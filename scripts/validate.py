@@ -17,6 +17,10 @@ Checks:
   - every manifest's declared row_count matches the number of CSV rows
     actually carrying that batch_id as their source.
   - every manifest's required fields are present and SHA-shaped.
+  - free-text fields (reason/provenance/confidence/notes/requested_by) don't
+    contain an obvious secret or an internal email address. This repo is
+    public, so this is a best-effort net, not a substitute for the reviewer
+    actually reading the diff -- see README's Accountability section.
 
 Exits 1 with all violations listed (not just the first) on failure.
 """
@@ -43,6 +47,27 @@ MANIFEST_REQUIRED_FIELDS = [
     "aurora_lint_sha", "projects", "codebase_commits", "submitted_at",
     "row_count",
 ]
+
+# Best-effort net, not a DLP tool -- this repo is public, so the intent is
+# to catch an obvious accident (a pasted credential, an internal address),
+# not to substitute for the reviewer actually reading the diff.
+SENSITIVE_PATTERNS = [
+    ("AWS access key", re.compile(r"AKIA[0-9A-Z]{16}")),
+    ("private key block", re.compile(r"-----BEGIN [A-Z ]*PRIVATE KEY-----")),
+    ("generic API key/token", re.compile(r"\b(api[_-]?key|secret|token|password)\s*[:=]\s*\S{8,}", re.IGNORECASE)),
+    ("bearer token", re.compile(r"\bBearer\s+[A-Za-z0-9\-._~+/]{20,}")),
+    ("internal email address", re.compile(r"[A-Za-z0-9._%+-]+@bissell\.com", re.IGNORECASE)),
+]
+CSV_FREE_TEXT_COLUMNS = ["reason", "provenance", "confidence"]
+MANIFEST_FREE_TEXT_FIELDS = ["notes", "requested_by", "adjudicator"]
+
+
+def scan_sensitive(loc: str, field: str, value: str, errors: list[str]) -> None:
+    if not value:
+        return
+    for label, pattern in SENSITIVE_PATTERNS:
+        if pattern.search(value):
+            errors.append(f"{loc}: field '{field}' looks like it contains a {label} -- remove before this goes public")
 
 
 def fail(errors: list[str]) -> None:
@@ -88,6 +113,11 @@ def load_manifests(errors: list[str]) -> dict[str, dict]:
                     f"{manifest_path}: codebase_commits['{project}']='{commit}' "
                     f"is not a full 40-char lowercase hex SHA"
                 )
+
+        for field in MANIFEST_FREE_TEXT_FIELDS:
+            value = manifest.get(field)
+            if isinstance(value, str):
+                scan_sensitive(str(manifest_path), field, value, errors)
 
         manifests[batch_dir_name] = manifest
     return manifests
@@ -141,6 +171,9 @@ def validate_csvs(errors: list[str], manifests: dict[str, dict]) -> dict[str, in
 
                 if not row["rule_id"]:
                     errors.append(f"{loc}: rule_id is empty")
+
+                for field in CSV_FREE_TEXT_COLUMNS:
+                    scan_sensitive(loc, field, row.get(field, ""), errors)
 
                 source = row["source"]
                 if not source:
