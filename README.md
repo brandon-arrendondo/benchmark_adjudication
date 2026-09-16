@@ -1,11 +1,37 @@
 # benchmark_adjudication
 
-Git-versioned, PR-reviewed record of the TP/FP/uncertain adjudication
-(`ground_truth`) labels used to produce aurora-lint's citable precision/recall
-numbers, plus the exact aurora-lint and codebase SHAs each batch of labels
-was adjudicated against.
+A dataset: TP/FP/uncertain adjudication labels for static-analysis findings
+across several open-source C codebases, adjudicated for aurora-lint but not
+specific to it — a label says "line N of file F in commit C of project P is a
+real bug" (or isn't), independent of which tool flagged it or who runs it.
 
-## Why this exists
+## Using this dataset
+
+No account, credential, database, or tooling of any kind is required — this
+is plain CSV under `data/<project>/adjudication.csv`, one row per labeled
+finding, columns documented below. Clone or download the repo and read the
+files directly with anything that reads CSV.
+
+- The join key is `(project, codebase_commit, file_path, line, rule_id)`.
+  `codebase_commit` is a full git SHA of the exact commit the label applies
+  to — check out that commit of the project to get matching file contents
+  and line numbers before comparing your own tool's findings against these
+  labels.
+- `verdict` is the label: `TP` (real defect), `FP` (not a real defect), or
+  `uncertain`.
+- `rule_id` names the kind of defect (e.g. a CERT-C rule like `MEM31-C`), not
+  a tool-specific code — these labels are usable by any static analyzer that
+  reasons about the same defect classes, not only aurora-lint.
+- `batches/*/manifest.json` is provenance metadata (who submitted a batch of
+  labels, under what request, with which tool version) for auditing how the
+  dataset grew over time. **You can ignore it entirely** if you just want the
+  labels — nothing in `data/*.csv` requires resolving a manifest to be
+  usable.
+
+Everything past this point describes how *this maintainer* curates and adds
+to the dataset. None of it is a prerequisite for using it.
+
+## Why the review process exists
 
 `ground_truth` lives in Postgres (`sqc_bench`, owned by `benchmarking_db`) and
 that does not change — this repo is not a second copy of the live oracle and
@@ -69,7 +95,7 @@ merge (a correction is a new batch, not an edit to an old one):
 {
   "batch_id": "TASK-1245",
   "work_item_ref": "TASK-1245",
-  "requested_by": "coordinator",
+  "requested_by": "maintainer",
   "adjudicator": "claude-opus-4.8",
   "aurora_lint_version": "0.4.336",
   "aurora_lint_sha": "27785c4a1234567890abcdef1234567890abcdef",
@@ -86,30 +112,35 @@ merge (a correction is a new batch, not an edit to an old one):
 40-char SHA for the same reason `codebase_commit` is: an abbreviation is a
 display concern, not a join/citation key.
 
-## Review protocol
+## How labels get added (maintainer process)
 
 Every change to `main` goes through a PR (branch protection enforces this —
 no direct pushes, no force-push). The PR template asks for the work item
-reference, scope, and row count up front so the coordinator (or whoever is
-reviewing) can check the PR's actual diff against what was actually
-dispatched, before approving — that check is the point, not a formality.
-`scripts/validate.py` runs in CI on every PR and catches the mechanical
-class of problem (schema violations, duplicate keys, a row whose `source`
-doesn't match any manifest, a manifest's declared `row_count` not matching
-reality) so review time goes to the judgment call: does this batch's content
-actually match what was asked for.
+reference, scope, and row count up front so a reviewer can check the PR's
+actual diff against what was actually requested, before approving — that
+check is the point, not a formality. `scripts/validate.py` runs in CI on
+every PR and catches the mechanical class of problem (schema violations,
+duplicate keys, a row whose `source` doesn't match any manifest, a
+manifest's declared `row_count` not matching reality, an obvious secret or
+internal address in a free-text field) so review time goes to the judgment
+call: does this batch's content actually match what was asked for. Nothing
+about this process affects how the merged data reads or is used.
 
-## Accountability
+Brandon Arrendondo is the accountable owner of aurora-lint and all its
+benchmark data, including what gets merged here — per BISSELL's AI
+Acceptable Use Policy, that accountability sits with a named human, not
+with any agent that performs a review on his behalf.
 
-Per BISSELL's AI Acceptable Use Policy, a human Associate is the accountable
-owner of what gets merged here, even when a coordinator agent performs the
-review — the agent's approval is not itself the accountable decision.
-Brandon Arrendondo is that Associate for this repo.
+## Relationship to Postgres (maintainer-internal, optional context)
 
-## Populating from Postgres
-
-The initial dump of existing `ground_truth` rows into this format, and the
-tool that loads a merged batch from here back into Postgres, live in
-`benchmarking_db` (it owns the DSN) — see
+For this maintainer's own pipeline, `ground_truth` also lives in Postgres
+(`sqc_bench`, in the separate `benchmarking_db` repo), and a merged commit
+here can be loaded there for use by that pipeline's own tooling — see
 `benchmarking_db/docs/design/adjudication-ingest-from-benchmark_adjudication.md`.
-This repo is deliberately Postgres-blind: no DSN, no connection code, ever.
+That relationship is why labels are organized into reviewed batches with
+full SHA provenance in the first place (reproducibility of a past published
+number), but it is specific to this maintainer's infrastructure. **This
+dataset does not depend on Postgres, a coordinator, or any other tooling to
+be useful** — the CSV files are the dataset, this repo is deliberately
+Postgres-blind (no DSN, no connection code, ever), and anyone else can
+consume `data/*/adjudication.csv` on its own with no other system involved.
