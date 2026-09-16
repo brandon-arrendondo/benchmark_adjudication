@@ -1,0 +1,21 @@
+{
+  "batch_id": "rule-relabel-2026-09-02",
+  "work_item_ref": "legacy:rule-relabel-2026-09-02",
+  "requested_by": "legacy-import",
+  "adjudicator": "human",
+  "aurora_lint_version": null,
+  "aurora_lint_sha": null,
+  "projects": [
+    "mosquitto"
+  ],
+  "codebase_commits": {
+    "mosquitto": "d3ee5c5ca62c0fa4983308c6fff558ee978e878c"
+  },
+  "submitted_at": "2026-09-02T21:14:19.787130",
+  "row_count": 3,
+  "rules": [
+    "EXP34-C",
+    "MEM31-C"
+  ],
+  "notes": "Reconstructed during benchmark_adjudication's initial population (2026-09-16) from benchmarking_db's ground_truth.source='rule-relabel-2026-09-02'. row_count/projects/codebase_commits/rules were derived from the rows themselves, not declared at adjudication time. aurora_lint_version/aurora_lint_sha are unknown for legacy data -- never recorded per-row."
+}

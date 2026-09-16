@@ -1,0 +1,24 @@
+{
+  "batch_id": "task1118_delta_r720_20260915_adversarial",
+  "work_item_ref": "legacy:task1118_delta_r720_20260915_adversarial",
+  "requested_by": "legacy-import",
+  "adjudicator": "claude",
+  "aurora_lint_version": null,
+  "aurora_lint_sha": null,
+  "projects": [
+    "mbedtls",
+    "mosquitto",
+    "raylib"
+  ],
+  "codebase_commits": {
+    "mbedtls": "068ff080b369adfac81509f9b57b2afabaf82dc5",
+    "mosquitto": "d3ee5c5ca62c0fa4983308c6fff558ee978e878c",
+    "raylib": "962bbfc6bfbd7a5acd08e21314fcfa161003a589"
+  },
+  "submitted_at": "2026-09-15T12:22:23.467739",
+  "row_count": 46,
+  "rules": [
+    "API00-C"
+  ],
+  "notes": "Reconstructed during benchmark_adjudication's initial population (2026-09-16) from benchmarking_db's ground_truth.source='task1118_delta_r720_20260915_adversarial'. row_count/projects/codebase_commits/rules were derived from the rows themselves, not declared at adjudication time. aurora_lint_version/aurora_lint_sha are unknown for legacy data -- never recorded per-row."
+}

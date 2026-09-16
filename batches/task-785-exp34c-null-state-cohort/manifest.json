@@ -1,0 +1,22 @@
+{
+  "batch_id": "task-785-exp34c-null-state-cohort",
+  "work_item_ref": "legacy:task-785-exp34c-null-state-cohort",
+  "requested_by": "legacy-import",
+  "adjudicator": "claude",
+  "aurora_lint_version": null,
+  "aurora_lint_sha": null,
+  "projects": [
+    "hostap",
+    "mosquitto"
+  ],
+  "codebase_commits": {
+    "hostap": "dcee60436390dd34731560657c4257c3b4c839a6",
+    "mosquitto": "d3ee5c5ca62c0fa4983308c6fff558ee978e878c"
+  },
+  "submitted_at": "2026-09-09T12:57:11.744858",
+  "row_count": 5,
+  "rules": [
+    "EXP34-C"
+  ],
+  "notes": "Reconstructed during benchmark_adjudication's initial population (2026-09-16) from benchmarking_db's ground_truth.source='task-785-exp34c-null-state-cohort'. row_count/projects/codebase_commits/rules were derived from the rows themselves, not declared at adjudication time. aurora_lint_version/aurora_lint_sha are unknown for legacy data -- never recorded per-row."
+}

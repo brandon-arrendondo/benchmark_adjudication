@@ -1,0 +1,20 @@
+{
+  "batch_id": "delta-adjudication-task757-exp12c-census-pureftpd",
+  "work_item_ref": "legacy:delta-adjudication-task757-exp12c-census-pureftpd",
+  "requested_by": "legacy-import",
+  "adjudicator": "claude",
+  "aurora_lint_version": null,
+  "aurora_lint_sha": null,
+  "projects": [
+    "pureftpd"
+  ],
+  "codebase_commits": {
+    "pureftpd": "cc28bff52ca28e1d122a2142bf37f2dc578f4d3e"
+  },
+  "submitted_at": "2026-09-07T21:01:23.194154",
+  "row_count": 25,
+  "rules": [
+    "EXP12-C"
+  ],
+  "notes": "Reconstructed during benchmark_adjudication's initial population (2026-09-16) from benchmarking_db's ground_truth.source='delta-adjudication-task757-exp12c-census-pureftpd'. row_count/projects/codebase_commits/rules were derived from the rows themselves, not declared at adjudication time. aurora_lint_version/aurora_lint_sha are unknown for legacy data -- never recorded per-row."
+}

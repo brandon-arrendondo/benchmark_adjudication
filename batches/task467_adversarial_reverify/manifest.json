@@ -1,0 +1,28 @@
+{
+  "batch_id": "task467_adversarial_reverify",
+  "work_item_ref": "legacy:task467_adversarial_reverify",
+  "requested_by": "legacy-import",
+  "adjudicator": "claude",
+  "aurora_lint_version": null,
+  "aurora_lint_sha": null,
+  "projects": [
+    "pureftpd"
+  ],
+  "codebase_commits": {
+    "pureftpd": "cc28bff52ca28e1d122a2142bf37f2dc578f4d3e"
+  },
+  "submitted_at": "2026-08-26T13:23:14.176516",
+  "row_count": 33,
+  "rules": [
+    "ARR02-C",
+    "DCL06-C",
+    "ERR01-C",
+    "EXP02-C",
+    "EXP14-C",
+    "INT32-C",
+    "MEM02-C",
+    "MEM10-C",
+    "PRE08-C"
+  ],
+  "notes": "Reconstructed during benchmark_adjudication's initial population (2026-09-16) from benchmarking_db's ground_truth.source='task467_adversarial_reverify'. row_count/projects/codebase_commits/rules were derived from the rows themselves, not declared at adjudication time. aurora_lint_version/aurora_lint_sha are unknown for legacy data -- never recorded per-row."
+}

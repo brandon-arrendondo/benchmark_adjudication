@@ -1,0 +1,41 @@
+{
+  "batch_id": "sqlite_batch1",
+  "work_item_ref": "legacy:sqlite_batch1",
+  "requested_by": "legacy-import",
+  "adjudicator": "claude",
+  "aurora_lint_version": null,
+  "aurora_lint_sha": null,
+  "projects": [
+    "sqlite"
+  ],
+  "codebase_commits": {
+    "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
+  },
+  "submitted_at": "2026-06-12T08:49:18.595514",
+  "row_count": 86,
+  "rules": [
+    "API00-C",
+    "API02-C",
+    "DCL13-C",
+    "DCL15-C",
+    "DCL37-C",
+    "EXP33-C",
+    "EXP37-C",
+    "INT12-C",
+    "INT14-C",
+    "INT30-C",
+    "INT31-C",
+    "INT32-C",
+    "MSC04-C",
+    "MSC37-C",
+    "PRE00-C",
+    "PRE01-C",
+    "PRE02-C",
+    "PRE05-C",
+    "PRE06-C",
+    "PRE11-C",
+    "PRE12-C",
+    "STR31-C"
+  ],
+  "notes": "Reconstructed during benchmark_adjudication's initial population (2026-09-16) from benchmarking_db's ground_truth.source='sqlite_batch1'. row_count/projects/codebase_commits/rules were derived from the rows themselves, not declared at adjudication time. aurora_lint_version/aurora_lint_sha are unknown for legacy data -- never recorded per-row."
+}
