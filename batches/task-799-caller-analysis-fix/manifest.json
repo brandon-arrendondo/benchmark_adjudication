@@ -1,0 +1,26 @@
+{
+  "batch_id": "task-799-caller-analysis-fix",
+  "work_item_ref": "legacy:task-799-caller-analysis-fix",
+  "requested_by": "legacy-import",
+  "adjudicator": "claude",
+  "aurora_lint_version": null,
+  "aurora_lint_sha": null,
+  "projects": [
+    "curl",
+    "hostap",
+    "pureftpd",
+    "sqlite"
+  ],
+  "codebase_commits": {
+    "curl": "3e198f75861cc2e12daf299689e145949dddd19b",
+    "hostap": "dcee60436390dd34731560657c4257c3b4c839a6",
+    "pureftpd": "cc28bff52ca28e1d122a2142bf37f2dc578f4d3e",
+    "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
+  },
+  "submitted_at": "2026-09-08T16:35:36.279363",
+  "row_count": 7,
+  "rules": [
+    "API00-C"
+  ],
+  "notes": "Reconstructed during benchmark_adjudication's initial population (2026-09-16) from benchmarking_db's ground_truth.source='task-799-caller-analysis-fix'. row_count/projects/codebase_commits/rules were derived from the rows themselves, not declared at adjudication time. aurora_lint_version/aurora_lint_sha are unknown for legacy data -- never recorded per-row."
+}

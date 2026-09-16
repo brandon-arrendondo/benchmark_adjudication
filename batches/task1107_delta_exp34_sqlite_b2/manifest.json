@@ -1,0 +1,20 @@
+{
+  "batch_id": "task1107_delta_exp34_sqlite_b2",
+  "work_item_ref": "legacy:task1107_delta_exp34_sqlite_b2",
+  "requested_by": "legacy-import",
+  "adjudicator": "claude",
+  "aurora_lint_version": null,
+  "aurora_lint_sha": null,
+  "projects": [
+    "sqlite"
+  ],
+  "codebase_commits": {
+    "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
+  },
+  "submitted_at": "2026-09-10T15:25:10.423000Z",
+  "row_count": 128,
+  "rules": [
+    "EXP34-C"
+  ],
+  "notes": "Reconstructed during benchmark_adjudication's initial population (2026-09-16) from benchmarking_db's ground_truth.source='task1107_delta_exp34_sqlite_b2'. row_count/projects/codebase_commits/rules were derived from the rows themselves, not declared at adjudication time. aurora_lint_version/aurora_lint_sha are unknown for legacy data -- never recorded per-row."
+}

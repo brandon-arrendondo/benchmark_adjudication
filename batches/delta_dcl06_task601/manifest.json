@@ -1,0 +1,20 @@
+{
+  "batch_id": "delta_dcl06_task601",
+  "work_item_ref": "legacy:delta_dcl06_task601",
+  "requested_by": "legacy-import",
+  "adjudicator": "claude",
+  "aurora_lint_version": null,
+  "aurora_lint_sha": null,
+  "projects": [
+    "pureftpd"
+  ],
+  "codebase_commits": {
+    "pureftpd": "cc28bff52ca28e1d122a2142bf37f2dc578f4d3e"
+  },
+  "submitted_at": "2026-08-30T21:59:13.552695",
+  "row_count": 4,
+  "rules": [
+    "DCL06-C"
+  ],
+  "notes": "Reconstructed during benchmark_adjudication's initial population (2026-09-16) from benchmarking_db's ground_truth.source='delta_dcl06_task601'. row_count/projects/codebase_commits/rules were derived from the rows themselves, not declared at adjudication time. aurora_lint_version/aurora_lint_sha are unknown for legacy data -- never recorded per-row."
+}

@@ -1,0 +1,29 @@
+{
+  "batch_id": "delta_task545",
+  "work_item_ref": "legacy:delta_task545",
+  "requested_by": "legacy-import",
+  "adjudicator": "claude",
+  "aurora_lint_version": null,
+  "aurora_lint_sha": null,
+  "projects": [
+    "hostap",
+    "mosquitto",
+    "raylib",
+    "sqlite"
+  ],
+  "codebase_commits": {
+    "hostap": "dcee60436390dd34731560657c4257c3b4c839a6",
+    "mosquitto": "d3ee5c5ca62c0fa4983308c6fff558ee978e878c",
+    "raylib": "962bbfc6bfbd7a5acd08e21314fcfa161003a589",
+    "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
+  },
+  "submitted_at": "2026-08-25T09:24:34.422453",
+  "row_count": 95,
+  "rules": [
+    "ARR00-C",
+    "ARR02-C",
+    "INT30-C",
+    "MEM12-C"
+  ],
+  "notes": "Reconstructed during benchmark_adjudication's initial population (2026-09-16) from benchmarking_db's ground_truth.source='delta_task545'. row_count/projects/codebase_commits/rules were derived from the rows themselves, not declared at adjudication time. aurora_lint_version/aurora_lint_sha are unknown for legacy data -- never recorded per-row."
+}

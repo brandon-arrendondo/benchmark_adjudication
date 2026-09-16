@@ -1,0 +1,32 @@
+{
+  "batch_id": "delta-adjudication-task757-round184",
+  "work_item_ref": "legacy:delta-adjudication-task757-round184",
+  "requested_by": "legacy-import",
+  "adjudicator": "claude",
+  "aurora_lint_version": null,
+  "aurora_lint_sha": null,
+  "projects": [
+    "curl",
+    "hostap",
+    "mosquitto",
+    "pureftpd",
+    "raylib",
+    "sel4",
+    "sqlite"
+  ],
+  "codebase_commits": {
+    "curl": "3e198f75861cc2e12daf299689e145949dddd19b",
+    "hostap": "dcee60436390dd34731560657c4257c3b4c839a6",
+    "mosquitto": "d3ee5c5ca62c0fa4983308c6fff558ee978e878c",
+    "pureftpd": "cc28bff52ca28e1d122a2142bf37f2dc578f4d3e",
+    "raylib": "962bbfc6bfbd7a5acd08e21314fcfa161003a589",
+    "sel4": "1326364bc9135d9445d936ebc01e38a402c1f4c6",
+    "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
+  },
+  "submitted_at": "2026-09-10T20:46:09.397344",
+  "row_count": 136,
+  "rules": [
+    "DCL06-C"
+  ],
+  "notes": "Reconstructed during benchmark_adjudication's initial population (2026-09-16) from benchmarking_db's ground_truth.source='delta-adjudication-task757-round184'. row_count/projects/codebase_commits/rules were derived from the rows themselves, not declared at adjudication time. aurora_lint_version/aurora_lint_sha are unknown for legacy data -- never recorded per-row."
+}

@@ -1,0 +1,40 @@
+{
+  "batch_id": "delta_lt3_task550",
+  "work_item_ref": "legacy:delta_lt3_task550",
+  "requested_by": "legacy-import",
+  "adjudicator": "claude",
+  "aurora_lint_version": null,
+  "aurora_lint_sha": null,
+  "projects": [
+    "curl",
+    "lua",
+    "mosquitto",
+    "sqlite"
+  ],
+  "codebase_commits": {
+    "curl": "3e198f75861cc2e12daf299689e145949dddd19b",
+    "lua": "40b76de2d77e66b70a9d4bf989c3f5340919973f",
+    "mosquitto": "d3ee5c5ca62c0fa4983308c6fff558ee978e878c",
+    "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
+  },
+  "submitted_at": "2026-08-25T10:04:36.057380",
+  "row_count": 19,
+  "rules": [
+    "API05-C",
+    "ARR01-C",
+    "CON04-C",
+    "DCL02-C",
+    "DCL18-C",
+    "ENV30-C",
+    "EXP42-C",
+    "FIO10-C",
+    "INT00-C",
+    "INT33-C",
+    "MSC14-C",
+    "PRE02-C",
+    "PRE10-C",
+    "STR00-C",
+    "STR05-C"
+  ],
+  "notes": "Reconstructed during benchmark_adjudication's initial population (2026-09-16) from benchmarking_db's ground_truth.source='delta_lt3_task550'. row_count/projects/codebase_commits/rules were derived from the rows themselves, not declared at adjudication time. aurora_lint_version/aurora_lint_sha are unknown for legacy data -- never recorded per-row."
+}

@@ -1,0 +1,20 @@
+{
+  "batch_id": "task-630-delta",
+  "work_item_ref": "legacy:task-630-delta",
+  "requested_by": "legacy-import",
+  "adjudicator": "human",
+  "aurora_lint_version": null,
+  "aurora_lint_sha": null,
+  "projects": [
+    "hostap"
+  ],
+  "codebase_commits": {
+    "hostap": "dcee60436390dd34731560657c4257c3b4c839a6"
+  },
+  "submitted_at": "2026-08-31T07:53:18.415971",
+  "row_count": 3,
+  "rules": [
+    "MEM30-C"
+  ],
+  "notes": "Reconstructed during benchmark_adjudication's initial population (2026-09-16) from benchmarking_db's ground_truth.source='task-630-delta'. row_count/projects/codebase_commits/rules were derived from the rows themselves, not declared at adjudication time. aurora_lint_version/aurora_lint_sha are unknown for legacy data -- never recorded per-row."
+}

@@ -1,0 +1,20 @@
+{
+  "batch_id": "task_447_verification_0.4.203",
+  "work_item_ref": "legacy:task_447_verification_0.4.203",
+  "requested_by": "legacy-import",
+  "adjudicator": "claude",
+  "aurora_lint_version": null,
+  "aurora_lint_sha": null,
+  "projects": [
+    "raylib"
+  ],
+  "codebase_commits": {
+    "raylib": "962bbfc6bfbd7a5acd08e21314fcfa161003a589"
+  },
+  "submitted_at": "2026-08-13T21:38:07.182970",
+  "row_count": 1,
+  "rules": [
+    "MSC13-C"
+  ],
+  "notes": "Reconstructed during benchmark_adjudication's initial population (2026-09-16) from benchmarking_db's ground_truth.source='task_447_verification_0.4.203'. row_count/projects/codebase_commits/rules were derived from the rows themselves, not declared at adjudication time. aurora_lint_version/aurora_lint_sha are unknown for legacy data -- never recorded per-row."
+}

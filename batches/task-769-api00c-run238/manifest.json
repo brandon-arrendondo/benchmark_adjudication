@@ -1,0 +1,28 @@
+{
+  "batch_id": "task-769-api00c-run238",
+  "work_item_ref": "legacy:task-769-api00c-run238",
+  "requested_by": "legacy-import",
+  "adjudicator": "claude",
+  "aurora_lint_version": null,
+  "aurora_lint_sha": null,
+  "projects": [
+    "curl",
+    "lua",
+    "pureftpd",
+    "raylib",
+    "sqlite"
+  ],
+  "codebase_commits": {
+    "curl": "3e198f75861cc2e12daf299689e145949dddd19b",
+    "lua": "40b76de2d77e66b70a9d4bf989c3f5340919973f",
+    "pureftpd": "cc28bff52ca28e1d122a2142bf37f2dc578f4d3e",
+    "raylib": "962bbfc6bfbd7a5acd08e21314fcfa161003a589",
+    "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
+  },
+  "submitted_at": "2026-09-08T15:31:51.800284",
+  "row_count": 348,
+  "rules": [
+    "API00-C"
+  ],
+  "notes": "Reconstructed during benchmark_adjudication's initial population (2026-09-16) from benchmarking_db's ground_truth.source='task-769-api00c-run238'. row_count/projects/codebase_commits/rules were derived from the rows themselves, not declared at adjudication time. aurora_lint_version/aurora_lint_sha are unknown for legacy data -- never recorded per-row."
+}

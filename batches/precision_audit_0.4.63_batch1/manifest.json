@@ -1,0 +1,42 @@
+{
+  "batch_id": "precision_audit_0.4.63_batch1",
+  "work_item_ref": "legacy:precision_audit_0.4.63_batch1",
+  "requested_by": "legacy-import",
+  "adjudicator": "claude",
+  "aurora_lint_version": null,
+  "aurora_lint_sha": null,
+  "projects": [
+    "raylib"
+  ],
+  "codebase_commits": {
+    "raylib": "962bbfc6bfbd7a5acd08e21314fcfa161003a589"
+  },
+  "submitted_at": "2026-06-23T14:17:05.782808",
+  "row_count": 69,
+  "rules": [
+    "API00-C",
+    "CON03-C",
+    "DCL00-C",
+    "DCL13-C",
+    "DCL31-C",
+    "DCL37-C",
+    "ENV03-C",
+    "ENV33-C",
+    "ERR01-C",
+    "ERR33-C",
+    "EXP05-C",
+    "FLP03-C",
+    "FLP06-C",
+    "FLP32-C",
+    "FLP34-C",
+    "INT13-C",
+    "INT33-C",
+    "POS54-C",
+    "PRE08-C",
+    "PRE13-C",
+    "STR02-C",
+    "STR31-C",
+    "STR34-C"
+  ],
+  "notes": "Reconstructed during benchmark_adjudication's initial population (2026-09-16) from benchmarking_db's ground_truth.source='precision_audit_0.4.63_batch1'. row_count/projects/codebase_commits/rules were derived from the rows themselves, not declared at adjudication time. aurora_lint_version/aurora_lint_sha are unknown for legacy data -- never recorded per-row."
+}
