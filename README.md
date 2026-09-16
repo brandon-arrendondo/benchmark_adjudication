@@ -124,10 +124,23 @@ actual diff against what was actually requested, before approving — that
 check is the point, not a formality. `scripts/validate.py` runs in CI on
 every PR and catches the mechanical class of problem (schema violations,
 duplicate keys, a row whose `source` doesn't match any manifest, a
-manifest's declared `row_count` not matching reality) so review time goes to
-the judgment call: does this batch's content actually match what was asked
-for. Nothing about this process affects how the merged data reads or is
-used.
+manifest's declared `row_count` not matching reality, a backslash-escaped
+quote in a free-text field) so review time goes to the judgment call: does
+this batch's content actually match what was asked for. Nothing about this
+process affects how the merged data reads or is used.
+
+**Whatever generates a batch's CSV must serialize it through a real CSV
+writer** (Python's `csv` module or equivalent) — never by concatenating
+strings by hand. CSV has exactly one way to put a literal quote inside a
+quoted field (double it, `""`); a backslash-escaped quote (`\"`, the
+JSON/Python string-literal convention) is not valid CSV escaping and will
+eventually corrupt that row's field boundaries the moment a real quote
+shows up in a `reason` (a 181-row cleanup across 8 projects was needed for
+exactly this, 2026-09-16 — see that commit's message for the recovery
+mechanism and its limits, in particular why some rows' `provenance`/
+`confidence` were left blank rather than guessed). `scripts/validate.py`
+catches the raw pattern in CI, but the fix is upstream: generate valid CSV
+in the first place.
 
 Whether a free-text field discloses a secret or an internal address is
 **not** something CI checks — an earlier regex-based scanner flagged 311
