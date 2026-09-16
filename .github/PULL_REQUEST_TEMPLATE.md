@@ -15,4 +15,11 @@ can be checked against the work item, not just skimmed.
 
 **Adjudicator:** <!-- who/what actually produced these labels -->
 
+**Reviewer checklist:**
+- [ ] Read every free-text field touched by this diff (`reason`, `provenance`,
+      `confidence`, `notes`, `requested_by`) for a secret, credential,
+      internal hostname/address, or anything else that shouldn't be public.
+      This repo has no automated scanner for this (see `scripts/validate.py`'s
+      docstring for why) — it's a judgment call made here, not mechanically.
+
 **Notes:**

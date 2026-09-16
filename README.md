@@ -17,8 +17,11 @@ files directly with anything that reads CSV.
   to — check out that commit of the project to get matching file contents
   and line numbers before comparing your own tool's findings against these
   labels.
-- `verdict` is the label: `TP` (real defect), `FP` (not a real defect), or
-  `uncertain`.
+- `verdict` is the label: `TP` (real defect), `FP` (not a real defect),
+  `uncertain`, or `FN` (a real bug found by reading the file that aurora-lint
+  did NOT flag at that line/rule — has no matching finding, so it never
+  affects precision, but counts as a known real bug for recall once some
+  future aurora-lint version actually catches it).
 - `rule_id` names the kind of defect (e.g. a CERT-C rule like `MEM31-C`), not
   a tool-specific code — these labels are usable by any static analyzer that
   reasons about the same defect classes, not only aurora-lint.
@@ -121,10 +124,20 @@ actual diff against what was actually requested, before approving — that
 check is the point, not a formality. `scripts/validate.py` runs in CI on
 every PR and catches the mechanical class of problem (schema violations,
 duplicate keys, a row whose `source` doesn't match any manifest, a
-manifest's declared `row_count` not matching reality, an obvious secret or
-internal address in a free-text field) so review time goes to the judgment
-call: does this batch's content actually match what was asked for. Nothing
-about this process affects how the merged data reads or is used.
+manifest's declared `row_count` not matching reality) so review time goes to
+the judgment call: does this batch's content actually match what was asked
+for. Nothing about this process affects how the merged data reads or is
+used.
+
+Whether a free-text field discloses a secret or an internal address is
+**not** something CI checks — an earlier regex-based scanner flagged 311
+rows in this repo's very first PR that turned out to be ordinary C variable
+names (`nToken`, `pToken`) in adjudication reasoning, not credentials. That's
+a reviewer judgment call instead: the PR template's checklist asks the
+reviewer (human or AI) to actually read free-text fields in the diff for
+anything that shouldn't be public, rather than leaning on a scanner that
+either misses a disclosure worded unexpectedly or trains reviewers to click
+past its noise.
 
 Brandon Arrendondo is the accountable owner of aurora-lint and all its
 benchmark data, including what gets merged here — per BISSELL's AI
