@@ -1,0 +1,4 @@
+# Every change here touches the adjudication record aurora-lint's citable
+# numbers trace back to — require review rather than letting branch
+# protection's PR requirement be satisfiable by anyone.
+* @brandon-arrendondo
