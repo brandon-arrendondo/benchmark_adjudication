@@ -1,0 +1,20 @@
+{
+  "batch_id": "task-781-pre02c-pureftpd-delta",
+  "work_item_ref": "781",
+  "requested_by": "brandon.arrendondo@bissell.com",
+  "adjudicator": "claude-r720",
+  "aurora_lint_version": "0.4.336",
+  "aurora_lint_sha": "f3afb23d5d9307f1f95c6c9bad929086aac5ea79",
+  "projects": [
+    "pureftpd"
+  ],
+  "codebase_commits": {
+    "pureftpd": "cc28bff52ca28e1d122a2142bf37f2dc578f4d3e"
+  },
+  "submitted_at": "2026-09-17T16:03:35.596Z",
+  "row_count": 44,
+  "rules": [
+    "PRE02-C"
+  ],
+  "notes": "Delta continuation of bmdb task 781. The original 158-row batch (source=task-781-pre02c-pureftpd-locale, 2026-09-08, already present in ground_truth prior to this repo's existence) resolved a real disagreement between the dispatch note's 'TP-by-spec' read and a since-lost r720 analysis pointing at contains_operators() reading raw replacement text including string-literal quotes -- concluding all-FP. bmdb task 781 itself was never marked done (task DB status still 'pending' as of this session), and re-running --rules PRE02-C -d pureftpd against the pinned commit found 213 live findings vs 169 already in ground_truth: 44 unlabeled. Re-derived this delta from scratch rather than importing the old verdict wholesale, per this session's own instructions. 42/44 are the identical established string-literal-macro shape (2 newly-surfaced files -- messages_en.h, messages_fr_funny.h -- plus additional per-file lines beyond the original per-file sample in already-covered files), independently verified each has a fully-quoted, token-free-outside-the-quotes replacement value: FP. The remaining 2 are a different shape each, not covered by the original batch's reasoning: src/ftpd.h:238 (#define STATFS_TYPE -1, single-token negative-literal macro, FP -- matches this project's and hostap's already-established PRE02-C negative-literal FP class) and src/log_pam.c:72 (#define GET_MEM, a bare multi-statement replacement including a return with no enclosing do{...}while(0) guard, TP -- matches this project's own src/alt_arc4random.c:18 CHACHA20_QUARTERROUND precedent for the same unguarded-statement-macro shape). No prior ground_truth rows touched or corrected by this batch, only new (file,line) keys added."
+}
