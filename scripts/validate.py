@@ -17,6 +17,20 @@ Checks:
   - every manifest's declared row_count matches the number of CSV rows
     actually carrying that batch_id as their source.
   - every manifest's required fields are present and SHA-shaped.
+  - no free-text field (reason/provenance/confidence) contains a
+    backslash-escaped quote (\") -- CSV has no backslash-escape convention,
+    so this is the signature of a row built by something that assumed
+    JSON/Python-style string escaping and never passed through a real CSV
+    writer, silently corrupting that row's field boundaries the moment a
+    real quote shows up in the text. This is a syntactic check (a fixed
+    two-character sequence), not a semantic one, so it doesn't carry the
+    false-positive risk of the abandoned secrets scanner below -- it
+    doesn't ask CI to judge the content of a field, only the literal
+    escaping. Checked on the parsed field value (not raw text), same as
+    every other check here -- a field that reads oddly because it
+    legitimately quotes a C string literal is still fine either way, since
+    a real CSV writer never introduces a bare backslash-quote sequence in
+    the first place.
 
 Deliberately NOT checked here: whether a free-text field discloses a secret
 or internal address. An earlier version of this script regex-scanned
@@ -55,6 +69,7 @@ CSV_COLUMNS = [
 # convention exactly, so a merge here round-trips with no translation.
 VALID_VERDICTS = {"TP", "FP", "uncertain", "FN"}
 FULL_SHA_RE = re.compile(r"^[0-9a-f]{40}$")
+BACKSLASH_QUOTE_RE = re.compile(r'\\"')
 
 MANIFEST_REQUIRED_FIELDS = [
     "batch_id", "work_item_ref", "adjudicator", "aurora_lint_version",
@@ -159,6 +174,16 @@ def validate_csvs(errors: list[str], manifests: dict[str, dict]) -> dict[str, in
 
                 if not row["rule_id"]:
                     errors.append(f"{loc}: rule_id is empty")
+
+                for field in ("reason", "provenance", "confidence"):
+                    if BACKSLASH_QUOTE_RE.search(row[field]):
+                        errors.append(
+                            f'{loc}: {field} contains a backslash-escaped quote (\\") '
+                            f'-- CSV has no backslash-escape convention; a literal '
+                            f'quote in a field must be doubled ("") by a real CSV '
+                            f"writer, never hand-escaped (see README, "
+                            f'"How labels get added")'
+                        )
 
                 source = row["source"]
                 if not source:
