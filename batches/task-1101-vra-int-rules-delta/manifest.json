@@ -1,0 +1,37 @@
+{
+  "batch_id": "task-1101-vra-int-rules-delta",
+  "work_item_ref": "1101",
+  "requested_by": "brandon.arrendondo@bissell.com",
+  "adjudicator": "claude-r720",
+  "aurora_lint_version": "0.4.336",
+  "aurora_lint_sha": "f3afb23d5d9307f1f95c6c9bad929086aac5ea79",
+  "projects": [
+    "curl",
+    "hostap",
+    "mosquitto",
+    "pureftpd",
+    "raylib",
+    "sqlite"
+  ],
+  "codebase_commits": {
+    "curl": "3e198f75861cc2e12daf299689e145949dddd19b",
+    "hostap": "dcee60436390dd34731560657c4257c3b4c839a6",
+    "mosquitto": "d3ee5c5ca62c0fa4983308c6fff558ee978e878c",
+    "pureftpd": "cc28bff52ca28e1d122a2142bf37f2dc578f4d3e",
+    "raylib": "962bbfc6bfbd7a5acd08e21314fcfa161003a589",
+    "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
+  },
+  "submitted_at": "2026-09-17T20:00:00.000Z",
+  "row_count": 20,
+  "rules": [
+    "INT32-C",
+    "INT30-C",
+    "INT10-C",
+    "INT33-C",
+    "ARR30-C",
+    "INT34-C",
+    "INT31-C",
+    "INT16-C"
+  ],
+  "notes": "bmdb 1101: delta-adjudicate aurora_lint 1014's (VRA dead-branch fix) real-world effect, last stated as 91 added / 66 removed / net +25 across 8 rules by dev-149's reviewed measurement. Isolated 1014's own effect fresh rather than trusting that number or diffing current HEAD against ground_truth directly (the latter would conflate 1014 with everything else that has landed on these 8 rules since -- confirmed separately: a naive current-vs-ground_truth diff across all 12 benchmarked projects for these 8 rules found ~1816 unlabeled findings, dominated by valkey (702)/raylib (521)/sqlite (356)/ventoy (175) -- valkey/mbedtls/ventoy are wholly new corpora onboarded after 1014 and never labeled for any rule, not part of 1014's effect at all; the remainder reflects ~15+ unrelated INT/VRA rule commits landed since 1014. That much larger gap is OUT OF SCOPE for this task and is called out separately below, not adjudicated here).\n\nMETHOD: built matched before/after release binaries in git worktrees at 15f80cc9 (1014's direct parent, found by commit message since ADR-0007 rewrote history and old SHAs from the task body don't resolve) and 3f542c3f ('VRA: correct a one-sided compound constraint on either operand', 1014's own symmetry-fix commit, its last change). Ran the 8 rules with identical flags across the 7 originally-measured projects (raylib/hostap/sel4/pureftpd/mosquitto/curl/sqlite), diffed exact (file,line,rule) keys using this repo's own path-aware bench.corpus.in_scope() (NOT plain fnmatch -- fnmatch treats '*' as crossing '/', which would have wrongly counted raylib's vendored src/external/*.{c,h} single-header libs as in-scope; caught and corrected before finalizing). Result: +77/-57/net+20 -- close to but not identical to the previously-reviewed 91/66/+25 (expected drift: this session's manual invocation didn't reproduce every -I/--exclude flag bench/realworld_runner.py's own _build_sqc_cmd would have used).\n\nOf the 77 additions, 57 were already present in ground_truth at that exact (file,line,rule) key (mostly the FP static-storage/output-param classes, plus 4 already-TP real bugs re-surfacing correctly) -- no action needed, existing labels already cover them. Of the 57 removals, 56 were already-labeled FP (no regression) and 1 was already-labeled TP: sqlite ext/fts3/tool/fts3view.c:579 (INT32-C), a documented real out-of-bounds-write vulnerability (iPrefix/nTerm from an untrusted on-disk varint, a crafted value passes the corruption check and makes the memcpy destination out of bounds) that the tool now silently misses after 1014's fix -- a genuine recall regression, NOT a ground_truth change (the bug is real and the TP label stands); filed as a separate aurora_lint task, not resolved here.\n\nTHIS BATCH'S 20 ROWS are the genuinely fresh (file,line,rule) keys -- present after 1014's fix, absent before, and never previously in ground_truth. 18 FP, 2 TP:\n- 10 INT16-C (raylib x5, sqlite x5): ALL FP, and all one systemic checker bug, not 10 independent judgment calls -- every flagged destination (or, for sqlite/btree.c:3448, the flagged SOURCE) is verified against its actual declared type to be a plain signed int (or genuinely u32 on both sides for the btree.c case), never the signed-vs-unsigned mismatch the rule's message claims. Filed as its own aurora_lint rule-bug task (destination/source type misresolution), not a per-corpus FP-suppression call.\n- 7 INT33-C/1 ARR30-C (curl x3, hostap x4, shapes: reassign-then-provably-nonzero, if(x){...%x...} guard x2, compile-time-constant divisor, bits<=40-bounds-a-loop-index): all FP, each individually verified against source with a concrete non-zero/in-bounds proof the checker fails to trace. Filed as a lower-priority rule-quality backlog item (VRA/taint doesn't trace a handful of simple-but-real non-zero/in-bounds proofs), separate from the INT16-C bug above since the mechanism differs per instance.\n- mosquitto src/mux_poll.c:97 (INT30-C): TP. pollfd_index (size_t) stays 0 if listensock_count is 0, and 'pollfd_current_max = pollfd_index-1' underflows with no guard at the call site; traced the caller chain (listeners.c) and could not conclusively rule out listensock_count reaching 0 for every build/config combination -- unlike every FP above, no proof of safety was found.\n- sqlite ext/fts3/fts3_write.c:3824 (INT31-C): TP. nSuffix (int) decoded from an on-disk FTS3 varint can be negative via crafted overflow; the existing corruption check uses a signed comparison that a negative value slips past, then reaches memcpy() as size_t -- a real out-of-bounds read/write, the same class of bug as the fts3view.c regression above, just still correctly caught rather than missed.\n- pureftpd src/pure-uploadscript.c:111 (INT31-C): FP, matches this project's own already-established 'byte values 0-255' non-representation-dependent-behavior class (readchar() is provably {-1}union[0,255], EOF excluded by an explicit guard three lines above).\n\nvalidate.py: OK (pending re-run after this commit)."
+}
