@@ -1,0 +1,20 @@
+{
+  "batch_id": "task-782-pre06c-pureftpd-locale",
+  "work_item_ref": "782",
+  "requested_by": "brandon.arrendondo@bissell.com",
+  "adjudicator": "claude-r720",
+  "aurora_lint_version": "0.4.336",
+  "aurora_lint_sha": "f3afb23d5d9307f1f95c6c9bad929086aac5ea79",
+  "projects": [
+    "pureftpd"
+  ],
+  "codebase_commits": {
+    "pureftpd": "cc28bff52ca28e1d122a2142bf37f2dc578f4d3e"
+  },
+  "submitted_at": "2026-09-17T00:00:00Z",
+  "row_count": 20,
+  "rules": [
+    "PRE06-C"
+  ],
+  "notes": "20 pureftpd messages_*.h locale header files (one PRE06-C finding each, missing include guard). All TP-by-spec: each file genuinely has no #ifndef guard of its own, though in practice only one is ever #included per build via messages.h's own guarded, mutually-exclusive per-locale #elif dispatch. Matches the already-established pattern for messages_cs_cz.h/messages_ro.h (task-578 sample2, source delta-adjudication-pureftpd-task578-sample2-batchA/B), independently re-derived and confirmed by reading messages.h's dispatch structure directly. bmdb task 782 originally scoped this as 16 findings; 20 were actually unlabeled at time of batching (task's own count was approximate, not re-verified before filing)."
+}
