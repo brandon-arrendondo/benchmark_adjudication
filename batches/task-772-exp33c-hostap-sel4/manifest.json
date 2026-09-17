@@ -1,0 +1,22 @@
+{
+  "batch_id": "task-772-exp33c-hostap-sel4",
+  "work_item_ref": "772",
+  "requested_by": "brandon.arrendondo@bissell.com",
+  "adjudicator": "claude-r720",
+  "aurora_lint_version": "0.4.336",
+  "aurora_lint_sha": "f3afb23d5d9307f1f95c6c9bad929086aac5ea79",
+  "projects": [
+    "hostap",
+    "sel4"
+  ],
+  "codebase_commits": {
+    "hostap": "dcee60436390dd34731560657c4257c3b4c839a6",
+    "sel4": "1326364bc9135d9445d936ebc01e38a402c1f4c6"
+  },
+  "submitted_at": "2026-09-17T19:00:00.000Z",
+  "row_count": 41,
+  "rules": [
+    "EXP33-C"
+  ],
+  "notes": "bmdb 772 was filed 2026-09-07 estimating 183 remaining (hostap 22, pureftpd 112, sel4 49). Before batching, re-measured against the pinned checkouts directly rather than trusting that estimate: pureftpd's in-scope live EXP33-C findings (110) are now FULLY covered by ground_truth already (0 unlabeled) and sel4's (54 in-scope) are covered down to 1 unlabeled -- both explained by task 779 (Delta-adjudicate EXP33-C after the output-argument-position fix, status=done, completed 2026-09-08), a separate, later-filed task that ended up doing a full EXP33-C delta-adjudication pass (156 findings at run 242/d13f4c6d) covering pureftpd (97 rows, mostly the static-storage-zero-init class) and sel4 (45 rows) among others, without 772 ever being updated or closed to reflect the overlap. This is the same stale-task-status class already found 3 times earlier this session (653, 1212, 781), just manifesting as an overlapping sibling task rather than a directly-stale one. hostap's real delta (40, scoped to src/**+wpa_supplicant/**+hostapd/**) came in well ABOVE the 22 estimate, opposite direction from pureftpd/sel4.\n\nAll 40 hostap findings are ONE uniform shape, not the diverse-subsystem picture the original task text described (which predates task 779's work reshaping what's left): every one is a cursor or remaining-length variable of libnl3's nla_for_each_nested()/nla_for_each_attr() iteration macros (netlink/attr.h, an external system header outside this repo) in the nl80211 driver family (driver_nl80211.c, driver_nl80211_capa.c, driver_nl80211_event.c, driver_macsec_linux.c). Both macros initialize their pos/rem arguments in the for-loop's own init clause before any read; aurora-lint's macro-expansion doesn't resolve the macro (defined outside the repo, no -I path to it), so it misreads the loop body's first reference as a use-before-init. Verified 11 concrete instances directly against source across all four files before generalizing the verdict to the remaining 29 (all matching variable-naming conventions and call shape: nl_*, rem*, *attr, link/link_attr, tids/tidattr).\n\nsel4's 1 remaining finding (arch/arm/32/machine/debug.c:297) is the file-scope 'static debug_state_t dbg;' zero-initialized-by-the-standard class already established with 270+ precedent rows in this dataset, plus an independent second reason: memset() only ever writes through its pointer argument, so the finding's own 'memset ... reads the value' framing misdescribes memset's contract.\n\nvalidate.py: OK (pending re-run after this commit)."
+}
