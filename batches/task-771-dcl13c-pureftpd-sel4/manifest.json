@@ -1,0 +1,22 @@
+{
+  "batch_id": "task-771-dcl13c-pureftpd-sel4",
+  "work_item_ref": "771",
+  "requested_by": "brandon.arrendondo@bissell.com",
+  "adjudicator": "claude-r720",
+  "aurora_lint_version": "0.4.336",
+  "aurora_lint_sha": "f3afb23d5d9307f1f95c6c9bad929086aac5ea79",
+  "projects": [
+    "pureftpd",
+    "sel4"
+  ],
+  "codebase_commits": {
+    "pureftpd": "cc28bff52ca28e1d122a2142bf37f2dc578f4d3e",
+    "sel4": "1326364bc9135d9445d936ebc01e38a402c1f4c6"
+  },
+  "submitted_at": "2026-09-17T18:00:00.000Z",
+  "row_count": 137,
+  "rules": [
+    "DCL13-C"
+  ],
+  "notes": "bmdb task 771: delta-adjudicate DCL13-C's remaining const-parameter findings on pureftpd (24) and sel4 (113), after 6 already done and imported this session (source=task761/764-adjacent, all TP). Scope for sel4 restricted to data/benchmark_repos.json's scope_include ('src/**') -- the raw --rules DCL13-C scan found 264 findings, 120 of them under include/ and out of scope; sel4's true in-scope unlabeled delta is 113, not the 264 raw count. Standard applied throughout (per the task's own framing, and this session's own precision_audit README precedent): TP only if BOTH correct (pointee genuinely never modified through the parameter OR any alias/cursor/copy derived from it, anywhere in the function or, for sel4's cross-config case, across every actively-built configuration of that source file) AND implementable (constifying the parameter would not require an explicit cast elsewhere to keep compiling, and is not blocked by a fixed external-library callback signature, a fixed internal function-pointer typedef, or a standard-library call whose own prototype demands non-const).\n\npureftpd (24 rows, adjudicated directly): 6 TP (genuine read-only accessors), 18 FP. Notably this INVERTS the task's own stated expectation of a high TP rate for this project -- flagging that reversal explicitly rather than silently deviating. The 18 FP break down as: writes through a derived alias/cursor (freestructs' hash0, generic_parser's config_keywords_pnt, strip_lf's strchr-derived f), a parameter aliased into a global that gets mutated in a different function (clearargs' argv -> argv0, later written by setprocessname), intentional mutable-accessor functions paired with an already-const twin (ipstack.c's storage_port/storage_port6/storage_sin_addr/storage_sin_addr6, and privsep.c's caller that exercises exactly that mutability), fixed external callback signatures (tls.c's OpenSSL session_ticket_cb, ftpd.c's SimpleConfSpecialHandler table entry), and standard-library calls whose own prototypes require a non-const pointer (fakechroot.c's stat()/lstat(), pure-pw.c's fprintf()). One FP (alt_arc4random.c's CHACHA20_ROUNDS) is a checker-side detection gap worth its own follow-up: the macro-expanded compound-assignment writes on its substituted array-index arguments aren't traced by the tool's write-analysis.\n\nsel4 (113 rows): adjudicated by a forked subagent under an explicit brief mirroring the pureftpd standard above, then independently re-verified by the requester -- structural check (row count, key set, no duplicates) plus source-level spot-checks on all 13 FP and a random sample of 15/100 TP, all confirmed against the real pinned checkout. 100 TP, 13 FP. This resolves the specific ambiguous case task 771 flagged as unsettled (src/object/objecttype.c:597, regionBase/nextFreeArea in createNewObjects): confirmed FP -- createObject dereferences the address derived from regionBase and writes real TCB fields through it for seL4_TCBObject, so regionBase's pointee is genuinely modified for at least one runtime-selectable object type. The other 12 FP: direct writes the checker missed (map_kernel_elf_image, vtd_map_reserved_page, memzero, memcpy -- all in the same checker-detection-gap category as pureftpd's CHACHA20_ROUNDS), writes reached through a call chain (cteInsert-style mdb writes via sendIPC/receiveIPC's thread_state_ptr_set_*, setIOPortMask writing a vcpu's inline io array, schedContext_unbind's call chain), va_arg(*ap,...) mutating its va_list* (a general C idiom), and one cross-build-configuration case (arch/x86/kernel/thread.c:20's Arch_postModifyRegisters -- a no-op on the x86/32 config but a real register write via Mode_postModifyRegisters on the actively-built x86/64 config of the same source file, so not cleanly constifiable across the real build matrix).\n\nvalidate.py: OK, 416 batches (pending re-run), 168413+137 rows."
+}
