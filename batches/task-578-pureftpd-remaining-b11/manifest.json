@@ -1,0 +1,32 @@
+{
+  "batch_id": "task-578-pureftpd-remaining-b11",
+  "work_item_ref": "benchmarking_db-578",
+  "requested_by": "coordinator",
+  "adjudicator": "claude-opus-5",
+  "aurora_lint_version": "0.4.336",
+  "aurora_lint_sha": "96c59c6498229f2321b85029faf8f7b72c445433",
+  "projects": [
+    "pureftpd"
+  ],
+  "codebase_commits": {
+    "pureftpd": "cc28bff52ca28e1d122a2142bf37f2dc578f4d3e"
+  },
+  "submitted_at": "2026-09-18T15:23:12Z",
+  "row_count": 137,
+  "rules": [
+    "ENV30-C",
+    "ENV34-C",
+    "ERR02-C",
+    "ERR04-C",
+    "ERR05-C",
+    "ERR07-C",
+    "ERR32-C",
+    "ERR34-C",
+    "SIG00-C",
+    "SIG01-C",
+    "SIG02-C",
+    "SIG30-C",
+    "SIG35-C"
+  ],
+  "notes": "benchmarking_db 578: adjudicate the remaining unlabeled pure-ftpd findings (the 90% task 551's 10% sample left), whole-daemon scope src/** + puredb/** per the task-551/717 scope declaration in data/benchmark_repos.json.\n\nMETHOD. Population = Postgres realworld run 261 (sqc-0.4.336-96c59c64, queued by dev-41 on main 2026-09-18 10:11, the newest run at pickup); pureftpd codebase_commit cc28bff5 equals the pinned checkout on dev-468 (bench corpus-check OK, tree clean apart from 3 untracked non-C build files). Keys pulled with BenchDB._run_violation_keys(261) -- the same (relpath, line, rule) basis score_realworld_run uses -- then filtered through aurora-lint's bench.corpus.in_scope (all 4610 keys are in scope: the scope declaration is src/**+puredb/** with no excludes), then diffed against BOTH Postgres ground_truth at that commit AND benchmark_adjudication main's pureftpd CSV (17 keys were labeled on main but not yet synced to Postgres; excluded). Result: 4610 keys, 2801 labeled in Postgres, 17 repo-only, 1792 unlabeled -- NOT the ~5,021 in the task body, which predates the per-rule delta passes that have labeled pureftpd since 2026-08-25 (DCL06-C, EXP34-C, PRE02-C, MSC41-C, DCL13-C, ERR33-C fclose, ...).\n\nSCOPE DECISION (task's own first step): full remaining coverage rather than another sample -- a second sample would leave the same per-file completeness gap that task 596 declined to fragment, and 1792 is bounded. Batched rule-coherently (~110-150 rows, largest rules first), one commit per batch on one branch, so partial progress is still mergeable.\n\nGATE CHECK (CLAUDE.md delta-adjudication step): five rules are HELD BACK because an open aurora_lint task is about to move their population: DCL05-C (25 keys; task 1188's typedef-resolution fix on review/1188-dev468 removes the P*/LP*/*PTR name heuristic that produced pureftpd's 21 labeled FPs, awaiting policy ack), ARR38-C (10; task 748 explicitly gates further ARR38-C adjudication on its research), MEM30-C (9; task 1233 exclusive-branch double-free FPs), MEM31-C (1; tasks 1198/1279/1280 in flight), ENV01-C (67; task 1174 re-examines the trigger condition itself, and pureftpd's existing 27 FP / 0 TP already supplies the evidence it asks for). 112 keys total, listed in the task note, to be adjudicated after those land. Not gated: MSC41-C (task 1177 is a P5 mbedtls note, no fix in flight) and PRE08-C (task 1175 wants evidence; adjudicating supplies it). Coverage target for this task is therefore 1680 keys.\n\nDRIFT NOTE: origin/main is 14 commits past run 261 at pickup; four touch rules (INT32-C 8e95f619, INT33-C cf3ae38c, MEM31-C 7721d6da, ARR30-C 64d14756), which have 0/0/1-gated/0 keys in this population, so run 261 is a sound basis for every batch here.\n\nADJUDICATION: each finding read in its source context at cc28bff5 (the statement, its enclosing condition/function, and callers where the checked-ness is decided elsewhere), verdicts following the conventions already established in pureftpd's labels for each rule (cited per row where a precedent exists). The rule's own text is the bar; \"the project does not care\" is a suppression/config matter, not an FP (ADR-0001/0005). Adjudicator: claude-opus-5 on dev-468, single pass, no adversarial re-verification. Counting basis: distinct (project, commit, file, line, rule) keys. No precision/recall claim is made here.\nBATCH B11 of 13: SIG00-C 29, ERR05-C 24, ERR34-C 16, ENV34-C 15, ENV30-C 13, SIG01-C 9, SIG02-C 7, ERR07-C 7, ERR32-C 5, SIG30-C 4, ERR02-C 4, ERR04-C 3, SIG35-C 1 (137 keys).\n\nRESULT: 72 FP / 65 TP.\n- SIG00-C (14 TP / 15 FP): every signal() call is TP (the rule targets the function; SIG_IGN installs included, per the prior labels); every sigaction() 'without masking' is FP because sa_mask is sigemptyset() at the top of both set_signals functions and each real handler blocks all signals itself.\n- SIG01-C (9 TP), SIG30-C (4 TP: pure-ftpwho's crash handlers call fprintf/exit), SIG02-C (7 FP: SIG_IGN installs and an idle-timeout handler), SIG35-C (1 FP: sigalarm is not a SIGFPE handler).\n- ERR05-C (14 TP / 10 FP): verdict rule per the prior labels -- TP when reusable/helper code (the RNG module, fakegetcwd, the transfer handlers' impossible-state aborts, clearargs, the simpleconf parser) terminates instead of reporting; FP when a single-purpose CLI/daemon's own top-level help/usage/out-of-memory/crash handler exits, which is the application deciding, not library code.\n- ERR34-C (16 TP) and ERR07-C (7 TP): atoi()/sscanf() numeric conversions with no ERANGE detection, the rule's own noncompliant examples; a return-count check on sscanf does not detect range errors. Prior labels split on this (ftpd.c:970/6039 and log_ldap.c:43 FP vs. 5996/6007 and the log_mysql/log_pgsql atoi TPs); this batch follows the rule text and flags the conflict for gavel.\n- ENV34-C (14 FP / 1 TP): 14 localtime/gmtime/getenv results consumed immediately (or copied by value first); one real retention -- getenv(\"FTP_ANON_DIR\") stored into the session's pw_.pw_dir while the daemon later calls putenv().\n- ENV30-C (13 FP: every callee takes 'const char * const' or a read-only macro), ERR32-C (5 FP: the handlers SAVE and RESTORE errno, the rule's compliant idiom; one site is not a handler), ERR02-C (4 FP: the POSIX ssize_t I/O contract, resolving the prior 'uncertain' at ftpd.h:315), ERR04-C (3 FP: read-only stream)."
+}
