@@ -1,0 +1,22 @@
+{
+  "batch_id": "task-1290-mem31c-withdrawn-recall-check",
+  "work_item_ref": "benchmarking_db-1290",
+  "requested_by": "coordinator",
+  "adjudicator": "claude-opus-5",
+  "aurora_lint_version": "0.4.336",
+  "aurora_lint_sha": "53853e782045143343733eb414e130771d369349",
+  "projects": [
+    "hostap",
+    "valkey"
+  ],
+  "codebase_commits": {
+    "hostap": "dcee60436390dd34731560657c4257c3b4c839a6",
+    "valkey": "7f1dffedff6de73058b2c2a389422b6ecd56c8fb"
+  },
+  "submitted_at": "2026-09-18T16:00:12Z",
+  "row_count": 112,
+  "rules": [
+    "MEM31-C"
+  ],
+  "notes": "benchmarking_db 1290: recall spot-check of the MEM31-C findings WITHDRAWN by today's three detection changes (ef67c39e/1197, 7721d6da/1198 stores_params, eed7c8b3/1269), so that a suppressed real leak cannot hide behind '0 labeled TP withdrawn'.\n\nMETHOD. Base = Postgres realworld run 260 (sqc-0.4.336-53853e78, this morning's floor, predates all three commits); target = run 263 (sqc-0.4.336-1c90198e, contains all three). Same 12 codebase_commits on both runs, equal to the pinned checkouts on dev-468. Keys via BenchDB._run_violation_keys on both runs, scoped with aurora-lint's bench.corpus.in_scope, labels checked against Postgres ground_truth AND benchmark_adjudication main. MEM31-C movement 260 -> 263: ADDED 0 keys in every project; REMOVED 129 -- curl 10 (all already labeled FP), hostap 28 (6 labeled FP, 22 unlabeled), mosquitto 1 (unlabeled, fuzzing/ -- out of scope), valkey 90 (all unlabeled). Labeled TP withdrawn: 0. So there is no new-finding delta to adjudicate; this batch labels the 112 in-scope withdrawn-unlabeled keys at their run-260 (file, line), each read in source at the pinned commit with the question 'was the withdrawn leak/double-free claim real?'. The rows are keyed at run 260's lines; since run 263 no longer emits them, a TP here would have been a recall regression.\n\nGATE CHECK: no other open FP-driver task withdraws these keys; 1279 (positional processing) and 1289 (MEM30-C) are still in flight and are expected to ADD ~13 findings, which will need their own small delta batch once landed -- deliberately not blocked on.\n\nRESULT: 112 FP / 0 TP. Every withdrawn claim was an ownership escape or an uncredited wrapper release: hostap 22 (dbus handler args stored in obj_desc with a destructor and freed by free_dbus_object_desc on the error path; NAN services and EAP-SIM pending entries linked into tables; one #ifdef-arm double-free); valkey 90 (cluster nodes registered by clusterAddNode, quicklist nodes linked into the list, bio jobs queued, dict/hashtable/listpack values installed with dictAdd/objectSetVal, stream consumers registered in the group, iterators released by listTypeReleaseIterator on every path, auxiliary hashtables released, the module argv adopted by the temp client, a valkey-cli dict released by the callee, and three returns in a branch where the allocation never happens). No real leak was hidden by the three changes.\n\nFOR THE v0.5.0 WRITE-UP: today's MEM31-C changes are clean on both the labeled set (0 TP lost, 16 FP gone) and this withdrawn-unlabeled set (0 real leaks suppressed). What still prevents citing MEM31-C real-world precision is the STABLE unlabeled backlog at run 263: 2014 in-scope keys (valkey 966, hostap 835, sqlite 153, curl 28, mosquitto 23, rest <= 3), gated on aurora_lint 1198/1279/1280 -- too large for this cycle. Counting basis: distinct (project, commit, file, line, rule). No precision/recall claim is made here. Adjudicator: claude-opus-5 on dev-468, single pass."
+}
