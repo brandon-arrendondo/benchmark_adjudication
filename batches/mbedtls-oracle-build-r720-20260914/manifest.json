@@ -12,7 +12,7 @@
     "mbedtls": "068ff080b369adfac81509f9b57b2afabaf82dc5"
   },
   "submitted_at": "2026-09-14T17:32:48.190170",
-  "row_count": 8366,
+  "row_count": 8361,
   "rules": [
     "API00-C",
     "API01-C",
@@ -143,5 +143,19 @@
     "WIN03-C",
     "WIN04-C"
   ],
-  "notes": "Reconstructed during benchmark_adjudication's initial population (2026-09-16) from benchmarking_db's ground_truth.source='mbedtls-oracle-build-r720-20260914'. row_count/projects/codebase_commits/rules were derived from the rows themselves, not declared at adjudication time. aurora_lint_version/aurora_lint_sha are unknown for legacy data -- never recorded per-row."
+  "notes": "Reconstructed during benchmark_adjudication's initial population (2026-09-16) from benchmarking_db's ground_truth.source='mbedtls-oracle-build-r720-20260914'. row_count/projects/codebase_commits/rules were derived from the rows themselves, not declared at adjudication time. aurora_lint_version/aurora_lint_sha are unknown for legacy data -- never recorded per-row.",
+  "superseded_rows": [
+    {
+      "by": "task-1281-err33c-fclose-gavel-review",
+      "count": 5,
+      "keys": [
+        "mbedtls library/md.c:962 ERR33-C",
+        "mbedtls library/platform.c:306 ERR33-C",
+        "mbedtls library/psa_its_file.c:114 ERR33-C",
+        "mbedtls library/psa_its_file.c:170 ERR33-C",
+        "mbedtls library/psa_its_file.c:247 ERR33-C"
+      ],
+      "note": "ERR33-C verdict corrected FP -> TP by gavel review (bmdb 1281); see that batch's manifest notes"
+    }
+  ]
 }

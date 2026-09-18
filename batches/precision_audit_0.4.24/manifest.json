@@ -12,7 +12,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-06-12",
-  "row_count": 3110,
+  "row_count": 3102,
   "rules": [
     "API00-C",
     "API02-C",
@@ -114,5 +114,22 @@
     "WIN03-C",
     "WIN04-C"
   ],
-  "notes": "Reconstructed during benchmark_adjudication's initial population (2026-09-16) from benchmarking_db's ground_truth.source='precision_audit_0.4.24'. row_count/projects/codebase_commits/rules were derived from the rows themselves, not declared at adjudication time. aurora_lint_version/aurora_lint_sha are unknown for legacy data -- never recorded per-row."
+  "notes": "Reconstructed during benchmark_adjudication's initial population (2026-09-16) from benchmarking_db's ground_truth.source='precision_audit_0.4.24'. row_count/projects/codebase_commits/rules were derived from the rows themselves, not declared at adjudication time. aurora_lint_version/aurora_lint_sha are unknown for legacy data -- never recorded per-row.",
+  "superseded_rows": [
+    {
+      "by": "task-1281-err33c-fclose-gavel-review",
+      "count": 8,
+      "keys": [
+        "sqlite ext/misc/base85.c:444 ERR33-C",
+        "sqlite ext/misc/csv.c:107 ERR33-C",
+        "sqlite ext/misc/zipfile.c:431 ERR33-C",
+        "sqlite ext/misc/zipfile.c:481 ERR33-C",
+        "sqlite ext/session/changeset.c:73 ERR33-C",
+        "sqlite ext/session/changeset.c:298 ERR33-C",
+        "sqlite ext/session/changeset.c:368 ERR33-C",
+        "sqlite src/vdbeaux.c:3662 ERR33-C"
+      ],
+      "note": "ERR33-C verdict corrected FP -> TP by gavel review (bmdb 1281); see that batch's manifest notes"
+    }
+  ]
 }

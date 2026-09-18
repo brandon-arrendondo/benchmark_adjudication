@@ -12,7 +12,7 @@
     "hostap": "dcee60436390dd34731560657c4257c3b4c839a6"
   },
   "submitted_at": "2026-07-28",
-  "row_count": 31068,
+  "row_count": 31058,
   "rules": [
     "API00-C",
     "API01-C",
@@ -189,5 +189,24 @@
     "WIN03-C",
     "WIN04-C"
   ],
-  "notes": "Reconstructed during benchmark_adjudication's initial population (2026-09-16) from benchmarking_db's ground_truth.source='hostap_full_audit_0.4.169'. row_count/projects/codebase_commits/rules were derived from the rows themselves, not declared at adjudication time. aurora_lint_version/aurora_lint_sha are unknown for legacy data -- never recorded per-row."
+  "notes": "Reconstructed during benchmark_adjudication's initial population (2026-09-16) from benchmarking_db's ground_truth.source='hostap_full_audit_0.4.169'. row_count/projects/codebase_commits/rules were derived from the rows themselves, not declared at adjudication time. aurora_lint_version/aurora_lint_sha are unknown for legacy data -- never recorded per-row.",
+  "superseded_rows": [
+    {
+      "by": "task-1281-err33c-fclose-gavel-review",
+      "count": 10,
+      "keys": [
+        "hostap hostapd/config_file.c:185 ERR33-C",
+        "hostap hostapd/config_file.c:568 ERR33-C",
+        "hostap hostapd/config_file.c:1084 ERR33-C",
+        "hostap hostapd/config_file.c:5056 ERR33-C",
+        "hostap src/eap_peer/eap_fast_pac.c:294 ERR33-C",
+        "hostap src/utils/edit.c:290 ERR33-C",
+        "hostap src/utils/os_internal.c:241 ERR33-C",
+        "hostap src/utils/os_unix.c:279 ERR33-C",
+        "hostap src/utils/os_unix.c:447 ERR33-C",
+        "hostap wpa_supplicant/config_file.c:486 ERR33-C"
+      ],
+      "note": "ERR33-C verdict corrected FP -> TP by gavel review (bmdb 1281); see that batch's manifest notes"
+    }
+  ]
 }

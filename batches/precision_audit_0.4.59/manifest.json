@@ -12,7 +12,7 @@
     "lua": "40b76de2d77e66b70a9d4bf989c3f5340919973f"
   },
   "submitted_at": "2026-06-22",
-  "row_count": 2458,
+  "row_count": 2457,
   "rules": [
     "API00-C",
     "API01-C",
@@ -119,5 +119,15 @@
     "WIN03-C",
     "WIN04-C"
   ],
-  "notes": "Reconstructed during benchmark_adjudication's initial population (2026-09-16) from benchmarking_db's ground_truth.source='precision_audit_0.4.59'. row_count/projects/codebase_commits/rules were derived from the rows themselves, not declared at adjudication time. aurora_lint_version/aurora_lint_sha are unknown for legacy data -- never recorded per-row."
+  "notes": "Reconstructed during benchmark_adjudication's initial population (2026-09-16) from benchmarking_db's ground_truth.source='precision_audit_0.4.59'. row_count/projects/codebase_commits/rules were derived from the rows themselves, not declared at adjudication time. aurora_lint_version/aurora_lint_sha are unknown for legacy data -- never recorded per-row.",
+  "superseded_rows": [
+    {
+      "by": "task-1281-err33c-fclose-gavel-review",
+      "count": 1,
+      "keys": [
+        "lua lauxlib.c:841 ERR33-C"
+      ],
+      "note": "ERR33-C verdict corrected FP -> TP by gavel review (bmdb 1281); see that batch's manifest notes"
+    }
+  ]
 }

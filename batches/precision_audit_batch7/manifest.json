@@ -12,7 +12,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-06-12T22:12:35.702584",
-  "row_count": 1260,
+  "row_count": 1257,
   "rules": [
     "API00-C",
     "API02-C",
@@ -111,5 +111,17 @@
     "WIN03-C",
     "WIN04-C"
   ],
-  "notes": "Reconstructed during benchmark_adjudication's initial population (2026-09-16) from benchmarking_db's ground_truth.source='precision_audit_batch7'. row_count/projects/codebase_commits/rules were derived from the rows themselves, not declared at adjudication time. aurora_lint_version/aurora_lint_sha are unknown for legacy data -- never recorded per-row."
+  "notes": "Reconstructed during benchmark_adjudication's initial population (2026-09-16) from benchmarking_db's ground_truth.source='precision_audit_batch7'. row_count/projects/codebase_commits/rules were derived from the rows themselves, not declared at adjudication time. aurora_lint_version/aurora_lint_sha are unknown for legacy data -- never recorded per-row.",
+  "superseded_rows": [
+    {
+      "by": "task-1281-err33c-fclose-gavel-review",
+      "count": 3,
+      "keys": [
+        "sqlite ext/misc/fileio.c:415 ERR33-C",
+        "sqlite ext/session/changesetfuzz.c:166 ERR33-C",
+        "sqlite ext/session/changesetfuzz.c:187 ERR33-C"
+      ],
+      "note": "ERR33-C verdict corrected FP -> TP by gavel review (bmdb 1281); see that batch's manifest notes"
+    }
+  ]
 }

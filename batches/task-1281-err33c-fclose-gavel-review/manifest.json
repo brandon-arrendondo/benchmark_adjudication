@@ -1,0 +1,36 @@
+{
+  "batch_id": "task-1281-err33c-fclose-gavel-review",
+  "work_item_ref": "benchmarking_db-1281",
+  "requested_by": "coordinator",
+  "adjudicator": "claude-opus-5",
+  "aurora_lint_version": "0.4.336",
+  "aurora_lint_sha": "96c59c6498229f2321b85029faf8f7b72c445433",
+  "projects": [
+    "curl",
+    "hostap",
+    "libcrc",
+    "lua",
+    "mbedtls",
+    "mosquitto",
+    "pureftpd",
+    "raylib",
+    "sqlite"
+  ],
+  "codebase_commits": {
+    "curl": "3e198f75861cc2e12daf299689e145949dddd19b",
+    "hostap": "dcee60436390dd34731560657c4257c3b4c839a6",
+    "libcrc": "7719e2112a9a960b1bba130d02bebdf58e8701f1",
+    "mbedtls": "068ff080b369adfac81509f9b57b2afabaf82dc5",
+    "mosquitto": "d3ee5c5ca62c0fa4983308c6fff558ee978e878c",
+    "pureftpd": "cc28bff52ca28e1d122a2142bf37f2dc578f4d3e",
+    "raylib": "962bbfc6bfbd7a5acd08e21314fcfa161003a589",
+    "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af",
+    "lua": "40b76de2d77e66b70a9d4bf989c3f5340919973f"
+  },
+  "submitted_at": "2026-09-18T14:34:19Z",
+  "row_count": 57,
+  "rules": [
+    "ERR33-C"
+  ],
+  "notes": "benchmarking_db 1281: gavel review of the ERR33-C oracle self-inconsistency flagged while closing 1271 -- older rows that label a bare fclose() discard FP for reasons the rule's own text does not recognise.\n\nENUMERATION (not from reason text): every ERR33-C row in the repo (mainline a14bd83) was joined to its source line at the project's pinned checkout; a row is a candidate when that line is a bare 'fclose(x);' statement (or an 'if (p) fclose(p);' whose only statement is the bare discard) and the verdict is FP or uncertain. 57 rows qualify, from 10 source batches across curl, hostap, libcrc, mbedtls, mosquitto, pureftpd, raylib, sqlite (0 uncertain). All 57 still fire ERR33-C at run 261 (sqc-0.4.336-96c59c64), so they are live keys. The 157 bare-fclose rows already labeled TP and the one genuinely checked site (curl lib/memdebug.c:517, 'res = fclose(file);' returned to the caller, FP) are untouched.\n\nBAR (task 1271, coordinator-confirmed): ERR33-C-EX1 lists the functions whose return may be ignored and fclose is not among them; the compliant discard is (void)fclose. A bare fclose() is a violation as written regardless of stream mode, of whether the caller is already failing, of whether the handle is reused, of a later unlink, or of the file being a debug/diagnostic log. 'The project does not care' is what suppression/config is for (ADR-0001/0005), not an FP label.\n\nRESULT: all 57 corrected FP -> TP in place. None of the 57 old reasons names an ERR33-C-EX1 exemption; each new reason quotes the old one and states why it does not exempt (read-only stream 22, handle-not-reused/cleanup 14, debug/diagnostic/'pedantry'/'advisory' 17, unlink-after 1, write-already-verified 2, unbuffered 1). Two rows (sqlite ext/session/changesetfuzz.c:166/187) are outside the sqlite oracle scope and never enter the denominator; corrected for consistency and marked as such in the reason.\n\nMECHANICS: same pattern as 1271's 4-row correction -- the corrected rows carry this batch's source; each of the 10 source manifests gets row_count decremented by the rows it lost and a superseded_rows record naming them (an existing superseded_rows dict on delta_task544 is promoted to a list). CSV files rewritten via a csv round trip that preserves each file's own line terminator; no other row's bytes change.\n\nAdjudicator claude-opus-5 on dev-468, single pass. Counting basis: distinct (project, commit, file, line, rule) keys. No precision/recall claim is made here; ERR33-C figures computed before this lands carry the inconsistency, figures after it do not."
+}

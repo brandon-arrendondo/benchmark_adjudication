@@ -12,7 +12,7 @@
     "mosquitto": "d3ee5c5ca62c0fa4983308c6fff558ee978e878c"
   },
   "submitted_at": "2026-06-16T15:18:57.383467",
-  "row_count": 2623,
+  "row_count": 2616,
   "rules": [
     "API00-C",
     "API02-C",
@@ -127,5 +127,21 @@
     "WIN03-C",
     "WIN04-C"
   ],
-  "notes": "Reconstructed during benchmark_adjudication's initial population (2026-09-16) from benchmarking_db's ground_truth.source='mosquitto_full_audit_0.4.30'. row_count/projects/codebase_commits/rules were derived from the rows themselves, not declared at adjudication time. aurora_lint_version/aurora_lint_sha are unknown for legacy data -- never recorded per-row."
+  "notes": "Reconstructed during benchmark_adjudication's initial population (2026-09-16) from benchmarking_db's ground_truth.source='mosquitto_full_audit_0.4.30'. row_count/projects/codebase_commits/rules were derived from the rows themselves, not declared at adjudication time. aurora_lint_version/aurora_lint_sha are unknown for legacy data -- never recorded per-row.",
+  "superseded_rows": [
+    {
+      "by": "task-1281-err33c-fclose-gavel-review",
+      "count": 7,
+      "keys": [
+        "mosquitto src/conf.c:307 ERR33-C",
+        "mosquitto src/conf.c:472 ERR33-C",
+        "mosquitto src/http_api.c:281 ERR33-C",
+        "mosquitto src/websockets.c:498 ERR33-C",
+        "mosquitto src/websockets.c:511 ERR33-C",
+        "mosquitto src/websockets.c:591 ERR33-C",
+        "mosquitto src/websockets.c:606 ERR33-C"
+      ],
+      "note": "ERR33-C verdict corrected FP -> TP by gavel review (bmdb 1281); see that batch's manifest notes"
+    }
+  ]
 }

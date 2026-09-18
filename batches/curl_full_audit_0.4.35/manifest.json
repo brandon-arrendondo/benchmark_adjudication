@@ -12,7 +12,7 @@
     "curl": "3e198f75861cc2e12daf299689e145949dddd19b"
   },
   "submitted_at": "2026-06-16T15:18:56.926079",
-  "row_count": 9719,
+  "row_count": 9718,
   "rules": [
     "API00-C",
     "API01-C",
@@ -141,5 +141,15 @@
     "WIN01-C",
     "WIN04-C"
   ],
-  "notes": "Reconstructed during benchmark_adjudication's initial population (2026-09-16) from benchmarking_db's ground_truth.source='curl_full_audit_0.4.35'. row_count/projects/codebase_commits/rules were derived from the rows themselves, not declared at adjudication time. aurora_lint_version/aurora_lint_sha are unknown for legacy data -- never recorded per-row."
+  "notes": "Reconstructed during benchmark_adjudication's initial population (2026-09-16) from benchmarking_db's ground_truth.source='curl_full_audit_0.4.35'. row_count/projects/codebase_commits/rules were derived from the rows themselves, not declared at adjudication time. aurora_lint_version/aurora_lint_sha are unknown for legacy data -- never recorded per-row.",
+  "superseded_rows": [
+    {
+      "by": "task-1281-err33c-fclose-gavel-review",
+      "count": 1,
+      "keys": [
+        "curl lib/memdebug.c:108 ERR33-C"
+      ],
+      "note": "ERR33-C verdict corrected FP -> TP by gavel review (bmdb 1281); see that batch's manifest notes"
+    }
+  ]
 }

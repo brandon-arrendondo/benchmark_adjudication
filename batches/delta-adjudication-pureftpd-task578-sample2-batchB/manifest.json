@@ -12,7 +12,7 @@
     "pureftpd": "cc28bff52ca28e1d122a2142bf37f2dc578f4d3e"
   },
   "submitted_at": "2026-09-15T20:13:00.348340",
-  "row_count": 140,
+  "row_count": 139,
   "rules": [
     "API04-C",
     "ARR00-C",
@@ -65,5 +65,15 @@
     "STR34-C",
     "WIN03-C"
   ],
-  "notes": "Reconstructed during benchmark_adjudication's initial population (2026-09-16) from benchmarking_db's ground_truth.source='delta-adjudication-pureftpd-task578-sample2-batchB'. row_count/projects/codebase_commits/rules were derived from the rows themselves, not declared at adjudication time. aurora_lint_version/aurora_lint_sha are unknown for legacy data -- never recorded per-row."
+  "notes": "Reconstructed during benchmark_adjudication's initial population (2026-09-16) from benchmarking_db's ground_truth.source='delta-adjudication-pureftpd-task578-sample2-batchB'. row_count/projects/codebase_commits/rules were derived from the rows themselves, not declared at adjudication time. aurora_lint_version/aurora_lint_sha are unknown for legacy data -- never recorded per-row.",
+  "superseded_rows": [
+    {
+      "by": "task-1281-err33c-fclose-gavel-review",
+      "count": 1,
+      "keys": [
+        "pureftpd src/pure-pw.c:1052 ERR33-C"
+      ],
+      "note": "ERR33-C verdict corrected FP -> TP by gavel review (bmdb 1281); see that batch's manifest notes"
+    }
+  ]
 }
