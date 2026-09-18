@@ -12,7 +12,7 @@
     "pureftpd": "cc28bff52ca28e1d122a2142bf37f2dc578f4d3e"
   },
   "submitted_at": "2026-08-19T20:51:49.864751",
-  "row_count": 219,
+  "row_count": 218,
   "rules": [
     "API02-C",
     "API07-C",
@@ -55,5 +55,15 @@
     "STR03-C",
     "STR34-C"
   ],
-  "notes": "Reconstructed during benchmark_adjudication's initial population (2026-09-16) from benchmarking_db's ground_truth.source='manual-audit'. row_count/projects/codebase_commits/rules were derived from the rows themselves, not declared at adjudication time. aurora_lint_version/aurora_lint_sha are unknown for legacy data -- never recorded per-row."
+  "notes": "Reconstructed during benchmark_adjudication's initial population (2026-09-16) from benchmarking_db's ground_truth.source='manual-audit'. row_count/projects/codebase_commits/rules were derived from the rows themselves, not declared at adjudication time. aurora_lint_version/aurora_lint_sha are unknown for legacy data -- never recorded per-row.",
+  "superseded_rows": [
+    {
+      "by": "task-1292-int30c-int32c-delta-b1",
+      "count": 1,
+      "keys": [
+        "pureftpd src/log_pgsql.c:62 INT32-C"
+      ],
+      "note": "row re-keyed INT32-C -> INT30-C in place (verdict/reason kept) after 144baafc/task 1288 moved the allocation-size wrap; see that batch's manifest"
+    }
+  ]
 }

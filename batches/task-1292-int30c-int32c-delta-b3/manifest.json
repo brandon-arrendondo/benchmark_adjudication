@@ -1,0 +1,35 @@
+{
+  "batch_id": "task-1292-int30c-int32c-delta-b3",
+  "work_item_ref": "benchmarking_db-1292",
+  "requested_by": "coordinator",
+  "adjudicator": "claude-opus-5",
+  "aurora_lint_version": "0.4.336",
+  "aurora_lint_sha": "dedcb5e445f177890c9e39555ecefe282666b9a7",
+  "projects": [
+    "curl",
+    "hostap",
+    "lua",
+    "mbedtls",
+    "pureftpd",
+    "raylib",
+    "sqlite",
+    "valkey"
+  ],
+  "codebase_commits": {
+    "curl": "3e198f75861cc2e12daf299689e145949dddd19b",
+    "hostap": "dcee60436390dd34731560657c4257c3b4c839a6",
+    "lua": "40b76de2d77e66b70a9d4bf989c3f5340919973f",
+    "mbedtls": "068ff080b369adfac81509f9b57b2afabaf82dc5",
+    "pureftpd": "cc28bff52ca28e1d122a2142bf37f2dc578f4d3e",
+    "raylib": "962bbfc6bfbd7a5acd08e21314fcfa161003a589",
+    "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af",
+    "valkey": "7f1dffedff6de73058b2c2a389422b6ecd56c8fb"
+  },
+  "submitted_at": "2026-09-18T16:41:45Z",
+  "row_count": 86,
+  "rules": [
+    "INT30-C",
+    "INT32-C"
+  ],
+  "notes": "benchmarking_db 1292: delta-adjudication of INT30-C/INT32-C after 8e95f619 (task 1276, six typing fixes), 144baafc (task 1288, the data*sizeof(T) allocation-size wrap moves INT32-C -> INT30-C) and dedcb5e4 (task 1288 audit finding, INT30-C now resolves typedef chains / Win32 names), plus task 1285's single relabel, ahead of the v0.5.0 baseline.\n\nMETHOD. Base = Postgres realworld run 260 (sqc-0.4.336-53853e78, the morning floor, predates all three commits); target = run 264 (sqc-0.4.336-dedcb5e4, origin/main HEAD at pickup, contains all three -- 8e95f619 is in run 262, the two 1288 commits only in 264). Same 12 codebase_commits on both runs, equal to the pinned checkouts on dev-468. Keys via BenchDB._run_violation_keys, scoped with bench.corpus.in_scope, labels checked against Postgres ground_truth AND benchmark_adjudication main. The coordinator's two handoff CSVs from mini (35-row INT32->INT30 rekey list; typedef-widening additions) were reconciled against the run diff rather than trusted blind: all 35 rekey keys show INT32-C withdrawn AND INT30-C added at the same (file, line) at 264 (one, sqlite src/tclsqlite.c:3039, is out of scope and has no repo row, so it is not re-keyed); every key in the additions CSV is present in the diff, plus 4 the CSV missed (mosquitto 2, mbedtls 1, pureftpd 1).\n\nMOVEMENT 260 -> 264, distinct (project, file, line) keys: INT30-C +258 (in-scope 257: sel4 103, sqlite 42, hostap 39, pureftpd 38, ventoy 22, mbedtls 5, valkey 5, mosquitto 2, curl 1 out-of-scope) / -3 (all labeled FP). INT32-C +12 (all unlabeled) / -188 (179 labeled FP, 9 labeled TP). Of the INT30-C additions: 34 are the re-key, 17 carry an existing INT32-C label at the same line, 4 already carried an INT30-C label, 201 are fresh unlabeled. INT30-C's population: 735 -> 990 keys.\n\nGATE CHECK: 1284 shapes 2/3 and 1289 do not touch INT30/INT32-C; aurora_lint 1258 (P4, four narrow VRA proof shapes) is not a blanket driver. Not gated.\n\nCOUNTING BASIS: distinct (project, commit, file, line, rule). No precision/recall claim is made here. Adjudicator: claude-opus-5 on dev-468, single pass.\nBATCH B3 of 3: the fresh INT30-C keys on hostap (30), sqlite (29) and pureftpd (15), plus every new INT32-C key of the run (12: hostap 4, mbedtls 2, valkey 2, curl 1, lua 1, raylib 1, sqlite 1) -- 86 keys, all new at run 264 with no label under any rule.\n\nRESULT: 85 FP / 1 TP.\n- INT30-C (74 FP): hostap's are u8 IE lengths + the 2-byte header, checksum and hash-counter idioms with their own carry handling, key-data lengths checked '>= 8' in the enclosing condition, nonce/register/VLAN values bounded by type or by the check on the next line, and LibTomMath's modular arithmetic; pureftpd's are puredb_read()'s slot walk, where every offset is either the bounds check itself or was checked against db->size by the preceding read_be_long()/comparison; sqlite's are the deliberate (u64) docid-delta wraparound (already labeled at fts3.c:2516/2518), corruption bounds checks evaluated in u64, guarded page/offset subtractions, and record-header index advances bounded by validated header sizes. Seven sqlite keys are in os_win.c, the Windows-only VFS not compiled on the Linux target; adjudicated on the merits anyway (all FP) and flagged here in case benchmarking_db wants os_win.c in sqlite's scope_exclude like curl's WIN_MAC set.\n- INT32-C (11 FP / 1 TP): config-file ints and argv indices (hostap's admin-trusted config convention applies to the two 'val * 8' diagnostics), a boolean shift, a bounded stack index, a write-loop remainder. The one TP is raylib GenMeshPlane()'s '(resX - 1)*(resZ - 1)' on unvalidated public int parameters that then size allocations -- signed operands, so INT32-C is the right rule under the 1285 dispatch decision, and the same unvalidated-public-parameter class as raylib's existing TPs.\n\nTASK-LEVEL SUMMARY (b1-b3, 269 rows + 39 in-place edits): the label movement is fully reconciled (34 re-keys, 1285's relabel, 4 recall-check corrections, 17 carry-overs) and every fresh key is labeled. Net picture of 8e95f619 + 144baafc + dedcb5e4 for INT30-C: +258 keys of which 1 TP (ventoy VentoyJson.c:407, carried) and 0 fresh TPs -- the typedef widening surfaced no new real wrap in any of the nine projects; for INT32-C: +12 (1 TP), -188 (0 recall loss on the labeled set after the corrections). One INT30-C false negative is recorded (p2p.c:288 per 1285). Two follow-ups for aurora_lint, not filed here: (a) the four corrected keys show INT32-C had been crediting unsigned expressions before 8e95f619 -- the fix is right; (b) INT30-C's typedef widening is noise-heavy on kernel/boot address arithmetic (sel4 +103, 0 TP), which is a config/suppression matter per ADR-0001, not a detection one."
+}

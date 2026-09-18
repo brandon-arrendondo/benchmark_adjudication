@@ -1,0 +1,33 @@
+{
+  "batch_id": "task-1292-int30c-int32c-delta-b1",
+  "work_item_ref": "benchmarking_db-1292",
+  "requested_by": "coordinator",
+  "adjudicator": "claude-opus-5",
+  "aurora_lint_version": "0.4.336",
+  "aurora_lint_sha": "dedcb5e445f177890c9e39555ecefe282666b9a7",
+  "projects": [
+    "hostap",
+    "pureftpd",
+    "raylib",
+    "sel4",
+    "sqlite",
+    "valkey",
+    "ventoy"
+  ],
+  "codebase_commits": {
+    "hostap": "dcee60436390dd34731560657c4257c3b4c839a6",
+    "pureftpd": "cc28bff52ca28e1d122a2142bf37f2dc578f4d3e",
+    "raylib": "962bbfc6bfbd7a5acd08e21314fcfa161003a589",
+    "sel4": "1326364bc9135d9445d936ebc01e38a402c1f4c6",
+    "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af",
+    "valkey": "7f1dffedff6de73058b2c2a389422b6ecd56c8fb",
+    "ventoy": "7cbdc5cf69935bcf1f085ae67f40e70ea7e74bae"
+  },
+  "submitted_at": "2026-09-18T16:34:55Z",
+  "row_count": 56,
+  "rules": [
+    "INT30-C",
+    "INT32-C"
+  ],
+  "notes": "benchmarking_db 1292: delta-adjudication of INT30-C/INT32-C after 8e95f619 (task 1276, six typing fixes), 144baafc (task 1288, the data*sizeof(T) allocation-size wrap moves INT32-C -> INT30-C) and dedcb5e4 (task 1288 audit finding, INT30-C now resolves typedef chains / Win32 names), plus task 1285's single relabel, ahead of the v0.5.0 baseline.\n\nMETHOD. Base = Postgres realworld run 260 (sqc-0.4.336-53853e78, the morning floor, predates all three commits); target = run 264 (sqc-0.4.336-dedcb5e4, origin/main HEAD at pickup, contains all three -- 8e95f619 is in run 262, the two 1288 commits only in 264). Same 12 codebase_commits on both runs, equal to the pinned checkouts on dev-468. Keys via BenchDB._run_violation_keys, scoped with bench.corpus.in_scope, labels checked against Postgres ground_truth AND benchmark_adjudication main. The coordinator's two handoff CSVs from mini (35-row INT32->INT30 rekey list; typedef-widening additions) were reconciled against the run diff rather than trusted blind: all 35 rekey keys show INT32-C withdrawn AND INT30-C added at the same (file, line) at 264 (one, sqlite src/tclsqlite.c:3039, is out of scope and has no repo row, so it is not re-keyed); every key in the additions CSV is present in the diff, plus 4 the CSV missed (mosquitto 2, mbedtls 1, pureftpd 1).\n\nMOVEMENT 260 -> 264, distinct (project, file, line) keys: INT30-C +258 (in-scope 257: sel4 103, sqlite 42, hostap 39, pureftpd 38, ventoy 22, mbedtls 5, valkey 5, mosquitto 2, curl 1 out-of-scope) / -3 (all labeled FP). INT32-C +12 (all unlabeled) / -188 (179 labeled FP, 9 labeled TP). Of the INT30-C additions: 34 are the re-key, 17 carry an existing INT32-C label at the same line, 4 already carried an INT30-C label, 201 are fresh unlabeled. INT30-C's population: 735 -> 990 keys.\n\nGATE CHECK: 1284 shapes 2/3 and 1289 do not touch INT30/INT32-C; aurora_lint 1258 (P4, four narrow VRA proof shapes) is not a blanket driver. Not gated.\n\nCOUNTING BASIS: distinct (project, commit, file, line, rule). No precision/recall claim is made here. Adjudicator: claude-opus-5 on dev-468, single pass.\nBATCH B1 of 3: the label-movement half -- 34 in-place re-keys, task 1285's relabel, 4 in-place corrections from the recall check of withdrawn INT32-C TPs, and 17 carry-over rows.\n\n- RE-KEY (34 rows edited in place, rule_id INT32-C -> INT30-C, verdict and original reasoning kept verbatim, source repointed here): hostap 3, pureftpd 23, sqlite 1, valkey 3, ventoy 4 (32 FP / 2 TP). Verified per key at run 264.\n- 1285 RELABEL (1 row, hostap src/p2p/p2p.c:288 TP, INT32-C -> INT30-C per Brandon's dispatch decision). NOTE: INT30-C does not emit at that key at run 264 (and INT32-C no longer does), so this TP is now an INT30-C false negative -- recorded, not dropped.\n- RECALL CHECK of the 9 withdrawn INT32-C TPs: 2 are the re-key (hostapd_cli.c:129, log_pgsql.c:62), 1 moved to a carried INT30-C TP (VentoyJson.c:407), 1 is p2p.c:288 above, 1 is out of scope (sqlite ext/fts3/tool/fts3view.c:579, untouched). The remaining 4 were re-read and CORRECTED to FP in place: os_unix.c:726 (generic allocator header add, INT30-C's own FP label stands), rtext.c:659 (the defect is the INT30-C TP at the same key, which still fires), rmodels.c:4980/5122 (uint32 x sizeof in 64-bit size_t cannot wrap; the real defect is the ARR38-C TP already at those lines). Net INT32-C recall effect of today's changes on the labeled set: none.\n- CARRY-OVER (17 new INT30-C rows at keys that already had an INT32-C label, 16 FP / 1 TP): each re-read against INT30-C's own question rather than copied blind (rotate/carry idioms, guarded subtractions, constant products, clz shifts; the one TP is a (UINT32)strlen truncation-then-wrap on an attacker-supplied file)."
+}

@@ -12,7 +12,7 @@
     "hostap": "dcee60436390dd34731560657c4257c3b4c839a6"
   },
   "submitted_at": "2026-07-28",
-  "row_count": 31058,
+  "row_count": 31055,
   "rules": [
     "API00-C",
     "API01-C",
@@ -207,6 +207,30 @@
         "hostap wpa_supplicant/config_file.c:486 ERR33-C"
       ],
       "note": "ERR33-C verdict corrected FP -> TP by gavel review (bmdb 1281); see that batch's manifest notes"
+    },
+    {
+      "by": "task-1292-int30c-int32c-delta-b1",
+      "count": 1,
+      "keys": [
+        "hostap src/utils/trace.c:448 INT32-C"
+      ],
+      "note": "row re-keyed INT32-C -> INT30-C in place (verdict/reason kept) after 144baafc/task 1288 moved the allocation-size wrap; see that batch's manifest"
+    },
+    {
+      "by": "task-1292-int30c-int32c-delta-b1",
+      "count": 1,
+      "keys": [
+        "hostap src/p2p/p2p.c:288 INT32-C"
+      ],
+      "note": "row re-keyed INT32-C -> INT30-C in place per task 1285's dispatch decision; see that batch's manifest"
+    },
+    {
+      "by": "task-1292-int30c-int32c-delta-b1",
+      "count": 1,
+      "keys": [
+        "hostap src/utils/os_unix.c:726 INT32-C"
+      ],
+      "note": "INT32-C verdict corrected TP -> FP after 8e95f619's typing withdrew the key (bmdb 1292 recall check); see that batch's manifest"
     }
   ]
 }

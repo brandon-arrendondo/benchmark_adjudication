@@ -12,9 +12,37 @@
     "pureftpd": "cc28bff52ca28e1d122a2142bf37f2dc578f4d3e"
   },
   "submitted_at": "2026-09-04T12:00:57.997943",
-  "row_count": 55,
+  "row_count": 36,
   "rules": [
     "INT32-C"
   ],
-  "notes": "Reconstructed during benchmark_adjudication's initial population (2026-09-16) from benchmarking_db's ground_truth.source='delta_int32_task700'. row_count/projects/codebase_commits/rules were derived from the rows themselves, not declared at adjudication time. aurora_lint_version/aurora_lint_sha are unknown for legacy data -- never recorded per-row."
+  "notes": "Reconstructed during benchmark_adjudication's initial population (2026-09-16) from benchmarking_db's ground_truth.source='delta_int32_task700'. row_count/projects/codebase_commits/rules were derived from the rows themselves, not declared at adjudication time. aurora_lint_version/aurora_lint_sha are unknown for legacy data -- never recorded per-row.",
+  "superseded_rows": [
+    {
+      "by": "task-1292-int30c-int32c-delta-b1",
+      "count": 19,
+      "keys": [
+        "pureftpd src/dynamic.c:105 INT32-C",
+        "pureftpd src/ftpd.c:662 INT32-C",
+        "pureftpd src/log_extauth.c:35 INT32-C",
+        "pureftpd src/log_ldap.c:125 INT32-C",
+        "pureftpd src/log_pgsql.c:253 INT32-C",
+        "pureftpd src/log_pgsql.c:292 INT32-C",
+        "pureftpd src/ls.c:223 INT32-C",
+        "pureftpd src/pure-authd.c:200 INT32-C",
+        "pureftpd src/pure-authd.c:367 INT32-C",
+        "pureftpd src/pure-certd.c:200 INT32-C",
+        "pureftpd src/pure-pw.c:347 INT32-C",
+        "pureftpd src/pure-pw.c:1405 INT32-C",
+        "pureftpd src/pure-quotacheck.c:115 INT32-C",
+        "pureftpd src/pure-quotacheck.c:143 INT32-C",
+        "pureftpd src/pure-uploadscript.c:309 INT32-C",
+        "pureftpd src/pure-uploadscript.c:325 INT32-C",
+        "pureftpd src/pure-uploadscript.c:344 INT32-C",
+        "pureftpd src/simpleconf.c:648 INT32-C",
+        "pureftpd src/upload-pipe.c:124 INT32-C"
+      ],
+      "note": "row re-keyed INT32-C -> INT30-C in place (verdict/reason kept) after 144baafc/task 1288 moved the allocation-size wrap; see that batch's manifest"
+    }
+  ]
 }

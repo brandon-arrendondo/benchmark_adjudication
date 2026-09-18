@@ -1,0 +1,28 @@
+{
+  "batch_id": "task-1292-int30c-int32c-delta-b2",
+  "work_item_ref": "benchmarking_db-1292",
+  "requested_by": "coordinator",
+  "adjudicator": "claude-opus-5",
+  "aurora_lint_version": "0.4.336",
+  "aurora_lint_sha": "dedcb5e445f177890c9e39555ecefe282666b9a7",
+  "projects": [
+    "mbedtls",
+    "mosquitto",
+    "sel4",
+    "valkey",
+    "ventoy"
+  ],
+  "codebase_commits": {
+    "mbedtls": "068ff080b369adfac81509f9b57b2afabaf82dc5",
+    "mosquitto": "d3ee5c5ca62c0fa4983308c6fff558ee978e878c",
+    "sel4": "1326364bc9135d9445d936ebc01e38a402c1f4c6",
+    "valkey": "7f1dffedff6de73058b2c2a389422b6ecd56c8fb",
+    "ventoy": "7cbdc5cf69935bcf1f085ae67f40e70ea7e74bae"
+  },
+  "submitted_at": "2026-09-18T16:38:20Z",
+  "row_count": 127,
+  "rules": [
+    "INT30-C"
+  ],
+  "notes": "benchmarking_db 1292: delta-adjudication of INT30-C/INT32-C after 8e95f619 (task 1276, six typing fixes), 144baafc (task 1288, the data*sizeof(T) allocation-size wrap moves INT32-C -> INT30-C) and dedcb5e4 (task 1288 audit finding, INT30-C now resolves typedef chains / Win32 names), plus task 1285's single relabel, ahead of the v0.5.0 baseline.\n\nMETHOD. Base = Postgres realworld run 260 (sqc-0.4.336-53853e78, the morning floor, predates all three commits); target = run 264 (sqc-0.4.336-dedcb5e4, origin/main HEAD at pickup, contains all three -- 8e95f619 is in run 262, the two 1288 commits only in 264). Same 12 codebase_commits on both runs, equal to the pinned checkouts on dev-468. Keys via BenchDB._run_violation_keys, scoped with bench.corpus.in_scope, labels checked against Postgres ground_truth AND benchmark_adjudication main. The coordinator's two handoff CSVs from mini (35-row INT32->INT30 rekey list; typedef-widening additions) were reconciled against the run diff rather than trusted blind: all 35 rekey keys show INT32-C withdrawn AND INT30-C added at the same (file, line) at 264 (one, sqlite src/tclsqlite.c:3039, is out of scope and has no repo row, so it is not re-keyed); every key in the additions CSV is present in the diff, plus 4 the CSV missed (mosquitto 2, mbedtls 1, pureftpd 1).\n\nMOVEMENT 260 -> 264, distinct (project, file, line) keys: INT30-C +258 (in-scope 257: sel4 103, sqlite 42, hostap 39, pureftpd 38, ventoy 22, mbedtls 5, valkey 5, mosquitto 2, curl 1 out-of-scope) / -3 (all labeled FP). INT32-C +12 (all unlabeled) / -188 (179 labeled FP, 9 labeled TP). Of the INT30-C additions: 34 are the re-key, 17 carry an existing INT32-C label at the same line, 4 already carried an INT30-C label, 201 are fresh unlabeled. INT30-C's population: 735 -> 990 keys.\n\nGATE CHECK: 1284 shapes 2/3 and 1289 do not touch INT30/INT32-C; aurora_lint 1258 (P4, four narrow VRA proof shapes) is not a blanket driver. Not gated.\n\nCOUNTING BASIS: distinct (project, commit, file, line, rule). No precision/recall claim is made here. Adjudicator: claude-opus-5 on dev-468, single pass.\nBATCH B2 of 3: the fresh INT30-C keys dedcb5e4's typedef widening exposed on sel4 (102), ventoy (16), mbedtls (5), mosquitto (2) and valkey (2) -- 127 keys, all new at run 264 with no label under any rule.\n\nRESULT: 127 FP / 0 TP. dedcb5e4 makes typedef'd unsigned types (seL4 word_t/vptr_t/paddr_t/asid_t, ventoy UINT64/DWORD, mbedtls size_t aliases, valkey monotime) visible to INT30-C, and what it exposes is overwhelmingly kernel/boot/device arithmetic on values the code itself established: seL4 object-range ends ('regionBase + MASK(bits)' on Untyped-derived objects), ASID-pool and page-table index sums, cache-flush ranges the invocation decoder already validated (restated by the proof annotations at the site), boot-time DTB/ELF/root-server placement (one site even has the canonical 'if (end < start)' wrap check on the next line), GIC/IOAPIC/VT-d register-field construction with constant shifts, and scheduler/refill invariants guarded by the preceding branch. ventoy's are 64-bit sector-to-byte conversions and installer-computed MBR layout; mbedtls' are MPS reader offsets capped by the checks above them and a PSA location/key-id range that was just validated; mosquitto's are strlen-1 on a token required non-empty; valkey's are monotonic-clock differences taken in order. Per-row reasons name the bound. Consistent with the 62 prior sel4 INT30-C FP labels: this rule finds no wrap in the verified kernel, and the widening did not change that."
+}
