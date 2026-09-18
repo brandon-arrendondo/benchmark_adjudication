@@ -1,0 +1,20 @@
+{
+  "batch_id": "task-1291-preproc-misread-delta",
+  "work_item_ref": "benchmarking_db-1291",
+  "requested_by": "coordinator",
+  "adjudicator": "claude-opus-5",
+  "aurora_lint_version": "0.4.336",
+  "aurora_lint_sha": "dedcb5e445f177890c9e39555ecefe282666b9a7",
+  "projects": [
+    "valkey"
+  ],
+  "codebase_commits": {
+    "valkey": "7f1dffedff6de73058b2c2a389422b6ecd56c8fb"
+  },
+  "submitted_at": "2026-09-18T16:29:52Z",
+  "row_count": 1,
+  "rules": [
+    "EXP13-C"
+  ],
+  "notes": "benchmarking_db 1291: delta-adjudication of EXP02-C after 18310ab7 (task 1264, `defined` is a preprocessor operator) and of the EXP13-C/PRE31-C/INT33-C shape-1 movement from ba983a76 (task 1284, is_on_preproc_directive_line), ahead of the v0.5.0 baseline.\n\nMETHOD. Base = Postgres realworld run 260 (sqc-0.4.336-53853e78, the morning floor, predates both commits); target = run 264 (sqc-0.4.336-dedcb5e4, origin/main HEAD at pickup, contains both -- 18310ab7 is in run 261 and ba983a76 only in 264). Same 12 codebase_commits on both runs, equal to the pinned checkouts on dev-468. Keys via BenchDB._run_violation_keys, scoped with bench.corpus.in_scope, labels checked against Postgres ground_truth AND benchmark_adjudication main.\n\nMOVEMENT 260 -> 264, distinct (project, file, line) keys, ADDED 0 for all four rules:\n- EXP02-C: -4 (mbedtls 1, sel4 3), all already labeled FP -- 1264's `defined` misfires. Nothing new to label; the withdrawal is correct on the labeled set (0 TP lost).\n- EXP13-C: -1 (valkey src/module.c:13497, unlabeled) -- this batch's one row.\n- PRE31-C: -11 (mbedtls 10, sqlite 1), all already labeled FP.\n- INT33-C: -105, all already labeled FP; 103 of them are cf3ae38c/1274 (guard credit, confirmed clean by mini, not double-counted here) and the remaining 2 (mbedtls) are 1284's shape-1 directive-line misfires.\nNote the task predicted 13 shape-1 removals across EXP13-C/PRE31-C/INT33-C; the run-level diff shows 1 + 11 + 2 = 14 in-scope, all but one pre-labeled FP. 1284 shapes 2 (PRE32-C) and 3 (INT33-C/INT10-C string literal) are not in run 264 and remain a follow-up.\n\nGATE CHECK: no open FP-driver task touches these keys; nothing gated.\n\nRESULT: 1 FP / 0 TP. The single unlabeled withdrawn key is `#if ... && __has_include(<dlfcn.h>)` (valkey module.c:13497), a preprocessor directive line whose `<dlfcn.h>` was parsed as chained relational operators -- exactly the ADR-0005 misfire class ba983a76 removes. Labeled FP at its run-260 key so the withdrawal is recorded as correct (no recall loss). Counting basis: distinct (project, commit, file, line, rule). No precision/recall claim is made here. Adjudicator: claude-opus-5 on dev-468."
+}
