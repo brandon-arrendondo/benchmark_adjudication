@@ -1,0 +1,36 @@
+{
+  "batch_id": "task-578-pureftpd-remaining-b10",
+  "work_item_ref": "benchmarking_db-578",
+  "requested_by": "coordinator",
+  "adjudicator": "claude-opus-5",
+  "aurora_lint_version": "0.4.336",
+  "aurora_lint_sha": "96c59c6498229f2321b85029faf8f7b72c445433",
+  "projects": [
+    "pureftpd"
+  ],
+  "codebase_commits": {
+    "pureftpd": "cc28bff52ca28e1d122a2142bf37f2dc578f4d3e"
+  },
+  "submitted_at": "2026-09-18T15:19:52Z",
+  "row_count": 140,
+  "rules": [
+    "EXP00-C",
+    "EXP07-C",
+    "EXP13-C",
+    "EXP15-C",
+    "EXP20-C",
+    "EXP30-C",
+    "EXP37-C",
+    "EXP40-C",
+    "EXP43-C",
+    "EXP45-C",
+    "EXP46-C",
+    "MEM00-C",
+    "MEM03-C",
+    "MEM04-C",
+    "MEM05-C",
+    "MEM11-C",
+    "MEM35-C"
+  ],
+  "notes": "benchmarking_db 578: adjudicate the remaining unlabeled pure-ftpd findings (the 90% task 551's 10% sample left), whole-daemon scope src/** + puredb/** per the task-551/717 scope declaration in data/benchmark_repos.json.\n\nMETHOD. Population = Postgres realworld run 261 (sqc-0.4.336-96c59c64, queued by dev-41 on main 2026-09-18 10:11, the newest run at pickup); pureftpd codebase_commit cc28bff5 equals the pinned checkout on dev-468 (bench corpus-check OK, tree clean apart from 3 untracked non-C build files). Keys pulled with BenchDB._run_violation_keys(261) -- the same (relpath, line, rule) basis score_realworld_run uses -- then filtered through aurora-lint's bench.corpus.in_scope (all 4610 keys are in scope: the scope declaration is src/**+puredb/** with no excludes), then diffed against BOTH Postgres ground_truth at that commit AND benchmark_adjudication main's pureftpd CSV (17 keys were labeled on main but not yet synced to Postgres; excluded). Result: 4610 keys, 2801 labeled in Postgres, 17 repo-only, 1792 unlabeled -- NOT the ~5,021 in the task body, which predates the per-rule delta passes that have labeled pureftpd since 2026-08-25 (DCL06-C, EXP34-C, PRE02-C, MSC41-C, DCL13-C, ERR33-C fclose, ...).\n\nSCOPE DECISION (task's own first step): full remaining coverage rather than another sample -- a second sample would leave the same per-file completeness gap that task 596 declined to fragment, and 1792 is bounded. Batched rule-coherently (~110-150 rows, largest rules first), one commit per batch on one branch, so partial progress is still mergeable.\n\nGATE CHECK (CLAUDE.md delta-adjudication step): five rules are HELD BACK because an open aurora_lint task is about to move their population: DCL05-C (25 keys; task 1188's typedef-resolution fix on review/1188-dev468 removes the P*/LP*/*PTR name heuristic that produced pureftpd's 21 labeled FPs, awaiting policy ack), ARR38-C (10; task 748 explicitly gates further ARR38-C adjudication on its research), MEM30-C (9; task 1233 exclusive-branch double-free FPs), MEM31-C (1; tasks 1198/1279/1280 in flight), ENV01-C (67; task 1174 re-examines the trigger condition itself, and pureftpd's existing 27 FP / 0 TP already supplies the evidence it asks for). 112 keys total, listed in the task note, to be adjudicated after those land. Not gated: MSC41-C (task 1177 is a P5 mbedtls note, no fix in flight) and PRE08-C (task 1175 wants evidence; adjudicating supplies it). Coverage target for this task is therefore 1680 keys.\n\nDRIFT NOTE: origin/main is 14 commits past run 261 at pickup; four touch rules (INT32-C 8e95f619, INT33-C cf3ae38c, MEM31-C 7721d6da, ARR30-C 64d14756), which have 0/0/1-gated/0 keys in this population, so run 261 is a sound basis for every batch here.\n\nADJUDICATION: each finding read in its source context at cc28bff5 (the statement, its enclosing condition/function, and callers where the checked-ness is decided elsewhere), verdicts following the conventions already established in pureftpd's labels for each rule (cited per row where a precedent exists). The rule's own text is the bar; \"the project does not care\" is a suppression/config matter, not an FP (ADR-0001/0005). Adjudicator: claude-opus-5 on dev-468, single pass, no adversarial re-verification. Counting basis: distinct (project, commit, file, line, rule) keys. No precision/recall claim is made here.\nBATCH B10 of 13: EXP20-C 44, EXP30-C 24, MEM05-C 21, MEM04-C 18, EXP43-C 6, EXP37-C 5, MEM03-C 4, EXP40-C 4, EXP45-C 4, and nine singletons/pairs (140 keys).\n\nRESULT: 93 FP / 47 TP.\n- EXP20-C (42 TP / 2 FP): the FTP command dispatcher's '!strcmp(cmd, \"...\")' chain -- CERT's canonical EXP20-C example, and the 16 prior pureftpd labels' convention; a manifest-level question, not a detection one. The two '== 1' findings are FP: SSL_clear() and this codebase's own access_ip_match() have documented/verified bounded return sets.\n- MEM03-C (4 TP): the LDAP userPassword hash is freed on four paths without zeroisation.\n- EXP45-C (3 FP / 1 TP): three EX1-permitted assign-and-compare forms; one '!(t = gmtime(...))' that EX1 does not cover (low).\n- EXP30-C (24 FP): 18 '(p = malloc()) == NULL' idioms and six argument lists of pure getters or distinct static buffers.\n- MEM05-C (21 FP): 17 'VLA' claims on compile-time-constant arrays (five of them static), and four recursions each bounded by an explicit depth limit (GLOB_LIMIT_RECUR, max_ls_depth, SC_MAX_RECURSION) or by PATH_MAX.\n- MEM04-C (18 FP): every size is provably >= 1 (strlen + literal, a constant, or guarded by the preceding return).\n- EXP43-C (6 FP: printf-family restrict covers only the format), EXP37-C (5 FP: <stdarg.h> is included), EXP40-C (4 FP: 'char * const' pointers and OpenLDAP's missing const), MEM11-C/MEM35-C/MEM00-C (5 FP), EXP15-C/EXP07-C/EXP13-C/EXP00-C/EXP46-C (5 FP -- the last three are the analyzer reading both arms of a #if as one expression; the '& 0' arm is Windows-only and not compiled on the Linux target)."
+}
