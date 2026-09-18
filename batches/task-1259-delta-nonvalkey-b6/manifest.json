@@ -1,0 +1,38 @@
+{
+  "batch_id": "task-1259-delta-nonvalkey-b6",
+  "work_item_ref": "benchmarking_db-1259",
+  "requested_by": "coordinator",
+  "adjudicator": "claude-opus-5",
+  "aurora_lint_version": "0.4.336",
+  "aurora_lint_sha": "53853e782045143343733eb414e130771d369349",
+  "projects": [
+    "curl",
+    "hostap",
+    "mbedtls",
+    "pureftpd",
+    "raylib",
+    "sqlite",
+    "ventoy"
+  ],
+  "codebase_commits": {
+    "curl": "3e198f75861cc2e12daf299689e145949dddd19b",
+    "hostap": "dcee60436390dd34731560657c4257c3b4c839a6",
+    "mbedtls": "068ff080b369adfac81509f9b57b2afabaf82dc5",
+    "pureftpd": "cc28bff52ca28e1d122a2142bf37f2dc578f4d3e",
+    "raylib": "962bbfc6bfbd7a5acd08e21314fcfa161003a589",
+    "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af",
+    "ventoy": "7cbdc5cf69935bcf1f085ae67f40e70ea7e74bae"
+  },
+  "submitted_at": "2026-09-18T13:34:03Z",
+  "row_count": 21,
+  "rules": [
+    "ARR30-C",
+    "INT16-C",
+    "INT30-C",
+    "INT31-C",
+    "INT32-C",
+    "INT33-C",
+    "INT34-C"
+  ],
+  "notes": "benchmarking_db 1259: baseline/delta adjudication of the 8 INT/VRA rules (INT32-C, INT30-C, INT10-C, INT33-C, ARR30-C, INT34-C, INT31-C, INT16-C) after the 53853e78 commit floor.\n\nMETHOD. Population = Postgres realworld run 260 (sqc-0.4.336-53853e78, queued by dev-41 on main 2026-09-18 08:31, benchmark host dev-41), i.e. exactly the task's commit floor; its per-project codebase_commits equal the pinned checkouts on dev-468 (bench corpus-check: all 12 detached at their pins, trees clean). Unlabeled keys pulled with BenchDB.list_realworld_unlabeled(260, rule) -- the same (project, relpath, line, rule) basis score_realworld_run uses -- then filtered through aurora-lint's bench.corpus.in_scope (path-aware globbing, data/benchmark_repos.json), because list_realworld_unlabeled does not scope. Raw 812 -> in-scope 715; out-of-scope drops were sqlite src/tclsqlite.c (44) and test_*/fuzz files, curl lib/vtls/schannel.c + system_win32.c (WIN_MAC), mosquitto fuzzing/ and examples/. Two in-scope keys already labeled on benchmark_adjudication main by task-1101-vra-int-rules-delta (PR #11, not yet in Postgres) were excluded. valkey's src/fuzzer_*.c are in scope: linked into the shipped valkey-benchmark binary (src/Makefile ENGINE_BENCHMARK_OBJ), consistent with the earlier INT16-C valkey batches.\n\nGATE CHECK (CLAUDE.md delta-adjudication step): the only open FP-reduction task against these rules is aurora_lint 1258 (P4, four narrow VRA non-zero/in-bounds proof shapes, ~8 findings of evidence) -- not a blanket driver, so not gated on. aurora_lint 914's ARR30-C pointer-arithmetic half was never picked up (no follow-up task exists); noted, not gated on.\n\nCORRECTIONS to the task body: only valkey is a true baseline gap (its 735 prior labels are all INT16-C); mbedtls (8,583 labels) and ventoy (2,478) already had oracles built 2026-09-14 covering these rules, so their leftovers are delta. The ~1816 headline predates the floor, those oracle builds, raylib's INT30/INT32 delta batches, valkey's INT16-C batches and aurora_lint 1257; at run 260 the whole in-scope backlog is 715, of which valkey is 692.\n\nAdjudication: each finding read in its source context at the pinned commit (function body, guards, callers where the operand crosses a call boundary), verdict per the established per-rule conventions in the existing labels (e.g. INT10-C: FP when the dividend is provably non-negative -- rand()/random() output, unsigned types, loop indices, short-circuit guards; TP when a genuinely signed value reaches % with no non-negativity guard even if practically benign). Adjudicator: claude-opus-5 on dev-468, single pass, no adversarial re-verification in this batch.\nBATCH B6 of 6: the non-valkey remainder -- every in-scope unlabeled key for the 8 rules on the other 11 projects at run 260: sqlite 9, mbedtls 3, raylib 3, curl 2, hostap 2, pureftpd 1, ventoy 1 (lua, sel4, libcrc, mosquitto: 0). 21 rows. Two further sqlite/pureftpd keys (fts3_write.c:3824 INT31-C, pure-uploadscript.c:111 INT31-C) were excluded because task-1101-vra-int-rules-delta already labels them.\n\nThis is the cumulative delta the task describes (commits on these rules since 1014, plus 402f9883/53853e78), now measured at the floor: it is 21 keys, not hundreds -- the earlier raylib INT30/INT32 delta batches, the mbedtls/ventoy oracle builds and 1257's INT16-C fix absorbed the rest.\n\nRESULT: 18 FP / 3 TP.\n- 3 TP, one root: raylib rtext.c:2895/2896/2899 -- LoadFontDataBDF sscanf's BBX/FONTBOUNDINGBOX/FONT_ASCENT fields from the font file with no range check; 2899 multiplies two of them for RL_CALLOC's size (the established raylib unvalidated-file-field allocation-sizing class), 2895/2896 are offset arithmetic on the same fields (lower impact).\n- sqlite fts3_write.c:3822/3825 INT32-C: FP as additions (both operands are bounded by the corruption check on the previous line), but the site's REAL defect is the negative-nSuffix sign slip already labeled TP as INT31-C at 3824 by task 1101 -- the two rules see the same line from different angles and the labels are consistent with that.\n- pureftpd ftpd.c:2824 ARR30-C claims 'no NULL check' for a pointer that is NULL-checked at malloc and after realpath(): a false premise (the ADR-0005 misfire class), separate from aurora_lint 914's note that this line was also misclassified as integer arithmetic.\n- the rest: caller-maintained invariants on static helpers (mbedtls cipher.c padding, matching its sibling labels), explicit intentional truncations, a shift bounded by the key RSC length, a mask index bounded by the 'bits > 40' rejection, and sqlite index arithmetic bounded by SQLITE_MAX_COLUMN.\n\nCounting basis: distinct (project, commit, file, line, rule) keys. No precision/recall claim is made here."
+}
