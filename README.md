@@ -142,6 +142,32 @@ mechanism and its limits, in particular why some rows' `provenance`/
 catches the raw pattern in CI, but the fix is upstream: generate valid CSV
 in the first place.
 
+**Append with each file's existing line terminator, and never reflow a whole
+file.** Python's `csv` module defaults to `lineterminator='\r\n'`, so using a
+real CSV writer as above — and then rewriting the file with it — still
+converts every existing line of an LF file to CRLF. A 150-row addition then
+lands as a whole-file diff of tens of thousands of lines, which buries the
+rows a reviewer is supposed to be checking and manufactures conflicts against
+any other batch in flight (this has happened twice: see the task-1292 merge
+commit's "CRLF-normalization false conflict with 1291", and again on
+task-1303). Pass `lineterminator="\n"` explicitly when a file is LF.
+
+`data/` is currently **mixed** — some projects' CSVs are LF and some are CRLF
+— so "just use LF" is not on its own the right rule; *match what the file
+already has*. The safest generator reads the existing terminator and reuses
+it:
+
+```python
+with open(path, "rb") as fh:
+    term = "\r\n" if fh.read().endswith(b"\r\n") else "\n"
+with open(path, "a", newline="", encoding="utf-8") as fh:
+    csv.DictWriter(fh, fieldnames=COLS, lineterminator=term).writerows(new_rows)
+```
+
+Appending (`"a"`) rather than rewriting is what keeps the diff to the added
+rows. `scripts/validate.py` reports a file whose terminators are mixed, so CI
+catches this instead of a reviewer.
+
 Whether a free-text field discloses a secret or an internal address is
 **not** something CI checks — an earlier regex-based scanner flagged 311
 rows in this repo's very first PR that turned out to be ordinary C variable

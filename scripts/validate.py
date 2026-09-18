@@ -223,14 +223,51 @@ def cross_check_row_counts(
             )
 
 
+def check_line_terminators(warnings: list[str]) -> None:
+    """Report a CSV whose line terminators are not all the same.
+
+    A batch generator that rewrites a file instead of appending to it -- or
+    that uses Python's csv module without passing lineterminator -- silently
+    converts every line to CRLF, turning a small addition into a whole-file
+    diff and manufacturing conflicts with any batch in flight. That has
+    happened twice (the task-1292 merge commit's "CRLF-normalization false
+    conflict with 1291", and task-1303).
+
+    This is a WARNING, not an error: `data/` is currently mixed by project,
+    and at least one file is mixed internally, so failing here would fail CI
+    on already-merged data. It flags the file so a reviewer sees the cause
+    rather than a 75k-line diff with no explanation.
+    """
+    if not DATA_DIR.exists():
+        return
+
+    for csv_path in sorted(DATA_DIR.glob("*/adjudication.csv")):
+        data = csv_path.read_bytes()
+        if not data:
+            continue
+        crlf = data.count(b"\r\n")
+        lf = data.count(b"\n") - crlf
+        if crlf and lf:
+            warnings.append(
+                f"{csv_path}: mixed line terminators ({crlf} CRLF, {lf} LF). "
+                f"Append with the file's existing terminator "
+                f"(csv writers default to lineterminator='\\r\\n')."
+            )
+
+
 def main() -> None:
     errors: list[str] = []
+    warnings: list[str] = []
     manifests = load_manifests(errors)
     source_row_counts = validate_csvs(errors, manifests)
     cross_check_row_counts(errors, manifests, source_row_counts)
+    check_line_terminators(warnings)
 
     if errors:
         fail(errors)
+
+    for w in warnings:
+        print(f"validate.py: warning: {w}", file=sys.stderr)
 
     n_rows = sum(source_row_counts.values())
     print(f"validate.py: OK — {len(manifests)} batch(es), {n_rows} row(s)")
