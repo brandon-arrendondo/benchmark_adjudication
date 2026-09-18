@@ -12,10 +12,20 @@
     "raylib": "962bbfc6bfbd7a5acd08e21314fcfa161003a589"
   },
   "submitted_at": "2026-09-08T10:37:49.365982",
-  "row_count": 233,
+  "row_count": 232,
   "rules": [
     "INT30-C",
     "INT32-C"
   ],
-  "notes": "Reconstructed during benchmark_adjudication's initial population (2026-09-16) from benchmarking_db's ground_truth.source='delta_int30_int32_bmdb778_raylib'. row_count/projects/codebase_commits/rules were derived from the rows themselves, not declared at adjudication time. aurora_lint_version/aurora_lint_sha are unknown for legacy data -- never recorded per-row."
+  "notes": "Reconstructed during benchmark_adjudication's initial population (2026-09-16) from benchmarking_db's ground_truth.source='delta_int30_int32_bmdb778_raylib'. row_count/projects/codebase_commits/rules were derived from the rows themselves, not declared at adjudication time. aurora_lint_version/aurora_lint_sha are unknown for legacy data -- never recorded per-row.",
+  "superseded_rows": [
+    {
+      "by": "task-1292-int30c-int32c-delta-b1",
+      "count": 1,
+      "keys": [
+        "raylib src/rtext.c:659 INT32-C"
+      ],
+      "note": "INT32-C verdict corrected TP -> FP after 8e95f619's typing withdrew the key (bmdb 1292 recall check); see that batch's manifest"
+    }
+  ]
 }

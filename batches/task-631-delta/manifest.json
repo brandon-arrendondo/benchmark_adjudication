@@ -16,10 +16,22 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-08-31T07:59:19.953658",
-  "row_count": 28,
+  "row_count": 25,
   "rules": [
     "INT10-C",
     "INT32-C"
   ],
-  "notes": "Reconstructed during benchmark_adjudication's initial population (2026-09-16) from benchmarking_db's ground_truth.source='task-631-delta'. row_count/projects/codebase_commits/rules were derived from the rows themselves, not declared at adjudication time. aurora_lint_version/aurora_lint_sha are unknown for legacy data -- never recorded per-row."
+  "notes": "Reconstructed during benchmark_adjudication's initial population (2026-09-16) from benchmarking_db's ground_truth.source='task-631-delta'. row_count/projects/codebase_commits/rules were derived from the rows themselves, not declared at adjudication time. aurora_lint_version/aurora_lint_sha are unknown for legacy data -- never recorded per-row.",
+  "superseded_rows": [
+    {
+      "by": "task-1292-int30c-int32c-delta-b1",
+      "count": 3,
+      "keys": [
+        "hostap hostapd/hostapd_cli.c:129 INT32-C",
+        "hostap wpa_supplicant/win_if_list.c:84 INT32-C",
+        "sqlite src/mem2.c:255 INT32-C"
+      ],
+      "note": "row re-keyed INT32-C -> INT30-C in place (verdict/reason kept) after 144baafc/task 1288 moved the allocation-size wrap; see that batch's manifest"
+    }
+  ]
 }
