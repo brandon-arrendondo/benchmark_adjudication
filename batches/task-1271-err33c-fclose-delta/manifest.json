@@ -1,0 +1,36 @@
+{
+  "batch_id": "task-1271-err33c-fclose-delta",
+  "work_item_ref": "benchmarking_db-1271",
+  "requested_by": "coordinator",
+  "adjudicator": "claude-opus-5",
+  "aurora_lint_version": "0.4.336",
+  "aurora_lint_sha": "96c59c6498229f2321b85029faf8f7b72c445433",
+  "projects": [
+    "hostap",
+    "libcrc",
+    "lua",
+    "mbedtls",
+    "mosquitto",
+    "pureftpd",
+    "sqlite",
+    "valkey",
+    "ventoy"
+  ],
+  "codebase_commits": {
+    "hostap": "dcee60436390dd34731560657c4257c3b4c839a6",
+    "libcrc": "7719e2112a9a960b1bba130d02bebdf58e8701f1",
+    "lua": "40b76de2d77e66b70a9d4bf989c3f5340919973f",
+    "mbedtls": "068ff080b369adfac81509f9b57b2afabaf82dc5",
+    "mosquitto": "d3ee5c5ca62c0fa4983308c6fff558ee978e878c",
+    "pureftpd": "cc28bff52ca28e1d122a2142bf37f2dc578f4d3e",
+    "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af",
+    "valkey": "7f1dffedff6de73058b2c2a389422b6ecd56c8fb",
+    "ventoy": "7cbdc5cf69935bcf1f085ae67f40e70ea7e74bae"
+  },
+  "submitted_at": "2026-09-18T14:21:22Z",
+  "row_count": 106,
+  "rules": [
+    "ERR33-C"
+  ],
+  "notes": "benchmarking_db 1271: delta-adjudicate ERR33-C after aurora-lint 34603323 (mini, closes aurora_lint 727) removed the is_cleanup_fclose_context exemption, and re-key the 13 mosquitto persist_read.c FIO04-C seed verdicts to ERR33-C.\n\nMETHOD. Basis = Postgres realworld runs 260 (sqc-0.4.336-53853e78, before the commit) and 261 (sqc-0.4.336-96c59c64, main after it; dev-41's run, queue 97). Keys = BenchDB._run_violation_keys per run (the scorer's own (project, relpath, line, rule) basis), ERR33-C only, target minus base. Nothing else touching ERR33-C landed between the two runs (ef67c39e MEM31-C, 406b1542 EXP34-C, 18310ab7 EXP02-C), so the delta is 34603323's effect. Result +103 / -0, identical to mini's local A/B in the task body, so mini's CSV was not needed. Scoped with aurora-lint's bench.corpus.in_scope: 102 in scope; sqlite mptest/mptest.c:697 is out of scope (test harness) and is not labeled. None of the 102 was already in ground_truth. Every one of the 102 flagged lines was read at the pinned checkout (ventoy WinDialog.c decoded as UTF-16) and is literally a bare 'fclose(x);' statement -- no (void) cast, no assignment, no condition, no macro (the only fclose macro in any corpus is ventoy's vendored fat_io_lib/fat_filelib.h, which the two flagged ventoy files do not include).\n\nBAR (from the task): the rule text. ERR33-C-EX1 does not exempt fclose; the compliant discard is (void)fclose. A bare fclose on an error path is a violation as written. So every in-scope addition is TP; 'the project doesn't care' is a suppression/config matter (ADR-0001/0005), not a label. Each reason records the enclosing function, the fopen mode where it was visible, and whether the call is immediately followed by return/goto (the exact shape the removed heuristic hid).\n\nSEED RE-KEY. The 13 persist_read.c sites (450, 473, 485, 491, 498, 507, 515, 523, 531, 539, 547, 558, 571 @ d3ee5c5c) adjudicated TP under FIO04-C by mosquitto_full_audit_0.4.30 and dropped by bmdb 2026-09-02-unimplemented-rule-ids: the 9 that only fire since 34603323 are inserted as ERR33-C TP with the original FIO04-C reason quoted and the provenance field naming the seed. The other 4 (450, 473, 558, 571) already carried ERR33-C rows -- labeled FP by delta_task544 with reasoning about the handle never being referenced after the close (a FIO46-C/FIO42-C concern, not ERR33-C's obligation). Those 4 rows are CORRECTED IN PLACE to TP under this batch's source (README: a correction is a new batch; the CSV key is unique so the row is rewritten, and the old manifest stays). FLAGGED FOR REVIEW: this flips 4 existing verdicts. It is what the task instructs, and it is consistent with the bar above and with the FIO04-C seed, but it is a verdict change on rows a previous batch owned.\n\nKNOWN INCONSISTENCY, NOT TOUCHED: ground_truth holds ~40 older ERR33-C FP rows on bare fclose() in other projects reasoned as 'read-only stream, benign', 'cleanup path', 'pedantry' (hostap config_file.c, sqlite ext/misc, libcrc examples, mosquitto psk_file.c/websockets.c/http_api.c, curl). Under this task's bar they are TP. Left alone here -- relabeling other batches' rows across projects is gavel_review territory (benchmarking_db), and the coordinator should decide whether to open that.\n\nGATE CHECK: no open FP-reduction task against ERR33-C's fclose bucket (task body confirms). Adjudicator claude-opus-5 on dev-468, single pass. Counting basis: distinct (project, commit, file, line, rule) keys. No precision/recall claim is made here."
+}
