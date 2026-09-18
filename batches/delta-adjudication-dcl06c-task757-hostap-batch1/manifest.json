@@ -1,0 +1,15 @@
+{
+  "batch_id": "delta-adjudication-dcl06c-task757-hostap-batch1",
+  "work_item_ref": "757",
+  "adjudicator": "claude",
+  "aurora_lint_version": "0.4.336",
+  "aurora_lint_sha": "f3afb23d5d9307f1f95c6c9bad929086aac5ea79",
+  "projects": ["hostap"],
+  "codebase_commits": {
+    "hostap": "dcee60436390dd34731560657c4257c3b4c839a6"
+  },
+  "submitted_at": "2026-09-17T00:00:00",
+  "row_count": 130,
+  "rules": ["DCL06-C"],
+  "notes": "First batch of task 757's DCL06-C resumption (gated on bmdb 1124's 1122-suppression fix, confirmed landed and non-regressive; bmdb 1124 closed 2026-09-14). Real in-scope unlabeled DCL06-C population in run 258 is 2350 rows (hostap 2246, sqlite 74, curl 8, mbedtls 6, mosquitto 16); mbedtls/valkey/ventoy's much larger unlabeled counts for OTHER rules are a separate, already-filed backlog (benchmarking_db 1259) and not this population. This PR takes the first 130 of hostap's 2246 (file-then-line order from list_realworld_unlabeled), all confirmed in-scope per data/benchmark_repos.json (hostapd/**, wpa_supplicant/**, src/**). All 130 labeled TP: every row is the base 'magic number appears/should use symbolic constant' message class (not the IDT-sibling-echo or version-macro shapes 1122 already suppressed, and not task 1123's still-open cipher-suite-table shape, which does not appear in this batch). Verified by direct source read (not just message text) on 6 samples spread across the batch's file range (config_file.c, ctrl_iface.c, beacon.c, dfs.c, gas_query_ap.c, ctrl_iface_ap.c) -- all genuine undocumented magic numbers (string-literal lengths, hash byte counts, channel/frequency arithmetic, protocol bitmasks), none matching any coded exemption in dcl06_c.rs (is_well_known_idiom, is_acceptable_integer, array-size self-consistency). Confidence marked 'medium' rather than 'high' because only 6/130 were individually source-verified, not all 130 -- this is a bulk mechanical characterization of one repeated shape, consistent with task 781's precedent, not a line-by-line read. Remaining hostap backlog (~2116) plus sqlite/curl/mbedtls/mosquitto's smaller counts are follow-up batches, not covered here."
+}
