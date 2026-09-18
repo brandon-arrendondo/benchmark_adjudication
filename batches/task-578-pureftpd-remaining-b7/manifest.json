@@ -1,0 +1,39 @@
+{
+  "batch_id": "task-578-pureftpd-remaining-b7",
+  "work_item_ref": "benchmarking_db-578",
+  "requested_by": "coordinator",
+  "adjudicator": "claude-opus-5",
+  "aurora_lint_version": "0.4.336",
+  "aurora_lint_sha": "96c59c6498229f2321b85029faf8f7b72c445433",
+  "projects": [
+    "pureftpd"
+  ],
+  "codebase_commits": {
+    "pureftpd": "cc28bff52ca28e1d122a2142bf37f2dc578f4d3e"
+  },
+  "submitted_at": "2026-09-18T15:11:15Z",
+  "row_count": 135,
+  "rules": [
+    "FIO01-C",
+    "FIO02-C",
+    "FIO03-C",
+    "FIO05-C",
+    "FIO06-C",
+    "FIO09-C",
+    "FIO10-C",
+    "FIO17-C",
+    "FIO18-C",
+    "FIO20-C",
+    "FIO21-C",
+    "FIO23-C",
+    "FIO24-C",
+    "FIO34-C",
+    "FIO39-C",
+    "FIO40-C",
+    "FIO42-C",
+    "FIO46-C",
+    "FIO50-C",
+    "FIO51-C"
+  ],
+  "notes": "benchmarking_db 578: adjudicate the remaining unlabeled pure-ftpd findings (the 90% task 551's 10% sample left), whole-daemon scope src/** + puredb/** per the task-551/717 scope declaration in data/benchmark_repos.json.\n\nMETHOD. Population = Postgres realworld run 261 (sqc-0.4.336-96c59c64, queued by dev-41 on main 2026-09-18 10:11, the newest run at pickup); pureftpd codebase_commit cc28bff5 equals the pinned checkout on dev-468 (bench corpus-check OK, tree clean apart from 3 untracked non-C build files). Keys pulled with BenchDB._run_violation_keys(261) -- the same (relpath, line, rule) basis score_realworld_run uses -- then filtered through aurora-lint's bench.corpus.in_scope (all 4610 keys are in scope: the scope declaration is src/**+puredb/** with no excludes), then diffed against BOTH Postgres ground_truth at that commit AND benchmark_adjudication main's pureftpd CSV (17 keys were labeled on main but not yet synced to Postgres; excluded). Result: 4610 keys, 2801 labeled in Postgres, 17 repo-only, 1792 unlabeled -- NOT the ~5,021 in the task body, which predates the per-rule delta passes that have labeled pureftpd since 2026-08-25 (DCL06-C, EXP34-C, PRE02-C, MSC41-C, DCL13-C, ERR33-C fclose, ...).\n\nSCOPE DECISION (task's own first step): full remaining coverage rather than another sample -- a second sample would leave the same per-file completeness gap that task 596 declined to fragment, and 1792 is bounded. Batched rule-coherently (~110-150 rows, largest rules first), one commit per batch on one branch, so partial progress is still mergeable.\n\nGATE CHECK (CLAUDE.md delta-adjudication step): five rules are HELD BACK because an open aurora_lint task is about to move their population: DCL05-C (25 keys; task 1188's typedef-resolution fix on review/1188-dev468 removes the P*/LP*/*PTR name heuristic that produced pureftpd's 21 labeled FPs, awaiting policy ack), ARR38-C (10; task 748 explicitly gates further ARR38-C adjudication on its research), MEM30-C (9; task 1233 exclusive-branch double-free FPs), MEM31-C (1; tasks 1198/1279/1280 in flight), ENV01-C (67; task 1174 re-examines the trigger condition itself, and pureftpd's existing 27 FP / 0 TP already supplies the evidence it asks for). 112 keys total, listed in the task note, to be adjudicated after those land. Not gated: MSC41-C (task 1177 is a P5 mbedtls note, no fix in flight) and PRE08-C (task 1175 wants evidence; adjudicating supplies it). Coverage target for this task is therefore 1680 keys.\n\nDRIFT NOTE: origin/main is 14 commits past run 261 at pickup; four touch rules (INT32-C 8e95f619, INT33-C cf3ae38c, MEM31-C 7721d6da, ARR30-C 64d14756), which have 0/0/1-gated/0 keys in this population, so run 261 is a sound basis for every batch here.\n\nADJUDICATION: each finding read in its source context at cc28bff5 (the statement, its enclosing condition/function, and callers where the checked-ness is decided elsewhere), verdicts following the conventions already established in pureftpd's labels for each rule (cited per row where a precedent exists). The rule's own text is the bar; \"the project does not care\" is a suppression/config matter, not an FP (ADR-0001/0005). Adjudicator: claude-opus-5 on dev-468, single pass, no adversarial re-verification. Counting basis: distinct (project, commit, file, line, rule) keys. No precision/recall claim is made here.\nBATCH B7 of 13: the FIO family -- FIO24-C 51, FIO05-C 16, FIO20-C 9, FIO18-C 8, FIO39-C 8, FIO10-C 8, FIO09-C 6, FIO50-C 6, FIO23-C 6, FIO51-C 3, and 11 singletons/pairs (135 keys).\n\nRESULT: 113 FP / 22 TP.\n- FIO24-C (51 FP): every 'closed again' pair is on mutually exclusive paths -- early-exit guards ('close; goto end'), fork() parent/child/failure branches, a stale descriptor that is re-created by socket() before the second close, or a close followed by 'kindy = -1' with the later close guarded on it. The analyzer does not model branch exclusivity here (the same gap the task body predicted for FIO24/MEM30). Verified per pair against source, each row cites its pair.\n- FIO05-C (7 FP / 9 TP): verdict rule -- FP for a literal device/kernel path (\"/dev/null\", \"/proc/net/tcp\") where no identity can be substituted or verified; TP, per the existing simpleconf.c:599 label and the rule's shape as implemented, for a variable path whose contents are then trusted without an fstat identity check (config, aliases, passwd files, the puredb file, scoreboard entries). The TPs are graded low/medium: the admin-tool and unprivileged-tool sites are low-impact by construction.\n- FIO20-C (9 TP): fgets() with only a NULL check everywhere; an over-long line is split silently (same as the existing pure-pw.c:811 TP). The one prior FP (parser.c:31) rested on a trailing NUL write, which is not a truncation check; not edited here.\n- FIO03-C/FIO06-C (4 TP): puredbw_open() creates the password-database temp files with fopen(\"wb\"/\"w+b\") -- no exclusive creation and no explicit 0600 -- in a library whose main caller runs as root.\n- FIO09-C/FIO18-C (14 FP): the puredb writer emits fixed-width htonl()'d u32 words and caller-length binary blobs; the portability and count concerns are exactly what the code handles. CONFLICT FLAGGED FOR GAVEL: the existing puredb_write.c:271 FIO09-C TP is on the identical sibling of the six FIO09-C FPs here.\n- FIO10-C (8 FP): POSIX-only code where replacing the destination is the intent (atomic publish of uploads/passwd file, RNTO, move-aside to a unique temp name) -- the rule's own POSIX compliant solution.\n- FIO39-C/FIO50-C (14 FP): every pair is on two different streams (fp vs stderr, fpdata vs fpindex, fp vs fp2), or on unsigned char locals that are not streams at all (crypto.c).\n- FIO23-C (6 FP: normal return from main flushes stdio; two are not even in main), FIO42-C/FIO51-C (5 FP: struct-field streams closed by the object's own close/free, and a fopen() wrapper returning the stream), FIO40-C (2 FP: buffer unused after failure), FIO46-C/FIO01-C/FIO02-C/FIO34-C/FIO21-C/FIO17-C (6 FP, each explained in the row)."
+}
