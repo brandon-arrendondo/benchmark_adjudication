@@ -3,3 +3,6 @@
 # file and bury a 150-row batch under a 75k-line diff; scripts/validate.py
 # rejects a CR in data/*/adjudication.csv as an error for the same reason.
 *.csv text eol=lf
+
+# Golden fixtures are gzipped; never let a text rule touch them.
+*.gz binary
