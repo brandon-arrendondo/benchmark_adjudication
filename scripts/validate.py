@@ -17,6 +17,8 @@ Checks:
   - every manifest's declared row_count matches the number of CSV rows
     actually carrying that batch_id as their source.
   - every manifest's required fields are present and SHA-shaped.
+  - every data/*/adjudication.csv is LF-terminated with no CR byte anywhere
+    (see check_line_terminators for why this is an error, not a warning).
   - no free-text field (reason/provenance/confidence) contains a
     backslash-escaped quote (\") -- CSV has no backslash-escape convention,
     so this is the signature of a row built by something that assumed
@@ -37,7 +39,7 @@ or internal address. An earlier version of this script regex-scanned
 reason/provenance/confidence/notes/requested_by for that, and its first real
 run (benchmarking_db's initial population, 2026-09-16) flagged 311 rows that
 were all false positives -- ordinary C identifiers like `nToken`/`pToken`
-matching a generic `token\s*[:=]` pattern in adjudication reasoning text, not
+matching a generic `token\\s*[:=]` pattern in adjudication reasoning text, not
 credentials. Brandon's call: don't fight the false-positive fight on secrets
 detection with a regex; this is a reviewer judgment call instead -- see the
 PR template's checklist item and README's Accountability section. A
@@ -223,51 +225,50 @@ def cross_check_row_counts(
             )
 
 
-def check_line_terminators(warnings: list[str]) -> None:
-    """Report a CSV whose line terminators are not all the same.
+def check_line_terminators(errors: list[str]) -> None:
+    """Reject any CR byte in a data CSV: every file is LF, everywhere.
 
     A batch generator that rewrites a file instead of appending to it -- or
     that uses Python's csv module without passing lineterminator -- silently
     converts every line to CRLF, turning a small addition into a whole-file
-    diff and manufacturing conflicts with any batch in flight. That has
-    happened twice (the task-1292 merge commit's "CRLF-normalization false
-    conflict with 1291", and task-1303).
+    diff and manufacturing conflicts with any batch in flight. That happened
+    twice (the task-1292 merge commit's "CRLF-normalization false conflict
+    with 1291", and task-1303) while data/ was mixed by project, and the
+    mixed-within-file warning this used to be could not have caught either:
+    a uniformly flipped file is not mixed.
 
-    This is a WARNING, not an error: `data/` is currently mixed by project,
-    and at least one file is mixed internally, so failing here would fail CI
-    on already-merged data. It flags the file so a reviewer sees the cause
-    rather than a 75k-line diff with no explanation.
+    Since benchmarking_db task 1338 every data/*/adjudication.csv is LF and
+    .gitattributes (`*.csv text eol=lf`) keeps it so, which makes this a
+    plain ERROR with nothing to exempt. It counts every CR, not only CRLF
+    record terminators: a CRLF inside a quoted multi-line field would be
+    normalized by git's `text` conversion at the next commit anyway, so the
+    committed bytes must already be free of it.
     """
     if not DATA_DIR.exists():
         return
 
     for csv_path in sorted(DATA_DIR.glob("*/adjudication.csv")):
         data = csv_path.read_bytes()
-        if not data:
-            continue
-        crlf = data.count(b"\r\n")
-        lf = data.count(b"\n") - crlf
-        if crlf and lf:
-            warnings.append(
-                f"{csv_path}: mixed line terminators ({crlf} CRLF, {lf} LF). "
-                f"Append with the file's existing terminator "
-                f"(csv writers default to lineterminator='\\r\\n')."
+        cr = data.count(b"\r")
+        if cr:
+            errors.append(
+                f"{csv_path}: {cr} CR byte(s) -- every adjudication.csv is LF "
+                f"(.gitattributes `*.csv text eol=lf`). Write with "
+                f"lineterminator='\\n' (csv writers default to '\\r\\n') and "
+                f"append rather than rewrite; see README, "
+                f'"How labels get added".'
             )
 
 
 def main() -> None:
     errors: list[str] = []
-    warnings: list[str] = []
     manifests = load_manifests(errors)
     source_row_counts = validate_csvs(errors, manifests)
     cross_check_row_counts(errors, manifests, source_row_counts)
-    check_line_terminators(warnings)
+    check_line_terminators(errors)
 
     if errors:
         fail(errors)
-
-    for w in warnings:
-        print(f"validate.py: warning: {w}", file=sys.stderr)
 
     n_rows = sum(source_row_counts.values())
     print(f"validate.py: OK — {len(manifests)} batch(es), {n_rows} row(s)")

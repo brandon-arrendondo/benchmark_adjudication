@@ -125,7 +125,7 @@ check is the point, not a formality. `scripts/validate.py` runs in CI on
 every PR and catches the mechanical class of problem (schema violations,
 duplicate keys, a row whose `source` doesn't match any manifest, a
 manifest's declared `row_count` not matching reality, a backslash-escaped
-quote in a free-text field) so review time goes to the judgment call: does
+quote in a free-text field, a CR byte in a CSV) so review time goes to the judgment call: does
 this batch's content actually match what was asked for. Nothing about this
 process affects how the merged data reads or is used.
 
@@ -142,31 +142,32 @@ mechanism and its limits, in particular why some rows' `provenance`/
 catches the raw pattern in CI, but the fix is upstream: generate valid CSV
 in the first place.
 
-**Append with each file's existing line terminator, and never reflow a whole
-file.** Python's `csv` module defaults to `lineterminator='\r\n'`, so using a
-real CSV writer as above — and then rewriting the file with it — still
-converts every existing line of an LF file to CRLF. A 150-row addition then
-lands as a whole-file diff of tens of thousands of lines, which buries the
-rows a reviewer is supposed to be checking and manufactures conflicts against
-any other batch in flight (this has happened twice: see the task-1292 merge
-commit's "CRLF-normalization false conflict with 1291", and again on
-task-1303). Pass `lineterminator="\n"` explicitly when a file is LF.
-
-`data/` is currently **mixed** — some projects' CSVs are LF and some are CRLF
-— so "just use LF" is not on its own the right rule; *match what the file
-already has*. The safest generator reads the existing terminator and reuses
-it:
+**Every CSV is LF-terminated, and a batch appends rather than rewriting the
+file.** `.gitattributes` pins `*.csv text eol=lf`, and `scripts/validate.py`
+fails on any CR byte in a `data/*/adjudication.csv` (a record terminator or a
+CRLF inside a quoted multi-line field alike — git's `text` conversion would
+normalize either at the next commit, so the committed bytes must already be
+clean). Python's `csv` module defaults to `lineterminator='\r\n'`, so using a
+real CSV writer as above without that argument — and then rewriting the file
+with it — converts every existing line to CRLF. Before this rule, when
+`data/` was mixed by project, a 150-row addition landed that way twice as a
+whole-file diff of tens of thousands of lines, which buried the rows a
+reviewer was supposed to be checking and manufactured conflicts against any
+other batch in flight (the task-1292 merge commit's "CRLF-normalization false
+conflict with 1291", and again on task-1303). `data/` was normalized to LF in
+one pass afterwards (benchmarking_db task 1338) so that "match what the file
+already has" could become the one rule it is now:
 
 ```python
-with open(path, "rb") as fh:
-    term = "\r\n" if fh.read().endswith(b"\r\n") else "\n"
 with open(path, "a", newline="", encoding="utf-8") as fh:
-    csv.DictWriter(fh, fieldnames=COLS, lineterminator=term).writerows(new_rows)
+    csv.DictWriter(fh, fieldnames=COLS, lineterminator="\n").writerows(new_rows)
 ```
 
 Appending (`"a"`) rather than rewriting is what keeps the diff to the added
-rows. `scripts/validate.py` reports a file whose terminators are mixed, so CI
-catches this instead of a reviewer.
+rows. A reviewer who sees a whole-file diff anyway can confirm nothing but
+terminators moved with `git diff --ignore-cr-at-eol`; a batch that fails
+`validate.py` on a CR was written by something that needs the
+`lineterminator` fix, not a file-side workaround.
 
 Whether a free-text field discloses a secret or an internal address is
 **not** something CI checks — an earlier regex-based scanner flagged 311
