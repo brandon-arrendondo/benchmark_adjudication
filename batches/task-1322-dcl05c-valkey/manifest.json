@@ -1,0 +1,17 @@
+{
+  "batch_id": "task-1322-dcl05c-valkey",
+  "work_item_ref": "benchmarking_db:1322",
+  "requested_by": "coordinator",
+  "adjudicator": "claude-sonnet-5",
+  "adjudicating_node": "r720",
+  "aurora_lint_version": "0.5.0",
+  "aurora_lint_sha": "c4c3ec587ebfa7c9e50793125bbd9952c7723a2f",
+  "projects": ["valkey"],
+  "codebase_commits": {
+    "valkey": "7f1dffedff6de73058b2c2a389422b6ecd56c8fb"
+  },
+  "submitted_at": "2026-09-19T10:40:00Z",
+  "row_count": 9,
+  "rules": ["DCL05-C"],
+  "notes": "Delta-adjudication for the DCL05-C stack (aurora_lint 1173/1187/1188), run 267 (main@c4c3ec58) vs oracle: task 1322 named 5 const-sds findings but the run's actual unlabeled DCL05-C set for valkey is 9 -- the same commit stack also produces 'typedef defines a pointer type' (3 rows) and 'function declarator returns a pointer to a function' (1 row) findings on valkey, all new keys from the same rule change and equally unlabeled, so all 9 are adjudicated together rather than re-splitting by message shape. All 9 verdicts TP, all high confidence: the 5 const-sds sites (fuzzer_command_generator.c mapFlagType/mapArgumentType/mapGroupType/shouldFilterCommand, server.c hashtableSdsKeyCompare) are genuine 'const sds' parameters/locals used only for read-only inspection (sdslen/sdscmp/string comparison) -- 'const sds' means 'char * const' per sds.h's own doc comment (lines 44-47), a const pointer to non-const content, not the const-content protection the read-only usage implies; the confusion is the exact one sds.h documents. sds.h:49 itself ('typedef char *sds;') is the pointer-hiding typedef the rest of the batch's confusion stems from. valkey-benchmark.c:174/194 ('typedef struct _client {...} *client;') and vset.h:76 ('typedef void *vset;', whose own preceding comment reads 'vset is just a pointer to a bucket') are the same pointer-hiding-typedef pattern. util.c:640 ('static int (*string2ll_resolver(void))(const char *, size_t, long long *)') is a function declarator returning a pointer to a function (an ifunc resolver), the exact shape aurora_lint 1173 narrowed the rule to. No known-but-unfixed FP driver for DCL05-C (per 1322's own note). No MEM31-C/MEM30-C overlap in this batch."
+}
