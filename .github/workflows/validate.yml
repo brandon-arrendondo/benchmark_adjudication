@@ -11,7 +11,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          # tests/test_score_golden.py scores the labels at a pinned past
+          # commit through `git show`; a shallow clone cannot see it.
+          fetch-depth: 0
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
       - run: python3 scripts/validate.py
+      - name: reference scorer (golden run 265 + definitions)
+        run: python3 -m unittest discover -s tests -v

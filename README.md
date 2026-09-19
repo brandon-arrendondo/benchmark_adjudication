@@ -34,6 +34,89 @@ files directly with anything that reads CSV.
 Everything past this point describes how *this maintainer* curates and adds
 to the dataset. None of it is a prerequisite for using it.
 
+## Scoring a run
+
+`scripts/score.py` is the reference scorer: the exact definition behind the
+real-world precision / recall / label-coverage figures aurora-lint publishes
+(README "Benchmark Highlights", the paper), as one stdlib-only Python script
+that needs no database, credential or network. It exists so a published
+number is reproducible from three public inputs and two SHAs — the
+aurora-lint commit that produced the run and the commit of this repo whose
+labels scored it — rather than from a private database.
+
+Inputs:
+
+1. **Findings** — what one aurora-lint run emitted. Either the per-codebase
+   JSON that `aurora-lint ... --export FILE.json` writes (a list of
+   `{"rule_id", "file", "line", ...}`; aurora-lint's `python -m bench
+   realworld-run` invokes exactly that per project and leaves the files under
+   its results directory as `sqc-<project>-<version>-<sha>.json`), passed as
+   `--export PROJECT=FILE`; or a `project,file_path,line,rule_id` CSV of
+   project-relative keys, passed as `--findings-csv FILE`. The scan must be of
+   the pinned checkout (`python -m bench corpus-check` in aurora-lint says
+   whether it still is), with the checkout directory named after the project.
+2. **Labels** — `data/<project>/adjudication.csv`, from the working tree or,
+   with `--labels-ref SHA`, from any commit of this repo via `git show`. Cite
+   that SHA: it names the label set the number was scored against.
+3. **Scope** — aurora-lint's `data/benchmark_repos.json`, which pins each
+   project's codebase commit and declares which files count toward the oracle
+   (`scope_include` / `scope_exclude`). Take it from the aurora-lint commit
+   that produced the run (`git show <sha>:data/benchmark_repos.json`); it is
+   read where it lives and deliberately not copied into this repo.
+
+```bash
+# score a fresh run of every project, labels as checked out here
+python3 scripts/score.py --scope ~/aurora-lint/data/benchmark_repos.json \
+    --export curl=results/sqc-curl-0.5.0-abc12345.json \
+    --export sqlite=results/sqc-sqlite-0.5.0-abc12345.json  # ... one per project
+
+# reproduce a published figure: findings of that run, labels at the cited SHA
+python3 scripts/score.py --scope <benchmark_repos.json at the run's aurora-lint commit> \
+    --findings-csv tests/golden/run-265/findings.csv.gz \
+    --labels-ref 3ab3f41db84355a1c72542104f79e2c9d1fa4a25 --json
+```
+
+Output is a per-project table and an overall row (`--json` for the same as a
+document), each figure keyed as `benchmarking_db`'s scorer keys it, with a
+basis line naming the definition version and every input.
+
+**Definitions** (`DEFINITION_VERSION` 1, basis
+`distinct/scored-projects/in_scope`; the script's docstring is the full
+statement):
+
+- a *finding* is one distinct `(file, line, rule_id)` per project, the scan
+  path normalized by stripping through the first `/<project>/` segment;
+- a project is *scored* only if it has a codebase commit and at least one
+  label at that commit — labels at another commit are a different corpus;
+- the declared *scope* applies to both sides: out-of-scope findings are not
+  counted, and out-of-scope labels leave the recall denominator;
+- `TP` and `FN` both mark a real bug. Precision = TP / (TP + FP) over the
+  run's labeled findings; recall = real-bug labels the run emitted / all
+  real-bug labels (recall against *known* true positives, not all bugs);
+  coverage = labeled findings / in-scope findings; `uncertain` counts toward
+  coverage only.
+
+**Correctness gate.** `tests/test_score_golden.py` (run in CI, and by
+`python3 -m unittest discover -s tests`) feeds the scorer the findings of
+aurora-lint real-world run #265 — the v0.5.0 paper baseline, pinned at
+`tests/golden/run-265/` — the labels at `3ab3f41d` and the scope at
+aurora-lint `f48effe3`, and asserts every per-project and overall figure is
+identical to what `benchmarking_db`'s Postgres-backed scorer published
+(52.5% precision, 96.9% recall against known TPs, 76.1% coverage over 12
+projects). `benchmarking_db` runs the reverse check against its own scorer,
+so the two definitions cannot drift apart unnoticed. Postgres via
+`benchmarking_db` remains the source of published numbers; this script is
+how anyone else checks them.
+
+**Determinism, stated plainly.** One aurora-lint binary at one commit gives
+byte-identical findings on the same checkout, but the message text of some
+rules can differ between builds (MEM31-C's allocator name), so everything
+here compares `(file, line, rule)` keys and ignores messages. A checkout that
+drifted from its pin scores as a quiet drop in coverage, not an error. Juliet
+(the synthetic CWE corpus) is scored by aurora-lint's own `python -m bench
+juliet` and is not reproduced here.
+
+
 ## Why the review process exists
 
 `ground_truth` lives in Postgres (`sqc_bench`, owned by `benchmarking_db`) and
@@ -62,6 +145,9 @@ for how a merged commit here gets loaded into Postgres.
 data/<project>/adjudication.csv   -- cumulative labels for one project
 batches/<batch_id>/manifest.json  -- one immutable record per submission batch
 scripts/validate.py               -- schema/consistency checks, run in CI
+scripts/score.py                  -- reference scorer: precision/recall/coverage
+                                     of an aurora-lint run against these labels
+tests/                            -- golden test pinning score.py to a published run
 ```
 
 ### `data/<project>/adjudication.csv`
