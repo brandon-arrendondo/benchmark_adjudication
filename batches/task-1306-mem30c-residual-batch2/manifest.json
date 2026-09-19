@@ -1,0 +1,43 @@
+{
+  "batch_id": "task-1306-mem30c-residual-batch2",
+  "work_item_ref": "aurora_lint:1306",
+  "requested_by": "coordinator",
+  "adjudicator": "claude-opus-5",
+  "adjudicating_node": "dev-180",
+  "aurora_lint_version": "0.5.0",
+  "aurora_lint_sha": "c4c3ec587ebfa7c9e50793125bbd9952c7723a2f",
+  "projects": [
+    "curl",
+    "lua",
+    "mosquitto",
+    "sel4",
+    "sqlite",
+    "valkey"
+  ],
+  "codebase_commits": {
+    "valkey": "7f1dffedff6de73058b2c2a389422b6ecd56c8fb",
+    "mosquitto": "d3ee5c5ca62c0fa4983308c6fff558ee978e878c",
+    "sel4": "1326364bc9135d9445d936ebc01e38a402c1f4c6",
+    "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af",
+    "curl": "3e198f75861cc2e12daf299689e145949dddd19b",
+    "lua": "40b76de2d77e66b70a9d4bf989c3f5340919973f"
+  },
+  "submitted_at": "2026-09-19T14:36:59Z",
+  "rebased_onto": "934e0d1",
+  "row_count": 100,
+  "rules": [
+    "MEM30-C"
+  ],
+  "assigned": 121,
+  "adjudicated": 100,
+  "held": 21,
+  "verdicts": {
+    "FP": 99,
+    "TP": 1
+  },
+  "confidence": {
+    "high": 82,
+    "medium": 18
+  },
+  "notes": "BATCH 2 of the run-267 MEM30-C residual; batch 1 is r720's hostap 125 (source task-1306-hostap-mem30c-batch1). Assigned 121: curl 7, lua 4, mosquitto 33, pureftpd 4, sel4 25, sqlite 11, valkey 37. Adjudicated 100, HELD 21. Key set diffed against benchmark_adjudication main before batching and re-diffed after each rebase; 0 collisions each time, most recently against 934e0d1 (which had gained r720's hostap batch 1 and dev-149's 351 valkey ERR33-C rows). Both sibling batches are intact in this branch.\n\nONE TRUE POSITIVE: valkey src/valkey-benchmark.c:556. freeClient() calls zfree(c) at line 553 and then passes the same pointer to listSearchKey(config.clients, c) at line 556; with no match function set, listSearchKey compares key == node->value (deps/libvalkey/src/adlist.c:290). The free and the use are four lines apart in one straight-line block with no branch between them, so this is not a flow-model artifact. Label basis only -- the analysis write-up is held in local notes, not in any public repo, per the coordinator's ADR-0007 guidance that the LABEL is public data while the write-up is not.\n\nHELD, 21 rows, per protocol 6:\n  (a) 17 mosquitto src/database.c rows (1161, 1264-1273, 1297-1312) -- 1342-SHAPED, AND 1342 IS BIGGER THAN ITS TASK BODY SAYS. 1342 is written against hostap's dl_list_for_each_safe; these are utlist's DL_FOREACH_SAFE (deps/utlist.h:744), the identical defect. Each flagged line sits in the SECOND-or-later DL_FOREACH_SAFE loop of a function whose earlier loop frees the element (db__expire_all_messages has four such loops back to back; db__message_reconnect_reset_incoming frees at 1147 and the flagged loop starts at 1161). The macro expands to a for-statement whose init and increment REBIND the loop variable, which the analyzer does not model, so the later loops read as operating on the pointer the first one freed. 1342's own NEEDS section asks whether other list macros are affected -- they are, in a second codebase. Adjudicating these now would label 17 findings 1342's fix deletes.\n  (b) 4 pureftpd rows (bsd-glob.c:745,759, ls.c:559, pure-quotacheck.c:119) -- 1293's deliberately gated set. 1293 gated 9 pureftpd MEM30-C keys out of task 578 on aurora_lint 1233, which has since LANDED, so that slice is now actionable. Neither 1293 nor 578 enumerates the 9 keys, so holding these 4 is a containment call, not a verified key match; if they are not 1293's they should be routed back.\n\nTHE 99 FP ARE FIVE MECHANICAL CLASSES. Consistent with the established MEM30-C oracle (4,566 FP / 8 TP / 3 FN before this batch), so a high-FP outcome is the distribution, not a rubber stamp -- see ADR-0002. Three classes are MISFIRES and are filed as aurora_lint 1349 and 1350.\n  1. MISFIRE, 'stack pointer escape' (35 rows: 20 sel4, 15 valkey) -- aurora_lint 1349. The message says \"local array/VLA assigned to global\" where no local, no array and no VLA exists. 32 write THROUGH a global pointer (`mct->global.tcon = GTCON_EN`, `myself->flags |= ...`) -- device-register and heap-object field writes, with no assignment to the global at all. The other 3 assign a global from a local POINTER whose pointee is heap (`EvictionPoolLRU = ep` after zmalloc; `Users = old_users`) or is the pthread argument (`thread_error_list = &data->error_list`, into a `static __thread` destination).\n  2. MISFIRE, free-name heuristic (9 rows: 4 valkey, 5 sel4) -- aurora_lint 1350. `listSetFreeMethod(list, aofListFree)` REGISTERS a callback, so the 'freed' name is a function designator and 'freed multiple times' is the same callback registered on two or three lists. sel4's five charge a free to a `cap_t` passed by value and to plain integers (`offset` a loop counter, `extra_bi_size_bits` a width, `last_port` a port number) because the accessors are spelled cap_untyped_cap_get_capFreeIndex / GET_FREE_REF. ADR-0006: resolve, do not match spelling.\n  3. MISFIRE, wrong argument index on a state-first allocator (4 lua rows) -- aurora_lint 1350. `luaM_freemem(L, block, size)` frees its SECOND argument; arg0 is the lua_State and is never freed.\n  4. Mutually-exclusive paths merged (37 rows). The dominant class. Includes eight sqlite changeset.c rows whose free is in an `if( rc!=SQLITE_OK )` arm ending in `exit(1)` -- a noreturn call, so the path provably cannot rejoin -- and the same shape in valkey-benchmark, acl.c, call_reply.c, update.c and libmosquitto.c. 1139/1339 family.\n  5. Ownership and rebinding not modeled (14 rows). mosquitto's context__add_to_disused is a DEFERRED free -- it links the context onto db.ll_for_free for a later sweep (src/context.c:314-315) and the object stays valid, which is why the next four lines legitimately use it. curl's Curl_easy `data` is the transfer handle, owned by the multi handle. valkey's rax rebinds node pointers by `memcpy(&h, cp, sizeof(h))`, an assignment into the pointer's own storage. zmalloc.c:388 is a preprocessor-arm merge: the flagged line is in the `#else` arm of HAVE_MALLOC_SIZE and its `realloc` is two lines BELOW -- compare ADR-0008.\n\nCROSS-FILE NAME COLLISION, hypothesis not proof: mosquitto defines SAME-NAMED handlers in both lib/ and src/ (handle_disconnect.c, handle_publish.c, handle_connack.c in both trees, both in scope), so a summary keyed on the bare name could attribute the broker's context teardown to the client library's handler. The eight lib/read_handle.c rows are consistent with it -- grep of lib/ shows no handle__* frees mosq at all, so the free came from outside lib/ -- but the misattribution is not demonstrated. Filed as an investigation task.\n\nFP-REFUTATION PASS run over all 100, not just the medium rows. It is what produced the TP: that row was in the mutually-exclusive-branch bucket on first read and only survived because the free and the use turned out to be four lines apart with no branch between them. 18 rows are marked MEDIUM and are where a reviewer should start: sqlite backup.c:611 (the subtlest -- if a path exists where the destination connection is already a zombie at line 608, the read at 611 becomes a genuine use of a freed pointer value), the four rax rows and debug_lua.c:309 where the exact prior free was not pinned, the seven curl rows judged from ownership rather than from the charged free site, mosquitto handle_connect.c:112, cluster.c:757-758, fts5_expr.c:2524 and lstrlib.c:669.\n\nSCOPE: per data/benchmark_repos.json, and flagged rather than acted on (appended to bmdb 739). sqlite ext/session/changeset.c is 'the changeset command line utility' with `int main()` at line 186, which the corpus-scope doc's own criterion ('a standalone main() utility rather than library code') would exclude, and its sibling changesetfuzz.c IS in scope_exclude -- but main already holds 197 labeled rows for that file, so precedent was followed rather than re-scoping mid-batch. Same for valkey fuzzer_*.c (165 existing rows), valkey-cli.c (90) and valkey-benchmark.c (17), the last of which is where this batch's TP sits."
+}
