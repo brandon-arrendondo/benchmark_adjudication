@@ -1,0 +1,5 @@
+# Every CSV is LF, whatever platform or writer produced it. Set once so a
+# writer that emits CRLF (Python csv.DictWriter default) cannot flip a whole
+# file and bury a 150-row batch under a 75k-line diff; scripts/validate.py
+# rejects a CR in data/*/adjudication.csv as an error for the same reason.
+*.csv text eol=lf
