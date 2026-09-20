@@ -12,7 +12,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-06-14T18:15:55.904371+00:00",
-  "row_count": 1329,
+  "row_count": 1323,
   "rules": [
     "API00-C",
     "API02-C",
@@ -111,6 +111,19 @@
         "sqlite src/mem5.c:561 ERR33-C"
       ],
       "note": "ERR33-C verdict corrected FP -> TP by gavel review (bmdb 1281); see that batch's manifest notes"
+    },
+    {
+      "by": "task-1352-err33c-strict-bar",
+      "count": 6,
+      "keys": [
+        "sqlite ext/misc/tmstmpvfs.c:506 ERR33-C",
+        "sqlite src/mem2.c:493 ERR33-C",
+        "sqlite src/mem5.c:559 ERR33-C",
+        "sqlite src/treeview.c:130 ERR33-C",
+        "sqlite src/treeview.c:78 ERR33-C",
+        "sqlite src/treeview.c:945 ERR33-C"
+      ],
+      "note": "ERR33-C verdict corrected FP -> TP under the project-wide strict bar (bmdb 1352); see that batch's manifest notes"
     }
   ]
 }

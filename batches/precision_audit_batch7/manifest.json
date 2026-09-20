@@ -12,7 +12,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-06-12T22:12:35.702584",
-  "row_count": 1257,
+  "row_count": 1252,
   "rules": [
     "API00-C",
     "API02-C",
@@ -122,6 +122,18 @@
         "sqlite ext/session/changesetfuzz.c:187 ERR33-C"
       ],
       "note": "ERR33-C verdict corrected FP -> TP by gavel review (bmdb 1281); see that batch's manifest notes"
+    },
+    {
+      "by": "task-1352-err33c-strict-bar",
+      "count": 5,
+      "keys": [
+        "sqlite ext/misc/fileio.c:185 ERR33-C",
+        "sqlite ext/misc/fileio.c:474 ERR33-C",
+        "sqlite ext/session/changesetfuzz.c:151 ERR33-C",
+        "sqlite src/os_unix.c:6275 ERR33-C",
+        "sqlite src/os_unix.c:6276 ERR33-C"
+      ],
+      "note": "ERR33-C verdict corrected FP -> TP under the project-wide strict bar (bmdb 1352); see that batch's manifest notes"
     }
   ]
 }

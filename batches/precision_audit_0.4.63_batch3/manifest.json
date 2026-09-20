@@ -12,7 +12,7 @@
     "raylib": "962bbfc6bfbd7a5acd08e21314fcfa161003a589"
   },
   "submitted_at": "2026-06-23T15:35:46.549195",
-  "row_count": 464,
+  "row_count": 455,
   "rules": [
     "API00-C",
     "API07-C",
@@ -106,6 +106,22 @@
         "raylib src/rcore.c:3611 ERR33-C"
       ],
       "note": "ERR33-C verdict corrected FP -> TP by gavel review (bmdb 1281); see that batch's manifest notes"
+    },
+    {
+      "by": "task-1352-err33c-strict-bar",
+      "count": 9,
+      "keys": [
+        "raylib src/rcore.c:1901 ERR33-C",
+        "raylib src/rcore.c:1959 ERR33-C",
+        "raylib src/rcore.c:1961 ERR33-C",
+        "raylib src/rcore.c:2109 ERR33-C",
+        "raylib src/rcore.c:2111 ERR33-C",
+        "raylib src/rcore.c:2439 ERR33-C",
+        "raylib src/rcore.c:3590 ERR33-C",
+        "raylib src/rcore.c:3593 ERR33-C",
+        "raylib src/rcore.c:3677 ERR33-C"
+      ],
+      "note": "ERR33-C verdict corrected FP -> TP under the project-wide strict bar (bmdb 1352); see that batch's manifest notes"
     }
   ]
 }

@@ -12,7 +12,7 @@
     "raylib": "962bbfc6bfbd7a5acd08e21314fcfa161003a589"
   },
   "submitted_at": "2026-06-23T18:27:05.631574",
-  "row_count": 441,
+  "row_count": 435,
   "rules": [
     "API00-C",
     "API02-C",
@@ -94,6 +94,19 @@
         "raylib src/raudio.c:2944 ERR33-C"
       ],
       "note": "ERR33-C verdict corrected FP -> TP by gavel review (bmdb 1281); see that batch's manifest notes"
+    },
+    {
+      "by": "task-1352-err33c-strict-bar",
+      "count": 6,
+      "keys": [
+        "raylib src/raudio.c:1174 ERR33-C",
+        "raylib src/raudio.c:1178 ERR33-C",
+        "raylib src/raudio.c:1179 ERR33-C",
+        "raylib src/raudio.c:1180 ERR33-C",
+        "raylib src/raudio.c:2861 ERR33-C",
+        "raylib src/raudio.c:2863 ERR33-C"
+      ],
+      "note": "ERR33-C verdict corrected FP -> TP under the project-wide strict bar (bmdb 1352); see that batch's manifest notes"
     }
   ]
 }

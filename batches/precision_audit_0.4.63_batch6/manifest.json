@@ -12,7 +12,7 @@
     "raylib": "962bbfc6bfbd7a5acd08e21314fcfa161003a589"
   },
   "submitted_at": "2026-06-23T17:36:08.453344",
-  "row_count": 754,
+  "row_count": 731,
   "rules": [
     "API00-C",
     "API02-C",
@@ -68,6 +68,36 @@
         "raylib src/rmodels.c:5122 INT32-C"
       ],
       "note": "INT32-C verdict corrected TP -> FP after 8e95f619's typing withdrew the key (bmdb 1292 recall check); see that batch's manifest"
+    },
+    {
+      "by": "task-1352-err33c-strict-bar",
+      "count": 23,
+      "keys": [
+        "raylib src/rmodels.c:1976 ERR33-C",
+        "raylib src/rmodels.c:1977 ERR33-C",
+        "raylib src/rmodels.c:1978 ERR33-C",
+        "raylib src/rmodels.c:1979 ERR33-C",
+        "raylib src/rmodels.c:1980 ERR33-C",
+        "raylib src/rmodels.c:1981 ERR33-C",
+        "raylib src/rmodels.c:1982 ERR33-C",
+        "raylib src/rmodels.c:1983 ERR33-C",
+        "raylib src/rmodels.c:1984 ERR33-C",
+        "raylib src/rmodels.c:1985 ERR33-C",
+        "raylib src/rmodels.c:1986 ERR33-C",
+        "raylib src/rmodels.c:1993 ERR33-C",
+        "raylib src/rmodels.c:1998 ERR33-C",
+        "raylib src/rmodels.c:2003 ERR33-C",
+        "raylib src/rmodels.c:2010 ERR33-C",
+        "raylib src/rmodels.c:2020 ERR33-C",
+        "raylib src/rmodels.c:2090 ERR33-C",
+        "raylib src/rmodels.c:2097 ERR33-C",
+        "raylib src/rmodels.c:2104 ERR33-C",
+        "raylib src/rmodels.c:2111 ERR33-C",
+        "raylib src/rmodels.c:2118 ERR33-C",
+        "raylib src/rmodels.c:2125 ERR33-C",
+        "raylib src/rmodels.c:2132 ERR33-C"
+      ],
+      "note": "ERR33-C verdict corrected FP -> TP under the project-wide strict bar (bmdb 1352); see that batch's manifest notes"
     }
   ]
 }

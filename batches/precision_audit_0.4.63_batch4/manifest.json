@@ -12,7 +12,7 @@
     "raylib": "962bbfc6bfbd7a5acd08e21314fcfa161003a589"
   },
   "submitted_at": "2026-06-23T15:59:12.460073",
-  "row_count": 504,
+  "row_count": 495,
   "rules": [
     "API00-C",
     "API02-C",
@@ -65,5 +65,23 @@
     "STR32-C",
     "STR34-C"
   ],
-  "notes": "Reconstructed during benchmark_adjudication's initial population (2026-09-16) from benchmarking_db's ground_truth.source='precision_audit_0.4.63_batch4'. row_count/projects/codebase_commits/rules were derived from the rows themselves, not declared at adjudication time. aurora_lint_version/aurora_lint_sha are unknown for legacy data -- never recorded per-row."
+  "notes": "Reconstructed during benchmark_adjudication's initial population (2026-09-16) from benchmarking_db's ground_truth.source='precision_audit_0.4.63_batch4'. row_count/projects/codebase_commits/rules were derived from the rows themselves, not declared at adjudication time. aurora_lint_version/aurora_lint_sha are unknown for legacy data -- never recorded per-row.",
+  "superseded_rows": [
+    {
+      "by": "task-1352-err33c-strict-bar",
+      "count": 9,
+      "keys": [
+        "raylib src/rtext.c:1104 ERR33-C",
+        "raylib src/rtext.c:1115 ERR33-C",
+        "raylib src/rtext.c:2858 ERR33-C",
+        "raylib src/rtext.c:2865 ERR33-C",
+        "raylib src/rtext.c:2872 ERR33-C",
+        "raylib src/rtext.c:2924 ERR33-C",
+        "raylib src/rtext.c:2931 ERR33-C",
+        "raylib src/rtext.c:2938 ERR33-C",
+        "raylib src/rtext.c:2945 ERR33-C"
+      ],
+      "note": "ERR33-C verdict corrected FP -> TP under the project-wide strict bar (bmdb 1352); see that batch's manifest notes"
+    }
+  ]
 }

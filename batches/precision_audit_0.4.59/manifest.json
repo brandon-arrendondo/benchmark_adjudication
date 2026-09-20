@@ -12,7 +12,7 @@
     "lua": "40b76de2d77e66b70a9d4bf989c3f5340919973f"
   },
   "submitted_at": "2026-06-22",
-  "row_count": 2457,
+  "row_count": 2452,
   "rules": [
     "API00-C",
     "API01-C",
@@ -128,6 +128,18 @@
         "lua lauxlib.c:841 ERR33-C"
       ],
       "note": "ERR33-C verdict corrected FP -> TP by gavel review (bmdb 1281); see that batch's manifest notes"
+    },
+    {
+      "by": "task-1352-err33c-strict-bar",
+      "count": 5,
+      "keys": [
+        "lua lauxlib.c:1159 ERR33-C",
+        "lua liolib.c:501 ERR33-C",
+        "lua liolib.c:515 ERR33-C",
+        "lua loslib.c:338 ERR33-C",
+        "lua lua.c:490 ERR33-C"
+      ],
+      "note": "ERR33-C verdict corrected FP -> TP under the project-wide strict bar (bmdb 1352); see that batch's manifest notes"
     }
   ]
 }

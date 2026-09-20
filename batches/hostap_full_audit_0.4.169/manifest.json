@@ -12,7 +12,7 @@
     "hostap": "dcee60436390dd34731560657c4257c3b4c839a6"
   },
   "submitted_at": "2026-07-28",
-  "row_count": 31055,
+  "row_count": 31046,
   "rules": [
     "API00-C",
     "API01-C",
@@ -231,6 +231,22 @@
         "hostap src/utils/os_unix.c:726 INT32-C"
       ],
       "note": "INT32-C verdict corrected TP -> FP after 8e95f619's typing withdrew the key (bmdb 1292 recall check); see that batch's manifest"
+    },
+    {
+      "by": "task-1352-err33c-strict-bar",
+      "count": 9,
+      "keys": [
+        "hostap hostapd/hostapd_cli.c:132 ERR33-C",
+        "hostap hostapd/hostapd_cli.c:790 ERR33-C",
+        "hostap src/drivers/driver_bsd.c:896 ERR33-C",
+        "hostap src/drivers/driver_bsd.c:898 ERR33-C",
+        "hostap src/drivers/driver_nl80211_monitor.c:83 ERR33-C",
+        "hostap src/drivers/driver_wext.c:762 ERR33-C",
+        "hostap wpa_supplicant/dbus/dbus_new.c:5512 ERR33-C",
+        "hostap wpa_supplicant/dbus/dbus_new.c:5574 ERR33-C",
+        "hostap wpa_supplicant/dbus/dbus_new.c:5630 ERR33-C"
+      ],
+      "note": "ERR33-C verdict corrected FP -> TP under the project-wide strict bar (bmdb 1352); see that batch's manifest notes"
     }
   ]
 }

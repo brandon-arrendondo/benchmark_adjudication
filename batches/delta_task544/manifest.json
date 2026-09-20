@@ -24,7 +24,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-08-25T09:15:39.606859",
-  "row_count": 433,
+  "row_count": 387,
   "rules": [
     "ERR33-C",
     "MEM30-C",
@@ -58,6 +58,59 @@
         "sqlite ext/misc/fileio.c:207 ERR33-C"
       ],
       "note": "ERR33-C verdict corrected FP -> TP by gavel review (bmdb 1281); see that batch's manifest notes"
+    },
+    {
+      "by": "task-1352-err33c-strict-bar",
+      "count": 46,
+      "keys": [
+        "libcrc src/nmea-chk.c:72 ERR33-C",
+        "mosquitto lib/logging_mosq.c:53 ERR33-C",
+        "mosquitto lib/send_publish.c:171 ERR33-C",
+        "mosquitto src/bridge.c:328 ERR33-C",
+        "mosquitto src/bridge.c:566 ERR33-C",
+        "mosquitto src/bridge.c:700 ERR33-C",
+        "mosquitto src/bridge_topic.c:299 ERR33-C",
+        "mosquitto src/bridge_topic.c:38 ERR33-C",
+        "mosquitto src/bridge_topic.c:82 ERR33-C",
+        "mosquitto src/bridge_topic.c:84 ERR33-C",
+        "mosquitto src/bridge_topic.c:96 ERR33-C",
+        "mosquitto src/conf.c:1841 ERR33-C",
+        "mosquitto src/conf.c:3048 ERR33-C",
+        "mosquitto src/conf.c:3061 ERR33-C",
+        "mosquitto src/conf.c:833 ERR33-C",
+        "mosquitto src/conf.c:835 ERR33-C",
+        "mosquitto src/conf_includedir.c:125 ERR33-C",
+        "mosquitto src/conf_includedir.c:176 ERR33-C",
+        "mosquitto src/control.c:161 ERR33-C",
+        "mosquitto src/control.c:42 ERR33-C",
+        "mosquitto src/handle_connect.c:380 ERR33-C",
+        "mosquitto src/handle_publish.c:344 ERR33-C",
+        "mosquitto src/handle_subscribe.c:184 ERR33-C",
+        "mosquitto src/http_api.c:488 ERR33-C",
+        "mosquitto src/http_api.c:90 ERR33-C",
+        "mosquitto src/http_api.c:92 ERR33-C",
+        "mosquitto src/logging.c:349 ERR33-C",
+        "mosquitto src/net.c:1102 ERR33-C",
+        "mosquitto src/net.c:1104 ERR33-C",
+        "mosquitto src/net.c:495 ERR33-C",
+        "mosquitto src/net.c:822 ERR33-C",
+        "mosquitto src/persist_write.c:240 ERR33-C",
+        "mosquitto src/persist_write.c:242 ERR33-C",
+        "mosquitto src/service.c:155 ERR33-C",
+        "mosquitto src/service.c:162 ERR33-C",
+        "mosquitto src/service.c:164 ERR33-C",
+        "mosquitto src/service.c:95 ERR33-C",
+        "mosquitto src/websockets.c:391 ERR33-C",
+        "mosquitto src/websockets.c:393 ERR33-C",
+        "mosquitto src/xtreport.c:119 ERR33-C",
+        "raylib src/platforms/rcore_desktop_win32.c:1262 ERR33-C",
+        "raylib src/platforms/rcore_drm.c:1940 ERR33-C",
+        "raylib src/platforms/rcore_web.c:1778 ERR33-C",
+        "raylib src/platforms/rcore_web_emscripten.c:1660 ERR33-C",
+        "raylib src/rcore.c:4612 ERR33-C",
+        "raylib src/rtext.c:1595 ERR33-C"
+      ],
+      "note": "ERR33-C verdict corrected FP -> TP under the project-wide strict bar (bmdb 1352); see that batch's manifest notes"
     }
   ]
 }
