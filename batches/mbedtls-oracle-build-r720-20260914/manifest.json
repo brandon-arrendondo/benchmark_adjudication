@@ -12,7 +12,7 @@
     "mbedtls": "068ff080b369adfac81509f9b57b2afabaf82dc5"
   },
   "submitted_at": "2026-09-14T17:32:48.190170",
-  "row_count": 8361,
+  "row_count": 8350,
   "rules": [
     "API00-C",
     "API01-C",
@@ -156,6 +156,24 @@
         "mbedtls library/psa_its_file.c:247 ERR33-C"
       ],
       "note": "ERR33-C verdict corrected FP -> TP by gavel review (bmdb 1281); see that batch's manifest notes"
+    },
+    {
+      "by": "task-1214-mbedtls-1171-delta-relabel",
+      "count": 11,
+      "keys": [
+        "mbedtls library/ecp.c:219 API00-C",
+        "mbedtls library/ecp.c:619 API00-C",
+        "mbedtls library/ecp.c:633 API00-C",
+        "mbedtls library/ecp.c:641 API00-C",
+        "mbedtls library/ecp.c:655 API00-C",
+        "mbedtls library/ecp.c:663 API00-C",
+        "mbedtls library/ecp.c:693 API00-C",
+        "mbedtls library/ecp.c:771 API00-C",
+        "mbedtls library/ecp.c:966 API00-C",
+        "mbedtls library/pkwrite.c:312 MSC13-C",
+        "mbedtls library/rsa_alt_helpers.c:217 EXP43-C"
+      ],
+      "note": "TP -> FP: rows silenced by the aurora_lint 1171 fixes (1203-1207) whose finding was a misfire on the facts (documented precondition, no restrict parameter, macro-hidden use); the 91 MSC13-C initializer rows the fixes also silenced were probed and are true dead stores, so they keep their TP (bmdb 1214)"
     }
   ]
 }
