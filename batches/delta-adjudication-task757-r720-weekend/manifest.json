@@ -26,7 +26,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-09-11T15:57:27.790148",
-  "row_count": 9353,
+  "row_count": 9346,
   "rules": [
     "DCL04-C",
     "DCL06-C",
@@ -38,5 +38,21 @@
     "INT16-C",
     "PRE31-C"
   ],
-  "notes": "Reconstructed during benchmark_adjudication's initial population (2026-09-16) from benchmarking_db's ground_truth.source='delta-adjudication-task757-r720-weekend'. row_count/projects/codebase_commits/rules were derived from the rows themselves, not declared at adjudication time. aurora_lint_version/aurora_lint_sha are unknown for legacy data -- never recorded per-row. no adjudicator recorded for any row in this batch."
+  "notes": "Reconstructed during benchmark_adjudication's initial population (2026-09-16) from benchmarking_db's ground_truth.source='delta-adjudication-task757-r720-weekend'. row_count/projects/codebase_commits/rules were derived from the rows themselves, not declared at adjudication time. aurora_lint_version/aurora_lint_sha are unknown for legacy data -- never recorded per-row. no adjudicator recorded for any row in this batch.",
+  "superseded_rows": [
+    {
+      "by": "correction-dcl06c-sqlite-string-length-echo-task1377",
+      "count": 7,
+      "keys": [
+        "sqlite ext/fts3/fts3_unicode.c:236 DCL06-C",
+        "sqlite ext/fts3/fts3_unicode.c:245 DCL06-C",
+        "sqlite ext/misc/vfslog.c:275 DCL06-C",
+        "sqlite ext/recover/sqlite3recover.c:810 DCL06-C",
+        "sqlite ext/recover/sqlite3recover.c:832 DCL06-C",
+        "sqlite src/analyze.c:1038 DCL06-C",
+        "sqlite src/where.c:2469 DCL06-C"
+      ],
+      "note": "DCL06-C verdict corrected FP -> TP: the string-length-echo shape this batch labelled FP was ruled a violation as written on 2026-09-17 (aurora_lint 1153, ADR-0001); see that batch's notes"
+    }
+  ]
 }

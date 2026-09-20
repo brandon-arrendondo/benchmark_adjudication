@@ -1,0 +1,28 @@
+{
+  "batch_id": "correction-dcl06c-sqlite-string-length-echo-task1377",
+  "work_item_ref": "benchmarking_db-1377",
+  "requested_by": "coordinator",
+  "adjudicator": "claude-opus-5",
+  "adjudicating_node": "dev-180",
+  "aurora_lint_version": "0.5.0",
+  "aurora_lint_sha": "e405089a3f7b1c2d4e6a8b0c9d1e2f3a4b5c6d7e",
+  "projects": [
+    "sqlite"
+  ],
+  "codebase_commits": {
+    "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
+  },
+  "submitted_at": "2026-09-20T13:30:00Z",
+  "rebased_onto": "d5a09bc",
+  "row_count": 7,
+  "rules": [
+    "DCL06-C"
+  ],
+  "verdicts": {
+    "TP": 7
+  },
+  "corrections": {
+    "FP_to_TP": 7
+  },
+  "notes": "A CORRECTION, NOT A NEW ADJUDICATION. Six sqlite DCL06-C rows from delta-adjudication-task757-r720-weekend were labelled FP with a shared cluster reason -- 'string-length echo: the literal is exactly strlen() of an adjacent string literal' -- offered as grounds for FP. That reading was overruled on 2026-09-17 (aurora_lint 1153 CORRECTION, coordinator and Brandon, under ADR-0001): an unnamed literal coupled to a string literal's spelling is a violation as written, and whether a project wants to act on it is a suppression or manifest question, not a labeling one. The hostap side of that ruling was corrected at the time; sqlite was missed. This batch closes that gap. Found by dev-149 during aurora_lint 1153 characterization.\n\nEACH ROW WAS READ AT sqlite b1a73ba34d, NOT TAKEN FROM THE CLUSTER REASON, and every length was recomputed:\n  ext/fts3/fts3_unicode.c:236  19 == strlen(\"remove_diacritics=1\"); the 19 appears twice on the line (n==19 and the memcmp length).\n  ext/fts3/fts3_unicode.c:245  11 == strlen(\"tokenchars=\"); the same 11 also indexes &z[11] and adjusts n-11 -- four couplings to one spelling.\n  ext/misc/vfslog.c:275        12 == strlen(\"-mj??????9??\"); serves as both the length guard and the suffix offset.\n  ext/recover/sqlite3recover.c:810  16 == strlen(\"replace(replace(\"); also advances iOut.\n  ext/recover/sqlite3recover.c:832  12 == strlen(\"', char(10))\"); also advances iOut.\n  src/where.c:2469             17 == strlen(\"sqlite_autoindex_\").\nAll six are the same shape the 2026-09-17 ruling covers, so all six flip; the seventh row below flips on the same ruling after a separate read. Reasons are per-line rather than a shared cluster string, deliberately: the cluster reason is what let the seventh row below hide.\n\nSEVENTH ROW -- src/analyze.c:1038, flipped on a separate decision. It was held out of the first push and read on its own merits, as the task asked; the coordinator then ruled it in (bmdb 1377): a label describes the source at the pinned commit, not one build configuration, and the build-config axis is settled once in bmdb 1378 rather than row by row. The reasoning offered for holding it is kept below, because it is the argument for the verdict.\n  The line is 'pStat1 = (Table*)sqlite3DbMallocZero(db, sizeof(Table) + 13);'. Three lines below, 'memcpy(pStat1->zName, \"sqlite_stat1\", 13);' writes into the tail of that allocation. strlen(\"sqlite_stat1\") is 12, so the 13 is the literal's length plus its NUL -- a string-length echo, but NOT the shape the cluster reason describes: the literal is not an argument of the same call, and the reason text's claim that it is 'paired with in the same call' is simply false here. That is evidence the cluster verdict was applied to this row without reading it.\n  ON THE MERITS I READ IT AS TP, and a stronger case than the six, not a weaker one. The coupling is the same in kind -- an unnamed integer that must track a string literal's spelling -- but the consequence of breaking it is worse: renaming the table string without editing the 13 makes the allocation too small for the name memcpy'd into it, whereas a mismatch in the six only makes a comparison fail. ADR-0001 points the same way for both.\n  IT WAS SURFACED RATHER THAN FOLDED IN because the line sits under '#ifdef SQLITE_ENABLE_PREUPDATE_HOOK', which is not a default build -- the same build-configuration question raised against INT02-C on this corpus (12 of 46 TPs in code the Linux oracle never compiles). That axis is a scope question rather than a verdict question and is now tracked as bmdb 1378; deciding it silently inside a one-row flip is what this batch avoided.\n\nMECHANICS follow task-1281/1352. In-place edits: each corrected row keeps its key, takes this batch's source, and carries a reason naming its own literal and quoting what it supersedes. delta-adjudication-task757-r720-weekend gets a row_count decrement of 6 and a superseded_rows record. The CSV writer was verified byte-stable against every untouched row in data/sqlite/adjudication.csv before writing, so the diff is exactly 6 additions and 6 deletions, key set and order unchanged, nothing reflowed.\n\nLIVENESS: dev-149 reports all seven keys still fire at 5595dd89; not re-verified here, and not needed -- a label is a statement about the code at the pinned commit rather than about a run.\n\nCounting basis: distinct (project, commit, file, line, rule) keys. No precision or recall claim is made here; sqlite DCL06-C figures computed before this is merged AND ingested mix two labeling bars."
+}
