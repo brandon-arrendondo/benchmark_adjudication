@@ -116,6 +116,49 @@ drifted from its pin scores as a quiet drop in coverage, not an error. Juliet
 (the synthetic CWE corpus) is scored by aurora-lint's own `python -m bench
 juliet` and is not reproduced here.
 
+## Explaining a shift in the labels
+
+`scripts/label_churn.py` reads two commits of this repository and reports
+what changed in the labels between them -- so a moved figure can be
+explained from public data rather than asserted, and a relabel branch can be
+checked against its own paperwork. It is stdlib-only and reads each ref
+through `git show`, the same way `score.py --labels-ref` does; the answer is
+a function of two SHAs.
+
+```bash
+python3 scripts/label_churn.py 1911f5b 5f132a2            # human table
+python3 scripts/label_churn.py 3ab3f41d 1911f5b --allow-crlf --json --keys > churn.json
+python3 scripts/label_churn.py origin/main my-relabel-branch   # review aid
+```
+
+Every key -- `(project, codebase_commit, file_path, line, rule_id)` -- that
+differs between the two refs is counted in exactly one of four kinds:
+**added** (in B, not A), **removed** (in A, not B), **flipped** (same key,
+verdict differs, reported by `from->to`), and **re-keyed** (a removed row and
+an added row at the same project / commit / file / line with the same verdict
+and a different rule -- a finding that moved between rules, such as task
+1292's INT32-C -> INT30-C, reported apart from added and removed). A row
+whose key and verdict are unchanged is not churn, whatever else in it was
+edited. Counts come per project, per rule and per batch, with row and verdict
+totals at both ends; `--keys` lists every changed key in the JSON. Each
+change is attributed to a batch: added, flipped and re-keyed rows to the
+`source` they carry at B, removed rows to the manifest at B that names the
+key under `superseded_rows`.
+
+Two properties make it a check and not just a report. The LF normalisation
+of every CSV (`d6d1eb8`) is zero churn -- only terminator bytes changed, and
+the tool reports those separately -- and a relabel branch's churn against
+`main` equals its manifests' `superseded_rows` exactly (the ERR33-C
+strict-bar relabel, `1911f5b -> 5f132a2`, is 185 `FP->TP` in one batch and
+nothing else). Refs before the normalisation are CRLF and are refused unless
+`--allow-crlf` is passed, matching `validate.py`. `tests/test_label_churn.py`
+pins those figures and the windows `3ab3f41d -> f5216b8 -> 5d4e70e ->
+1911f5b`, and checks that the whole span equals the windows summed.
+
+The output is labels only -- keys, verdicts, counts and batch ids. It never
+carries a row's free text, so nothing in it can describe a defect
+(ADR-0007 in aurora-lint).
+
 
 ## Why the review process exists
 
@@ -179,7 +222,9 @@ batches/<batch_id>/manifest.json  -- one immutable record per submission batch
 scripts/validate.py               -- schema/consistency checks, run in CI
 scripts/score.py                  -- reference scorer: precision/recall/coverage
                                      of an aurora-lint run against these labels
-tests/                            -- golden test pinning score.py to a published run
+scripts/label_churn.py            -- what changed in the labels between two commits
+tests/                            -- golden tests pinning score.py to a published run
+                                     and label_churn.py to this repo's history
 ```
 
 ### `data/<project>/adjudication.csv`
