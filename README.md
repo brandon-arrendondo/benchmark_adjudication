@@ -139,6 +139,38 @@ results is the citable answer to "which labels."
 staging and audit layer in front of it. See `benchmarking_db/docs/design/`
 for how a merged commit here gets loaded into Postgres.
 
+## Labeling standards
+
+These are the rules a verdict is judged against, so a label means the same
+thing in every project. They are decisions of the project owner, recorded
+here so a reviewer can check a batch against them.
+
+**Labels are data, including true positives.** Every TP, FP and FN row belongs
+in this repo whatever the defect, because it is the output of a public tool on
+public code. A row's `reason` and `provenance` state the *basis of the verdict*
+(what the flagged construct is, why it is TP or FP at that line). They do not
+carry reproduction steps, sanitizer output, a proposed patch, an impact
+narrative or report text; write-ups of a defect stay out of public repos until
+the fix has landed upstream (aurora-lint ADR-0007).
+
+**ERR33-C follows the strict reading (aurora-lint ADR-0001), in every project.**
+A call whose result ERR33-C covers is a violation as written when the result
+is bare-ignored, or assigned to a variable that is never tested in the
+enclosing function; `ERR33-C-EX1` does not exempt it. A finding is FP only
+where the error indicator *is* tested. Whether a project would want to act on
+it is a suppression question, not a labeling one. Two consequences:
+
+- A result **returned to the caller** for it to check is *propagated*, not
+  ignored, and is labeled FP.
+- A partial or indirect check (a value derived from the result, or a test on
+  only some paths) keeps the verdict it already had until a batch decides it
+  explicitly.
+
+(benchmarking_db 1352 applied this reading across the older projects: 185 rows
+were corrected FP to TP in one reviewed commit, each listed under
+`superseded_rows` in the manifest of the batch that first labeled it. Task 1281
+had already parked the "returned to the caller" shape on the same ground.)
+
 ## Layout
 
 ```
