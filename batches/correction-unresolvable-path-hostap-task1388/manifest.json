@@ -1,0 +1,24 @@
+{
+  "batch_id": "correction-unresolvable-path-hostap-task1388",
+  "work_item_ref": "benchmarking_db-1388",
+  "requested_by": "coordinator",
+  "adjudicator": "claude-opus-5",
+  "adjudicating_node": "dev-180",
+  "aurora_lint_version": "0.5.0",
+  "aurora_lint_sha": "e405089a3f7b1c2d4e6a8b0c9d1e2f3a4b5c6d7e",
+  "projects": [
+    "hostap"
+  ],
+  "codebase_commits": {
+    "hostap": "dcee60436390dd34731560657c4257c3b4c839a6"
+  },
+  "submitted_at": "2026-09-20T14:05:00Z",
+  "rebased_onto": "480bd5b",
+  "row_count": 0,
+  "rules": [
+    "EXP34-C"
+  ],
+  "verdicts": {},
+  "removed_rows": 1,
+  "notes": "A REMOVAL, NOT AN ADJUDICATION. row_count is 0 on purpose: this batch adds no row and is the record of one being dropped. No verdict is changed anywhere.\n\nWHAT WAS BROKEN. assertions.check_run failed real-world run 268 with labels_on_real_files: one hostap ground_truth label named src/eap_sim.c, which does not exist at the pinned commit dcee604363, so the label had no resolvable address. That single error is what made run 268 NOT CITABLE, and it blocked release_baseline_numbers from printing any figure for the v0.5.2 release.\n\nTHE PATH IS UNAMBIGUOUS, AND THAT IS NOT THE FIX. The pinned tree holds exactly one eap_sim.c, at src/eap_peer/eap_sim.c, and its line 609 is 'enc_identity = eap_sim_encrypt_identity(...attr);' -- the construct the broken row's reason describes. So the intended path is certain. But repathing it is WRONG, because src/eap_peer/eap_sim.c:609 EXP34-C ALREADY EXISTS as a separate row (source task777_delta_r720_20260915, adjudicated 2026-09-15, verdict FP), and (project, codebase_commit, file_path, line, rule_id) is ground_truth's UNIQUE constraint. Repathing was tried and rejected by scripts/validate.py, which reports it verbatim: 'duplicate key ('hostap', 'dcee6043...', 'src/eap_peer/eap_sim.c', '609', 'EXP34-C') ... matches ground_truth's UNIQUE constraint'. The broken row is a duplicate of a key that is already correctly labelled, so the fix is to drop it.\n\nNOTHING IS LOST. Both rows say FP about the same construct, so the oracle's answer at that key is unchanged by the removal. The surviving row is also the better record: the removed row's reason was itself CSV-corrupted -- it ends 'NULL is an intentional \\\\no attr\" sentinel.\"', a quote that did not survive the write -- while the surviving row states the same finding cleanly and cites the guard lines (539 and 549) in the callee. The removal is checked in code before it happens: the script refuses to run unless exactly one surviving row exists at the correct key AND its verdict is FP, so a removal can never quietly change what the oracle answers.\n\nLIKELY CAUSE, stated as a lead rather than a finding: the truncated path and the broken quoting are in the same row of the same batch, which points at one malformed write in task1107_delta_exp34_hostap_b9 (2026-09-10, claude-sonnet-5) rather than at a typo. The other 127 rows of that batch round-trip byte-stably and were left untouched, so whatever happened did not affect them. Worth a look at that batch's generator if one still exists; not chased here.\n\nMECHANICS. The row is deleted in place; task1107_delta_exp34_hostap_b9 takes a row_count decrement of 1 and a superseded_rows record naming the removed key, which is how scripts/label_churn.py attributes a removal. Every other row in data/hostap/adjudication.csv was verified to round-trip byte-stably before the write, so the diff is exactly one deleted line and nothing reflowed.\n\nWHAT THIS DOES NOT FIX. check_run's two WARNINGS on run 268 are untouched and are a different problem: 640 labels sit on files the pinned corpus scope excludes (sqlite 480, mosquitto 111, curl 44, hostap 5) and 1,825 findings sit on out-of-scope files. Those do not block citability, but they mean some per-project precision figures are computed over label sets the scope predicate would not re-derive. Raised separately, not folded in here."
+}

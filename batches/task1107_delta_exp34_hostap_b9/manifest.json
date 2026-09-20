@@ -12,9 +12,19 @@
     "hostap": "dcee60436390dd34731560657c4257c3b4c839a6"
   },
   "submitted_at": "2026-09-10T13:42:26.630959Z",
-  "row_count": 128,
+  "row_count": 127,
   "rules": [
     "EXP34-C"
   ],
-  "notes": "Reconstructed during benchmark_adjudication's initial population (2026-09-16) from benchmarking_db's ground_truth.source='task1107_delta_exp34_hostap_b9'. row_count/projects/codebase_commits/rules were derived from the rows themselves, not declared at adjudication time. aurora_lint_version/aurora_lint_sha are unknown for legacy data -- never recorded per-row."
+  "notes": "Reconstructed during benchmark_adjudication's initial population (2026-09-16) from benchmarking_db's ground_truth.source='task1107_delta_exp34_hostap_b9'. row_count/projects/codebase_commits/rules were derived from the rows themselves, not declared at adjudication time. aurora_lint_version/aurora_lint_sha are unknown for legacy data -- never recorded per-row.",
+  "superseded_rows": [
+    {
+      "by": "correction-unresolvable-path-hostap-task1388",
+      "count": 1,
+      "keys": [
+        "hostap src/eap_sim.c:609 EXP34-C"
+      ],
+      "note": "row removed: its file_path does not resolve at the pinned hostap commit, and the correctly-pathed key it duplicates (src/eap_peer/eap_sim.c:609) already carries the same FP verdict; see that batch's manifest notes"
+    }
+  ]
 }
