@@ -29,6 +29,15 @@ import random
 import sys
 from pathlib import Path
 
+# Withheld from the blind sample by Brandon, 2026-09-21 (coordinator-notes
+# in coordinator_work, "~19:30"): these three rules share a caller-side
+# reporting defect (a proven cross-file summary knows the callee's unsafe
+# behavior, but the finding is keyed at the caller's call site instead --
+# see r720-caller-side-basis-report-2026-09-21.md). Until that's fixed,
+# their sample rows are excluded from gavel by design, not unreviewed --
+# report them as withheld, never silently folded into "not yet labeled".
+WITHHELD_RULES = {"EXP34-C", "EXP33-C", "ARR30-C"}
+
 
 def load_verdicts(path: Path) -> dict[str, tuple[str, str]]:
     out = {}
@@ -110,9 +119,25 @@ def main() -> None:
         if sample_id not in answers:
             print(f"warning: {sample_id} not in answer key, skipped", file=sys.stderr)
             continue
+        if rule in WITHHELD_RULES:
+            continue  # excluded by design (see the note printed above), not batched into kappa
         model_verdict, _ = answers[sample_id]
         pairs.append((human, model_verdict))
         per_rule_pairs.setdefault(rule, []).append((human, model_verdict))
+
+    withheld_total = sum(1 for _, rule in answers.values() if rule in WITHHELD_RULES)
+    eligible_total = len(answers) - withheld_total
+    withheld_labeled = sum(
+        1 for sample_id in verdicts if answers.get(sample_id, (None, ""))[1] in WITHHELD_RULES
+    )
+    if withheld_labeled:
+        print(
+            f"note: {withheld_labeled} labeled row(s) belong to a withheld rule "
+            f"(EXP34-C/EXP33-C/ARR30-C) -- excluded from kappa below, not because "
+            f"they weren't reviewed but per Brandon's 2026-09-21 withholding call. "
+            f"Kept in the verdict CSV, just not counted.",
+            file=sys.stderr,
+        )
 
     n = len(pairs)
     if n == 0:
@@ -121,7 +146,12 @@ def main() -> None:
 
     agree = sum(1 for h, m in pairs if h == m)
     kappa = cohens_kappa(pairs)
-    print(f"{n} labeled row(s) (of {len(answers)} in the sample)")
+    print(
+        f"{withheld_total} of {len(answers)} sample row(s) withheld "
+        f"(EXP34-C/EXP33-C/ARR30-C, caller-side basis defect -- excluded by "
+        f"design, not unfilled); {eligible_total} eligible."
+    )
+    print(f"{n} labeled row(s) (of {eligible_total} eligible)")
     print(f"raw agreement: {agree}/{n} ({100*agree/n:.1f}%)")
     print(f"Cohen's kappa: {kappa:.4f}")
     print()
@@ -133,20 +163,24 @@ def main() -> None:
     print()
 
     # corpus-wide observed TP rate among model TP/FP verdicts (excluding
-    # human-gavel and uncertain, matching the sample's own eligible pool)
+    # human-gavel and uncertain, matching the sample's own eligible pool --
+    # and excluding WITHHELD_RULES too: the sample no longer represents
+    # them, so applying its Se/Sp to a pool that still includes their
+    # (very different) TP rate would mix scopes)
     data_dir = Path(__file__).resolve().parent.parent / "data"
     n_tp = n_fp = 0
     for csv_path in sorted(data_dir.glob("*/adjudication.csv")):
         with csv_path.open(newline="") as f:
             for row in csv.DictReader(f):
-                if row["adjudicator"] == "human-gavel":
+                if row["adjudicator"] == "human-gavel" or row["rule_id"] in WITHHELD_RULES:
                     continue
                 if row["verdict"] == "TP":
                     n_tp += 1
                 elif row["verdict"] == "FP":
                     n_fp += 1
     p_obs = n_tp / (n_tp + n_fp)
-    print(f"corpus observed TP rate (model-labeled pool): {p_obs:.4f} ({n_tp} TP / {n_fp} FP)")
+    print(f"corpus observed TP rate, withheld rules excluded (model-labeled pool): "
+          f"{p_obs:.4f} ({n_tp} TP / {n_fp} FP)")
 
     p_true = rogan_gladen(pairs, p_obs)
     if p_true is None:
