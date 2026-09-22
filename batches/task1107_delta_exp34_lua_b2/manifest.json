@@ -12,9 +12,20 @@
     "lua": "40b76de2d77e66b70a9d4bf989c3f5340919973f"
   },
   "submitted_at": "2026-09-10T13:28:02.803488Z",
-  "row_count": 78,
+  "row_count": 76,
   "rules": [
     "EXP34-C"
   ],
-  "notes": "Reconstructed during benchmark_adjudication's initial population (2026-09-16) from benchmarking_db's ground_truth.source='task1107_delta_exp34_lua_b2'. row_count/projects/codebase_commits/rules were derived from the rows themselves, not declared at adjudication time. aurora_lint_version/aurora_lint_sha are unknown for legacy data -- never recorded per-row."
+  "notes": "Reconstructed during benchmark_adjudication's initial population (2026-09-16) from benchmarking_db's ground_truth.source='task1107_delta_exp34_lua_b2'. row_count/projects/codebase_commits/rules were derived from the rows themselves, not declared at adjudication time. aurora_lint_version/aurora_lint_sha are unknown for legacy data -- never recorded per-row.",
+  "superseded_rows": [
+    {
+      "by": "correction-exp34c-caller-key-relabel-task1423",
+      "count": 2,
+      "keys": [
+        "lua loadlib.c:565 EXP34-C",
+        "lua loadlib.c:570 EXP34-C"
+      ],
+      "note": "EXP34-C verdict corrected TP -> FP as keyed by bmdb 1423: the key is a caller's positional call argument, which aurora_lint 1418 no longer treats as a violation site; see that batch's manifest notes"
+    }
+  ]
 }

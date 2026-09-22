@@ -1,0 +1,41 @@
+{
+  "batch_id": "correction-exp34c-caller-key-relabel-task1423",
+  "work_item_ref": "benchmarking_db-1423",
+  "requested_by": "coordinator",
+  "adjudicator": "claude-opus-5",
+  "adjudicating_node": "dev-180",
+  "aurora_lint_version": "0.5.2",
+  "aurora_lint_sha": "ca327445c5c2f072c813caad935f954d9efff69b",
+  "projects": [
+    "curl",
+    "hostap",
+    "lua",
+    "mbedtls",
+    "mosquitto",
+    "raylib",
+    "sqlite",
+    "ventoy"
+  ],
+  "codebase_commits": {
+    "curl": "3e198f75861cc2e12daf299689e145949dddd19b",
+    "hostap": "dcee60436390dd34731560657c4257c3b4c839a6",
+    "lua": "40b76de2d77e66b70a9d4bf989c3f5340919973f",
+    "mbedtls": "068ff080b369adfac81509f9b57b2afabaf82dc5",
+    "mosquitto": "d3ee5c5ca62c0fa4983308c6fff558ee978e878c",
+    "raylib": "962bbfc6bfbd7a5acd08e21314fcfa161003a589",
+    "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af",
+    "ventoy": "7cbdc5cf69935bcf1f085ae67f40e70ea7e74bae"
+  },
+  "submitted_at": "2026-09-22T00:00:00Z",
+  "row_count": 59,
+  "rules": [
+    "EXP34-C"
+  ],
+  "verdicts": {
+    "FP": 59
+  },
+  "corrections": {
+    "TP_to_FP": 59
+  },
+  "notes": "A CORRECTION, NOT A NEW ADJUDICATION. 59 rows carried a TP verdict keyed at a caller's positional call argument. aurora_lint 1418 relocated EXP34-C's report off the caller line (Brandon's ruling of 2026-09-21: the dereference is the violation site, a positional argument at a call is not), so a TP keyed at such a line places the verdict at a site the standard no longer treats as one. Each row is corrected AS KEYED and carries no claim about any other site.\n\nHOW THE SET WAS DRAWN, AND WHAT IT DELIBERATELY EXCLUDES. 6,031 labeled EXP34-C keys no longer produce a report at aurora_lint ca327445 over the same codebase_commit (5,934 FP, 69 TP, 21 uncertain, 7 FN). Only the TP rows are in scope here -- a stale FP or uncertain key costs nothing to leave. Of the 69 TP rows, each was classified by the report it actually carried at the run 270 baseline (aurora_lint 2960cd88), not by inspection of the source line alone:\n  (1) 60 carried a positional-argument call-site report naming the argument and the callee. 59 of them are corrected here.\n  (2) 1 of those 60 is HELD: hostap src/drivers/driver_nl80211_event.c:3579, where the argument sits in a variadic slot (wpa_msg is PRINTF_FORMAT(3,4)). 1418 KEPT the call-site check for vararg slots, so that key is still a violation site under the new standard and its silence is a coverage question, not staleness. Correcting it would assert the opposite of what the standard says.\n  (3) 9 produced NO EXP34-C report at the run 270 baseline either, so they were already stale before the relocation and 1418 is not their cause. Eight of the nine are keyed at a dereference -- the site the new standard treats as THE violation site -- so the relocation rationale does not reach them in either direction. They need adjudication on their merits and are left untouched: hostap src/common/wpa_common.c:1277, src/common/wpa_ctrl.c:470 and :726, wpa_supplicant/p2p_supplicant.c:4350 and :4375; mosquitto src/websockets.c:147; raylib src/raudio.c:1707, src/rcore.c:2297, src/rmodels.c:2902.\n\nNOT IN SCOPE, RECORDED SO IT IS NOT LOST. The 7 stale FN rows are a separate problem: an FN key that no longer fires is not stale in the TP/FP sense, since the rule still does not report the construct. They are untouched here and need their own pass.\n\nWhich commit silenced a given key does not change this correction -- the standard is about the site, not about the commit -- so no per-commit A/B was run. Attributing a key to 1418 specifically would need 4bbf15d1^ vs 4bbf15d1.\n\nApplied on dev-180 under bmdb 1423, corpus-check clean on all 12 pins."
+}

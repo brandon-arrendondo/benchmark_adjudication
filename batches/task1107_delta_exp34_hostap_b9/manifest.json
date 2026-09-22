@@ -12,7 +12,7 @@
     "hostap": "dcee60436390dd34731560657c4257c3b4c839a6"
   },
   "submitted_at": "2026-09-10T13:42:26.630959Z",
-  "row_count": 127,
+  "row_count": 125,
   "rules": [
     "EXP34-C"
   ],
@@ -25,6 +25,15 @@
         "hostap src/eap_sim.c:609 EXP34-C"
       ],
       "note": "row removed: its file_path does not resolve at the pinned hostap commit, and the correctly-pathed key it duplicates (src/eap_peer/eap_sim.c:609) already carries the same FP verdict; see that batch's manifest notes"
+    },
+    {
+      "by": "correction-exp34c-caller-key-relabel-task1423",
+      "count": 2,
+      "keys": [
+        "hostap src/eap_server/eap_server_peap.c:526 EXP34-C",
+        "hostap src/eap_server/eap_server_peap.c:532 EXP34-C"
+      ],
+      "note": "EXP34-C verdict corrected TP -> FP as keyed by bmdb 1423: the key is a caller's positional call argument, which aurora_lint 1418 no longer treats as a violation site; see that batch's manifest notes"
     }
   ]
 }
