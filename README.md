@@ -254,8 +254,22 @@ should discover first.
 
 ### `batches/<batch_id>/manifest.json`
 
-One immutable file per submission, written once and never edited after
-merge (a correction is a new batch, not an edit to an old one):
+One file per submission, written once at merge time. **A correction is
+always a new batch, never an edit to the rows or fields an old manifest
+already declared** (`row_count`'s original value, `codebase_commits`,
+`notes`, etc. stay as submitted). The one exception, established by
+practice (task 1352's ERR33-C strict-bar corrections; task 1425's ADR-0010
+config-basis corrections) rather than stated here until now: when a new
+correction batch supersedes specific rows an old manifest owned, the old
+manifest gains a `superseded_rows` array (see the `label_churn` section
+above) naming the correcting
+batch, and its `row_count` is decremented by exactly the corrected count —
+that field now describes how many of its rows are still live under that
+batch_id as `source`, which is what `validate.py`'s row-count cross-check
+verifies. This is a narrow, mechanical edit (two fields, always in the same
+direction, always cross-checked against the correcting batch's own
+`corrections` block) — not license to touch anything else in an old
+manifest.
 
 ```json
 {
