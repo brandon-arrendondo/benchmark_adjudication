@@ -12,7 +12,7 @@
     "mosquitto": "d3ee5c5ca62c0fa4983308c6fff558ee978e878c"
   },
   "submitted_at": "2026-06-16T15:18:57.383467",
-  "row_count": 2615,
+  "row_count": 2614,
   "rules": [
     "API00-C",
     "API02-C",
@@ -150,6 +150,14 @@
         "mosquitto src/mux_kqueue.c:174 ERR33-C"
       ],
       "note": "ERR33-C verdict corrected FP -> TP under the project-wide strict bar (bmdb 1352); see that batch's manifest notes"
+    },
+    {
+      "by": "correction-exp34c-deref-keys-merits-task1452",
+      "count": 1,
+      "keys": [
+        "mosquitto src/websockets.c:147 EXP34-C"
+      ],
+      "note": "EXP34-C verdict corrected TP -> FP on the merits by bmdb 1452: the full caller set establishes non-nullness before the line; see that batch's manifest notes"
     }
   ]
 }
