@@ -14,9 +14,25 @@
     "sel4": "1326364bc9135d9445d936ebc01e38a402c1f4c6"
   },
   "submitted_at": "2026-09-10T13:28:02.803488Z",
-  "row_count": 50,
+  "row_count": 43,
   "rules": [
     "EXP34-C"
   ],
-  "notes": "Reconstructed during benchmark_adjudication's initial population (2026-09-16) from benchmarking_db's ground_truth.source='task1107_delta_exp34_raylib_sel4'. row_count/projects/codebase_commits/rules were derived from the rows themselves, not declared at adjudication time. aurora_lint_version/aurora_lint_sha are unknown for legacy data -- never recorded per-row."
+  "notes": "Reconstructed during benchmark_adjudication's initial population (2026-09-16) from benchmarking_db's ground_truth.source='task1107_delta_exp34_raylib_sel4'. row_count/projects/codebase_commits/rules were derived from the rows themselves, not declared at adjudication time. aurora_lint_version/aurora_lint_sha are unknown for legacy data -- never recorded per-row.",
+  "superseded_rows": [
+    {
+      "by": "correction-exp34c-caller-key-relabel-task1423",
+      "count": 7,
+      "keys": [
+        "raylib src/platforms/rcore_desktop_rgfw.c:782 EXP34-C",
+        "raylib src/rcore.c:2297 EXP34-C",
+        "raylib src/rmodels.c:6715 EXP34-C",
+        "raylib src/rtextures.c:655 EXP34-C",
+        "raylib src/rtextures.c:658 EXP34-C",
+        "raylib src/rtextures.c:662 EXP34-C",
+        "raylib src/rtextures.c:680 EXP34-C"
+      ],
+      "note": "EXP34-C verdict corrected TP -> FP as keyed by bmdb 1423: the key is a caller's positional call argument, which aurora_lint 1418 no longer treats as a violation site; see that batch's manifest notes"
+    }
+  ]
 }
