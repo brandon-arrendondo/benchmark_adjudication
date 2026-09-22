@@ -34,6 +34,32 @@ Checks:
     a real CSV writer never introduces a bare backslash-quote sequence in
     the first place.
 
+ADR-0007 vocabulary (ADR-0007, clarified 699c5c8a; bmdb 1414, follow-up to 1400):
+a public reason/provenance states only the verdict's label basis -- what the
+flagged construct is and why it is TP/FP/FN "at the pinned commit" -- and
+makes no claim about impact, severity, exploitability, reachability by an
+attacker, trigger inputs, reproducibility or sanitizer results. This is a
+disclosure-safety rule (stay on good terms with upstream maintainers; don't
+frame a finding more aggressively than they may judge it), not a secrets
+check, so it is scoped narrower than the abandoned scanner below and tuned
+against the corpus rather than dropped. Two known false-positive classes,
+both allowlisted rather than pattern-loosened: (1) plain CFG/dead-code
+"reachable" (MSC07/13/17-C's own subject matter) vs. an attacker-reachability
+claim -- ADR0007_PATTERNS['reachable_threat'] requires attacker/remote/
+network/untrusted context within ~25 chars; (2) CERT-C's own advisory/
+recommendation "severity" (e.g. "low-severity const opportunity" on a
+DCL06-C/DCL13-C style hit) vs. a vulnerability-severity claim --
+SEVERITY_TAXONOMY_CONTEXT excludes a severity_word hit when rule-taxonomy
+vocabulary (advisory, recommendation, style, DCL\\d\\d-C, ...) appears in the
+same clause. Warn-only on legacy rows (adjudicated before this check
+landed): warn: not add to `errors`, so 172k rows already in the corpus at
+tune-in-time don't retroactively break CI. Fail on any row adjudicated on or
+after ADR0007_CHECK_LANDING_DATE, so a new row can't reintroduce the
+vocabulary. See scripts/adr0007_vocabulary_counts.py for a per-project/rule
+breakdown of the legacy warnings -- validate.py itself prints only a count,
+same lesson as the secrets scanner below: a per-row dump trains reviewers to
+click past it.
+
 Deliberately NOT checked here: whether a free-text field discloses a secret
 or internal address. An earlier version of this script regex-scanned
 reason/provenance/confidence/notes/requested_by for that, and its first real
@@ -72,6 +98,78 @@ CSV_COLUMNS = [
 VALID_VERDICTS = {"TP", "FP", "uncertain", "FN"}
 FULL_SHA_RE = re.compile(r"^[0-9a-f]{40}$")
 BACKSLASH_QUOTE_RE = re.compile(r'\\"')
+
+# Date (not datetime) this check landed on main -- see the ADR-0007 docstring
+# note above. Compared against adjudicated_at's leading YYYY-MM-DD only;
+# adjudicated_at has accumulated several ISO-variant spellings over the
+# corpus's history (bare date, full timestamp, with/without a UTC suffix),
+# but they all share that prefix, and lexicographic comparison on it sorts
+# the same as the dates themselves.
+ADR0007_CHECK_LANDING_DATE = "2026-09-21"
+
+ADR0007_PATTERNS = {
+    "crafted": re.compile(r"\bcrafted\b", re.I),
+    "attacker": re.compile(r"\battacker\b", re.I),
+    "exploit": re.compile(r"\bexploit(?:s|ed|able|ability)?\b", re.I),
+    "reachable_threat": re.compile(
+        r"\b(?:attacker|remote(?:ly)?|network|external(?:ly)?|untrusted|malicious)"
+        r"[\w\s-]{0,25}reachab(?:le|ility)\b"
+        r"|\breachab(?:le|ility)[\w\s-]{0,25}"
+        r"(?:attacker|remote(?:ly)?|network|untrusted|malicious)\b",
+        re.I,
+    ),
+    "oob": re.compile(r"\boob\b|\bout[- ]of[- ]bounds\b", re.I),
+    "heap_buffer_overflow": re.compile(r"\bheap-buffer-overflow\b", re.I),
+    "overflow_asan": re.compile(r"\boverflow\s+(?:WRITE|READ)\b", re.I),
+    "crash": re.compile(r"\bcrash(?:es|ed|ing)?\b", re.I),
+    "dos": re.compile(r"\bDoS\b"),
+    "poc": re.compile(r"\bPoC\b|\bpoc/", re.I),
+    "sanitizer_tool": re.compile(r"\b(?:ASan|UBSan|valgrind|GDB|sanitizer)\b", re.I),
+    "reproduced": re.compile(r"\breproduc(?:ed|ible|es)\b", re.I),
+    "live_at_head": re.compile(r"\blive at HEAD\b", re.I),
+    "segfault": re.compile(r"\bsegfault\b|\bSIGSEGV\b", re.I),
+    "severity_word": re.compile(
+        r"\b(?:low|medium|high)[- ]severity\b|\bseverity\b|\bcritical\b|\bCVSS\b", re.I
+    ),
+    "vulnerable": re.compile(r"\bvulnerab(?:le|ility)\b", re.I),
+    "trigger_threat": re.compile(
+        r"\btrigger(?:ed|ing|s)?\s+(?:by\s+)?(?:an?\s+)?"
+        r"(?:attacker|remote|malicious|crafted|untrusted)\b"
+        r"|\b(?:attacker|remote|malicious|crafted|untrusted)[\w\s-]{0,15}trigger",
+        re.I,
+    ),
+    "sqli_payload": re.compile(r"UNION\s+SELECT|DROP\s+TABLE|OR\s+1\s*=\s*1", re.I),
+    "remote_input": re.compile(
+        r"\bremote(?:ly)?[\w\s-]{0,15}\b(?:input|controlled|data|attacker)\b", re.I
+    ),
+}
+
+# CERT-C rule taxonomy uses "severity" for its own advisory/recommendation/rule
+# strength (e.g. "genuine low-severity const opportunity" on a DCL06-C/DCL13-C
+# style hit) -- a rule-classification statement, not a vulnerability-severity
+# claim. A severity_word hit in this context is allowlisted. Measured on the
+# 172k-row corpus at tune-in-time: this excludes ~97% of raw severity_word
+# hits, all confirmed rule-taxonomy usage on advisory-level style/const rules.
+SEVERITY_TAXONOMY_CONTEXT = re.compile(
+    r"advisory|recommendation|readability|style|const\b|magic number"
+    r"|DCL\d{2}-C|checked-return|conformance|intent|opportunity",
+    re.I,
+)
+
+
+def adr0007_hit_categories(text: str) -> set[str]:
+    """ADR-0007-restricted vocabulary categories present in `text`, if any."""
+    hits: set[str] = set()
+    for name, pat in ADR0007_PATTERNS.items():
+        m = pat.search(text)
+        if not m:
+            continue
+        if name == "severity_word":
+            window = text[max(0, m.start() - 70) : m.end() + 70]
+            if SEVERITY_TAXONOMY_CONTEXT.search(window):
+                continue
+        hits.add(name)
+    return hits
 
 MANIFEST_REQUIRED_FIELDS = [
     "batch_id", "work_item_ref", "adjudicator", "aurora_lint_version",
@@ -128,7 +226,9 @@ def load_manifests(errors: list[str]) -> dict[str, dict]:
     return manifests
 
 
-def validate_csvs(errors: list[str], manifests: dict[str, dict]) -> dict[str, int]:
+def validate_csvs(
+    errors: list[str], manifests: dict[str, dict], adr0007_warnings: dict[tuple[str, str], int]
+) -> dict[str, int]:
     source_row_counts: dict[str, int] = {}
     if not DATA_DIR.exists():
         return source_row_counts
@@ -185,6 +285,23 @@ def validate_csvs(errors: list[str], manifests: dict[str, dict]) -> dict[str, in
                             f'quote in a field must be doubled ("") by a real CSV '
                             f"writer, never hand-escaped (see README, "
                             f'"How labels get added")'
+                        )
+
+                hit_categories = adr0007_hit_categories(
+                    f"{row['reason']} {row['provenance']}"
+                )
+                if hit_categories:
+                    msg = (
+                        f"{loc}: reason/provenance carries ADR-0007-restricted "
+                        f"vocabulary ({', '.join(sorted(hit_categories))}) -- state "
+                        f"only the verdict's label basis (docs/adr/0007)"
+                    )
+                    adjudicated_at = row.get("adjudicated_at", "") or ""
+                    if adjudicated_at[:10] >= ADR0007_CHECK_LANDING_DATE:
+                        errors.append(msg)
+                    else:
+                        adr0007_warnings[(row["project"], row["rule_id"])] = (
+                            adr0007_warnings.get((row["project"], row["rule_id"]), 0) + 1
                         )
 
                 source = row["source"]
@@ -262,8 +379,9 @@ def check_line_terminators(errors: list[str]) -> None:
 
 def main() -> None:
     errors: list[str] = []
+    adr0007_warnings: dict[tuple[str, str], int] = {}
     manifests = load_manifests(errors)
-    source_row_counts = validate_csvs(errors, manifests)
+    source_row_counts = validate_csvs(errors, manifests, adr0007_warnings)
     cross_check_row_counts(errors, manifests, source_row_counts)
     check_line_terminators(errors)
 
@@ -272,6 +390,15 @@ def main() -> None:
 
     n_rows = sum(source_row_counts.values())
     print(f"validate.py: OK — {len(manifests)} batch(es), {n_rows} row(s)")
+    if adr0007_warnings:
+        n_warn = sum(adr0007_warnings.values())
+        n_pairs = len(adr0007_warnings)
+        print(
+            f"validate.py: {n_warn} legacy row(s) across {n_pairs} (project, rule) "
+            f"pair(s) carry ADR-0007-restricted vocabulary (warn-only; run "
+            f"scripts/adr0007_vocabulary_counts.py for the breakdown)",
+            file=sys.stderr,
+        )
 
 
 if __name__ == "__main__":
