@@ -12,7 +12,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-06-14T15:07:21.887995",
-  "row_count": 1093,
+  "row_count": 1092,
   "rules": [
     "API00-C",
     "ARR00-C",
@@ -113,6 +113,14 @@
         "sqlite src/mem3.c:653 ERR33-C"
       ],
       "note": "ERR33-C verdict corrected FP -> TP under the project-wide strict bar (bmdb 1352); see that batch's manifest notes"
+    },
+    {
+      "by": "correction-mem30c-intck-task1455",
+      "count": 1,
+      "keys": [
+        "sqlite ext/intck/sqlite3intck.c:936 MEM30-C"
+      ],
+      "note": "MEM30-C verdict corrected FP -> TP: the stated basis holds on two of the three branches of sqlite3_intck_test_sql but not on the one where no reassignment separates the two frees (bmdb 1449/1455); see that batch's manifest notes"
     }
   ]
 }
