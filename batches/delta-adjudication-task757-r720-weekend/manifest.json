@@ -26,7 +26,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-09-11T15:57:27.790148",
-  "row_count": 9346,
+  "row_count": 9345,
   "rules": [
     "DCL04-C",
     "DCL06-C",
@@ -53,6 +53,14 @@
         "sqlite src/where.c:2469 DCL06-C"
       ],
       "note": "DCL06-C verdict corrected FP -> TP: the string-length-echo shape this batch labelled FP was ruled a violation as written on 2026-09-17 (aurora_lint 1153, ADR-0001); see that batch's notes"
+    },
+    {
+      "by": "correction-adr0010-config-basis-task1425",
+      "count": 1,
+      "keys": [
+        "lua lvm.c:1231 EXP02-C"
+      ],
+      "note": "verdict corrected FP -> TP under ADR-0010 (configuration reachability / NDEBUG-stripped guard is not an FP basis); see that batch's manifest notes"
     }
   ]
 }

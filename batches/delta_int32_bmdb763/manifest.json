@@ -16,9 +16,21 @@
     "sel4": "1326364bc9135d9445d936ebc01e38a402c1f4c6"
   },
   "submitted_at": "2026-09-07T13:09:32.136759",
-  "row_count": 35,
+  "row_count": 32,
   "rules": [
     "INT32-C"
   ],
-  "notes": "Reconstructed during benchmark_adjudication's initial population (2026-09-16) from benchmarking_db's ground_truth.source='delta_int32_bmdb763'. row_count/projects/codebase_commits/rules were derived from the rows themselves, not declared at adjudication time. aurora_lint_version/aurora_lint_sha are unknown for legacy data -- never recorded per-row."
+  "notes": "Reconstructed during benchmark_adjudication's initial population (2026-09-16) from benchmarking_db's ground_truth.source='delta_int32_bmdb763'. row_count/projects/codebase_commits/rules were derived from the rows themselves, not declared at adjudication time. aurora_lint_version/aurora_lint_sha are unknown for legacy data -- never recorded per-row.",
+  "superseded_rows": [
+    {
+      "by": "correction-adr0010-config-basis-task1425",
+      "count": 3,
+      "keys": [
+        "lua lapi.c:188 INT32-C",
+        "lua lapi.c:244 INT32-C",
+        "lua lapi.c:67 INT32-C"
+      ],
+      "note": "verdict corrected FP -> TP under ADR-0010 (configuration reachability / NDEBUG-stripped guard is not an FP basis); see that batch's manifest notes"
+    }
+  ]
 }

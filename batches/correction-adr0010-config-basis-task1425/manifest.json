@@ -1,0 +1,37 @@
+{
+  "batch_id": "correction-adr0010-config-basis-task1425",
+  "work_item_ref": "benchmarking_db-1425",
+  "requested_by": "coordinator",
+  "adjudicator": "claude-opus-5",
+  "adjudicating_node": "dev-180",
+  "aurora_lint_version": "0.5.2",
+  "aurora_lint_sha": "6e91dffbaeb6150fa19bee54a7356d71732e0f1f",
+  "projects": [
+    "curl",
+    "hostap",
+    "lua",
+    "sqlite"
+  ],
+  "codebase_commits": {
+    "curl": "3e198f75861cc2e12daf299689e145949dddd19b",
+    "hostap": "dcee60436390dd34731560657c4257c3b4c839a6",
+    "lua": "40b76de2d77e66b70a9d4bf989c3f5340919973f",
+    "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
+  },
+  "submitted_at": "2026-09-22T00:00:00Z",
+  "row_count": 8,
+  "rules": [
+    "API00-C",
+    "ARR00-C",
+    "EXP02-C",
+    "INT32-C",
+    "MSC17-C"
+  ],
+  "verdicts": {
+    "TP": 8
+  },
+  "corrections": {
+    "FP_to_TP": 8
+  },
+  "notes": "A CORRECTION, NOT A NEW ADJUDICATION. Eight rows were labelled FP on a basis ADR-0010 (accepted 2026-09-21, aurora-lint 6e91dffb) rules out: reachability under a non-default build configuration, or a guard the release configuration strips. Decision 1 -- which flags a build defines, which are default, which are \"testing-only\" or \"debug-only\" -- is not a detection input and not an FP basis. Decision 5 -- an assert guards nothing under NDEBUG, and its argument is compiled and evaluated in the debug configuration; neither configuration is privileged.\n\nEACH ROW WAS READ AT SOURCE in the pinned checkout (corpus-check clean, all 12 trees detached at their pins) before being listed here, and each is corrected only because the construct violates its rule AS WRITTEN once the configuration basis is removed -- not merely because the old reason used the disallowed phrasing.\n\nSCOPE OF THIS BATCH, AND WHAT IS DELIBERATELY NOT IN IT. A survey of every FP row in the public oracle (107408 of them) for release/default-config phrasing produced 98 candidates, read individually. They fall in three groups, and only the first is corrected here:\n  (1) basis invalid AND construct violates as written -- these 8 rows;\n  (2) basis invalid BUT the construct question was never adjudicated -- 24 rows, the sqlite ASSERT_SZLEAF_OK x7 shape being the largest. Striking the configuration excuse does not by itself establish a defect, so flipping them to TP would assert something no row has shown. They go to the human-review queue (bmdb 1341) with the invalid basis documented, per Brandon's 2026-09-22 call;\n  (3) correct FPs that merely mention configuration in passing -- the assert(pure_predicate(...)) family, raylib's TRACELOG rows, sel4's API00-C rows (the mirror case: they cite the same NDEBUG reasoning and then give an actual address-of proof), and the arms ADR-0010 Decision 2 protects as provably dead (#if 0; an #else under a macro #defined unconditionally in the same file). Untouched.\n\nFound and applied on dev-180 under bmdb 1425."
+}
