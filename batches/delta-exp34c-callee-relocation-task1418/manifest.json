@@ -1,0 +1,39 @@
+{
+  "batch_id": "delta-exp34c-callee-relocation-task1418",
+  "work_item_ref": "aurora_lint-1418",
+  "requested_by": "coordinator",
+  "adjudicator": "claude-opus-5",
+  "adjudicating_node": "dev-180",
+  "aurora_lint_version": "0.5.2",
+  "aurora_lint_sha": "ca327445c5c2f072c813caad935f954d9efff69b",
+  "projects": [
+    "curl",
+    "hostap",
+    "mbedtls",
+    "mosquitto",
+    "pureftpd",
+    "raylib",
+    "sqlite",
+    "ventoy"
+  ],
+  "codebase_commits": {
+    "curl": "3e198f75861cc2e12daf299689e145949dddd19b",
+    "hostap": "dcee60436390dd34731560657c4257c3b4c839a6",
+    "mbedtls": "068ff080b369adfac81509f9b57b2afabaf82dc5",
+    "mosquitto": "d3ee5c5ca62c0fa4983308c6fff558ee978e878c",
+    "pureftpd": "cc28bff52ca28e1d122a2142bf37f2dc578f4d3e",
+    "raylib": "962bbfc6bfbd7a5acd08e21314fcfa161003a589",
+    "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af",
+    "ventoy": "7cbdc5cf69935bcf1f085ae67f40e70ea7e74bae"
+  },
+  "submitted_at": "2026-09-22T19:59:31Z",
+  "row_count": 130,
+  "rules": [
+    "EXP34-C"
+  ],
+  "verdicts": {
+    "FP": 103,
+    "TP": 27
+  },
+  "notes": "DELTA BATCH FOR A RELOCATED CHECK, NOT A RE-ADJUDICATION. aurora-lint 4bbf15d1\n(\"EXP34-C: report the callee's unguarded dereference, not the call site\",\nBrandon's ruling 2026-09-21: a caller passing a possibly-null pointer into a\ncallee never violates by itself, because C has no contract semantics) moved\nEXP34-C's report site. These 130 keys are the in-scope findings at the new tip\n(0.5.2 @ ca327445) that the oracle did not already cover.\n\nBASELINE, MEASURED, NOT INHERITED. The task body's \"8,900 findings on 11 corpora\nat 2960cd88\" does not match the database. Measured against Postgres at realworld\nrun 270 (sqc-0.5.2-2960cd88): EXP34-C raw 10,564 across 12 corpora, 10,426 of\nthem in scope. Splitting by message shape, the caller-side set 1418 relocates\naway is 8,191 (8,187 excluding 4 function-pointer rows), not 8,900, and it spans\nall 12 corpora, not 11. Two other quantities are genuinely 11: libcrc is the only\nproject with zero callee-side findings, and EXP34-C's oracle covers 11 projects\nbecause valkey has never been adjudicated (bmdb 1249). At the new tip the rule\nproduces 3,325 findings, corroborating dev-921's independent 3,326 within one.\n\nSCOPE OF THIS BATCH. Key-level, run 270 -> ca327445: 10,004 distinct keys ->\n3,261; 2,983 survived, 7,021 vanished, 278 are new. In-scope and unlabelled\nagainst Postgres ground_truth is 1,111 rows, of which 980 are valkey -- not this\nrelocation's doing, but the pre-existing absence of any valkey EXP34-C oracle.\nPer the coordinator's 2026-09-22 call those stay with bmdb 1249 as its own\nwhole-file pass, and this batch is the remaining 131 rows / 130 distinct keys.\nThe two findings at hostap src/utils/wpabuf.c:40 differ in message but share a\nkey, and the oracle cannot distinguish them; one row covers both and its reason\naddresses each.\n\nMETHOD. The unlabelled set was computed by joining the local run against\nground_truth in Postgres, NOT with `bench realworld-unlabeled`: that command\nreads this checkout's local SQLite oracle, which is empty on a worker node, so\nit would report every finding as unlabelled. Scope was applied with the pinned\nscope_include/scope_exclude from audit_corpus_meta via bench_db.corpus.in_scope,\nthe oracle's own predicate. Note that realworld_violations.file_path is absolute\nwhile ground_truth and the scope globs are repo-relative; the prefix is stripped\nbefore either is applied. corpus-check was green for all 12 checkouts and their\npins match run 270's codebase_commits, so the two runs are comparable.\n\nSTANDARD APPLIED. Calibrated against this dataset's existing EXP34-C rows rather\nthan an invented bar: an FP records that no null-producing expression reaches the\ndereference (the shape already recorded at sqlite src/expr.c:47, \"callers never\npass NULL\"), and a TP requires a concrete null producer on a path that reaches it\n(the shape at sqlite ext/expert/expert.c:65, an unchecked sqlite3_malloc64).\nCaller sets were enumerated where the set is closed, and confidence is \"high\"\nonly where it was; \"medium\" records reasoning from an invariant rather than a\nclosed enumeration.\n\nWHAT WAS DELIBERATELY NOT USED AS A BASIS. Per ADR-0010 Decision 1, no verdict\nrests on which macros a build defines -- notably not sqlite's\n`# define sqlite3BtreeEnter(X)` under SQLITE_OMIT_SHARED_CACHE (src/btree.h:396).\nPer Decision 5, no verdict rests on an assertion in either direction: curl's\nDEBUGASSERT, hostap's WPA_ASSERT, mbedtls's documented no-null-parameter policy\nand sqlite's assert-only routines are all recorded as neutral where they appear.\nTwo findings were also found to misstate their own basis: the claim \"which does\nnot check for NULL\" is false for sqlite3ErrorMsg, whose %#T and %T handlers test\nthe pointer at src/printf.c:929 and :937 before dereferencing it, and for\nhostap's wpabuf.c:40, where the pointer is consumed by a %p conversion, which\ndoes not dereference it at all.\n\nTHE 27 TP ROWS ARE ONE FINDING. All are mosquitto src/loop.c, the vararg remnant\n4bbf15d1 deliberately kept alive (check_callsite_null_args survives, scoped to\nargs at or past variadic_from, because a vararg slot carries no positional index\nfor the callee's own analysis to seed). `id` takes context->address when\ncontext->id is NULL; context->address is initialised NULL at src/context.c:114,\nassigned from mosquitto_strdup, and NULL-checked by mosquitto's own code at\nsrc/context.c:51. Every path that leaves it NULL bails except one:\ncontext__init_sock(..., get_address=false) at src/net.c:204, the\nenable_proxy_protocol listener path, which returns MOSQ_ERR_SUCCESS on a client\nthat has no id yet either. The bridge path is not the one -- it guards its id at\nsrc/bridge.c:74-76. The same switch carries a dedicated MOSQ_ERR_PROXY case, so\nproxy-path contexts demonstrably reach it. The value is consumed as a %s\nconversion by a variadic callee.\n\nNO PRECISION OR RECALL CLAIM follows from this batch, here or anywhere, per\nCLAUDE.md's delta-adjudication rule and bmdb 1423 step 3. The stale caller-line\nkeys are 1423's half: 6,031 labelled keys no longer fire at ca327445 (5,934 FP,\n69 TP -- not the 68 that task states -- 21 uncertain, and 7 FN, which that task\ndoes not mention and which are a different problem, since an FN key that no\nlonger fires is not stale). Separately, run 270 -> ca327445 spans 49+ commits;\nMSC13-C moved +1,329 on its own, so no total delta here is attributable to 1418\nalone. Isolating that needs 4bbf15d1^ vs 4bbf15d1, which this node did not run.\n\nAdjudicated on dev-180 under aurora_lint 1418.\n"
+}
