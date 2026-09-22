@@ -12,7 +12,7 @@
     "raylib": "962bbfc6bfbd7a5acd08e21314fcfa161003a589"
   },
   "submitted_at": "2026-08-12T09:15:07.487844",
-  "row_count": 343,
+  "row_count": 341,
   "rules": [
     "API00-C",
     "ARR01-C",
@@ -24,5 +24,16 @@
     "INT32-C",
     "MSC13-C"
   ],
-  "notes": "Reconstructed during benchmark_adjudication's initial population (2026-09-16) from benchmarking_db's ground_truth.source='precision_audit_task439_delta'. row_count/projects/codebase_commits/rules were derived from the rows themselves, not declared at adjudication time. aurora_lint_version/aurora_lint_sha are unknown for legacy data -- never recorded per-row."
+  "notes": "Reconstructed during benchmark_adjudication's initial population (2026-09-16) from benchmarking_db's ground_truth.source='precision_audit_task439_delta'. row_count/projects/codebase_commits/rules were derived from the rows themselves, not declared at adjudication time. aurora_lint_version/aurora_lint_sha are unknown for legacy data -- never recorded per-row.",
+  "superseded_rows": [
+    {
+      "by": "correction-exp34c-deref-keys-merits-task1452",
+      "count": 2,
+      "keys": [
+        "raylib src/raudio.c:1707 EXP34-C",
+        "raylib src/rmodels.c:2902 EXP34-C"
+      ],
+      "note": "EXP34-C verdict corrected TP -> FP on the merits by bmdb 1452: the full caller set establishes non-nullness before the line; see that batch's manifest notes"
+    }
+  ]
 }

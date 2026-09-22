@@ -1,0 +1,31 @@
+{
+  "batch_id": "correction-exp34c-deref-keys-merits-task1452",
+  "work_item_ref": "benchmarking_db-1452",
+  "requested_by": "coordinator",
+  "adjudicator": "claude-opus-5",
+  "adjudicating_node": "dev-180",
+  "aurora_lint_version": "0.5.2",
+  "aurora_lint_sha": "ca327445c5c2f072c813caad935f954d9efff69b",
+  "projects": [
+    "hostap",
+    "mosquitto",
+    "raylib"
+  ],
+  "codebase_commits": {
+    "hostap": "dcee60436390dd34731560657c4257c3b4c839a6",
+    "mosquitto": "d3ee5c5ca62c0fa4983308c6fff558ee978e878c",
+    "raylib": "962bbfc6bfbd7a5acd08e21314fcfa161003a589"
+  },
+  "submitted_at": "2026-09-22T00:00:00Z",
+  "row_count": 8,
+  "rules": [
+    "EXP34-C"
+  ],
+  "verdicts": {
+    "FP": 8
+  },
+  "corrections": {
+    "TP_to_FP": 8
+  },
+  "notes": "A CORRECTION ON THE MERITS, NOT A STALENESS RELABEL. These are the 8 keys bmdb 1423 deliberately held back. 1423 corrected 60 keys because the EXP34-C site standard adopted in aurora_lint 1418 stopped treating a caller's positional argument as a violation site; that rationale does not reach these 8, each of which is keyed at a dereference -- the site the standard DOES treat as a violation site -- and each of which stopped reporting well before the relocation. So each was adjudicated on its own merits instead.\n\nALL 8 ARE FP, AND NONE IS A RECALL LOSS. The dataset's EXP34-C standard asks whether a null-producing expression reaches the dereference. For every one of these the full caller set was enumerated at source in the pinned checkout -- not sampled -- and every path establishes non-nullness before the line. Each silencing was therefore the tool correctly dropping a false positive, not losing a finding. Four of the prior TP reasons are themselves the tell: three rest on a function not checking its own parameter (an unguarded-parameter observation, which is API00-C's subject and not a reaching-null one), one was explicitly recorded as 'caller-guarantee not verified across the whole call graph', and one carried low confidence with an admittedly untraced basis.\n\nTWO ROWS WHOSE PRIOR LABEL DID NOT MATCH THE FINDING IT LABELLED. mosquitto src/websockets.c:147 was labelled TP by reasoning about a pointer the report never named; the report names 'mosq', which is used only inside its own `if(mosq)` block. raylib src/rmodels.c:2902 attributed to this line a dereference that happens inside the callee, in src/external, which raylib's oracle scope excludes by design.\n\nWHY EACH STOPPED REPORTING. Two windows are narrow enough to name: raylib src/rmodels.c:2902 falls to a single commit, the lang-parsing-substrate 0.6.2 bump (task 560), consistent with the vendored callee becoming parseable so its initialise-before-return became visible; mosquitto src/websockets.c:147 falls to two commits that model and prune switch/case control flow (task 320), consistent with the enclosing guard becoming visible once a switch stopped being opaque. The other six sit in wider windows and are NOT attributed here: the five hostap keys share one run-238-to-239 window containing several EXP34-C guard-proof commits, and raylib src/raudio.c:1707 sits in an 11-commit window with no EXP34-C commit in it. Pinning those down needs a per-commit A/B, which was not run, and none of the verdicts depends on it -- the verdicts rest on the caller sets, which were read directly.\n\nAdjudicated on dev-180 under bmdb 1452, corpus-check clean on all 12 pins."
+}
