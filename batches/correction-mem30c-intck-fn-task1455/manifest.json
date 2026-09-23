@@ -1,0 +1,27 @@
+{
+  "batch_id": "correction-mem30c-intck-fn-task1455",
+  "work_item_ref": "benchmarking_db-1455",
+  "requested_by": "coordinator",
+  "adjudicator": "claude-opus-5",
+  "adjudicating_node": "dev-180",
+  "aurora_lint_version": "0.5.2",
+  "aurora_lint_sha": "75d66e4b216316c1a0de30d28e0bd1f6241fb565",
+  "projects": [
+    "sqlite"
+  ],
+  "codebase_commits": {
+    "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
+  },
+  "submitted_at": "2026-09-22T00:00:00Z",
+  "row_count": 1,
+  "rules": [
+    "MEM30-C"
+  ],
+  "verdicts": {
+    "FN": 1
+  },
+  "corrections": {
+    "TP_to_FN": 1
+  },
+  "notes": "A CORRECTION OF ONE ROW, TP -> FN, superseding correction-mem30c-intck-task1455.\n\nThat batch corrected this row from FP to TP, and the construct reading behind it is right: on the branch where both zObj and p->zObj are null, p->zTestSql is passed to sqlite3_free at line 929 and again at line 936 with no assignment in between, while the two sibling branches reassign it. Three independent reads agree on that, including this one.\n\nWHAT TP GOT WRONG IS NOT THE CODE, IT IS WHAT THE VERDICT ASSERTS. aurora_lint produces no MEM30-C report at this key at 75d66e4b, so a TP verdict asserts a correct report that is not made -- the same stale-TP shape bmdb 1423 and 1452 cleared 68 of for EXP34-C. FP is equally wrong, because nothing about the construct is a false alarm. FN is the verdict this repo defines for the case: a real construct found by reading the file, with no matching finding at that line and rule, never affecting precision and counting for recall once some future version flags it. Coordinator's ruling of 2026-09-22, and it matches validate.py's own definition.\n\nTHE TOOL USED TO FIND THIS. Measured against the shared record, the key carried a MEM30-C report in 100 runs, run 8 through run 137, and none since, while the file is still scanned and still yields other rules' findings. The silencing window is run 137 (aurora_lint 54b3adc6, 2026-07-27) to run 143 (4bd97693, 2026-08-09), 29 commits, four of which touch MEM30-C or the free/alias machinery. That is filed as bmdb 1462; nothing in this verdict depends on its outcome.\n\nApplied on dev-180 under bmdb 1455, corpus-check clean on all 12 pins."
+}
