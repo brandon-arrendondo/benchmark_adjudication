@@ -1,0 +1,27 @@
+{
+  "batch_id": "correction-mem30c-intck-tp-task1441",
+  "work_item_ref": "aurora_lint-1441",
+  "requested_by": "coordinator",
+  "adjudicator": "claude-opus-5-5",
+  "adjudicating_node": "dev-149",
+  "aurora_lint_version": "0.5.2",
+  "aurora_lint_sha": "8a5c659f063d8a6bd3c42b4fe6c1dfe92ff9d019",
+  "projects": [
+    "sqlite"
+  ],
+  "codebase_commits": {
+    "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
+  },
+  "submitted_at": "2026-09-23T00:00:00Z",
+  "row_count": 1,
+  "rules": [
+    "MEM30-C"
+  ],
+  "verdicts": {
+    "TP": 1
+  },
+  "corrections": {
+    "FN_to_TP": 1
+  },
+  "notes": "A CORRECTION OF ONE ROW, FN -> TP, superseding correction-mem30c-intck-fn-task1455.\n\nThat batch corrected this row from TP to FN because aurora_lint made no MEM30-C report at this key at 75d66e4b, and FN is this repo's verdict for a real construct with no matching finding. The construct reading behind it stands and this batch re-read it at the pinned commit in agreement: on the branch where both zObj and p->zObj are null, p->zTestSql is passed to sqlite3_free at line 929 and again at line 936 with no assignment in between, while the two sibling branches reassign it.\n\nWHAT CHANGED IS THE TOOL, NOT THE CODE. aurora_lint 8a5c659f (aurora_lint 1441) credits a one-argument deallocator whose body releases through a function pointer, which is how sqlite3_free is written. Built at that SHA and run through realworld_runner._build_sqc_cmd with the sqlite manifest filtered to MEM30-C, it reports \"Double-free: 'p->zTestSql' freed multiple times\" at line 936, column 7. A correct report is now made at this key, which is what TP means; FN would now assert a miss that does not happen. Coordinator's ruling of 2026-09-23: labels track the tool's current capability.\n\nApplied on dev-149 under aurora_lint 1441, corpus-check clean on all 12 pins."
+}
