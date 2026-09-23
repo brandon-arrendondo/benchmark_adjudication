@@ -1,9 +1,9 @@
 {
- "_note": "CI definition version 2: expected output of scripts/precision_ci.py (default --order canonical) for run 269, inputs as expected.json beside this file. Produced by this script and cross-checked identical to benchmarking_db bench_db/precision_ci.py at CI_DEFINITION_VERSION 2 over the same labeled units; the v0.5.2 paper's interval tables are re-rendered from these values.",
+ "_note": "CI definition version 1, as first published: expected output of scripts/precision_ci.py --order en_US.UTF-8 for run 269 (inputs as expected.json beside this file). Copied from the overview paper's data/measurement_facts.json intervals block as it stood at v0.5.2 (a pinned benchmarking_db release_baseline_numbers.py --intervals), minus its computed_at timestamp; not hand-edited. Superseded by expected_intervals.json (version 2); kept so the published v1 figures stay reproducible.",
  "run_id": 269,
  "basis": "distinct/scored-projects/in_scope",
  "confidence": 0.95,
- "ci_definition_version": 2,
+ "ci_definition_version": 1,
  "labeled_scored": 118511,
  "labeled_tp": 62581,
  "labeled_fp": 55930,
@@ -22,7 +22,7 @@
    "seed": 20261310,
    "point": 52.8,
    "lo_pct": 50.7,
-   "hi_pct": 54.8,
+   "hi_pct": 54.9,
    "effective_replicates": 2000,
    "degenerate": false
   },
@@ -47,7 +47,7 @@
    "seed": 20261310,
    "point": 36.0,
    "lo_pct": 34.6,
-   "hi_pct": 37.6,
+   "hi_pct": 37.5,
    "effective_replicates": 2000,
    "degenerate": false
   },
@@ -199,7 +199,7 @@
     "seed": 20261310,
     "point": 30.2,
     "lo_pct": 28.4,
-    "hi_pct": 32.1,
+    "hi_pct": 32.2,
     "effective_replicates": 2000,
     "degenerate": false
    }

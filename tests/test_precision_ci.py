@@ -1,10 +1,15 @@
 """Tests for scripts/precision_ci.py, the public interval estimates.
 
-Run269Intervals is the golden: fed run 269's pinned inputs (the same three
-test_score_golden.Run269Golden uses) and --order en_US.UTF-8, the script
-reproduces the interval block the v0.5.2 paper was typeset from --
-every field, not close. That order is the one benchmarking_db's Postgres
-produced, so the test is skipped on a machine without the locale.
+Run269Intervals is the golden, over run 269's pinned inputs (the same three
+test_score_golden.Run269Golden uses):
+
+  * CI definition version 2 (the default, --order canonical) equals
+    tests/golden/run-269/expected_intervals.json -- every field, not close.
+    That file was cross-checked identical to benchmarking_db's precision_ci
+    at version 2, and the paper's interval tables are rendered from it.
+  * version 1 (--order en_US.UTF-8) equals expected_intervals_v1.json, the
+    block the v0.5.2 paper was first typeset from. v1 depends on the
+    locale, so that test is skipped where it is not installed.
 
 The rest are small hand-checkable cases for each definition.
 
@@ -42,6 +47,7 @@ class Run269Intervals(unittest.TestCase):
     def setUpClass(cls):
         exp = json.loads((GOLDEN / "expected.json").read_text())
         cls.want = json.loads((GOLDEN / "expected_intervals.json").read_text())
+        cls.want_v1 = json.loads((GOLDEN / "expected_intervals_v1.json").read_text())
         if not _labels_available(exp["benchmark_adjudication_commit"]):
             raise AssertionError("labels commit not in this clone; fetch full history")
         cls.tmp = tempfile.TemporaryDirectory()
@@ -61,27 +67,35 @@ class Run269Intervals(unittest.TestCase):
         return pc.interval_figures(self.findings, self.labels, self.scope,
                                    self.commits, order=order)
 
-    @unittest.skipUnless(_has_locale("en_US.UTF-8"), "en_US.UTF-8 not installed")
-    def test_published_intervals_are_reproduced_exactly(self):
-        got = self._run("en_US.UTF-8")
-        for key, want in self.want.items():
+    def _assert_block(self, got, want):
+        for key, value in want.items():
             if key in ("_note", "run_id"):
                 continue
             with self.subTest(field=key):
-                self.assertEqual(got[key], want)
+                self.assertEqual(got[key], value)
 
-    def test_canonical_order_is_deterministic_and_order_matters(self):
-        """Canonical order gives the same result twice; its point estimates
-        equal the published ones (order cannot move a point estimate), while
-        at least one bootstrap endpoint differs -- which is why the order is
-        part of the definition, not an implementation detail."""
-        a, b = self._run("canonical"), self._run("canonical")
-        self.assertEqual(a, b)
-        self.assertEqual(a["headline_pooled"]["precision_pct"],
-                         self.want["headline_pooled"]["precision_pct"])
-        self.assertEqual(a["per_project"], self.want["per_project"])
-        self.assertNotEqual(a["headline_pooled"]["bootstrap_by_file"],
-                            self.want["headline_pooled"]["bootstrap_by_file"])
+    def test_v2_intervals_are_reproduced_exactly(self):
+        self._assert_block(self._run("canonical"), self.want)
+
+    @unittest.skipUnless(_has_locale("en_US.UTF-8"), "en_US.UTF-8 not installed")
+    def test_v1_published_intervals_are_reproduced_exactly(self):
+        self._assert_block(self._run("en_US.UTF-8"), self.want_v1)
+
+    def test_v2_does_not_depend_on_the_order_labels_are_read_in(self):
+        """The point of version 2: reversing every project's label list --
+        what a different collation or storage order would do -- gives the
+        identical intervals."""
+        flipped = {p: list(reversed(ls)) for p, ls in self.labels.items()}
+        got = pc.interval_figures(self.findings, flipped, self.scope, self.commits)
+        self.assertEqual(got["headline_pooled"], self.want["headline_pooled"])
+        self.assertEqual(got["macro_average"], self.want["macro_average"])
+
+    def test_the_versions_differ_only_in_bootstrap_endpoints(self):
+        """Order cannot move a point estimate or a Wilson interval."""
+        for key in ("per_project", "per_rule", "coverage_bounds", "labeled_tp"):
+            self.assertEqual(self.want[key], self.want_v1[key], key)
+        self.assertEqual(self.want["headline_pooled"]["wilson"],
+                         self.want_v1["headline_pooled"]["wilson"])
 
     def test_point_estimate_agrees_with_score_py(self):
         got = self._run("canonical")

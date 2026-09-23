@@ -28,25 +28,29 @@ roughly the mean cluster size. `file` resamples whole files; `project`
 resamples whole projects (12 here), which is the unit for a claim about C
 codebases in general, and is wide and lumpy by nature.
 
-REPRODUCING A PUBLISHED INTERVAL NEEDS THREE THINGS, NOT TWO. A bootstrap
-with a fixed seed is deterministic only for a fixed order of the units it
-draws from: the seed picks cluster INDICES, so the same clusters listed in
-another order give different replicates. The resample count (2,000) and seed
-(20261310) are recorded in every result; so is the order, --order:
+THE ORDER OF THE CLUSTERS IS PART OF THE DEFINITION. A bootstrap with a
+fixed seed is deterministic only for a fixed order of what it draws from:
+the seed picks cluster INDICES, so the same clusters listed in another order
+give different replicates. --order names it:
 
-  canonical    labels sorted by (project, rule_id, file_path, line) comparing
-               strings by code point. Locale-independent; the same on every
-               machine.
-  en_US.UTF-8  the same key compared under glibc's en_US.UTF-8 collation --
-               what benchmarking_db's Postgres ORDER BY produced for the
-               published v0.5.2 intervals. Needs that locale installed, and
-               glibc has changed its collation between releases, so treat a
-               result under it as reproducing one machine's sort, not a
-               definition.
+  canonical    CI definition version 2, the definition: clusters are
+               resampled in code-point order of their key, (project,
+               file_path) or (project,). A property of the data alone, the
+               same on every machine.
+  en_US.UTF-8  CI definition version 1, kept only to reproduce intervals
+               published under it (the v0.5.2 paper's first print): clusters
+               in first-seen order after sorting labels by (project,
+               rule_id, file_path, line) under glibc's en_US.UTF-8
+               collation, which is what the Postgres behind them returned.
+               Needs that locale installed, and glibc has changed its
+               collation between releases.
 
-Percentages are rounded to one decimal with round(), as the private module
-does. At 2,000 resamples an endpoint's last decimal is at the Monte Carlo
-noise floor: changing only the order moves some endpoints by 0.1.
+The resample count (2,000), seed (20261310), order and definition version
+are recorded in every result. Percentages are rounded to one decimal with
+round(), as the private module does. At 2,000 resamples an endpoint's last
+decimal is at the Monte Carlo noise floor: changing only the order moves
+some endpoints by 0.1, so a one-decimal endpoint is not more precise than
+that.
 
 Usage:
     python3 scripts/precision_ci.py --scope benchmark_repos.json \\
@@ -66,8 +70,9 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import score  # noqa: E402
 
-#: benchmarking_db bench_db/precision_ci.CI_DEFINITION_VERSION this implements.
-CI_DEFINITION_VERSION = 1
+#: benchmarking_db bench_db/precision_ci.CI_DEFINITION_VERSION each --order
+#: implements; canonical is the current definition.
+CI_DEFINITION_VERSION = {"canonical": 2, "en_US.UTF-8": 1}
 DEFAULT_CONFIDENCE = 0.95
 DEFAULT_RESAMPLES = 2_000
 DEFAULT_SEED = 20261310
@@ -191,9 +196,11 @@ def top_rules_by_volume(units, k):
 # Bootstrap
 # --------------------------------------------------------------------------
 
-def _cluster_tallies(units, cluster):
-    """Collapse each cluster to (project, tp, fp) in first-seen order, before
-    resampling: precision depends on a cluster only through its two counts."""
+def _cluster_tallies(units, cluster, order=DEFAULT_ORDER):
+    """Collapse each cluster to (project, tp, fp) before resampling: precision
+    depends on a cluster only through its two counts. Listed in code-point
+    order of the cluster key under `canonical` (v2), first-seen order of the
+    units under `en_US.UTF-8` (v1)."""
     if cluster == "file":
         key = lambda u: (u[0], u[1])  # noqa: E731
     elif cluster == "project":
@@ -209,7 +216,8 @@ def _cluster_tallies(units, cluster):
         elif u[3] == "FP":
             fp += 1
         acc[k] = (tp, fp)
-    return [(k[0], tp, fp) for k, (tp, fp) in acc.items()]
+    items = sorted(acc.items()) if order == "canonical" else acc.items()
+    return [(k[0], tp, fp) for k, (tp, fp) in items]
 
 
 def pooled_from_tallies(tallies):
@@ -228,9 +236,9 @@ def macro_from_tallies(tallies):
 
 
 def bootstrap_ci(units, statistic, *, cluster="file", resamples=DEFAULT_RESAMPLES,
-                 confidence=DEFAULT_CONFIDENCE, seed=DEFAULT_SEED):
+                 confidence=DEFAULT_CONFIDENCE, seed=DEFAULT_SEED, order=DEFAULT_ORDER):
     """Percentile bootstrap, resampling whole clusters with replacement."""
-    tallies = _cluster_tallies(units, cluster)
+    tallies = _cluster_tallies(units, cluster, order)
     n = len(tallies)
     point = statistic(tallies)
     base = {"clusters": n, "cluster_unit": cluster, "resamples": resamples, "seed": seed}
@@ -279,7 +287,7 @@ def interval_figures(findings, labels, scope, commits, *, order=DEFAULT_ORDER,
     units = labeled_units(findings, labels, scope, commits, order)
     tp, fp, unc = _tally(units)
     findings_total = score.score(findings, labels, scope, commits)["overall"]["run_findings"]
-    ci = dict(resamples=resamples, confidence=confidence, seed=seed)
+    ci = dict(resamples=resamples, confidence=confidence, seed=seed, order=order)
 
     def per_group(idx, with_uncertain):
         out = {}
@@ -300,7 +308,7 @@ def interval_figures(findings, labels, scope, commits, *, order=DEFAULT_ORDER,
     report = {
         "basis": score.BASIS,
         "confidence": confidence,
-        "ci_definition_version": CI_DEFINITION_VERSION,
+        "ci_definition_version": CI_DEFINITION_VERSION[order],
         "order": order,
         "labeled_scored": tp + fp,
         "labeled_tp": tp,
