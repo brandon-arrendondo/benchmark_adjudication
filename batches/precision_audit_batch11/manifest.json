@@ -12,7 +12,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-06-14T16:47:13.233669+00:00",
-  "row_count": 1185,
+  "row_count": 1184,
   "rules": [
     "API00-C",
     "API02-C",
@@ -95,6 +95,14 @@
         "sqlite src/os_kv.c:295 ERR33-C"
       ],
       "note": "ERR33-C verdict corrected FP -> TP by gavel review (bmdb 1281); see that batch's manifest notes"
+    },
+    {
+      "by": "correction-int32c-spellfix-oskv-task1490",
+      "count": 1,
+      "keys": [
+        "sqlite src/os_kv.c:460 INT32-C"
+      ],
+      "note": "INT32-C verdict corrected FP -> TP: the original reasoning assumed the base-26 run-length accumulator's input run is short 'in practice', but the upstream fix commit this candidate was mined from is specifically about a corrupt kvvfs block, which is the threat model this dataset otherwise treats as in-scope; see that batch's manifest notes"
     }
   ]
 }

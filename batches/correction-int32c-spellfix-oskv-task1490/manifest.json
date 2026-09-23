@@ -1,0 +1,26 @@
+{
+  "batch_id": "correction-int32c-spellfix-oskv-task1490",
+  "work_item_ref": "benchmarking_db-1490",
+  "requested_by": "coordinator",
+  "adjudicator": "claude-sonnet-5",
+  "aurora_lint_version": "0.5.2",
+  "aurora_lint_sha": "50db01a781a4e2f6be1ee5009e737584a2f97a65",
+  "projects": [
+    "sqlite"
+  ],
+  "codebase_commits": {
+    "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
+  },
+  "submitted_at": "2026-09-23T00:00:00Z",
+  "row_count": 3,
+  "rules": [
+    "INT32-C"
+  ],
+  "verdicts": {
+    "TP": 3
+  },
+  "corrections": {
+    "FP_to_TP": 3
+  },
+  "notes": "A CORRECTION, NOT A NEW ADJUDICATION. Surfaced as a side effect of task 1438's git+CVE mining pipeline: while adversarially re-checking 6 mined candidates that collided with already-adjudicated keys, 3 of the existing FP verdicts turned out to be arithmetically incomplete -- each addressed only one operand of a multiplication or product, not the full expression.\n\nEach row was read directly at sqlite b1a73ba34d, not taken from the mining pipeline's own reason text:\n\next/misc/spellfix.c:422 (editdist1, INT32-C). `m = sqlite3_malloc64((nB+1)*5*sizeof(m[0])/4)`. C evaluates left-to-right, so `(nB+1)*5` computes first, as a product of two `int` operands, before `sizeof(m[0])` (size_t) ever widens the expression. nB is bounded by SQLITE_MAX_LENGTH (1e9 by default), so `(nB+1)*5` can reach ~5e9 -- past int's ~2.1e9 max -- before the widening helps. The prior FP verdict's reasoning ('(nB+1) fits int range') is correct about `(nB+1)` alone but does not address the `*5` factor.\n\next/misc/spellfix.c:1011 (editDist3Core, INT32-C). `n = (f.n+1)*(n2+1);`, n declared int. This is a PRODUCT of two independently SQLITE_MAX_LENGTH-bounded values, not a sum -- with both near their 1e9 bound the product reaches ~1e18. The prior FP verdict's reasoning ('f.n is bounded, +1 cannot overflow') is correct about `f.n+1` alone but does not address the multiplication by `(n2+1)`.\n\nsrc/os_kv.c:460 (kvvfsDecode, INT32-C). `n += (c-'a')*mult;` inside a loop that also does `mult *= 26;` each iteration, with no cap on the length of a consecutive 'a'-'z' run in the input (both n and mult declared int). The prior FP verdict assumed the run is 'short in practice', but the upstream fix commit this candidate was mined from (task 1438, benchmarking_db docs/design/git-cve-mining-adjudication.md) is specifically titled around a CORRUPT kvvfs block -- the corrupted/malicious-input threat model this dataset otherwise treats as in-scope throughout (see e.g. the many 'a corrupt record'-framed FN rows this same pipeline produced).\n\nA fourth candidate collision, sqlite ext/fts3/fts3_expr.c:473 (INT32-C), was checked and NOT corrected here: it looks like two unrelated integer concerns (an array-indexing bound the existing FP addresses, and a separately-used unclamped NEAR-span value the mining pipeline's lead was about) coincidentally sharing one line number, not a real disagreement about the same construct. Left as-is pending a closer look if it recurs.\n\nMECHANICS follow task-1281/1352/1377. In-place edits: each corrected row keeps its key, takes this batch's source, and carries a reason stating the arithmetic basis directly. precision_audit_batch5 (spellfix.c:422/1011) and precision_audit_batch11 (os_kv.c:460) each get a row_count decrement and a superseded_rows record. Diff against data/sqlite/adjudication.csv is exactly 3 changed lines (verified via git diff --numstat), key set and line count unchanged.\n\nCounting basis: distinct (project, commit, file, line, rule) keys. No precision claim: sqlite INT32-C figures computed before this is merged and ingested reflect the prior FP verdicts."
+}
