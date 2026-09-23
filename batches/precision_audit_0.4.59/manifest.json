@@ -12,7 +12,7 @@
     "lua": "40b76de2d77e66b70a9d4bf989c3f5340919973f"
   },
   "submitted_at": "2026-06-22",
-  "row_count": 2452,
+  "row_count": 2451,
   "rules": [
     "API00-C",
     "API01-C",
@@ -140,6 +140,14 @@
         "lua lua.c:490 ERR33-C"
       ],
       "note": "ERR33-C verdict corrected FP -> TP under the project-wide strict bar (bmdb 1352); see that batch's manifest notes"
+    },
+    {
+      "by": "delta-mem31c-loop-array-relocation-task1491",
+      "count": 1,
+      "keys": [
+        "lua ltm.c:1 MEM31-C"
+      ],
+      "note": "MEM31-C loop-array finding relocated off line 1 by aurora_lint 1487; the key is re-keyed to the allocation site or dropped where that site already carries an FP label; see delta-mem31c-loop-array-relocation-task1491's manifest notes"
     }
   ]
 }
