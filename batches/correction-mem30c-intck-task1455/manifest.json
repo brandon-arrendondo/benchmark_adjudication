@@ -13,7 +13,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-09-22T23:45:00Z",
-  "row_count": 1,
+  "row_count": 0,
   "rules": [
     "MEM30-C"
   ],
@@ -23,5 +23,15 @@
   "corrections": {
     "FP_to_TP": 1
   },
-  "notes": "A CORRECTION, NOT A NEW ADJUDICATION. One row, sqlite ext/intck/sqlite3intck.c:936 MEM30-C, first labelled FP by precision_audit_b14 with the basis \"p->zTestSql freed then reassigned each branch single free per call no double-free\".\n\nTHE BASIS IS TRUE OF TWO OF THE THREE BRANCHES AND NOT THE THIRD. sqlite3_intck_test_sql frees p->zTestSql at line 929 and then branches: zObj non-NULL reassigns at 931; zObj NULL with p->zObj non-NULL reassigns at 934; zObj NULL and p->zObj NULL reaches line 936, which frees p->zTestSql a second time with nothing assigning to it in between. The prior reason generalises the reassignment across all three arms, which is where it goes wrong. The second free is a no-op only when p->zTestSql was already NULL on entry.\n\nREAD AT SOURCE in the pinned checkout (b1a73ba34d05, corpus-check clean, all 12 trees detached at their pins) on dev-149, independently of the reviews recorded in bmdb 1449.\n\nSCOPE. This batch corrects exactly the one key it was asked to. The three neighbouring intck rows in the same original batch (line 65 MEM30-C, 933 MEM30-C, 934 MEM30-C) were re-read and their FP bases hold as written; they are untouched: line 64 frees p->zErr and line 65 writes it rather than reading it, and lines 933/934 read p->zObj and p->zKey, neither of which the free at 929 touches."
+  "notes": "A CORRECTION, NOT A NEW ADJUDICATION. One row, sqlite ext/intck/sqlite3intck.c:936 MEM30-C, first labelled FP by precision_audit_b14 with the basis \"p->zTestSql freed then reassigned each branch single free per call no double-free\".\n\nTHE BASIS IS TRUE OF TWO OF THE THREE BRANCHES AND NOT THE THIRD. sqlite3_intck_test_sql frees p->zTestSql at line 929 and then branches: zObj non-NULL reassigns at 931; zObj NULL with p->zObj non-NULL reassigns at 934; zObj NULL and p->zObj NULL reaches line 936, which frees p->zTestSql a second time with nothing assigning to it in between. The prior reason generalises the reassignment across all three arms, which is where it goes wrong. The second free is a no-op only when p->zTestSql was already NULL on entry.\n\nREAD AT SOURCE in the pinned checkout (b1a73ba34d05, corpus-check clean, all 12 trees detached at their pins) on dev-149, independently of the reviews recorded in bmdb 1449.\n\nSCOPE. This batch corrects exactly the one key it was asked to. The three neighbouring intck rows in the same original batch (line 65 MEM30-C, 933 MEM30-C, 934 MEM30-C) were re-read and their FP bases hold as written; they are untouched: line 64 frees p->zErr and line 65 writes it rather than reading it, and lines 933/934 read p->zObj and p->zKey, neither of which the free at 929 touches.",
+  "superseded_rows": [
+    {
+      "by": "correction-mem30c-intck-fn-task1455",
+      "count": 1,
+      "keys": [
+        "sqlite ext/intck/sqlite3intck.c:936 MEM30-C"
+      ],
+      "note": "MEM30-C verdict corrected TP -> FN by bmdb 1455 follow-up: the construct reading stands, but the tool makes no report at this key, so TP asserted a report that is not made; see that batch's manifest notes"
+    }
+  ]
 }
