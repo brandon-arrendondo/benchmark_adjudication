@@ -1,0 +1,25 @@
+{
+  "batch_id": "task1406-hostap-fixed-upstream-fn",
+  "work_item_ref": "bmdb:1406",
+  "requested_by": "coordinator",
+  "adjudicator": "claude-opus-5.5",
+  "adjudicating_node": "dev-468",
+  "aurora_lint_version": "0.5.2",
+  "aurora_lint_sha": "7fe681ae5a1f86dd2fdd610a273636af18039362",
+  "projects": [
+    "hostap"
+  ],
+  "codebase_commits": {
+    "hostap": "dcee60436390dd34731560657c4257c3b4c839a6"
+  },
+  "submitted_at": "2026-09-23T18:19:11Z",
+  "row_count": 10,
+  "rules": [
+    "ARR30-C",
+    "EXP34-C"
+  ],
+  "verdicts": {
+    "FN": 10
+  },
+  "notes": "FN rows for hostap defects that were found by adjudication read-through (not by an aurora-lint finding) and are FIXED UPSTREAM, per Brandon's ruling on bmdb 1406 (2026-09-23): enter audit-found defects as FN rows, label-basis reasons only (ADR-0007), only for items fixed upstream or where the key alone is safe to publish.\n\nSCOPE OF THIS BATCH. The eight hostap items in the overview paper's first disclosure batch (upstream commits authored 2026-08-25, applied 2026-09-08) and the read-through items of the follow-up batch (applied 2026-09-11). Each row cites the upstream commit that changed the code. The key alone plus that public commit is the whole claim; the reason states only the basis of the FN verdict.\n\nKEY RULE. Each row is keyed at the access or dereference that the upstream fix protects, the line where the rule would report had it detected the defect, not at the guard the fix edits. This follows the rule aurora_lint 1418 applied to EXP34-C (the dereference is the violation site). Where one fix covers two accesses (895fd588, two lines) or the same guard in two functions (7ce11243, drv_callbacks.c and ieee802_11.c), each access is its own row.\n\nVERIFIED FOR EVERY ROW: (1) no existing row at the same (file, line, rule) on main at submission; (2) aurora-lint at aurora_lint_sha does not report the row's rule at that line over the pinned hostap commit (full-checkout scan, same invocation as the real-world runner). Some lines carry existing rows under OTHER rules (ARR37-C/ARR00-C/ARR36-C/INT14-C, all FP); those are untouched.\n\nEXCLUDED, NOT FN. src/common/nan_de.c:651 (upstream ec339318, first batch): an INT33-C TP already sits at that key, so the rule did report it. The seven follow-up items the paper attributes to EXP34-C detections are tool findings, not misses.\n\nHELD, NOT IN THIS BATCH (need a keying ruling). Three follow-up read-through fixes whose dereference is not in the function the fix edits: wpa_supplicant/ctrl_iface.c (upstream f3b1fc3b: the NULL reaches a libc string call, so the dereference is outside the corpus), src/eap_server/eap_server_peap.c (upstream 0da59aad: the dereference is inside a shared inline accessor in a header), wpa_supplicant/wnm_sta.c (upstream e341c11d: the dereference is inside a callee in events.c). Each sits next to a 1423 'FP as keyed' caller-argument row, and 1418's standard says a positional argument is not a violation site, so where their FN key belongs is a ruling, not a mechanical choice.\n\nNOT IN THIS BATCH. The remaining hostap audit-logged defects (109 in the paper's Appendix A minus the items above): their per-item disposition lives in the local task 1412 ledger, which this node could not read; none is added until a disposition of FIXED-UPSTREAM (or key-safe) is confirmed per item.\n\nNo recall figure follows from this batch until it merges and the sync runs."
+}
