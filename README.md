@@ -103,7 +103,9 @@ aurora-lint real-world run #265 — the v0.5.0 paper baseline, pinned at
 aurora-lint `f48effe3`, and asserts every per-project and overall figure is
 identical to what `benchmarking_db`'s Postgres-backed scorer published
 (52.5% precision, 96.9% recall against known TPs, 76.1% coverage over 12
-projects). `benchmarking_db` runs the reverse check against its own scorer,
+projects). A second golden, `tests/golden/run-269/`, does the same for
+run #269 — the v0.5.2 paper baseline, labels at `e7d70148`, scope at
+aurora-lint `92eae76c`. `benchmarking_db` runs the reverse check against its own scorer,
 so the two definitions cannot drift apart unnoticed. Postgres via
 `benchmarking_db` remains the source of published numbers; this script is
 how anyone else checks them.
@@ -115,6 +117,55 @@ here compares `(file, line, rule)` keys and ignores messages. A checkout that
 drifted from its pin scores as a quiet drop in coverage, not an error. Juliet
 (the synthetic CWE corpus) is scored by aurora-lint's own `python -m bench
 juliet` and is not reproduced here.
+
+### Intervals
+
+`scripts/precision_ci.py` takes the same three inputs and reports the
+intervals the paper prints beside its precision figures: Wilson for each
+project and for the pooled figure, and a percentile bootstrap that resamples
+whole files or whole projects (findings cluster by file, so resampling single
+findings would understate the variance), for the pooled figure, the
+macro-average over projects, and the run without its top one and top three
+rules by labeled volume. It also reports the coverage bracket: precision if
+every unlabeled finding were a true positive, and if every one were a false
+positive. Membership comes from `score.py`, so its point estimates are
+`score.py`'s.
+
+A bootstrap interval is reproducible from its seed and resample count **and
+the order of the units it draws from**, because the seed picks cluster
+indices. `--order` names that third input. `canonical` sorts labels by
+`(project, rule_id, file_path, line)` comparing strings by code point, the
+same on every machine. `en_US.UTF-8` compares them under glibc's collation
+for that locale, which is what the Postgres behind the v0.5.2 paper produced;
+under it, `tests/test_precision_ci.py` reproduces the published run-269
+interval block field for field (`tests/golden/run-269/expected_intervals.json`).
+Changing only the order moves some endpoints by 0.1, the Monte Carlo noise
+floor at 2,000 resamples.
+
+```bash
+python3 scripts/precision_ci.py --scope <benchmark_repos.json at aurora-lint 92eae76c> \
+    --findings-csv tests/golden/run-269/findings.csv.gz \
+    --labels-ref e7d70148 --order en_US.UTF-8
+```
+
+### The evaluated-scope table
+
+`scripts/eval_scope_table.py` regenerates the paper's evaluated-scope table
+— per project: pinned commit, Files and SLOC inside the declared scope,
+Findings, Labeled, Coverage and an adjudication status — from the same
+inputs plus the pinned corpus checkouts (`--bench-root`, one directory per
+project, named after it). Files and SLOC count every `.c`/`.h` the scope
+declaration admits, matched with `score.py`'s own glob rule; the other
+columns are `score.py`'s. Run aurora-lint's `python -m bench corpus-check`
+first: a checkout that drifted from its pin changes the size columns without
+any error. Against the pins, `tests/test_eval_scope_table.py` reproduces the
+v0.5.2 paper's table row for row (skipped where the checkouts are absent).
+
+```bash
+python3 scripts/eval_scope_table.py --scope <benchmark_repos.json at aurora-lint 92eae76c> \
+    --bench-root ~/toolchain \
+    --findings-csv tests/golden/run-269/findings.csv.gz --labels-ref e7d70148
+```
 
 ## Explaining a shift in the labels
 
@@ -222,9 +273,13 @@ batches/<batch_id>/manifest.json  -- one immutable record per submission batch
 scripts/validate.py               -- schema/consistency checks, run in CI
 scripts/score.py                  -- reference scorer: precision/recall/coverage
                                      of an aurora-lint run against these labels
+scripts/precision_ci.py           -- Wilson and clustered-bootstrap intervals for
+                                     the same figures
+scripts/eval_scope_table.py       -- per-project scope size and adjudication status
 scripts/label_churn.py            -- what changed in the labels between two commits
-tests/                            -- golden tests pinning score.py to a published run
-                                     and label_churn.py to this repo's history
+tests/                            -- golden tests pinning score.py and precision_ci.py
+                                     to published runs, and label_churn.py to this
+                                     repo's history
 ```
 
 ### `data/<project>/adjudication.csv`

@@ -1,0 +1,133 @@
+{
+ "_note": "Expected output of scripts/eval_scope_table.py --json for run 269 at the pinned corpus checkouts (inputs as expected.json beside this file). Files and SLOC are the figures the v0.5.2 overview paper types into its evaluated-scope table; Findings, Labeled and Coverage are its measurement_facts.json per-project run_findings / labeled_total / label_coverage_pct. Status is derived from coverage by the script, not copied.",
+ "rows": [
+  {
+   "project": "libcrc",
+   "commit": "7719e211",
+   "files": 19,
+   "sloc": 988,
+   "findings": 266,
+   "labeled": 264,
+   "coverage_pct": 99.2,
+   "status": "exhaustive"
+  },
+  {
+   "project": "sqlite",
+   "commit": "b1a73ba3",
+   "files": 214,
+   "sloc": 192843,
+   "findings": 21072,
+   "labeled": 20835,
+   "coverage_pct": 98.9,
+   "status": "exhaustive"
+  },
+  {
+   "project": "mosquitto",
+   "commit": "d3ee5c5c",
+   "files": 179,
+   "sloc": 31805,
+   "findings": 2815,
+   "labeled": 2773,
+   "coverage_pct": 98.5,
+   "status": "exhaustive"
+  },
+  {
+   "project": "curl",
+   "commit": "3e198f75",
+   "files": 427,
+   "sloc": 129796,
+   "findings": 15317,
+   "labeled": 15241,
+   "coverage_pct": 99.5,
+   "status": "exhaustive"
+  },
+  {
+   "project": "hostap",
+   "commit": "dcee6043",
+   "files": 736,
+   "sloc": 442344,
+   "findings": 56817,
+   "labeled": 53006,
+   "coverage_pct": 93.3,
+   "status": "exhaustive"
+  },
+  {
+   "project": "lua",
+   "commit": "40b76de2",
+   "files": 60,
+   "sloc": 20714,
+   "findings": 3582,
+   "labeled": 3581,
+   "coverage_pct": 100.0,
+   "status": "exhaustive"
+  },
+  {
+   "project": "raylib",
+   "commit": "962bbfc6",
+   "files": 23,
+   "sloc": 38114,
+   "findings": 6354,
+   "labeled": 6341,
+   "coverage_pct": 99.8,
+   "status": "exhaustive"
+  },
+  {
+   "project": "pureftpd",
+   "commit": "cc28bff5",
+   "files": 131,
+   "sloc": 29963,
+   "findings": 4295,
+   "labeled": 4272,
+   "coverage_pct": 99.5,
+   "status": "exhaustive"
+  },
+  {
+   "project": "sel4",
+   "commit": "1326364b",
+   "files": 183,
+   "sloc": 37560,
+   "findings": 3312,
+   "labeled": 2514,
+   "coverage_pct": 75.9,
+   "status": "partial"
+  },
+  {
+   "project": "mbedtls",
+   "commit": "068ff080",
+   "files": 174,
+   "sloc": 102592,
+   "findings": 6008,
+   "labeled": 5987,
+   "coverage_pct": 99.7,
+   "status": "exhaustive"
+  },
+  {
+   "project": "valkey",
+   "commit": "7f1dffed",
+   "files": 234,
+   "sloc": 123506,
+   "findings": 29359,
+   "labeled": 1578,
+   "coverage_pct": 5.4,
+   "status": "in progress"
+  },
+  {
+   "project": "ventoy",
+   "commit": "7cbdc5cf",
+   "files": 22,
+   "sloc": 15515,
+   "findings": 2201,
+   "labeled": 2200,
+   "coverage_pct": 100.0,
+   "status": "exhaustive"
+  }
+ ],
+ "total": {
+  "projects": 12,
+  "files": 2402,
+  "sloc": 1165740,
+  "findings": 151398,
+  "labeled": 118592,
+  "coverage_pct": 78.3
+ }
+}
