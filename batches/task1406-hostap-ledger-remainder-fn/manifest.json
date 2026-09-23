@@ -1,0 +1,25 @@
+{
+  "batch_id": "task1406-hostap-ledger-remainder-fn",
+  "work_item_ref": "bmdb:1406",
+  "requested_by": "coordinator",
+  "adjudicator": "claude-opus-5.5",
+  "adjudicating_node": "dev-468",
+  "aurora_lint_version": "0.5.2",
+  "aurora_lint_sha": "7fe681ae5a1f86dd2fdd610a273636af18039362",
+  "projects": [
+    "hostap"
+  ],
+  "codebase_commits": {
+    "hostap": "dcee60436390dd34731560657c4257c3b4c839a6"
+  },
+  "submitted_at": "2026-09-23T19:17:33Z",
+  "row_count": 2,
+  "rules": [
+    "EXP33-C",
+    "INT31-C"
+  ],
+  "verdicts": {
+    "FN": 2
+  },
+  "notes": "Two FN rows closing bmdb 1406's hostap set, drawn from the task 1412 ledger export (83 rows, relayed by the coordinator 2026-09-23). Per ADR-0007 (2026-09-23 clarification) each reason states only the construct and why it is a miss at that line.\n\nWHY ONLY TWO. Of the ledger's 83 hostap rows: 59 are existing tool TP rows (not misses); 1 (osu_client.c) is an existing INT32-C TP; the 8 audit-found items of the first set are covered by task1406-hostap-fixed-upstream-fn (7 keyed; nan_de.c already an INT33-C TP). Of the 15 rows of the later set, the ones with an EXP34-C TP at their key are tool findings (wnm_ap.c:478, driver_nl80211_event.c:3579, config_none.c:43, config_winreg.c x3, browser-*.c:38 x3); dbus_new.c:1560, eap_server_peap.c (keyed at wpabuf.h:60) and wnm_sta.c (keyed at events.c:2165) are already FN rows from the two earlier 1406 batches; ctrl_iface.c is not keyed (ruled: dereference outside the corpus). That leaves these two, which previously counted as tool findings only through EXP34-C TPs keyed at a caller's positional argument that aurora_lint 1418 / bmdb 1423 have since corrected to FP as keyed, so under the current standard no TP covers either defect.\n\nKEYS. tls_openssl_ocsp.c:467 under INT31-C: the loop condition where a possibly negative int is converted to unsigned for the comparison (upstream db1c8dfce changes the index type). dbus_new_handlers_p2p.c:2308 under EXP33-C: passing 'op' by value is a read of it, so this call is a read site; 1418's positional-argument rule concerns pointer dereference under EXP34-C and does not move an EXP33-C read. The existing EXP34-C 'FP as keyed' row at 2308 is a different rule and is untouched.\n\nVERIFIED FOR BOTH ROWS: no existing row at the same (file, line, rule) on main at submission, and aurora-lint at aurora_lint_sha does not report the row's rule at that line over the pinned hostap commit (full-checkout scan, real-world runner invocation). No other rule reports anywhere in either function's defect lines.\n\nCOVERAGE GAP, stated plainly: the overview paper counts 109 audit-logged hostap defects. The only surviving record of audit-found hostap items is the ledger's 18 (8 + 10); the remaining ~91 have no consolidated record on any node the fleet could search, so this task could not key them. That is a gap in the record, not a finding that they are absent from the code."
+}
