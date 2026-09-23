@@ -12,7 +12,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-06-12T21:29:51.801719",
-  "row_count": 1275,
+  "row_count": 1273,
   "rules": [
     "API00-C",
     "API01-C",
@@ -78,5 +78,16 @@
     "STR37-C",
     "WIN04-C"
   ],
-  "notes": "Reconstructed during benchmark_adjudication's initial population (2026-09-16) from benchmarking_db's ground_truth.source='precision_audit_batch5'. row_count/projects/codebase_commits/rules were derived from the rows themselves, not declared at adjudication time. aurora_lint_version/aurora_lint_sha are unknown for legacy data -- never recorded per-row."
+  "notes": "Reconstructed during benchmark_adjudication's initial population (2026-09-16) from benchmarking_db's ground_truth.source='precision_audit_batch5'. row_count/projects/codebase_commits/rules were derived from the rows themselves, not declared at adjudication time. aurora_lint_version/aurora_lint_sha are unknown for legacy data -- never recorded per-row.",
+  "superseded_rows": [
+    {
+      "by": "correction-int32c-spellfix-oskv-task1490",
+      "count": 2,
+      "keys": [
+        "sqlite ext/misc/spellfix.c:422 INT32-C",
+        "sqlite ext/misc/spellfix.c:1011 INT32-C"
+      ],
+      "note": "INT32-C verdict corrected FP -> TP: the original reasoning addressed only one operand of a multiplication/product (e.g. (nB+1) alone, or f.n+1 alone) and did not account for the other factor pushing the full expression past INT_MAX under SQLITE_MAX_LENGTH-bounded inputs; see that batch's manifest notes"
+    }
+  ]
 }
