@@ -148,6 +148,25 @@ python3 scripts/precision_ci.py --scope <benchmark_repos.json at aurora-lint 92e
     --labels-ref e7d70148 --order en_US.UTF-8
 ```
 
+### The evaluated-scope table
+
+`scripts/eval_scope_table.py` regenerates the paper's evaluated-scope table
+— per project: pinned commit, Files and SLOC inside the declared scope,
+Findings, Labeled, Coverage and an adjudication status — from the same
+inputs plus the pinned corpus checkouts (`--bench-root`, one directory per
+project, named after it). Files and SLOC count every `.c`/`.h` the scope
+declaration admits, matched with `score.py`'s own glob rule; the other
+columns are `score.py`'s. Run aurora-lint's `python -m bench corpus-check`
+first: a checkout that drifted from its pin changes the size columns without
+any error. Against the pins, `tests/test_eval_scope_table.py` reproduces the
+v0.5.2 paper's table row for row (skipped where the checkouts are absent).
+
+```bash
+python3 scripts/eval_scope_table.py --scope <benchmark_repos.json at aurora-lint 92eae76c> \
+    --bench-root ~/toolchain \
+    --findings-csv tests/golden/run-269/findings.csv.gz --labels-ref e7d70148
+```
+
 ## Explaining a shift in the labels
 
 `scripts/label_churn.py` reads two commits of this repository and reports
@@ -256,6 +275,7 @@ scripts/score.py                  -- reference scorer: precision/recall/coverage
                                      of an aurora-lint run against these labels
 scripts/precision_ci.py           -- Wilson and clustered-bootstrap intervals for
                                      the same figures
+scripts/eval_scope_table.py       -- per-project scope size and adjudication status
 scripts/label_churn.py            -- what changed in the labels between two commits
 tests/                            -- golden tests pinning score.py and precision_ci.py
                                      to published runs, and label_churn.py to this
