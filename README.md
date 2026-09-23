@@ -132,20 +132,24 @@ positive. Membership comes from `score.py`, so its point estimates are
 `score.py`'s.
 
 A bootstrap interval is reproducible from its seed and resample count **and
-the order of the units it draws from**, because the seed picks cluster
-indices. `--order` names that third input. `canonical` sorts labels by
-`(project, rule_id, file_path, line)` comparing strings by code point, the
-same on every machine. `en_US.UTF-8` compares them under glibc's collation
-for that locale, which is what the Postgres behind the v0.5.2 paper produced;
-under it, `tests/test_precision_ci.py` reproduces the published run-269
-interval block field for field (`tests/golden/run-269/expected_intervals.json`).
-Changing only the order moves some endpoints by 0.1, the Monte Carlo noise
-floor at 2,000 resamples.
+the order of the clusters it draws from**, because the seed picks cluster
+indices. So the order is part of the definition (CI definition version 2):
+clusters are resampled in code-point order of their key, a property of the
+data alone. That is the default, and `tests/test_precision_ci.py` pins it to
+`tests/golden/run-269/expected_intervals.json`, which is identical to
+`benchmarking_db`'s own implementation over the same units.
+
+Version 1 took clusters in the order Postgres happened to return the labels,
+sorted under its `en_US.UTF-8` collation; the v0.5.2 paper was first typeset
+from it. `--order en_US.UTF-8` still reproduces that block field for field
+(`expected_intervals_v1.json`, skipped where the locale is missing), so the
+figures once published stay checkable. The two versions differ only in
+bootstrap endpoints, by 0.1 at three of them: at 2,000 resamples a
+one-decimal endpoint sits at the Monte Carlo noise floor.
 
 ```bash
 python3 scripts/precision_ci.py --scope <benchmark_repos.json at aurora-lint 92eae76c> \
-    --findings-csv tests/golden/run-269/findings.csv.gz \
-    --labels-ref e7d70148 --order en_US.UTF-8
+    --findings-csv tests/golden/run-269/findings.csv.gz --labels-ref e7d70148
 ```
 
 ### The evaluated-scope table
