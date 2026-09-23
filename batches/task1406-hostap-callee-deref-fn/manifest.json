@@ -1,0 +1,24 @@
+{
+  "batch_id": "task1406-hostap-callee-deref-fn",
+  "work_item_ref": "bmdb:1406",
+  "requested_by": "coordinator",
+  "adjudicator": "claude-opus-5.5",
+  "adjudicating_node": "dev-468",
+  "aurora_lint_version": "0.5.2",
+  "aurora_lint_sha": "7fe681ae5a1f86dd2fdd610a273636af18039362",
+  "projects": [
+    "hostap"
+  ],
+  "codebase_commits": {
+    "hostap": "dcee60436390dd34731560657c4257c3b4c839a6"
+  },
+  "submitted_at": "2026-09-23T18:36:47Z",
+  "row_count": 2,
+  "rules": [
+    "EXP34-C"
+  ],
+  "verdicts": {
+    "FN": 2
+  },
+  "notes": "Two FN rows completing bmdb 1406's first set, keyed per the coordinator's 2026-09-23 ruling on the three items held from task1406-hostap-fixed-upstream-fn. Per ADR-0007 (2026-09-23 clarification) each reason states only the construct and why it is a miss at that line.\n\nKEY RULE, as ruled: where the NULL dereference is not in the function the upstream fix edits, the row is keyed at the dereference itself when it is inside the corpus, consistent with aurora_lint 1418's violation-site rule. src/utils/wpabuf.h:60 is the dereference inside the wpabuf_len() inline reached from src/eap_server/eap_server_peap.c (upstream 0da59aadc). wpa_supplicant/events.c:2165 is the first member dereference of 'selected' in wpa_supplicant_need_to_roam_within_ess(), reached from wpa_supplicant/wnm_sta.c (upstream e341c11d9); the wpa_bss_ie_ptr() call on the line above computes an address and is not taken as the dereference.\n\nNOT KEYED, as ruled: wpa_supplicant/ctrl_iface.c (upstream f3b1fc3b9). Its dereference is inside a libc string function, outside the corpus, so there is no in-corpus line to key.\n\nVERIFIED FOR BOTH ROWS: no existing row at the same (file, line, rule) on main at submission, and aurora-lint at aurora_lint_sha does not report EXP34-C at that line over the pinned hostap commit (full-checkout scan, same invocation as the real-world runner; src/utils/wpabuf.h is inside the scan).\n\nA key inside a shared inline (wpabuf.h:60) stands for every call that reaches it. This row is placed for the one path above and says nothing about other callers."
+}
