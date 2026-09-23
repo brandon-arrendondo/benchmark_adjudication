@@ -1,0 +1,36 @@
+{
+  "batch_id": "task1438_git_upstream_mining_2026-09-23",
+  "work_item_ref": "bmdb:1438",
+  "requested_by": "coordinator",
+  "adjudicator": "claude+subagents (high-effort)",
+  "aurora_lint_version": "0.5.2",
+  "aurora_lint_sha": "50db01a781a4e2f6be1ee5009e737584a2f97a65",
+  "projects": [
+    "curl",
+    "hostap",
+    "mbedtls",
+    "sqlite",
+    "valkey"
+  ],
+  "codebase_commits": {
+    "curl": "3e198f75861cc2e12daf299689e145949dddd19b",
+    "hostap": "dcee60436390dd34731560657c4257c3b4c839a6",
+    "mbedtls": "068ff080b369adfac81509f9b57b2afabaf82dc5",
+    "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af",
+    "valkey": "7f1dffedff6de73058b2c2a389422b6ecd56c8fb"
+  },
+  "submitted_at": "2026-09-23T00:00:00Z",
+  "row_count": 99,
+  "rules": [
+    "ARR30-C",
+    "EXP33-C",
+    "EXP34-C",
+    "INT31-C",
+    "INT32-C",
+    "MEM30-C",
+    "MEM31-C",
+    "MEM35-C",
+    "STR31-C"
+  ],
+  "notes": "First batch from task 1438's git+CVE mining pipeline (docs/design/git-cve-mining-adjudication.md in benchmarking_db): each row's lead came from an upstream fix commit already merged into the project's real history, cross-checked against the pinned code by hand (not the mining tool's own resolution alone). Three rounds of quality gates before this batch was formed -- see the design doc's Findings 5-7 for the full methodology and the false-lead patterns each one caught (provenance-window mismatches, duplicate-hash/rebase commits, bot backport-sweep bundles, and defensive-hardening fixes mistaken for evidence of a reachable defect). Started from 707 mined candidates across sqlite/curl/mbedtls/valkey/hostap; this batch is the 99 rows that survived confirmation, adversarial re-verification, exact-line resolution, and TWO separate key-collision checks against the existing dataset (one before exact-line resolution, one after -- resolving a function-only row to a specific line can newly collide with an already-adjudicated key that wasn't checkable before resolution; 6 more rows were caught and excluded this way, in addition to the 28 excluded earlier in the pipeline). All but 1 row is FN (a confirmed real defect aurora-lint's current scan does not flag at that exact line) -- the pipeline's original purpose was recall measurement, not precision corroboration, and that's reflected in the split. hostap wpa_supplicant/bss.c's link_id off-by-one (ARR30-C) is a real out-of-bounds array subscript per a strict ADR-0001/ERR33-C-style reading (coordinator ruling), kept despite the upstream fix commit itself characterizing the specific consequence as benign -- that row's reason states only the code-level basis, not upstream's severity read, per this repo's labeling standards. Six additional post-line-resolution collisions (4 disagreeing with existing FP labels in the same shape as the spellfix.c case that motivated the adversarial pass -- sqlite fts3_expr.c:473, spellfix.c:422, spellfix.c:1011, os_kv.c:460; 1 matching an existing TP -- hostap dbus_new_handlers.c:964; 1 matching an existing TP -- sqlite prefixes.c:295) were excluded from this batch rather than resolved here -- the 4 disagreements in particular look like the same adversarial-pass gap recurring on rows that weren't in scope for that pass (they only got an exact line after it ran), and are flagged as a follow-up, not silently dropped."
+}
