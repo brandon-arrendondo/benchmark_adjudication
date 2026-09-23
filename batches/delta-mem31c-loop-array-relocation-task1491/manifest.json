@@ -1,0 +1,35 @@
+{
+  "batch_id": "delta-mem31c-loop-array-relocation-task1491",
+  "work_item_ref": "benchmarking_db-1491",
+  "requested_by": "coordinator",
+  "adjudicator": "claude-opus-5.5",
+  "adjudicating_node": "mini",
+  "batch_written_by": "dev-180",
+  "aurora_lint_version": "0.5.2",
+  "aurora_lint_sha": "0674550bf5112ce99dd125f3209bd767ae8e2e65",
+  "projects": [
+    "hostap",
+    "lua",
+    "sel4",
+    "sqlite",
+    "valkey"
+  ],
+  "codebase_commits": {
+    "hostap": "dcee60436390dd34731560657c4257c3b4c839a6",
+    "lua": "40b76de2d77e66b70a9d4bf989c3f5340919973f",
+    "sel4": "1326364bc9135d9445d936ebc01e38a402c1f4c6",
+    "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af",
+    "valkey": "7f1dffedff6de73058b2c2a389422b6ecd56c8fb"
+  },
+  "submitted_at": "2026-09-23T21:00:00Z",
+  "row_count": 39,
+  "rules": [
+    "MEM31-C"
+  ],
+  "verdicts": {
+    "FP": 39
+  },
+  "rekeyed_rows": 4,
+  "removed_rows": 4,
+  "notes": "A LOCATION MIGRATION PLUS ITS DELTA-ADJUDICATION. aurora_lint 1487 (3bff52c844e0aec5b0294b2aac411a0bb7901642) stopped reporting MEM31-C's loop-array finding (\"Array 'X' elements allocated in loop but not freed in a matching loop\") at the collapsed (file, line 1) location and reports it at the allocation site instead. Every label keyed at an old (file, 1, MEM31-C) key matched nothing after that change, and the new sites were unlabeled.\n\nRELEASE FRAMING (from mini's adjudication writeup, must travel with any v0.5.2-vs-v0.5.3 MEM31-C precision comparison): before 1487, this population was 34 line-1 keys with only 8 labeled; after this batch lands, it's 46 labeled sites, all FP. MEM31-C's labeled-FP count rises by ~38 and measured precision on this rule DROPS as a direct result -- purely because the labels are now complete, not because the tool got worse. Anyone citing MEM31-C precision for the release needs this caveat attached or it reads as a regression that didn't happen.\n\nKEY SET. Re-derived by dev-180, not taken from the writeup: a MEM31-C-only scan of all 12 pinned corpora at aurora-lint 0674550bf5112ce99dd125f3209bd767ae8e2e65 (corpus-check clean) emits the loop-array message at exactly 46 distinct (file, line) keys, in hostap 21, valkey 15, sel4 7, sqlite 2, lua 1, and at no line-1 key anywhere. Their disposition:\n- 35 fresh keys (hostap 20, valkey 15): adjudicated by mini, all FP, added by this batch. Each verdict rests on where the elements are released or who owns them after the loop: a caller that frees every element in its own loop, the function's own unwind or error-path loop, a struct teardown or deinit loop, a preceding loop that frees the previous contents, or a process-lifetime global. Five were re-read at source by dev-180 before writing (hostapd/hostapd_cli.c:1095, src/eap_peer/eap_methods.c:144, src/p2p/p2p.c:870, valkey src/config.c:3045, src/server.c:7508).\n- 4 re-keyed (hostap src/ap/wps_hostapd.c:1 -> 1038; sel4 src/arch/arm/32/kernel/vspace.c:1 -> 2725, src/arch/arm/64/kernel/vspace.c:1 -> 357, src/arch/x86/object/interrupt.c:1 -> 24): the old line-1 FP verdict describes the construct at the new line, which was re-read at source. Each row is edited in place: new line, this batch's source, and a reason naming the array at the new line. The verdict is unchanged (FP).\n- 7 already labeled, no write: lua ltm.c:50, sel4 src/arch/arm/64/kernel/vspace.c:349, src/arch/x86/64/kernel/vspace.c:163/195/289, sqlite ext/rtree/rtree.c:4403, src/os_unix.c:5021. All are FP. The writeup counted rtree.c:4403 and os_unix.c:5021 as carry-overs to be written, but both keys already carry an FP label from their original batch, so writing them would duplicate a key (validate.py rejects that). At the four sel4 lines the existing label's reason describes a second MEM31-C message the tool also emits at that key (a value-returning bitfield constructor); the loop-array message at the same key concerns the same statically-declared global array and is FP on the same ground, so the key's verdict is the same.\n- 4 removed: the line-1 rows whose relocated finding lands on those already-labeled keys (sel4 src/arch/x86/64/kernel/vspace.c:1, sqlite ext/rtree/rtree.c:1, src/os_unix.c:1, lua ltm.c:1). Each said FP about the same array that its successor key already labels FP, so the oracle's answer at every live key is unchanged by the removal.\n\nMECHANICS follow task 1388 (removal) and 1490 (in-place edit). The 8 old line-1 keys are listed under superseded_rows in the manifests that first labeled them, each of which takes a row_count decrement by the same number: task-627-delta 4, hostap_full_audit_0.4.169 1, precision_audit_batch6 1, precision_audit_batch7 1, precision_audit_0.4.59 1. Every touched CSV was verified to round-trip byte for byte before the write, so its diff is exactly its appended, edited and removed lines.\n\nCounting basis: distinct (project, commit, file, line, rule) keys. No precision claim: MEM31-C figures computed before this is merged and ingested score the relocated findings as unlabeled."
+}

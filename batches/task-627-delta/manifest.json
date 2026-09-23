@@ -14,10 +14,23 @@
     "sel4": "1326364bc9135d9445d936ebc01e38a402c1f4c6"
   },
   "submitted_at": "2026-08-30T22:35:05.671221",
-  "row_count": 339,
+  "row_count": 335,
   "rules": [
     "DCL31-C",
     "MEM31-C"
   ],
-  "notes": "Reconstructed during benchmark_adjudication's initial population (2026-09-16) from benchmarking_db's ground_truth.source='task-627-delta'. row_count/projects/codebase_commits/rules were derived from the rows themselves, not declared at adjudication time. aurora_lint_version/aurora_lint_sha are unknown for legacy data -- never recorded per-row."
+  "notes": "Reconstructed during benchmark_adjudication's initial population (2026-09-16) from benchmarking_db's ground_truth.source='task-627-delta'. row_count/projects/codebase_commits/rules were derived from the rows themselves, not declared at adjudication time. aurora_lint_version/aurora_lint_sha are unknown for legacy data -- never recorded per-row.",
+  "superseded_rows": [
+    {
+      "by": "delta-mem31c-loop-array-relocation-task1491",
+      "count": 4,
+      "keys": [
+        "sel4 src/arch/arm/32/kernel/vspace.c:1 MEM31-C",
+        "sel4 src/arch/arm/64/kernel/vspace.c:1 MEM31-C",
+        "sel4 src/arch/x86/64/kernel/vspace.c:1 MEM31-C",
+        "sel4 src/arch/x86/object/interrupt.c:1 MEM31-C"
+      ],
+      "note": "MEM31-C loop-array finding relocated off line 1 by aurora_lint 1487; the key is re-keyed to the allocation site or dropped where that site already carries an FP label; see delta-mem31c-loop-array-relocation-task1491's manifest notes"
+    }
+  ]
 }
