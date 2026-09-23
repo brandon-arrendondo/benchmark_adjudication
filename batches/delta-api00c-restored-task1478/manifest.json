@@ -1,0 +1,24 @@
+{
+  "batch_id": "delta-api00c-restored-task1478",
+  "work_item_ref": "benchmarking_db-1478",
+  "requested_by": "coordinator",
+  "adjudicator": "claude-opus-5",
+  "adjudicating_node": "dev-180",
+  "aurora_lint_version": "0.5.2",
+  "aurora_lint_sha": "f0ca19e598d9d8d1742878c2afd58f4673f6def0",
+  "projects": [
+    "valkey"
+  ],
+  "codebase_commits": {
+    "valkey": "7f1dffedff6de73058b2c2a389422b6ecd56c8fb"
+  },
+  "submitted_at": "2026-09-23T16:30:00Z",
+  "row_count": 2,
+  "rules": [
+    "API00-C"
+  ],
+  "verdicts": {
+    "TP": 2
+  },
+  "notes": "Delta-adjudication for aurora_lint 1476, which restored API00-C's relay check for a forwarder whose callee only forms a member address of the parameter. API00-C-only scans of all 12 pinned codebases at aurora_lint 1e180eb0 (1444) and 6ec9a3ee (the pre-rebase build of 1476; f0ca19e5 differs from it only by comment-only rebased commits) differ by 40 added keys and no removed keys: curl 10, hostap 10, mbedtls 13, sqlite 5, valkey 2. The 38 outside valkey are already labeled on main (22 TP, 16 FP), so these 2 valkey keys are the only unlabeled additions. Both are the restored forwarder shape, read at source. corpus-check clean on all 12 pins."
+}
