@@ -1,4 +1,8 @@
-"""Golden test: scripts/score.py reproduces the paper's run-265 figures exactly.
+"""Golden test: scripts/score.py reproduces the paper's figures exactly.
+
+Two pinned runs: #265 (the v0.5.0 baseline, described below) and #269 (the
+v0.5.2 baseline, tests/golden/run-269, same three inputs at its own SHAs --
+see that directory's expected.json).
 
 This is the correctness gate for the reference scorer (benchmarking_db task
 1331, aurora-lint ADR-0004: one definition, no second thing that can
@@ -65,10 +69,16 @@ def _labels_available(sha: str) -> bool:
                            f"{sha}^{{commit}}"], capture_output=True).returncode == 0
 
 
-class Run265Golden(unittest.TestCase):
+class _GoldenRun:
+    """One pinned run's golden. A subclass names its directory under
+    tests/golden/; the three inputs and the expected figures all come from
+    that directory's expected.json, so adding a run adds no test code."""
+
+    golden: Path
+
     @classmethod
     def setUpClass(cls):
-        cls.expected = json.loads((GOLDEN / "expected.json").read_text())
+        cls.expected = json.loads((cls.golden / "expected.json").read_text())
         labels_sha = cls.expected["benchmark_adjudication_commit"]
         if not _labels_available(labels_sha):
             raise AssertionError(
@@ -80,7 +90,7 @@ class Run265Golden(unittest.TestCase):
         scope_path = Path(cls.tmp.name) / "benchmark_repos.json"
         scope_path.write_text(scope_text)
         scope = score.load_scope(scope_path)
-        findings = score.load_findings_csv(GOLDEN / "findings.csv.gz")
+        findings = score.load_findings_csv(cls.golden / "findings.csv.gz")
         commits = {p: scope[p]["commit"] for p in findings}
         labels, n_labels = score.load_labels(sorted(findings), None, labels_sha)
         cls.n_labels = n_labels
@@ -91,8 +101,9 @@ class Run265Golden(unittest.TestCase):
         cls.tmp.cleanup()
 
     def test_label_set_is_the_oracle_the_paper_cites(self):
-        """168,761 labels at 3ab3f41d -- the count release_baseline_numbers
-        reported for the oracle it scored against."""
+        """The label count at benchmark_adjudication_commit is the one
+        release_baseline_numbers reported for the oracle it scored against
+        (168,761 at 3ab3f41d for run 265; 172,189 at e7d70148 for run 269)."""
         self.assertEqual(self.n_labels, self.expected["oracle_labels_total"])
 
     def test_definition_version_and_basis(self):
@@ -113,6 +124,17 @@ class Run265Golden(unittest.TestCase):
                 # score.py carries the full SHA the labels are keyed on.
                 have["commit"] = have["commit"][:len(want["commit"])]
                 self.assertEqual(have, want)
+
+
+class Run265Golden(_GoldenRun, unittest.TestCase):
+    """v0.5.0 paper baseline: aurora-lint f48effe3, labels 3ab3f41d."""
+    golden = GOLDEN
+
+
+class Run269Golden(_GoldenRun, unittest.TestCase):
+    """v0.5.2 paper baseline: aurora-lint 92eae76c (the v0.5.2 tag), labels
+    e7d70148."""
+    golden = REPO_ROOT / "tests" / "golden" / "run-269"
 
 
 class ScorerDefinitions(unittest.TestCase):
