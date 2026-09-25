@@ -1,0 +1,27 @@
+{
+  "batch_id": "correction-api00c-mainargv-lua-task1548",
+  "work_item_ref": "benchmarking_db-1548",
+  "requested_by": "coordinator",
+  "adjudicator": "claude-opus-5.5",
+  "adjudicating_node": "dev-180",
+  "aurora_lint_version": "0.5.3",
+  "aurora_lint_sha": "05bd14f9ea5fbc249818b91d416ea1b09b2bf793",
+  "projects": [
+    "lua"
+  ],
+  "codebase_commits": {
+    "lua": "40b76de2d77e66b70a9d4bf989c3f5340919973f"
+  },
+  "submitted_at": "2026-09-25T19:17:38Z",
+  "row_count": 1,
+  "rules": [
+    "API00-C"
+  ],
+  "verdicts": {
+    "FP": 1
+  },
+  "corrections": {
+    "TP_to_FP": 1
+  },
+  "notes": "A CORRECTION, NOT A NEW ADJUDICATION. The lua.c:777 row the coordinator queued under the main() argc/argv ruling (Brandon, 2026-09-24; bmdb 1548): API00-C on main()'s argv parameter itself is FP by C11 5.1.2.2.1 (argv[argc] is a null pointer, so argv points to at least one element); a finding about argv[i] indexed without an argc bound is TP. The finding at lua.c:777 names argv itself, and main's only uses of it are argv[0], in bounds for any argc >= 0 and passed to l_message, which tests pname (lua.c:118), and the pointer stored with lua_pushlightuserdata. RESULT: 1 flip TP -> FP. Counting basis: distinct (project, commit, file, line, rule) keys. No precision claim is made here."
+}
