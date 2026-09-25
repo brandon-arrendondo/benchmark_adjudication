@@ -12,7 +12,7 @@
     "hostap": "dcee60436390dd34731560657c4257c3b4c839a6"
   },
   "submitted_at": "2026-09-10T12:38:12.058426Z",
-  "row_count": 22,
+  "row_count": 8,
   "rules": [
     "EXP33-C",
     "EXP34-C"
@@ -40,6 +40,27 @@
         "hostap src/ap/ieee802_11_vht.c:255 EXP34-C",
         "hostap src/ap/ieee802_11_vht.c:335 EXP34-C",
         "hostap src/ap/sta_info.c:1550 EXP34-C"
+      ],
+      "note": "verdict reverted FP -> TP by the bmdb 1554 -rdynamic re-pass (ADR-0011 6b28c8d7): the function is non-static and linked into wpa_supplicant, so its caller set is open and the in-tree call-site basis does not hold"
+    },
+    {
+      "by": "correction-rdynamic-1554-hostap-b13",
+      "count": 14,
+      "keys": [
+        "hostap src/ap/ieee802_11.c:1200 EXP34-C",
+        "hostap src/ap/ieee802_11.c:3941 EXP34-C",
+        "hostap src/ap/ieee802_11.c:3959 EXP34-C",
+        "hostap src/ap/ieee802_11.c:3986 EXP34-C",
+        "hostap src/ap/ieee802_11.c:4092 EXP34-C",
+        "hostap src/ap/ieee802_11.c:4258 EXP34-C",
+        "hostap src/ap/ieee802_11.c:5402 EXP34-C",
+        "hostap src/ap/ieee802_11_eht.c:308 EXP34-C",
+        "hostap src/ap/ieee802_11_eht.c:1156 EXP34-C",
+        "hostap src/ap/ieee802_11_he.c:422 EXP34-C",
+        "hostap src/ap/ieee802_11_ht.c:485 EXP34-C",
+        "hostap src/ap/ieee802_11_ht.c:512 EXP34-C",
+        "hostap src/ap/ieee802_11_shared.c:1291 EXP34-C",
+        "hostap src/ap/ieee802_11_vht.c:156 EXP34-C"
       ],
       "note": "verdict reverted FP -> TP by the bmdb 1554 -rdynamic re-pass (ADR-0011 6b28c8d7): the function is non-static and linked into wpa_supplicant, so its caller set is open and the in-tree call-site basis does not hold"
     }

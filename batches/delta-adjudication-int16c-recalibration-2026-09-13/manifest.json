@@ -30,7 +30,7 @@
     "ventoy": "7cbdc5cf69935bcf1f085ae67f40e70ea7e74bae"
   },
   "submitted_at": "2026-09-13T06:11:45.408059",
-  "row_count": 1065,
+  "row_count": 1059,
   "rules": [
     "INT16-C"
   ],
@@ -71,6 +71,19 @@
       "count": 1,
       "keys": [
         "hostap src/drivers/driver_wext.c:50 INT16-C"
+      ],
+      "note": "verdict reverted FP -> TP by the bmdb 1554 -rdynamic re-pass (ADR-0011 6b28c8d7): the function is non-static and linked into wpa_supplicant, so its caller set is open and the in-tree call-site basis does not hold"
+    },
+    {
+      "by": "correction-rdynamic-1554-hostap-b13",
+      "count": 6,
+      "keys": [
+        "hostap src/crypto/aes-internal-dec.c:118 INT16-C",
+        "hostap src/crypto/aes-internal-dec.c:123 INT16-C",
+        "hostap src/crypto/aes-internal-enc.c:65 INT16-C",
+        "hostap src/crypto/aes-internal-enc.c:70 INT16-C",
+        "hostap src/crypto/tls_openssl.c:912 INT16-C",
+        "hostap src/utils/eloop.c:538 INT16-C"
       ],
       "note": "verdict reverted FP -> TP by the bmdb 1554 -rdynamic re-pass (ADR-0011 6b28c8d7): the function is non-static and linked into wpa_supplicant, so its caller set is open and the in-tree call-site basis does not hold"
     }

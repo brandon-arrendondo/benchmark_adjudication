@@ -12,7 +12,7 @@
     "hostap": "dcee60436390dd34731560657c4257c3b4c839a6"
   },
   "submitted_at": "2026-09-10T13:45:59.707792Z",
-  "row_count": 122,
+  "row_count": 121,
   "rules": [
     "EXP34-C"
   ],
@@ -30,6 +30,14 @@
         "hostap src/utils/browser-wpadebug.c:43 EXP34-C"
       ],
       "note": "EXP34-C verdict corrected TP -> FP as keyed by bmdb 1423: the key is a caller's positional call argument, which aurora_lint 1418 no longer treats as a violation site; see that batch's manifest notes"
+    },
+    {
+      "by": "correction-rdynamic-1554-hostap-b13",
+      "count": 1,
+      "keys": [
+        "hostap src/wps/wps_er.c:1210 EXP34-C"
+      ],
+      "note": "verdict reverted FP -> TP by the bmdb 1554 -rdynamic re-pass (ADR-0011 6b28c8d7): the function is non-static and linked into wpa_supplicant, so its caller set is open and the in-tree call-site basis does not hold"
     }
   ]
 }

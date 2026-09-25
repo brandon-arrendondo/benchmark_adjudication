@@ -16,12 +16,22 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-08-25T09:38:32.524605",
-  "row_count": 71,
+  "row_count": 70,
   "rules": [
     "CON03-C",
     "DCL19-C",
     "DCL31-C",
     "INT10-C"
   ],
-  "notes": "Reconstructed during benchmark_adjudication's initial population (2026-09-16) from benchmarking_db's ground_truth.source='delta_task547'. row_count/projects/codebase_commits/rules were derived from the rows themselves, not declared at adjudication time. aurora_lint_version/aurora_lint_sha are unknown for legacy data -- never recorded per-row."
+  "notes": "Reconstructed during benchmark_adjudication's initial population (2026-09-16) from benchmarking_db's ground_truth.source='delta_task547'. row_count/projects/codebase_commits/rules were derived from the rows themselves, not declared at adjudication time. aurora_lint_version/aurora_lint_sha are unknown for legacy data -- never recorded per-row.",
+  "superseded_rows": [
+    {
+      "by": "correction-rdynamic-1554-hostap-b13",
+      "count": 1,
+      "keys": [
+        "hostap src/ap/wnm_ap.c:903 INT10-C"
+      ],
+      "note": "verdict reverted FP -> TP by the bmdb 1554 -rdynamic re-pass (ADR-0011 6b28c8d7): the function is non-static and linked into wpa_supplicant, so its caller set is open and the in-tree call-site basis does not hold"
+    }
+  ]
 }

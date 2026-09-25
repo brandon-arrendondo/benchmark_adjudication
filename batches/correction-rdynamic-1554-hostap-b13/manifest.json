@@ -1,0 +1,31 @@
+{
+  "batch_id": "correction-rdynamic-1554-hostap-b13",
+  "work_item_ref": "benchmarking_db-1554",
+  "requested_by": "coordinator",
+  "adjudicator": "claude-opus-5.5",
+  "adjudicating_node": "dev-149",
+  "aurora_lint_version": "0.5.3",
+  "aurora_lint_sha": "05bd14f9ea5fbc249818b91d416ea1b09b2bf793",
+  "projects": [
+    "hostap"
+  ],
+  "codebase_commits": {
+    "hostap": "dcee60436390dd34731560657c4257c3b4c839a6"
+  },
+  "submitted_at": "2026-09-25T15:53:18Z",
+  "row_count": 79,
+  "rules": [
+    "EXP34-C",
+    "INT10-C",
+    "INT16-C",
+    "INT33-C",
+    "STR30-C"
+  ],
+  "verdicts": {
+    "TP": 79
+  },
+  "corrections": {
+    "FP_to_TP": 79
+  },
+  "notes": "A CORRECTION, NOT A NEW ADJUDICATION. bmdb 1554 hostap -rdynamic re-pass, batch 13 (src/ap/ap_config.c .. wpa_supplicant/wps_supplicant.c). Stacked on correction-rdynamic-1554-hostap-b12.\n\nRULING. aurora-lint ADR-0011 6b28c8d7 (Brandon, 2026-09-25): wpa_supplicant/Makefile:1004-1006 links with -ldl -rdynamic under CONFIG_DYNAMIC_EAP_METHODS, a compilable configuration (ADR-0010), so every non-static function linked into wpa_supplicant has an open caller set and in-tree call sites prove nothing about its parameters. Also applied: a prior dereference is not a check (d9cb04d0); &p->field with p unproven is a violation site; a (pointer, length) pairing is a contract, not proof.\n\nSCOPE. FP rows whose reason rested on callers, in non-static functions of files wpa_supplicant links under some configuration (the union of its Makefile OBJS under every ifdef). This batch covers 118 such rows. Held back and NOT changed here: 0 whose key realworld run 274 no longer emits (pending a ruling on non-emitted keys), 0 inside an #ifdef HOSTAPD / hostapd-only CONFIG_* arm that the wpa_supplicant build cannot compile, 6 uncertain.\n\nMETHOD. One read-only agent read every row at source at the pinned commit, judging the value the run-274 message names, and decided whether any basis inside the function or its callees holds (a dominating test, a NULL-tolerant callee, a language guarantee, a local value's own flow, or the site not being a violation site). A fresh-context refuter re-read a sample (Refuter: 68 rows (every FP keep and non-high call plus 20 random TP flips); 59/68 upheld and all 9 rejections accepted as FP -> TP: six rested on a correlated flag or sibling variable (events.c:2395, interworking.c:1258/1314/1369/2420/2450), one on a correlated header field (wps_er.c:1210), one on a size_t-to-unsigned narrowing (p2p_utils.c:379), one on platform POLL* values (eloop.c:538).).\n\nRESULT. 79 FP -> TP here (EXP34-C 68, INT16-C 6, INT33-C 3, INT10-C 1, STR30-C 1): the only basis was the caller set. 33 stay FP with the reason restated to its local basis (a 16, d 7, c 10). THIS BATCH IS THE STATIC-FUNCTION UNDERCOUNT: rows in static functions whose proof chain was followed up the in-file call chain to a non-static caller; a flip needs one open path with no real proof, a keep needs a real proof on every path. Of 389 static-function candidates, only the 118 still emitted by run 274 were read here; 271 non-emitted wait on the non-emitted ruling.\n\nMechanics: in-place edits keep each key; each original batch takes a row_count decrement and a superseded_rows record. Counting basis: distinct (project, commit, file, line, rule) keys. No precision claim is made here."
+}
