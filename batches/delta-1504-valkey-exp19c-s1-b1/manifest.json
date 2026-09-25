@@ -1,0 +1,24 @@
+{
+  "batch_id": "delta-1504-valkey-exp19c-s1-b1",
+  "work_item_ref": "aurora_lint-1504",
+  "requested_by": "coordinator",
+  "adjudicator": "claude-opus-5.5",
+  "adjudicating_node": "dev-149",
+  "aurora_lint_version": "0.5.3",
+  "aurora_lint_sha": "05bd14f9ea5fbc249818b91d416ea1b09b2bf793",
+  "projects": [
+    "valkey"
+  ],
+  "codebase_commits": {
+    "valkey": "7f1dffedff6de73058b2c2a389422b6ecd56c8fb"
+  },
+  "submitted_at": "2026-09-25T02:14:51Z",
+  "row_count": 154,
+  "rules": [
+    "EXP19-C"
+  ],
+  "verdicts": {
+    "TP": 154
+  },
+  "notes": "aurora_lint 1504 (v0.5.3 step 3), valkey EXP19-C stratum S1: a baseline for the risky stratum, not a delta. valkey had no EXP19-C labels. Stacked on delta-1504-valkey-msc01c-b3; this branch adds only this batch's rows over its parent.\n\nWHY A STRATUM. valkey has 6,551 unlabeled EXP19-C keys at run 274. The existing labels are about 99.8% TP for if/for/while and 2.6% TP for else-shaped findings, so the FP mass sits in else findings and in constructs next to preprocessor lines (the misfire family aurora_lint 1535 addressed). S1 is every valkey EXP19-C key that is else-shaped (27) or has a preprocessor directive within the next 5 lines (127): 156 at run 274. A local probe at aurora-lint d2453457 (the 1535 fix; EXP19-C + MSC01-C only, via bench.realworld_runner._build_sqc_cmd, corpus-check clean; a diagnostic, not a project figure) shows 1535 removes 2 of them (rax.c:1763, lzf_d.c:73), so 154 remain. That is 4 over the 150 batch ceiling, kept as one batch rather than two undersized ones. The remaining ~6,395 keys (stratum S2) are held for Brandon's methodology decision on mechanical labeling and are not in this batch.\n\nSTANDARD. The existing EXP19-C convention (~39,700 labels): TP when the body of the if/else/for/while at that line is a single statement not enclosed in braces; FP when the premise is false (a braced body or braced else-if chain misread). An #if-split construct is judged per arm, and any arm with an unbraced single statement is TP (ADR-0010). For else findings keyed on the chain's if line, an else-if idiom with braced arms is FP, and an else followed by a plain single statement is TP.\n\nMETHOD. One read-only agent. For if/while keys, a script located the controlling expression's closing parenthesis and the first code token after it, skipping comments and directives, and stopped if that token was `{` (it never was). Else lines were located by hand. The adjudicator spot-checked geo.c:462-466 and zmalloc.c:688-694 at source.\n\nRESULT: 154 TP / 0 FP. No misfire survives in this stratum after 1535. Each else finding points at a chain whose final else is followed by one plain statement (e.g. geo.c:465 `} else break;`); valkey-cli.c's CLUSTER_MANAGER_PRINT_REPLY_ERROR expands to a single unbraced call; zmalloc.c:689's body is an unbraced return in both #if arms.\n\nCounting basis: distinct (project, commit, file, line, rule) keys. No precision/recall claim is made here."
+}

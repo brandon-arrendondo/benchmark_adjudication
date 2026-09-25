@@ -1,0 +1,25 @@
+{
+  "batch_id": "delta-1504-valkey-msc01c-b2",
+  "work_item_ref": "aurora_lint-1504",
+  "requested_by": "coordinator",
+  "adjudicator": "claude-opus-5.5",
+  "adjudicating_node": "dev-149",
+  "aurora_lint_version": "0.5.3",
+  "aurora_lint_sha": "05bd14f9ea5fbc249818b91d416ea1b09b2bf793",
+  "projects": [
+    "valkey"
+  ],
+  "codebase_commits": {
+    "valkey": "7f1dffedff6de73058b2c2a389422b6ecd56c8fb"
+  },
+  "submitted_at": "2026-09-25T02:12:23Z",
+  "row_count": 135,
+  "rules": [
+    "MSC01-C"
+  ],
+  "verdicts": {
+    "FP": 130,
+    "TP": 5
+  },
+  "notes": "aurora_lint 1504 (v0.5.3 step 3), MSC01-C batch 2 of 3: valkey baseline. valkey had no MSC01-C labels. Held until aurora_lint 1535 (EXP19-C/MSC01-C comment-as-body and spliced-chain fix, d2453457) landed, then released by the coordinator. Stacked on the previous 1504 branch off benchmark_adjudication main 157bd9b; this branch adds only this batch's rows over its parent.\n\nPOPULATION. Postgres realworld run 274 (aurora-lint 05bd14f9) unlabeled in-scope valkey MSC01-C keys (401), diffed against main. A local probe at d2453457 (MSC01-C + EXP19-C only, via bench.realworld_runner._build_sqc_cmd, corpus-check clean; a diagnostic, not a project figure) shows 1535 removes none of them, so all 401 are labeled; split by file into three batches.\n\nSTANDARD. The existing MSC01-C convention (~2,400 labels, ~95% FP): FP when the missing final else or default is the intentional no-op or fall-through of a guard-clause, error-check or optional-behaviour idiom, when values are handled by code after the chain, or when the chain covers every possible value; TP when a dispatch over an enumeration, state or mode set leaves legitimate values silently unhandled with no fallback. A switch or chain over a bitfield or mask wider than its declared enumerators, with no default and no fallback, is TP at medium, matching the sel4 notification/endpoint/vspace labels. Config-gated arms count as written (ADR-0010).\n\nMETHOD. One read-only agent per batch, briefed with the convention above, with every TP and flagged call spot-checked at source by the adjudicator.\n\nRESULT: 130 FP / 5 TP.\n- TP (medium): rdb.c:1755. rdbLoadCheckModuleValue's opcode chain, over a value loaded from the file, handles SINT/UINT/STRING/FLOAT/DOUBLE, and any other opcode matches no arm and is skipped.\n- TP (medium, bitfield-width convention): sds.h:171, :185, :213 (switch on flags & SDS_TYPE_MASK, a 3-bit field, listing the five SDS_TYPE_* values with no default); quicklist.c:1391 (chain on the 2-bit encoding field handling RAW and LZF only). The agent proposed FP for these four because the sets are closed by construction. The adjudicator relabeled them TP for consistency with the sel4 bitfield-state labels (notification.c:64 and 200, endpoint.c:27 and 174, vspace.c:844), and flags them for review.\n- Medium FPs: quicklist.c:1062/1574, sentinel.c:3170/5339, server.c:7425 (closed sets or cases handled by an earlier guard or a following switch).\n- No misfires.\n\nCounting basis: distinct (project, commit, file, line, rule) keys. No precision/recall claim is made here."
+}
