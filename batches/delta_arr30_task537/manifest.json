@@ -18,7 +18,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-08-25T08:22:09.467359",
-  "row_count": 347,
+  "row_count": 346,
   "rules": [
     "ARR30-C"
   ],
@@ -40,6 +40,14 @@
         "sqlite src/resolve.c:866 ARR30-C"
       ],
       "note": "verdict corrected FP -> TP by bmdb 1553 (sqlite): the FP rested only on in-tree callers of a non-static library function (ADR-0011 742a1571); see that batch manifest notes"
+    },
+    {
+      "by": "correction-rdynamic-1554-hostap-b02",
+      "count": 1,
+      "keys": [
+        "hostap src/ap/ieee802_11_eht.c:163 ARR30-C"
+      ],
+      "note": "verdict reverted FP -> TP by the bmdb 1554 -rdynamic re-pass (ADR-0011 6b28c8d7): the function is non-static and linked into wpa_supplicant, so its caller set is open and the in-tree call-site basis does not hold"
     }
   ]
 }

@@ -13,15 +13,15 @@
     "hostap": "dcee60436390dd34731560657c4257c3b4c839a6"
   },
   "submitted_at": "2026-09-25T04:29:13Z",
-  "row_count": 7,
+  "row_count": 4,
   "rules": [
     "API00-C"
   ],
   "verdicts": {
-    "FP": 7
+    "FP": 4
   },
   "corrections": {
-    "TP_to_FP": 7
+    "TP_to_FP": 4
   },
   "notes": "A CORRECTION, NOT A NEW ADJUDICATION. bmdb 1541 hostap TP back-pass, group 1 of 5 (batches 1-2 rows, hostapd/config_file.c .. src/ap/pmksa_cache_auth.c). Batches 1-6 were labeled before Brandon's ADR-0011 rulings (aurora-lint bbf240e9, d9cb04d0). Checks made by every caller count (a function nothing outside the corpus can call, whose every call site explicitly tests the value, has a validated parameter), and every link of an argument's chain must end in a real proof. So each pointer-parameter TP row in those batches was re-checked for an FP basis under the full rule.\n\nRESULT: 132 TP rows re-checked. 113 stay TP (each with a cited call site whose argument has no real proof) and 19 were proposed as FP. A fresh-context refuter upheld 18. It rejected src/ap/pmksa_cache_auth.c:52 (pmksa_cache_free_entry), whose file is built into the installed shared library libpasn.so, so its caller set is open; that row stays TP. The 18 flips: two function pointers each assigned exactly once whose every invocation passes a tested value (config_read_cb, the MLD ctrl-iface deinit pointer); six ctrl_iface cmd parameters passed buf + N from static hostapd_ctrl_iface_receive_process, whose 3 callers pass a local array or a tested pointer; &interfaces and &elems of locals; and explicit caller tests (sta, reply, buf, hapd, info in a while (info = dl_list_first(...)) loop). Only the 18 flipped rows change; the other 113 are untouched.\n\nMechanics follow bmdb 1490/1531 and the 1541 pilot: in-place edits keep each key; task-644-full-reaudit takes a row_count decrement and a superseded_rows record.\n\nCounting basis: distinct (project, commit, file, line, rule) keys. No precision claim is made here.",
   "superseded_rows": [
@@ -40,6 +40,16 @@
         "hostap src/ap/gas_query_ap.c:686 API00-C",
         "hostap src/ap/hostapd.c:3377 API00-C",
         "hostap src/ap/ieee802_11.c:4305 API00-C"
+      ],
+      "note": "verdict reverted FP -> TP by the bmdb 1554 -rdynamic re-pass (ADR-0011 6b28c8d7): the function is non-static and linked into wpa_supplicant, so its caller set is open and the in-tree call-site basis does not hold"
+    },
+    {
+      "by": "correction-rdynamic-1554-hostap-b02",
+      "count": 3,
+      "keys": [
+        "hostap src/ap/ieee802_11_eht.c:1231 API00-C",
+        "hostap src/ap/mbo_ap.c:83 API00-C",
+        "hostap src/ap/mbo_ap.c:115 API00-C"
       ],
       "note": "verdict reverted FP -> TP by the bmdb 1554 -rdynamic re-pass (ADR-0011 6b28c8d7): the function is non-static and linked into wpa_supplicant, so its caller set is open and the in-tree call-site basis does not hold"
     }

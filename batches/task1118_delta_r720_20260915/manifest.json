@@ -24,7 +24,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-09-15T11:23:46.295128",
-  "row_count": 1123,
+  "row_count": 1100,
   "rules": [
     "API00-C"
   ],
@@ -398,6 +398,36 @@
         "hostap src/ap/hostapd.c:4593 API00-C",
         "hostap src/ap/hostapd.c:5157 API00-C",
         "hostap src/ap/ieee802_11.c:6969 API00-C"
+      ],
+      "note": "verdict reverted FP -> TP by the bmdb 1554 -rdynamic re-pass (ADR-0011 6b28c8d7): the function is non-static and linked into wpa_supplicant, so its caller set is open and the in-tree call-site basis does not hold"
+    },
+    {
+      "by": "correction-rdynamic-1554-hostap-b02",
+      "count": 23,
+      "keys": [
+        "hostap src/ap/ieee802_11_auth.c:672 API00-C",
+        "hostap src/ap/ieee802_11_eht.c:371 API00-C",
+        "hostap src/ap/ieee802_11_eht.c:1503 API00-C",
+        "hostap src/ap/ieee802_11_he.c:472 API00-C",
+        "hostap src/ap/ieee802_11_he.c:503 API00-C",
+        "hostap src/ap/ieee802_11_ht.c:397 API00-C",
+        "hostap src/ap/ieee802_11_shared.c:1046 API00-C",
+        "hostap src/ap/ieee802_11_vht.c:196 API00-C",
+        "hostap src/ap/ieee802_11_vht.c:225 API00-C",
+        "hostap src/ap/ieee802_11_vht.c:310 API00-C",
+        "hostap src/ap/ieee802_1x.c:372 API00-C",
+        "hostap src/ap/ieee802_1x.c:1495 API00-C",
+        "hostap src/ap/ieee802_1x.c:2630 API00-C",
+        "hostap src/ap/ieee802_1x.c:2749 API00-C",
+        "hostap src/ap/ieee802_1x.c:2759 API00-C",
+        "hostap src/ap/ieee802_1x.c:2779 API00-C",
+        "hostap src/ap/ieee802_1x.c:2791 API00-C",
+        "hostap src/ap/nan_usd_ap.c:170 API00-C",
+        "hostap src/ap/neighbor_db.c:194 API00-C",
+        "hostap src/ap/rrm.c:610 API00-C",
+        "hostap src/ap/sta_info.c:542 API00-C",
+        "hostap src/ap/sta_info.c:810 API00-C",
+        "hostap src/ap/sta_info.c:1715 API00-C"
       ],
       "note": "verdict reverted FP -> TP by the bmdb 1554 -rdynamic re-pass (ADR-0011 6b28c8d7): the function is non-static and linked into wpa_supplicant, so its caller set is open and the in-tree call-site basis does not hold"
     }
