@@ -12,7 +12,7 @@
     "curl": "3e198f75861cc2e12daf299689e145949dddd19b"
   },
   "submitted_at": "2026-06-16T15:18:56.926079",
-  "row_count": 9654,
+  "row_count": 9633,
   "rules": [
     "API00-C",
     "API01-C",
@@ -233,6 +233,34 @@
         "curl lib/cfilters.c:768 API00-C",
         "curl lib/conncache.c:651 EXP34-C",
         "curl lib/cshutdn.c:414 EXP34-C"
+      ],
+      "note": "verdict corrected FP -> TP by bmdb 1553 (curl): the FP rested only on in-tree callers of a non-static library function (ADR-0011 742a1571); see that batch manifest notes"
+    },
+    {
+      "by": "correction-libruling-curl-b2-task1553",
+      "count": 21,
+      "keys": [
+        "curl lib/escape.c:115 EXP34-C",
+        "curl lib/hostip.c:1288 EXP34-C",
+        "curl lib/hostip.c:209 EXP34-C",
+        "curl lib/hostip.c:572 EXP34-C",
+        "curl lib/hostip.c:581 EXP34-C",
+        "curl lib/hostip.c:655 EXP34-C",
+        "curl lib/hostip.c:888 EXP34-C",
+        "curl lib/http1.c:323 EXP34-C",
+        "curl lib/http_proxy.c:413 API00-C",
+        "curl lib/httpsrr.c:167 API00-C",
+        "curl lib/llist.c:237 EXP34-C",
+        "curl lib/sendf.c:466 EXP34-C",
+        "curl lib/splay.c:290 EXP34-C",
+        "curl lib/transfer.c:804 ARR30-C",
+        "curl lib/url.c:2466 API00-C",
+        "curl lib/url.c:515 API00-C",
+        "curl lib/vtls/gtls.c:418 EXP34-C",
+        "curl lib/vtls/vtls.c:1882 ARR00-C",
+        "curl lib/vtls/vtls.c:1882 ARR30-C",
+        "curl lib/vtls/vtls.c:1998 EXP43-C",
+        "curl lib/vtls/vtls_scache.c:1143 API00-C"
       ],
       "note": "verdict corrected FP -> TP by bmdb 1553 (curl): the FP rested only on in-tree callers of a non-static library function (ADR-0011 742a1571); see that batch manifest notes"
     }

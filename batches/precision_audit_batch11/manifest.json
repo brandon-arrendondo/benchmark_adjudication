@@ -12,7 +12,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-06-14T16:47:13.233669+00:00",
-  "row_count": 1184,
+  "row_count": 1182,
   "rules": [
     "API00-C",
     "API02-C",
@@ -103,6 +103,15 @@
         "sqlite src/os_kv.c:460 INT32-C"
       ],
       "note": "INT32-C verdict corrected FP -> TP: the original reasoning assumed the base-26 run-length accumulator's input run is short 'in practice', but the upstream fix commit this candidate was mined from is specifically about a corrupt kvvfs block, which is the threat model this dataset otherwise treats as in-scope; see that batch's manifest notes"
+    },
+    {
+      "by": "correction-libruling-sqlite-b2-task1553",
+      "count": 2,
+      "keys": [
+        "sqlite src/alter.c:2881 API00-C",
+        "sqlite src/alter.c:788 EXP34-C"
+      ],
+      "note": "verdict corrected FP -> TP by bmdb 1553 (sqlite): the FP rested only on in-tree callers of a non-static library function (ADR-0011 742a1571); see that batch manifest notes"
     }
   ]
 }

@@ -12,7 +12,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-06-14T15:07:21.887995",
-  "row_count": 1078,
+  "row_count": 1064,
   "rules": [
     "API00-C",
     "ARR00-C",
@@ -140,6 +140,27 @@
         "sqlite ext/misc/percentile.c:478 API00-C",
         "sqlite ext/misc/randomjson.c:215 API00-C",
         "sqlite ext/misc/totype.c:509 API00-C"
+      ],
+      "note": "verdict corrected FP -> TP by bmdb 1553 (sqlite): the FP rested only on in-tree callers of a non-static library function (ADR-0011 742a1571); see that batch manifest notes"
+    },
+    {
+      "by": "correction-libruling-sqlite-b2-task1553",
+      "count": 14,
+      "keys": [
+        "sqlite src/attach.c:54 ARR00-C",
+        "sqlite src/attach.c:54 ARR30-C",
+        "sqlite src/backup.c:163 EXP34-C",
+        "sqlite src/backup.c:164 EXP34-C",
+        "sqlite src/carray.c:435 API00-C",
+        "sqlite src/carray.c:467 INT32-C",
+        "sqlite src/carray.c:468 INT32-C",
+        "sqlite src/carray.c:469 INT32-C",
+        "sqlite src/carray.c:470 INT32-C",
+        "sqlite src/carray.c:471 INT32-C",
+        "sqlite src/carray.c:476 INT32-C",
+        "sqlite src/carray.c:480 INT32-C",
+        "sqlite src/carray.c:540 API00-C",
+        "sqlite src/delete.c:979 EXP34-C"
       ],
       "note": "verdict corrected FP -> TP by bmdb 1553 (sqlite): the FP rested only on in-tree callers of a non-static library function (ADR-0011 742a1571); see that batch manifest notes"
     }

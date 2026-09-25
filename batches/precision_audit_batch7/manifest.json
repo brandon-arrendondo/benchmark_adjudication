@@ -12,7 +12,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-06-12T22:12:35.702584",
-  "row_count": 1250,
+  "row_count": 1232,
   "rules": [
     "API00-C",
     "API02-C",
@@ -148,6 +148,31 @@
       "count": 1,
       "keys": [
         "sqlite ext/misc/series.c:919 API00-C"
+      ],
+      "note": "verdict corrected FP -> TP by bmdb 1553 (sqlite): the FP rested only on in-tree callers of a non-static library function (ADR-0011 742a1571); see that batch manifest notes"
+    },
+    {
+      "by": "correction-libruling-sqlite-b2-task1553",
+      "count": 18,
+      "keys": [
+        "sqlite src/build.c:1071 EXP34-C",
+        "sqlite src/build.c:1085 EXP34-C",
+        "sqlite src/build.c:1158 EXP34-C",
+        "sqlite src/build.c:2052 ARR00-C",
+        "sqlite src/build.c:3260 ARR00-C",
+        "sqlite src/build.c:3260 ARR30-C",
+        "sqlite src/build.c:3390 ARR00-C",
+        "sqlite src/build.c:344 EXP34-C",
+        "sqlite src/build.c:4553 EXP34-C",
+        "sqlite src/build.c:5026 EXP34-C",
+        "sqlite src/build.c:5477 EXP34-C",
+        "sqlite src/build.c:550 EXP34-C",
+        "sqlite src/build.c:5664 EXP34-C",
+        "sqlite src/build.c:571 ARR00-C",
+        "sqlite src/build.c:747 EXP34-C",
+        "sqlite src/build.c:86 API00-C",
+        "sqlite src/build.c:935 EXP34-C",
+        "sqlite src/build.c:94 ARR00-C"
       ],
       "note": "verdict corrected FP -> TP by bmdb 1553 (sqlite): the FP rested only on in-tree callers of a non-static library function (ADR-0011 742a1571); see that batch manifest notes"
     }
