@@ -30,7 +30,7 @@
     "ventoy": "7cbdc5cf69935bcf1f085ae67f40e70ea7e74bae"
   },
   "submitted_at": "2026-09-13T06:11:45.408059",
-  "row_count": 1073,
+  "row_count": 1072,
   "rules": [
     "INT16-C"
   ],
@@ -51,6 +51,14 @@
         "curl lib/easy.c:1153 INT16-C"
       ],
       "note": "verdict corrected FP -> TP by bmdb 1553 (curl): the FP rested only on in-tree callers of a non-static library function (ADR-0011 742a1571); see that batch manifest notes"
+    },
+    {
+      "by": "correction-libruling-lua-b1-task1553",
+      "count": 1,
+      "keys": [
+        "lua lcode.c:402 INT16-C"
+      ],
+      "note": "verdict corrected FP -> TP by bmdb 1553 (lua): the FP rested only on in-tree callers of a non-static library function (ADR-0011 742a1571); see that batch manifest notes"
     }
   ]
 }

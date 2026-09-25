@@ -22,7 +22,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-08-25T08:36:46.115695",
-  "row_count": 210,
+  "row_count": 207,
   "rules": [
     "EXP34-C"
   ],
@@ -47,6 +47,23 @@
         "sqlite src/vdbeapi.c:2093 EXP34-C"
       ],
       "note": "verdict corrected FP -> TP by bmdb 1553 (sqlite): the FP rested only on in-tree callers of a non-static library function (ADR-0011 742a1571); see that batch manifest notes"
+    },
+    {
+      "by": "correction-libruling-curl-b3-task1553",
+      "count": 2,
+      "keys": [
+        "curl lib/url.c:3874 EXP34-C",
+        "curl lib/url.c:3884 EXP34-C"
+      ],
+      "note": "verdict corrected FP -> TP by bmdb 1553 (curl): the FP rested only on in-tree callers of a non-static library function (ADR-0011 742a1571); see that batch manifest notes"
+    },
+    {
+      "by": "correction-libruling-mosquitto-b1-task1553",
+      "count": 1,
+      "keys": [
+        "mosquitto lib/net_ws.c:49 EXP34-C"
+      ],
+      "note": "verdict corrected FP -> TP by bmdb 1553 (mosquitto): the FP rested only on in-tree callers of a non-static library function (ADR-0011 742a1571); see that batch manifest notes"
     }
   ]
 }

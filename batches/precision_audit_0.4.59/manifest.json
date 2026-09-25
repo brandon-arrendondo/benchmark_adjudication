@@ -12,7 +12,7 @@
     "lua": "40b76de2d77e66b70a9d4bf989c3f5340919973f"
   },
   "submitted_at": "2026-06-22",
-  "row_count": 2451,
+  "row_count": 2426,
   "rules": [
     "API00-C",
     "API01-C",
@@ -148,6 +148,38 @@
         "lua ltm.c:1 MEM31-C"
       ],
       "note": "MEM31-C loop-array finding relocated off line 1 by aurora_lint 1487; the key is re-keyed to the allocation site or dropped where that site already carries an FP label; see delta-mem31c-loop-array-relocation-task1491's manifest notes"
+    },
+    {
+      "by": "correction-libruling-lua-b1-task1553",
+      "count": 25,
+      "keys": [
+        "lua lauxlib.c:1006 API00-C",
+        "lua lauxlib.c:1026 API00-C",
+        "lua lauxlib.c:1039 API00-C",
+        "lua lauxlib.c:1194 API00-C",
+        "lua lauxlib.c:127 API00-C",
+        "lua lauxlib.c:171 API00-C",
+        "lua lauxlib.c:197 API00-C",
+        "lua lauxlib.c:220 API00-C",
+        "lua lauxlib.c:238 API00-C",
+        "lua lauxlib.c:330 API00-C",
+        "lua lauxlib.c:336 API00-C",
+        "lua lauxlib.c:351 API00-C",
+        "lua lauxlib.c:366 API00-C",
+        "lua lauxlib.c:408 API00-C",
+        "lua lauxlib.c:448 API00-C",
+        "lua lauxlib.c:592 API00-C",
+        "lua lauxlib.c:606 API00-C",
+        "lua lauxlib.c:635 API00-C",
+        "lua lauxlib.c:661 API00-C",
+        "lua lauxlib.c:670 API00-C",
+        "lua lauxlib.c:808 API00-C",
+        "lua lauxlib.c:867 API00-C",
+        "lua lauxlib.c:910 API00-C",
+        "lua lauxlib.c:922 API00-C",
+        "lua lauxlib.c:965 API00-C"
+      ],
+      "note": "verdict corrected FP -> TP by bmdb 1553 (lua): the FP rested only on in-tree callers of a non-static library function (ADR-0011 742a1571); see that batch manifest notes"
     }
   ]
 }

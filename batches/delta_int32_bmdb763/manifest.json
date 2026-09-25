@@ -16,7 +16,7 @@
     "sel4": "1326364bc9135d9445d936ebc01e38a402c1f4c6"
   },
   "submitted_at": "2026-09-07T13:09:32.136759",
-  "row_count": 32,
+  "row_count": 31,
   "rules": [
     "INT32-C"
   ],
@@ -31,6 +31,14 @@
         "lua lapi.c:67 INT32-C"
       ],
       "note": "verdict corrected FP -> TP under ADR-0010 (configuration reachability / NDEBUG-stripped guard is not an FP basis); see that batch's manifest notes"
+    },
+    {
+      "by": "correction-libruling-lua-b1-task1553",
+      "count": 1,
+      "keys": [
+        "lua lapi.c:1094 INT32-C"
+      ],
+      "note": "verdict corrected FP -> TP by bmdb 1553 (lua): the FP rested only on in-tree callers of a non-static library function (ADR-0011 742a1571); see that batch manifest notes"
     }
   ]
 }
