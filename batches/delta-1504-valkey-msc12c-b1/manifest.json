@@ -1,0 +1,24 @@
+{
+  "batch_id": "delta-1504-valkey-msc12c-b1",
+  "work_item_ref": "aurora_lint-1504",
+  "requested_by": "coordinator",
+  "adjudicator": "claude-opus-5.5",
+  "adjudicating_node": "dev-180",
+  "aurora_lint_version": "0.5.3",
+  "aurora_lint_sha": "05bd14f9ea5fbc249818b91d416ea1b09b2bf793",
+  "projects": [
+    "valkey"
+  ],
+  "codebase_commits": {
+    "valkey": "7f1dffedff6de73058b2c2a389422b6ecd56c8fb"
+  },
+  "submitted_at": "2026-09-25T03:40:00Z",
+  "row_count": 34,
+  "rules": [
+    "MSC12-C"
+  ],
+  "verdicts": {
+    "FP": 34
+  },
+  "notes": "aurora_lint 1504 (v0.5.3 step 3), valkey MSC12-C batch 1.\n\nPOPULATION. Postgres realworld run 274 (aurora-lint 05bd14f9, tag v0.5.3) left 53 in-scope valkey MSC12-C keys unlabeled, none already on this repo's main. This batch is the 34 whose message is not 'Stray semicolon has no effect.' (empty if/else/case/function bodies, literal-as-statement). The 19 stray-semicolon keys are held on aurora_lint 1282 (subtree-scoped parse-damage guard; valkey syscheck.c:407 is its own example), per the coordinator's gate decision. The batch is below the usual 110-150 because it is the whole ungated population.\n\nMETHOD. Every flagged line read at the pinned checkout (valkey 7f1dffed).\n\nRESULT: 34 FP, 0 TP. 22 are empty if bodies whose condition calls write()/connWrite() to consume the return value, each with a comment saying so. 10 are documented no-op else/case arms, a TODO placeholder (medium confidence) or a function kept only for its address. 2 are misfires: adjacent string literals concatenated around STRINGIFY(), not a literal statement. Confidence: high 33, med 1. This follows the existing MSC12-C convention in this repo.\n\nCounting basis: distinct (project, commit, file, line, rule) keys. No precision/recall claim is made here."
+}
