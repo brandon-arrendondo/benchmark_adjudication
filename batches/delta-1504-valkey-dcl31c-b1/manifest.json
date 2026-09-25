@@ -1,0 +1,24 @@
+{
+  "batch_id": "delta-1504-valkey-dcl31c-b1",
+  "work_item_ref": "aurora_lint-1504",
+  "requested_by": "coordinator",
+  "adjudicator": "claude-opus-5.5",
+  "adjudicating_node": "dev-180",
+  "aurora_lint_version": "0.5.3",
+  "aurora_lint_sha": "05bd14f9ea5fbc249818b91d416ea1b09b2bf793",
+  "projects": [
+    "valkey"
+  ],
+  "codebase_commits": {
+    "valkey": "7f1dffedff6de73058b2c2a389422b6ecd56c8fb"
+  },
+  "submitted_at": "2026-09-25T02:30:00Z",
+  "row_count": 118,
+  "rules": [
+    "DCL31-C"
+  ],
+  "verdicts": {
+    "FP": 118
+  },
+  "notes": "aurora_lint 1504 (v0.5.3 step 3), valkey DCL31-C batch 1 of 3.\n\nPOPULATION. Postgres realworld run 274 (aurora-lint 05bd14f9, tag v0.5.3): all 355 unlabeled valkey DCL31-C keys (list_realworld_unlabeled), every one inside valkey's declared scope (data/benchmark_repos.json, docs/design/realworld-corpus-scope.md), none already on this repo's main. Split into batches by whole file. This batch: 118 keys in 10 files (src/ae_evport.c, src/aof.c, src/dict.c, src/lazyfree.c, src/modules/lua/function_lua.c, src/monotonic.c, src/queues.c, src/valkey-cli.c, src/valkey_strtod.c, src/zmalloc.c). corpus-check: valkey detached at its pin, tree clean.\n\nMETHOD. Each call was read at the pinned checkout and its callee's declaration located. Callees: atomic_store_explicit 24, atomic_load_explicit 23, atomic_fetch_add_explicit 21, fileno 11, atomic_fetch_sub_explicit 10, atomic_init 8, valkeySetPushCallback 4, ValkeyModule_CreateStringPrintf 2, ValkeyModule_Calloc 2, ValkeyModule_Alloc 2, ffc_from_chars_double_options 2, port_create 1, port_associate 1, port_dissociate 1, port_getn 1, callback 1, ValkeyModule_CreateString 1, monotime 1, atomic_thread_fence 1, atomic_compare_exchange_weak_explicit 1.\n\nRESULT: 118 FP, 0 TP. Every flagged call has a declaration visible to it: C11 <stdatomic.h> generic operations, valkeymodule.h's function-pointer API table, POSIX/BSD/Solaris system headers the file includes, vendored deps headers, function-pointer parameters, or a definition earlier in the same file. This follows the existing DCL31-C convention in this repo, where no DCL31-C row is TP.\n\nCounting basis: distinct (project, commit, file, line, rule) keys. No precision/recall claim is made here."
+}
