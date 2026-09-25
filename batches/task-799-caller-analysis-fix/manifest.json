@@ -18,7 +18,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-09-08T16:35:36.279363",
-  "row_count": 6,
+  "row_count": 5,
   "rules": [
     "API00-C"
   ],
@@ -31,6 +31,14 @@
         "curl lib/select.c:404 API00-C"
       ],
       "note": "verdict corrected FP -> TP by bmdb 1553 (curl): the FP rested only on in-tree callers of a non-static library function (ADR-0011 742a1571); see that batch manifest notes"
+    },
+    {
+      "by": "correction-rdynamic-1554-hostap-b06",
+      "count": 1,
+      "keys": [
+        "hostap src/eap_peer/eap_fast_pac.c:411 API00-C"
+      ],
+      "note": "verdict reverted FP -> TP by the bmdb 1554 -rdynamic re-pass (ADR-0011 6b28c8d7): the function is non-static and linked into wpa_supplicant, so its caller set is open and the in-tree call-site basis does not hold"
     }
   ]
 }
