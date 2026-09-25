@@ -13,15 +13,15 @@
     "hostap": "dcee60436390dd34731560657c4257c3b4c839a6"
   },
   "submitted_at": "2026-09-25T04:11:27Z",
-  "row_count": 40,
+  "row_count": 13,
   "rules": [
     "API00-C"
   ],
   "verdicts": {
-    "FP": 40
+    "FP": 13
   },
   "corrections": {
-    "TP_to_FP": 40
+    "TP_to_FP": 13
   },
   "notes": "A CORRECTION, NOT A NEW ADJUDICATION. bmdb 1541 hostap batch 7 (src/pasn/pasn_responder.c .. src/tls/tlsv1_server_write.c). Same standard and method as batches 1-6 and 8 (see correction-api00c-644-hostap-b1-task1541), including ADR-0011's caller-check basis (aurora-lint bbf240e9): a function nothing outside the corpus can call, whose every call site provably tests the value for NULL, has a validated parameter. A dereference is not a test for that basis.\n\nRESULT: 140 rows. 97 TP stand (reason restated to the TP basis; source unchanged) and 43 are corrected TP -> FP here, a flip rate of 30.7%. This is the b7-r2 rebuild: after Brandon's ADR-0011 d9cb04d0 ruling (a prior dereference is not proof), a proof-chain audit reverted 8 of the 51 earlier flips before merge (driver-frame mgmt->sa, driver-ctx wpa_s->sme/rsnxe, and dl_list iterators never NULL-tested), and restated two tlsv1_common.c reasons to their real chain. A fresh-context refuter reviewed all 61 proposed flips and upheld 51. It rejected the 10 RADIUS rows (radius.c:488/530/595/621/911/1566/1932/1953, radius_client.c:849/1943): the in-tree call sites all test msg or pass address-of values, but hostap ships src/radius as libradius.a for outside programs (radius_example/README: \"used as a library in another program\"; radius_example/Makefile links it), so under ADR-0011 their caller set is open, and those rows stay TP. The 23 tlsv1_client_*/tlsv1_server_* flips rest on tls_internal.c's dominating conn->client/conn->server tests; tlsv1_* is not declared in the public tls.h and is reached only through tls_internal.c.\n\nMechanics follow bmdb 1490/1531 and the 1541 pilot: in-place edits keep each key; task-644-full-reaudit takes a row_count decrement and a superseded_rows record.\n\nCounting basis: distinct (project, commit, file, line, rule) keys. No precision claim is made here.",
   "superseded_rows": [
@@ -32,6 +32,40 @@
         "hostap src/pasn/pasn_responder.c:54 API00-C",
         "hostap src/pasn/pasn_responder.c:84 API00-C",
         "hostap src/rsn_supp/wpa_ie.c:28 API00-C"
+      ],
+      "note": "API00-C verdict reverted FP -> TP under the ADR-0011 library ruling (aurora-lint 742a1571): the function is non-static in a library-built file, so its caller set is open and the in-tree call-site proof does not hold; see that batch's manifest notes"
+    },
+    {
+      "by": "correction-api00c-644-hostap-libeap-archives-task1541",
+      "count": 27,
+      "keys": [
+        "hostap src/tls/asn1.c:604 API00-C",
+        "hostap src/tls/pkcs1.c:200 API00-C",
+        "hostap src/tls/tlsv1_client.c:330 API00-C",
+        "hostap src/tls/tlsv1_client.c:510 API00-C",
+        "hostap src/tls/tlsv1_client.c:531 API00-C",
+        "hostap src/tls/tlsv1_client.c:549 API00-C",
+        "hostap src/tls/tlsv1_client.c:730 API00-C",
+        "hostap src/tls/tlsv1_client.c:810 API00-C",
+        "hostap src/tls/tlsv1_client.c:854 API00-C",
+        "hostap src/tls/tlsv1_client.c:868 API00-C",
+        "hostap src/tls/tlsv1_client.c:875 API00-C",
+        "hostap src/tls/tlsv1_client.c:886 API00-C",
+        "hostap src/tls/tlsv1_common.c:330 API00-C",
+        "hostap src/tls/tlsv1_common.c:370 API00-C",
+        "hostap src/tls/tlsv1_server.c:132 API00-C",
+        "hostap src/tls/tlsv1_server.c:260 API00-C",
+        "hostap src/tls/tlsv1_server.c:443 API00-C",
+        "hostap src/tls/tlsv1_server.c:455 API00-C",
+        "hostap src/tls/tlsv1_server.c:473 API00-C",
+        "hostap src/tls/tlsv1_server.c:686 API00-C",
+        "hostap src/tls/tlsv1_server.c:712 API00-C",
+        "hostap src/tls/tlsv1_server.c:719 API00-C",
+        "hostap src/tls/tlsv1_server.c:730 API00-C",
+        "hostap src/tls/tlsv1_server.c:738 API00-C",
+        "hostap src/tls/tlsv1_server.c:744 API00-C",
+        "hostap src/tls/tlsv1_server.c:750 API00-C",
+        "hostap src/tls/tlsv1_server.c:757 API00-C"
       ],
       "note": "API00-C verdict reverted FP -> TP under the ADR-0011 library ruling (aurora-lint 742a1571): the function is non-static in a library-built file, so its caller set is open and the in-tree call-site proof does not hold; see that batch's manifest notes"
     }

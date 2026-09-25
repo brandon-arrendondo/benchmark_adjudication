@@ -1,0 +1,27 @@
+{
+  "batch_id": "correction-api00c-644-hostap-libeap-archives-task1541",
+  "work_item_ref": "benchmarking_db-1541",
+  "requested_by": "coordinator",
+  "adjudicator": "claude-opus-5.5",
+  "adjudicating_node": "dev-149",
+  "aurora_lint_version": "0.5.3",
+  "aurora_lint_sha": "05bd14f9ea5fbc249818b91d416ea1b09b2bf793",
+  "projects": [
+    "hostap"
+  ],
+  "codebase_commits": {
+    "hostap": "dcee60436390dd34731560657c4257c3b4c839a6"
+  },
+  "submitted_at": "2026-09-25T12:37:18Z",
+  "row_count": 41,
+  "rules": [
+    "API00-C"
+  ],
+  "verdicts": {
+    "TP": 41
+  },
+  "corrections": {
+    "FP_to_TP": 41
+  },
+  "notes": "A CORRECTION, NOT A NEW ADJUDICATION. bmdb 1541 hostap, library ruling, second part. Same ruling as correction-api00c-644-hostap-libraries-task1541 (aurora-lint ADR-0011, 742a1571), applied to the helper archives that the shipped libraries link in.\n\nSCOPE. eap_example/Makefile builds libeap from EAP_LIBS (src/utils/libutils.a, src/crypto/libcrypto.a, src/tls/libtls.a) plus its own objects, as a thin archive (ar crT) or as libeap.so. eap_example/README says the EAP library links in helper functions from src/utils and src/crypto. radius_example/Makefile links libcrypto.a and libutils.a directly next to libradius.a. So every non-static function in a LIB_OBJS member of those three archives (src/utils/Makefile, src/crypto/Makefile, src/tls/Makefile) is in a library linked by an example program, and its caller set is open.\n\nRESULT. Every task-1541 API00-C FP row in those files that is not already covered by the first batch was checked (42 rows). 41 revert FP -> TP here: 28 in libtls.a (23 tlsv1_client/tlsv1_server rows that rested on tls_internal.c's conn->client/conn->server tests, plus tlsv1_common.c, asn1.c, pkcs1.c and x509v3.c), 12 in libcrypto.a (aes-ccm, aes-gcm, milenage, sha1-internal, tls_internal) and 1 in libutils.a (radiotap.c). 1 stays FP because its proof is in the callee (asn1.c:480, next forwarded only to asn1_get_sequence, which tests it). This reverses the earlier reading that tlsv1_* is closed because it is not declared in tls.h: the ruling is per file, and libtls.a is a member of libeap.\n\nMechanics as in the first batch. Counting basis: distinct (project, commit, file, line, rule) keys. No precision claim is made here."
+}
