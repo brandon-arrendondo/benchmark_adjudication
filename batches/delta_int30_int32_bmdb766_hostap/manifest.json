@@ -12,7 +12,7 @@
     "hostap": "dcee60436390dd34731560657c4257c3b4c839a6"
   },
   "submitted_at": "2026-09-08T10:59:07.673706",
-  "row_count": 170,
+  "row_count": 169,
   "rules": [
     "INT30-C",
     "INT32-C"
@@ -24,6 +24,14 @@
       "count": 1,
       "keys": [
         "hostap src/utils/common.c:224 INT30-C"
+      ],
+      "note": "verdict reverted FP -> TP by the bmdb 1554 -rdynamic re-pass (ADR-0011 6b28c8d7): the function is non-static and linked into wpa_supplicant, so its caller set is open and the in-tree call-site basis does not hold"
+    },
+    {
+      "by": "correction-rdynamic-1554-hostap-b09",
+      "count": 1,
+      "keys": [
+        "hostap src/utils/os_unix.c:726 INT30-C"
       ],
       "note": "verdict reverted FP -> TP by the bmdb 1554 -rdynamic re-pass (ADR-0011 6b28c8d7): the function is non-static and linked into wpa_supplicant, so its caller set is open and the in-tree call-site basis does not hold"
     }

@@ -12,7 +12,7 @@
     "hostap": "dcee60436390dd34731560657c4257c3b4c839a6"
   },
   "submitted_at": "2026-07-28",
-  "row_count": 30974,
+  "row_count": 30970,
   "rules": [
     "API00-C",
     "API01-C",
@@ -387,6 +387,17 @@
         "hostap src/utils/common.c:239 EXP34-C",
         "hostap src/utils/common.c:239 INT34-C",
         "hostap src/utils/common.c:522 EXP34-C"
+      ],
+      "note": "verdict reverted FP -> TP by the bmdb 1554 -rdynamic re-pass (ADR-0011 6b28c8d7): the function is non-static and linked into wpa_supplicant, so its caller set is open and the in-tree call-site basis does not hold"
+    },
+    {
+      "by": "correction-rdynamic-1554-hostap-b09",
+      "count": 4,
+      "keys": [
+        "hostap src/utils/config.c:45 INT32-C",
+        "hostap src/utils/json.c:60 EXP34-C",
+        "hostap src/utils/wpabuf.c:224 EXP34-C",
+        "hostap src/wps/wps_common.c:262 EXP34-C"
       ],
       "note": "verdict reverted FP -> TP by the bmdb 1554 -rdynamic re-pass (ADR-0011 6b28c8d7): the function is non-static and linked into wpa_supplicant, so its caller set is open and the in-tree call-site basis does not hold"
     }
