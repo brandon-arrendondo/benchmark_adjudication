@@ -1,0 +1,27 @@
+{
+  "batch_id": "correction-api00c-callercheck-curl-task1551",
+  "work_item_ref": "benchmarking_db-1551",
+  "requested_by": "coordinator",
+  "adjudicator": "claude-opus-5.5",
+  "adjudicating_node": "dev-180",
+  "aurora_lint_version": "0.5.3",
+  "aurora_lint_sha": "05bd14f9ea5fbc249818b91d416ea1b09b2bf793",
+  "projects": [
+    "curl"
+  ],
+  "codebase_commits": {
+    "curl": "3e198f75861cc2e12daf299689e145949dddd19b"
+  },
+  "submitted_at": "2026-09-25T13:04:53Z",
+  "row_count": 18,
+  "rules": [
+    "API00-C"
+  ],
+  "verdicts": {
+    "FP": 18
+  },
+  "corrections": {
+    "TP_to_FP": 18
+  },
+  "notes": "A CORRECTION, NOT A NEW ADJUDICATION. bmdb 1551, curl: API00-C rows labeled TP are re-derived under ADR-0011 (aurora-lint bbf240e9 caller-side checks, d9cb04d0 proof chains, 742a1571 libraries count as external). API00-C never flags a static function, so a closed caller set exists only for a non-static function linked solely into a plain executable. For curl that is the curl command-line tool (src/, not libcurl): there is no -rdynamic, export list or dlopen of its own code. A row flips TP -> FP only when every call site (including every use of a wrapping macro, in every #ifdef arm) proves every flagged parameter non-null by a dominating explicit test, an address-of, an array or array offset, a literal, or a chain of caller parameters ending in one of those at every level. A prior dereference, assert/DEBUGASSERT, an untested field or global, or a test of a different expression is not proof. METHOD: a mechanical call-site pre-pass, then a first reader over every candidate, then a fresh-context refuter over every proposed flip. RESULT: 18 flip TP -> FP here, each reason naming its call sites. Key src/tool_xattr.c:108 is not emitted by a current scan; the originally flagged parameters are shown non-null regardless. main() argv rows are left to bmdb 1548. Counting basis: distinct (project, commit, file, line, rule) keys. No precision claim is made here."
+}

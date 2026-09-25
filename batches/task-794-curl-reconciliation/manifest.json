@@ -12,9 +12,21 @@
     "curl": "3e198f75861cc2e12daf299689e145949dddd19b"
   },
   "submitted_at": "2026-09-08T13:38:02.379815",
-  "row_count": 60,
+  "row_count": 57,
   "rules": [
     "API00-C"
   ],
-  "notes": "Reconstructed during benchmark_adjudication's initial population (2026-09-16) from benchmarking_db's ground_truth.source='task-794-curl-reconciliation'. row_count/projects/codebase_commits/rules were derived from the rows themselves, not declared at adjudication time. aurora_lint_version/aurora_lint_sha are unknown for legacy data -- never recorded per-row."
+  "notes": "Reconstructed during benchmark_adjudication's initial population (2026-09-16) from benchmarking_db's ground_truth.source='task-794-curl-reconciliation'. row_count/projects/codebase_commits/rules were derived from the rows themselves, not declared at adjudication time. aurora_lint_version/aurora_lint_sha are unknown for legacy data -- never recorded per-row.",
+  "superseded_rows": [
+    {
+      "by": "correction-api00c-callercheck-curl-task1551",
+      "count": 3,
+      "keys": [
+        "curl src/tool_ssls.c:187 API00-C",
+        "curl src/tool_ssls.c:55 API00-C",
+        "curl src/tool_xattr.c:108 API00-C"
+      ],
+      "note": "API00-C verdict corrected TP -> FP by bmdb 1551 (curl): closed caller set, every call site proves each flagged parameter non-null (ADR-0011 caller-side checks); see that batch manifest notes"
+    }
+  ]
 }
