@@ -1,0 +1,24 @@
+{
+  "batch_id": "delta-1504-valkey-mem10c-b1",
+  "work_item_ref": "aurora_lint-1504",
+  "requested_by": "coordinator",
+  "adjudicator": "claude-opus-5.5",
+  "adjudicating_node": "dev-180",
+  "aurora_lint_version": "0.5.3",
+  "aurora_lint_sha": "05bd14f9ea5fbc249818b91d416ea1b09b2bf793",
+  "projects": [
+    "valkey"
+  ],
+  "codebase_commits": {
+    "valkey": "7f1dffedff6de73058b2c2a389422b6ecd56c8fb"
+  },
+  "submitted_at": "2026-09-25T03:00:00Z",
+  "row_count": 77,
+  "rules": [
+    "MEM10-C"
+  ],
+  "verdicts": {
+    "FP": 77
+  },
+  "notes": "aurora_lint 1504 (v0.5.3 step 3), valkey MEM10-C batch 1.\n\nPOPULATION. Postgres realworld run 274 (aurora-lint 05bd14f9, tag v0.5.3) left 85 in-scope valkey MEM10-C keys unlabeled, none already on this repo's main. This batch is the 77 with the 'Direct NULL check for pointer validation' message, in 16 files. It is below the usual 110-150 because it is the whole population for that message. The other 8 keys carry the 'sizeof(x) returns the size of a pointer' message and are held: all 8 read FP (non-pointer x, a deliberate copy of a pointer's own bytes, or an array), and a rule fix filed alongside this batch would remove them.\n\nMETHOD. Every flagged line read at the pinned checkout (valkey 7f1dffed); each is an `if (x == NULL)` or `if (x != NULL)` guard, confirmed mechanically and by eye.\n\nRESULT: 77 FP, 0 TP, following the existing MEM10-C convention in this repo (a plain NULL check is the stylistic FP class; 683 of 687 existing MEM10-C rows are FP).\n\nCounting basis: distinct (project, commit, file, line, rule) keys. No precision/recall claim is made here."
+}
