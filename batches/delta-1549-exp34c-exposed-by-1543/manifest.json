@@ -1,0 +1,29 @@
+{
+  "batch_id": "delta-1549-exp34c-exposed-by-1543",
+  "work_item_ref": "benchmarking_db-1549",
+  "requested_by": "coordinator",
+  "adjudicator": "claude-opus-5.5",
+  "adjudicating_node": "dev-180",
+  "aurora_lint_version": "0.5.3",
+  "aurora_lint_sha": "91a182fb2a3d5125322794a724cc928e6735e877",
+  "projects": [
+    "mbedtls",
+    "sqlite",
+    "valkey"
+  ],
+  "codebase_commits": {
+    "mbedtls": "068ff080b369adfac81509f9b57b2afabaf82dc5",
+    "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af",
+    "valkey": "7f1dffedff6de73058b2c2a389422b6ecd56c8fb"
+  },
+  "submitted_at": "2026-09-25T19:20:13Z",
+  "row_count": 5,
+  "rules": [
+    "EXP34-C"
+  ],
+  "verdicts": {
+    "FP": 3,
+    "TP": 2
+  },
+  "notes": "bmdb 1549: the EXP34-C keys exposed by aurora-lint 91a182fb (aurora_lint 1543(a)), previously masked by the report-once-per-variable rule. Six keys were listed; valkey src/cluster_legacy.c:982 is already labeled on main (FP, delta-1504-valkey-exp19c-s2-b19) and is not re-added. Each remaining key was read by hand at source in the pinned checkout. RESULT: 3 FP (mbedtls x509_create.c:349 variable correlation proven in source; valkey module.c:12744 and replication.c:1236 loop correlation plus the existing valkey list-value basis) and 2 TP (sqlite where.c:419, guarded only by ALWAYS(); valkey-cli.c:6306, callee bounded only by an NDEBUG-strippable assert). Counting basis: distinct (project, commit, file, line, rule) keys. No precision claim is made here."
+}
