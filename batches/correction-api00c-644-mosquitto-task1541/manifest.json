@@ -1,0 +1,27 @@
+{
+  "batch_id": "correction-api00c-644-mosquitto-task1541",
+  "work_item_ref": "benchmarking_db-1541",
+  "requested_by": "coordinator",
+  "adjudicator": "claude-opus-5.5",
+  "adjudicating_node": "dev-180",
+  "aurora_lint_version": "0.5.3",
+  "aurora_lint_sha": "05bd14f9ea5fbc249818b91d416ea1b09b2bf793",
+  "projects": [
+    "mosquitto"
+  ],
+  "codebase_commits": {
+    "mosquitto": "d3ee5c5ca62c0fa4983308c6fff558ee978e878c"
+  },
+  "submitted_at": "2026-09-25T02:46:15Z",
+  "row_count": 7,
+  "rules": [
+    "API00-C"
+  ],
+  "verdicts": {
+    "FP": 7
+  },
+  "corrections": {
+    "TP_to_FP": 7
+  },
+  "notes": "A CORRECTION, NOT A NEW ADJUDICATION. bmdb 1541, mosquitto, all 162 rows: 162 mosquitto rows of task-644-full-reaudit (all TP, most carrying a superseded FP-rationale reason), re-derived at mosquitto d3ee5c5ca6 under the bmdb 769 API00-C standard, per flagged parameter. A parameter is validated only by a genuine guard on the parameter itself, by every call site passing an address-of or literal, or by being forwarded only to null-tolerant callees (a parameter forwarded to a dereferencing callee is unvalidated, as task-664 labels it). assert()/DEBUGASSERT is not validation (non-debug build); optional hardening configs are off (ADR-0010).\n\nRESULT: 155 TP stand (reason text restated to the TP basis, source unchanged) and 7 flip TP -> FP, listed here: mosquitto lib/net_mosq.c:1121 API00-C; mosquitto src/conf.c:389 API00-C; mosquitto src/database.c:1041 API00-C; mosquitto src/database.c:401 API00-C; mosquitto src/http_api.c:559 API00-C; mosquitto src/subs.c:621 API00-C; mosquitto src/subs.c:653 API00-C. A fresh-context reviewer tried to refute each flip and upheld all of them.\n\nMECHANICS follow bmdb 1490/1531: in-place edits keep each key; task-644-full-reaudit takes a row_count decrement of 7 and a superseded_rows record.\n\nCounting basis: distinct (project, commit, file, line, rule) keys. No precision claim is made here."
+}
