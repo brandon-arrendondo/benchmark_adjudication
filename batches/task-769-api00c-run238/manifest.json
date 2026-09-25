@@ -20,9 +20,58 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-09-08T15:31:51.800284",
-  "row_count": 348,
+  "row_count": 315,
   "rules": [
     "API00-C"
   ],
-  "notes": "Reconstructed during benchmark_adjudication's initial population (2026-09-16) from benchmarking_db's ground_truth.source='task-769-api00c-run238'. row_count/projects/codebase_commits/rules were derived from the rows themselves, not declared at adjudication time. aurora_lint_version/aurora_lint_sha are unknown for legacy data -- never recorded per-row."
+  "notes": "Reconstructed during benchmark_adjudication's initial population (2026-09-16) from benchmarking_db's ground_truth.source='task-769-api00c-run238'. row_count/projects/codebase_commits/rules were derived from the rows themselves, not declared at adjudication time. aurora_lint_version/aurora_lint_sha are unknown for legacy data -- never recorded per-row.",
+  "superseded_rows": [
+    {
+      "by": "correction-api00c-callercheck-curl-task1551",
+      "count": 7,
+      "keys": [
+        "curl src/tool_cb_hdr.c:233 API00-C",
+        "curl src/tool_operhlp.c:61 API00-C",
+        "curl src/tool_setopt.c:235 API00-C",
+        "curl src/tool_setopt.c:273 API00-C",
+        "curl src/tool_setopt.c:324 API00-C",
+        "curl src/tool_setopt.c:595 API00-C",
+        "curl src/tool_setopt.c:638 API00-C"
+      ],
+      "note": "API00-C verdict corrected TP -> FP by bmdb 1551 (curl): closed caller set, every call site proves each flagged parameter non-null (ADR-0011 caller-side checks); see that batch manifest notes"
+    },
+    {
+      "by": "correction-api00c-callercheck-pureftpd-task1551",
+      "count": 26,
+      "keys": [
+        "pureftpd src/altlog.c:412 API00-C",
+        "pureftpd src/bonjour.c:29 API00-C",
+        "pureftpd src/bsd-glob.c:232 API00-C",
+        "pureftpd src/bsd-realpath.c:143 API00-C",
+        "pureftpd src/diraliases.c:80 API00-C",
+        "pureftpd src/fakechroot.c:182 API00-C",
+        "pureftpd src/fakechroot.c:195 API00-C",
+        "pureftpd src/fakechroot.c:208 API00-C",
+        "pureftpd src/fakechroot.c:300 API00-C",
+        "pureftpd src/fakechroot.c:402 API00-C",
+        "pureftpd src/fakechroot.c:477 API00-C",
+        "pureftpd src/fakechroot.c:57 API00-C",
+        "pureftpd src/ftpd.c:1168 API00-C",
+        "pureftpd src/ftpd.c:2192 API00-C",
+        "pureftpd src/ftpd.c:253 API00-C",
+        "pureftpd src/ftpd.c:2556 API00-C",
+        "pureftpd src/ftpd.c:337 API00-C",
+        "pureftpd src/ftpd.c:3406 API00-C",
+        "pureftpd src/ftpd.c:4617 API00-C",
+        "pureftpd src/ftpd.c:75 API00-C",
+        "pureftpd src/ftpd.c:932 API00-C",
+        "pureftpd src/ls.c:1062 API00-C",
+        "pureftpd src/ls.c:981 API00-C",
+        "pureftpd src/tls_extcert.c:97 API00-C",
+        "pureftpd src/upload-pipe.c:95 API00-C",
+        "pureftpd src/utils.c:46 API00-C"
+      ],
+      "note": "API00-C verdict corrected TP -> FP by bmdb 1551 (pureftpd): closed caller set, every call site proves each flagged parameter non-null (ADR-0011 caller-side checks); see that batch manifest notes"
+    }
+  ]
 }
