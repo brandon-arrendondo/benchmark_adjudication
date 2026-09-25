@@ -12,7 +12,7 @@
     "hostap": "dcee60436390dd34731560657c4257c3b4c839a6"
   },
   "submitted_at": "2026-07-28",
-  "row_count": 31040,
+  "row_count": 31028,
   "rules": [
     "API00-C",
     "API01-C",
@@ -267,6 +267,25 @@
         "hostap src/ap/wps_hostapd.c:1 MEM31-C"
       ],
       "note": "MEM31-C loop-array finding relocated off line 1 by aurora_lint 1487; the key is re-keyed to the allocation site or dropped where that site already carries an FP label; see delta-mem31c-loop-array-relocation-task1491's manifest notes"
+    },
+    {
+      "by": "correction-rdynamic-1554-hostap-b01",
+      "count": 12,
+      "keys": [
+        "hostap src/ap/ap_drv_ops.c:243 EXP34-C",
+        "hostap src/ap/ap_drv_ops.c:255 EXP34-C",
+        "hostap src/ap/ap_drv_ops.c:276 EXP34-C",
+        "hostap src/ap/ap_drv_ops.c:396 EXP34-C",
+        "hostap src/ap/ap_drv_ops.c:708 EXP34-C",
+        "hostap src/ap/ap_drv_ops.c:831 EXP34-C",
+        "hostap src/ap/drv_callbacks.c:1153 EXP34-C",
+        "hostap src/ap/hostapd.c:5087 EXP34-C",
+        "hostap src/ap/hostapd.c:5114 EXP34-C",
+        "hostap src/ap/hostapd.c:5223 EXP34-C",
+        "hostap src/ap/ieee802_11.c:3929 EXP34-C",
+        "hostap src/ap/ieee802_11.c:5124 EXP34-C"
+      ],
+      "note": "verdict reverted FP -> TP by the bmdb 1554 -rdynamic re-pass (ADR-0011 6b28c8d7): the function is non-static and linked into wpa_supplicant, so its caller set is open and the in-tree call-site basis does not hold"
     }
   ]
 }

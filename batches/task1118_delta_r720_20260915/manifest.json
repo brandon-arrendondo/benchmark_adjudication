@@ -24,7 +24,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-09-15T11:23:46.295128",
-  "row_count": 1162,
+  "row_count": 1123,
   "rules": [
     "API00-C"
   ],
@@ -354,6 +354,52 @@
         "sqlite src/where.c:4543 API00-C"
       ],
       "note": "verdict corrected FP -> TP by bmdb 1553 (sqlite): the FP rested only on in-tree callers of a non-static library function (ADR-0011 742a1571); see that batch manifest notes"
+    },
+    {
+      "by": "correction-rdynamic-1554-hostap-b01",
+      "count": 39,
+      "keys": [
+        "hostap src/ap/ap_config.c:48 API00-C",
+        "hostap src/ap/ap_config.c:719 API00-C",
+        "hostap src/ap/ap_config.c:1087 API00-C",
+        "hostap src/ap/ap_config.c:1559 API00-C",
+        "hostap src/ap/ap_config.c:1776 API00-C",
+        "hostap src/ap/ap_config.c:1798 API00-C",
+        "hostap src/ap/ap_drv_ops.c:536 API00-C",
+        "hostap src/ap/ap_drv_ops.c:632 API00-C",
+        "hostap src/ap/ap_drv_ops.c:765 API00-C",
+        "hostap src/ap/ap_drv_ops.c:892 API00-C",
+        "hostap src/ap/ap_drv_ops.c:1075 API00-C",
+        "hostap src/ap/authsrv.c:506 API00-C",
+        "hostap src/ap/beacon.c:2688 API00-C",
+        "hostap src/ap/beacon.c:3350 API00-C",
+        "hostap src/ap/beacon.c:3366 API00-C",
+        "hostap src/ap/ctrl_iface_ap.c:1832 API00-C",
+        "hostap src/ap/ctrl_iface_ap.c:1851 API00-C",
+        "hostap src/ap/ctrl_iface_ap.c:1881 API00-C",
+        "hostap src/ap/dfs.c:837 API00-C",
+        "hostap src/ap/dfs.c:955 API00-C",
+        "hostap src/ap/dfs.c:1672 API00-C",
+        "hostap src/ap/dpp_hostapd.c:3368 API00-C",
+        "hostap src/ap/dpp_hostapd.c:3543 API00-C",
+        "hostap src/ap/dpp_hostapd.c:3911 API00-C",
+        "hostap src/ap/dpp_hostapd.c:3997 API00-C",
+        "hostap src/ap/gas_serv.c:133 API00-C",
+        "hostap src/ap/hostapd.c:468 API00-C",
+        "hostap src/ap/hostapd.c:730 API00-C",
+        "hostap src/ap/hostapd.c:853 API00-C",
+        "hostap src/ap/hostapd.c:2839 API00-C",
+        "hostap src/ap/hostapd.c:2937 API00-C",
+        "hostap src/ap/hostapd.c:3087 API00-C",
+        "hostap src/ap/hostapd.c:3580 API00-C",
+        "hostap src/ap/hostapd.c:4270 API00-C",
+        "hostap src/ap/hostapd.c:4279 API00-C",
+        "hostap src/ap/hostapd.c:4292 API00-C",
+        "hostap src/ap/hostapd.c:4593 API00-C",
+        "hostap src/ap/hostapd.c:5157 API00-C",
+        "hostap src/ap/ieee802_11.c:6969 API00-C"
+      ],
+      "note": "verdict reverted FP -> TP by the bmdb 1554 -rdynamic re-pass (ADR-0011 6b28c8d7): the function is non-static and linked into wpa_supplicant, so its caller set is open and the in-tree call-site basis does not hold"
     }
   ]
 }

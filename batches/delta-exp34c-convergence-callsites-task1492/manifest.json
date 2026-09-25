@@ -25,13 +25,13 @@
     "ventoy": "7cbdc5cf69935bcf1f085ae67f40e70ea7e74bae"
   },
   "submitted_at": "2026-09-23T00:00:00Z",
-  "row_count": 72,
+  "row_count": 69,
   "rules": [
     "EXP33-C",
     "EXP34-C"
   ],
   "verdicts": {
-    "FP": 76,
+    "FP": 73,
     "uncertain": 1
   },
   "notes": "DELTA BATCH FOR TWO CONVERGENCE FIXES, not a re-adjudication. aurora_lint 1445 (b0cac5ab, null-state propagation run to convergence instead of stopping at 3 passes) and 1451 (b70755d5, call sites collected inside a top-level ERROR node) each widened the caller-state seed that EXP34-C consults, and each commit states that its new keys need delta-adjudication before any EXP34-C precision or recall claim. No batch had covered them (bmdb 1492 checked the full history). 1443 (575393b5) removed 91 already-FP keys and added none, so it owes nothing.\n\nHOW THE SET WAS MEASURED. No official run contains these fixes (the newest realworld run is 270, 2960cd88). So the batch source is a local scan at aurora-lint a533858c over the 12 pinned corpora (corpus-check clean), each corpus driven by bench/realworld_runner._build_sqc_cmd with its real manifest filtered to EXP34-C, INT32-C, MEM31-C and EXP33-C, in-scope via bench.corpus.in_scope, keys (file, line, rule). Taken: keys with no label at the pinned commit on main that run 270 did not report. EXP34-C gave 270 such keys; the 195 in valkey are excluded because valkey has no EXP34-C oracle at all (bmdb 1249's gap, filed separately by the coordinator). That leaves 75 EXP34-C keys plus 2 EXP33-C. The 14 MEM31-C keys in the same window are aurora_lint 1487's loop-array relocations, which bmdb 1491 adjudicated separately, so they are not here. Per corpus the EXP34-C counts sit close to the two commits' own stated deltas (hostap 35 = 4 + 31) but are not attributed to them key by key: other EXP34-C commits since run 270 also move keys.\n\nSTANDARD. Same as the 1418 batch: the violation site is the dereference, and the verdict rests on whether a null-producing expression reaches it on some path in the pinned tree. Caller sets were enumerated at source; confidence is high where the set was closed. Assertions, API contracts and build-macro guards (ADR-0010 Decision 1) are neutral, never a basis.\n\nRESULT: 76 FP, 1 uncertain, 0 TP. The dominant shape (most hostap and mosquitto keys) is a parameter whose every caller has already dereferenced or tested the same pointer. The next is an out-parameter set non-null on every success return and read only after that status (mbedtls PSA slots and ssl_cache, curl digest, mosquitto message__remove, hostap assoc_hapd and rkh_seq). None is a misfire: each message names the construct at its line and column.\n\nTHE UNCERTAIN ROW. sqlite src/status.c:216 (public sqlite3_db_status64): its only guard is under #ifdef SQLITE_ENABLE_API_ARMOR and is not used. The in-scope call sites pass an open connection. The one in-tree caller whose handle can be 0 is the JNI binding under ext/jni, which is out of scope. The dataset has not decided whether an out-of-scope caller counts as a null producer for an in-scope dereference, so the row is uncertain rather than decided here.\n\nNO PRECISION OR RECALL CLAIM follows from this batch. The keys were measured on a local scan at a533858c; the release run's own unlabeled list is authoritative once it exists.\n\nAdjudicated on dev-149 under bmdb 1492: five read-only research agents, one per project group, each verdict spot-checked at source by dev-149 before inclusion.",
@@ -61,6 +61,16 @@
         "sqlite src/vdbemem.c:191 EXP34-C"
       ],
       "note": "verdict corrected FP -> TP by bmdb 1553 (sqlite): the FP rested only on in-tree callers of a non-static library function (ADR-0011 742a1571); see that batch manifest notes"
+    },
+    {
+      "by": "correction-rdynamic-1554-hostap-b01",
+      "count": 3,
+      "keys": [
+        "hostap src/ap/ap_drv_ops.c:109 EXP34-C",
+        "hostap src/ap/hostapd.c:2497 EXP34-C",
+        "hostap src/ap/hs20.c:25 EXP34-C"
+      ],
+      "note": "verdict reverted FP -> TP by the bmdb 1554 -rdynamic re-pass (ADR-0011 6b28c8d7): the function is non-static and linked into wpa_supplicant, so its caller set is open and the in-tree call-site basis does not hold"
     }
   ]
 }
