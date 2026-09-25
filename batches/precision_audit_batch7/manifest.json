@@ -12,7 +12,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-06-12T22:12:35.702584",
-  "row_count": 1232,
+  "row_count": 1224,
   "rules": [
     "API00-C",
     "API02-C",
@@ -173,6 +173,21 @@
         "sqlite src/build.c:86 API00-C",
         "sqlite src/build.c:935 EXP34-C",
         "sqlite src/build.c:94 ARR00-C"
+      ],
+      "note": "verdict corrected FP -> TP by bmdb 1553 (sqlite): the FP rested only on in-tree callers of a non-static library function (ADR-0011 742a1571); see that batch manifest notes"
+    },
+    {
+      "by": "correction-libruling-sqlite-b7-task1553",
+      "count": 8,
+      "keys": [
+        "sqlite src/build.c:5093 EXP34-C",
+        "sqlite src/build.c:5601 API00-C",
+        "sqlite src/build.c:574 EXP34-C",
+        "sqlite src/os_unix.c:3801 INT32-C",
+        "sqlite src/os_unix.c:3802 INT32-C",
+        "sqlite src/os_unix.c:7493 CON33-C",
+        "sqlite src/os_unix.c:7630 INT13-C",
+        "sqlite src/os_unix.c:7630 INT14-C"
       ],
       "note": "verdict corrected FP -> TP by bmdb 1553 (sqlite): the FP rested only on in-tree callers of a non-static library function (ADR-0011 742a1571); see that batch manifest notes"
     }

@@ -23,7 +23,7 @@
     "valkey": "7f1dffedff6de73058b2c2a389422b6ecd56c8fb"
   },
   "submitted_at": "2026-09-22T00:00:00Z",
-  "row_count": 48,
+  "row_count": 46,
   "rules": [
     "EXP34-C",
     "INT30-C",
@@ -36,6 +36,15 @@
   },
   "notes": "Delta batch for aurora_lint 1385, which changed which definition of a multiply-defined name answers for a caller: an external definition now outranks a static one in another file (e2c2c762), and a static answers only in the file that defines it (75d66e4b). A caller in neither defining file is told nothing, which is what 'unknown callee' already means elsewhere. That removes cross-file contamination rather than adding detection, but it moves which keys several rules report at, so the delta-adjudication gate applies.\n\nHOW THE SET WAS MEASURED, AND WHY IT IS 49 AND NOT THE 68 THE TASK PROJECTED. Two local runs over the same pinned codebase commits, one at ca327445 and one at 75d66e4b, across the seven projects the task names. That window moved 58 keys in and 168 out for these six rules. Of the 58 added, 1 is out of scope and 5 already carry labels, leaving 52; 3 of those are valkey EXP34-C keys, which belong to bmdb 1249 by a standing fleet decision and are deliberately left to it rather than adjudicated here. 49 remain and are in this batch.\n\nTHE WINDOW IS NOT 1385 ALONE, AND NO KEY HERE IS ATTRIBUTED TO IT. The 13 commits between those two points also carry EXP33-C, MEM31-C, ENV30-C, VRA and dereferences_params changes. Isolating 1385's own effect would need e2c2c762^ against 75d66e4b specifically, which was not run. Every verdict below rests on the construct at source, not on which commit produced the key, so none of them depends on that attribution.\n\nVERDICTS: 47 FP, 2 TP. The two TP are one finding in two places -- mosquitto lib/send_publish.c 186 and 189, where send__publish's topic parameter reaches a %s conversion in the variadic log__printf while mosq->id on the same call is wrapped in SAFE_PRINT. mosquitto_publish_v5 assigns topic = NULL and still calls send__publish on the MQTT5 path that carries a topic alias, so the null-producing expression is concrete and in-corpus. This is the callee-side counterpart of the caller key bmdb 1423 corrected at lib/actions_publish.c:132.\n\nWHAT THE FP VERDICTS REST ON, BY GROUP. Seven are dominated by an explicit bail-out on the same length (ieee802_1x.c and eapol_supp_sm.c both return when len is below sizeof(*hdr) before the subtraction). Four in utils/common.c rest on an inductive invariant the surrounding guards maintain. Most of the remainder rest on magnitude: size_t operands carrying protocol-bounded lengths on this corpus's declared linux-x86_64 configuration, which cannot approach SIZE_MAX. Two rest on deliberate modular arithmetic (curl's LCG seed, matching the standing FP at lib/rand.c:155 for the same construct). Three are null-pointer findings whose call sets were enumerated at source.\n\nCONFIGURATION IS NOWHERE A BASIS (ADR-0010 Decision 1). Three of these keys are in hostap's non-default link-layer files (l2_packet_freebsd.c, l2_packet_ndis.c, l2_packet_winpcap.c) and two are under a testing-options duration; each is labelled as written, on magnitude or on a guard, and each reason says so explicitly so that no later reader mistakes the verdict for a configuration argument.\n\nTHREE ROWS CARRY medium CONFIDENCE, and they are the ones whose caller set was not closed: hostap src/utils/wpabuf.c:309, mbedtls library/cipher.c:326 and mosquitto src/plugin_public.c:287. Each reason states what was checked and what the verdict rests on instead.\n\nONE ROW IS FP AS KEYED RATHER THAN ON ITS MERITS: mosquitto lib/send_publish.c:128 is a positional call argument, which the EXP34-C site standard adopted in aurora_lint 1418 does not treat as a violation site. Worth a look by whoever owns that rule: the standard says the report should not be emitted there at all, and it still is.\n\nNOT IN THIS BATCH, AND FLAGGED SEPARATELY: of the 168 keys the same window removed, 22 currently carry a TP label and now name a site the tool no longer reports -- the same stale-TP shape bmdb 1423 and 1452 cleared for EXP34-C, arriving now for API00-C. They are untouched here and need their own pass.\n\nAdjudicated on dev-180 under bmdb 1453.",
   "superseded_rows": [
+    {
+      "by": "correction-libruling-mosquitto-b1-task1553",
+      "count": 2,
+      "keys": [
+        "mosquitto lib/send_publish.c:128 EXP34-C",
+        "mosquitto src/plugin_public.c:287 INT32-C"
+      ],
+      "note": "verdict corrected FP -> TP by bmdb 1553 (mosquitto): the FP rested only on in-tree callers of a non-static library function (ADR-0011 742a1571); see that batch manifest notes"
+    },
     {
       "by": "correction-rdynamic-1554-hostap-b13",
       "count": 1,

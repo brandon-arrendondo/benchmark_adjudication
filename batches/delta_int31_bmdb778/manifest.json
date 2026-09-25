@@ -22,7 +22,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-09-08T10:21:53.082359",
-  "row_count": 80,
+  "row_count": 76,
   "rules": [
     "INT31-C"
   ],
@@ -35,6 +35,24 @@
         "curl lib/curlx/warnless.c:274 INT31-C"
       ],
       "note": "verdict corrected FP -> TP by bmdb 1553 (curl): the FP rested only on in-tree callers of a non-static library function (ADR-0011 742a1571); see that batch manifest notes"
+    },
+    {
+      "by": "correction-libruling-mosquitto-b1-task1553",
+      "count": 1,
+      "keys": [
+        "mosquitto lib/logging_mosq.c:57 INT31-C"
+      ],
+      "note": "verdict corrected FP -> TP by bmdb 1553 (mosquitto): the FP rested only on in-tree callers of a non-static library function (ADR-0011 742a1571); see that batch manifest notes"
+    },
+    {
+      "by": "correction-libruling-raylib-b1-task1553",
+      "count": 3,
+      "keys": [
+        "raylib src/rlgl.h:1649 INT31-C",
+        "raylib src/rtextures.c:1938 INT31-C",
+        "raylib src/rtextures.c:1955 INT31-C"
+      ],
+      "note": "verdict corrected FP -> TP by bmdb 1553 (raylib): the FP rested only on in-tree callers of a non-static library function (ADR-0011 742a1571); see that batch manifest notes"
     },
     {
       "by": "correction-rdynamic-1554-hostap-b05",

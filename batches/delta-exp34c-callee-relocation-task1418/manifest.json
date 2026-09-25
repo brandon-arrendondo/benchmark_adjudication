@@ -27,7 +27,7 @@
     "ventoy": "7cbdc5cf69935bcf1f085ae67f40e70ea7e74bae"
   },
   "submitted_at": "2026-09-22T19:59:31Z",
-  "row_count": 83,
+  "row_count": 69,
   "rules": [
     "EXP34-C"
   ],
@@ -85,6 +85,41 @@
         "sqlite src/vdbeaux.c:5335 EXP34-C"
       ],
       "note": "verdict corrected FP -> TP by bmdb 1553 (sqlite): the FP rested only on in-tree callers of a non-static library function (ADR-0011 742a1571); see that batch manifest notes"
+    },
+    {
+      "by": "correction-libruling-sqlite-b5-task1553",
+      "count": 1,
+      "keys": [
+        "sqlite src/callback.c:422 EXP34-C"
+      ],
+      "note": "verdict corrected FP -> TP by bmdb 1553 (sqlite): the FP rested only on in-tree callers of a non-static library function (ADR-0011 742a1571); see that batch manifest notes"
+    },
+    {
+      "by": "correction-libruling-mosquitto-b1-task1553",
+      "count": 12,
+      "keys": [
+        "mosquitto lib/actions_publish.c:164 EXP34-C",
+        "mosquitto lib/callbacks.c:298 EXP34-C",
+        "mosquitto lib/net_mosq.c:602 EXP34-C",
+        "mosquitto lib/packet_datatypes.c:87 EXP34-C",
+        "mosquitto lib/tls_mosq.c:61 EXP34-C",
+        "mosquitto lib/util_mosq.c:258 EXP34-C",
+        "mosquitto lib/will_mosq.c:126 EXP34-C",
+        "mosquitto src/context.c:366 EXP34-C",
+        "mosquitto src/keepalive.c:221 EXP34-C",
+        "mosquitto src/plugin_acl_check.c:146 EXP34-C",
+        "mosquitto src/plugin_persist.c:103 EXP34-C",
+        "mosquitto src/will_delay.c:41 EXP34-C"
+      ],
+      "note": "verdict corrected FP -> TP by bmdb 1553 (mosquitto): the FP rested only on in-tree callers of a non-static library function (ADR-0011 742a1571); see that batch manifest notes"
+    },
+    {
+      "by": "correction-libruling-raylib-b1-task1553",
+      "count": 1,
+      "keys": [
+        "raylib src/rcore.c:2364 EXP34-C"
+      ],
+      "note": "verdict corrected FP -> TP by bmdb 1553 (raylib): the FP rested only on in-tree callers of a non-static library function (ADR-0011 742a1571); see that batch manifest notes"
     },
     {
       "by": "correction-rdynamic-1554-hostap-b01",

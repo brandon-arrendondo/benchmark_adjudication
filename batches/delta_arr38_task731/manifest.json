@@ -20,9 +20,51 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-09-03T13:20:20.370365",
-  "row_count": 125,
+  "row_count": 113,
   "rules": [
     "ARR38-C"
   ],
-  "notes": "Reconstructed during benchmark_adjudication's initial population (2026-09-16) from benchmarking_db's ground_truth.source='delta_arr38_task731'. row_count/projects/codebase_commits/rules were derived from the rows themselves, not declared at adjudication time. aurora_lint_version/aurora_lint_sha are unknown for legacy data -- never recorded per-row."
+  "notes": "Reconstructed during benchmark_adjudication's initial population (2026-09-16) from benchmarking_db's ground_truth.source='delta_arr38_task731'. row_count/projects/codebase_commits/rules were derived from the rows themselves, not declared at adjudication time. aurora_lint_version/aurora_lint_sha are unknown for legacy data -- never recorded per-row.",
+  "superseded_rows": [
+    {
+      "by": "correction-libruling-curl-b3-task1553",
+      "count": 1,
+      "keys": [
+        "curl lib/dynhds.c:195 ARR38-C"
+      ],
+      "note": "verdict corrected FP -> TP by bmdb 1553 (curl): the FP rested only on in-tree callers of a non-static library function (ADR-0011 742a1571); see that batch manifest notes"
+    },
+    {
+      "by": "correction-libruling-sqlite-b5-task1553",
+      "count": 9,
+      "keys": [
+        "sqlite ext/fts3/fts3_write.c:1747 ARR38-C",
+        "sqlite ext/fts5/fts5_buffer.c:375 ARR38-C",
+        "sqlite ext/fts5/fts5_hash.c:267 ARR38-C",
+        "sqlite ext/fts5/fts5_hash.c:506 ARR38-C",
+        "sqlite ext/fts5/fts5_index.c:7711 ARR38-C",
+        "sqlite src/os.c:275 ARR38-C",
+        "sqlite src/os.c:277 ARR38-C",
+        "sqlite src/pager.c:3899 ARR38-C",
+        "sqlite src/random.c:116 ARR38-C"
+      ],
+      "note": "verdict corrected FP -> TP by bmdb 1553 (sqlite): the FP rested only on in-tree callers of a non-static library function (ADR-0011 742a1571); see that batch manifest notes"
+    },
+    {
+      "by": "correction-libruling-mosquitto-b1-task1553",
+      "count": 1,
+      "keys": [
+        "mosquitto lib/packet_datatypes.c:74 ARR38-C"
+      ],
+      "note": "verdict corrected FP -> TP by bmdb 1553 (mosquitto): the FP rested only on in-tree callers of a non-static library function (ADR-0011 742a1571); see that batch manifest notes"
+    },
+    {
+      "by": "correction-libruling-sqlite-b7-task1553",
+      "count": 1,
+      "keys": [
+        "sqlite src/os_win.c:6191 ARR38-C"
+      ],
+      "note": "verdict corrected FP -> TP by bmdb 1553 (sqlite): the FP rested only on in-tree callers of a non-static library function (ADR-0011 742a1571); see that batch manifest notes"
+    }
+  ]
 }

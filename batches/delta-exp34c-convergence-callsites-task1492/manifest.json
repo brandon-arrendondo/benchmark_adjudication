@@ -25,7 +25,7 @@
     "ventoy": "7cbdc5cf69935bcf1f085ae67f40e70ea7e74bae"
   },
   "submitted_at": "2026-09-23T00:00:00Z",
-  "row_count": 41,
+  "row_count": 36,
   "rules": [
     "EXP33-C",
     "EXP34-C"
@@ -61,6 +61,18 @@
         "sqlite src/vdbemem.c:191 EXP34-C"
       ],
       "note": "verdict corrected FP -> TP by bmdb 1553 (sqlite): the FP rested only on in-tree callers of a non-static library function (ADR-0011 742a1571); see that batch manifest notes"
+    },
+    {
+      "by": "correction-libruling-mosquitto-b1-task1553",
+      "count": 5,
+      "keys": [
+        "mosquitto lib/net_mosq.c:920 EXP34-C",
+        "mosquitto lib/net_ws.c:47 EXP34-C",
+        "mosquitto src/bridge.c:407 EXP34-C",
+        "mosquitto src/plugin_persist.c:404 EXP34-C",
+        "mosquitto src/plugin_persist.c:432 EXP34-C"
+      ],
+      "note": "verdict corrected FP -> TP by bmdb 1553 (mosquitto): the FP rested only on in-tree callers of a non-static library function (ADR-0011 742a1571); see that batch manifest notes"
     },
     {
       "by": "correction-rdynamic-1554-hostap-b01",

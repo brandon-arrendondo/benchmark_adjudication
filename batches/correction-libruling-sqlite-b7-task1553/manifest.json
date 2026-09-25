@@ -1,0 +1,47 @@
+{
+  "batch_id": "correction-libruling-sqlite-b7-task1553",
+  "work_item_ref": "benchmarking_db-1553",
+  "requested_by": "coordinator",
+  "adjudicator": "claude-opus-5.5",
+  "adjudicating_node": "dev-180",
+  "aurora_lint_version": "0.5.3",
+  "aurora_lint_sha": "05bd14f9ea5fbc249818b91d416ea1b09b2bf793",
+  "projects": [
+    "sqlite"
+  ],
+  "codebase_commits": {
+    "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
+  },
+  "submitted_at": "2026-09-25T14:51:43Z",
+  "row_count": 79,
+  "rules": [
+    "API00-C",
+    "ARR00-C",
+    "ARR30-C",
+    "ARR38-C",
+    "CON03-C",
+    "CON07-C",
+    "CON33-C",
+    "DCL13-C",
+    "ERR00-C",
+    "ERR07-C",
+    "ERR34-C",
+    "EXP34-C",
+    "FIO03-C",
+    "FIO06-C",
+    "INT00-C",
+    "INT13-C",
+    "INT14-C",
+    "INT32-C",
+    "MSC01-C",
+    "MSC13-C",
+    "WIN03-C"
+  ],
+  "verdicts": {
+    "TP": 79
+  },
+  "corrections": {
+    "FP_to_TP": 79
+  },
+  "notes": "A CORRECTION, NOT A NEW ADJUDICATION. bmdb 1553 (library-ruling consistency pass), sqlite, b7: the ADR-0010 build-configuration sub-pass. EXPORT SURFACE: libsqlite3 is built and installed (main.mk:1599-1608, install-lib/install-dll), and ext/ sources are compiled into it or built as documented loadable extensions (ext/misc/README.md); SQLITE_PRIVATE makes internal functions static only in the amalgamation build, and the separate-source build also compiles (ADR-0010). Every non-static function in these sources therefore has an open caller set (ADR-0011 742a1571, 6b28c8d7), and in-tree call sites prove nothing about a value arriving through its parameters. SELECTION: existing FP labels on non-static functions in exported sources whose recorded reason is caller-side (callers, call sites, contract, precondition, \"always valid/never NULL\"); tool-only files with their own main() excluded. METHOD: each row read at source by a reviewer; FP -> TP only where the verdict rested solely on callers for a parameter-derived value. Rows with a real in-function basis (a guard present in every build, a null-tolerant callee, a misfire, a value not from a parameter, a language guarantee) or where the keyword match was noise keep FP. assert/DEBUGASSERT/NEVER()/ALWAYS() are not guards (each compiles out or constant-folds in a compilable build). A fresh-context refuter re-checked a random sample of flips and stands. RESULT: 256 rows reviewed, 79 flip FP -> TP here, 177 keep FP. SUB-PASS: FP labels whose recorded reason rests on build configuration (NEVER()/ALWAYS() guards, which are (0)/(1) under SQLITE_OMIT_AUXILIARY_SAFETY_CHECKS, sqliteInt.h:534-536; asserts stripped under NDEBUG; code live only under SQLITE_DEBUG/SQLITE_TEST; \"default build\" readings). Under ADR-0010 every compilable configuration counts, so these flip where the construct is live and unproven in some compilable build; labels in files outside the declared scope are not touched. Counting basis: distinct (project, commit, file, line, rule) keys. No precision claim is made here."
+}

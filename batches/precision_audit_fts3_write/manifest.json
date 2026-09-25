@@ -12,7 +12,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-06-12T10:34:24.833576",
-  "row_count": 464,
+  "row_count": 461,
   "rules": [
     "API00-C",
     "ARR00-C",
@@ -64,6 +64,16 @@
         "sqlite ext/fts3/fts3_write.c:1740 ARR00-C",
         "sqlite ext/fts3/fts3_write.c:1740 ARR30-C",
         "sqlite ext/fts3/fts3_write.c:1747 EXP34-C"
+      ],
+      "note": "verdict corrected FP -> TP by bmdb 1553 (sqlite): the FP rested only on in-tree callers of a non-static library function (ADR-0011 742a1571); see that batch manifest notes"
+    },
+    {
+      "by": "correction-libruling-sqlite-b7-task1553",
+      "count": 3,
+      "keys": [
+        "sqlite ext/fts3/fts3_write.c:5479 ERR34-C",
+        "sqlite ext/fts3/fts3_write.c:5483 ERR34-C",
+        "sqlite ext/fts3/fts3_write.c:5490 ERR34-C"
       ],
       "note": "verdict corrected FP -> TP by bmdb 1553 (sqlite): the FP rested only on in-tree callers of a non-static library function (ADR-0011 742a1571); see that batch manifest notes"
     }
