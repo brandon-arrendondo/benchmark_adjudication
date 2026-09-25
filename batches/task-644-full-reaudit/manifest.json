@@ -26,7 +26,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-08-30T18:38:52.403573",
-  "row_count": 2678,
+  "row_count": 2660,
   "rules": [
     "API00-C"
   ],
@@ -519,6 +519,31 @@
         "hostap wpa_supplicant/wps_supplicant.c:1585 API00-C",
         "hostap wpa_supplicant/wps_supplicant.c:1883 API00-C",
         "hostap wpa_supplicant/wps_supplicant.c:2146 API00-C"
+      ],
+      "note": "API00-C verdict corrected TP -> FP by bmdb 1541 (hostap): every flagged parameter is guarded, passed an address-of or literal at every call site, or forwarded only to null-tolerant callees; see that batch's manifest notes"
+    },
+    {
+      "by": "correction-api00c-644-hostap-backpass-g1-task1541",
+      "count": 18,
+      "keys": [
+        "hostap hostapd/config_file.c:4992 API00-C",
+        "hostap hostapd/ctrl_iface.c:4959 API00-C",
+        "hostap hostapd/ctrl_iface.c:6071 API00-C",
+        "hostap src/ap/accounting.c:395 API00-C",
+        "hostap src/ap/beacon.c:1880 API00-C",
+        "hostap src/ap/ctrl_iface_ap.c:554 API00-C",
+        "hostap src/ap/ctrl_iface_ap.c:1480 API00-C",
+        "hostap src/ap/dpp_hostapd.c:105 API00-C",
+        "hostap src/ap/dpp_hostapd.c:136 API00-C",
+        "hostap src/ap/dpp_hostapd.c:974 API00-C",
+        "hostap src/ap/dpp_hostapd.c:3258 API00-C",
+        "hostap src/ap/dpp_hostapd.c:3864 API00-C",
+        "hostap src/ap/gas_query_ap.c:686 API00-C",
+        "hostap src/ap/hostapd.c:3377 API00-C",
+        "hostap src/ap/ieee802_11.c:4305 API00-C",
+        "hostap src/ap/ieee802_11_eht.c:1231 API00-C",
+        "hostap src/ap/mbo_ap.c:83 API00-C",
+        "hostap src/ap/mbo_ap.c:115 API00-C"
       ],
       "note": "API00-C verdict corrected TP -> FP by bmdb 1541 (hostap): every flagged parameter is guarded, passed an address-of or literal at every call site, or forwarded only to null-tolerant callees; see that batch's manifest notes"
     }
