@@ -22,7 +22,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-09-08T10:21:53.082359",
-  "row_count": 82,
+  "row_count": 80,
   "rules": [
     "INT31-C"
   ],
@@ -35,6 +35,15 @@
         "curl lib/curlx/warnless.c:274 INT31-C"
       ],
       "note": "verdict corrected FP -> TP by bmdb 1553 (curl): the FP rested only on in-tree callers of a non-static library function (ADR-0011 742a1571); see that batch manifest notes"
+    },
+    {
+      "by": "correction-rdynamic-1554-hostap-b05",
+      "count": 2,
+      "keys": [
+        "hostap src/crypto/crypto_openssl.c:761 INT31-C",
+        "hostap src/crypto/crypto_openssl.c:766 INT31-C"
+      ],
+      "note": "verdict reverted FP -> TP by the bmdb 1554 -rdynamic re-pass (ADR-0011 6b28c8d7): the function is non-static and linked into wpa_supplicant, so its caller set is open and the in-tree call-site basis does not hold"
     }
   ]
 }
