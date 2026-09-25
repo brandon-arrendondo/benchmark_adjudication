@@ -1,0 +1,24 @@
+{
+  "batch_id": "delta-1504-valkey-dcl31c-b2",
+  "work_item_ref": "aurora_lint-1504",
+  "requested_by": "coordinator",
+  "adjudicator": "claude-opus-5.5",
+  "adjudicating_node": "dev-180",
+  "aurora_lint_version": "0.5.3",
+  "aurora_lint_sha": "05bd14f9ea5fbc249818b91d416ea1b09b2bf793",
+  "projects": [
+    "valkey"
+  ],
+  "codebase_commits": {
+    "valkey": "7f1dffedff6de73058b2c2a389422b6ecd56c8fb"
+  },
+  "submitted_at": "2026-09-25T02:30:00Z",
+  "row_count": 118,
+  "rules": [
+    "DCL31-C"
+  ],
+  "verdicts": {
+    "FP": 118
+  },
+  "notes": "aurora_lint 1504 (v0.5.3 step 3), valkey DCL31-C batch 2 of 3.\n\nPOPULATION. Postgres realworld run 274 (aurora-lint 05bd14f9, tag v0.5.3): all 355 unlabeled valkey DCL31-C keys (list_realworld_unlabeled), every one inside valkey's declared scope (data/benchmark_repos.json, docs/design/realworld-corpus-scope.md), none already on this repo's main. Split into batches by whole file. This batch: 118 keys in 12 files (src/ae_kqueue.c, src/bio.c, src/cluster_legacy.c, src/fuzzer_client.c, src/hashtable.c, src/io_threads.c, src/modules/lua/engine_lua.c, src/modules/lua/list.c, src/modules/lua/script_lua.c, src/rio.c, src/t_list.c, src/ziplist.c). corpus-check: valkey detached at its pin, tree clean.\n\nMETHOD. Each call was read at the pinned checkout and its callee's declaration located. Callees: ValkeyModule_Log 11, ValkeyModule_Alloc 8, atomic_load 7, atomic_fetch_add 6, atomic_thread_fence 6, ValkeyModule_Calloc 6, atomic_store_explicit 5, atomic_store 5, ValkeyModule_MallocSize 5, kevent 4, atomic_load_explicit 4, ValkeyModule_CreateStringPrintf 3, ValkeyModule_ServerInfoGetFieldC 3, zipStorePrevEntryLengthLarge 3, fileno 2, atomic_fetch_add_explicit 2, ValkeyModule_CallReplyStringPtr 2, ValkeyModule_ReplyWithLongLong 2, ValkeyModule_ReplyWithNull 2, ValkeyModule_StringPtrLen 2, fn 2, zipPrevLenByteDiff 2, kqueue 1, atomic_fetch_sub 1, callback 1, atomic_init 1, ValkeyModule_StringAppendBuffer 1, ValkeyModule_GetServerInfo 1, ValkeyModule_FreeServerInfo 1, ValkeyModule_Call 1, ValkeyModule_CallReplyArrayElement 1, ValkeyModule_Init 1, ValkeyModule_SetModuleOptions 1, ValkeyModule_LoadConfigs 1, ValkeyModule_RegisterScriptingEngine 1, ValkeyModule_UnregisterScriptingEngine 1, ValkeyModule_ReplyWithBool 1, ValkeyModule_ReplyWithDouble 1, ValkeyModule_ReplyWithBigNumber 1, ValkeyModule_CreateString 1, ValkeyModule_ScriptingEngineDebuggerLogRespReplyStr 1, ValkeyModule_GetCurrentUserName 1, ValkeyModule_GetModuleUserFromUserName 1, ValkeyModule_GetSelectedDb 1, ValkeyModule_ACLCheckPermissions 1, ValkeyModule_FreeModuleUser 1, lua_newthread 1, ValkeyModule_GetFunctionExecutionState 1.\n\nRESULT: 118 FP, 0 TP. Every flagged call has a declaration visible to it: C11 <stdatomic.h> generic operations, valkeymodule.h's function-pointer API table, POSIX/BSD/Solaris system headers the file includes, vendored deps headers, function-pointer parameters, or a definition earlier in the same file. This follows the existing DCL31-C convention in this repo, where no DCL31-C row is TP.\n\nCounting basis: distinct (project, commit, file, line, rule) keys. No precision/recall claim is made here."
+}
