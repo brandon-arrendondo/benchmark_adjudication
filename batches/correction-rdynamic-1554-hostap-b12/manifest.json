@@ -1,0 +1,29 @@
+{
+  "batch_id": "correction-rdynamic-1554-hostap-b12",
+  "work_item_ref": "benchmarking_db-1554",
+  "requested_by": "coordinator",
+  "adjudicator": "claude-opus-5.5",
+  "adjudicating_node": "dev-149",
+  "aurora_lint_version": "0.5.3",
+  "aurora_lint_sha": "05bd14f9ea5fbc249818b91d416ea1b09b2bf793",
+  "projects": [
+    "hostap"
+  ],
+  "codebase_commits": {
+    "hostap": "dcee60436390dd34731560657c4257c3b4c839a6"
+  },
+  "submitted_at": "2026-09-25T15:18:35Z",
+  "row_count": 55,
+  "rules": [
+    "API00-C",
+    "ARR00-C",
+    "EXP34-C"
+  ],
+  "verdicts": {
+    "TP": 55
+  },
+  "corrections": {
+    "FP_to_TP": 55
+  },
+  "notes": "A CORRECTION, NOT A NEW ADJUDICATION. bmdb 1554 hostap -rdynamic re-pass, batch 12 (wpa_supplicant/wifi_display.c .. wpa_supplicant/wps_supplicant.c). Stacked on correction-rdynamic-1554-hostap-b11.\n\nRULING. aurora-lint ADR-0011 6b28c8d7 (Brandon, 2026-09-25): wpa_supplicant/Makefile:1004-1006 links with -ldl -rdynamic under CONFIG_DYNAMIC_EAP_METHODS, a compilable configuration (ADR-0010), so every non-static function linked into wpa_supplicant has an open caller set and in-tree call sites prove nothing about its parameters. Also applied: a prior dereference is not a check (d9cb04d0); &p->field with p unproven is a violation site; a (pointer, length) pairing is a contract, not proof.\n\nSCOPE. FP rows whose reason rested on callers, in non-static functions of files wpa_supplicant links under some configuration (the union of its Makefile OBJS under every ifdef). This batch covers 59 such rows. Held back and NOT changed here: 3 whose key realworld run 274 no longer emits (pending a ruling on non-emitted keys), 0 inside an #ifdef HOSTAPD / hostapd-only CONFIG_* arm that the wpa_supplicant build cannot compile.\n\nMETHOD. One read-only agent read every row at source at the pinned commit, judging the value the run-274 message names, and decided whether any basis inside the function or its callees holds (a dominating test, a NULL-tolerant callee, a language guarantee, a local value's own flow, or the site not being a violation site). A fresh-context refuter re-read a sample (31 rows: every emitted FP keep or non-high call plus 30 random TP flips; 31/31 upheld.).\n\nRESULT. 55 FP -> TP here (API00-C 46, ARR00-C 6, EXP34-C 3): the only basis was the caller set. 1 stay FP with the reason restated to its local basis (a 1).\n\nMechanics: in-place edits keep each key; each original batch takes a row_count decrement and a superseded_rows record. Counting basis: distinct (project, commit, file, line, rule) keys. No precision claim is made here."
+}

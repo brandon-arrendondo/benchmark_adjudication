@@ -13,15 +13,32 @@
     "hostap": "dcee60436390dd34731560657c4257c3b4c839a6"
   },
   "submitted_at": "2026-09-25T04:22:37Z",
-  "row_count": 12,
+  "row_count": 4,
   "rules": [
     "API00-C"
   ],
   "verdicts": {
-    "FP": 12
+    "FP": 4
   },
   "corrections": {
-    "TP_to_FP": 12
+    "TP_to_FP": 4
   },
-  "notes": "A CORRECTION, NOT A NEW ADJUDICATION. bmdb 1541 hostap batch 11 (wpa_supplicant/sme.c .. wpa_supplicant/wps_supplicant.c), the last task-644 hostap batch. Same standard as batches 1-10 (see correction-api00c-644-hostap-b1-task1541), under ADR-0011 as of aurora-lint d9cb04d0. A function nothing outside the corpus can call, whose every call site explicitly tests the value, has a validated parameter. Every link of an argument's provenance chain must end in a real proof: an explicit NULL test, a language guarantee, an address-of or local/static array, or a literal. A prior dereference is not a proof.\n\nRESULT: 75 rows. 63 TP stand (reason restated to the TP basis; source unchanged) and 12 are corrected TP -> FP here, a flip rate of 16.0%. A fresh-context refuter reviewed all 12 and upheld all of them. That includes wmm_ac.c:847 (buflen - pos cannot wrap under wpa_scnprintf's in-tree return contract, common.c:272-287), wpa_supplicant.c:10018 (bssid forwarded only to get_scan_results, whose single in-tree implementation, driver_nl80211.c:15481, tests it), and wps_supplicant.c:1883 (all 9 wpa_supplicant_connect call sites explicitly test the bss they pass).\n\nMechanics follow bmdb 1490/1531 and the 1541 pilot: in-place edits keep each key; task-644-full-reaudit takes a row_count decrement and a superseded_rows record.\n\nCounting basis: distinct (project, commit, file, line, rule) keys. No precision claim is made here."
+  "notes": "A CORRECTION, NOT A NEW ADJUDICATION. bmdb 1541 hostap batch 11 (wpa_supplicant/sme.c .. wpa_supplicant/wps_supplicant.c), the last task-644 hostap batch. Same standard as batches 1-10 (see correction-api00c-644-hostap-b1-task1541), under ADR-0011 as of aurora-lint d9cb04d0. A function nothing outside the corpus can call, whose every call site explicitly tests the value, has a validated parameter. Every link of an argument's provenance chain must end in a real proof: an explicit NULL test, a language guarantee, an address-of or local/static array, or a literal. A prior dereference is not a proof.\n\nRESULT: 75 rows. 63 TP stand (reason restated to the TP basis; source unchanged) and 12 are corrected TP -> FP here, a flip rate of 16.0%. A fresh-context refuter reviewed all 12 and upheld all of them. That includes wmm_ac.c:847 (buflen - pos cannot wrap under wpa_scnprintf's in-tree return contract, common.c:272-287), wpa_supplicant.c:10018 (bssid forwarded only to get_scan_results, whose single in-tree implementation, driver_nl80211.c:15481, tests it), and wps_supplicant.c:1883 (all 9 wpa_supplicant_connect call sites explicitly test the bss they pass).\n\nMechanics follow bmdb 1490/1531 and the 1541 pilot: in-place edits keep each key; task-644-full-reaudit takes a row_count decrement and a superseded_rows record.\n\nCounting basis: distinct (project, commit, file, line, rule) keys. No precision claim is made here.",
+  "superseded_rows": [
+    {
+      "by": "correction-rdynamic-1554-hostap-b12",
+      "count": 8,
+      "keys": [
+        "hostap wpa_supplicant/wpa_supplicant.c:1556 API00-C",
+        "hostap wpa_supplicant/wpa_supplicant.c:3529 API00-C",
+        "hostap wpa_supplicant/wpa_supplicant.c:7593 API00-C",
+        "hostap wpa_supplicant/wpa_supplicant.c:9109 API00-C",
+        "hostap wpa_supplicant/wpa_supplicant.c:9338 API00-C",
+        "hostap wpa_supplicant/wps_supplicant.c:1585 API00-C",
+        "hostap wpa_supplicant/wps_supplicant.c:1883 API00-C",
+        "hostap wpa_supplicant/wps_supplicant.c:2146 API00-C"
+      ],
+      "note": "verdict reverted FP -> TP by the bmdb 1554 -rdynamic re-pass (ADR-0011 6b28c8d7): the function is non-static and linked into wpa_supplicant, so its caller set is open and the in-tree call-site basis does not hold"
+    }
+  ]
 }
