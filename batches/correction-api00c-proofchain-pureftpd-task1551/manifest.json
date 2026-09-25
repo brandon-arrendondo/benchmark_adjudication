@@ -1,0 +1,27 @@
+{
+  "batch_id": "correction-api00c-proofchain-pureftpd-task1551",
+  "work_item_ref": "benchmarking_db-1551",
+  "requested_by": "coordinator",
+  "adjudicator": "claude-opus-5.5",
+  "adjudicating_node": "dev-180",
+  "aurora_lint_version": "0.5.3",
+  "aurora_lint_sha": "05bd14f9ea5fbc249818b91d416ea1b09b2bf793",
+  "projects": [
+    "pureftpd"
+  ],
+  "codebase_commits": {
+    "pureftpd": "cc28bff52ca28e1d122a2142bf37f2dc578f4d3e"
+  },
+  "submitted_at": "2026-09-25T13:27:25Z",
+  "row_count": 4,
+  "rules": [
+    "API00-C"
+  ],
+  "verdicts": {
+    "TP": 4
+  },
+  "corrections": {
+    "FP_to_TP": 4
+  },
+  "notes": "A CORRECTION, NOT A NEW ADJUDICATION. bmdb 1551 scope addition (ADR-0011 d9cb04d0, proof chains), pureftpd: every API00-C FP label on a non-static function in a plain executable was re-checked, and an FP stands only on a real basis: a test in the function, a null-tolerant callee, or a closed caller set whose every call site ends in an explicit test, an address-of a proven object, an array, a literal or a language guarantee. A base pointer dereferenced above the call, an assert, a status-code test that does not cover the pointer, a cap- or field-derived pointer, an untested global, an integer-to-pointer round trip (basis 4), a callback registration (open caller set), and a CLI-contract or kernel-invariant argument are not proof. Unused functions stay in scope. RESULT: 4 revert FP -> TP here; the other FP rows in this pass stand. Library functions (e.g. pureftpd puredb/) are left to bmdb 1553. Counting basis: distinct (project, commit, file, line, rule) keys. No precision claim is made here."
+}

@@ -12,7 +12,7 @@
     "pureftpd": "cc28bff52ca28e1d122a2142bf37f2dc578f4d3e"
   },
   "submitted_at": "2026-08-25",
-  "row_count": 563,
+  "row_count": 561,
   "rules": [
     "API00-C",
     "API02-C",
@@ -138,6 +138,15 @@
         "pureftpd src/tls_extcert.c:31 INT32-C"
       ],
       "note": "row re-keyed INT32-C -> INT30-C in place (verdict/reason kept) after 144baafc/task 1288 moved the allocation-size wrap; see that batch's manifest"
+    },
+    {
+      "by": "correction-api00c-proofchain-pureftpd-task1551",
+      "count": 2,
+      "keys": [
+        "pureftpd src/bsd-getopt_long.c:502 API00-C",
+        "pureftpd src/bsd-glob.c:225 API00-C"
+      ],
+      "note": "API00-C verdict reverted FP -> TP by bmdb 1551 (pureftpd): the FP basis did not end in a real proof under ADR-0011 d9cb04d0; see that batch manifest notes"
     }
   ]
 }

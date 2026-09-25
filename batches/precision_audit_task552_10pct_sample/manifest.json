@@ -12,7 +12,7 @@
     "sel4": "1326364bc9135d9445d936ebc01e38a402c1f4c6"
   },
   "submitted_at": "2026-08-25",
-  "row_count": 446,
+  "row_count": 435,
   "rules": [
     "API00-C",
     "ARR00-C",
@@ -71,5 +71,25 @@
     "STR09-C",
     "STR31-C"
   ],
-  "notes": "Reconstructed during benchmark_adjudication's initial population (2026-09-16) from benchmarking_db's ground_truth.source='precision_audit_task552_10pct_sample'. row_count/projects/codebase_commits/rules were derived from the rows themselves, not declared at adjudication time. aurora_lint_version/aurora_lint_sha are unknown for legacy data -- never recorded per-row."
+  "notes": "Reconstructed during benchmark_adjudication's initial population (2026-09-16) from benchmarking_db's ground_truth.source='precision_audit_task552_10pct_sample'. row_count/projects/codebase_commits/rules were derived from the rows themselves, not declared at adjudication time. aurora_lint_version/aurora_lint_sha are unknown for legacy data -- never recorded per-row.",
+  "superseded_rows": [
+    {
+      "by": "correction-api00c-proofchain-sel4-task1551",
+      "count": 11,
+      "keys": [
+        "sel4 src/arch/riscv/kernel/vspace.c:933 API00-C",
+        "sel4 src/arch/x86/32/kernel/thread.c:27 API00-C",
+        "sel4 src/arch/x86/32/object/objecttype.c:133 API00-C",
+        "sel4 src/arch/x86/64/kernel/vspace.c:1404 API00-C",
+        "sel4 src/arch/x86/kernel/ept.c:363 API00-C",
+        "sel4 src/arch/x86/kernel/ept.c:463 API00-C",
+        "sel4 src/kernel/thread.c:202 API00-C",
+        "sel4 src/object/cnode.c:320 API00-C",
+        "sel4 src/object/notification.c:300 API00-C",
+        "sel4 src/object/notification.c:387 API00-C",
+        "sel4 src/object/untyped.c:26 API00-C"
+      ],
+      "note": "API00-C verdict reverted FP -> TP by bmdb 1551 (sel4): the FP basis did not end in a real proof under ADR-0011 d9cb04d0; see that batch manifest notes"
+    }
+  ]
 }

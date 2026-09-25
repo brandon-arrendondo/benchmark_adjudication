@@ -24,7 +24,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-09-15T11:23:46.295128",
-  "row_count": 1423,
+  "row_count": 1419,
   "rules": [
     "API00-C"
   ],
@@ -37,6 +37,24 @@
         "hostap src/common/ieee802_11_common.c:2456 API00-C"
       ],
       "note": "verdict corrected FP -> TP under ADR-0010 (configuration reachability / NDEBUG-stripped guard is not an FP basis); see that batch's manifest notes"
+    },
+    {
+      "by": "correction-api00c-proofchain-curl-task1551",
+      "count": 2,
+      "keys": [
+        "curl src/tool_progress.c:152 API00-C",
+        "curl src/tool_writeout_json.c:84 API00-C"
+      ],
+      "note": "API00-C verdict reverted FP -> TP by bmdb 1551 (curl): the FP basis did not end in a real proof under ADR-0011 d9cb04d0; see that batch manifest notes"
+    },
+    {
+      "by": "correction-api00c-proofchain-pureftpd-task1551",
+      "count": 2,
+      "keys": [
+        "pureftpd src/ipstack.c:161 API00-C",
+        "pureftpd src/pure-ftpwho.c:91 API00-C"
+      ],
+      "note": "API00-C verdict reverted FP -> TP by bmdb 1551 (pureftpd): the FP basis did not end in a real proof under ADR-0011 d9cb04d0; see that batch manifest notes"
     }
   ]
 }

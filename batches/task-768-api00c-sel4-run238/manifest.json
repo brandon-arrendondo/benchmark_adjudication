@@ -12,7 +12,7 @@
     "sel4": "1326364bc9135d9445d936ebc01e38a402c1f4c6"
   },
   "submitted_at": "2026-09-08T16:22:08.709460",
-  "row_count": 278,
+  "row_count": 277,
   "rules": [
     "API00-C"
   ],
@@ -63,6 +63,14 @@
         "sel4 src/plat/pc99/machine/ioapic.c:106 API00-C"
       ],
       "note": "API00-C verdict corrected TP -> FP by bmdb 1551 (sel4): closed caller set, every call site proves each flagged parameter non-null (ADR-0011 caller-side checks); see that batch manifest notes"
+    },
+    {
+      "by": "correction-api00c-proofchain-sel4-task1551",
+      "count": 1,
+      "keys": [
+        "sel4 src/arch/x86/machine/registerset.c:10 API00-C"
+      ],
+      "note": "API00-C verdict reverted FP -> TP by bmdb 1551 (sel4): the FP basis did not end in a real proof under ADR-0011 d9cb04d0; see that batch manifest notes"
     }
   ]
 }
