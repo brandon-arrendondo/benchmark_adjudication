@@ -14,9 +14,19 @@
     "sel4": "1326364bc9135d9445d936ebc01e38a402c1f4c6"
   },
   "submitted_at": "2026-09-10T12:38:12.058426Z",
-  "row_count": 10,
+  "row_count": 9,
   "rules": [
     "EXP34-C"
   ],
-  "notes": "Reconstructed during benchmark_adjudication's initial population (2026-09-16) from benchmarking_db's ground_truth.source='task773_delta_exp34_curl_sel4'. row_count/projects/codebase_commits/rules were derived from the rows themselves, not declared at adjudication time. aurora_lint_version/aurora_lint_sha are unknown for legacy data -- never recorded per-row."
+  "notes": "Reconstructed during benchmark_adjudication's initial population (2026-09-16) from benchmarking_db's ground_truth.source='task773_delta_exp34_curl_sel4'. row_count/projects/codebase_commits/rules were derived from the rows themselves, not declared at adjudication time. aurora_lint_version/aurora_lint_sha are unknown for legacy data -- never recorded per-row.",
+  "superseded_rows": [
+    {
+      "by": "correction-libruling-curl-b1-task1553",
+      "count": 1,
+      "keys": [
+        "curl lib/conncache.c:397 EXP34-C"
+      ],
+      "note": "verdict corrected FP -> TP by bmdb 1553 (curl): the FP rested only on in-tree callers of a non-static library function (ADR-0011 742a1571); see that batch manifest notes"
+    }
+  ]
 }

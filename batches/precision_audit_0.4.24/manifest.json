@@ -12,7 +12,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-06-12",
-  "row_count": 3095,
+  "row_count": 3091,
   "rules": [
     "API00-C",
     "API02-C",
@@ -144,6 +144,17 @@
         "sqlite src/vdbeaux.c:2129 ERR33-C"
       ],
       "note": "ERR33-C verdict corrected FP -> TP under the project-wide strict bar (bmdb 1352); see that batch's manifest notes"
+    },
+    {
+      "by": "correction-libruling-sqlite-b1-task1553",
+      "count": 4,
+      "keys": [
+        "sqlite ext/misc/csv.c:958 API00-C",
+        "sqlite ext/misc/decimal.c:890 API00-C",
+        "sqlite ext/misc/fossildelta.c:1084 API00-C",
+        "sqlite ext/misc/regexp.c:900 API00-C"
+      ],
+      "note": "verdict corrected FP -> TP by bmdb 1553 (sqlite): the FP rested only on in-tree callers of a non-static library function (ADR-0011 742a1571); see that batch manifest notes"
     }
   ]
 }

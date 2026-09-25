@@ -26,7 +26,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-09-11T15:57:27.790148",
-  "row_count": 9345,
+  "row_count": 9341,
   "rules": [
     "DCL04-C",
     "DCL06-C",
@@ -61,6 +61,17 @@
         "lua lvm.c:1231 EXP02-C"
       ],
       "note": "verdict corrected FP -> TP under ADR-0010 (configuration reachability / NDEBUG-stripped guard is not an FP basis); see that batch's manifest notes"
+    },
+    {
+      "by": "correction-libruling-sqlite-b1-task1553",
+      "count": 4,
+      "keys": [
+        "sqlite ext/fts5/fts5_buffer.c:48 INT16-C",
+        "sqlite ext/fts5/fts5_buffer.c:49 INT16-C",
+        "sqlite ext/fts5/fts5_buffer.c:50 INT16-C",
+        "sqlite ext/fts5/fts5_buffer.c:51 INT16-C"
+      ],
+      "note": "verdict corrected FP -> TP by bmdb 1553 (sqlite): the FP rested only on in-tree callers of a non-static library function (ADR-0011 742a1571); see that batch manifest notes"
     }
   ]
 }
