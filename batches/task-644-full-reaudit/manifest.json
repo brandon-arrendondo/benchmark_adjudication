@@ -26,7 +26,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-08-30T18:38:52.403573",
-  "row_count": 2753,
+  "row_count": 2733,
   "rules": [
     "API00-C"
   ],
@@ -423,6 +423,33 @@
         "hostap wpa_supplicant/hs20_supplicant.c:93 API00-C",
         "hostap wpa_supplicant/hs20_supplicant.c:221 API00-C",
         "hostap wpa_supplicant/ibss_rsn.c:861 API00-C"
+      ],
+      "note": "API00-C verdict corrected TP -> FP by bmdb 1541 (hostap): every flagged parameter is guarded, passed an address-of or literal at every call site, or forwarded only to null-tolerant callees; see that batch's manifest notes"
+    },
+    {
+      "by": "correction-api00c-644-hostap-b10-task1541",
+      "count": 20,
+      "keys": [
+        "hostap wpa_supplicant/interworking.c:2247 API00-C",
+        "hostap wpa_supplicant/interworking.c:2777 API00-C",
+        "hostap wpa_supplicant/interworking.c:3232 API00-C",
+        "hostap wpa_supplicant/main.c:193 API00-C",
+        "hostap wpa_supplicant/mbo.c:485 API00-C",
+        "hostap wpa_supplicant/mesh.c:602 API00-C",
+        "hostap wpa_supplicant/mesh.c:827 API00-C",
+        "hostap wpa_supplicant/mesh_rsn.c:474 API00-C",
+        "hostap wpa_supplicant/mesh_rsn.c:536 API00-C",
+        "hostap wpa_supplicant/mesh_rsn.c:553 API00-C",
+        "hostap wpa_supplicant/notify.c:407 API00-C",
+        "hostap wpa_supplicant/notify.c:1012 API00-C",
+        "hostap wpa_supplicant/op_classes.c:525 API00-C",
+        "hostap wpa_supplicant/p2p_supplicant.c:4708 API00-C",
+        "hostap wpa_supplicant/p2p_supplicant.c:4792 API00-C",
+        "hostap wpa_supplicant/p2p_supplicant.c:10424 API00-C",
+        "hostap wpa_supplicant/pasn_supplicant.c:810 API00-C",
+        "hostap wpa_supplicant/pasn_supplicant.c:1115 API00-C",
+        "hostap wpa_supplicant/pr_supplicant.c:334 API00-C",
+        "hostap wpa_supplicant/scan.c:951 API00-C"
       ],
       "note": "API00-C verdict corrected TP -> FP by bmdb 1541 (hostap): every flagged parameter is guarded, passed an address-of or literal at every call site, or forwarded only to null-tolerant callees; see that batch's manifest notes"
     }
