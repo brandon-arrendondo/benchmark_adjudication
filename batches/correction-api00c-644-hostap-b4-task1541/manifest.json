@@ -13,15 +13,29 @@
     "hostap": "dcee60436390dd34731560657c4257c3b4c839a6"
   },
   "submitted_at": "2026-09-25T02:56:53Z",
-  "row_count": 19,
+  "row_count": 14,
   "rules": [
     "API00-C"
   ],
   "verdicts": {
-    "FP": 19
+    "FP": 14
   },
   "corrections": {
-    "TP_to_FP": 19
+    "TP_to_FP": 14
   },
-  "notes": "A CORRECTION, NOT A NEW ADJUDICATION. bmdb 1541 hostap batch 4 (src/crypto/crypto_openssl.c .. src/eap_common/eap_eke_common.c). Same standard and method as batches 1-3 (see correction-api00c-644-hostap-b1-task1541): each task-644-full-reaudit row re-derived at hostap dcee6043 under the bmdb 769 API00-C standard, per flagged parameter (the one realworld run 274 names at the key). A parameter counts as validated only by a genuine guard on the parameter itself, by every real call site passing an address-of, literal or array (an array member or &base->member only where the base pointer is shown valid), or by being forwarded only to null-tolerant callees. assert() is no validation, and neither is a config-macro-only guard. A callee outside the pinned tree (wolfSSL, OpenSSL, libnl) is not shown null-tolerant, so a parameter forwarded only to one stays TP.\n\nRESULT: 140 rows. 121 TP stand (reason restated to the TP basis; source unchanged), including 7 crypto_wolfssl.c/tls_wolfssl.c rows whose parameter is forwarded only to wolfSSL APIs. 19 are corrected TP -> FP here, a flip rate of 13.6%. A fresh-context refuter reviewed all 19 and upheld all of them, checking the shared sha1_vector (27 sites), omac1_aes_128_vector (9), SHA1Init (6) and SHA1Final (5) caller sets and finding no function-pointer use of any flipped function. It corrected two reasons' line citations (crypto_openssl.c:829, ms_funcs.c:357), and the corrected wording is used.\n\nMechanics follow bmdb 1490/1531 and the 1541 pilot: in-place edits keep each key; task-644-full-reaudit takes a row_count decrement and a superseded_rows record.\n\nCounting basis: distinct (project, commit, file, line, rule) keys. No precision claim is made here."
+  "notes": "A CORRECTION, NOT A NEW ADJUDICATION. bmdb 1541 hostap batch 4 (src/crypto/crypto_openssl.c .. src/eap_common/eap_eke_common.c). Same standard and method as batches 1-3 (see correction-api00c-644-hostap-b1-task1541): each task-644-full-reaudit row re-derived at hostap dcee6043 under the bmdb 769 API00-C standard, per flagged parameter (the one realworld run 274 names at the key). A parameter counts as validated only by a genuine guard on the parameter itself, by every real call site passing an address-of, literal or array (an array member or &base->member only where the base pointer is shown valid), or by being forwarded only to null-tolerant callees. assert() is no validation, and neither is a config-macro-only guard. A callee outside the pinned tree (wolfSSL, OpenSSL, libnl) is not shown null-tolerant, so a parameter forwarded only to one stays TP.\n\nRESULT: 140 rows. 121 TP stand (reason restated to the TP basis; source unchanged), including 7 crypto_wolfssl.c/tls_wolfssl.c rows whose parameter is forwarded only to wolfSSL APIs. 19 are corrected TP -> FP here, a flip rate of 13.6%. A fresh-context refuter reviewed all 19 and upheld all of them, checking the shared sha1_vector (27 sites), omac1_aes_128_vector (9), SHA1Init (6) and SHA1Final (5) caller sets and finding no function-pointer use of any flipped function. It corrected two reasons' line citations (crypto_openssl.c:829, ms_funcs.c:357), and the corrected wording is used.\n\nMechanics follow bmdb 1490/1531 and the 1541 pilot: in-place edits keep each key; task-644-full-reaudit takes a row_count decrement and a superseded_rows record.\n\nCounting basis: distinct (project, commit, file, line, rule) keys. No precision claim is made here.",
+  "superseded_rows": [
+    {
+      "by": "correction-api00c-644-hostap-proofchain-AB-task1541",
+      "count": 5,
+      "keys": [
+        "hostap src/crypto/des-internal.c:435 API00-C",
+        "hostap src/crypto/des-internal.c:469 API00-C",
+        "hostap src/crypto/milenage.c:235 API00-C",
+        "hostap src/crypto/ms_funcs.c:357 API00-C",
+        "hostap src/eap_common/eap_eke_common.c:342 API00-C"
+      ],
+      "note": "API00-C verdict reverted FP -> TP by the bmdb 1541 proof-chain audit (ADR-0011 d9cb04d0): the FP basis rested on a prior dereference rather than a real proof; see that batch's manifest notes"
+    }
+  ]
 }

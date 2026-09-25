@@ -1,0 +1,27 @@
+{
+  "batch_id": "correction-api00c-644-hostap-backpass-g4-task1541",
+  "work_item_ref": "benchmarking_db-1541",
+  "requested_by": "coordinator",
+  "adjudicator": "claude-opus-5.5",
+  "adjudicating_node": "dev-149",
+  "aurora_lint_version": "0.5.3",
+  "aurora_lint_sha": "05bd14f9ea5fbc249818b91d416ea1b09b2bf793",
+  "projects": [
+    "hostap"
+  ],
+  "codebase_commits": {
+    "hostap": "dcee60436390dd34731560657c4257c3b4c839a6"
+  },
+  "submitted_at": "2026-09-25T04:57:32Z",
+  "row_count": 20,
+  "rules": [
+    "API00-C"
+  ],
+  "verdicts": {
+    "FP": 20
+  },
+  "corrections": {
+    "TP_to_FP": 20
+  },
+  "notes": "A CORRECTION, NOT A NEW ADJUDICATION. bmdb 1541 hostap TP back-pass, group 4 of 5 (src/crypto/tls_wolfssl.c .. src/l2_packet/l2_packet_none.c). Same method as back-pass groups 1-3 (see correction-api00c-644-hostap-backpass-g1-task1541): each pointer-parameter TP row in batches 1-6 re-checked for an FP basis under ADR-0011 (aurora-lint bbf240e9, d9cb04d0).\n\nRESULT: 132 TP rows re-checked. 20 are corrected TP -> FP here, and the rest stay TP. 9 of those that stay TP had a proof found but sit in libpasn.so-built files, held pending a ruling. A fresh-context refuter reviewed the 22 proposed flips and upheld 20. It rejected src/eap_server/eap_server.c:2052 and :2074: eap_example builds the EAP server code into libeap.a/libeap.so, documented in eap_example/README as usable as a library, so that file's caller set is open; both rows stay TP with rewritten reasons. The four driver ops-pointer flips (driver_wext.c get_ssid/associate, driver_wired_common.c get_ssid/get_capa) close because every invocation of those ops (driver_i.h wrappers, wpa_priv.c, hostapd/main.c) was enumerated and each passes a local array or &local; wpa_priv.c's wire data only fills local struct fields. driver_nl80211_android.c:185 closes through static nl80211_register_eloop_read, whose seven call sites all pass a tested handle.\n\nMechanics follow bmdb 1490/1531 and the 1541 pilot: in-place edits keep each key; task-644-full-reaudit takes a row_count decrement and a superseded_rows record.\n\nCounting basis: distinct (project, commit, file, line, rule) keys. No precision claim is made here."
+}
