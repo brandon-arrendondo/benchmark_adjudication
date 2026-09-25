@@ -12,7 +12,7 @@
     "mosquitto": "d3ee5c5ca62c0fa4983308c6fff558ee978e878c"
   },
   "submitted_at": "2026-06-16T15:18:57.383467",
-  "row_count": 2602,
+  "row_count": 2601,
   "rules": [
     "API00-C",
     "API02-C",
@@ -175,6 +175,14 @@
         "mosquitto src/plugin_subscribe.c:56 API00-C",
         "mosquitto src/plugin_unsubscribe.c:53 API00-C",
         "mosquitto src/property_broker.c:149 EXP34-C"
+      ],
+      "note": "verdict corrected FP -> TP by bmdb 1553 (mosquitto): the FP rested only on in-tree callers of a non-static library function (ADR-0011 742a1571); see that batch manifest notes"
+    },
+    {
+      "by": "correction-libruling-mosquitto-b2-task1553",
+      "count": 1,
+      "keys": [
+        "mosquitto src/plugin_message.c:87 API00-C"
       ],
       "note": "verdict corrected FP -> TP by bmdb 1553 (mosquitto): the FP rested only on in-tree callers of a non-static library function (ADR-0011 742a1571); see that batch manifest notes"
     }

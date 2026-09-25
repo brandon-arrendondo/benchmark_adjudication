@@ -24,7 +24,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-09-15T11:23:46.295128",
-  "row_count": 1066,
+  "row_count": 1051,
   "rules": [
     "API00-C"
   ],
@@ -464,6 +464,42 @@
         "mosquitto src/will_delay.c:37 API00-C"
       ],
       "note": "verdict corrected FP -> TP by bmdb 1553 (mosquitto): the FP rested only on in-tree callers of a non-static library function (ADR-0011 742a1571); see that batch manifest notes"
+    },
+    {
+      "by": "correction-libruling-raylib-b1-task1553",
+      "count": 1,
+      "keys": [
+        "raylib src/raudio.c:752 API00-C"
+      ],
+      "note": "verdict corrected FP -> TP by bmdb 1553 (raylib): the FP rested only on in-tree callers of a non-static library function (ADR-0011 742a1571); see that batch manifest notes"
+    },
+    {
+      "by": "correction-libruling-sqlite-b6-task1553",
+      "count": 4,
+      "keys": [
+        "sqlite src/btmutex.c:200 API00-C",
+        "sqlite src/expr.c:7580 API00-C",
+        "sqlite src/main.c:1363 API00-C",
+        "sqlite src/select.c:2472 API00-C"
+      ],
+      "note": "verdict corrected FP -> TP by bmdb 1553 (sqlite): the FP rested only on in-tree callers of a non-static library function (ADR-0011 742a1571); see that batch manifest notes"
+    },
+    {
+      "by": "correction-libruling-pureftpd-puredb-task1553",
+      "count": 10,
+      "keys": [
+        "pureftpd puredb/src/puredb_read.c:106 API00-C",
+        "pureftpd puredb/src/puredb_read.c:155 API00-C",
+        "pureftpd puredb/src/puredb_read.c:296 API00-C",
+        "pureftpd puredb/src/puredb_read.c:302 API00-C",
+        "pureftpd puredb/src/puredb_read.c:330 API00-C",
+        "pureftpd puredb/src/puredb_write.c:177 API00-C",
+        "pureftpd puredb/src/puredb_write.c:359 API00-C",
+        "pureftpd puredb/src/puredb_write.c:365 API00-C",
+        "pureftpd puredb/src/puredb_write.c:42 API00-C",
+        "pureftpd puredb/src/puredb_write.c:82 API00-C"
+      ],
+      "note": "verdict corrected FP -> TP by bmdb 1553 (pureftpd): the FP rested only on in-tree callers of a non-static library function (ADR-0011 742a1571); see that batch manifest notes"
     }
   ]
 }

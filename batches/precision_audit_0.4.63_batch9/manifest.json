@@ -12,7 +12,7 @@
     "raylib": "962bbfc6bfbd7a5acd08e21314fcfa161003a589"
   },
   "submitted_at": "2026-06-23T18:57:14.967191",
-  "row_count": 1170,
+  "row_count": 1156,
   "rules": [
     "API00-C",
     "API01-C",
@@ -98,6 +98,27 @@
         "raylib src/platforms/rcore_drm.c:1780 ERR33-C"
       ],
       "note": "ERR33-C verdict corrected FP -> TP under the project-wide strict bar (bmdb 1352); see that batch's manifest notes"
+    },
+    {
+      "by": "correction-libruling-raylib-b1-task1553",
+      "count": 14,
+      "keys": [
+        "raylib src/platforms/rcore_desktop_glfw.c:1237 API00-C",
+        "raylib src/platforms/rcore_desktop_glfw.c:657 API00-C",
+        "raylib src/platforms/rcore_desktop_rgfw.c:1189 API00-C",
+        "raylib src/platforms/rcore_desktop_rgfw.c:1197 API00-C",
+        "raylib src/platforms/rcore_desktop_rgfw.c:1205 API00-C",
+        "raylib src/platforms/rcore_desktop_rgfw.c:1213 API00-C",
+        "raylib src/platforms/rcore_desktop_rgfw.c:1221 API00-C",
+        "raylib src/platforms/rcore_desktop_rgfw.c:1229 API00-C",
+        "raylib src/platforms/rcore_desktop_rgfw.c:1237 API00-C",
+        "raylib src/platforms/rcore_desktop_rgfw.c:1503 API00-C",
+        "raylib src/platforms/rcore_desktop_sdl.c:370 API00-C",
+        "raylib src/platforms/rcore_desktop_sdl.c:375 API00-C",
+        "raylib src/platforms/rcore_desktop_sdl.c:815 API00-C",
+        "raylib src/platforms/rcore_desktop_win32.c:938 API00-C"
+      ],
+      "note": "verdict corrected FP -> TP by bmdb 1553 (raylib): the FP rested only on in-tree callers of a non-static library function (ADR-0011 742a1571); see that batch manifest notes"
     }
   ]
 }

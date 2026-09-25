@@ -12,7 +12,7 @@
     "raylib": "962bbfc6bfbd7a5acd08e21314fcfa161003a589"
   },
   "submitted_at": "2026-06-23T17:02:48.296889",
-  "row_count": 869,
+  "row_count": 857,
   "rules": [
     "API00-C",
     "API07-C",
@@ -62,5 +62,26 @@
     "STR34-C",
     "WIN04-C"
   ],
-  "notes": "Reconstructed during benchmark_adjudication's initial population (2026-09-16) from benchmarking_db's ground_truth.source='precision_audit_0.4.63_batch5'. row_count/projects/codebase_commits/rules were derived from the rows themselves, not declared at adjudication time. aurora_lint_version/aurora_lint_sha are unknown for legacy data -- never recorded per-row."
+  "notes": "Reconstructed during benchmark_adjudication's initial population (2026-09-16) from benchmarking_db's ground_truth.source='precision_audit_0.4.63_batch5'. row_count/projects/codebase_commits/rules were derived from the rows themselves, not declared at adjudication time. aurora_lint_version/aurora_lint_sha are unknown for legacy data -- never recorded per-row.",
+  "superseded_rows": [
+    {
+      "by": "correction-libruling-raylib-b1-task1553",
+      "count": 12,
+      "keys": [
+        "raylib src/rtextures.c:1746 API00-C",
+        "raylib src/rtextures.c:2230 API00-C",
+        "raylib src/rtextures.c:2434 API00-C",
+        "raylib src/rtextures.c:2618 API00-C",
+        "raylib src/rtextures.c:3915 API00-C",
+        "raylib src/rtextures.c:791 API00-C",
+        "raylib src/rtextures.c:813 API00-C",
+        "raylib src/rtextures.c:861 API00-C",
+        "raylib src/rtextures.c:898 API00-C",
+        "raylib src/rtextures.c:947 API00-C",
+        "raylib src/rtextures.c:973 API00-C",
+        "raylib src/rtextures.c:995 API00-C"
+      ],
+      "note": "verdict corrected FP -> TP by bmdb 1553 (raylib): the FP rested only on in-tree callers of a non-static library function (ADR-0011 742a1571); see that batch manifest notes"
+    }
+  ]
 }

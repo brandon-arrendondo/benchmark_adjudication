@@ -12,7 +12,7 @@
     "raylib": "962bbfc6bfbd7a5acd08e21314fcfa161003a589"
   },
   "submitted_at": "2026-06-23T18:27:05.631574",
-  "row_count": 435,
+  "row_count": 426,
   "rules": [
     "API00-C",
     "API02-C",
@@ -107,6 +107,22 @@
         "raylib src/raudio.c:2863 ERR33-C"
       ],
       "note": "ERR33-C verdict corrected FP -> TP under the project-wide strict bar (bmdb 1352); see that batch's manifest notes"
+    },
+    {
+      "by": "correction-libruling-raylib-b1-task1553",
+      "count": 9,
+      "keys": [
+        "raylib src/raudio.c:1059 API00-C",
+        "raylib src/raudio.c:1247 API00-C",
+        "raylib src/raudio.c:575 API00-C",
+        "raylib src/rlgl.h:1721 API00-C",
+        "raylib src/rlgl.h:2699 API00-C",
+        "raylib src/rlgl.h:2804 API00-C",
+        "raylib src/rlgl.h:3231 API00-C",
+        "raylib src/rlgl.h:3730 API00-C",
+        "raylib src/rlgl.h:3820 API00-C"
+      ],
+      "note": "verdict corrected FP -> TP by bmdb 1553 (raylib): the FP rested only on in-tree callers of a non-static library function (ADR-0011 742a1571); see that batch manifest notes"
     }
   ]
 }

@@ -27,7 +27,7 @@
     "ventoy": "7cbdc5cf69935bcf1f085ae67f40e70ea7e74bae"
   },
   "submitted_at": "2026-09-22T19:59:31Z",
-  "row_count": 103,
+  "row_count": 102,
   "rules": [
     "EXP34-C"
   ],
@@ -112,6 +112,14 @@
         "mosquitto src/will_delay.c:41 EXP34-C"
       ],
       "note": "verdict corrected FP -> TP by bmdb 1553 (mosquitto): the FP rested only on in-tree callers of a non-static library function (ADR-0011 742a1571); see that batch manifest notes"
+    },
+    {
+      "by": "correction-libruling-raylib-b1-task1553",
+      "count": 1,
+      "keys": [
+        "raylib src/rcore.c:2364 EXP34-C"
+      ],
+      "note": "verdict corrected FP -> TP by bmdb 1553 (raylib): the FP rested only on in-tree callers of a non-static library function (ADR-0011 742a1571); see that batch manifest notes"
     }
   ]
 }
