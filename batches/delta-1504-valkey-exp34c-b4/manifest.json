@@ -1,0 +1,25 @@
+{
+  "batch_id": "delta-1504-valkey-exp34c-b4",
+  "work_item_ref": "aurora_lint-1504",
+  "requested_by": "coordinator",
+  "adjudicator": "claude-opus-5.5",
+  "adjudicating_node": "dev-149",
+  "aurora_lint_version": "0.5.3",
+  "aurora_lint_sha": "05bd14f9ea5fbc249818b91d416ea1b09b2bf793",
+  "projects": [
+    "valkey"
+  ],
+  "codebase_commits": {
+    "valkey": "7f1dffedff6de73058b2c2a389422b6ecd56c8fb"
+  },
+  "submitted_at": "2026-09-25T01:14:32Z",
+  "row_count": 143,
+  "rules": [
+    "EXP34-C"
+  ],
+  "verdicts": {
+    "FP": 140,
+    "TP": 3
+  },
+  "notes": "aurora_lint 1504 (v0.5.3 step 3), valkey EXP34-C batch 4 of 8. Baseline, not a delta: valkey had no EXP34-C labels. Stacked on the previous 1504 valkey branch; this branch adds only this batch's rows over its parent.\n\nPOPULATION. Postgres realworld run 274 (aurora-lint 05bd14f9, tag v0.5.3). Unlabeled keys from BenchDB.list_realworld_unlabeled(274), filtered through aurora-lint bench.corpus.in_scope, then diffed against this repo's main. valkey EXP34-C has 1092 keys, split into 8 batches by file (sorted by path). corpus-check: all 12 checkouts detached at their pins, trees clean.\n\nGATE CHECK. aurora_lint 1427 (prescan abstains on an unprovable disjunctive guard) can only add EXP34-C findings, not remove them, so it does not gate this baseline. No other open FP-reduction task targets EXP34-C.\n\nSTANDARD. The dataset's EXP34-C standard (aurora_lint 1418, bmdb 1492): the violation site is the dereference, and the verdict rests on whether a null-producing expression reaches it on some path in the pinned tree. Caller sets are enumerated at source, and a caller in an out-of-scope tree (src/unit, src/modules/hello*, tests/modules) still counts. valkey-specific, per coordinator relay 2026-09-25: serverAssert, serverAssertWithInfo, valkey's redefined assert and serverPanic have no NDEBUG arm (server.h:678-681, serverassert.h:60), so a dominating one is a valid FP basis. debugServerAssert/debugServerAssertWithInfo run only under the hidden config enable-debug-assert (default 0; server.h:687-688), so they are neutral. zmalloc/zcalloc/zrealloc never yield NULL (both OOM handlers abort or panic); ztry*, je_mallocx and libc strdup can.\n\nMETHOD. Two read-only agents per batch, each briefed with the standard above. The adjudicator spot-checked TPs and flagged calls at source.\n\nRESULT: 139 FP / 3 TP.\n- TP: src/module.c:13603. moduleUnload(ctx.module->name, NULL) on the post-load error path (module.c:13470) reaches moduleUnloadInternal, which writes *errmsg when module->types is non-empty.\n- TP: src/modules/lua/script_lua.c:1452. log starts NULL (1444) and stays NULL when the first message argument is neither string nor number, and lm_asprintf(\"%s %s\", log, s) then receives it.\n- TP (medium): src/localtime.c:118. localtime() may return NULL, and aux->tm_isdst reads it unchecked (LOCALTIME_TEST_MAIN arm, labeled as written).\n- Misfire (FP): src/kvstore.c:641. &kvs_it->di only forms an address.\n- ValkeyModule_Assert (valkeymodule.h:2719, `(_e) ? (void)0 : (..., exit(1))`, no NDEBUG arm) is treated like serverAssert as an FP basis (7 keys in function_lua.c/script_lua.c).\n- Medium FPs: io_threads.c:100 (a NULL client is reachable only through open module API, VM_ACLAddLogEntry from a client-less ctx, with no in-tree caller); module.c:4880 (VM_ListInsert's key: visible callers pass VM_OpenKey WRITE handles, which are always allocated); script_lua.c:1534/1563 (rctx can be NULL outside script runs, but the dereference needs a wrong-arity metamethod call, which is reachable only through getmetatable in script-run globals where rctx is set).\n- Recurring FP bases: every kvstore comes from kvstoreCreate (zcalloc); memory_prefetch helpers run only after `if (!batch) return`; lpSkip/lpGet never NULL with non-null intbuf; sdssplitlen NULL only with count 0; iterator loops; dominating unconditional serverAssert.\n\nCounting basis: distinct (project, commit, file, line, rule) keys. No precision/recall claim is made here."
+}
