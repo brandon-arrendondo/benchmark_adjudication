@@ -1,0 +1,27 @@
+{
+  "batch_id": "correction-api00c-644-hostap-b2-task1541",
+  "work_item_ref": "benchmarking_db-1541",
+  "requested_by": "coordinator",
+  "adjudicator": "claude-opus-5.5",
+  "adjudicating_node": "dev-149",
+  "aurora_lint_version": "0.5.3",
+  "aurora_lint_sha": "05bd14f9ea5fbc249818b91d416ea1b09b2bf793",
+  "projects": [
+    "hostap"
+  ],
+  "codebase_commits": {
+    "hostap": "dcee60436390dd34731560657c4257c3b4c839a6"
+  },
+  "submitted_at": "2026-09-25T02:39:15Z",
+  "row_count": 22,
+  "rules": [
+    "API00-C"
+  ],
+  "verdicts": {
+    "FP": 22
+  },
+  "corrections": {
+    "TP_to_FP": 22
+  },
+  "notes": "A CORRECTION, NOT A NEW ADJUDICATION. bmdb 1541 hostap batch 2 (src/ap/mbo_ap.c .. src/common/dpp_auth.c). Same standard and method as batch 1 (see correction-api00c-644-hostap-b1-task1541): each task-644-full-reaudit row re-derived at hostap dcee6043 under the bmdb 769 API00-C standard, per flagged parameter. A parameter counts as validated only by a genuine guard on the parameter itself, by every real call site passing an address-of, literal or array, or by being forwarded only to null-tolerant callees. assert() is no validation, and neither is a config-macro-only guard. An array member or &base->member counts as an array or address-of only where the base pointer is shown valid at the call site. A caller set that runs through an open entry point does not close. The flagged parameter is the one aurora-lint names at that key in realworld run 274; each flipped key names exactly one.\n\nRESULT: 138 rows. 116 TP stand (reason restated to the TP basis; source unchanged) and 22 are corrected TP -> FP here, a flip rate of 15.9%. A fresh-context refuter reviewed all 23 proposed flips and upheld 22. It rejected src/ap/wmm.c:154, whose flip reasoned about the unused parameter hapd while the finding is about eid, read after only a length check; that row stays TP with a rewritten reason. Four upheld flips rest on &sm->wpa_auth->conf or a local set from it (wpa_auth_ft.c:779, wpa_auth_ie.c:400/534) with sm checked at each site; the refuter marked those medium.\n\nMechanics follow bmdb 1490/1531 and the 1541 pilot: in-place edits keep each key; task-644-full-reaudit takes a row_count decrement and a superseded_rows record.\n\nCounting basis: distinct (project, commit, file, line, rule) keys. No precision claim is made here."
+}
