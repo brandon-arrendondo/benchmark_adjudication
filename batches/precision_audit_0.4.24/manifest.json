@@ -12,7 +12,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-06-12",
-  "row_count": 3090,
+  "row_count": 3072,
   "rules": [
     "API00-C",
     "API02-C",
@@ -161,6 +161,38 @@
       "count": 1,
       "keys": [
         "sqlite ext/recover/dbdata.c:1014 API00-C"
+      ],
+      "note": "verdict corrected FP -> TP by bmdb 1553 (sqlite): the FP rested only on in-tree callers of a non-static library function (ADR-0011 742a1571); see that batch manifest notes"
+    },
+    {
+      "by": "correction-libruling-sqlite-b3-task1553",
+      "count": 5,
+      "keys": [
+        "sqlite src/select.c:126 API00-C",
+        "sqlite src/select.c:1581 EXP34-C",
+        "sqlite src/select.c:2450 EXP34-C",
+        "sqlite src/select.c:325 EXP34-C",
+        "sqlite src/select.c:6472 API00-C"
+      ],
+      "note": "verdict corrected FP -> TP by bmdb 1553 (sqlite): the FP rested only on in-tree callers of a non-static library function (ADR-0011 742a1571); see that batch manifest notes"
+    },
+    {
+      "by": "correction-libruling-sqlite-b4-task1553",
+      "count": 13,
+      "keys": [
+        "sqlite src/vdbeaux.c:1011 ARR00-C",
+        "sqlite src/vdbeaux.c:2035 ARR00-C",
+        "sqlite src/vdbeaux.c:276 EXP34-C",
+        "sqlite src/vdbeaux.c:2887 API00-C",
+        "sqlite src/vdbeaux.c:4248 EXP34-C",
+        "sqlite src/vdbeaux.c:4506 EXP34-C",
+        "sqlite src/vdbeaux.c:4507 EXP34-C",
+        "sqlite src/vdbeaux.c:4579 EXP34-C",
+        "sqlite src/vdbeaux.c:4580 EXP34-C",
+        "sqlite src/vdbeaux.c:5146 EXP34-C",
+        "sqlite src/vdbeaux.c:5187 API00-C",
+        "sqlite src/vdbeaux.c:5438 API00-C",
+        "sqlite src/vdbeaux.c:5506 EXP34-C"
       ],
       "note": "verdict corrected FP -> TP by bmdb 1553 (sqlite): the FP rested only on in-tree callers of a non-static library function (ADR-0011 742a1571); see that batch manifest notes"
     }

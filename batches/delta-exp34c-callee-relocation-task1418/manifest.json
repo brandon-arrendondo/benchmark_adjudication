@@ -27,7 +27,7 @@
     "ventoy": "7cbdc5cf69935bcf1f085ae67f40e70ea7e74bae"
   },
   "submitted_at": "2026-09-22T19:59:31Z",
-  "row_count": 121,
+  "row_count": 116,
   "rules": [
     "EXP34-C"
   ],
@@ -64,6 +64,25 @@
         "sqlite src/btmutex.c:282 EXP34-C",
         "sqlite src/callback.c:446 EXP34-C",
         "sqlite src/expr.c:510 EXP34-C"
+      ],
+      "note": "verdict corrected FP -> TP by bmdb 1553 (sqlite): the FP rested only on in-tree callers of a non-static library function (ADR-0011 742a1571); see that batch manifest notes"
+    },
+    {
+      "by": "correction-libruling-sqlite-b3-task1553",
+      "count": 3,
+      "keys": [
+        "sqlite src/expr.c:3989 EXP34-C",
+        "sqlite src/malloc.c:828 EXP34-C",
+        "sqlite src/status.c:189 EXP34-C"
+      ],
+      "note": "verdict corrected FP -> TP by bmdb 1553 (sqlite): the FP rested only on in-tree callers of a non-static library function (ADR-0011 742a1571); see that batch manifest notes"
+    },
+    {
+      "by": "correction-libruling-sqlite-b4-task1553",
+      "count": 2,
+      "keys": [
+        "sqlite src/util.c:162 EXP34-C",
+        "sqlite src/vdbeaux.c:5335 EXP34-C"
       ],
       "note": "verdict corrected FP -> TP by bmdb 1553 (sqlite): the FP rested only on in-tree callers of a non-static library function (ADR-0011 742a1571); see that batch manifest notes"
     }
