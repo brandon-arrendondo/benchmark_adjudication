@@ -1,0 +1,27 @@
+{
+  "batch_id": "correction-api00c-644-hostap-b1-task1541",
+  "work_item_ref": "benchmarking_db-1541",
+  "requested_by": "coordinator",
+  "adjudicator": "claude-opus-5.5",
+  "adjudicating_node": "dev-149",
+  "aurora_lint_version": "0.5.3",
+  "aurora_lint_sha": "05bd14f9ea5fbc249818b91d416ea1b09b2bf793",
+  "projects": [
+    "hostap"
+  ],
+  "codebase_commits": {
+    "hostap": "dcee60436390dd34731560657c4257c3b4c839a6"
+  },
+  "submitted_at": "2026-09-25T02:32:41Z",
+  "row_count": 11,
+  "rules": [
+    "API00-C"
+  ],
+  "verdicts": {
+    "FP": 11
+  },
+  "corrections": {
+    "TP_to_FP": 11
+  },
+  "notes": "A CORRECTION, NOT A NEW ADJUDICATION. bmdb 1541 hostap batch 1 (hostapd/config_file.c .. src/ap/ieee802_1x.c). The batch task-644-full-reaudit holds 1,434 hostap API00-C rows, all TP, most carrying a superseded FP-rationale reason. Each row in this batch was re-derived at hostap dcee6043 under the bmdb 769 API00-C standard, per flagged parameter, following the 1541 sqlite pilot. A parameter counts as validated only by a genuine guard on the parameter itself, by every real call site passing an address-of, literal or array, or by being forwarded only to null-tolerant callees. assert() is no validation (ADR-0010), and config-macro-only guards do not count. An array member reached through a pointer (e.g. mgmt->sa, u8[6]) counts as an array only where the base pointer is shown valid at or above the call site. A caller set that runs through an open entry point does not close.\n\nRESULT: of 138 rows, 4 are held for a coordinator ruling on main() argc/argv (hlr_auc_gw.c:1020, hostapd_cli.c:2250, main.c:815, sae_pk_gen.c:17) and left untouched. Of the 134 applied, 123 TP stand (reason restated to the TP basis; source unchanged) and 11 are corrected TP -> FP here. A fresh-context refuter reviewed all 12 proposed flips and upheld them. The adjudicator overrode one, src/ap/hostapd.c:5017 (hostapd_get_iface's ifname via the driver-event entry point wpa_supplicant_event_global, whose caller set is open), which stays TP. hostapd.c:77 (hostapd_for_each_interface's cb) is flipped because its ops pointer is assigned only at main.c:845 and all 14 calls, 5 direct and 9 through the pointer, pass a named function.\n\nMechanics follow bmdb 1490/1531 and the 1541 pilot: in-place edits keep each key; task-644-full-reaudit takes a row_count decrement and a superseded_rows record.\n\nCounting basis: distinct (project, commit, file, line, rule) keys. No precision claim is made here."
+}

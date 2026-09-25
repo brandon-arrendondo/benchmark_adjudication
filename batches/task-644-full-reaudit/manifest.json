@@ -26,7 +26,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-08-30T18:38:52.403573",
-  "row_count": 2974,
+  "row_count": 2963,
   "rules": [
     "API00-C"
   ],
@@ -85,6 +85,24 @@
         "sqlite src/malloc.c:774 API00-C"
       ],
       "note": "API00-C verdict corrected TP -> FP by bmdb 1541 (sqlite batch 3 of 5): every flagged parameter is shown valid by the call sites (address-of or local array at every one) or is forwarded only to a null-tolerant callee; see that batch's manifest notes"
+    },
+    {
+      "by": "correction-api00c-644-hostap-b1-task1541",
+      "count": 11,
+      "keys": [
+        "hostap src/ap/ap_drv_ops.c:71 API00-C",
+        "hostap src/ap/ap_drv_ops.c:1142 API00-C",
+        "hostap src/ap/ap_list.c:169 API00-C",
+        "hostap src/ap/beacon.c:1286 API00-C",
+        "hostap src/ap/dpp_hostapd.c:491 API00-C",
+        "hostap src/ap/drv_callbacks.c:1146 API00-C",
+        "hostap src/ap/drv_callbacks.c:1477 API00-C",
+        "hostap src/ap/gas_query_ap.c:468 API00-C",
+        "hostap src/ap/hostapd.c:77 API00-C",
+        "hostap src/ap/hostapd.c:4703 API00-C",
+        "hostap src/ap/hostapd.c:4798 API00-C"
+      ],
+      "note": "API00-C verdict corrected TP -> FP by bmdb 1541 (hostap): every flagged parameter is guarded, passed an address-of or literal at every call site, or forwarded only to null-tolerant callees; see that batch's manifest notes"
     }
   ]
 }
