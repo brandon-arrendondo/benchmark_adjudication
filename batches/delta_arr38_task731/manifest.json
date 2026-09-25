@@ -20,7 +20,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-09-03T13:20:20.370365",
-  "row_count": 114,
+  "row_count": 113,
   "rules": [
     "ARR38-C"
   ],
@@ -57,6 +57,14 @@
         "mosquitto lib/packet_datatypes.c:74 ARR38-C"
       ],
       "note": "verdict corrected FP -> TP by bmdb 1553 (mosquitto): the FP rested only on in-tree callers of a non-static library function (ADR-0011 742a1571); see that batch manifest notes"
+    },
+    {
+      "by": "correction-libruling-sqlite-b7-task1553",
+      "count": 1,
+      "keys": [
+        "sqlite src/os_win.c:6191 ARR38-C"
+      ],
+      "note": "verdict corrected FP -> TP by bmdb 1553 (sqlite): the FP rested only on in-tree callers of a non-static library function (ADR-0011 742a1571); see that batch manifest notes"
     }
   ]
 }

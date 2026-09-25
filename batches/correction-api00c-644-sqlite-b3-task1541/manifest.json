@@ -13,7 +13,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-09-25T02:15:13Z",
-  "row_count": 2,
+  "row_count": 1,
   "rules": [
     "API00-C"
   ],
@@ -35,6 +35,14 @@
         "sqlite src/callback.c:358 API00-C"
       ],
       "note": "API00-C verdict reverted FP -> TP by bmdb 1551 item (a) (sqlite): the flip rested on in-tree call sites of a library function, whose caller set is open under ADR-0011 742a1571; see that batch manifest notes"
+    },
+    {
+      "by": "correction-libruling-sqlite-b7-task1553",
+      "count": 1,
+      "keys": [
+        "sqlite ext/fts5/fts5_index.c:9481 API00-C"
+      ],
+      "note": "verdict corrected FP -> TP by bmdb 1553 (sqlite): the FP rested only on in-tree callers of a non-static library function (ADR-0011 742a1571); see that batch manifest notes"
     }
   ]
 }

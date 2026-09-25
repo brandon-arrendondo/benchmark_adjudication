@@ -22,7 +22,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-08-25T08:36:46.115695",
-  "row_count": 206,
+  "row_count": 204,
   "rules": [
     "EXP34-C"
   ],
@@ -70,6 +70,15 @@
       "count": 1,
       "keys": [
         "sqlite src/where.c:7553 EXP34-C"
+      ],
+      "note": "verdict corrected FP -> TP by bmdb 1553 (sqlite): the FP rested only on in-tree callers of a non-static library function (ADR-0011 742a1571); see that batch manifest notes"
+    },
+    {
+      "by": "correction-libruling-sqlite-b7-task1553",
+      "count": 2,
+      "keys": [
+        "sqlite src/resolve.c:1408 EXP34-C",
+        "sqlite src/vdbe.c:5996 EXP34-C"
       ],
       "note": "verdict corrected FP -> TP by bmdb 1553 (sqlite): the FP rested only on in-tree callers of a non-static library function (ADR-0011 742a1571); see that batch manifest notes"
     }

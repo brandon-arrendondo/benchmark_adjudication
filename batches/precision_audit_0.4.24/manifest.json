@@ -12,7 +12,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-06-12",
-  "row_count": 3072,
+  "row_count": 3062,
   "rules": [
     "API00-C",
     "API02-C",
@@ -193,6 +193,23 @@
         "sqlite src/vdbeaux.c:5187 API00-C",
         "sqlite src/vdbeaux.c:5438 API00-C",
         "sqlite src/vdbeaux.c:5506 EXP34-C"
+      ],
+      "note": "verdict corrected FP -> TP by bmdb 1553 (sqlite): the FP rested only on in-tree callers of a non-static library function (ADR-0011 742a1571); see that batch manifest notes"
+    },
+    {
+      "by": "correction-libruling-sqlite-b7-task1553",
+      "count": 10,
+      "keys": [
+        "sqlite ext/misc/csv.c:537 ERR07-C",
+        "sqlite ext/misc/csv.c:537 ERR34-C",
+        "sqlite src/select.c:1532 INT32-C",
+        "sqlite src/select.c:1538 INT32-C",
+        "sqlite src/select.c:1540 INT32-C",
+        "sqlite src/select.c:2266 EXP34-C",
+        "sqlite src/select.c:8672 EXP34-C",
+        "sqlite src/vdbeaux.c:213 CON07-C",
+        "sqlite src/vdbeaux.c:214 CON03-C",
+        "sqlite src/vdbeaux.c:3809 INT32-C"
       ],
       "note": "verdict corrected FP -> TP by bmdb 1553 (sqlite): the FP rested only on in-tree callers of a non-static library function (ADR-0011 742a1571); see that batch manifest notes"
     }
