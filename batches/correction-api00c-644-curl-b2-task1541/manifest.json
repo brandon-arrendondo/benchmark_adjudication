@@ -1,0 +1,27 @@
+{
+  "batch_id": "correction-api00c-644-curl-b2-task1541",
+  "work_item_ref": "benchmarking_db-1541",
+  "requested_by": "coordinator",
+  "adjudicator": "claude-opus-5.5",
+  "adjudicating_node": "dev-180",
+  "aurora_lint_version": "0.5.3",
+  "aurora_lint_sha": "05bd14f9ea5fbc249818b91d416ea1b09b2bf793",
+  "projects": [
+    "curl"
+  ],
+  "codebase_commits": {
+    "curl": "3e198f75861cc2e12daf299689e145949dddd19b"
+  },
+  "submitted_at": "2026-09-25T02:39:18Z",
+  "row_count": 3,
+  "rules": [
+    "API00-C"
+  ],
+  "verdicts": {
+    "FP": 3
+  },
+  "corrections": {
+    "TP_to_FP": 3
+  },
+  "notes": "A CORRECTION, NOT A NEW ADJUDICATION. bmdb 1541, curl batch 2 of 2: 126 curl rows of task-644-full-reaudit (all TP, most carrying a superseded FP-rationale reason), re-derived at curl 3e198f7586 under the bmdb 769 API00-C standard, per flagged parameter. A parameter is validated only by a genuine guard on the parameter itself, by every call site passing an address-of or literal, or by being forwarded only to null-tolerant callees (a parameter forwarded to a dereferencing callee is unvalidated, as task-664 labels it). assert()/DEBUGASSERT is not validation (non-debug build); optional hardening configs are off (ADR-0010).\n\nRESULT: 123 TP stand (reason text restated to the TP basis, source unchanged) and 3 flip TP -> FP, listed here: curl lib/vauth/oauth2.c:86 API00-C; curl lib/vauth/vauth.c:65 API00-C; curl lib/vtls/vtls_spack.c:239 API00-C. A fresh-context reviewer tried to refute each flip and upheld all of them.\n\nMECHANICS follow bmdb 1490/1531: in-place edits keep each key; task-644-full-reaudit takes a row_count decrement of 3 and a superseded_rows record.\n\nCounting basis: distinct (project, commit, file, line, rule) keys. No precision claim is made here."
+}

@@ -26,7 +26,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-08-30T18:38:52.403573",
-  "row_count": 2951,
+  "row_count": 2948,
   "rules": [
     "API00-C"
   ],
@@ -129,6 +129,16 @@
         "curl lib/uint-spbset.c:147 API00-C"
       ],
       "note": "API00-C verdict corrected TP -> FP by bmdb 1541 (curl batch 1 of 2): every flagged parameter is shown valid by the call sites (address-of or local array at every one) or is forwarded only to a null-tolerant callee; see that batch's manifest notes"
+    },
+    {
+      "by": "correction-api00c-644-curl-b2-task1541",
+      "count": 3,
+      "keys": [
+        "curl lib/vauth/oauth2.c:86 API00-C",
+        "curl lib/vauth/vauth.c:65 API00-C",
+        "curl lib/vtls/vtls_spack.c:239 API00-C"
+      ],
+      "note": "API00-C verdict corrected TP -> FP by bmdb 1541 (curl batch 2 of 2): every flagged parameter is shown valid by the call sites (address-of or local array at every one) or is forwarded only to a null-tolerant callee; see that batch's manifest notes"
     }
   ]
 }
