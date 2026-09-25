@@ -1,0 +1,27 @@
+{
+  "batch_id": "correction-api00c-callercheck-sel4-task1551",
+  "work_item_ref": "benchmarking_db-1551",
+  "requested_by": "coordinator",
+  "adjudicator": "claude-opus-5.5",
+  "adjudicating_node": "dev-180",
+  "aurora_lint_version": "0.5.3",
+  "aurora_lint_sha": "05bd14f9ea5fbc249818b91d416ea1b09b2bf793",
+  "projects": [
+    "sel4"
+  ],
+  "codebase_commits": {
+    "sel4": "1326364bc9135d9445d936ebc01e38a402c1f4c6"
+  },
+  "submitted_at": "2026-09-25T13:12:04Z",
+  "row_count": 42,
+  "rules": [
+    "API00-C"
+  ],
+  "verdicts": {
+    "FP": 42
+  },
+  "corrections": {
+    "TP_to_FP": 42
+  },
+  "notes": "A CORRECTION, NOT A NEW ADJUDICATION. bmdb 1551, sel4: API00-C rows labeled TP are re-derived under ADR-0011 (aurora-lint bbf240e9 caller-side checks, d9cb04d0 proof chains). API00-C never flags a static function; the seL4 kernel image outside libsel4 is a closed program, so a non-static kernel function has a closed caller set unless it is entered from assembly or used as a function pointer. A row flips TP -> FP only when every call site, in every architecture and every CONFIG_ arm (ADR-0010), proves every flagged pointer parameter non-null by a dominating explicit test of exactly that value, an address-of an object whose base is itself proven (members of the globals boot_state and x86KSGlobalState), an array, a literal, or a chain of caller parameters ending in one of those. assert/fail, cap-derived TCB_PTR/EP_PTR values, untested NODE_STATE globals, lookupIPCBuffer results and integer-to-pointer round trips are not proof. METHOD: all 341 closed-set TP rows reviewed (a mechanical pre-pass, a first reader over 63 rows including a 30-row sample of pre-pass rejects, then a full pass over the remaining 276 after that sample found flips), then a fresh-context refuter over every proposed flip. RESULT: 42 flip TP -> FP here, each reason naming its call sites; init_core_state flips on a guard in the function instead. Refuted and left TP: src/machine/fpu.c:29 switchFpuOwner (its NULL argument crosses a pointer -> word_t -> pointer round trip on the SMP path, implementation-defined, ADR-0011 basis 4). Rows flagged only by API00-C integer-overflow messages are outside this pass and left as labeled. Counting basis: distinct (project, commit, file, line, rule) keys. No precision claim is made here."
+}

@@ -12,9 +12,57 @@
     "sel4": "1326364bc9135d9445d936ebc01e38a402c1f4c6"
   },
   "submitted_at": "2026-09-08T16:22:08.709460",
-  "row_count": 317,
+  "row_count": 278,
   "rules": [
     "API00-C"
   ],
-  "notes": "Reconstructed during benchmark_adjudication's initial population (2026-09-16) from benchmarking_db's ground_truth.source='task-768-api00c-sel4-run238'. row_count/projects/codebase_commits/rules were derived from the rows themselves, not declared at adjudication time. aurora_lint_version/aurora_lint_sha are unknown for legacy data -- never recorded per-row."
+  "notes": "Reconstructed during benchmark_adjudication's initial population (2026-09-16) from benchmarking_db's ground_truth.source='task-768-api00c-sel4-run238'. row_count/projects/codebase_commits/rules were derived from the rows themselves, not declared at adjudication time. aurora_lint_version/aurora_lint_sha are unknown for legacy data -- never recorded per-row.",
+  "superseded_rows": [
+    {
+      "by": "correction-api00c-callercheck-sel4-task1551",
+      "count": 39,
+      "keys": [
+        "sel4 src/arch/arm/32/machine/capdl.c:154 API00-C",
+        "sel4 src/arch/arm/32/machine/capdl.c:19 API00-C",
+        "sel4 src/arch/arm/32/machine/capdl.c:258 API00-C",
+        "sel4 src/arch/arm/32/machine/capdl.c:448 API00-C",
+        "sel4 src/arch/arm/64/machine/capdl.c:15 API00-C",
+        "sel4 src/arch/arm/64/machine/capdl.c:223 API00-C",
+        "sel4 src/arch/arm/64/machine/capdl.c:255 API00-C",
+        "sel4 src/arch/arm/64/machine/capdl.c:460 API00-C",
+        "sel4 src/arch/arm/object/vcpu.c:84 API00-C",
+        "sel4 src/arch/riscv/machine/capdl.c:14 API00-C",
+        "sel4 src/arch/riscv/machine/capdl.c:216 API00-C",
+        "sel4 src/arch/riscv/machine/capdl.c:33 API00-C",
+        "sel4 src/arch/riscv/machine/capdl.c:83 API00-C",
+        "sel4 src/arch/x86/32/kernel/vspace.c:201 API00-C",
+        "sel4 src/arch/x86/32/kernel/vspace.c:27 API00-C",
+        "sel4 src/arch/x86/32/kernel/vspace.c:63 API00-C",
+        "sel4 src/arch/x86/64/kernel/vspace.c:308 API00-C",
+        "sel4 src/arch/x86/64/kernel/vspace.c:340 API00-C",
+        "sel4 src/arch/x86/64/kernel/vspace.c:41 API00-C",
+        "sel4 src/arch/x86/64/kernel/vspace.c:452 API00-C",
+        "sel4 src/arch/x86/64/machine/capdl.c:15 API00-C",
+        "sel4 src/arch/x86/64/machine/capdl.c:175 API00-C",
+        "sel4 src/arch/x86/64/machine/capdl.c:374 API00-C",
+        "sel4 src/arch/x86/kernel/boot.c:86 API00-C",
+        "sel4 src/arch/x86/object/vcpu.c:1091 API00-C",
+        "sel4 src/kernel/boot.c:610 API00-C",
+        "sel4 src/kernel/boot.c:993 API00-C",
+        "sel4 src/machine/capdl.c:168 API00-C",
+        "sel4 src/machine/capdl.c:228 API00-C",
+        "sel4 src/machine/capdl.c:290 API00-C",
+        "sel4 src/machine/capdl.c:70 API00-C",
+        "sel4 src/machine/capdl.c:82 API00-C",
+        "sel4 src/machine/io.c:614 API00-C",
+        "sel4 src/machine/io.c:626 API00-C",
+        "sel4 src/object/notification.c:325 API00-C",
+        "sel4 src/object/tcb.c:346 API00-C",
+        "sel4 src/plat/pc99/machine/acpi.c:257 API00-C",
+        "sel4 src/plat/pc99/machine/intel-vtd.c:518 API00-C",
+        "sel4 src/plat/pc99/machine/ioapic.c:106 API00-C"
+      ],
+      "note": "API00-C verdict corrected TP -> FP by bmdb 1551 (sel4): closed caller set, every call site proves each flagged parameter non-null (ADR-0011 caller-side checks); see that batch manifest notes"
+    }
+  ]
 }
