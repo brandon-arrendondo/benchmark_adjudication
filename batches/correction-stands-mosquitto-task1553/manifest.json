@@ -1,0 +1,28 @@
+{
+  "batch_id": "correction-stands-mosquitto-task1553",
+  "work_item_ref": "benchmarking_db-1553",
+  "requested_by": "coordinator",
+  "adjudicator": "claude-opus-5.5",
+  "adjudicating_node": "dev-180",
+  "aurora_lint_version": "0.5.3",
+  "aurora_lint_sha": "05bd14f9ea5fbc249818b91d416ea1b09b2bf793",
+  "projects": [
+    "mosquitto"
+  ],
+  "codebase_commits": {
+    "mosquitto": "d3ee5c5ca62c0fa4983308c6fff558ee978e878c"
+  },
+  "submitted_at": "2026-09-25T19:15:30Z",
+  "row_count": 7,
+  "rules": [
+    "CON33-C",
+    "CON34-C"
+  ],
+  "verdicts": {
+    "TP": 7
+  },
+  "corrections": {
+    "FP_to_TP": 7
+  },
+  "notes": "A CORRECTION, NOT A NEW ADJUDICATION. bmdb 1553 stands pass, mosquitto: the coordinator asked for a full refute of the FP labels kept by the ADR-0010 build-configuration sub-pass (a 54-row sample had found 2 of 24 stands wrong), plus FP labels flagged during 1553 as resting on no accepted basis. Every remaining stand was re-read by a fresh-context refuter. An FP flips to TP where its basis fails in some compilable build (a second unsynchronised caller, a documented SQLITE_INT64_TYPE width, an unchecked parent-pointer write that leaves a loop unbounded) or is not an ADR-0011 basis (convention, intent or idiom, a duplicate-rule disposition, a caller dereference, an inferred single-threaded start-up). RESULT: 7 flip FP -> TP here; all other re-checked stands keep FP. Counting basis: distinct (project, commit, file, line, rule) keys. No precision claim is made here."
+}

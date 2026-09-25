@@ -12,7 +12,7 @@
     "lua": "40b76de2d77e66b70a9d4bf989c3f5340919973f"
   },
   "submitted_at": "2026-06-22",
-  "row_count": 2425,
+  "row_count": 2424,
   "rules": [
     "API00-C",
     "API01-C",
@@ -188,6 +188,14 @@
         "lua ltable.c:1351 API00-C"
       ],
       "note": "verdict corrected FP -> TP by bmdb 1553 (lua): the FP rested only on in-tree callers of a non-static library function (ADR-0011 742a1571); see that batch manifest notes"
+    },
+    {
+      "by": "correction-stands-lua-task1553",
+      "count": 1,
+      "keys": [
+        "lua ldebug.c:198 DCL13-C"
+      ],
+      "note": "verdict corrected FP -> TP by the bmdb 1553 stands pass (lua); see that batch manifest notes"
     }
   ]
 }

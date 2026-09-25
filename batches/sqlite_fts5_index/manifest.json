@@ -12,7 +12,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-06-12T08:49:18.490420",
-  "row_count": 876,
+  "row_count": 874,
   "rules": [
     "API00-C",
     "ARR00-C",
@@ -81,6 +81,15 @@
         "sqlite ext/fts5/fts5_index.c:8959 INT32-C"
       ],
       "note": "verdict corrected FP -> TP by bmdb 1553 (sqlite): the FP rested only on in-tree callers of a non-static library function (ADR-0011 742a1571); see that batch manifest notes"
+    },
+    {
+      "by": "correction-stands-sqlite-task1553",
+      "count": 2,
+      "keys": [
+        "sqlite ext/fts5/fts5_index.c:2970 EXP34-C",
+        "sqlite ext/fts5/fts5_index.c:3008 EXP34-C"
+      ],
+      "note": "verdict corrected FP -> TP by the bmdb 1553 stands pass (sqlite); see that batch manifest notes"
     }
   ]
 }
