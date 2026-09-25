@@ -12,7 +12,7 @@
     "mosquitto": "d3ee5c5ca62c0fa4983308c6fff558ee978e878c"
   },
   "submitted_at": "2026-06-16T15:18:57.383467",
-  "row_count": 2614,
+  "row_count": 2601,
   "rules": [
     "API00-C",
     "API02-C",
@@ -158,6 +158,33 @@
         "mosquitto src/websockets.c:147 EXP34-C"
       ],
       "note": "EXP34-C verdict corrected TP -> FP on the merits by bmdb 1452: the full caller set establishes non-nullness before the line; see that batch's manifest notes"
+    },
+    {
+      "by": "correction-libruling-mosquitto-b1-task1553",
+      "count": 12,
+      "keys": [
+        "mosquitto lib/actions_publish.c:34 API00-C",
+        "mosquitto lib/send_mosq.c:101 API00-C",
+        "mosquitto lib/send_mosq.c:117 API00-C",
+        "mosquitto lib/send_mosq.c:73 API00-C",
+        "mosquitto lib/send_mosq.c:87 API00-C",
+        "mosquitto lib/send_subscribe.c:39 API00-C",
+        "mosquitto src/control.c:178 API00-C",
+        "mosquitto src/net.c:1075 API00-C",
+        "mosquitto src/plugin_message.c:108 API00-C",
+        "mosquitto src/plugin_subscribe.c:56 API00-C",
+        "mosquitto src/plugin_unsubscribe.c:53 API00-C",
+        "mosquitto src/property_broker.c:149 EXP34-C"
+      ],
+      "note": "verdict corrected FP -> TP by bmdb 1553 (mosquitto): the FP rested only on in-tree callers of a non-static library function (ADR-0011 742a1571); see that batch manifest notes"
+    },
+    {
+      "by": "correction-libruling-mosquitto-b2-task1553",
+      "count": 1,
+      "keys": [
+        "mosquitto src/plugin_message.c:87 API00-C"
+      ],
+      "note": "verdict corrected FP -> TP by bmdb 1553 (mosquitto): the FP rested only on in-tree callers of a non-static library function (ADR-0011 742a1571); see that batch manifest notes"
     }
   ]
 }

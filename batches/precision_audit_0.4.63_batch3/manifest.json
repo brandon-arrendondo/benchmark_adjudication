@@ -12,7 +12,7 @@
     "raylib": "962bbfc6bfbd7a5acd08e21314fcfa161003a589"
   },
   "submitted_at": "2026-06-23T15:35:46.549195",
-  "row_count": 455,
+  "row_count": 450,
   "rules": [
     "API00-C",
     "API07-C",
@@ -122,6 +122,18 @@
         "raylib src/rcore.c:3677 ERR33-C"
       ],
       "note": "ERR33-C verdict corrected FP -> TP under the project-wide strict bar (bmdb 1352); see that batch's manifest notes"
+    },
+    {
+      "by": "correction-libruling-raylib-b1-task1553",
+      "count": 5,
+      "keys": [
+        "raylib src/rcore.c:1074 API00-C",
+        "raylib src/rcore.c:1702 API00-C",
+        "raylib src/rcore.c:1757 API00-C",
+        "raylib src/rcore.c:2732 API00-C",
+        "raylib src/rcore.c:3691 API00-C"
+      ],
+      "note": "verdict corrected FP -> TP by bmdb 1553 (raylib): the FP rested only on in-tree callers of a non-static library function (ADR-0011 742a1571); see that batch manifest notes"
     }
   ]
 }

@@ -22,7 +22,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-08-25T07:39:35.521054",
-  "row_count": 1355,
+  "row_count": 1344,
   "rules": [
     "MSC01-C"
   ],
@@ -33,6 +33,24 @@
       "count": 1,
       "keys": [
         "sqlite src/treeview.c:390 MSC01-C"
+      ],
+      "note": "verdict corrected FP -> TP by bmdb 1553 (sqlite): the FP rested only on in-tree callers of a non-static library function (ADR-0011 742a1571); see that batch manifest notes"
+    },
+    {
+      "by": "correction-libruling-sqlite-b7-task1553",
+      "count": 11,
+      "keys": [
+        "sqlite ext/rtree/rtree.c:1602 MSC01-C",
+        "sqlite ext/session/sqlite3session.c:4257 MSC01-C",
+        "sqlite src/expr.c:3757 MSC01-C",
+        "sqlite src/printf.c:963 MSC01-C",
+        "sqlite src/vdbe.c:1157 MSC01-C",
+        "sqlite src/vdbe.c:550 MSC01-C",
+        "sqlite src/vdbeapi.c:822 MSC01-C",
+        "sqlite src/vtab.c:630 MSC01-C",
+        "sqlite src/wal.c:1185 MSC01-C",
+        "sqlite src/where.c:3355 MSC01-C",
+        "sqlite src/where.c:5326 MSC01-C"
       ],
       "note": "verdict corrected FP -> TP by bmdb 1553 (sqlite): the FP rested only on in-tree callers of a non-static library function (ADR-0011 742a1571); see that batch manifest notes"
     }

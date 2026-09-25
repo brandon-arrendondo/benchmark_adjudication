@@ -1,0 +1,30 @@
+{
+  "batch_id": "correction-libruling-curl-b3-task1553",
+  "work_item_ref": "benchmarking_db-1553",
+  "requested_by": "coordinator",
+  "adjudicator": "claude-opus-5.5",
+  "adjudicating_node": "dev-180",
+  "aurora_lint_version": "0.5.3",
+  "aurora_lint_sha": "05bd14f9ea5fbc249818b91d416ea1b09b2bf793",
+  "projects": [
+    "curl"
+  ],
+  "codebase_commits": {
+    "curl": "3e198f75861cc2e12daf299689e145949dddd19b"
+  },
+  "submitted_at": "2026-09-25T14:31:14Z",
+  "row_count": 74,
+  "rules": [
+    "API00-C",
+    "ARR37-C",
+    "ARR38-C",
+    "EXP34-C"
+  ],
+  "verdicts": {
+    "TP": 74
+  },
+  "corrections": {
+    "FP_to_TP": 74
+  },
+  "notes": "A CORRECTION, NOT A NEW ADJUDICATION. bmdb 1553 (library-ruling consistency pass), curl, b3. EXPORT SURFACE: lib/ is libcurl (lib/Makefile.am lib_LTLIBRARIES = libcurl.la; lib/CMakeLists.txt installs the shared and static library), including lib/curlx. Every non-static function in these sources therefore has an open caller set (ADR-0011 742a1571, 6b28c8d7), and in-tree call sites prove nothing about a value arriving through its parameters. SELECTION: existing FP labels on non-static functions in exported sources whose recorded reason is caller-side (callers, call sites, contract, precondition, \"always valid/never NULL\"); tool-only files with their own main() excluded. METHOD: each row read at source by a reviewer; FP -> TP only where the verdict rested solely on callers for a parameter-derived value. Rows with a real in-function basis (a guard present in every build, a null-tolerant callee, a misfire, a value not from a parameter, a language guarantee) or where the keyword match was noise keep FP. assert/DEBUGASSERT/NEVER()/ALWAYS() are not guards (each compiles out or constant-folds in a compilable build). A fresh-context refuter re-checked a random sample of flips and stands. RESULT: 102 rows reviewed, 74 flip FP -> TP here, 28 keep FP. RULINGS APPLIED IN THIS BATCH (Brandon, 2026-09-25): (1) address-of is strict: &p->field and &p->a[i] evaluate p->field, undefined for a null p (C11 6.5.2.3; 6.5.3.2 exempts only &*E and &E[i]), so a key line forming &p->f with p an unproven parameter is TP; plain f(p) into a project function stays FP under aurora-lint 4bbf15d1. (2) a (pointer, length) parameter pair is a caller contract, not a basis: TP unless every call site provably validates the length, which needs a closed caller set. Rows re-checked under these rulings from earlier 1553 batches are included here. Counting basis: distinct (project, commit, file, line, rule) keys. No precision claim is made here."
+}

@@ -1,0 +1,28 @@
+{
+  "batch_id": "correction-libruling-lua-b2-task1553",
+  "work_item_ref": "benchmarking_db-1553",
+  "requested_by": "coordinator",
+  "adjudicator": "claude-opus-5.5",
+  "adjudicating_node": "dev-180",
+  "aurora_lint_version": "0.5.3",
+  "aurora_lint_sha": "05bd14f9ea5fbc249818b91d416ea1b09b2bf793",
+  "projects": [
+    "lua"
+  ],
+  "codebase_commits": {
+    "lua": "40b76de2d77e66b70a9d4bf989c3f5340919973f"
+  },
+  "submitted_at": "2026-09-25T14:36:22Z",
+  "row_count": 2,
+  "rules": [
+    "API00-C",
+    "EXP34-C"
+  ],
+  "verdicts": {
+    "TP": 2
+  },
+  "corrections": {
+    "FP_to_TP": 2
+  },
+  "notes": "A CORRECTION, NOT A NEW ADJUDICATION. bmdb 1553 (library-ruling consistency pass), lua, b2. EXPORT SURFACE: the makefile links the interpreter with -Wl,-E (makefile:79) and it loads C modules with dlopen (loadlib.c; testes/libs builds such modules), so every non-static symbol is exported; LUAI_FUNC hidden visibility is a GNUC/ELF-only attribute (ADR-0011 basis 4). Every non-static function in these sources therefore has an open caller set (ADR-0011 742a1571, 6b28c8d7), and in-tree call sites prove nothing about a value arriving through its parameters. SELECTION: existing FP labels on non-static functions in exported sources whose recorded reason is caller-side (callers, call sites, contract, precondition, \"always valid/never NULL\"); tool-only files with their own main() excluded. METHOD: each row read at source by a reviewer; FP -> TP only where the verdict rested solely on callers for a parameter-derived value. Rows with a real in-function basis (a guard present in every build, a null-tolerant callee, a misfire, a value not from a parameter, a language guarantee) or where the keyword match was noise keep FP. assert/DEBUGASSERT/NEVER()/ALWAYS() are not guards (each compiles out or constant-folds in a compilable build). A fresh-context refuter re-checked a random sample of flips and stands. RESULT: 29 rows reviewed, 2 flip FP -> TP here, 27 keep FP. Counting basis: distinct (project, commit, file, line, rule) keys. No precision claim is made here."
+}
