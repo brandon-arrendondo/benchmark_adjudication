@@ -13,15 +13,15 @@
     "hostap": "dcee60436390dd34731560657c4257c3b4c839a6"
   },
   "submitted_at": "2026-09-25T03:11:12Z",
-  "row_count": 16,
+  "row_count": 10,
   "rules": [
     "API00-C"
   ],
   "verdicts": {
-    "FP": 16
+    "FP": 10
   },
   "corrections": {
-    "TP_to_FP": 16
+    "TP_to_FP": 10
   },
   "notes": "A CORRECTION, NOT A NEW ADJUDICATION. bmdb 1541 hostap batch 5 (src/eap_common/eap_gpsk_common.c .. src/nan/nan.c), plus the 4 main() rows held from batch 1. Same standard and method as batches 1-4 and 6 (see correction-api00c-644-hostap-b1-task1541): each task-644-full-reaudit row re-derived at hostap dcee6043 under the bmdb 769 API00-C standard, per flagged parameter (the one realworld run 274 names at the key). A parameter counts as validated only by a genuine guard on the parameter itself, by every real call site passing an address-of, literal or array (an array member or &base->member only where the base pointer is shown valid), or by being forwarded only to null-tolerant callees. A caller set may close through static single-caller frames or a fully enumerated internal (non-exported) function.\n\nMAIN() ROWS. Per Brandon's ruling (coordinator relay 2026-09-25): main's argv itself is validated by C11 5.1.2.2.1, since argv[argc] is a null pointer; argv[i] indexed without an argc bound would be TP; argc is judged as an integer. Applied: hostapd/hlr_auc_gw.c:1020 argv FP (argv[optind] only after optind == argc is ruled out); hostapd/sae_pk_gen.c:17 argv FP (argv[1..3] only after argc != 4); hostapd/hostapd_cli.c:2250 and hostapd/main.c:815 argc TP (argc - optind with no bound check in the tree).\n\nRESULT: 136 rows (132 batch 5 + 4 main). 101 TP stand (reason restated to the TP basis; source unchanged) and 35 are corrected TP -> FP here: 33 from batch 5 (a flip rate of 25.0%) and the 2 main() argv rows. A fresh-context refuter reviewed all 35 and upheld all of them, grepping callers across every top-level directory including eap_example/, wlantest/ and hs20/. It confirmed the set_anon_id ops-pointer chain closes (eap.c:3282; every implementation handles a NULL id), the two-static-frame eap_fast_pac.c:138 chain, fst_attach's four address-of callers (fst_group.c:437, fst_iface.c:15), and the l2_packet_* call sites. Three reasons' line citations were corrected to the call lines.\n\nMechanics follow bmdb 1490/1531 and the 1541 pilot: in-place edits keep each key; task-644-full-reaudit takes a row_count decrement and a superseded_rows record.\n\nCounting basis: distinct (project, commit, file, line, rule) keys. No precision claim is made here.",
   "superseded_rows": [
@@ -50,6 +50,19 @@
         "hostap src/l2_packet/l2_packet_privsep.c:235 API00-C"
       ],
       "note": "API00-C verdict reverted FP -> TP by the bmdb 1541 proof-chain audit (ADR-0011 d9cb04d0): the FP basis rested on a prior dereference rather than a real proof; see that batch's manifest notes"
+    },
+    {
+      "by": "correction-api00c-644-hostap-libraries-task1541",
+      "count": 6,
+      "keys": [
+        "hostap src/eap_peer/eap.c:620 API00-C",
+        "hostap src/eap_peer/eap.c:2935 API00-C",
+        "hostap src/eap_peer/eap.c:2951 API00-C",
+        "hostap src/eap_peer/eap.c:3282 API00-C",
+        "hostap src/eap_server/eap_server.c:1965 API00-C",
+        "hostap src/eap_server/eap_server_tls_common.c:102 API00-C"
+      ],
+      "note": "API00-C verdict reverted FP -> TP under the ADR-0011 library ruling (aurora-lint 742a1571): the function is non-static in a library-built file, so its caller set is open and the in-tree call-site proof does not hold; see that batch's manifest notes"
     }
   ]
 }

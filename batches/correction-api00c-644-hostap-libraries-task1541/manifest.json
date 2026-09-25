@@ -1,0 +1,27 @@
+{
+  "batch_id": "correction-api00c-644-hostap-libraries-task1541",
+  "work_item_ref": "benchmarking_db-1541",
+  "requested_by": "coordinator",
+  "adjudicator": "claude-opus-5.5",
+  "adjudicating_node": "dev-149",
+  "aurora_lint_version": "0.5.3",
+  "aurora_lint_sha": "05bd14f9ea5fbc249818b91d416ea1b09b2bf793",
+  "projects": [
+    "hostap"
+  ],
+  "codebase_commits": {
+    "hostap": "dcee60436390dd34731560657c4257c3b4c839a6"
+  },
+  "submitted_at": "2026-09-25T12:36:11Z",
+  "row_count": 27,
+  "rules": [
+    "API00-C"
+  ],
+  "verdicts": {
+    "TP": 27
+  },
+  "corrections": {
+    "FP_to_TP": 27
+  },
+  "notes": "A CORRECTION, NOT A NEW ADJUDICATION. bmdb 1541 hostap, library ruling. Brandon ruled (aurora-lint ADR-0011, 742a1571) that libraries count as external: a .so or .a that the tree builds or installs for outside use (documented, installed, or linked by an example program) has an open caller set for every non-static function in its source files, so in-tree call sites prove nothing about those functions. Static functions stay closed.\n\nSCOPE. The libraries named in the ruling, with their source files taken from the build files at the pinned commit under any configuration (ADR-0010): libpasn.so (wpa_supplicant/Makefile LIBPASNSO, installed under CONFIG_BUILD_PASN_SO, including crypto_$(CONFIG_CRYPTO).c and tls_$(CONFIG_TLS).c for every backend), libwpa_client.so (LIBCTRLSO, installed under CONFIG_BUILD_WPA_CLIENT_SO), libeap's own objects (eap_example/Makefile OBJS_lib; eap_example/README describes it as usable as a library) and libradius.a (src/radius/Makefile; radius_example/README).\n\nRESULT. Every task-1541 API00-C FP row in those files was checked (28 rows in main). 27 revert FP -> TP here: each is a non-static function whose FP basis was in-tree call sites passing an address-of, a local array, or a tested value. 1 stays FP because its proof is in the callee, not in the callers (sae.c:2201, allowed_groups forwarded only to sae_group_allowed, which tests it). The earlier count of 21 left out the 4 rows in the gnutls and nettle crypto backends (crypto_gnutls.c:77/312, crypto_nettle.c:84/333) and the 2 rows in libeap's own files (eap_server.c:1965, eap_server_tls_common.c:102); with them it is 27. No libradius FP rows exist (the 10 RADIUS rows were already kept TP by the b7 refuter on this basis).\n\nAlso in this batch, with no verdict change: 33 TP rows in libpasn.so-built files, which the back-pass had held as TP pending this ruling after finding an in-tree proof, get their reason restated to the open-caller basis. Their source is unchanged. Three further held rows (crypto_libtomcrypt.c:576, eap_server.c:2052, :2074) already carried that basis.\n\nMechanics follow the proof-chain revert batch: in-place edits keep each key; each original correction batch takes a row_count decrement and a superseded_rows record.\n\nCounting basis: distinct (project, commit, file, line, rule) keys. No precision claim is made here."
+}
