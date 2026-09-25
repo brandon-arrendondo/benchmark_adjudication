@@ -1,0 +1,27 @@
+{
+  "batch_id": "correction-api00c-644-sqlite-pilot-task1541",
+  "work_item_ref": "benchmarking_db-1541",
+  "requested_by": "coordinator",
+  "adjudicator": "claude-opus-5.5",
+  "adjudicating_node": "dev-180",
+  "aurora_lint_version": "0.5.3",
+  "aurora_lint_sha": "05bd14f9ea5fbc249818b91d416ea1b09b2bf793",
+  "projects": [
+    "sqlite"
+  ],
+  "codebase_commits": {
+    "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
+  },
+  "submitted_at": "2026-09-25T05:00:00Z",
+  "row_count": 7,
+  "rules": [
+    "API00-C"
+  ],
+  "verdicts": {
+    "FP": 7
+  },
+  "corrections": {
+    "TP_to_FP": 7
+  },
+  "notes": "A CORRECTION, NOT A NEW ADJUDICATION. bmdb 1541 sqlite pilot: a seeded random sample of 120 of the 772 sqlite rows in task-644-full-reaudit (all TP, most carrying a superseded FP-rationale reason), re-derived at sqlite b1a73ba3 under the bmdb 769 API00-C standard, per flagged parameter. A parameter is validated only by a genuine guard on the parameter itself, by every call site passing an address-of or literal, or by being forwarded only to null-tolerant callees (a parameter forwarded to a dereferencing callee is unvalidated, as task-664 labels it). assert() is not validation (NDEBUG in the default build); SQLITE_ENABLE_API_ARMOR is off.\n\nRESULT of the pilot: 113 TP stand (reason text restated to the TP basis, source unchanged) and 7 flip TP -> FP, listed here: sqlite ext/fts3/fts3_hash.c:59 API00-C; sqlite src/complete.c:269 API00-C; sqlite src/expr.c:7264 API00-C; sqlite src/resolve.c:2191 API00-C; sqlite src/utf.c:114 API00-C; sqlite src/util.c:390 API00-C; sqlite src/vdbemem.c:1553 API00-C. A fresh-context reviewer tried to refute each flip and upheld all of them.\n\nMECHANICS follow bmdb 1490/1531: in-place edits keep each key; task-644-full-reaudit takes a row_count decrement of 7 and a superseded_rows record.\n\nCounting basis: distinct (project, commit, file, line, rule) keys. No precision claim: this is a 120-row pilot of a 3,000-row batch."
+}
