@@ -1,0 +1,25 @@
+{
+  "batch_id": "delta-1504-valkey-exp33c-b3",
+  "work_item_ref": "aurora_lint-1504",
+  "requested_by": "coordinator",
+  "adjudicator": "claude-opus-5.5",
+  "adjudicating_node": "dev-149",
+  "aurora_lint_version": "0.5.3",
+  "aurora_lint_sha": "05bd14f9ea5fbc249818b91d416ea1b09b2bf793",
+  "projects": [
+    "valkey"
+  ],
+  "codebase_commits": {
+    "valkey": "7f1dffedff6de73058b2c2a389422b6ecd56c8fb"
+  },
+  "submitted_at": "2026-09-25T00:56:18Z",
+  "row_count": 127,
+  "rules": [
+    "EXP33-C"
+  ],
+  "verdicts": {
+    "FP": 120,
+    "TP": 7
+  },
+  "notes": "aurora_lint 1504 (v0.5.3 step 3), valkey EXP33-C batch 3 of 3. Baseline, not a delta: valkey had no EXP33-C labels. Stacked on delta-1504-valkey-exp33c-b2; this branch adds only this batch's rows over that parent. With batches 1-2 this covers every in-scope valkey EXP33-C key unlabeled at run 274 (383).\n\nPOPULATION. Same as batches 1-2: run 274 (05bd14f9) unlabeled keys, in scope, diffed against main. This batch holds the last 127 keys (by file) of the non-static EXP33-C shapes (\"may be used uninitialized\", \"is used uninitialized\", \"Passing pointer to uninitialized variable\", \"Reading from ... uninitialized\").\n\nGATE CHECK. aurora_lint 1435 affects only \"Passing pointer to uninitialized variable\" on explicitly-initialized file-scope statics. valkey's keys of that shape all pass locals.\n\nSTANDARD. TP only if some path in the pinned tree reads the object before assigning it. FP when every path assigns it first, when the flagged use is not a read, when a callee that fills it on its success path is read only on that path, or when the path ends in serverPanic/serverAssert (unconditional, no NDEBUG arm). Config-gated and platform arms count as written (ADR-0010 Decision 1).\n\nMETHOD. Two read-only agents (64 + 63 keys), with the TPs spot-checked at source by the adjudicator (module.c:3762-3768 with cluster.c:981-994, t_list.c:295-306, t_set.c:380-385 with listpack.c:587-598, lzf_c.c:150-157 with lzfP.h:95, zmalloc.c:664-673).\n\nRESULT: 120 FP / 7 TP.\n- TP, one shared cause (4): lpGetValue (listpack.c:587) writes *slen only for string entries, and the caller copies or passes the length unconditionally: t_list.c:305, t_set.c:384, t_set.c:437, t_set.c:891.\n- TP: module.c:3767. read_flags has no initializer, and clusterSlotByCommand only ORs into it.\n- TP (medium): lzf_c.c:155. With INIT_HTAB at its default 0, the htab slot addressed here is read at line 156 before any write. The flagged line itself is the address computation.\n- TP (medium): zmalloc.c:671 (HAVE_TASKINFO arm). task_info's return is unchecked, and t_info is read unconditionally.\n- Misfires (FP): module.c:13507 (the line assigns handle; it does not read it); setproctitle.c:112 (environ is the libc global); valkey-cli.c:8739 (p points at a stack array, not an allocation, and is read only after readConn wrote it).\n- Medium-confidence FPs: util.c:1264 (gettimeofday fills tz on the non-Linux arm); vset.c:1971 (findBucket writes *node on the found path, which the caller's contract guarantees).\n\nCounting basis: distinct (project, commit, file, line, rule) keys. No precision/recall claim is made here."
+}
