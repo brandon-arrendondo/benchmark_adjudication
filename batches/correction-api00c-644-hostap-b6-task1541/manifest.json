@@ -13,15 +13,27 @@
     "hostap": "dcee60436390dd34731560657c4257c3b4c839a6"
   },
   "submitted_at": "2026-09-25T03:10:19Z",
-  "row_count": 14,
+  "row_count": 11,
   "rules": [
     "API00-C"
   ],
   "verdicts": {
-    "FP": 14
+    "FP": 11
   },
   "corrections": {
-    "TP_to_FP": 14
+    "TP_to_FP": 11
   },
-  "notes": "A CORRECTION, NOT A NEW ADJUDICATION. bmdb 1541 hostap batch 6 (src/p2p/p2p.c .. src/pasn/pasn_initiator.c). Same standard and method as batches 1-4 (see correction-api00c-644-hostap-b1-task1541): each task-644-full-reaudit row re-derived at hostap dcee6043 under the bmdb 769 API00-C standard, per flagged parameter (the one realworld run 274 names at the key). A parameter counts as validated only by a genuine guard on the parameter itself, by every real call site passing an address-of, literal or array (an array member or &base->member only where the base pointer is shown valid outside any config gate the call is not under), or by being forwarded only to null-tolerant callees; wpabuf_put_data/wpabuf_alloc_copy are null-tolerant for data (wpabuf.h:175). An integer parameter is validated where a bound provably holds on every path to the arithmetic.\n\nRESULT: 139 rows. 125 TP stand (reason restated to the TP basis; source unchanged) and 14 are corrected TP -> FP here, a flip rate of 10.1%. One of the 14 is p2p_invitation.c:227 (len in len - 1), where p2p_parse, called earlier in the function, rejects len < 1 and the function returns on that failure. A fresh-context refuter reviewed all 14 and upheld all of them. It found the single assignment and invocation of pending_action_tx_status_cb (p2p.c:4004 closes through it), confirmed wpabuf_put_data's single definition, and corrected the evidence lines for p2p_build.c:127 and p2p_parse.c:18; the corrected wording is used.\n\nMechanics follow bmdb 1490/1531 and the 1541 pilot: in-place edits keep each key; task-644-full-reaudit takes a row_count decrement and a superseded_rows record.\n\nCounting basis: distinct (project, commit, file, line, rule) keys. No precision claim is made here."
+  "notes": "A CORRECTION, NOT A NEW ADJUDICATION. bmdb 1541 hostap batch 6 (src/p2p/p2p.c .. src/pasn/pasn_initiator.c). Same standard and method as batches 1-4 (see correction-api00c-644-hostap-b1-task1541): each task-644-full-reaudit row re-derived at hostap dcee6043 under the bmdb 769 API00-C standard, per flagged parameter (the one realworld run 274 names at the key). A parameter counts as validated only by a genuine guard on the parameter itself, by every real call site passing an address-of, literal or array (an array member or &base->member only where the base pointer is shown valid outside any config gate the call is not under), or by being forwarded only to null-tolerant callees; wpabuf_put_data/wpabuf_alloc_copy are null-tolerant for data (wpabuf.h:175). An integer parameter is validated where a bound provably holds on every path to the arithmetic.\n\nRESULT: 139 rows. 125 TP stand (reason restated to the TP basis; source unchanged) and 14 are corrected TP -> FP here, a flip rate of 10.1%. One of the 14 is p2p_invitation.c:227 (len in len - 1), where p2p_parse, called earlier in the function, rejects len < 1 and the function returns on that failure. A fresh-context refuter reviewed all 14 and upheld all of them. It found the single assignment and invocation of pending_action_tx_status_cb (p2p.c:4004 closes through it), confirmed wpabuf_put_data's single definition, and corrected the evidence lines for p2p_build.c:127 and p2p_parse.c:18; the corrected wording is used.\n\nMechanics follow bmdb 1490/1531 and the 1541 pilot: in-place edits keep each key; task-644-full-reaudit takes a row_count decrement and a superseded_rows record.\n\nCounting basis: distinct (project, commit, file, line, rule) keys. No precision claim is made here.",
+  "superseded_rows": [
+    {
+      "by": "correction-api00c-644-hostap-proofchain-AB-task1541",
+      "count": 3,
+      "keys": [
+        "hostap src/p2p/p2p.c:3733 API00-C",
+        "hostap src/p2p/p2p.c:4004 API00-C",
+        "hostap src/pae/ieee802_1x_kay.c:3494 API00-C"
+      ],
+      "note": "API00-C verdict reverted FP -> TP by the bmdb 1541 proof-chain audit (ADR-0011 d9cb04d0): the FP basis rested on a prior dereference rather than a real proof; see that batch's manifest notes"
+    }
+  ]
 }

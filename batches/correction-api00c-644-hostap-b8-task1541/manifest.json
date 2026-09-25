@@ -13,15 +13,28 @@
     "hostap": "dcee60436390dd34731560657c4257c3b4c839a6"
   },
   "submitted_at": "2026-09-25T03:30:52Z",
-  "row_count": 35,
+  "row_count": 31,
   "rules": [
     "API00-C"
   ],
   "verdicts": {
-    "FP": 35
+    "FP": 31
   },
   "corrections": {
-    "TP_to_FP": 35
+    "TP_to_FP": 31
   },
-  "notes": "A CORRECTION, NOT A NEW ADJUDICATION. bmdb 1541 hostap batch 8 (src/tls/x509v3.c .. wpa_supplicant/bss.c). Same standard and method as batches 1-6 (see correction-api00c-644-hostap-b1-task1541), plus ADR-0011 (aurora-lint bbf240e9, Brandon 2026-09-24): checks made by every caller count. A function that nothing outside the corpus can call (no exported API, no function-pointer or callback route), whose every call site provably tests the value for NULL on every path to the call, has a validated parameter.\n\nRESULT: 133 rows. 98 TP stand (reason restated to the TP basis; source unchanged) and 35 are corrected TP -> FP here, a flip rate of 26.3%. 25 flips rest on the 769 bases (guard, address-of/literal/array at every site, null-tolerant callee) and main()'s argv ruling (the hs20 browser url rows pass argv[optind + 1] after an argc - optind < 2 exit). 10 rest on the ADR-0011 caller-check basis, with explicit tests at every call site. A fresh-context refuter reviewed all 35 and upheld all of them, closing x509_check_signature's caller set (2 direct sites, 3 callers of x509_certificate_check_signature), all 23 xml_node_for_each macro uses (none reassigns the loop variable), and the goto/else paths for autoscan.c:143 and bss.c:1936. Line citations were corrected in trace.c:351's reason.\n\nMechanics follow bmdb 1490/1531 and the 1541 pilot: in-place edits keep each key; task-644-full-reaudit takes a row_count decrement and a superseded_rows record.\n\nCounting basis: distinct (project, commit, file, line, rule) keys. No precision claim is made here."
+  "notes": "A CORRECTION, NOT A NEW ADJUDICATION. bmdb 1541 hostap batch 8 (src/tls/x509v3.c .. wpa_supplicant/bss.c). Same standard and method as batches 1-6 (see correction-api00c-644-hostap-b1-task1541), plus ADR-0011 (aurora-lint bbf240e9, Brandon 2026-09-24): checks made by every caller count. A function that nothing outside the corpus can call (no exported API, no function-pointer or callback route), whose every call site provably tests the value for NULL on every path to the call, has a validated parameter.\n\nRESULT: 133 rows. 98 TP stand (reason restated to the TP basis; source unchanged) and 35 are corrected TP -> FP here, a flip rate of 26.3%. 25 flips rest on the 769 bases (guard, address-of/literal/array at every site, null-tolerant callee) and main()'s argv ruling (the hs20 browser url rows pass argv[optind + 1] after an argc - optind < 2 exit). 10 rest on the ADR-0011 caller-check basis, with explicit tests at every call site. A fresh-context refuter reviewed all 35 and upheld all of them, closing x509_check_signature's caller set (2 direct sites, 3 callers of x509_certificate_check_signature), all 23 xml_node_for_each macro uses (none reassigns the loop variable), and the goto/else paths for autoscan.c:143 and bss.c:1936. Line citations were corrected in trace.c:351's reason.\n\nMechanics follow bmdb 1490/1531 and the 1541 pilot: in-place edits keep each key; task-644-full-reaudit takes a row_count decrement and a superseded_rows record.\n\nCounting basis: distinct (project, commit, file, line, rule) keys. No precision claim is made here.",
+  "superseded_rows": [
+    {
+      "by": "correction-api00c-644-hostap-proofchain-AB-task1541",
+      "count": 4,
+      "keys": [
+        "hostap src/utils/trace.c:351 API00-C",
+        "hostap src/utils/uuid.c:65 API00-C",
+        "hostap src/wps/wps_enrollee.c:452 API00-C",
+        "hostap src/wps/wps_registrar.c:325 API00-C"
+      ],
+      "note": "API00-C verdict reverted FP -> TP by the bmdb 1541 proof-chain audit (ADR-0011 d9cb04d0): the FP basis rested on a prior dereference rather than a real proof; see that batch's manifest notes"
+    }
+  ]
 }

@@ -1,0 +1,27 @@
+{
+  "batch_id": "correction-api00c-644-hostap-proofchain-AB-task1541",
+  "work_item_ref": "benchmarking_db-1541",
+  "requested_by": "coordinator",
+  "adjudicator": "claude-opus-5.5",
+  "adjudicating_node": "dev-149",
+  "aurora_lint_version": "0.5.3",
+  "aurora_lint_sha": "05bd14f9ea5fbc249818b91d416ea1b09b2bf793",
+  "projects": [
+    "hostap"
+  ],
+  "codebase_commits": {
+    "hostap": "dcee60436390dd34731560657c4257c3b4c839a6"
+  },
+  "submitted_at": "2026-09-25T04:05:10Z",
+  "row_count": 41,
+  "rules": [
+    "API00-C"
+  ],
+  "verdicts": {
+    "TP": 41
+  },
+  "corrections": {
+    "FP_to_TP": 41
+  },
+  "notes": "A CORRECTION, NOT A NEW ADJUDICATION. bmdb 1541 hostap proof-chain audit, merged batches 1-6 and 8. Brandon ruled (aurora-lint ADR-0011, d9cb04d0) that a prior dereference is not proof: a caller that dereferenced a pointer before passing it, or dereferenced the base of an array member it passes, only moves the fault one frame up. An FP basis must end in a real proof: an explicit NULL test, a language guarantee, an address-of or local/static array, or a literal. Earlier batches accepted \"base dereferenced above the call\" for array-member and &base->member arguments, and those FPs were re-audited here.\n\nMETHOD. Every applied FP row in batches 1-6 and 8 (159 rows) was re-audited at hostap dcee6043 by two read-only agents (group A: batches 1-4 and 6, 89 rows; group B: batches 5 and 8, 70 rows). Each traced the argument's provenance chain at every call site to a real proof or to a dereference-only link. Rules applied consistently: a pointer arriving as a driver callback ctx or frame (wpa_supplicant_event ctx, rx_mgmt->frame, scan results) or a D-Bus user_data is no proof. EAP method private data reaches process/buildReq/getSessionId without a NULL test (eap_peer/eap.c:919, eap_server/eap_server.c:410/517), so a data->array passed from those paths is no proof. A test of a different, correlated field is no proof.\n\nRESULT: 118 FP stand; 41 revert FP -> TP here (group A 18, group B 23). By original batch: see superseded_rows in each correction-api00c-644-hostap-bN-task1541 manifest. Typical reverts: mgmt->sa/da from driver frames (beacon.c:1286, dpp_hostapd.c:491, gas_query_ap.c:468), &sm->wpa_auth->conf, EAP method data->key arrays (eap_gpsk/psk/sake/sim/teap_common, milenage, ms_funcs), wpa_s->own_addr/bssid from event ctx (fst.c, l2_packet_*), and a dl_list iterator never NULL-tested (trace.c:351).\n\nCounting basis: distinct (project, commit, file, line, rule) keys. No precision claim is made here."
+}
