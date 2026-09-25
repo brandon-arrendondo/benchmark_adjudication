@@ -26,7 +26,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-08-30T18:38:52.403573",
-  "row_count": 2948,
+  "row_count": 2873,
   "rules": [
     "API00-C"
   ],
@@ -139,6 +139,109 @@
         "curl lib/vtls/vtls_spack.c:239 API00-C"
       ],
       "note": "API00-C verdict corrected TP -> FP by bmdb 1541 (curl batch 2 of 2): every flagged parameter is shown valid by the call sites (address-of or local array at every one) or is forwarded only to a null-tolerant callee; see that batch's manifest notes"
+    },
+    {
+      "by": "correction-api00c-644-hostap-b1-task1541",
+      "count": 11,
+      "keys": [
+        "hostap src/ap/ap_drv_ops.c:71 API00-C",
+        "hostap src/ap/ap_drv_ops.c:1142 API00-C",
+        "hostap src/ap/ap_list.c:169 API00-C",
+        "hostap src/ap/beacon.c:1286 API00-C",
+        "hostap src/ap/dpp_hostapd.c:491 API00-C",
+        "hostap src/ap/drv_callbacks.c:1146 API00-C",
+        "hostap src/ap/drv_callbacks.c:1477 API00-C",
+        "hostap src/ap/gas_query_ap.c:468 API00-C",
+        "hostap src/ap/hostapd.c:77 API00-C",
+        "hostap src/ap/hostapd.c:4703 API00-C",
+        "hostap src/ap/hostapd.c:4798 API00-C"
+      ],
+      "note": "API00-C verdict corrected TP -> FP by bmdb 1541 (hostap): every flagged parameter is guarded, passed an address-of or literal at every call site, or forwarded only to null-tolerant callees; see that batch's manifest notes"
+    },
+    {
+      "by": "correction-api00c-644-hostap-b2-task1541",
+      "count": 22,
+      "keys": [
+        "hostap src/ap/pmksa_cache_auth.c:664 API00-C",
+        "hostap src/ap/rrm.c:490 API00-C",
+        "hostap src/ap/rrm.c:621 API00-C",
+        "hostap src/ap/rrm.c:729 API00-C",
+        "hostap src/ap/vlan_ifconfig.c:66 API00-C",
+        "hostap src/ap/wpa_auth.c:421 API00-C",
+        "hostap src/ap/wpa_auth.c:1049 API00-C",
+        "hostap src/ap/wpa_auth.c:3127 API00-C",
+        "hostap src/ap/wpa_auth.c:6870 API00-C",
+        "hostap src/ap/wpa_auth.c:7036 API00-C",
+        "hostap src/ap/wpa_auth.c:7421 API00-C",
+        "hostap src/ap/wpa_auth_ft.c:779 API00-C",
+        "hostap src/ap/wpa_auth_ft.c:1497 API00-C",
+        "hostap src/ap/wpa_auth_ft.c:3408 API00-C",
+        "hostap src/ap/wpa_auth_ft.c:3700 API00-C",
+        "hostap src/ap/wpa_auth_ft.c:4696 API00-C",
+        "hostap src/ap/wpa_auth_ie.c:400 API00-C",
+        "hostap src/ap/wpa_auth_ie.c:534 API00-C",
+        "hostap src/common/cli.c:240 API00-C",
+        "hostap src/common/ctrl_iface_common.c:190 API00-C",
+        "hostap src/common/dpp.c:4218 API00-C",
+        "hostap src/common/dpp.c:5112 API00-C"
+      ],
+      "note": "API00-C verdict corrected TP -> FP by bmdb 1541 (hostap): every flagged parameter is guarded, passed an address-of or literal at every call site, or forwarded only to null-tolerant callees; see that batch's manifest notes"
+    },
+    {
+      "by": "correction-api00c-644-hostap-b3-task1541",
+      "count": 23,
+      "keys": [
+        "hostap src/common/dpp_crypto.c:284 API00-C",
+        "hostap src/common/dpp_crypto.c:389 API00-C",
+        "hostap src/common/dpp_crypto.c:416 API00-C",
+        "hostap src/common/dpp_crypto.c:1142 API00-C",
+        "hostap src/common/dragonfly.c:53 API00-C",
+        "hostap src/common/ieee802_11_common.c:2680 API00-C",
+        "hostap src/common/nan_de.c:129 API00-C",
+        "hostap src/common/ocv.c:91 API00-C",
+        "hostap src/common/sae.c:2201 API00-C",
+        "hostap src/common/wpa_common.c:708 API00-C",
+        "hostap src/common/wpa_common.c:3058 API00-C",
+        "hostap src/common/wpa_common.c:3849 API00-C",
+        "hostap src/common/wpa_helpers.c:35 API00-C",
+        "hostap src/common/wpa_helpers.c:61 API00-C",
+        "hostap src/common/wpa_helpers.c:163 API00-C",
+        "hostap src/common/wpa_helpers.c:287 API00-C",
+        "hostap src/crypto/crypto_gnutls.c:77 API00-C",
+        "hostap src/crypto/crypto_gnutls.c:312 API00-C",
+        "hostap src/crypto/crypto_libtomcrypt.c:73 API00-C",
+        "hostap src/crypto/crypto_linux.c:139 API00-C",
+        "hostap src/crypto/crypto_linux.c:765 API00-C",
+        "hostap src/crypto/crypto_nettle.c:84 API00-C",
+        "hostap src/crypto/crypto_nettle.c:333 API00-C"
+      ],
+      "note": "API00-C verdict corrected TP -> FP by bmdb 1541 (hostap): every flagged parameter is guarded, passed an address-of or literal at every call site, or forwarded only to null-tolerant callees; see that batch's manifest notes"
+    },
+    {
+      "by": "correction-api00c-644-hostap-b4-task1541",
+      "count": 19,
+      "keys": [
+        "hostap src/crypto/crypto_openssl.c:829 API00-C",
+        "hostap src/crypto/crypto_wolfssl.c:219 API00-C",
+        "hostap src/crypto/crypto_wolfssl.c:1289 API00-C",
+        "hostap src/crypto/des-internal.c:435 API00-C",
+        "hostap src/crypto/des-internal.c:469 API00-C",
+        "hostap src/crypto/milenage.c:173 API00-C",
+        "hostap src/crypto/milenage.c:235 API00-C",
+        "hostap src/crypto/ms_funcs.c:357 API00-C",
+        "hostap src/crypto/sha1-internal.c:31 API00-C",
+        "hostap src/crypto/sha1-internal.c:234 API00-C",
+        "hostap src/crypto/sha1-internal.c:278 API00-C",
+        "hostap src/crypto/tls_gnutls.c:1666 API00-C",
+        "hostap src/crypto/tls_gnutls.c:1684 API00-C",
+        "hostap src/drivers/driver_wired_common.c:140 API00-C",
+        "hostap src/drivers/driver_wired_common.c:219 API00-C",
+        "hostap src/drivers/linux_ioctl.c:226 API00-C",
+        "hostap src/drivers/ndis_events.c:702 API00-C",
+        "hostap src/eap_common/eap_eke_common.c:342 API00-C",
+        "hostap src/eap_common/eap_eke_common.c:583 API00-C"
+      ],
+      "note": "API00-C verdict corrected TP -> FP by bmdb 1541 (hostap): every flagged parameter is guarded, passed an address-of or literal at every call site, or forwarded only to null-tolerant callees; see that batch's manifest notes"
     }
   ]
 }

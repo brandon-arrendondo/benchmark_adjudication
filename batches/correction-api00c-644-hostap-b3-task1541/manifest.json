@@ -1,0 +1,27 @@
+{
+  "batch_id": "correction-api00c-644-hostap-b3-task1541",
+  "work_item_ref": "benchmarking_db-1541",
+  "requested_by": "coordinator",
+  "adjudicator": "claude-opus-5.5",
+  "adjudicating_node": "dev-149",
+  "aurora_lint_version": "0.5.3",
+  "aurora_lint_sha": "05bd14f9ea5fbc249818b91d416ea1b09b2bf793",
+  "projects": [
+    "hostap"
+  ],
+  "codebase_commits": {
+    "hostap": "dcee60436390dd34731560657c4257c3b4c839a6"
+  },
+  "submitted_at": "2026-09-25T02:49:49Z",
+  "row_count": 23,
+  "rules": [
+    "API00-C"
+  ],
+  "verdicts": {
+    "FP": 23
+  },
+  "corrections": {
+    "TP_to_FP": 23
+  },
+  "notes": "A CORRECTION, NOT A NEW ADJUDICATION. bmdb 1541 hostap batch 3 (src/common/dpp_crypto.c .. src/crypto/crypto_nettle.c). Same standard and method as batches 1-2 (see correction-api00c-644-hostap-b1-task1541): each task-644-full-reaudit row re-derived at hostap dcee6043 under the bmdb 769 API00-C standard, per flagged parameter. The flagged parameter is the one realworld run 274 names at the key. A parameter counts as validated only by a genuine guard on the parameter itself, by every real call site passing an address-of, literal or array, or by being forwarded only to null-tolerant callees. assert() is no validation, and neither is a config-macro-only guard. An array member or &base->member counts only where the base pointer is shown valid at or above the call site. A closed caller set may close one frame up through a pass-through wrapper, as accepted for batch 1's beacon.c:1286.\n\nRESULT: 130 rows. 107 TP stand (reason restated to the TP basis; source unchanged) and 23 are corrected TP -> FP here, a flip rate of 17.7%. A fresh-context refuter reviewed all 23 and upheld all of them. Its checks: the dpp_derive_k1/k2 array-member sites dereference auth on the lines just above each call; the four sha1_vector backends share one 27-site caller set, each passing a local pointer array or an address-of; none of the batch's functions is installed as a function pointer. wpa_common.c:3849 (wpa_parse_kde_ies, ie) closes one frame up: the static inline wrapper wpa_supplicant_parse_ies passes its parameter through, and its 12 callers pass &kde/&ie of local structs.\n\nMechanics follow bmdb 1490/1531 and the 1541 pilot: in-place edits keep each key; task-644-full-reaudit takes a row_count decrement and a superseded_rows record.\n\nCounting basis: distinct (project, commit, file, line, rule) keys. No precision claim is made here."
+}
