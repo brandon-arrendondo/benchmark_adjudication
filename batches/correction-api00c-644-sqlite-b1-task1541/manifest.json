@@ -13,7 +13,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-09-25T02:07:44Z",
-  "row_count": 6,
+  "row_count": 0,
   "rules": [
     "API00-C"
   ],
@@ -23,5 +23,20 @@
   "corrections": {
     "TP_to_FP": 6
   },
-  "notes": "A CORRECTION, NOT A NEW ADJUDICATION. bmdb 1541, sqlite batch 1 of 5: 130 sqlite rows of task-644-full-reaudit (all TP, most carrying a superseded FP-rationale reason), re-derived at sqlite b1a73ba34d under the bmdb 769 API00-C standard, per flagged parameter. A parameter is validated only by a genuine guard on the parameter itself, by every call site passing an address-of or literal, or by being forwarded only to null-tolerant callees (a parameter forwarded to a dereferencing callee is unvalidated, as task-664 labels it). assert()/DEBUGASSERT is not validation (non-debug build); optional hardening configs are off (ADR-0010).\n\nRESULT: 124 TP stand (reason text restated to the TP basis, source unchanged) and 6 flip TP -> FP, listed here: sqlite ext/fts3/fts3_icu.c:255 API00-C; sqlite ext/fts3/fts3_write.c:496 API00-C; sqlite ext/fts5/fts5_aux.c:796 API00-C; sqlite src/hash.c:23 API00-C; sqlite src/pcache1.c:1261 API00-C; sqlite src/utf.c:175 API00-C. A fresh-context reviewer tried to refute each flip and upheld all of them.\n\nMECHANICS follow bmdb 1490/1531: in-place edits keep each key; task-644-full-reaudit takes a row_count decrement of 6 and a superseded_rows record.\n\nCounting basis: distinct (project, commit, file, line, rule) keys. No precision claim is made here."
+  "notes": "A CORRECTION, NOT A NEW ADJUDICATION. bmdb 1541, sqlite batch 1 of 5: 130 sqlite rows of task-644-full-reaudit (all TP, most carrying a superseded FP-rationale reason), re-derived at sqlite b1a73ba34d under the bmdb 769 API00-C standard, per flagged parameter. A parameter is validated only by a genuine guard on the parameter itself, by every call site passing an address-of or literal, or by being forwarded only to null-tolerant callees (a parameter forwarded to a dereferencing callee is unvalidated, as task-664 labels it). assert()/DEBUGASSERT is not validation (non-debug build); optional hardening configs are off (ADR-0010).\n\nRESULT: 124 TP stand (reason text restated to the TP basis, source unchanged) and 6 flip TP -> FP, listed here: sqlite ext/fts3/fts3_icu.c:255 API00-C; sqlite ext/fts3/fts3_write.c:496 API00-C; sqlite ext/fts5/fts5_aux.c:796 API00-C; sqlite src/hash.c:23 API00-C; sqlite src/pcache1.c:1261 API00-C; sqlite src/utf.c:175 API00-C. A fresh-context reviewer tried to refute each flip and upheld all of them.\n\nMECHANICS follow bmdb 1490/1531: in-place edits keep each key; task-644-full-reaudit takes a row_count decrement of 6 and a superseded_rows record.\n\nCounting basis: distinct (project, commit, file, line, rule) keys. No precision claim is made here.",
+  "superseded_rows": [
+    {
+      "by": "correction-api00c-libruling-revert-sqlite-task1551",
+      "count": 6,
+      "keys": [
+        "sqlite ext/fts3/fts3_icu.c:255 API00-C",
+        "sqlite ext/fts3/fts3_write.c:496 API00-C",
+        "sqlite ext/fts5/fts5_aux.c:796 API00-C",
+        "sqlite src/hash.c:23 API00-C",
+        "sqlite src/pcache1.c:1261 API00-C",
+        "sqlite src/utf.c:175 API00-C"
+      ],
+      "note": "API00-C verdict reverted FP -> TP by bmdb 1551 item (a) (sqlite): the flip rested on in-tree call sites of a library function, whose caller set is open under ADR-0011 742a1571; see that batch manifest notes"
+    }
+  ]
 }

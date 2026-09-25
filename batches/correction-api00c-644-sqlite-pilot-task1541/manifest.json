@@ -13,7 +13,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-09-25T05:00:00Z",
-  "row_count": 7,
+  "row_count": 2,
   "rules": [
     "API00-C"
   ],
@@ -23,5 +23,19 @@
   "corrections": {
     "TP_to_FP": 7
   },
-  "notes": "A CORRECTION, NOT A NEW ADJUDICATION. bmdb 1541 sqlite pilot: a seeded random sample of 120 of the 772 sqlite rows in task-644-full-reaudit (all TP, most carrying a superseded FP-rationale reason), re-derived at sqlite b1a73ba3 under the bmdb 769 API00-C standard, per flagged parameter. A parameter is validated only by a genuine guard on the parameter itself, by every call site passing an address-of or literal, or by being forwarded only to null-tolerant callees (a parameter forwarded to a dereferencing callee is unvalidated, as task-664 labels it). assert() is not validation (NDEBUG in the default build); SQLITE_ENABLE_API_ARMOR is off.\n\nRESULT of the pilot: 113 TP stand (reason text restated to the TP basis, source unchanged) and 7 flip TP -> FP, listed here: sqlite ext/fts3/fts3_hash.c:59 API00-C; sqlite src/complete.c:269 API00-C; sqlite src/expr.c:7264 API00-C; sqlite src/resolve.c:2191 API00-C; sqlite src/utf.c:114 API00-C; sqlite src/util.c:390 API00-C; sqlite src/vdbemem.c:1553 API00-C. A fresh-context reviewer tried to refute each flip and upheld all of them.\n\nMECHANICS follow bmdb 1490/1531: in-place edits keep each key; task-644-full-reaudit takes a row_count decrement of 7 and a superseded_rows record.\n\nCounting basis: distinct (project, commit, file, line, rule) keys. No precision claim: this is a 120-row pilot of a 3,000-row batch."
+  "notes": "A CORRECTION, NOT A NEW ADJUDICATION. bmdb 1541 sqlite pilot: a seeded random sample of 120 of the 772 sqlite rows in task-644-full-reaudit (all TP, most carrying a superseded FP-rationale reason), re-derived at sqlite b1a73ba3 under the bmdb 769 API00-C standard, per flagged parameter. A parameter is validated only by a genuine guard on the parameter itself, by every call site passing an address-of or literal, or by being forwarded only to null-tolerant callees (a parameter forwarded to a dereferencing callee is unvalidated, as task-664 labels it). assert() is not validation (NDEBUG in the default build); SQLITE_ENABLE_API_ARMOR is off.\n\nRESULT of the pilot: 113 TP stand (reason text restated to the TP basis, source unchanged) and 7 flip TP -> FP, listed here: sqlite ext/fts3/fts3_hash.c:59 API00-C; sqlite src/complete.c:269 API00-C; sqlite src/expr.c:7264 API00-C; sqlite src/resolve.c:2191 API00-C; sqlite src/utf.c:114 API00-C; sqlite src/util.c:390 API00-C; sqlite src/vdbemem.c:1553 API00-C. A fresh-context reviewer tried to refute each flip and upheld all of them.\n\nMECHANICS follow bmdb 1490/1531: in-place edits keep each key; task-644-full-reaudit takes a row_count decrement of 7 and a superseded_rows record.\n\nCounting basis: distinct (project, commit, file, line, rule) keys. No precision claim: this is a 120-row pilot of a 3,000-row batch.",
+  "superseded_rows": [
+    {
+      "by": "correction-api00c-libruling-revert-sqlite-task1551",
+      "count": 5,
+      "keys": [
+        "sqlite ext/fts3/fts3_hash.c:59 API00-C",
+        "sqlite src/expr.c:7264 API00-C",
+        "sqlite src/resolve.c:2191 API00-C",
+        "sqlite src/utf.c:114 API00-C",
+        "sqlite src/util.c:390 API00-C"
+      ],
+      "note": "API00-C verdict reverted FP -> TP by bmdb 1551 item (a) (sqlite): the flip rested on in-tree call sites of a library function, whose caller set is open under ADR-0011 742a1571; see that batch manifest notes"
+    }
+  ]
 }

@@ -1,0 +1,27 @@
+{
+  "batch_id": "correction-api00c-libruling-revert-lua-task1551",
+  "work_item_ref": "benchmarking_db-1551",
+  "requested_by": "coordinator",
+  "adjudicator": "claude-opus-5.5",
+  "adjudicating_node": "dev-180",
+  "aurora_lint_version": "0.5.3",
+  "aurora_lint_sha": "05bd14f9ea5fbc249818b91d416ea1b09b2bf793",
+  "projects": [
+    "lua"
+  ],
+  "codebase_commits": {
+    "lua": "40b76de2d77e66b70a9d4bf989c3f5340919973f"
+  },
+  "submitted_at": "2026-09-25T13:14:37Z",
+  "row_count": 2,
+  "rules": [
+    "API00-C"
+  ],
+  "verdicts": {
+    "TP": 2
+  },
+  "corrections": {
+    "FP_to_TP": 2
+  },
+  "notes": "A CORRECTION, NOT A NEW ADJUDICATION. bmdb 1551 item (a), lua: reverts bmdb 1541 API00-C flips TP -> FP that rested on the in-tree call sites (address-of, literal or local-array arguments at every site) of a non-static function in a library. ADR-0011 742a1571 (libraries count as external) and 6b28c8d7 (an executable linked to export its symbols to plugins is a library too) make that caller set open, so the in-tree sites prove nothing and the verdict returns to TP. Kept as FP (not in this batch): 1541 flips resting on a guard in the function, a null-tolerant callee, or a closed executable. RESULT: 2 revert FP -> TP here. Counting basis: distinct (project, commit, file, line, rule) keys. No precision claim is made here."
+}
