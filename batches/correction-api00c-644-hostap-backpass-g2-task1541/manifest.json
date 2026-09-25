@@ -1,0 +1,27 @@
+{
+  "batch_id": "correction-api00c-644-hostap-backpass-g2-task1541",
+  "work_item_ref": "benchmarking_db-1541",
+  "requested_by": "coordinator",
+  "adjudicator": "claude-opus-5.5",
+  "adjudicating_node": "dev-149",
+  "aurora_lint_version": "0.5.3",
+  "aurora_lint_sha": "05bd14f9ea5fbc249818b91d416ea1b09b2bf793",
+  "projects": [
+    "hostap"
+  ],
+  "codebase_commits": {
+    "hostap": "dcee60436390dd34731560657c4257c3b4c839a6"
+  },
+  "submitted_at": "2026-09-25T04:36:59Z",
+  "row_count": 27,
+  "rules": [
+    "API00-C"
+  ],
+  "verdicts": {
+    "FP": 27
+  },
+  "corrections": {
+    "TP_to_FP": 27
+  },
+  "notes": "A CORRECTION, NOT A NEW ADJUDICATION. bmdb 1541 hostap TP back-pass, group 2 of 5 (src/ap/pmksa_cache_auth.c .. src/common/nan_de.c). Same method as back-pass group 1 (see correction-api00c-644-hostap-backpass-g1-task1541): each pointer-parameter TP row in batches 1-6 re-checked for an FP basis under ADR-0011 (aurora-lint bbf240e9, d9cb04d0).\n\nRESULT: 132 TP rows re-checked. 105 stay TP. 27 are corrected TP -> FP here, all on the caller-check basis (every call site explicitly tests the value, and no function-pointer or external route exists). A fresh-context refuter upheld all 27, confirming each function's call sites by exact-name grep over the whole tree, and confirming that no address is taken and no file is in libpasn.so/libwpa_client.so. Three rows pass pointer arithmetic on the tested pointer (s + 1 after a tested os_strchr result; pos + 10 after a tested os_strstr match), which stays inside the same object and is non-null (C11 6.5.6p8). Two further proposed flips in src/ap/pmksa_cache_auth.c (:400, :710) are held as TP pending a ruling on the open caller set of files built into libpasn.so.\n\nMechanics follow bmdb 1490/1531 and the 1541 pilot: in-place edits keep each key; task-644-full-reaudit takes a row_count decrement and a superseded_rows record.\n\nCounting basis: distinct (project, commit, file, line, rule) keys. No precision claim is made here."
+}

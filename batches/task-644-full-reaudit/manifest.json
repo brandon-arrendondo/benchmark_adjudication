@@ -26,7 +26,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-08-30T18:38:52.403573",
-  "row_count": 2660,
+  "row_count": 2633,
   "rules": [
     "API00-C"
   ],
@@ -544,6 +544,40 @@
         "hostap src/ap/ieee802_11_eht.c:1231 API00-C",
         "hostap src/ap/mbo_ap.c:83 API00-C",
         "hostap src/ap/mbo_ap.c:115 API00-C"
+      ],
+      "note": "API00-C verdict corrected TP -> FP by bmdb 1541 (hostap): every flagged parameter is guarded, passed an address-of or literal at every call site, or forwarded only to null-tolerant callees; see that batch's manifest notes"
+    },
+    {
+      "by": "correction-api00c-644-hostap-backpass-g2-task1541",
+      "count": 27,
+      "keys": [
+        "hostap src/ap/taxonomy.c:268 API00-C",
+        "hostap src/ap/taxonomy.c:277 API00-C",
+        "hostap src/ap/wpa_auth.c:907 API00-C",
+        "hostap src/ap/wpa_auth.c:6830 API00-C",
+        "hostap src/ap/wpa_auth.c:7518 API00-C",
+        "hostap src/ap/wpa_auth.c:7720 API00-C",
+        "hostap src/ap/wpa_auth.c:7977 API00-C",
+        "hostap src/common/cli.c:103 API00-C",
+        "hostap src/common/cli.c:152 API00-C",
+        "hostap src/common/dpp.c:1064 API00-C",
+        "hostap src/common/dpp.c:3585 API00-C",
+        "hostap src/common/dpp.c:3736 API00-C",
+        "hostap src/common/dpp.c:3965 API00-C",
+        "hostap src/common/dpp.c:5173 API00-C",
+        "hostap src/common/dpp_crypto.c:1169 API00-C",
+        "hostap src/common/dpp_crypto.c:1682 API00-C",
+        "hostap src/common/dpp_crypto.c:2225 API00-C",
+        "hostap src/common/dpp_pkex.c:1018 API00-C",
+        "hostap src/common/dpp_pkex.c:1200 API00-C",
+        "hostap src/common/dpp_reconfig.c:663 API00-C",
+        "hostap src/common/dpp_reconfig.c:849 API00-C",
+        "hostap src/common/dpp_tcp.c:2282 API00-C",
+        "hostap src/common/nan_de.c:880 API00-C",
+        "hostap src/common/nan_de.c:888 API00-C",
+        "hostap src/common/nan_de.c:907 API00-C",
+        "hostap src/common/nan_de.c:914 API00-C",
+        "hostap src/common/nan_de.c:1522 API00-C"
       ],
       "note": "API00-C verdict corrected TP -> FP by bmdb 1541 (hostap): every flagged parameter is guarded, passed an address-of or literal at every call site, or forwarded only to null-tolerant callees; see that batch's manifest notes"
     }
