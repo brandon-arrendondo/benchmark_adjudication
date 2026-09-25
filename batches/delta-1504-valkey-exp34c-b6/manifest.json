@@ -1,0 +1,25 @@
+{
+  "batch_id": "delta-1504-valkey-exp34c-b6",
+  "work_item_ref": "aurora_lint-1504",
+  "requested_by": "coordinator",
+  "adjudicator": "claude-opus-5.5",
+  "adjudicating_node": "dev-149",
+  "aurora_lint_version": "0.5.3",
+  "aurora_lint_sha": "05bd14f9ea5fbc249818b91d416ea1b09b2bf793",
+  "projects": [
+    "valkey"
+  ],
+  "codebase_commits": {
+    "valkey": "7f1dffedff6de73058b2c2a389422b6ecd56c8fb"
+  },
+  "submitted_at": "2026-09-25T01:14:53Z",
+  "row_count": 142,
+  "rules": [
+    "EXP34-C"
+  ],
+  "verdicts": {
+    "FP": 140,
+    "TP": 2
+  },
+  "notes": "aurora_lint 1504 (v0.5.3 step 3), valkey EXP34-C batch 6 of 8. Baseline, not a delta: valkey had no EXP34-C labels. Stacked on the previous 1504 valkey branch; this branch adds only this batch's rows over its parent.\n\nPOPULATION. Postgres realworld run 274 (aurora-lint 05bd14f9, tag v0.5.3). Unlabeled keys from BenchDB.list_realworld_unlabeled(274), filtered through aurora-lint bench.corpus.in_scope, then diffed against this repo's main. valkey EXP34-C has 1092 keys, split into 8 batches by file (sorted by path). corpus-check: all 12 checkouts detached at their pins, trees clean.\n\nGATE CHECK. aurora_lint 1427 (prescan abstains on an unprovable disjunctive guard) can only add EXP34-C findings, not remove them, so it does not gate this baseline. No other open FP-reduction task targets EXP34-C.\n\nSTANDARD. The dataset's EXP34-C standard (aurora_lint 1418, bmdb 1492): the violation site is the dereference, and the verdict rests on whether a null-producing expression reaches it on some path in the pinned tree. Caller sets are enumerated at source, and a caller in an out-of-scope tree (src/unit, src/modules/hello*, tests/modules) still counts. valkey-specific, per coordinator relay 2026-09-25: serverAssert, serverAssertWithInfo, valkey's redefined assert and serverPanic have no NDEBUG arm (server.h:678-681, serverassert.h:60), so a dominating one is a valid FP basis. debugServerAssert/debugServerAssertWithInfo run only under the hidden config enable-debug-assert (default 0; server.h:687-688), so they are neutral. zmalloc/zcalloc/zrealloc never yield NULL (both OOM handlers abort or panic); ztry*, je_mallocx and libc strdup can.\n\nMETHOD. Two read-only agents per batch, each briefed with the standard above. The adjudicator spot-checked TPs and flagged calls at source.\n\nRESULT: 140 FP / 2 TP.\n- TP: src/t_hash.c:325. entry_ref = hashtableFindRef(ht, field) returns NULL for an absent field (hashtable.c:1623/1627) and *entry_ref follows unchecked. The only caller, VM_HashHasStringRef (module.c:5403), is driven with a caller-supplied field by tests/modules/hash_stringref.c:54.\n- TP: src/t_list.c:128. VM_ListInsert special-cases an empty key (key->value == NULL) only for index 0/-1, and any other index reaches listTypeTryConversionAppend(key->value, ...) and o->encoding here. tests/modules/list.c:205 passes a WRITE-opened key and a caller-supplied index.\n- Misfire (FP): src/setproctitle.c:200. &base[strlen(base)] only forms an address, and base is checked at L196.\n- Medium FPs: server.c:3944 (c->realcmd set from a command already checked by commandCheckExistence on every entry to call()); sds.c:523 (sdscatlen's t: 209 call sites, none passing NULL; the 79 non-literal sites were read line by line).\n- Recurring FP bases: listNext loop iterators; server.replicas values only ever added as a dereferenced client; script.c curr_run_ctx dominated by unconditional serverAssert(scriptIsRunning()); sentinel addr fields only ever assigned checked createSentinelAddr/dupSentinelAddr or sdsnew results; sdssplitlen NULL only with count 0.\n\nCounting basis: distinct (project, commit, file, line, rule) keys. No precision/recall claim is made here."
+}
