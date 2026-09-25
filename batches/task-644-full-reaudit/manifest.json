@@ -26,7 +26,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-08-30T18:38:52.403573",
-  "row_count": 2873,
+  "row_count": 2858,
   "rules": [
     "API00-C"
   ],
@@ -242,6 +242,56 @@
         "hostap src/eap_common/eap_eke_common.c:583 API00-C"
       ],
       "note": "API00-C verdict corrected TP -> FP by bmdb 1541 (hostap): every flagged parameter is guarded, passed an address-of or literal at every call site, or forwarded only to null-tolerant callees; see that batch's manifest notes"
+    },
+    {
+      "by": "correction-api00c-644-mosquitto-task1541",
+      "count": 7,
+      "keys": [
+        "mosquitto lib/net_mosq.c:1121 API00-C",
+        "mosquitto src/conf.c:389 API00-C",
+        "mosquitto src/database.c:1041 API00-C",
+        "mosquitto src/database.c:401 API00-C",
+        "mosquitto src/http_api.c:559 API00-C",
+        "mosquitto src/subs.c:621 API00-C",
+        "mosquitto src/subs.c:653 API00-C"
+      ],
+      "note": "API00-C verdict corrected TP -> FP by bmdb 1541 (mosquitto, all 162 rows): every flagged parameter is shown valid by the call sites (address-of or local array at every one) or is forwarded only to a null-tolerant callee; see that batch's manifest notes"
+    },
+    {
+      "by": "correction-api00c-644-lua-b2-task1541",
+      "count": 2,
+      "keys": [
+        "lua lobject.c:386 API00-C",
+        "lua lzio.c:39 API00-C"
+      ],
+      "note": "API00-C verdict corrected TP -> FP by bmdb 1541 (lua batch 2 of 2): every flagged parameter is shown valid by the call sites (address-of or local array at every one) or is forwarded only to a null-tolerant callee; see that batch's manifest notes"
+    },
+    {
+      "by": "correction-api00c-644-raylib-task1541",
+      "count": 3,
+      "keys": [
+        "raylib src/platforms/rcore_desktop_sdl.c:334 API00-C",
+        "raylib src/rcore.c:1233 API00-C",
+        "raylib src/rtext.c:1250 API00-C"
+      ],
+      "note": "API00-C verdict corrected TP -> FP by bmdb 1541 (raylib, all 109 rows): every flagged parameter is shown valid by the call sites (address-of or local array at every one) or is forwarded only to a null-tolerant callee; see that batch's manifest notes"
+    },
+    {
+      "by": "correction-api00c-644-sel4-task1541",
+      "count": 2,
+      "keys": [
+        "sel4 src/plat/pc99/machine/acpi.c:297 API00-C",
+        "sel4 src/plat/pc99/machine/acpi.c:462 API00-C"
+      ],
+      "note": "API00-C verdict corrected TP -> FP by bmdb 1541 (sel4, all 27 rows): every flagged parameter is shown valid by the call sites (address-of or local array at every one) or is forwarded only to a null-tolerant callee; see that batch's manifest notes"
+    },
+    {
+      "by": "correction-api00c-644-pureftpd-task1541",
+      "count": 1,
+      "keys": [
+        "pureftpd src/ipstack.c:196 API00-C"
+      ],
+      "note": "API00-C verdict corrected TP -> FP by bmdb 1541 (pureftpd, both rows): every flagged parameter is shown valid by the call sites (address-of or local array at every one) or is forwarded only to a null-tolerant callee; see that batch's manifest notes"
     }
   ]
 }
