@@ -13,15 +13,15 @@
     "hostap": "dcee60436390dd34731560657c4257c3b4c839a6"
   },
   "submitted_at": "2026-09-25T02:49:49Z",
-  "row_count": 11,
+  "row_count": 8,
   "rules": [
     "API00-C"
   ],
   "verdicts": {
-    "FP": 11
+    "FP": 8
   },
   "corrections": {
-    "TP_to_FP": 11
+    "TP_to_FP": 8
   },
   "notes": "A CORRECTION, NOT A NEW ADJUDICATION. bmdb 1541 hostap batch 3 (src/common/dpp_crypto.c .. src/crypto/crypto_nettle.c). Same standard and method as batches 1-2 (see correction-api00c-644-hostap-b1-task1541): each task-644-full-reaudit row re-derived at hostap dcee6043 under the bmdb 769 API00-C standard, per flagged parameter. The flagged parameter is the one realworld run 274 names at the key. A parameter counts as validated only by a genuine guard on the parameter itself, by every real call site passing an address-of, literal or array, or by being forwarded only to null-tolerant callees. assert() is no validation, and neither is a config-macro-only guard. An array member or &base->member counts only where the base pointer is shown valid at or above the call site. A closed caller set may close one frame up through a pass-through wrapper, as accepted for batch 1's beacon.c:1286.\n\nRESULT: 130 rows. 107 TP stand (reason restated to the TP basis; source unchanged) and 23 are corrected TP -> FP here, a flip rate of 17.7%. A fresh-context refuter reviewed all 23 and upheld all of them. Its checks: the dpp_derive_k1/k2 array-member sites dereference auth on the lines just above each call; the four sha1_vector backends share one 27-site caller set, each passing a local pointer array or an address-of; none of the batch's functions is installed as a function pointer. wpa_common.c:3849 (wpa_parse_kde_ies, ie) closes one frame up: the static inline wrapper wpa_supplicant_parse_ies passes its parameter through, and its 12 callers pass &kde/&ie of local structs.\n\nMechanics follow bmdb 1490/1531 and the 1541 pilot: in-place edits keep each key; task-644-full-reaudit takes a row_count decrement and a superseded_rows record.\n\nCounting basis: distinct (project, commit, file, line, rule) keys. No precision claim is made here.",
   "superseded_rows": [
@@ -55,6 +55,16 @@
       "keys": [
         "hostap src/common/dpp_crypto.c:284 API00-C",
         "hostap src/common/nan_de.c:129 API00-C"
+      ],
+      "note": "verdict reverted FP -> TP by the bmdb 1554 -rdynamic re-pass (ADR-0011 6b28c8d7): the function is non-static and linked into wpa_supplicant, so its caller set is open and the in-tree call-site basis does not hold"
+    },
+    {
+      "by": "correction-rdynamic-1554-hostap-b04",
+      "count": 3,
+      "keys": [
+        "hostap src/common/ocv.c:91 API00-C",
+        "hostap src/crypto/crypto_linux.c:139 API00-C",
+        "hostap src/crypto/crypto_linux.c:765 API00-C"
       ],
       "note": "verdict reverted FP -> TP by the bmdb 1554 -rdynamic re-pass (ADR-0011 6b28c8d7): the function is non-static and linked into wpa_supplicant, so its caller set is open and the in-tree call-site basis does not hold"
     }
