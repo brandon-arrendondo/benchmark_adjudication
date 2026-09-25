@@ -30,7 +30,7 @@
     "ventoy": "7cbdc5cf69935bcf1f085ae67f40e70ea7e74bae"
   },
   "submitted_at": "2026-09-13T06:11:45.408059",
-  "row_count": 1073,
+  "row_count": 1066,
   "rules": [
     "INT16-C"
   ],
@@ -51,6 +51,20 @@
         "curl lib/easy.c:1153 INT16-C"
       ],
       "note": "verdict corrected FP -> TP by bmdb 1553 (curl): the FP rested only on in-tree callers of a non-static library function (ADR-0011 742a1571); see that batch manifest notes"
+    },
+    {
+      "by": "correction-rdynamic-1554-hostap-b03",
+      "count": 7,
+      "keys": [
+        "hostap src/ap/wpa_auth.c:2121 INT16-C",
+        "hostap src/ap/wpa_auth.c:2126 INT16-C",
+        "hostap src/ap/wpa_auth.c:2127 INT16-C",
+        "hostap src/ap/wpa_auth.c:2128 INT16-C",
+        "hostap src/ap/wpa_auth.c:2129 INT16-C",
+        "hostap src/ap/wpa_auth.c:2163 INT16-C",
+        "hostap src/ap/wpa_auth.c:2279 INT16-C"
+      ],
+      "note": "verdict reverted FP -> TP by the bmdb 1554 -rdynamic re-pass (ADR-0011 6b28c8d7): the function is non-static and linked into wpa_supplicant, so its caller set is open and the in-tree call-site basis does not hold"
     }
   ]
 }

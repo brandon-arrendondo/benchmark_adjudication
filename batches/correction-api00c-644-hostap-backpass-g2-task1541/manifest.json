@@ -13,15 +13,45 @@
     "hostap": "dcee60436390dd34731560657c4257c3b4c839a6"
   },
   "submitted_at": "2026-09-25T04:36:59Z",
-  "row_count": 27,
+  "row_count": 6,
   "rules": [
     "API00-C"
   ],
   "verdicts": {
-    "FP": 27
+    "FP": 6
   },
   "corrections": {
-    "TP_to_FP": 27
+    "TP_to_FP": 6
   },
-  "notes": "A CORRECTION, NOT A NEW ADJUDICATION. bmdb 1541 hostap TP back-pass, group 2 of 5 (src/ap/pmksa_cache_auth.c .. src/common/nan_de.c). Same method as back-pass group 1 (see correction-api00c-644-hostap-backpass-g1-task1541): each pointer-parameter TP row in batches 1-6 re-checked for an FP basis under ADR-0011 (aurora-lint bbf240e9, d9cb04d0).\n\nRESULT: 132 TP rows re-checked. 105 stay TP. 27 are corrected TP -> FP here, all on the caller-check basis (every call site explicitly tests the value, and no function-pointer or external route exists). A fresh-context refuter upheld all 27, confirming each function's call sites by exact-name grep over the whole tree, and confirming that no address is taken and no file is in libpasn.so/libwpa_client.so. Three rows pass pointer arithmetic on the tested pointer (s + 1 after a tested os_strchr result; pos + 10 after a tested os_strstr match), which stays inside the same object and is non-null (C11 6.5.6p8). Two further proposed flips in src/ap/pmksa_cache_auth.c (:400, :710) are held as TP pending a ruling on the open caller set of files built into libpasn.so.\n\nMechanics follow bmdb 1490/1531 and the 1541 pilot: in-place edits keep each key; task-644-full-reaudit takes a row_count decrement and a superseded_rows record.\n\nCounting basis: distinct (project, commit, file, line, rule) keys. No precision claim is made here."
+  "notes": "A CORRECTION, NOT A NEW ADJUDICATION. bmdb 1541 hostap TP back-pass, group 2 of 5 (src/ap/pmksa_cache_auth.c .. src/common/nan_de.c). Same method as back-pass group 1 (see correction-api00c-644-hostap-backpass-g1-task1541): each pointer-parameter TP row in batches 1-6 re-checked for an FP basis under ADR-0011 (aurora-lint bbf240e9, d9cb04d0).\n\nRESULT: 132 TP rows re-checked. 105 stay TP. 27 are corrected TP -> FP here, all on the caller-check basis (every call site explicitly tests the value, and no function-pointer or external route exists). A fresh-context refuter upheld all 27, confirming each function's call sites by exact-name grep over the whole tree, and confirming that no address is taken and no file is in libpasn.so/libwpa_client.so. Three rows pass pointer arithmetic on the tested pointer (s + 1 after a tested os_strchr result; pos + 10 after a tested os_strstr match), which stays inside the same object and is non-null (C11 6.5.6p8). Two further proposed flips in src/ap/pmksa_cache_auth.c (:400, :710) are held as TP pending a ruling on the open caller set of files built into libpasn.so.\n\nMechanics follow bmdb 1490/1531 and the 1541 pilot: in-place edits keep each key; task-644-full-reaudit takes a row_count decrement and a superseded_rows record.\n\nCounting basis: distinct (project, commit, file, line, rule) keys. No precision claim is made here.",
+  "superseded_rows": [
+    {
+      "by": "correction-rdynamic-1554-hostap-b03",
+      "count": 21,
+      "keys": [
+        "hostap src/ap/wpa_auth.c:907 API00-C",
+        "hostap src/ap/wpa_auth.c:6830 API00-C",
+        "hostap src/ap/wpa_auth.c:7518 API00-C",
+        "hostap src/ap/wpa_auth.c:7720 API00-C",
+        "hostap src/ap/wpa_auth.c:7977 API00-C",
+        "hostap src/common/dpp.c:1064 API00-C",
+        "hostap src/common/dpp.c:3585 API00-C",
+        "hostap src/common/dpp.c:3736 API00-C",
+        "hostap src/common/dpp.c:3965 API00-C",
+        "hostap src/common/dpp.c:5173 API00-C",
+        "hostap src/common/dpp_crypto.c:1682 API00-C",
+        "hostap src/common/dpp_pkex.c:1018 API00-C",
+        "hostap src/common/dpp_pkex.c:1200 API00-C",
+        "hostap src/common/dpp_reconfig.c:663 API00-C",
+        "hostap src/common/dpp_reconfig.c:849 API00-C",
+        "hostap src/common/dpp_tcp.c:2282 API00-C",
+        "hostap src/common/nan_de.c:880 API00-C",
+        "hostap src/common/nan_de.c:888 API00-C",
+        "hostap src/common/nan_de.c:907 API00-C",
+        "hostap src/common/nan_de.c:914 API00-C",
+        "hostap src/common/nan_de.c:1522 API00-C"
+      ],
+      "note": "verdict reverted FP -> TP by the bmdb 1554 -rdynamic re-pass (ADR-0011 6b28c8d7): the function is non-static and linked into wpa_supplicant, so its caller set is open and the in-tree call-site basis does not hold"
+    }
+  ]
 }

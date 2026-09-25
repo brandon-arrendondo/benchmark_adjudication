@@ -13,15 +13,15 @@
     "hostap": "dcee60436390dd34731560657c4257c3b4c839a6"
   },
   "submitted_at": "2026-09-25T04:56:41Z",
-  "row_count": 13,
+  "row_count": 6,
   "rules": [
     "API00-C"
   ],
   "verdicts": {
-    "FP": 13
+    "FP": 6
   },
   "corrections": {
-    "TP_to_FP": 13
+    "TP_to_FP": 6
   },
   "notes": "A CORRECTION, NOT A NEW ADJUDICATION. bmdb 1541 hostap TP back-pass, group 3 of 5 (src/common/nan_de.c .. src/crypto/tls_wolfssl.c). Same method as back-pass groups 1-2 (see correction-api00c-644-hostap-backpass-g1-task1541): each pointer-parameter TP row in batches 1-6 re-checked for an FP basis under ADR-0011 (aurora-lint bbf240e9, d9cb04d0).\n\nRESULT: 132 TP rows re-checked. 21 are corrected TP -> FP here, and the rest stay TP. 20 of those that stay TP had an FP proof found but sit in files built into the installed shared library libpasn.so, and are held pending a ruling on that library's open caller set. A fresh-context refuter reviewed the 22 proposed flips and upheld 21. It rejected crypto_libtomcrypt.c:576, which can be built into libpasn.so via crypto_$(CONFIG_CRYPTO).c (wpa_supplicant/Makefile:2302); that row stays TP with a rewritten reason. Upheld flips include the nan_de rows (every call site tests the nan_de field; nan_de.c:2148 through the static predicate wpas_nan_ready, whose only true path requires nan_de non-null), ocv.c:77 (&pos of a local at every chain), and the aes-ccm/aes-gcm/sha1-internal/tls_internal/tls_none rows, whose files are built into no shared library and whose complete call sets pass tested buffers, local arrays or &local.\n\nMechanics follow bmdb 1490/1531 and the 1541 pilot: in-place edits keep each key; task-644-full-reaudit takes a row_count decrement and a superseded_rows record.\n\nCounting basis: distinct (project, commit, file, line, rule) keys. No precision claim is made here.",
   "superseded_rows": [
@@ -39,6 +39,20 @@
         "hostap src/crypto/tls_internal.c:777 API00-C"
       ],
       "note": "API00-C verdict reverted FP -> TP under the ADR-0011 library ruling (aurora-lint 742a1571): the function is non-static in a library-built file, so its caller set is open and the in-tree call-site proof does not hold; see that batch's manifest notes"
+    },
+    {
+      "by": "correction-rdynamic-1554-hostap-b03",
+      "count": 7,
+      "keys": [
+        "hostap src/common/nan_de.c:1601 API00-C",
+        "hostap src/common/nan_de.c:1740 API00-C",
+        "hostap src/common/nan_de.c:1755 API00-C",
+        "hostap src/common/nan_de.c:1779 API00-C",
+        "hostap src/common/nan_de.c:2006 API00-C",
+        "hostap src/common/nan_de.c:2059 API00-C",
+        "hostap src/common/nan_de.c:2148 API00-C"
+      ],
+      "note": "verdict reverted FP -> TP by the bmdb 1554 -rdynamic re-pass (ADR-0011 6b28c8d7): the function is non-static and linked into wpa_supplicant, so its caller set is open and the in-tree call-site basis does not hold"
     }
   ]
 }
