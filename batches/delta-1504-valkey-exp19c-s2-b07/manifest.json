@@ -1,0 +1,24 @@
+{
+  "batch_id": "delta-1504-valkey-exp19c-s2-b07",
+  "work_item_ref": "aurora_lint-1504",
+  "requested_by": "coordinator",
+  "adjudicator": "claude-opus-5.5",
+  "adjudicating_node": "dev-149",
+  "aurora_lint_version": "0.5.3",
+  "aurora_lint_sha": "05bd14f9ea5fbc249818b91d416ea1b09b2bf793",
+  "projects": [
+    "valkey"
+  ],
+  "codebase_commits": {
+    "valkey": "7f1dffedff6de73058b2c2a389422b6ecd56c8fb"
+  },
+  "submitted_at": "2026-09-25T14:11:34Z",
+  "row_count": 122,
+  "rules": [
+    "EXP19-C"
+  ],
+  "verdicts": {
+    "TP": 122
+  },
+  "notes": "aurora_lint 1504 (v0.5.3 step 3), valkey EXP19-C stratum S2, batch 7: a baseline, not a delta (valkey had no EXP19-C labels before S1). Stacked on delta-1504-valkey-exp19c-s2-b06; this branch adds only this batch's rows over its parent.\n\nSCOPE. S2 is every in-scope valkey EXP19-C key at realworld run 274 that is not else-shaped and has no preprocessor directive within the next 5 lines (6,395 keys; S1's 154 are merged). Brandon ruled that S2 is labeled by hand rather than by a mechanical checker. Batches run alphabetically by file, about 130 keys each. This batch: 122 keys in 1 file(s), src/cluster_legacy.c (if 120, for 1, while 1).\n\nSTANDARD. The existing EXP19-C convention (~39,700 labels): TP when the body of the if/for/while/do at that line is a single statement not enclosed in braces (a macro call, return, goto, assignment, empty statement or nested unbraced if all count); FP only when the premise is false and the body is a braced block the tool misread.\n\nMETHOD. One read-only agent read every key's construct at source in the pinned checkout and judged it; no script decided a verdict. The adjudicator then checked that each reason's named body token is present at the key and spot-read a random sample at source.\n\nRESULT: 122 TP / 0 FP.\n\nCounting basis: distinct (project, commit, file, line, rule) keys. No precision/recall claim is made here."
+}
