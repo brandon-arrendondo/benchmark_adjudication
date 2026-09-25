@@ -1,0 +1,32 @@
+{
+  "batch_id": "correction-libruling-sqlite-b2-task1553",
+  "work_item_ref": "benchmarking_db-1553",
+  "requested_by": "coordinator",
+  "adjudicator": "claude-opus-5.5",
+  "adjudicating_node": "dev-180",
+  "aurora_lint_version": "0.5.3",
+  "aurora_lint_sha": "05bd14f9ea5fbc249818b91d416ea1b09b2bf793",
+  "projects": [
+    "sqlite"
+  ],
+  "codebase_commits": {
+    "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
+  },
+  "submitted_at": "2026-09-25T14:03:54Z",
+  "row_count": 95,
+  "rules": [
+    "API00-C",
+    "ARR00-C",
+    "ARR30-C",
+    "EXP34-C",
+    "INT32-C",
+    "INT33-C"
+  ],
+  "verdicts": {
+    "TP": 95
+  },
+  "corrections": {
+    "FP_to_TP": 95
+  },
+  "notes": "A CORRECTION, NOT A NEW ADJUDICATION. bmdb 1553 (library-ruling consistency pass), sqlite, b2. EXPORT SURFACE: libsqlite3 is built and installed (main.mk:1599-1608, install-lib/install-dll), and ext/ sources are compiled into it or built as documented loadable extensions (ext/misc/README.md); SQLITE_PRIVATE makes internal functions static only in the amalgamation build, and the separate-source build also compiles (ADR-0010). Every non-static function in these sources therefore has an open caller set (ADR-0011 742a1571, 6b28c8d7), and in-tree call sites prove nothing about a value arriving through its parameters. SELECTION: existing FP labels on non-static functions in exported sources whose recorded reason is caller-side (callers, call sites, contract, precondition, \"always valid/never NULL\"); tool-only files with their own main() excluded. METHOD: each row read at source by a reviewer; FP -> TP only where the verdict rested solely on callers for a parameter-derived value. Rows with a real in-function basis (a guard present in every build, a null-tolerant callee, a misfire, a value not from a parameter, a language guarantee) or where the keyword match was noise keep FP. assert/DEBUGASSERT/NEVER()/ALWAYS() are not guards (each compiles out or constant-folds in a compilable build). A fresh-context refuter re-checked a random sample of flips and stands. RESULT: 140 rows reviewed, 95 flip FP -> TP here, 45 keep FP. Counting basis: distinct (project, commit, file, line, rule) keys. No precision claim is made here."
+}

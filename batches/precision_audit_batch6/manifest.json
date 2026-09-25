@@ -12,7 +12,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-06-12T21:51:17.770595",
-  "row_count": 1120,
+  "row_count": 1116,
   "rules": [
     "API00-C",
     "ARR00-C",
@@ -92,6 +92,24 @@
         "sqlite ext/rtree/rtree.c:1 MEM31-C"
       ],
       "note": "MEM31-C loop-array finding relocated off line 1 by aurora_lint 1487; the key is re-keyed to the allocation site or dropped where that site already carries an FP label; see delta-mem31c-loop-array-relocation-task1491's manifest notes"
+    },
+    {
+      "by": "correction-libruling-sqlite-b1-task1553",
+      "count": 1,
+      "keys": [
+        "sqlite ext/misc/amatch.c:1490 API00-C"
+      ],
+      "note": "verdict corrected FP -> TP by bmdb 1553 (sqlite): the FP rested only on in-tree callers of a non-static library function (ADR-0011 742a1571); see that batch manifest notes"
+    },
+    {
+      "by": "correction-libruling-sqlite-b2-task1553",
+      "count": 3,
+      "keys": [
+        "sqlite ext/rtree/rtree.c:4315 API00-C",
+        "sqlite ext/rtree/rtree.c:4423 API00-C",
+        "sqlite ext/rtree/rtree.c:4447 API00-C"
+      ],
+      "note": "verdict corrected FP -> TP by bmdb 1553 (sqlite): the FP rested only on in-tree callers of a non-static library function (ADR-0011 742a1571); see that batch manifest notes"
     }
   ]
 }
