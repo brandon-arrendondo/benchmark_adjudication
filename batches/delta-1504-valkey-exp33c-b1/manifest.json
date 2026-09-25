@@ -1,0 +1,24 @@
+{
+  "batch_id": "delta-1504-valkey-exp33c-b1",
+  "work_item_ref": "aurora_lint-1504",
+  "requested_by": "coordinator",
+  "adjudicator": "claude-opus-5.5",
+  "adjudicating_node": "dev-149",
+  "aurora_lint_version": "0.5.3",
+  "aurora_lint_sha": "05bd14f9ea5fbc249818b91d416ea1b09b2bf793",
+  "projects": [
+    "valkey"
+  ],
+  "codebase_commits": {
+    "valkey": "7f1dffedff6de73058b2c2a389422b6ecd56c8fb"
+  },
+  "submitted_at": "2026-09-25T00:51:24Z",
+  "row_count": 128,
+  "rules": [
+    "EXP33-C"
+  ],
+  "verdicts": {
+    "FP": 128
+  },
+  "notes": "aurora_lint 1504 (v0.5.3 step 3), valkey EXP33-C batch 1 of 3. This is a baseline, not a delta: valkey had no EXP33-C labels. Brandon chose to label valkey for the ungated rules listed in 1504 (coordinator relay, 2026-09-25).\n\nPOPULATION. Postgres realworld run 274 (aurora-lint 05bd14f9, tag v0.5.3). Unlabeled keys from BenchDB.list_realworld_unlabeled(274), filtered through aurora-lint bench.corpus.in_scope, then diffed against this repo's main. valkey EXP33-C has 383 keys, split into three batches by message shape and file. This batch holds the first 128 (by file) of the 212 \"Static variable 'X' used without explicit initialization\" keys. corpus-check: all 12 checkouts detached at their pins, trees clean.\n\nGATE CHECK. aurora_lint 1435 (EXP33-C cross-file call on an explicitly-initialized file-scope static) touches only the \"Passing pointer to uninitialized variable\" shape. None of this batch has that shape, and valkey's 15 such keys all pass locals. No other open FP-reduction task targets this shape.\n\nSTANDARD. Same as every existing label for this message (287 FP, 0 TP across the other corpora): an object with static or thread storage duration and no initializer is zero-initialized (C11 6.7.9p10), so the read sees a determinate value. For each key, the use was resolved to its declaration at source, with shadowing locals checked (defrag.c ctx, valkey-cli.c context, server.c name resolved by hand).\n\nMETHOD. One read-only agent, spot-checked at source by the adjudicator (defrag.c:938, valkey-cli.c:222, and a random sample of 4 rows).\n\nRESULT: 128 FP / 0 TP. 118 file-scope statics, 9 block-scope static, 1 block-scope static _Thread_local. No misfires.\n\nCounting basis: distinct (project, commit, file, line, rule) keys. No precision/recall claim is made here."
+}
