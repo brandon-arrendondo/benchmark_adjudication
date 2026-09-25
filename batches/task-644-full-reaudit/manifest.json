@@ -26,7 +26,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-08-30T18:38:52.403573",
-  "row_count": 2969,
+  "row_count": 2959,
   "rules": [
     "API00-C"
   ],
@@ -97,6 +97,23 @@
         "sqlite src/resolve.c:125 API00-C"
       ],
       "note": "API00-C verdict corrected TP -> FP by bmdb 1541 (sqlite batch 4 of 5): every flagged parameter is shown valid by the call sites (address-of or local array at every one) or is forwarded only to a null-tolerant callee; see that batch's manifest notes"
+    },
+    {
+      "by": "correction-api00c-644-sqlite-b5-task1541",
+      "count": 10,
+      "keys": [
+        "sqlite ext/fts3/tool/fts3view.c:137 API00-C",
+        "sqlite src/attach.c:576 API00-C",
+        "sqlite src/select.c:112 API00-C",
+        "sqlite src/threads.c:184 API00-C",
+        "sqlite src/threads.c:250 API00-C",
+        "sqlite src/threads.c:88 API00-C",
+        "sqlite src/vdbeaux.c:3702 API00-C",
+        "sqlite src/vdbeaux.c:70 API00-C",
+        "sqlite src/vdbemem.c:1930 API00-C",
+        "sqlite src/whereexpr.c:1759 API00-C"
+      ],
+      "note": "API00-C verdict corrected TP -> FP by bmdb 1541 (sqlite batch 5 of 5): every flagged parameter is shown valid by the call sites (address-of or local array at every one) or is forwarded only to a null-tolerant callee; see that batch's manifest notes"
     }
   ]
 }
