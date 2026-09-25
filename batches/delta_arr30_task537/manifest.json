@@ -18,7 +18,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-08-25T08:22:09.467359",
-  "row_count": 348,
+  "row_count": 347,
   "rules": [
     "ARR30-C"
   ],
@@ -30,6 +30,14 @@
       "keys": [
         "sqlite src/callback.c:346 ARR30-C",
         "sqlite src/expr.c:610 ARR30-C"
+      ],
+      "note": "verdict corrected FP -> TP by bmdb 1553 (sqlite): the FP rested only on in-tree callers of a non-static library function (ADR-0011 742a1571); see that batch manifest notes"
+    },
+    {
+      "by": "correction-libruling-sqlite-b3-task1553",
+      "count": 1,
+      "keys": [
+        "sqlite src/resolve.c:866 ARR30-C"
       ],
       "note": "verdict corrected FP -> TP by bmdb 1553 (sqlite): the FP rested only on in-tree callers of a non-static library function (ADR-0011 742a1571); see that batch manifest notes"
     }

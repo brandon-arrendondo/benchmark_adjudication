@@ -12,7 +12,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-06-12T22:26:55.925966",
-  "row_count": 1343,
+  "row_count": 1318,
   "rules": [
     "API00-C",
     "API02-C",
@@ -83,5 +83,46 @@
     "STR34-C",
     "WIN04-C"
   ],
-  "notes": "Reconstructed during benchmark_adjudication's initial population (2026-09-16) from benchmarking_db's ground_truth.source='precision_audit_batch8'. row_count/projects/codebase_commits/rules were derived from the rows themselves, not declared at adjudication time. aurora_lint_version/aurora_lint_sha are unknown for legacy data -- never recorded per-row."
+  "notes": "Reconstructed during benchmark_adjudication's initial population (2026-09-16) from benchmarking_db's ground_truth.source='precision_audit_batch8'. row_count/projects/codebase_commits/rules were derived from the rows themselves, not declared at adjudication time. aurora_lint_version/aurora_lint_sha are unknown for legacy data -- never recorded per-row.",
+  "superseded_rows": [
+    {
+      "by": "correction-libruling-sqlite-b3-task1553",
+      "count": 12,
+      "keys": [
+        "sqlite src/main.c:1794 EXP34-C",
+        "sqlite src/main.c:1824 EXP34-C",
+        "sqlite src/main.c:1850 EXP34-C",
+        "sqlite src/main.c:1947 EXP34-C",
+        "sqlite src/main.c:2117 API00-C",
+        "sqlite src/main.c:2144 API00-C",
+        "sqlite src/main.c:3031 EXP34-C",
+        "sqlite src/main.c:3745 API00-C",
+        "sqlite src/main.c:4124 API00-C",
+        "sqlite src/main.c:4822 EXP34-C",
+        "sqlite src/main.c:4949 EXP34-C",
+        "sqlite src/main.c:5103 API00-C"
+      ],
+      "note": "verdict corrected FP -> TP by bmdb 1553 (sqlite): the FP rested only on in-tree callers of a non-static library function (ADR-0011 742a1571); see that batch manifest notes"
+    },
+    {
+      "by": "correction-libruling-sqlite-b4-task1553",
+      "count": 13,
+      "keys": [
+        "sqlite src/util.c:105 EXP34-C",
+        "sqlite src/util.c:1098 EXP34-C",
+        "sqlite src/util.c:1690 EXP34-C",
+        "sqlite src/vdbeapi.c:1095 API00-C",
+        "sqlite src/vdbeapi.c:1774 INT32-C",
+        "sqlite src/vdbeapi.c:1788 INT32-C",
+        "sqlite src/vdbeapi.c:1799 INT32-C",
+        "sqlite src/vdbeapi.c:1815 INT32-C",
+        "sqlite src/vdbeapi.c:1857 INT13-C",
+        "sqlite src/vdbeapi.c:1897 INT32-C",
+        "sqlite src/vdbeapi.c:198 API00-C",
+        "sqlite src/vdbeapi.c:315 EXP34-C",
+        "sqlite src/vdbeapi.c:335 EXP34-C"
+      ],
+      "note": "verdict corrected FP -> TP by bmdb 1553 (sqlite): the FP rested only on in-tree callers of a non-static library function (ADR-0011 742a1571); see that batch manifest notes"
+    }
+  ]
 }

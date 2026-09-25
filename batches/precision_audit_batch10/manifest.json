@@ -12,7 +12,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-06-14T15:32:32.702771+00:00",
-  "row_count": 1185,
+  "row_count": 1157,
   "rules": [
     "API00-C",
     "API02-C",
@@ -79,6 +79,48 @@
         "sqlite src/analyze.c:1970 ARR00-C",
         "sqlite src/expr.c:1282 EXP34-C",
         "sqlite src/expr.c:47 EXP34-C"
+      ],
+      "note": "verdict corrected FP -> TP by bmdb 1553 (sqlite): the FP rested only on in-tree callers of a non-static library function (ADR-0011 742a1571); see that batch manifest notes"
+    },
+    {
+      "by": "correction-libruling-sqlite-b3-task1553",
+      "count": 8,
+      "keys": [
+        "sqlite src/expr.c:2353 EXP34-C",
+        "sqlite src/expr.c:3855 EXP34-C",
+        "sqlite src/expr.c:4366 ARR00-C",
+        "sqlite src/expr.c:4366 EXP34-C",
+        "sqlite src/expr.c:4438 ARR00-C",
+        "sqlite src/insert.c:112 EXP34-C",
+        "sqlite src/insert.c:2160 EXP34-C",
+        "sqlite src/insert.c:2811 EXP34-C"
+      ],
+      "note": "verdict corrected FP -> TP by bmdb 1553 (sqlite): the FP rested only on in-tree callers of a non-static library function (ADR-0011 742a1571); see that batch manifest notes"
+    },
+    {
+      "by": "correction-libruling-sqlite-b4-task1553",
+      "count": 20,
+      "keys": [
+        "sqlite src/vdbemem.c:1014 ARR30-C",
+        "sqlite src/vdbemem.c:1024 API00-C",
+        "sqlite src/vdbemem.c:1059 EXP34-C",
+        "sqlite src/vdbemem.c:1072 EXP34-C",
+        "sqlite src/vdbemem.c:1155 EXP34-C",
+        "sqlite src/vdbemem.c:1294 EXP43-C",
+        "sqlite src/vdbemem.c:1376 EXP43-C",
+        "sqlite src/vdbemem.c:2194 EXP34-C",
+        "sqlite src/vdbemem.c:315 EXP34-C",
+        "sqlite src/vdbemem.c:336 EXP34-C",
+        "sqlite src/vdbemem.c:37 EXP34-C",
+        "sqlite src/vdbemem.c:611 EXP34-C",
+        "sqlite src/vdbemem.c:666 API00-C",
+        "sqlite src/vdbemem.c:744 EXP34-C",
+        "sqlite src/vdbemem.c:879 EXP34-C",
+        "sqlite src/vdbemem.c:949 EXP34-C",
+        "sqlite src/wherecode.c:2839 EXP34-C",
+        "sqlite src/wherecode.c:2840 EXP34-C",
+        "sqlite src/wherecode.c:286 EXP34-C",
+        "sqlite src/window.c:687 EXP34-C"
       ],
       "note": "verdict corrected FP -> TP by bmdb 1553 (sqlite): the FP rested only on in-tree callers of a non-static library function (ADR-0011 742a1571); see that batch manifest notes"
     }

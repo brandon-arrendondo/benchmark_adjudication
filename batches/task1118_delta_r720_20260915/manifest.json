@@ -24,7 +24,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-09-15T11:23:46.295128",
-  "row_count": 1206,
+  "row_count": 1162,
   "rules": [
     "API00-C"
   ],
@@ -294,6 +294,64 @@
         "sqlite src/delete.c:51 API00-C",
         "sqlite src/expr.c:452 API00-C",
         "sqlite src/expr.c:499 API00-C"
+      ],
+      "note": "verdict corrected FP -> TP by bmdb 1553 (sqlite): the FP rested only on in-tree callers of a non-static library function (ADR-0011 742a1571); see that batch manifest notes"
+    },
+    {
+      "by": "correction-libruling-sqlite-b3-task1553",
+      "count": 16,
+      "keys": [
+        "sqlite src/expr.c:2351 API00-C",
+        "sqlite src/expr.c:3841 API00-C",
+        "sqlite src/fkey.c:1095 API00-C",
+        "sqlite src/fkey.c:676 API00-C",
+        "sqlite src/func.c:2338 API00-C",
+        "sqlite src/insert.c:179 API00-C",
+        "sqlite src/loadext.c:746 API00-C",
+        "sqlite src/loadext.c:908 API00-C",
+        "sqlite src/main.c:1175 API00-C",
+        "sqlite src/main.c:1483 API00-C",
+        "sqlite src/main.c:1770 API00-C",
+        "sqlite src/main.c:2690 API00-C",
+        "sqlite src/printf.c:1054 API00-C",
+        "sqlite src/printf.c:1462 API00-C",
+        "sqlite src/select.c:2141 API00-C",
+        "sqlite src/update.c:61 API00-C"
+      ],
+      "note": "verdict corrected FP -> TP by bmdb 1553 (sqlite): the FP rested only on in-tree callers of a non-static library function (ADR-0011 742a1571); see that batch manifest notes"
+    },
+    {
+      "by": "correction-libruling-sqlite-b4-task1553",
+      "count": 28,
+      "keys": [
+        "sqlite src/util.c:1388 API00-C",
+        "sqlite src/util.c:155 API00-C",
+        "sqlite src/util.c:1622 API00-C",
+        "sqlite src/util.c:1741 API00-C",
+        "sqlite src/util.c:876 API00-C",
+        "sqlite src/vdbeaux.c:1092 API00-C",
+        "sqlite src/vdbeaux.c:1307 API00-C",
+        "sqlite src/vdbeaux.c:1465 API00-C",
+        "sqlite src/vdbeaux.c:1472 API00-C",
+        "sqlite src/vdbeaux.c:1566 API00-C",
+        "sqlite src/vdbeaux.c:1695 API00-C",
+        "sqlite src/vdbeaux.c:263 API00-C",
+        "sqlite src/vdbeaux.c:317 API00-C",
+        "sqlite src/vdbeaux.c:414 API00-C",
+        "sqlite src/vdbeaux.c:52 API00-C",
+        "sqlite src/vdbeaux.c:5343 API00-C",
+        "sqlite src/vdbeaux.c:572 API00-C",
+        "sqlite src/vdbeaux.c:637 API00-C",
+        "sqlite src/vdbeaux.c:666 API00-C",
+        "sqlite src/vtab.c:1020 API00-C",
+        "sqlite src/vtab.c:182 API00-C",
+        "sqlite src/vtab.c:192 API00-C",
+        "sqlite src/vtab.c:203 API00-C",
+        "sqlite src/vtab.c:310 API00-C",
+        "sqlite src/walker.c:133 API00-C",
+        "sqlite src/walker.c:166 API00-C",
+        "sqlite src/walker.c:206 API00-C",
+        "sqlite src/where.c:4543 API00-C"
       ],
       "note": "verdict corrected FP -> TP by bmdb 1553 (sqlite): the FP rested only on in-tree callers of a non-static library function (ADR-0011 742a1571); see that batch manifest notes"
     }

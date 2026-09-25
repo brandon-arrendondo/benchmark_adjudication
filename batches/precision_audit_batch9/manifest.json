@@ -12,7 +12,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-06-14T14:17:05.114719+00:00",
-  "row_count": 1373,
+  "row_count": 1363,
   "rules": [
     "API00-C",
     "API01-C",
@@ -97,6 +97,30 @@
         "sqlite src/printf.c:1493 ERR33-C"
       ],
       "note": "ERR33-C verdict corrected FP -> TP under the project-wide strict bar (bmdb 1352); see that batch's manifest notes"
+    },
+    {
+      "by": "correction-libruling-sqlite-b3-task1553",
+      "count": 7,
+      "keys": [
+        "sqlite src/pager.c:3782 EXP34-C",
+        "sqlite src/pager.c:4754 INT13-C",
+        "sqlite src/pager.c:5785 EXP34-C",
+        "sqlite src/pager.c:6235 EXP34-C",
+        "sqlite src/pager.c:7306 EXP34-C",
+        "sqlite src/pager.c:7315 EXP34-C",
+        "sqlite src/printf.c:1284 API00-C"
+      ],
+      "note": "verdict corrected FP -> TP by bmdb 1553 (sqlite): the FP rested only on in-tree callers of a non-static library function (ADR-0011 742a1571); see that batch manifest notes"
+    },
+    {
+      "by": "correction-libruling-sqlite-b4-task1553",
+      "count": 3,
+      "keys": [
+        "sqlite src/vdbesort.c:1811 EXP34-C",
+        "sqlite src/vdbesort.c:2739 EXP34-C",
+        "sqlite src/vdbesort.c:2794 EXP34-C"
+      ],
+      "note": "verdict corrected FP -> TP by bmdb 1553 (sqlite): the FP rested only on in-tree callers of a non-static library function (ADR-0011 742a1571); see that batch manifest notes"
     }
   ]
 }
