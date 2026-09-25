@@ -1,0 +1,25 @@
+{
+  "batch_id": "delta-1504-valkey-exp34c-b3",
+  "work_item_ref": "aurora_lint-1504",
+  "requested_by": "coordinator",
+  "adjudicator": "claude-opus-5.5",
+  "adjudicating_node": "dev-149",
+  "aurora_lint_version": "0.5.3",
+  "aurora_lint_sha": "05bd14f9ea5fbc249818b91d416ea1b09b2bf793",
+  "projects": [
+    "valkey"
+  ],
+  "codebase_commits": {
+    "valkey": "7f1dffedff6de73058b2c2a389422b6ecd56c8fb"
+  },
+  "submitted_at": "2026-09-25T01:29:47Z",
+  "row_count": 149,
+  "rules": [
+    "EXP34-C"
+  ],
+  "verdicts": {
+    "FP": 146,
+    "TP": 3
+  },
+  "notes": "aurora_lint 1504 (v0.5.3 step 3), valkey EXP34-C batch 3 of 8. Baseline, not a delta: valkey had no EXP34-C labels. Rebuilt on benchmark_adjudication main b59c756 after batches 1, 2, 4, 6 merged; stacked on the previous -r2 branch. This branch adds only this batch's rows over its parent.\n\nPOPULATION. Postgres realworld run 274 (aurora-lint 05bd14f9, tag v0.5.3). Unlabeled keys from BenchDB.list_realworld_unlabeled(274), filtered through aurora-lint bench.corpus.in_scope, then diffed against this repo's main. valkey EXP34-C has 1092 keys, split into 8 batches by file (sorted by path). corpus-check: all 12 checkouts detached at their pins, trees clean.\n\nGATE CHECK. aurora_lint 1427 (prescan abstains on an unprovable disjunctive guard) can only add EXP34-C findings, not remove them, so it does not gate this baseline. No other open FP-reduction task targets EXP34-C.\n\nSTANDARD. The dataset's EXP34-C standard (aurora_lint 1418, bmdb 1492): the violation site is the dereference, and the verdict rests on whether a null-producing expression reaches it on some path in the pinned tree. Caller sets are enumerated at source, and a caller in an out-of-scope tree (src/unit, src/modules/hello*, tests/modules) still counts. valkey-specific, per coordinator relay 2026-09-25: serverAssert, serverAssertWithInfo, valkey's redefined assert and serverPanic have no NDEBUG arm (server.h:678-681, serverassert.h:60), so a dominating one is a valid FP basis. debugServerAssert/debugServerAssertWithInfo run only under the hidden config enable-debug-assert (default 0; server.h:687-688), so they are neutral. zmalloc/zcalloc/zrealloc never yield NULL (both OOM handlers abort or panic); ztry*, je_mallocx and libc strdup can.\n\nMETHOD. Two read-only agents per batch, each briefed with the standard above. The adjudicator spot-checked TPs and flagged calls at source.\n\nRESULT: 146 FP / 3 TP.\n- TP: src/fuzzer_client.c:115. struct tm *tm = localtime(&now) (L111) is unchecked before tm->tm_hour.\n- TP: src/fuzzer_client.c:684. thread_data = malloc(...) (L679, libc malloc) is unchecked before thread_data[i].host is written.\n- TP (medium): src/fuzzer_client.c:691. threads = malloc(...) (L678) is unchecked, and pthread_create(&threads[i], ...) writes through it. The flagged construct forms &threads[i], which the callee then stores through.\n- Misfire (FP): src/hashtable.c:1353. return &ht->metadata only forms an address.\n- Medium FPs: hashtable.c:414 (three callers pass an unchecked kvstoreGetHashtable() result, which is non-null because a key with an expire or volatile field lives in that table, and kvstore frees a table only when it is empty); hashtable.c:1358 and :1427 (public entry points with 71 and several indirect callers, none NULL-capable).\n- Recurring FP bases: static hashtable/dict helpers whose every caller has already dereferenced the table (hashtableSize, hashtableIsRehashing, unconditional assert); bucket walks bounded by b->chained; curr_functions_lib_ctx (zmalloc'd in functionsInit, never set to NULL); fuzzer contexts zmalloc'd before use; dominating unconditional serverAssert.\n\nCounting basis: distinct (project, commit, file, line, rule) keys. No precision/recall claim is made here."
+}

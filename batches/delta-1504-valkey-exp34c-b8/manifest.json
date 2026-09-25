@@ -1,0 +1,25 @@
+{
+  "batch_id": "delta-1504-valkey-exp34c-b8",
+  "work_item_ref": "aurora_lint-1504",
+  "requested_by": "coordinator",
+  "adjudicator": "claude-opus-5.5",
+  "adjudicating_node": "dev-149",
+  "aurora_lint_version": "0.5.3",
+  "aurora_lint_sha": "05bd14f9ea5fbc249818b91d416ea1b09b2bf793",
+  "projects": [
+    "valkey"
+  ],
+  "codebase_commits": {
+    "valkey": "7f1dffedff6de73058b2c2a389422b6ecd56c8fb"
+  },
+  "submitted_at": "2026-09-25T01:30:40Z",
+  "row_count": 139,
+  "rules": [
+    "EXP34-C"
+  ],
+  "verdicts": {
+    "FP": 134,
+    "TP": 5
+  },
+  "notes": "aurora_lint 1504 (v0.5.3 step 3), valkey EXP34-C batch 8 of 8. Baseline, not a delta: valkey had no EXP34-C labels. Rebuilt on benchmark_adjudication main b59c756 after batches 1, 2, 4, 6 merged; stacked on the previous -r2 branch. This branch adds only this batch's rows over its parent.\n\nPOPULATION. Postgres realworld run 274 (aurora-lint 05bd14f9, tag v0.5.3). Unlabeled keys from BenchDB.list_realworld_unlabeled(274), filtered through aurora-lint bench.corpus.in_scope, then diffed against this repo's main. valkey EXP34-C has 1092 keys, split into 8 batches by file (sorted by path). corpus-check: all 12 checkouts detached at their pins, trees clean.\n\nGATE CHECK. aurora_lint 1427 (prescan abstains on an unprovable disjunctive guard) can only add EXP34-C findings, not remove them, so it does not gate this baseline. No other open FP-reduction task targets EXP34-C.\n\nSTANDARD. The dataset's EXP34-C standard (aurora_lint 1418, bmdb 1492): the violation site is the dereference, and the verdict rests on whether a null-producing expression reaches it on some path in the pinned tree. Caller sets are enumerated at source, and a caller in an out-of-scope tree (src/unit, src/modules/hello*, tests/modules) still counts. valkey-specific, per coordinator relay 2026-09-25: serverAssert, serverAssertWithInfo, valkey's redefined assert and serverPanic have no NDEBUG arm (server.h:678-681, serverassert.h:60), so a dominating one is a valid FP basis. debugServerAssert/debugServerAssertWithInfo run only under the hidden config enable-debug-assert (default 0; server.h:687-688), so they are neutral. zmalloc/zcalloc/zrealloc never yield NULL (both OOM handlers abort or panic); ztry*, je_mallocx and libc strdup can.\n\nMETHOD. Two read-only agents per batch, each briefed with the standard above. The adjudicator spot-checked TPs and flagged calls at source.\n\nRESULT: 134 FP / 5 TP. All keys are in src/valkey-cli.c, a client program linked against deps/libvalkey, whose allocations are plain libc calloc/malloc (valkey-cli installs no allocator override), so a NULL context is possible.\n- TP: valkey-cli.c:1644, :2530, :8165. The context from valkeyConnectWrapper is read (->err) unchecked. valkeyConnectWithOptions returns NULL when valkeyContextInit's vk_calloc fails (deps/libvalkey/src/valkey.c:724-726, 838-840).\n- TP: valkey-cli.c:2213. s = strrchr(p + 1, ':') returns NULL when the string has no ':', and *s = '\\0' follows unchecked.\n- TP (medium): valkey-cli.c:9894. The global context is set to NULL at 3154 and 2178 without clearing config.pubsub_mode, and sigIntHandler (installed at 10250) reads context->fd guarded only by monitor_mode || pubsub_mode.\n- No misfires.\n- Medium FPs: the cluster-manager node chains (4918, 5056, 5120, 5265, 5429), where every call site of clusterManagerSetSlot/clusterManagerMoveSlot passes a checked, asserted or already-dereferenced node.\n- Recurring FP bases: listNext loop conditions; cluster_manager.nodes and friends only ever filled with zmalloc'd nodes; the global context used only after cliConnect succeeded (or exit(1)); a blocking valkeyGetReply returning OK always yields a reply (valkey.c:1127-1133); sendScan exits on a NULL reply; strtol end pointers; sdssplitargs NULL only with argc 0.\n\nCounting basis: distinct (project, commit, file, line, rule) keys. No precision/recall claim is made here."
+}

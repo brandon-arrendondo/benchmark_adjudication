@@ -1,0 +1,27 @@
+{
+  "batch_id": "correction-exp34c-valkey-open-module-api-1504",
+  "work_item_ref": "aurora_lint-1504",
+  "requested_by": "coordinator",
+  "adjudicator": "claude-opus-5.5",
+  "adjudicating_node": "dev-149",
+  "aurora_lint_version": "0.5.3",
+  "aurora_lint_sha": "05bd14f9ea5fbc249818b91d416ea1b09b2bf793",
+  "projects": [
+    "valkey"
+  ],
+  "codebase_commits": {
+    "valkey": "7f1dffedff6de73058b2c2a389422b6ecd56c8fb"
+  },
+  "submitted_at": "2026-09-25T01:34:42Z",
+  "row_count": 7,
+  "rules": [
+    "EXP34-C"
+  ],
+  "verdicts": {
+    "TP": 7
+  },
+  "corrections": {
+    "FP_to_TP": 7
+  },
+  "notes": "A CORRECTION, NOT A NEW ADJUDICATION. The coordinator ruled on 2026-09-25, reviewing valkey EXP34-C batch 2, that src/db.c:729 (selectDb's client parameter, reached through VM_SelectDb) is TP: the golden rule excludes 'no in-tree caller passes NULL' as an FP basis, and an exported module API has callers outside the corpus by design. That is the same standard as a public entry point with no guard (cf. dev-180's sqlite3rbu_progress row in aurora_lint 1531).\n\nThe same basis decided six more rows in the 1504 valkey EXP34-C batches, so all seven are corrected here in place. For each one, the exported entry point was read at source and confirmed to forward the pointer with no NULL check:\n- src/db.c:729 via VM_SelectDb (module.c:4237), ctx->client NULL for a VALKEYMODULE_CTX_NONE ctx [delta-1504-valkey-exp34c-b2]\n- src/module.c:4880, VM_ListInsert's own key parameter, with every earlier branch requiring key != NULL [exp34c-b4]\n- src/io_threads.c:100 and src/networking.c:4476 via VM_ACLAddLogEntry (module.c:10625) -> addACLLogEntry, which uses ctx->client when server.current_client is NULL (acl.c:2914; its comment notes the client 'could be missing on module timers') [exp34c-b4, exp34c-b5]\n- src/object.c:616 via VM_RetainString (module.c:2925); src/object.c:628 via VM_FreeString (module.c:2885); src/object.c:958 via VM_StringCompare (module.c:3077) [exp34c-b5]\n\nAll are confidence medium: the null producer is the open API surface, not a specific in-tree call. Mechanics follow bmdb 1490: in-place edits keeping each key, and the original batches each take a row_count and FP decrement plus a superseded_rows record. Counting basis: distinct keys. No precision/recall claim is made here."
+}

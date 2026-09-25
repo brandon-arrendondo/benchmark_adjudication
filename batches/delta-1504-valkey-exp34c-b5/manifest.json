@@ -1,0 +1,38 @@
+{
+  "batch_id": "delta-1504-valkey-exp34c-b5",
+  "work_item_ref": "aurora_lint-1504",
+  "requested_by": "coordinator",
+  "adjudicator": "claude-opus-5.5",
+  "adjudicating_node": "dev-149",
+  "aurora_lint_version": "0.5.3",
+  "aurora_lint_sha": "05bd14f9ea5fbc249818b91d416ea1b09b2bf793",
+  "projects": [
+    "valkey"
+  ],
+  "codebase_commits": {
+    "valkey": "7f1dffedff6de73058b2c2a389422b6ecd56c8fb"
+  },
+  "submitted_at": "2026-09-25T01:30:04Z",
+  "row_count": 144,
+  "rules": [
+    "EXP34-C"
+  ],
+  "verdicts": {
+    "FP": 142,
+    "TP": 2
+  },
+  "notes": "aurora_lint 1504 (v0.5.3 step 3), valkey EXP34-C batch 5 of 8. Baseline, not a delta: valkey had no EXP34-C labels. Rebuilt on benchmark_adjudication main b59c756 after batches 1, 2, 4, 6 merged; stacked on the previous -r2 branch. This branch adds only this batch's rows over its parent.\n\nPOPULATION. Postgres realworld run 274 (aurora-lint 05bd14f9, tag v0.5.3). Unlabeled keys from BenchDB.list_realworld_unlabeled(274), filtered through aurora-lint bench.corpus.in_scope, then diffed against this repo's main. valkey EXP34-C has 1092 keys, split into 8 batches by file (sorted by path). corpus-check: all 12 checkouts detached at their pins, trees clean.\n\nGATE CHECK. aurora_lint 1427 (prescan abstains on an unprovable disjunctive guard) can only add EXP34-C findings, not remove them, so it does not gate this baseline. No other open FP-reduction task targets EXP34-C.\n\nSTANDARD. The dataset's EXP34-C standard (aurora_lint 1418, bmdb 1492): the violation site is the dereference, and the verdict rests on whether a null-producing expression reaches it on some path in the pinned tree. Caller sets are enumerated at source, and a caller in an out-of-scope tree (src/unit, src/modules/hello*, tests/modules) still counts. valkey-specific, per coordinator relay 2026-09-25: serverAssert, serverAssertWithInfo, valkey's redefined assert and serverPanic have no NDEBUG arm (server.h:678-681, serverassert.h:60), so a dominating one is a valid FP basis. debugServerAssert/debugServerAssertWithInfo run only under the hidden config enable-debug-assert (default 0; server.h:687-688), so they are neutral. zmalloc/zcalloc/zrealloc never yield NULL (both OOM handlers abort or panic); ztry*, je_mallocx and libc strdup can.\n\nMETHOD. Two read-only agents per batch, each briefed with the standard above. The adjudicator spot-checked TPs and flagged calls at source.\n\nRESULT: 146 FP / 2 TP.\n- TP: src/rdma.c:309 and :332. rdma_config = listener->priv (rdma.c:1675). server.listeners is zeroed (server.c:2286), and priv is set only at init under rdma-port != 0 (server.c:3156). rdma-port is MODIFIABLE, and its apply function updateRdmaPort (config.c:3095-3110) sets bindaddr/port/ct and re-listens but never sets priv, so the accept path reads a NULL rdma_config.\n- Misfires (FP): networking.c:4127 (&c->cmd_queue), rdma.c:836 and :1686 (&rdma_listeners[i]). Each only forms an address.\n- Medium FPs: the reply/refcount/object helpers with very large caller sets (networking.c:437/477/639/694/1465/1680/2139/2275/4476; object.c:146/265/616/628/958/1018), where no NULL producer was found among the non-trivial arguments, some of them open module API; quicklist.c:779/895 (lpMerge returns NULL only for NULL or identical inputs, which the merge preconditions exclude); rdma.c:595-596 (cm_id on accepted connections).\n- Recurring FP bases: client parameters dereferenced earlier or by every caller; createObject/createClient/quicklist/stream allocators via zmalloc; rax_malloc = zmalloc; listNext loop iterators; ev read only after rdma_get_cm_event returns 0.\n\nCounting basis: distinct (project, commit, file, line, rule) keys. No precision/recall claim is made here.",
+  "superseded_rows": [
+    {
+      "by": "correction-exp34c-valkey-open-module-api-1504",
+      "count": 4,
+      "keys": [
+        "valkey src/networking.c:4476 EXP34-C",
+        "valkey src/object.c:616 EXP34-C",
+        "valkey src/object.c:628 EXP34-C",
+        "valkey src/object.c:958 EXP34-C"
+      ],
+      "note": "EXP34-C verdict corrected FP -> TP per the coordinator's 2026-09-25 ruling: an exported module API has callers outside the corpus by design, so 'no in-tree caller passes NULL' is not an FP basis; see that batch's manifest notes"
+    }
+  ]
+}
