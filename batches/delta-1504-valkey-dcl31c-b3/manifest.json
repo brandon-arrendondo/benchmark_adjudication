@@ -1,0 +1,24 @@
+{
+  "batch_id": "delta-1504-valkey-dcl31c-b3",
+  "work_item_ref": "aurora_lint-1504",
+  "requested_by": "coordinator",
+  "adjudicator": "claude-opus-5.5",
+  "adjudicating_node": "dev-180",
+  "aurora_lint_version": "0.5.3",
+  "aurora_lint_sha": "05bd14f9ea5fbc249818b91d416ea1b09b2bf793",
+  "projects": [
+    "valkey"
+  ],
+  "codebase_commits": {
+    "valkey": "7f1dffedff6de73058b2c2a389422b6ecd56c8fb"
+  },
+  "submitted_at": "2026-09-25T02:30:00Z",
+  "row_count": 119,
+  "rules": [
+    "DCL31-C"
+  ],
+  "verdicts": {
+    "FP": 119
+  },
+  "notes": "aurora_lint 1504 (v0.5.3 step 3), valkey DCL31-C batch 3 of 3.\n\nPOPULATION. Postgres realworld run 274 (aurora-lint 05bd14f9, tag v0.5.3): all 355 unlabeled valkey DCL31-C keys (list_realworld_unlabeled), every one inside valkey's declared scope (data/benchmark_repos.json, docs/design/realworld-corpus-scope.md), none already on this repo's main. Split into batches by whole file. This batch: 119 keys in 11 files (src/cli_common.c, src/config.c, src/module.c, src/modules/lua/debug_lua.c, src/networking.c, src/rdb.c, src/replication.c, src/server.c, src/valkey-benchmark.c, src/valkey-check-aof.c, src/valkey-check-rdb.c). corpus-check: valkey detached at its pin, tree clean.\n\nMETHOD. Each call was read at the pinned checkout and its callee's declaration located. Callees: atomic_load_explicit 23, atomic_store_explicit 16, ValkeyModule_StringPtrLen 14, ValkeyModule_StringAppendBuffer 14, fileno 12, ValkeyModule_ScriptingEngineDebuggerFlushLogs 8, atomic_fetch_add_explicit 8, ValkeyModule_CreateString 5, ValkeyModule_CreateStringPrintf 4, ValkeyModule_Calloc 3, ValkeyModule_ScriptingEngineDebuggerLog 2, ValkeyModule_Log 1, ValkeyModule_ScriptingEngineDebuggerLogRespReplyStr 1, ValkeyModule_StringToLongLong 1, ValkeyModule_ScriptingEngineDebuggerProcessCommands 1, atomic_compare_exchange_strong_explicit 1, atomic_exchange_explicit 1, atomic_fetch_sub_explicit 1, uname 1, unsetenv 1, atomic_compare_exchange_weak_explicit 1.\n\nRESULT: 119 FP, 0 TP. Every flagged call has a declaration visible to it: C11 <stdatomic.h> generic operations, valkeymodule.h's function-pointer API table, POSIX/BSD/Solaris system headers the file includes, vendored deps headers, function-pointer parameters, or a definition earlier in the same file. This follows the existing DCL31-C convention in this repo, where no DCL31-C row is TP.\n\nCounting basis: distinct (project, commit, file, line, rule) keys. No precision/recall claim is made here."
+}
