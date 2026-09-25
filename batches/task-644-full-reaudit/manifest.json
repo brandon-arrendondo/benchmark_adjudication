@@ -26,7 +26,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-08-30T18:38:52.403573",
-  "row_count": 2892,
+  "row_count": 2873,
   "rules": [
     "API00-C"
   ],
@@ -214,6 +214,32 @@
         "hostap src/crypto/crypto_linux.c:765 API00-C",
         "hostap src/crypto/crypto_nettle.c:84 API00-C",
         "hostap src/crypto/crypto_nettle.c:333 API00-C"
+      ],
+      "note": "API00-C verdict corrected TP -> FP by bmdb 1541 (hostap): every flagged parameter is guarded, passed an address-of or literal at every call site, or forwarded only to null-tolerant callees; see that batch's manifest notes"
+    },
+    {
+      "by": "correction-api00c-644-hostap-b4-task1541",
+      "count": 19,
+      "keys": [
+        "hostap src/crypto/crypto_openssl.c:829 API00-C",
+        "hostap src/crypto/crypto_wolfssl.c:219 API00-C",
+        "hostap src/crypto/crypto_wolfssl.c:1289 API00-C",
+        "hostap src/crypto/des-internal.c:435 API00-C",
+        "hostap src/crypto/des-internal.c:469 API00-C",
+        "hostap src/crypto/milenage.c:173 API00-C",
+        "hostap src/crypto/milenage.c:235 API00-C",
+        "hostap src/crypto/ms_funcs.c:357 API00-C",
+        "hostap src/crypto/sha1-internal.c:31 API00-C",
+        "hostap src/crypto/sha1-internal.c:234 API00-C",
+        "hostap src/crypto/sha1-internal.c:278 API00-C",
+        "hostap src/crypto/tls_gnutls.c:1666 API00-C",
+        "hostap src/crypto/tls_gnutls.c:1684 API00-C",
+        "hostap src/drivers/driver_wired_common.c:140 API00-C",
+        "hostap src/drivers/driver_wired_common.c:219 API00-C",
+        "hostap src/drivers/linux_ioctl.c:226 API00-C",
+        "hostap src/drivers/ndis_events.c:702 API00-C",
+        "hostap src/eap_common/eap_eke_common.c:342 API00-C",
+        "hostap src/eap_common/eap_eke_common.c:583 API00-C"
       ],
       "note": "API00-C verdict corrected TP -> FP by bmdb 1541 (hostap): every flagged parameter is guarded, passed an address-of or literal at every call site, or forwarded only to null-tolerant callees; see that batch's manifest notes"
     }
