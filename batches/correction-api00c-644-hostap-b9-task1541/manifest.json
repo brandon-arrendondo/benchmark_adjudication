@@ -13,15 +13,15 @@
     "hostap": "dcee60436390dd34731560657c4257c3b4c839a6"
   },
   "submitted_at": "2026-09-25T03:49:14Z",
-  "row_count": 11,
+  "row_count": 9,
   "rules": [
     "API00-C"
   ],
   "verdicts": {
-    "FP": 11
+    "FP": 9
   },
   "corrections": {
-    "TP_to_FP": 11
+    "TP_to_FP": 9
   },
   "notes": "A CORRECTION, NOT A NEW ADJUDICATION. bmdb 1541 hostap batch 9 (wpa_supplicant/config.c .. wpa_supplicant/ibss_rsn.c). Same standard as batches 1-8 (see correction-api00c-644-hostap-b1-task1541), under ADR-0011 as of aurora-lint d9cb04d0. A function nothing outside the corpus can call, whose every call site provably tests the value, has a validated parameter. Every link of an argument's provenance chain must end in a real proof: an explicit NULL test, a language guarantee, an address-of or local/static array, or a literal. A prior dereference of the pointer, or of an array member's base, is not a proof.\n\nRESULT: 137 rows. 116 TP stand (reason restated to the TP basis; source unchanged) and 21 are corrected TP -> FP here, a flip rate of 15.3%. A fresh-context refuter, applying the d9cb04d0 rule, reviewed all 23 proposed flips. It upheld 21 and rejected 2 whose only support was a dereference: gas_query.c:536 (mgmt->da, with mgmt the driver-event frame and never tested) and ctrl_iface.c:14983 (the named-pipe site's dst reaches it through a Win32 completion routine with no test). Upheld flips include the dbus getter/setter iter rows (all four ->getter/->setter invocations, dbus_new_helpers.c:50/181/632/218, pass &local) and hs20_supplicant.c:69/93, where the test lives in a callee whose return the caller tests (wpabuf_resize, is_hs20_network) and holds on every return path.\n\nMechanics follow bmdb 1490/1531 and the 1541 pilot: in-place edits keep each key; task-644-full-reaudit takes a row_count decrement and a superseded_rows record.\n\nCounting basis: distinct (project, commit, file, line, rule) keys. No precision claim is made here.",
   "superseded_rows": [
@@ -39,6 +39,15 @@
         "hostap wpa_supplicant/dbus/dbus_new_handlers_p2p.c:2171 API00-C",
         "hostap wpa_supplicant/dbus/dbus_new_handlers_p2p.c:3143 API00-C",
         "hostap wpa_supplicant/dbus/dbus_new_helpers.c:471 API00-C"
+      ],
+      "note": "verdict reverted FP -> TP by the bmdb 1554 -rdynamic re-pass (ADR-0011 6b28c8d7): the function is non-static and linked into wpa_supplicant, so its caller set is open and the in-tree call-site basis does not hold"
+    },
+    {
+      "by": "correction-rdynamic-1554-hostap-b11",
+      "count": 2,
+      "keys": [
+        "hostap wpa_supplicant/hs20_supplicant.c:93 API00-C",
+        "hostap wpa_supplicant/hs20_supplicant.c:221 API00-C"
       ],
       "note": "verdict reverted FP -> TP by the bmdb 1554 -rdynamic re-pass (ADR-0011 6b28c8d7): the function is non-static and linked into wpa_supplicant, so its caller set is open and the in-tree call-site basis does not hold"
     }

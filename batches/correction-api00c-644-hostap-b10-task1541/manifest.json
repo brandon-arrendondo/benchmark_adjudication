@@ -13,15 +13,41 @@
     "hostap": "dcee60436390dd34731560657c4257c3b4c839a6"
   },
   "submitted_at": "2026-09-25T03:56:20Z",
-  "row_count": 20,
+  "row_count": 3,
   "rules": [
     "API00-C"
   ],
   "verdicts": {
-    "FP": 20
+    "FP": 3
   },
   "corrections": {
-    "TP_to_FP": 20
+    "TP_to_FP": 3
   },
-  "notes": "A CORRECTION, NOT A NEW ADJUDICATION. bmdb 1541 hostap batch 10 (wpa_supplicant/interworking.c .. wpa_supplicant/scan.c). Same standard as batches 1-9 (see correction-api00c-644-hostap-b1-task1541), under ADR-0011 as of aurora-lint d9cb04d0. A function nothing outside the corpus can call, whose every call site provably tests the value, has a validated parameter. Every link of an argument's provenance chain must end in a real proof: an explicit NULL test, a language guarantee, an address-of or local/static array, or a literal. A prior dereference is not a proof.\n\nRESULT: 132 rows. 112 TP stand (reason restated to the TP basis; source unchanged) and 20 are corrected TP -> FP here, a flip rate of 15.2%. Applying d9cb04d0 turned 9 earlier FP decisions back to TP before review (e.g. arguments derived from driver-event frames or ctrl_iface buffers that are only dereferenced). A fresh-context refuter reviewed all 20 flips and upheld all of them. It independently enumerated notify.c:407's 15 call sites (each passes an explicitly tested ssid) and corrected the cited lines, which are used here. The multi-frame static closures (mesh_rsn.c:474, notify.c:1012, p2p_supplicant.c:4708/4792) and mesh.c:827 (bss->ies via static print_bss_info) end in explicit tests.\n\nMechanics follow bmdb 1490/1531 and the 1541 pilot: in-place edits keep each key; task-644-full-reaudit takes a row_count decrement and a superseded_rows record.\n\nCounting basis: distinct (project, commit, file, line, rule) keys. No precision claim is made here."
+  "notes": "A CORRECTION, NOT A NEW ADJUDICATION. bmdb 1541 hostap batch 10 (wpa_supplicant/interworking.c .. wpa_supplicant/scan.c). Same standard as batches 1-9 (see correction-api00c-644-hostap-b1-task1541), under ADR-0011 as of aurora-lint d9cb04d0. A function nothing outside the corpus can call, whose every call site provably tests the value, has a validated parameter. Every link of an argument's provenance chain must end in a real proof: an explicit NULL test, a language guarantee, an address-of or local/static array, or a literal. A prior dereference is not a proof.\n\nRESULT: 132 rows. 112 TP stand (reason restated to the TP basis; source unchanged) and 20 are corrected TP -> FP here, a flip rate of 15.2%. Applying d9cb04d0 turned 9 earlier FP decisions back to TP before review (e.g. arguments derived from driver-event frames or ctrl_iface buffers that are only dereferenced). A fresh-context refuter reviewed all 20 flips and upheld all of them. It independently enumerated notify.c:407's 15 call sites (each passes an explicitly tested ssid) and corrected the cited lines, which are used here. The multi-frame static closures (mesh_rsn.c:474, notify.c:1012, p2p_supplicant.c:4708/4792) and mesh.c:827 (bss->ies via static print_bss_info) end in explicit tests.\n\nMechanics follow bmdb 1490/1531 and the 1541 pilot: in-place edits keep each key; task-644-full-reaudit takes a row_count decrement and a superseded_rows record.\n\nCounting basis: distinct (project, commit, file, line, rule) keys. No precision claim is made here.",
+  "superseded_rows": [
+    {
+      "by": "correction-rdynamic-1554-hostap-b11",
+      "count": 17,
+      "keys": [
+        "hostap wpa_supplicant/interworking.c:2247 API00-C",
+        "hostap wpa_supplicant/interworking.c:2777 API00-C",
+        "hostap wpa_supplicant/interworking.c:3232 API00-C",
+        "hostap wpa_supplicant/mbo.c:485 API00-C",
+        "hostap wpa_supplicant/mesh.c:602 API00-C",
+        "hostap wpa_supplicant/mesh_rsn.c:474 API00-C",
+        "hostap wpa_supplicant/mesh_rsn.c:536 API00-C",
+        "hostap wpa_supplicant/mesh_rsn.c:553 API00-C",
+        "hostap wpa_supplicant/notify.c:407 API00-C",
+        "hostap wpa_supplicant/notify.c:1012 API00-C",
+        "hostap wpa_supplicant/p2p_supplicant.c:4708 API00-C",
+        "hostap wpa_supplicant/p2p_supplicant.c:4792 API00-C",
+        "hostap wpa_supplicant/p2p_supplicant.c:10424 API00-C",
+        "hostap wpa_supplicant/pasn_supplicant.c:810 API00-C",
+        "hostap wpa_supplicant/pasn_supplicant.c:1115 API00-C",
+        "hostap wpa_supplicant/pr_supplicant.c:334 API00-C",
+        "hostap wpa_supplicant/scan.c:951 API00-C"
+      ],
+      "note": "verdict reverted FP -> TP by the bmdb 1554 -rdynamic re-pass (ADR-0011 6b28c8d7): the function is non-static and linked into wpa_supplicant, so its caller set is open and the in-tree call-site basis does not hold"
+    }
+  ]
 }

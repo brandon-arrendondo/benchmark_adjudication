@@ -12,7 +12,7 @@
     "hostap": "dcee60436390dd34731560657c4257c3b4c839a6"
   },
   "submitted_at": "2026-07-28",
-  "row_count": 30950,
+  "row_count": 30941,
   "rules": [
     "API00-C",
     "API01-C",
@@ -425,6 +425,22 @@
         "hostap wpa_supplicant/dbus/dbus_new_handlers.c:6485 API00-C",
         "hostap wpa_supplicant/dbus/dbus_new_handlers.c:6781 API00-C",
         "hostap wpa_supplicant/dbus/dbus_new_handlers.c:6972 API00-C"
+      ],
+      "note": "verdict reverted FP -> TP by the bmdb 1554 -rdynamic re-pass (ADR-0011 6b28c8d7): the function is non-static and linked into wpa_supplicant, so its caller set is open and the in-tree call-site basis does not hold"
+    },
+    {
+      "by": "correction-rdynamic-1554-hostap-b11",
+      "count": 9,
+      "keys": [
+        "hostap wpa_supplicant/dpp_supplicant.c:1132 API00-C",
+        "hostap wpa_supplicant/dpp_supplicant.c:4552 EXP34-C",
+        "hostap wpa_supplicant/events.c:1982 EXP34-C",
+        "hostap wpa_supplicant/events.c:6534 EXP34-C",
+        "hostap wpa_supplicant/interworking.c:2295 EXP34-C",
+        "hostap wpa_supplicant/mesh_mpm.c:463 ARR30-C",
+        "hostap wpa_supplicant/notify.c:427 EXP34-C",
+        "hostap wpa_supplicant/p2p_supplicant.c:8549 EXP34-C",
+        "hostap wpa_supplicant/p2p_supplicant.c:9149 API00-C"
       ],
       "note": "verdict reverted FP -> TP by the bmdb 1554 -rdynamic re-pass (ADR-0011 6b28c8d7): the function is non-static and linked into wpa_supplicant, so its caller set is open and the in-tree call-site basis does not hold"
     }
