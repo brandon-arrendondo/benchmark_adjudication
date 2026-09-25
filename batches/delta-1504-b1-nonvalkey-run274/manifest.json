@@ -1,0 +1,40 @@
+{
+  "batch_id": "delta-1504-b1-nonvalkey-run274",
+  "work_item_ref": "aurora_lint-1504",
+  "requested_by": "coordinator",
+  "adjudicator": "claude-opus-5.5",
+  "adjudicating_node": "dev-149",
+  "aurora_lint_version": "0.5.3",
+  "aurora_lint_sha": "05bd14f9ea5fbc249818b91d416ea1b09b2bf793",
+  "projects": [
+    "curl",
+    "hostap",
+    "mbedtls",
+    "pureftpd",
+    "sel4",
+    "sqlite"
+  ],
+  "codebase_commits": {
+    "curl": "3e198f75861cc2e12daf299689e145949dddd19b",
+    "hostap": "dcee60436390dd34731560657c4257c3b4c839a6",
+    "mbedtls": "068ff080b369adfac81509f9b57b2afabaf82dc5",
+    "pureftpd": "cc28bff52ca28e1d122a2142bf37f2dc578f4d3e",
+    "sel4": "1326364bc9135d9445d936ebc01e38a402c1f4c6",
+    "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
+  },
+  "submitted_at": "2026-09-25T01:30:00Z",
+  "row_count": 105,
+  "rules": [
+    "DCL31-C",
+    "EXP19-C",
+    "EXP33-C",
+    "MEM10-C",
+    "MSC01-C",
+    "MSC12-C"
+  ],
+  "verdicts": {
+    "FP": 75,
+    "TP": 30
+  },
+  "notes": "aurora_lint 1504 (v0.5.3 step 3), batch B1: the non-valkey, ungated remainder of the rules listed in 1504.\n\nPOPULATION. Postgres realworld run 274 (aurora-lint 05bd14f9, tag v0.5.3). Unlabeled keys from BenchDB.list_realworld_unlabeled(274), filtered through aurora-lint bench.corpus.in_scope (data/benchmark_repos.json at 5cb7b070), then diffed against this repo's main (38ea4fa) so no key already on main is relabeled. Restricted to MSC01-C, EXP19-C, DCL31-C, EXP33-C, MSC12-C, MEM10-C outside valkey: 105 findings, 105 distinct keys. Gated rules (MEM31-C on aurora_lint 1494, API00-C on 1511, MSC13-C on bmdb 1397) and all valkey keys are excluded per the coordinator's phase-1 ack. corpus-check: all 12 checkouts detached at their pins, trees clean.\n\nMETHOD. Each finding read at source in the pinned checkout by three read-only agents (one per rule group: mixed rules; sel4 MSC01-C; other MSC01-C). Each was briefed with the existing per-rule label conventions from this repo, and the adjudicator spot-checked calls at source (curl timeval.c/openssl.c, sqlite vdbesort.c, mbedtls ecp.c, curl hostip4.c, sel4 endpoint.c/vspace.c). sel4 files outside its primary build configuration are labeled on the construct alone (ADR-0010 decision 1).\n\nRESULT: 75 FP / 30 TP. EXP19-C 26 TP / 7 FP; MSC01-C 4 TP / 61 FP; DCL31-C 3 FP; EXP33-C 2 FP; MEM10-C 1 FP; MSC12-C 1 FP.\n- EXP19-C FPs (7): the else body is braced, but the brace or braced else-if sits after an intervening #if/#endif (hostap libtommath.c:492, mbedtls ecp.c:2300/2307, sqlite trigger.c:354, vdbesort.c:2237/2676/2710). These are misfires.\n- MSC01-C misfires (2): curl lib/curlx/timeval.c:89 and lib/vtls/openssl.c:4270 do end in a final else; the chain is split by #ifdef arms.\n- MSC01-C TPs (4, sel4): switches on a 2-bit state/type bitfield that handle some encodings with no default (endpoint.c:27, endpoint.c:174, notification.c:200), matching the existing notification.c:64 TP; vspace.c:844 is labeled the same way at medium confidence (switch on capFMapType; enumerators beyond VSpace/None exist only under CONFIG_IOMMU/CONFIG_VTX).\n- MSC12-C curl hostip4.c:157 `if(h) { ; }`: labeled FP as an intentional placeholder body, consistent with the existing sel4 `{ ; }` convention (medium confidence).\n\nCounting basis: distinct (project, commit, file, line, rule) keys. No precision/recall claim is made here."
+}
