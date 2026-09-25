@@ -26,7 +26,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-08-30T18:38:52.403573",
-  "row_count": 2939,
+  "row_count": 2936,
   "rules": [
     "API00-C"
   ],
@@ -162,6 +162,16 @@
         "lua lzio.c:39 API00-C"
       ],
       "note": "API00-C verdict corrected TP -> FP by bmdb 1541 (lua batch 2 of 2): every flagged parameter is shown valid by the call sites (address-of or local array at every one) or is forwarded only to a null-tolerant callee; see that batch's manifest notes"
+    },
+    {
+      "by": "correction-api00c-644-raylib-task1541",
+      "count": 3,
+      "keys": [
+        "raylib src/platforms/rcore_desktop_sdl.c:334 API00-C",
+        "raylib src/rcore.c:1233 API00-C",
+        "raylib src/rtext.c:1250 API00-C"
+      ],
+      "note": "API00-C verdict corrected TP -> FP by bmdb 1541 (raylib, all 109 rows): every flagged parameter is shown valid by the call sites (address-of or local array at every one) or is forwarded only to a null-tolerant callee; see that batch's manifest notes"
     }
   ]
 }
