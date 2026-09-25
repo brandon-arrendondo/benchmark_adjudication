@@ -13,15 +13,54 @@
     "hostap": "dcee60436390dd34731560657c4257c3b4c839a6"
   },
   "submitted_at": "2026-09-25T05:28:44Z",
-  "row_count": 46,
+  "row_count": 16,
   "rules": [
     "API00-C"
   ],
   "verdicts": {
-    "FP": 46
+    "FP": 16
   },
   "corrections": {
-    "TP_to_FP": 46
+    "TP_to_FP": 16
   },
-  "notes": "A CORRECTION, NOT A NEW ADJUDICATION. bmdb 1541 hostap TP back-pass, group 5 of 5 (src/l2_packet/l2_packet_pcap.c .. src/pasn/pasn_initiator.c). Same method as back-pass groups 1-4 (see correction-api00c-644-hostap-backpass-g1-task1541): each pointer-parameter TP row in batches 1-6 re-checked for an FP basis under ADR-0011 (aurora-lint bbf240e9, d9cb04d0).\n\nRESULT: 128 TP rows re-checked. 46 are corrected TP -> FP here, and the rest stay TP; 2 of those that stay TP (src/pasn) had a proof found but are held pending the libpasn.so ruling. Two fresh-context refuters reviewed the 60 proposed flips (30 each) and upheld 46. They applied a strict field rule: a NULL test on a field (wpa_s->global->p2p, p2p->go_neg_peer) dominates a later call only if nothing in between can write that field, and any function-pointer callback or driver op run in between (cfg->stop_listen, find_stopped, group ie_update, wpa_drv_*) defeats it. The 14 rejected rows stay TP with rewritten reasons; they include the wifi_display.c p2p_set_wfd_* sites after p2p_set_wfd_ie_beacon and p2p_connect_send via p2p.c:2171. Upheld flips include p2p_ctrl_set's setters (test at ctrl_iface.c:7674, string parsing only in between), p2p_buf_add_channel_list (10 sites, each a wpabuf tested after alloc), p2p_peer_channels_check (7 sites, dev tested), and reply-buffer offsets bounded inside a tested reply (p2p_attr_text, ieee802_1x_kay_get_mib).\n\nMechanics follow bmdb 1490/1531 and the 1541 pilot: in-place edits keep each key; task-644-full-reaudit takes a row_count decrement and a superseded_rows record.\n\nCounting basis: distinct (project, commit, file, line, rule) keys. No precision claim is made here."
+  "notes": "A CORRECTION, NOT A NEW ADJUDICATION. bmdb 1541 hostap TP back-pass, group 5 of 5 (src/l2_packet/l2_packet_pcap.c .. src/pasn/pasn_initiator.c). Same method as back-pass groups 1-4 (see correction-api00c-644-hostap-backpass-g1-task1541): each pointer-parameter TP row in batches 1-6 re-checked for an FP basis under ADR-0011 (aurora-lint bbf240e9, d9cb04d0).\n\nRESULT: 128 TP rows re-checked. 46 are corrected TP -> FP here, and the rest stay TP; 2 of those that stay TP (src/pasn) had a proof found but are held pending the libpasn.so ruling. Two fresh-context refuters reviewed the 60 proposed flips (30 each) and upheld 46. They applied a strict field rule: a NULL test on a field (wpa_s->global->p2p, p2p->go_neg_peer) dominates a later call only if nothing in between can write that field, and any function-pointer callback or driver op run in between (cfg->stop_listen, find_stopped, group ie_update, wpa_drv_*) defeats it. The 14 rejected rows stay TP with rewritten reasons; they include the wifi_display.c p2p_set_wfd_* sites after p2p_set_wfd_ie_beacon and p2p_connect_send via p2p.c:2171. Upheld flips include p2p_ctrl_set's setters (test at ctrl_iface.c:7674, string parsing only in between), p2p_buf_add_channel_list (10 sites, each a wpabuf tested after alloc), p2p_peer_channels_check (7 sites, dev tested), and reply-buffer offsets bounded inside a tested reply (p2p_attr_text, ieee802_1x_kay_get_mib).\n\nMechanics follow bmdb 1490/1531 and the 1541 pilot: in-place edits keep each key; task-644-full-reaudit takes a row_count decrement and a superseded_rows record.\n\nCounting basis: distinct (project, commit, file, line, rule) keys. No precision claim is made here.",
+  "superseded_rows": [
+    {
+      "by": "correction-rdynamic-1554-hostap-b07",
+      "count": 30,
+      "keys": [
+        "hostap src/l2_packet/l2_packet_pcap.c:381 API00-C",
+        "hostap src/l2_packet/l2_packet_privsep.c:274 API00-C",
+        "hostap src/nan/nan.c:38 API00-C",
+        "hostap src/p2p/p2p.c:57 API00-C",
+        "hostap src/p2p/p2p.c:145 API00-C",
+        "hostap src/p2p/p2p.c:1903 API00-C",
+        "hostap src/p2p/p2p.c:3102 API00-C",
+        "hostap src/p2p/p2p.c:3393 API00-C",
+        "hostap src/p2p/p2p.c:3399 API00-C",
+        "hostap src/p2p/p2p.c:4503 API00-C",
+        "hostap src/p2p/p2p.c:5006 API00-C",
+        "hostap src/p2p/p2p.c:5015 API00-C",
+        "hostap src/p2p/p2p.c:5022 API00-C",
+        "hostap src/p2p/p2p.c:5029 API00-C",
+        "hostap src/p2p/p2p.c:5046 API00-C",
+        "hostap src/p2p/p2p.c:5114 API00-C",
+        "hostap src/p2p/p2p.c:5250 API00-C",
+        "hostap src/p2p/p2p.c:5290 API00-C",
+        "hostap src/p2p/p2p.c:5424 API00-C",
+        "hostap src/p2p/p2p.c:5504 API00-C",
+        "hostap src/p2p/p2p.c:5518 API00-C",
+        "hostap src/p2p/p2p.c:5532 API00-C",
+        "hostap src/p2p/p2p.c:5549 API00-C",
+        "hostap src/p2p/p2p.c:5690 API00-C",
+        "hostap src/p2p/p2p.c:5700 API00-C",
+        "hostap src/p2p/p2p.c:5866 API00-C",
+        "hostap src/p2p/p2p.c:5900 API00-C",
+        "hostap src/p2p/p2p.c:5908 API00-C",
+        "hostap src/p2p/p2p.c:5980 API00-C",
+        "hostap src/p2p/p2p.c:7373 API00-C"
+      ],
+      "note": "verdict reverted FP -> TP by the bmdb 1554 -rdynamic re-pass (ADR-0011 6b28c8d7): the function is non-static and linked into wpa_supplicant, so its caller set is open and the in-tree call-site basis does not hold"
+    }
+  ]
 }

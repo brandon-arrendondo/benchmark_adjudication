@@ -18,7 +18,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-09-08T16:35:36.279363",
-  "row_count": 5,
+  "row_count": 4,
   "rules": [
     "API00-C"
   ],
@@ -37,6 +37,14 @@
       "count": 1,
       "keys": [
         "hostap src/eap_peer/eap_fast_pac.c:411 API00-C"
+      ],
+      "note": "verdict reverted FP -> TP by the bmdb 1554 -rdynamic re-pass (ADR-0011 6b28c8d7): the function is non-static and linked into wpa_supplicant, so its caller set is open and the in-tree call-site basis does not hold"
+    },
+    {
+      "by": "correction-rdynamic-1554-hostap-b07",
+      "count": 1,
+      "keys": [
+        "hostap src/eapol_supp/eapol_supp_sm.c:2273 API00-C"
       ],
       "note": "verdict reverted FP -> TP by the bmdb 1554 -rdynamic re-pass (ADR-0011 6b28c8d7): the function is non-static and linked into wpa_supplicant, so its caller set is open and the in-tree call-site basis does not hold"
     }
