@@ -20,9 +20,19 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-09-08T12:54:46.331652",
-  "row_count": 310,
+  "row_count": 309,
   "rules": [
     "API00-C"
   ],
-  "notes": "Reconstructed during benchmark_adjudication's initial population (2026-09-16) from benchmarking_db's ground_truth.source='task-793-convention-correction'. row_count/projects/codebase_commits/rules were derived from the rows themselves, not declared at adjudication time. aurora_lint_version/aurora_lint_sha are unknown for legacy data -- never recorded per-row."
+  "notes": "Reconstructed during benchmark_adjudication's initial population (2026-09-16) from benchmarking_db's ground_truth.source='task-793-convention-correction'. row_count/projects/codebase_commits/rules were derived from the rows themselves, not declared at adjudication time. aurora_lint_version/aurora_lint_sha are unknown for legacy data -- never recorded per-row.",
+  "superseded_rows": [
+    {
+      "by": "correction-api00c-mainargv-task1548",
+      "count": 1,
+      "keys": [
+        "mosquitto src/mosquitto.c:413 API00-C"
+      ],
+      "note": "API00-C verdict corrected TP -> FP under the main() argc/argv ruling (Brandon 2026-09-24, bmdb 1548): argv itself is non-null by C11 5.1.2.2.1; see that batch manifest notes"
+    }
+  ]
 }

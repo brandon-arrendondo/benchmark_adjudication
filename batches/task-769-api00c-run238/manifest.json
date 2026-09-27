@@ -20,7 +20,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-09-08T15:31:51.800284",
-  "row_count": 315,
+  "row_count": 306,
   "rules": [
     "API00-C"
   ],
@@ -72,6 +72,22 @@
         "pureftpd src/utils.c:46 API00-C"
       ],
       "note": "API00-C verdict corrected TP -> FP by bmdb 1551 (pureftpd): closed caller set, every call site proves each flagged parameter non-null (ADR-0011 caller-side checks); see that batch manifest notes"
+    },
+    {
+      "by": "correction-api00c-mainargv-task1548",
+      "count": 9,
+      "keys": [
+        "curl src/tool_main.c:143 API00-C",
+        "pureftpd src/pure-authd.c:434 API00-C",
+        "pureftpd src/pure-certd.c:401 API00-C",
+        "pureftpd src/pure-ftpwho.c:724 API00-C",
+        "pureftpd src/pure-mrtginfo.c:82 API00-C",
+        "pureftpd src/pure-pw.c:1285 API00-C",
+        "pureftpd src/pure-quotacheck.c:270 API00-C",
+        "pureftpd src/pure-statsdecode.c:15 API00-C",
+        "pureftpd src/pure-uploadscript.c:437 API00-C"
+      ],
+      "note": "API00-C verdict corrected TP -> FP under the main() argc/argv ruling (Brandon 2026-09-24, bmdb 1548): argv itself is non-null by C11 5.1.2.2.1; see that batch manifest notes"
     }
   ]
 }

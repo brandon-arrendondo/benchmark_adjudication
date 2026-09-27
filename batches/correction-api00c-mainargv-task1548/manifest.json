@@ -1,0 +1,37 @@
+{
+  "batch_id": "correction-api00c-mainargv-task1548",
+  "work_item_ref": "benchmarking_db-1548",
+  "requested_by": "coordinator",
+  "adjudicator": "claude-opus-5.5",
+  "adjudicating_node": "dev-149",
+  "aurora_lint_version": "0.5.3",
+  "aurora_lint_sha": "41d8d49f5c3432797ab10ae7738324b897caea79",
+  "projects": [
+    "curl",
+    "hostap",
+    "mosquitto",
+    "pureftpd",
+    "ventoy"
+  ],
+  "codebase_commits": {
+    "curl": "3e198f75861cc2e12daf299689e145949dddd19b",
+    "hostap": "dcee60436390dd34731560657c4257c3b4c839a6",
+    "mosquitto": "d3ee5c5ca62c0fa4983308c6fff558ee978e878c",
+    "pureftpd": "cc28bff52ca28e1d122a2142bf37f2dc578f4d3e",
+    "ventoy": "7cbdc5cf69935bcf1f085ae67f40e70ea7e74bae"
+  },
+  "submitted_at": "2026-09-27T23:03:09Z",
+  "row_count": 12,
+  "rules": [
+    "API00-C"
+  ],
+  "verdicts": {
+    "FP": 11,
+    "TP": 1
+  },
+  "corrections": {
+    "TP_to_FP": 11,
+    "TP_restated": 1
+  },
+  "notes": "A CORRECTION, NOT A NEW ADJUDICATION. Applies the main() argc/argv ruling (Brandon, 2026-09-24; bmdb 1548) to every API00-C row keyed on a main() definition that is not a task-644-full-reaudit row (those are left for bmdb 1541, which is rewriting them) and not already under the ruling (the bmdb 1541 hostap corrections and the lua.c:777 correction). Ruling: API00-C on main()'s argv parameter itself is FP by C11 5.1.2.2.1 (argv[argc] is a null pointer, so argv points to at least one element); a finding about argv[i] indexed without an argc bound is TP; argc is judged like any other integer parameter. Scope: 35 API00-C rows across all projects are keyed on a main() definition line (read at each row's pinned commit); 9 are task-644-full-reaudit rows (skipped), 6 are already under the ruling, and 21 were re-derived here. Every one of the 21 names argv. RESULT: 11 flips TP -> FP, where argv is indexed only under an argc bound or only passed on (curl 1, hostap 1, mosquitto 1, pureftpd 8); 1 TP stands with its reason restated (ventoy VentoyJson.c:719, argv[1] with no argc check); the 9 standing FP rows are unchanged and not part of this batch. Counting basis: distinct (project, commit, file, line, rule) keys. No precision claim is made here."
+}
