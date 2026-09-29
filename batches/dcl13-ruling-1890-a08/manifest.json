@@ -1,0 +1,43 @@
+{
+  "work_item_ref": "benchmarking_db-1890",
+  "requested_by": "coordinator",
+  "adjudicating_node": "mini",
+  "aurora_lint_version": "0.5.3",
+  "aurora_lint_sha": "44af4205ca0a48b328c33aafa1a61af7020d4b4c",
+  "batch_id": "dcl13-ruling-1890-a08",
+  "adjudicator": "claude-opus-5.5",
+  "corrections": {
+    "FP_to_TP": 151
+  },
+  "recheck": {
+    "basis": "ruling",
+    "ruling": "Brandon 2026-09-29 DCL13-C option (c)",
+    "selection": "census",
+    "reviewed": 151,
+    "flipped": 151,
+    "blind_to_prior_verdict": false,
+    "blind_to_diagnostic": false,
+    "blind_slice": {
+      "seed": 18908,
+      "reviewed": 20,
+      "disagreed": 0,
+      "blind_to_prior_verdict": true,
+      "blind_to_diagnostic": false
+    }
+  },
+  "notes": "A RULING RELABEL. Batch a08 of the DCL13-C tier-A census (hostap rows from wpa_supplicant/ctrl_iface.c through wpa_supplicant/eapol_test.c). Brandon's 2026-09-29 DCL13-C rulings: a signature, callback or function-pointer-slot constraint is not an exception (option (c)): a function whose non-const pointer parameter is fixed by a function-pointer slot it is visibly assigned to is TP with provenance tag `oracle-tag: interface-fixed signature: fn-pointer slot` (the relaxed profile scores it FP); const is shallow as in C, so a write through a pointer member of *p is not a write to *p, while an array or nested-struct member write is. Each row was re-derived by reading the pinned source: FP only where the function writes *p directly, through a local alias, by passing p (or &p->m, or an array member) to a function or macro whose parameter is pointer-to-non-const or cannot be resolved, or by storing p itself into an object that outlives the call; otherwise TP, tagged where the function's name is assigned to a function-pointer object, table entry or function-pointer parameter in the pinned source. A key with several flagged parameters is TP if at least one is unmodified; its reason names each. Keys aurora-lint 44af4205 no longer reports at the line were relabeled on the parameter the prior reason discussed (provenance says so). 151 TP rows carry the tag; 0 rows stay FP, their reasons restated on a write basis. Blind slice: 20 seeded rows (seed 18908) re-labeled by a fresh reader without the prior verdict or reason; 0 of 20 disagreed. Counting basis: distinct (project, commit, file, line, rule) keys. No precision claim is made here. basis: ruling. selection: census (every in-scope DCL13-C FP row whose recorded reason matches the tier-A signature/callback/slot predicate; this batch covers hostap rows from wpa_supplicant/ctrl_iface.c through wpa_supplicant/eapol_test.c). reviewed: 151. flipped: 151 (FP -> TP). blind_to_prior: false. blind_to_diagnostic: false.",
+  "submitted_at": "2026-09-29T21:58:11Z",
+  "row_count": 151,
+  "projects": [
+    "hostap"
+  ],
+  "codebase_commits": {
+    "hostap": "dcee60436390dd34731560657c4257c3b4c839a6"
+  },
+  "rules": [
+    "DCL13-C"
+  ],
+  "verdicts": {
+    "TP": 151
+  }
+}
