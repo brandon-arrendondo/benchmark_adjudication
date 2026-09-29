@@ -12,7 +12,7 @@
     "mbedtls": "068ff080b369adfac81509f9b57b2afabaf82dc5"
   },
   "submitted_at": "2026-09-14T17:32:48.190170",
-  "row_count": 8349,
+  "row_count": 8347,
   "rules": [
     "API00-C",
     "API01-C",
@@ -182,6 +182,15 @@
         "mbedtls library/ssl_tls.c:7147 EXP34-C"
       ],
       "note": "EXP34-C verdict corrected TP -> FP as keyed by bmdb 1423: the key is a caller's positional call argument, which aurora_lint 1418 no longer treats as a violation site; see that batch's manifest notes"
+    },
+    {
+      "by": "gavel-bs-1317-2026-09-29",
+      "count": 2,
+      "keys": [
+        "mbedtls library/x509_create.c:37 PRE02-C",
+        "mbedtls library/threading.c:114 DCL13-C"
+      ],
+      "note": "relabeled by Brandon's blind-sample gavel verdict (bmdb 1317); see gavel-bs-1317-2026-09-29's manifest"
     }
   ]
 }

@@ -12,7 +12,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-06-12T10:15:42.226172",
-  "row_count": 163,
+  "row_count": 162,
   "rules": [
     "API00-C",
     "API05-C",
@@ -42,5 +42,15 @@
     "STR34-C",
     "WIN04-C"
   ],
-  "notes": "Reconstructed during benchmark_adjudication's initial population (2026-09-16) from benchmarking_db's ground_truth.source='precision_audit_fts3_snippet'. row_count/projects/codebase_commits/rules were derived from the rows themselves, not declared at adjudication time. aurora_lint_version/aurora_lint_sha are unknown for legacy data -- never recorded per-row."
+  "notes": "Reconstructed during benchmark_adjudication's initial population (2026-09-16) from benchmarking_db's ground_truth.source='precision_audit_fts3_snippet'. row_count/projects/codebase_commits/rules were derived from the rows themselves, not declared at adjudication time. aurora_lint_version/aurora_lint_sha are unknown for legacy data -- never recorded per-row.",
+  "superseded_rows": [
+    {
+      "by": "gavel-bs-1317-2026-09-29",
+      "count": 1,
+      "keys": [
+        "sqlite ext/fts3/fts3_snippet.c:546 INT30-C"
+      ],
+      "note": "relabeled by Brandon's blind-sample gavel verdict (bmdb 1317); see gavel-bs-1317-2026-09-29's manifest"
+    }
+  ]
 }

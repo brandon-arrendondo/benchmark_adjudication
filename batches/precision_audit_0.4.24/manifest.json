@@ -12,7 +12,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-06-12",
-  "row_count": 3062,
+  "row_count": 3061,
   "rules": [
     "API00-C",
     "API02-C",
@@ -212,6 +212,14 @@
         "sqlite src/vdbeaux.c:3809 INT32-C"
       ],
       "note": "verdict corrected FP -> TP by bmdb 1553 (sqlite): the FP rested only on in-tree callers of a non-static library function (ADR-0011 742a1571); see that batch manifest notes"
+    },
+    {
+      "by": "gavel-bs-1317-2026-09-29",
+      "count": 1,
+      "keys": [
+        "sqlite ext/misc/fossildelta.c:214 INT30-C"
+      ],
+      "note": "relabeled by Brandon's blind-sample gavel verdict (bmdb 1317); see gavel-bs-1317-2026-09-29's manifest"
     }
   ]
 }

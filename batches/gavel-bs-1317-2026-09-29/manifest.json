@@ -1,0 +1,48 @@
+{
+  "work_item_ref": "benchmarking_db-1892",
+  "requested_by": "coordinator",
+  "adjudicating_node": "r720",
+  "aurora_lint_version": "0.5.3",
+  "aurora_lint_sha": "f330e308e4c67b36d867567257243556c9376d19",
+  "batch_id": "gavel-bs-1317-2026-09-29",
+  "adjudicator": "human-blind-sample",
+  "reviewer": "brandon",
+  "notes": "bmdb 1892: Brandon's blind-sample gavel verdicts (bmdb 1317, seed 20260921), a partial round: 40 of the sample's items reviewed 2026-09-25..29 (the export has no s0008). Only rows where his verdict differs from the label are written: 12 of 40. The 28 agreements are not written; they are agreement data, not new labels. s0006, s0010, s0011, s0020 and s0021 were his 'uncertain' and follow his 2026-09-29 rulings (s0010 and s0020 TP, s0021 FP; s0006 and s0011 FP, equal to the label, so not written). Reason text is agent-drafted from his rationale and the pinned source, not quoted. Oracle tags are in the provenance column as a '; '-separated segment of the form 'oracle-tag: <class>: <detail>' (class has no ':', neither part has ';'). The strict verdict is the verdict column; a relaxed profile may score a tagged row the other way. s0034 carries 'interface-fixed signature' and s0038 'environment relaxation'. Agreement: raw 26/35, Cohen's kappa 0.4928 over the 35 items where both sides are TP/FP (20 sample rows under EXP34-C/EXP33-C/ARR30-C are withheld by design). Reproduce with: python3 scripts/kappa.py <blind_sample.csv with human_verdict filled from the gavel export> <answer_key.csv>. Both inputs stay local: gavel export sha256 3a2e9fe6a3db02926f41bb45634cc3c8dcad2830b7dc3be29bed12de617b7f32; answer_key.csv sha256 cbf4566ff1b2db45c0c7915338121181fe6bef366c4470f967c783ddd2399a2f; unfilled blind_sample.csv sha256 8542eb7d61b13520ed88b19191b4df9f324795272554731fbc379b2d55605e58; filled verdict CSV sha256 66862a665fa2d74aab73f98ce9afedacade8c0e97289c2978805a74e5e272aca. Counting basis: distinct (project, commit, file, line, rule) keys. No precision claim is made here. basis: merit. selection: seeded random (blind sample, seed 20260921), partial. reviewed: 40. flipped: 12. blind_to_prior: true. blind_to_diagnostic: false.",
+  "submitted_at": "2026-09-29T19:33:43Z",
+  "row_count": 12,
+  "projects": [
+    "hostap",
+    "mbedtls",
+    "pureftpd",
+    "raylib",
+    "sqlite"
+  ],
+  "codebase_commits": {
+    "raylib": "962bbfc6bfbd7a5acd08e21314fcfa161003a589",
+    "mbedtls": "068ff080b369adfac81509f9b57b2afabaf82dc5",
+    "hostap": "dcee60436390dd34731560657c4257c3b4c839a6",
+    "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af",
+    "pureftpd": "cc28bff52ca28e1d122a2142bf37f2dc578f4d3e"
+  },
+  "rules": [
+    "DCL09-C",
+    "DCL13-C",
+    "ERR02-C",
+    "EXP12-C",
+    "INT30-C",
+    "INT32-C",
+    "MEM03-C",
+    "MSC30-C",
+    "POS50-C",
+    "PRE02-C",
+    "PRE08-C"
+  ],
+  "verdicts": {
+    "FP": 1,
+    "TP": 11
+  },
+  "corrections": {
+    "FP_to_TP": 11,
+    "TP_to_FP": 1
+  }
+}

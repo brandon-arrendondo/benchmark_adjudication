@@ -12,7 +12,7 @@
     "raylib": "962bbfc6bfbd7a5acd08e21314fcfa161003a589"
   },
   "submitted_at": "2026-06-23T18:57:14.967191",
-  "row_count": 1156,
+  "row_count": 1155,
   "rules": [
     "API00-C",
     "API01-C",
@@ -119,6 +119,14 @@
         "raylib src/platforms/rcore_desktop_win32.c:938 API00-C"
       ],
       "note": "verdict corrected FP -> TP by bmdb 1553 (raylib): the FP rested only on in-tree callers of a non-static library function (ADR-0011 742a1571); see that batch manifest notes"
+    },
+    {
+      "by": "gavel-bs-1317-2026-09-29",
+      "count": 1,
+      "keys": [
+        "raylib src/platforms/rcore_android.c:1588 DCL09-C"
+      ],
+      "note": "relabeled by Brandon's blind-sample gavel verdict (bmdb 1317); see gavel-bs-1317-2026-09-29's manifest"
     }
   ]
 }

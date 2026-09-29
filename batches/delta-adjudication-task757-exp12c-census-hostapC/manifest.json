@@ -12,9 +12,19 @@
     "hostap": "dcee60436390dd34731560657c4257c3b4c839a6"
   },
   "submitted_at": "2026-09-07T21:05:20.430475",
-  "row_count": 218,
+  "row_count": 217,
   "rules": [
     "EXP12-C"
   ],
-  "notes": "Reconstructed during benchmark_adjudication's initial population (2026-09-16) from benchmarking_db's ground_truth.source='delta-adjudication-task757-exp12c-census-hostapC'. row_count/projects/codebase_commits/rules were derived from the rows themselves, not declared at adjudication time. aurora_lint_version/aurora_lint_sha are unknown for legacy data -- never recorded per-row."
+  "notes": "Reconstructed during benchmark_adjudication's initial population (2026-09-16) from benchmarking_db's ground_truth.source='delta-adjudication-task757-exp12c-census-hostapC'. row_count/projects/codebase_commits/rules were derived from the rows themselves, not declared at adjudication time. aurora_lint_version/aurora_lint_sha are unknown for legacy data -- never recorded per-row.",
+  "superseded_rows": [
+    {
+      "by": "gavel-bs-1317-2026-09-29",
+      "count": 1,
+      "keys": [
+        "hostap src/ap/vlan_full.c:273 EXP12-C"
+      ],
+      "note": "relabeled by Brandon's blind-sample gavel verdict (bmdb 1317); see gavel-bs-1317-2026-09-29's manifest"
+    }
+  ]
 }
