@@ -12,7 +12,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-06-14T16:20:13.561245",
-  "row_count": 1158,
+  "row_count": 1141,
   "rules": [
     "API00-C",
     "API02-C",
@@ -309,6 +309,30 @@
         "sqlite src/walker.c:25 DCL13-C"
       ],
       "note": "DCL13-C re-derived under Brandon 2026-09-29 DCL13-C option (c) (a signature, callback or function-pointer-slot basis is not an exception); see dcl13-ruling-1890-a15's manifest notes"
+    },
+    {
+      "by": "dcl13-ruling-1890-b03",
+      "count": 17,
+      "keys": [
+        "sqlite ext/icu/icu.c:579 DCL13-C",
+        "sqlite ext/icu/icu.c:580 DCL13-C",
+        "sqlite ext/misc/appendvfs.c:650 DCL13-C",
+        "sqlite ext/misc/appendvfs.c:651 DCL13-C",
+        "sqlite ext/misc/btreeinfo.c:429 DCL13-C",
+        "sqlite ext/misc/cksumvfs.c:834 DCL13-C",
+        "sqlite ext/misc/completion.c:500 DCL13-C",
+        "sqlite ext/misc/explain.c:314 DCL13-C",
+        "sqlite ext/misc/ieee754.c:331 DCL13-C",
+        "sqlite ext/misc/memstat.c:406 DCL13-C",
+        "sqlite ext/misc/memstat.c:424 DCL13-C",
+        "sqlite ext/misc/nextchar.c:294 DCL13-C",
+        "sqlite ext/misc/prefixes.c:308 DCL13-C",
+        "sqlite ext/misc/stmt.c:336 DCL13-C",
+        "sqlite ext/misc/templatevtab.c:262 DCL13-C",
+        "sqlite ext/misc/uint.c:86 DCL13-C",
+        "sqlite ext/misc/wholenumber.c:271 DCL13-C"
+      ],
+      "note": "DCL13-C re-derived under Brandon 2026-09-29 DCL13-C tier B (an API/ABI signature not in a function-pointer slot is strict TP; shallow const) (a signature, callback or function-pointer-slot basis is not an exception); see dcl13-ruling-1890-b03's manifest notes"
     }
   ]
 }

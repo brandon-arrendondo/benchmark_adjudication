@@ -12,7 +12,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-06-14T17:15:05.361551+00:00",
-  "row_count": 186,
+  "row_count": 182,
   "rules": [
     "API00-C",
     "ARR00-C",
@@ -85,6 +85,17 @@
         "sqlite ext/expert/sqlite3expert.c:955 DCL13-C"
       ],
       "note": "DCL13-C re-derived under Brandon 2026-09-29 DCL13-C option (c) (a signature, callback or function-pointer-slot basis is not an exception); see dcl13-ruling-1890-a11's manifest notes"
+    },
+    {
+      "by": "dcl13-ruling-1890-b03",
+      "count": 4,
+      "keys": [
+        "sqlite ext/expert/sqlite3expert.c:2187 DCL13-C",
+        "sqlite ext/expert/sqlite3expert.c:2196 DCL13-C",
+        "sqlite ext/expert/sqlite3expert.c:267 DCL13-C",
+        "sqlite ext/expert/sqlite3expert.c:847 DCL13-C"
+      ],
+      "note": "DCL13-C re-derived under Brandon 2026-09-29 DCL13-C tier B (an API/ABI signature not in a function-pointer slot is strict TP; shallow const) (a signature, callback or function-pointer-slot basis is not an exception); see dcl13-ruling-1890-b03's manifest notes"
     }
   ]
 }

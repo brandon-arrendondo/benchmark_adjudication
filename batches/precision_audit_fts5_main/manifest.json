@@ -12,7 +12,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-06-12T17:03:11.499738",
-  "row_count": 247,
+  "row_count": 236,
   "rules": [
     "API00-C",
     "ARR00-C",
@@ -78,6 +78,24 @@
         "sqlite ext/fts5/fts5_main.c:3672 DCL13-C"
       ],
       "note": "DCL13-C re-derived under Brandon 2026-09-29 DCL13-C option (c) (a signature, callback or function-pointer-slot basis is not an exception); see dcl13-ruling-1890-a11's manifest notes"
+    },
+    {
+      "by": "dcl13-ruling-1890-b03",
+      "count": 11,
+      "keys": [
+        "sqlite ext/fts5/fts5_main.c:2144 DCL13-C",
+        "sqlite ext/fts5/fts5_main.c:2150 DCL13-C",
+        "sqlite ext/fts5/fts5_main.c:2159 DCL13-C",
+        "sqlite ext/fts5/fts5_main.c:2169 DCL13-C",
+        "sqlite ext/fts5/fts5_main.c:2201 DCL13-C",
+        "sqlite ext/fts5/fts5_main.c:2597 DCL13-C",
+        "sqlite ext/fts5/fts5_main.c:2641 DCL13-C",
+        "sqlite ext/fts5/fts5_main.c:2719 DCL13-C",
+        "sqlite ext/fts5/fts5_main.c:3371 DCL13-C",
+        "sqlite ext/fts5/fts5_main.c:3851 DCL13-C",
+        "sqlite ext/fts5/fts5_main.c:3864 DCL13-C"
+      ],
+      "note": "DCL13-C re-derived under Brandon 2026-09-29 DCL13-C tier B (an API/ABI signature not in a function-pointer slot is strict TP; shallow const) (a signature, callback or function-pointer-slot basis is not an exception); see dcl13-ruling-1890-b03's manifest notes"
     }
   ]
 }

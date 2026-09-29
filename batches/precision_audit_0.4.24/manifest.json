@@ -12,7 +12,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-06-12",
-  "row_count": 2955,
+  "row_count": 2939,
   "rules": [
     "API00-C",
     "API02-C",
@@ -368,6 +368,29 @@
         "sqlite src/vdbeaux.c:5495 DCL13-C"
       ],
       "note": "DCL13-C re-derived under Brandon 2026-09-29 DCL13-C option (c) (a signature, callback or function-pointer-slot basis is not an exception); see dcl13-ruling-1890-a15's manifest notes"
+    },
+    {
+      "by": "dcl13-ruling-1890-b03",
+      "count": 16,
+      "keys": [
+        "sqlite ext/misc/csv.c:960 DCL13-C",
+        "sqlite ext/misc/decimal.c:432 DCL13-C",
+        "sqlite ext/misc/fossildelta.c:1088 DCL13-C",
+        "sqlite ext/misc/regexp.c:769 DCL13-C",
+        "sqlite ext/misc/regexp.c:822 DCL13-C",
+        "sqlite ext/misc/regexp.c:904 DCL13-C",
+        "sqlite ext/misc/zipfile.c:1247 DCL13-C",
+        "sqlite ext/misc/zipfile.c:1402 DCL13-C",
+        "sqlite ext/misc/zipfile.c:1799 DCL13-C",
+        "sqlite ext/misc/zipfile.c:2282 DCL13-C",
+        "sqlite ext/misc/zipfile.c:746 DCL13-C",
+        "sqlite ext/recover/dbdata.c:1016 DCL13-C",
+        "sqlite ext/recover/sqlite3recover.c:2551 DCL13-C",
+        "sqlite ext/recover/sqlite3recover.c:2571 DCL13-C",
+        "sqlite ext/recover/sqlite3recover.c:2783 DCL13-C",
+        "sqlite ext/recover/sqlite3recover.c:2790 DCL13-C"
+      ],
+      "note": "DCL13-C re-derived under Brandon 2026-09-29 DCL13-C tier B (an API/ABI signature not in a function-pointer slot is strict TP; shallow const) (a signature, callback or function-pointer-slot basis is not an exception); see dcl13-ruling-1890-b03's manifest notes"
     }
   ]
 }
