@@ -12,7 +12,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-06-12T08:37:09.925876",
-  "row_count": 580,
+  "row_count": 577,
   "rules": [
     "API00-C",
     "ARR00-C",
@@ -106,6 +106,16 @@
         "sqlite ext/session/sqlite3session.c:6527 INT31-C"
       ],
       "note": "uncertain resolved to TP by the agent applying Brandon's gavel cluster rulings (pq:1, pq:3, pq:5); see ruling-gavel-clusters-1892's manifest"
+    },
+    {
+      "by": "ruling-flp02-sqlite3session-1878",
+      "count": 3,
+      "keys": [
+        "sqlite ext/session/sqlite3session.c:949 FLP02-C",
+        "sqlite ext/session/sqlite3session.c:1661 FLP02-C",
+        "sqlite ext/session/sqlite3session.c:2722 FLP02-C"
+      ],
+      "note": "FP relabeled TP under ADR-0001 and Brandon's 2026-09-29 s0020 ruling (intent is not an FP basis); see ruling-flp02-sqlite3session-1878's manifest"
     }
   ]
 }
