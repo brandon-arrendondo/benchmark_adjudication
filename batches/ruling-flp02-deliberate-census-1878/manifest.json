@@ -1,0 +1,38 @@
+{
+  "work_item_ref": "benchmarking_db-1878",
+  "requested_by": "coordinator",
+  "adjudicating_node": "r720",
+  "aurora_lint_version": "0.5.3",
+  "aurora_lint_sha": "f330e308e4c67b36d867567257243556c9376d19",
+  "adjudicator": "claude-opus-5.5",
+  "batch_id": "ruling-flp02-deliberate-census-1878",
+  "recheck": {
+    "basis": "ruling",
+    "ruling": "ADR-0001 (intent or 'deliberate' use is a suppression question, not an FP basis) and Brandon's gavel ruling on s0020, 2026-09-29 (suppression is not a reason for FP)",
+    "selection": "census",
+    "reviewed": 19,
+    "flipped": 16,
+    "blind_to_prior_verdict": false,
+    "blind_to_diagnostic": false
+  },
+  "notes": "A RULING RELABEL. bmdb 1878: a census of the sqlite FLP02-C FP labels whose reason rests on intent. The set is defined without judging the labels: every FP whose reason matches deliberat|intention|intended|idiom (case-insensitive), 22 rows, less the three sqlite3session.c rows already corrected in ruling-flp02-sqlite3session-1878: 19 rows. Each was re-derived at source in the pinned checkout against the ruled FLP02-C form (both operands floating-point, no exact-zero literal). Split: 16 compare two floating operands and flip FP -> TP; 3 have an integer operand (totype.c:457, date.c:879, window.c:225) and stay FP, restated on that construct basis. The other 15 sqlite FLP02-C FP labels are outside the census (misfire, exact-zero or relational bases). Counting basis: distinct (project, commit, file, line, rule) keys. No precision claim is made here. basis: ruling (ADR-0001 (intent or 'deliberate' use is a suppression question, not an FP basis) and Brandon's gavel ruling on s0020, 2026-09-29 (suppression is not a reason for FP)). selection: census. reviewed: 19. flipped: 16 (FP -> TP). blind_to_prior: false. blind_to_diagnostic: false.",
+  "submitted_at": "2026-09-29T21:48:42Z",
+  "row_count": 19,
+  "projects": [
+    "sqlite"
+  ],
+  "codebase_commits": {
+    "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
+  },
+  "rules": [
+    "FLP02-C"
+  ],
+  "verdicts": {
+    "FP": 3,
+    "TP": 16
+  },
+  "corrections": {
+    "FP_restated": 3,
+    "FP_to_TP": 16
+  }
+}

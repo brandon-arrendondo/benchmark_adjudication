@@ -12,7 +12,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-06-14T14:17:05.114719+00:00",
-  "row_count": 1358,
+  "row_count": 1356,
   "rules": [
     "API00-C",
     "API01-C",
@@ -140,6 +140,15 @@
         "sqlite src/wal.c:3636 DCL13-C"
       ],
       "note": "verdict corrected FP -> TP by the bmdb 1553 stands pass (sqlite); see that batch manifest notes"
+    },
+    {
+      "by": "ruling-flp02-deliberate-census-1878",
+      "count": 2,
+      "keys": [
+        "sqlite src/func.c:1108 FLP02-C",
+        "sqlite src/func.c:3063 FLP02-C"
+      ],
+      "note": "re-derived under ADR-0001 and Brandon's 2026-09-29 s0020 ruling (intent is not an FP basis): FP->TP where both operands are floating, FP restated on its construct basis otherwise; see ruling-flp02-deliberate-census-1878's manifest"
     }
   ]
 }

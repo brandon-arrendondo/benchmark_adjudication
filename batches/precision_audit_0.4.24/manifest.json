@@ -12,7 +12,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-06-12",
-  "row_count": 3061,
+  "row_count": 3056,
   "rules": [
     "API00-C",
     "API02-C",
@@ -220,6 +220,18 @@
         "sqlite ext/misc/fossildelta.c:214 INT30-C"
       ],
       "note": "relabeled by Brandon's blind-sample gavel verdict (bmdb 1317); see gavel-bs-1317-2026-09-29's manifest"
+    },
+    {
+      "by": "ruling-flp02-deliberate-census-1878",
+      "count": 5,
+      "keys": [
+        "sqlite ext/rtree/geopoly.c:790 FLP02-C",
+        "sqlite ext/rtree/geopoly.c:797 FLP02-C",
+        "sqlite ext/rtree/geopoly.c:803 FLP02-C",
+        "sqlite ext/rtree/geopoly.c:919 FLP02-C",
+        "sqlite src/vdbeaux.c:4539 FLP02-C"
+      ],
+      "note": "re-derived under ADR-0001 and Brandon's 2026-09-29 s0020 ruling (intent is not an FP basis): FP->TP where both operands are floating, FP restated on its construct basis otherwise; see ruling-flp02-deliberate-census-1878's manifest"
     }
   ]
 }
