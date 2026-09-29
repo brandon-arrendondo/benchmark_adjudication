@@ -12,7 +12,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-06-12",
-  "row_count": 3033,
+  "row_count": 2992,
   "rules": [
     "API00-C",
     "API02-C",
@@ -269,6 +269,54 @@
         "sqlite ext/misc/decimal.c:879 DCL13-C"
       ],
       "note": "DCL13-C re-derived under Brandon 2026-09-29 DCL13-C option (c) (a signature, callback or function-pointer-slot basis is not an exception); see dcl13-ruling-1890-a11's manifest notes"
+    },
+    {
+      "by": "dcl13-ruling-1890-a13",
+      "count": 41,
+      "keys": [
+        "sqlite ext/misc/zipfile.c:1168 DCL13-C",
+        "sqlite ext/misc/zipfile.c:1295 DCL13-C",
+        "sqlite ext/misc/zipfile.c:1360 DCL13-C",
+        "sqlite ext/misc/zipfile.c:1604 DCL13-C",
+        "sqlite ext/misc/zipfile.c:1605 DCL13-C",
+        "sqlite ext/misc/zipfile.c:1902 DCL13-C",
+        "sqlite ext/misc/zipfile.c:1913 DCL13-C",
+        "sqlite ext/misc/zipfile.c:1962 DCL13-C",
+        "sqlite ext/misc/zipfile.c:2014 DCL13-C",
+        "sqlite ext/misc/zipfile.c:362 DCL13-C",
+        "sqlite ext/recover/dbdata.c:192 DCL13-C",
+        "sqlite ext/recover/dbdata.c:195 DCL13-C",
+        "sqlite ext/recover/dbdata.c:244 DCL13-C",
+        "sqlite ext/recover/dbdata.c:294 DCL13-C",
+        "sqlite ext/recover/dbdata.c:770 DCL13-C",
+        "sqlite ext/recover/dbdata.c:841 DCL13-C",
+        "sqlite ext/recover/sqlite3recover.c:2528 DCL13-C",
+        "sqlite ext/recover/sqlite3recover.c:2722 DCL13-C",
+        "sqlite ext/recover/sqlite3recover.c:2726 DCL13-C",
+        "sqlite ext/recover/sqlite3recover.c:634 DCL13-C",
+        "sqlite ext/recover/sqlite3recover.c:670 DCL13-C",
+        "sqlite ext/recover/sqlite3recover.c:695 DCL13-C",
+        "sqlite ext/recover/sqlite3recover.c:774 DCL13-C",
+        "sqlite ext/rtree/geopoly.c:1215 DCL13-C",
+        "sqlite ext/rtree/geopoly.c:1217 DCL13-C",
+        "sqlite ext/rtree/geopoly.c:1239 DCL13-C",
+        "sqlite ext/rtree/geopoly.c:1366 DCL13-C",
+        "sqlite ext/rtree/geopoly.c:1495 DCL13-C",
+        "sqlite ext/rtree/geopoly.c:1606 DCL13-C",
+        "sqlite ext/rtree/geopoly.c:362 DCL13-C",
+        "sqlite ext/rtree/geopoly.c:382 DCL13-C",
+        "sqlite ext/rtree/geopoly.c:409 DCL13-C",
+        "sqlite ext/rtree/geopoly.c:456 DCL13-C",
+        "sqlite ext/rtree/geopoly.c:515 DCL13-C",
+        "sqlite ext/rtree/geopoly.c:541 DCL13-C",
+        "sqlite ext/rtree/geopoly.c:591 DCL13-C",
+        "sqlite ext/rtree/geopoly.c:706 DCL13-C",
+        "sqlite ext/rtree/geopoly.c:733 DCL13-C",
+        "sqlite ext/rtree/geopoly.c:818 DCL13-C",
+        "sqlite ext/rtree/geopoly.c:863 DCL13-C",
+        "sqlite ext/session/changeset.c:143 DCL13-C"
+      ],
+      "note": "DCL13-C re-derived under Brandon 2026-09-29 DCL13-C option (c) (a signature, callback or function-pointer-slot basis is not an exception); see dcl13-ruling-1890-a13's manifest notes"
     }
   ]
 }

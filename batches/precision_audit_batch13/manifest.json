@@ -12,7 +12,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-06-14T18:15:55.904371+00:00",
-  "row_count": 1213,
+  "row_count": 1193,
   "rules": [
     "API00-C",
     "API02-C",
@@ -290,6 +290,33 @@
         "sqlite ext/misc/closure.c:828 DCL13-C"
       ],
       "note": "DCL13-C re-derived under Brandon 2026-09-29 DCL13-C option (c) (a signature, callback or function-pointer-slot basis is not an exception); see dcl13-ruling-1890-a11's manifest notes"
+    },
+    {
+      "by": "dcl13-ruling-1890-a13",
+      "count": 20,
+      "keys": [
+        "sqlite ext/misc/vtablog.c:193 DCL13-C",
+        "sqlite ext/misc/vtablog.c:354 DCL13-C",
+        "sqlite ext/misc/vtablog.c:378 DCL13-C",
+        "sqlite ext/misc/vtablog.c:391 DCL13-C",
+        "sqlite ext/misc/vtablog.c:471 DCL13-C",
+        "sqlite ext/misc/vtablog.c:520 DCL13-C",
+        "sqlite ext/misc/vtablog.c:583 DCL13-C",
+        "sqlite ext/misc/vtablog.c:585 DCL13-C",
+        "sqlite ext/misc/vtablog.c:586 DCL13-C",
+        "sqlite ext/misc/vtablog.c:600 DCL13-C",
+        "sqlite ext/misc/vtablog.c:605 DCL13-C",
+        "sqlite ext/misc/vtablog.c:610 DCL13-C",
+        "sqlite ext/misc/vtablog.c:615 DCL13-C",
+        "sqlite ext/misc/vtablog.c:620 DCL13-C",
+        "sqlite ext/misc/vtablog.c:625 DCL13-C",
+        "sqlite ext/misc/vtablog.c:630 DCL13-C",
+        "sqlite ext/misc/vtablog.c:637 DCL13-C",
+        "sqlite ext/misc/vtablog.c:641 DCL13-C",
+        "sqlite ext/misc/vtablog.c:665 DCL13-C",
+        "sqlite ext/misc/vtablog.c:669 DCL13-C"
+      ],
+      "note": "DCL13-C re-derived under Brandon 2026-09-29 DCL13-C option (c) (a signature, callback or function-pointer-slot basis is not an exception); see dcl13-ruling-1890-a13's manifest notes"
     }
   ]
 }

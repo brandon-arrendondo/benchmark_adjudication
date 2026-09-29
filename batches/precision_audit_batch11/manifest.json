@@ -12,7 +12,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-06-14T16:47:13.233669+00:00",
-  "row_count": 1167,
+  "row_count": 1153,
   "rules": [
     "API00-C",
     "API02-C",
@@ -155,6 +155,27 @@
         "sqlite src/trigger.c:1069 EXP34-C"
       ],
       "note": "verdict corrected FP -> TP by the bmdb 1553 stands pass (sqlite); see that batch manifest notes"
+    },
+    {
+      "by": "dcl13-ruling-1890-a13",
+      "count": 14,
+      "keys": [
+        "sqlite src/alter.c:1015 DCL13-C",
+        "sqlite src/alter.c:1533 DCL13-C",
+        "sqlite src/alter.c:1696 DCL13-C",
+        "sqlite src/alter.c:1757 DCL13-C",
+        "sqlite src/alter.c:1903 DCL13-C",
+        "sqlite src/alter.c:1940 DCL13-C",
+        "sqlite src/alter.c:2053 DCL13-C",
+        "sqlite src/alter.c:2179 DCL13-C",
+        "sqlite src/alter.c:2522 DCL13-C",
+        "sqlite src/alter.c:2657 DCL13-C",
+        "sqlite src/alter.c:2829 DCL13-C",
+        "sqlite src/alter.c:2939 DCL13-C",
+        "sqlite src/alter.c:816 DCL13-C",
+        "sqlite src/alter.c:829 DCL13-C"
+      ],
+      "note": "DCL13-C re-derived under Brandon 2026-09-29 DCL13-C option (c) (a signature, callback or function-pointer-slot basis is not an exception); see dcl13-ruling-1890-a13's manifest notes"
     }
   ]
 }
