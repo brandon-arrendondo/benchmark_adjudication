@@ -1,0 +1,27 @@
+{
+  "work_item_ref": "benchmarking_db-1892",
+  "requested_by": "coordinator",
+  "adjudicating_node": "r720",
+  "aurora_lint_version": "0.5.3",
+  "aurora_lint_sha": "f330e308e4c67b36d867567257243556c9376d19",
+  "batch_id": "gavel-fn-os-internal-1892",
+  "adjudicator": "human-gavel",
+  "reviewer": "brandon",
+  "notes": "bmdb 1892: FN rows Brandon raised in his gavel line comments on blind-sample item s0041 (hostap src/utils/os_internal.c, os_readfile). Checked against official realworld run 316 (aurora-lint f330e308): none of the three keys is reported there, so each is recorded FN. Reason text is agent-drafted from the source at the pin, not taken from his comments. The existing FIO32-C FP rows at the fseek/ftell lines stay FP. Counting basis: distinct (project, commit, file, line, rule) keys. No precision claim is made here. basis: merit. selection: targeted (the keys named in his line comments). reviewed: 3. flipped: 0. blind_to_prior: false. blind_to_diagnostic: false.",
+  "submitted_at": "2026-09-29T19:33:05Z",
+  "row_count": 3,
+  "projects": [
+    "hostap"
+  ],
+  "codebase_commits": {
+    "hostap": "dcee60436390dd34731560657c4257c3b4c839a6"
+  },
+  "rules": [
+    "ERR33-C",
+    "FIO19-C",
+    "FIO32-C"
+  ],
+  "verdicts": {
+    "FN": 3
+  }
+}
