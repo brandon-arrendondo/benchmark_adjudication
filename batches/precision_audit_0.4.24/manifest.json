@@ -12,7 +12,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-06-12",
-  "row_count": 3056,
+  "row_count": 3046,
   "rules": [
     "API00-C",
     "API02-C",
@@ -232,6 +232,23 @@
         "sqlite src/vdbeaux.c:4539 FLP02-C"
       ],
       "note": "re-derived under ADR-0001 and Brandon's 2026-09-29 s0020 ruling (intent is not an FP basis): FP->TP where both operands are floating, FP restated on its construct basis otherwise; see ruling-flp02-deliberate-census-1878's manifest"
+    },
+    {
+      "by": "dcl13-ruling-1890-a12",
+      "count": 10,
+      "keys": [
+        "sqlite ext/misc/fossildelta.c:1028 DCL13-C",
+        "sqlite ext/misc/fossildelta.c:633 DCL13-C",
+        "sqlite ext/misc/fossildelta.c:668 DCL13-C",
+        "sqlite ext/misc/fossildelta.c:711 DCL13-C",
+        "sqlite ext/misc/fossildelta.c:806 DCL13-C",
+        "sqlite ext/misc/fossildelta.c:844 DCL13-C",
+        "sqlite ext/misc/fossildelta.c:923 DCL13-C",
+        "sqlite ext/misc/fossildelta.c:972 DCL13-C",
+        "sqlite ext/misc/fossildelta.c:986 DCL13-C",
+        "sqlite ext/misc/regexp.c:460 DCL13-C"
+      ],
+      "note": "DCL13-C re-derived under Brandon 2026-09-29 DCL13-C option (c) (a signature, callback or function-pointer-slot basis is not an exception); see dcl13-ruling-1890-a12's manifest notes"
     }
   ]
 }

@@ -12,7 +12,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-06-12T08:49:18.685018",
-  "row_count": 322,
+  "row_count": 318,
   "rules": [
     "API00-C",
     "API02-C",
@@ -126,6 +126,17 @@
         "sqlite src/btreeInt.h:739 PRE12-C"
       ],
       "note": "uncertain resolved to TP by the agent applying Brandon's gavel cluster rulings (pq:1, pq:3, pq:5); see ruling-gavel-clusters-1892's manifest"
+    },
+    {
+      "by": "dcl13-ruling-1890-a12",
+      "count": 4,
+      "keys": [
+        "sqlite ext/misc/rot13.c:82 DCL13-C",
+        "sqlite ext/misc/uuid.c:166 DCL13-C",
+        "sqlite ext/misc/uuid.c:183 DCL13-C",
+        "sqlite ext/misc/uuid.c:199 DCL13-C"
+      ],
+      "note": "DCL13-C re-derived under Brandon 2026-09-29 DCL13-C option (c) (a signature, callback or function-pointer-slot basis is not an exception); see dcl13-ruling-1890-a12's manifest notes"
     }
   ]
 }

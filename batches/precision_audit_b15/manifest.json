@@ -12,7 +12,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-06-14T16:20:13.561245",
-  "row_count": 1286,
+  "row_count": 1243,
   "rules": [
     "API00-C",
     "API02-C",
@@ -146,6 +146,56 @@
         "sqlite src/upsert.c:230 EXP34-C"
       ],
       "note": "verdict corrected FP -> TP by bmdb 1553 (sqlite): the FP rested only on in-tree callers of a non-static library function (ADR-0011 742a1571); see that batch manifest notes"
+    },
+    {
+      "by": "dcl13-ruling-1890-a12",
+      "count": 43,
+      "keys": [
+        "sqlite ext/misc/ieee754.c:105 DCL13-C",
+        "sqlite ext/misc/ieee754.c:223 DCL13-C",
+        "sqlite ext/misc/ieee754.c:243 DCL13-C",
+        "sqlite ext/misc/ieee754.c:270 DCL13-C",
+        "sqlite ext/misc/ieee754.c:283 DCL13-C",
+        "sqlite ext/misc/ieee754.c:310 DCL13-C",
+        "sqlite ext/misc/memstat.c:108 DCL13-C",
+        "sqlite ext/misc/memstat.c:285 DCL13-C",
+        "sqlite ext/misc/memstat.c:321 DCL13-C",
+        "sqlite ext/misc/memstat.c:331 DCL13-C",
+        "sqlite ext/misc/memstat.c:345 DCL13-C",
+        "sqlite ext/misc/memstat.c:362 DCL13-C",
+        "sqlite ext/misc/memstat.c:72 DCL13-C",
+        "sqlite ext/misc/memstat.c:75 DCL13-C",
+        "sqlite ext/misc/memtrace.c:85 DCL13-C",
+        "sqlite ext/misc/nextchar.c:204 DCL13-C",
+        "sqlite ext/misc/pcachetrace.c:156 DCL13-C",
+        "sqlite ext/misc/prefixes.c:133 DCL13-C",
+        "sqlite ext/misc/prefixes.c:164 DCL13-C",
+        "sqlite ext/misc/prefixes.c:178 DCL13-C",
+        "sqlite ext/misc/prefixes.c:200 DCL13-C",
+        "sqlite ext/misc/prefixes.c:283 DCL13-C",
+        "sqlite ext/misc/prefixes.c:66 DCL13-C",
+        "sqlite ext/misc/prefixes.c:69 DCL13-C",
+        "sqlite ext/misc/prefixes.c:99 DCL13-C",
+        "sqlite ext/misc/scrub.c:579 DCL13-C",
+        "sqlite ext/misc/shathree.c:819 DCL13-C",
+        "sqlite ext/misc/stmt.c:128 DCL13-C",
+        "sqlite ext/misc/stmt.c:174 DCL13-C",
+        "sqlite ext/misc/stmt.c:192 DCL13-C",
+        "sqlite ext/misc/stmt.c:202 DCL13-C",
+        "sqlite ext/misc/stmt.c:216 DCL13-C",
+        "sqlite ext/misc/stmt.c:279 DCL13-C",
+        "sqlite ext/misc/stmt.c:78 DCL13-C",
+        "sqlite ext/misc/stmt.c:81 DCL13-C",
+        "sqlite ext/misc/templatevtab.c:124 DCL13-C",
+        "sqlite ext/misc/templatevtab.c:157 DCL13-C",
+        "sqlite ext/misc/templatevtab.c:188 DCL13-C",
+        "sqlite ext/misc/templatevtab.c:202 DCL13-C",
+        "sqlite ext/misc/templatevtab.c:216 DCL13-C",
+        "sqlite ext/misc/templatevtab.c:89 DCL13-C",
+        "sqlite ext/misc/templatevtab.c:92 DCL13-C",
+        "sqlite ext/misc/uint.c:41 DCL13-C"
+      ],
+      "note": "DCL13-C re-derived under Brandon 2026-09-29 DCL13-C option (c) (a signature, callback or function-pointer-slot basis is not an exception); see dcl13-ruling-1890-a12's manifest notes"
     }
   ]
 }
