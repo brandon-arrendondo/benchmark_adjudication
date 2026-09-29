@@ -188,13 +188,21 @@ MANIFEST_REQUIRED_FIELDS = [
 # reading of every manifest, and about 300 flips have no rate because no note
 # says how many labels were looked at. Manifests submitted before the cutoff
 # are left as they are.
-RECHECK_REQUIRED_FROM = "2026-09-30"
+RECHECK_REQUIRED_FROM = "2026-10-01"
 RECHECK_BASES = ("ruling", "standard", "merit", "tool", "conflict")
 RECHECK_SELECTIONS = ("census", "sample", "tool-prompted", "targeted")
 RECHECK_FIELDS = ("basis", "selection", "reviewed", "flipped",
                   "blind_to_prior_verdict", "blind_to_diagnostic")
 BLIND_SLICE_FIELDS = ("seed", "reviewed", "disagreed",
                       "blind_to_prior_verdict", "blind_to_diagnostic")
+# A `corrections` key that changes a verdict ("FP_to_TP"); any other key
+# ("TP_restated") records a row rewritten with its verdict kept.
+VERDICT_CHANGE_KEY = re.compile(r"^(TP|FP|FN)_to_(TP|FP|FN)$")
+
+
+def verdict_changes(corrections: dict) -> int:
+    return sum(v for k, v in corrections.items()
+               if (m := VERDICT_CHANGE_KEY.match(k)) and m.group(1) != m.group(2))
 
 
 def _count(value) -> bool:
@@ -214,7 +222,8 @@ def check_recheck(manifest: dict, where: str) -> list[str]:
       selection  census | sample | tool-prompted | targeted; a sample
                  also names its `seed`
       reviewed   labels re-checked, the ones kept as well as the ones changed
-      flipped    labels whose verdict changed
+      flipped    labels whose verdict changed; equal to the verdict-changing
+                 `corrections` keys when there are any
       blind_to_prior_verdict, blind_to_diagnostic   what the reader could see
       blind_slice  optional: {seed, reviewed, disagreed,
                  blind_to_prior_verdict, blind_to_diagnostic} for the small
@@ -253,7 +262,7 @@ def check_recheck(manifest: dict, where: str) -> list[str]:
     if "selection" in block and selection not in RECHECK_SELECTIONS:
         errors.append(f"{where}: recheck.selection {selection!r} is not one of "
                       f"{', '.join(RECHECK_SELECTIONS)}")
-    if selection == "sample" and "seed" not in block:
+    if selection == "sample" and block.get("seed") is None:
         errors.append(f"{where}: recheck.selection sample needs its 'seed'")
     for field in ("reviewed", "flipped"):
         if field in block and not _count(block[field]):
@@ -266,15 +275,15 @@ def check_recheck(manifest: dict, where: str) -> list[str]:
     if _count(reviewed) and _count(flipped):
         if flipped > reviewed:
             errors.append(f"{where}: recheck.flipped {flipped} exceeds reviewed {reviewed}")
-        row_count = manifest.get("row_count")
-        if _count(row_count) and flipped > row_count:
-            errors.append(f"{where}: recheck.flipped {flipped} exceeds row_count {row_count}; "
-                          f"a flipped row carries this batch as its source")
+        # Not checked against row_count: that counts the rows that carry this
+        # batch as their source now, and drops when a later correction
+        # supersedes some of them.
         corrections = manifest.get("corrections")
         if isinstance(corrections, dict) and all(_count(v) for v in corrections.values()):
-            if sum(corrections.values()) != flipped:
+            changed = verdict_changes(corrections)
+            if changed != flipped:
                 errors.append(f"{where}: recheck.flipped {flipped} does not equal the "
-                              f"corrections total {sum(corrections.values())}")
+                              f"verdict-changing corrections total {changed}")
 
     blind = block.get("blind_slice")
     if blind is not None:
@@ -282,7 +291,7 @@ def check_recheck(manifest: dict, where: str) -> list[str]:
             errors.append(f"{where}: recheck.blind_slice must be an object")
         else:
             for field in BLIND_SLICE_FIELDS:
-                if field not in blind:
+                if blind.get(field) is None:
                     errors.append(f"{where}: recheck.blind_slice is missing '{field}'")
             for field in ("reviewed", "disagreed"):
                 if field in blind and not _count(blind[field]):

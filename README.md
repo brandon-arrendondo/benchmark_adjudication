@@ -357,7 +357,7 @@ A batch that re-reads existing labels records what it re-read, so that how
 often a label changes on a second look is `flipped / reviewed` from the
 manifest alone. Before this block existed, that lived only in free-text
 notes, and many corrections never stated how many labels they had looked at.
-From 2026-09-30 every manifest carries the key: `"recheck": null` for a batch
+From 2026-10-01 (by `submitted_at`) every manifest carries the key: `"recheck": null` for a batch
 of new labels only, the block below for anything that re-reads labels. A
 manifest with a `corrections` block always needs a real one.
 `scripts/validate.py` checks both.
@@ -382,7 +382,7 @@ manifest with a `corrections` block always needs a real one.
 | `ruling` | for `ruling` and `standard`: the decision applied, such as an ADR and its commit |
 | `selection` | how the re-read rows were chosen: `census` (every label in a set defined without judging whether the labels were right), `sample` (a seeded random draw; give `seed`), `tool-prompted` (the labels at keys the analyzer stopped reporting), or `targeted` (rows picked because they looked wrong) |
 | `reviewed` | labels re-read, including the ones kept |
-| `flipped` | labels whose verdict changed; at most `reviewed` and `row_count`, and equal to the `corrections` total when there is one |
+| `flipped` | labels whose verdict changed; at most `reviewed`, and equal to the sum of the verdict-changing `corrections` keys (`FP_to_TP` and the like, not `TP_restated`) when there are any. It is not checked against `row_count`, which drops when a later correction supersedes this batch's rows. |
 | `blind_to_prior_verdict`, `blind_to_diagnostic` | whether the reader could see the earlier verdict, and the analyzer's message |
 | `blind_slice` | optional: a small seeded sample of the batch re-labeled without the prior verdict (and, where the tooling allows, without the message), with how many of its labels the reader disagreed with |
 

@@ -77,6 +77,8 @@ class Shape(unittest.TestCase):
 
     def test_a_sample_names_its_seed(self):
         self.assertIn("needs its 'seed'", errors(manifest(recheck(selection="sample")))[0])
+        self.assertIn("needs its 'seed'",
+                      errors(manifest(recheck(selection="sample", seed=None)))[0])
         self.assertEqual(errors(manifest(recheck(selection="sample", seed=20260930))), [])
 
     def test_counts_are_non_negative_integers_and_flags_are_booleans(self):
@@ -89,14 +91,21 @@ class Consistency(unittest.TestCase):
         e = errors(manifest(recheck(reviewed=5, flipped=7)))
         self.assertIn("flipped 7 exceeds reviewed 5", e[0])
 
-    def test_flipped_cannot_exceed_the_rows_the_batch_owns(self):
-        e = errors(manifest(recheck(), row_count=3))
-        self.assertIn("exceeds row_count 3", e[0])
+    def test_flipped_may_exceed_row_count_once_later_corrections_supersede_rows(self):
+        self.assertEqual(errors(manifest(recheck(), row_count=0)), [])
 
-    def test_flipped_equals_the_corrections_total(self):
+    def test_flipped_equals_the_verdict_changing_corrections(self):
         self.assertEqual(errors(manifest(recheck(), corrections={"FP_to_TP": 7})), [])
         e = errors(manifest(recheck(), corrections={"FP_to_TP": 5, "TP_to_FP": 1}))
-        self.assertIn("does not equal the corrections total 6", e[0])
+        self.assertIn("verdict-changing corrections total 6", e[0])
+
+    def test_a_restated_row_is_not_a_flip(self):
+        block = recheck(flipped=11)
+        self.assertEqual(errors(manifest(block, corrections={"TP_to_FP": 11,
+                                                              "TP_restated": 1})), [])
+        e = errors(manifest(recheck(flipped=12), corrections={"TP_to_FP": 11,
+                                                               "TP_restated": 1}))
+        self.assertIn("verdict-changing corrections total 11", e[0])
 
 
 class BlindSlice(unittest.TestCase):
@@ -114,6 +123,8 @@ class BlindSlice(unittest.TestCase):
         del s["seed"]
         self.assertIn("blind_slice is missing 'seed'",
                       errors(manifest(recheck(blind_slice=s)))[0])
+        self.assertIn("blind_slice is missing 'seed'",
+                      errors(manifest(recheck(blind_slice=self.slice(seed=None))))[0])
 
     def test_disagreements_cannot_exceed_the_slice(self):
         e = errors(manifest(recheck(blind_slice=self.slice(disagreed=21))))
