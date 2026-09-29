@@ -23,11 +23,9 @@
   "verdicts": {
     "FP": 2
   },
-  "selection": "targeted",
-  "basis": "merit",
   "realworld_run_ids": [
     316,
     317
   ],
-  "notes": "bmdb 1887: the in-scope keys that aurora_lint 1861 was expected to add, re-derived from the official sweep (realworld runs 316 and 317, aurora-lint f330e308, scope pinned from benchmark_repos.json). SELECTION: targeted, the five keys named in the task, not a sample. BASIS: merit, each read by hand at source in the pinned checkout (ADR-0001, rule as written). All five are present in run 316. Three already carry labels on main and are not re-added: mosquitto lib/net_mosq.c:582 API00-C (FP), sqlite src/vacuum.c:62 and :143 MSC04-C (TP). The remaining two are labeled here: raylib src/platforms/rcore_android.c:322 DCL15-C FP (android_main needs external linkage; out_of_config, still scored) and valkey src/modules/lua/engine_lua.c:562 API00-C FP (ctx only forwarded). Counting basis: distinct (project, commit, file, line, rule) keys. No precision claim is made here."
+  "notes": "bmdb 1887: the in-scope keys that aurora_lint 1861 was expected to add, re-derived from the official sweep (realworld runs 316 and 317, aurora-lint f330e308, scope pinned from benchmark_repos.json). Each key read by hand at source in the pinned checkout (ADR-0001, rule as written). All five are present in run 316. Three already carry labels on main and are not re-added: mosquitto lib/net_mosq.c:582 API00-C (FP), sqlite src/vacuum.c:62 and :143 MSC04-C (TP). The remaining two are labeled here: raylib src/platforms/rcore_android.c:322 DCL15-C FP (android_main needs external linkage; out_of_config, still scored) and valkey src/modules/lua/engine_lua.c:562 API00-C FP (ctx only forwarded). Counting basis: distinct (project, commit, file, line, rule) keys. No precision claim is made here. basis: merit. selection: targeted (the five keys named in the task). reviewed: 5. flipped: 0. blind_to_prior: false (the three existing labels were read to decide not to re-add them). blind_to_diagnostic: false (the finding message was read)."
 }
