@@ -1,0 +1,30 @@
+{
+  "work_item_ref": "benchmarking_db-1878",
+  "requested_by": "coordinator",
+  "adjudicating_node": "r720",
+  "aurora_lint_version": "0.5.3",
+  "aurora_lint_sha": "f330e308e4c67b36d867567257243556c9376d19",
+  "batch_id": "delta-1878-flp02-additions",
+  "adjudicator": "claude-opus-5.5",
+  "realworld_run_ids": [
+    316
+  ],
+  "recheck": null,
+  "notes": "bmdb 1878, FLP02-C half: the in-scope FLP02-C keys that official realworld run 316 (aurora-lint f330e308, the first official run after aurora_lint 1560 part 2b) reports and run 314 (309664b2, the last full sweep before it) did not. All 9 are the additions the task names, all in scope and unlabeled, each read by hand at source in the pinned checkout (ADR-0001, rule as written). The bar is the ruled form in rule-disposition.md: a floating ==/!= with both operands floating-point, exact zero excepted, which is also why date.c:879 and window.c:225 (one integer operand) are correct removals. Removed keys, run 314 -> 316: 68 (49 FP-labeled in scope, 2 FP-labeled out of scope, 17 unlabeled in scope); no TP label stops firing. The 17 unlabeled removals (valkey) are integer, pointer or relational-result comparisons, so none is a lost finding. The INT02-C half is held until aurora_lint 1561 lands. Counting basis: distinct (project, commit, file, line, rule) keys. No precision claim is made here.",
+  "submitted_at": "2026-09-29T21:19:40Z",
+  "row_count": 9,
+  "projects": [
+    "sqlite",
+    "valkey"
+  ],
+  "codebase_commits": {
+    "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af",
+    "valkey": "7f1dffedff6de73058b2c2a389422b6ecd56c8fb"
+  },
+  "rules": [
+    "FLP02-C"
+  ],
+  "verdicts": {
+    "TP": 9
+  }
+}
