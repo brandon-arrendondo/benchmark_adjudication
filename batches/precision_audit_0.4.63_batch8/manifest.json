@@ -12,7 +12,7 @@
     "raylib": "962bbfc6bfbd7a5acd08e21314fcfa161003a589"
   },
   "submitted_at": "2026-06-23T18:27:05.631574",
-  "row_count": 426,
+  "row_count": 418,
   "rules": [
     "API00-C",
     "API02-C",
@@ -123,6 +123,21 @@
         "raylib src/rlgl.h:3820 API00-C"
       ],
       "note": "verdict corrected FP -> TP by bmdb 1553 (raylib): the FP rested only on in-tree callers of a non-static library function (ADR-0011 742a1571); see that batch manifest notes"
+    },
+    {
+      "by": "dcl13-ruling-1890-p01",
+      "count": 8,
+      "keys": [
+        "raylib src/raudio.c:2376 DCL13-C",
+        "raylib src/raudio.c:2480 DCL13-C",
+        "raylib src/raudio.c:2560 DCL13-C",
+        "raylib src/raudio.c:2658 DCL13-C",
+        "raylib src/raudio.c:2700 DCL13-C",
+        "raylib src/raudio.c:2928 DCL13-C",
+        "raylib src/rlgl.h:3211 DCL13-C",
+        "raylib src/rlgl.h:4615 DCL13-C"
+      ],
+      "note": "DCL13-C re-derived under Brandon 2026-09-29 DCL13-C option (c) (a signature, callback or function-pointer-slot basis is not an exception); see dcl13-ruling-1890-p01's manifest notes"
     }
   ]
 }
