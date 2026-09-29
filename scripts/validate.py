@@ -17,6 +17,11 @@ Checks:
   - every manifest's declared row_count matches the number of CSV rows
     actually carrying that batch_id as their source.
   - every manifest's required fields are present and SHA-shaped.
+  - every manifest submitted on or after RECHECK_REQUIRED_FROM states what it
+    re-checked: a `recheck` block, or `"recheck": null` for a batch of new
+    labels only; a manifest with a `corrections` block needs a real one. The
+    block's fields are checked for shape and for consistency with the
+    manifest's own counts (see check_recheck).
   - every data/*/adjudication.csv is LF-terminated with no CR byte anywhere
     (see check_line_terminators for why this is an error, not a warning).
   - no free-text field (reason/provenance/confidence) contains a
@@ -178,6 +183,120 @@ MANIFEST_REQUIRED_FIELDS = [
 ]
 
 
+# Re-check metadata (benchmarking_db 1889). Before this, what a correction
+# batch re-checked lived only in free-text notes, so a flip rate needed a hand
+# reading of every manifest, and about 300 flips have no rate because no note
+# says how many labels were looked at. Manifests submitted before the cutoff
+# are left as they are.
+RECHECK_REQUIRED_FROM = "2026-09-30"
+RECHECK_BASES = ("ruling", "standard", "merit", "tool", "conflict")
+RECHECK_SELECTIONS = ("census", "sample", "tool-prompted", "targeted")
+RECHECK_FIELDS = ("basis", "selection", "reviewed", "flipped",
+                  "blind_to_prior_verdict", "blind_to_diagnostic")
+BLIND_SLICE_FIELDS = ("seed", "reviewed", "disagreed",
+                      "blind_to_prior_verdict", "blind_to_diagnostic")
+
+
+def _count(value) -> bool:
+    return isinstance(value, int) and not isinstance(value, bool) and value >= 0
+
+
+def check_recheck(manifest: dict, where: str) -> list[str]:
+    """Errors in a manifest's `recheck` block, or in its absence.
+
+    The block says what a correction or re-check batch looked at, so a flip
+    rate is flipped / reviewed with nothing read out of the notes:
+
+      basis      ruling | standard | merit | tool | conflict -- one per batch,
+                 because a ruling relabel and a merit re-read measure
+                 different things and a pooled rate reads as neither
+      ruling     for basis ruling or standard: the decision it applies
+      selection  census | sample | tool-prompted | targeted; a sample
+                 also names its `seed`
+      reviewed   labels re-checked, the ones kept as well as the ones changed
+      flipped    labels whose verdict changed
+      blind_to_prior_verdict, blind_to_diagnostic   what the reader could see
+      blind_slice  optional: {seed, reviewed, disagreed,
+                 blind_to_prior_verdict, blind_to_diagnostic} for the small
+                 blind re-label the batch carried alongside
+
+    Whether `flipped` matches the rows the batch actually changed needs the
+    history, which this script does not read; benchmarking_db's
+    oracle_flip_rates.py checks it and refuses a mismatch.
+    """
+    errors: list[str] = []
+    submitted = str(manifest.get("submitted_at") or "")
+    due = submitted[:10] >= RECHECK_REQUIRED_FROM
+    if "recheck" not in manifest:
+        if due:
+            errors.append(f"{where}: missing 'recheck' (a re-check block, or null for a "
+                          f"batch of new labels only; required from {RECHECK_REQUIRED_FROM})")
+        return errors
+    block = manifest["recheck"]
+    if block is None:
+        if "corrections" in manifest:
+            errors.append(f"{where}: has 'corrections' but 'recheck' is null; a correction "
+                          f"batch states what it re-checked")
+        return errors
+    if not isinstance(block, dict):
+        return [f"{where}: 'recheck' must be an object or null"]
+
+    for field in RECHECK_FIELDS:
+        if field not in block:
+            errors.append(f"{where}: recheck is missing '{field}'")
+    basis, selection = block.get("basis"), block.get("selection")
+    if "basis" in block and basis not in RECHECK_BASES:
+        errors.append(f"{where}: recheck.basis {basis!r} is not one of {', '.join(RECHECK_BASES)}")
+    if basis in ("ruling", "standard") and not str(block.get("ruling") or "").strip():
+        errors.append(f"{where}: recheck.basis {basis} needs 'ruling' naming the decision "
+                      f"it applies")
+    if "selection" in block and selection not in RECHECK_SELECTIONS:
+        errors.append(f"{where}: recheck.selection {selection!r} is not one of "
+                      f"{', '.join(RECHECK_SELECTIONS)}")
+    if selection == "sample" and "seed" not in block:
+        errors.append(f"{where}: recheck.selection sample needs its 'seed'")
+    for field in ("reviewed", "flipped"):
+        if field in block and not _count(block[field]):
+            errors.append(f"{where}: recheck.{field} must be a non-negative integer")
+    for field in ("blind_to_prior_verdict", "blind_to_diagnostic"):
+        if field in block and not isinstance(block[field], bool):
+            errors.append(f"{where}: recheck.{field} must be true or false")
+
+    reviewed, flipped = block.get("reviewed"), block.get("flipped")
+    if _count(reviewed) and _count(flipped):
+        if flipped > reviewed:
+            errors.append(f"{where}: recheck.flipped {flipped} exceeds reviewed {reviewed}")
+        row_count = manifest.get("row_count")
+        if _count(row_count) and flipped > row_count:
+            errors.append(f"{where}: recheck.flipped {flipped} exceeds row_count {row_count}; "
+                          f"a flipped row carries this batch as its source")
+        corrections = manifest.get("corrections")
+        if isinstance(corrections, dict) and all(_count(v) for v in corrections.values()):
+            if sum(corrections.values()) != flipped:
+                errors.append(f"{where}: recheck.flipped {flipped} does not equal the "
+                              f"corrections total {sum(corrections.values())}")
+
+    blind = block.get("blind_slice")
+    if blind is not None:
+        if not isinstance(blind, dict):
+            errors.append(f"{where}: recheck.blind_slice must be an object")
+        else:
+            for field in BLIND_SLICE_FIELDS:
+                if field not in blind:
+                    errors.append(f"{where}: recheck.blind_slice is missing '{field}'")
+            for field in ("reviewed", "disagreed"):
+                if field in blind and not _count(blind[field]):
+                    errors.append(f"{where}: recheck.blind_slice.{field} must be a "
+                                  f"non-negative integer")
+            for field in ("blind_to_prior_verdict", "blind_to_diagnostic"):
+                if field in blind and not isinstance(blind[field], bool):
+                    errors.append(f"{where}: recheck.blind_slice.{field} must be true or false")
+            if (_count(blind.get("reviewed")) and _count(blind.get("disagreed"))
+                    and blind["disagreed"] > blind["reviewed"]):
+                errors.append(f"{where}: recheck.blind_slice.disagreed exceeds its reviewed")
+    return errors
+
+
 def fail(errors: list[str]) -> None:
     print(f"validate.py: {len(errors)} error(s):", file=sys.stderr)
     for e in errors:
@@ -200,6 +319,7 @@ def load_manifests(errors: list[str]) -> dict[str, dict]:
         for field in MANIFEST_REQUIRED_FIELDS:
             if field not in manifest:
                 errors.append(f"{manifest_path}: missing required field '{field}'")
+        errors.extend(check_recheck(manifest, str(manifest_path)))
 
         batch_id = manifest.get("batch_id")
         if batch_id and batch_id != batch_dir_name:
