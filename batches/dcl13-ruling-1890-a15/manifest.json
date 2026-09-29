@@ -28,7 +28,7 @@
   },
   "notes": "A RULING RELABEL. Batch a15 of the DCL13-C tier-A census (sqlite rows from src/notify.c through src/window.c). Brandon's 2026-09-29 DCL13-C rulings: a signature, callback or function-pointer-slot constraint is not an exception (option (c)): a function whose non-const pointer parameter is fixed by a function-pointer slot it is visibly assigned to is TP with provenance tag `oracle-tag: interface-fixed signature: fn-pointer slot` (the relaxed profile scores it FP); const is shallow as in C, so a write through a pointer member of *p is not a write to *p, while an array or nested-struct member write is. Each row was re-derived by reading the pinned source: FP only where the function writes *p directly, through a local alias, by passing p (or &p->m, or an array member) to a function or macro whose parameter is pointer-to-non-const or cannot be resolved, or by storing p itself into an object that outlives the call; otherwise TP, tagged where the function's name is assigned to a function-pointer object, table entry or function-pointer parameter in the pinned source. A key with several flagged parameters is TP if at least one is unmodified; its reason names each. Keys aurora-lint 44af4205 no longer reports at the line were relabeled on the parameter the prior reason discussed (provenance says so). 3 row(s) were left out and listed for the coordinator (not a parameter of a function definition, or a pointee of function type). 51 TP rows carry the tag; 33 rows stay FP, their reasons restated on a write basis. Blind slice: 20 seeded rows (seed 18915) re-labeled by a fresh reader without the prior verdict or reason, 1 of them left out as above; 0 of 19 disagreed. Counting basis: distinct (project, commit, file, line, rule) keys. No precision claim is made here. basis: ruling. selection: census (every in-scope DCL13-C FP row whose recorded reason matches the tier-A signature/callback/slot predicate; this batch covers sqlite rows from src/notify.c through src/window.c). reviewed: 109. flipped: 76 (FP -> TP). blind_to_prior: false. blind_to_diagnostic: false.",
   "submitted_at": "2026-09-29T22:14:11Z",
-  "row_count": 109,
+  "row_count": 103,
   "projects": [
     "sqlite"
   ],
@@ -41,5 +41,20 @@
   "verdicts": {
     "FP": 33,
     "TP": 76
-  }
+  },
+  "superseded_rows": [
+    {
+      "by": "dcl13-ruling-1890-c01",
+      "count": 6,
+      "keys": [
+        "sqlite src/select.c:1920 DCL13-C",
+        "sqlite src/trigger.c:999 DCL13-C",
+        "sqlite src/vdbeaux.c:5494 DCL13-C",
+        "sqlite src/vdbeaux.c:5495 DCL13-C",
+        "sqlite src/window.c:860 DCL13-C",
+        "sqlite src/window.c:861 DCL13-C"
+      ],
+      "note": "DCL13-C verdict corrected TP -> FP: the parameter is stored into a local struct member declared as a non-const pointer; see dcl13-ruling-1890-c01's manifest notes"
+    }
+  ]
 }

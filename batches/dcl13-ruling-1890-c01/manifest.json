@@ -1,0 +1,36 @@
+{
+  "work_item_ref": "benchmarking_db-1890",
+  "requested_by": "coordinator",
+  "adjudicating_node": "mini",
+  "aurora_lint_version": "0.5.3",
+  "aurora_lint_sha": "44af4205ca0a48b328c33aafa1a61af7020d4b4c",
+  "batch_id": "dcl13-ruling-1890-c01",
+  "adjudicator": "claude-opus-5.5",
+  "corrections": {
+    "TP_to_FP": 10
+  },
+  "recheck": {
+    "basis": "ruling",
+    "ruling": "Brandon 2026-09-29 DCL13-C test 'would const compile without changing anything outside the function', as applied by the coordinator 2026-09-29: a parameter stored into a local struct member declared as a non-const pointer is FP",
+    "selection": "targeted",
+    "reviewed": 10,
+    "flipped": 10,
+    "blind_to_prior_verdict": false,
+    "blind_to_diagnostic": false
+  },
+  "notes": "A RULING CORRECTION to batches dcl13-ruling-1890-a14 and dcl13-ruling-1890-a15. Those batches labeled TP ten DCL13-C rows where the pointer parameter is stored into a member of a local struct (a Walker, NameContext, PreUpdate, WindowRewrite, IntegrityCk, PrintfArguments or Expr) and nothing writes through it. Under Brandon's 2026-09-29 DCL13-C test, would const on the parameter compile without changing anything outside the function, a store of a const-qualified pointer into a struct member declared as a non-const pointer does not compile without changing that struct type, which is an interface beyond the function; a plain local pointer variable could take const along with the parameter and stays TP unless something writes through it. Each of the ten members was checked in the pinned source and is declared as a non-const pointer, so each row is FP on that member-store basis, with its reason restated. The selection is every row in the 1890 batches whose TP rested on a local struct member holding the parameter. No blind slice: batch under 50 rows. Counting basis: distinct (project, commit, file, line, rule) keys. No precision claim is made here. basis: ruling. selection: targeted (every 1890 row labeled TP on a local-struct-member store). reviewed: 10. flipped: 10 (TP -> FP). blind_to_prior: false. blind_to_diagnostic: false.",
+  "submitted_at": "2026-09-29T22:28:07Z",
+  "row_count": 10,
+  "projects": [
+    "sqlite"
+  ],
+  "codebase_commits": {
+    "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
+  },
+  "rules": [
+    "DCL13-C"
+  ],
+  "verdicts": {
+    "FP": 10
+  }
+}
