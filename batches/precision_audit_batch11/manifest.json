@@ -12,7 +12,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-06-14T16:47:13.233669+00:00",
-  "row_count": 1153,
+  "row_count": 1123,
   "rules": [
     "API00-C",
     "API02-C",
@@ -176,6 +176,43 @@
         "sqlite src/alter.c:829 DCL13-C"
       ],
       "note": "DCL13-C re-derived under Brandon 2026-09-29 DCL13-C option (c) (a signature, callback or function-pointer-slot basis is not an exception); see dcl13-ruling-1890-a13's manifest notes"
+    },
+    {
+      "by": "dcl13-ruling-1890-a15",
+      "count": 30,
+      "keys": [
+        "sqlite src/os_kv.c:1004 DCL13-C",
+        "sqlite src/os_kv.c:1012 DCL13-C",
+        "sqlite src/os_kv.c:1021 DCL13-C",
+        "sqlite src/os_kv.c:1028 DCL13-C",
+        "sqlite src/os_kv.c:1036 DCL13-C",
+        "sqlite src/os_kv.c:521 DCL13-C",
+        "sqlite src/os_kv.c:528 DCL13-C",
+        "sqlite src/os_kv.c:776 DCL13-C",
+        "sqlite src/os_kv.c:823 DCL13-C",
+        "sqlite src/os_kv.c:832 DCL13-C",
+        "sqlite src/os_kv.c:836 DCL13-C",
+        "sqlite src/os_kv.c:853 DCL13-C",
+        "sqlite src/os_kv.c:860 DCL13-C",
+        "sqlite src/os_kv.c:870 DCL13-C",
+        "sqlite src/os_kv.c:874 DCL13-C",
+        "sqlite src/os_kv.c:913 DCL13-C",
+        "sqlite src/os_kv.c:932 DCL13-C",
+        "sqlite src/os_kv.c:984 DCL13-C",
+        "sqlite src/pragma.c:2805 DCL13-C",
+        "sqlite src/pragma.c:2878 DCL13-C",
+        "sqlite src/pragma.c:2916 DCL13-C",
+        "sqlite src/pragma.c:2968 DCL13-C",
+        "sqlite src/pragma.c:3015 DCL13-C",
+        "sqlite src/pragma.c:3024 DCL13-C",
+        "sqlite src/pragma.c:334 DCL13-C",
+        "sqlite src/prepare.c:24 DCL13-C",
+        "sqlite src/trigger.c:1233 DCL13-C",
+        "sqlite src/trigger.c:999 DCL13-C",
+        "sqlite src/vtab.c:43 DCL13-C",
+        "sqlite src/whereexpr.c:1743 DCL13-C"
+      ],
+      "note": "DCL13-C re-derived under Brandon 2026-09-29 DCL13-C option (c) (a signature, callback or function-pointer-slot basis is not an exception); see dcl13-ruling-1890-a15's manifest notes"
     }
   ]
 }

@@ -12,7 +12,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-06-12",
-  "row_count": 2975,
+  "row_count": 2955,
   "rules": [
     "API00-C",
     "API02-C",
@@ -341,6 +341,33 @@
         "sqlite src/json.c:5424 DCL13-C"
       ],
       "note": "DCL13-C re-derived under Brandon 2026-09-29 DCL13-C option (c) (a signature, callback or function-pointer-slot basis is not an exception); see dcl13-ruling-1890-a14's manifest notes"
+    },
+    {
+      "by": "dcl13-ruling-1890-a15",
+      "count": 20,
+      "keys": [
+        "sqlite src/select.c:128 DCL13-C",
+        "sqlite src/select.c:129 DCL13-C",
+        "sqlite src/select.c:130 DCL13-C",
+        "sqlite src/select.c:131 DCL13-C",
+        "sqlite src/select.c:132 DCL13-C",
+        "sqlite src/select.c:133 DCL13-C",
+        "sqlite src/select.c:135 DCL13-C",
+        "sqlite src/select.c:1920 DCL13-C",
+        "sqlite src/select.c:3962 DCL13-C",
+        "sqlite src/select.c:4892 DCL13-C",
+        "sqlite src/select.c:4964 DCL13-C",
+        "sqlite src/select.c:5531 DCL13-C",
+        "sqlite src/select.c:5875 DCL13-C",
+        "sqlite src/select.c:6417 DCL13-C",
+        "sqlite src/select.c:7494 DCL13-C",
+        "sqlite src/vdbeaux.c:2151 DCL13-C",
+        "sqlite src/vdbeaux.c:4219 DCL13-C",
+        "sqlite src/vdbeaux.c:5438 DCL13-C",
+        "sqlite src/vdbeaux.c:5494 DCL13-C",
+        "sqlite src/vdbeaux.c:5495 DCL13-C"
+      ],
+      "note": "DCL13-C re-derived under Brandon 2026-09-29 DCL13-C option (c) (a signature, callback or function-pointer-slot basis is not an exception); see dcl13-ruling-1890-a15's manifest notes"
     }
   ]
 }
