@@ -12,7 +12,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-06-12T08:49:18.490420",
-  "row_count": 872,
+  "row_count": 859,
   "rules": [
     "API00-C",
     "ARR00-C",
@@ -99,6 +99,26 @@
         "sqlite ext/fts5/fts5_index.c:1166 INT32-C"
       ],
       "note": "restated or settled by Brandon's priority-queue gavel verdict (bmdb 1341); see gavel-pq-1341-2026-09-29's manifest"
+    },
+    {
+      "by": "dcl13-ruling-1890-a11",
+      "count": 13,
+      "keys": [
+        "sqlite ext/fts5/fts5_index.c:3735 DCL13-C",
+        "sqlite ext/fts5/fts5_index.c:5964 DCL13-C",
+        "sqlite ext/fts5/fts5_index.c:6072 DCL13-C",
+        "sqlite ext/fts5/fts5_index.c:6591 DCL13-C",
+        "sqlite ext/fts5/fts5_index.c:8981 DCL13-C",
+        "sqlite ext/fts5/fts5_index.c:9216 DCL13-C",
+        "sqlite ext/fts5/fts5_index.c:9266 DCL13-C",
+        "sqlite ext/fts5/fts5_index.c:9269 DCL13-C",
+        "sqlite ext/fts5/fts5_index.c:9293 DCL13-C",
+        "sqlite ext/fts5/fts5_index.c:9326 DCL13-C",
+        "sqlite ext/fts5/fts5_index.c:9372 DCL13-C",
+        "sqlite ext/fts5/fts5_index.c:9391 DCL13-C",
+        "sqlite ext/fts5/fts5_index.c:9446 DCL13-C"
+      ],
+      "note": "DCL13-C re-derived under Brandon 2026-09-29 DCL13-C option (c) (a signature, callback or function-pointer-slot basis is not an exception); see dcl13-ruling-1890-a11's manifest notes"
     }
   ]
 }

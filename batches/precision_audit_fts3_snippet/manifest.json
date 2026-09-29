@@ -12,7 +12,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-06-12T10:15:42.226172",
-  "row_count": 162,
+  "row_count": 161,
   "rules": [
     "API00-C",
     "API05-C",
@@ -51,6 +51,14 @@
         "sqlite ext/fts3/fts3_snippet.c:546 INT30-C"
       ],
       "note": "relabeled by Brandon's blind-sample gavel verdict (bmdb 1317); see gavel-bs-1317-2026-09-29's manifest"
+    },
+    {
+      "by": "dcl13-ruling-1890-a11",
+      "count": 1,
+      "keys": [
+        "sqlite ext/fts3/fts3_snippet.c:155 DCL13-C"
+      ],
+      "note": "DCL13-C re-derived under Brandon 2026-09-29 DCL13-C option (c) (a signature, callback or function-pointer-slot basis is not an exception); see dcl13-ruling-1890-a11's manifest notes"
     }
   ]
 }

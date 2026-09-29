@@ -12,7 +12,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-06-12",
-  "row_count": 3046,
+  "row_count": 3033,
   "rules": [
     "API00-C",
     "API02-C",
@@ -249,6 +249,26 @@
         "sqlite ext/misc/regexp.c:460 DCL13-C"
       ],
       "note": "DCL13-C re-derived under Brandon 2026-09-29 DCL13-C option (c) (a signature, callback or function-pointer-slot basis is not an exception); see dcl13-ruling-1890-a12's manifest notes"
+    },
+    {
+      "by": "dcl13-ruling-1890-a11",
+      "count": 13,
+      "keys": [
+        "sqlite ext/misc/csv.c:492 DCL13-C",
+        "sqlite ext/misc/csv.c:775 DCL13-C",
+        "sqlite ext/misc/csv.c:800 DCL13-C",
+        "sqlite ext/misc/csv.c:812 DCL13-C",
+        "sqlite ext/misc/csv.c:843 DCL13-C",
+        "sqlite ext/misc/csv.c:915 DCL13-C",
+        "sqlite ext/misc/decimal.c:702 DCL13-C",
+        "sqlite ext/misc/decimal.c:756 DCL13-C",
+        "sqlite ext/misc/decimal.c:769 DCL13-C",
+        "sqlite ext/misc/decimal.c:791 DCL13-C",
+        "sqlite ext/misc/decimal.c:817 DCL13-C",
+        "sqlite ext/misc/decimal.c:850 DCL13-C",
+        "sqlite ext/misc/decimal.c:879 DCL13-C"
+      ],
+      "note": "DCL13-C re-derived under Brandon 2026-09-29 DCL13-C option (c) (a signature, callback or function-pointer-slot basis is not an exception); see dcl13-ruling-1890-a11's manifest notes"
     }
   ]
 }

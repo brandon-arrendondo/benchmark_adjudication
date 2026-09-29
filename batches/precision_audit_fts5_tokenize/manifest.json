@@ -12,7 +12,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-06-12T17:17:28.235699",
-  "row_count": 279,
+  "row_count": 274,
   "rules": [
     "API01-C",
     "ARR00-C",
@@ -51,5 +51,19 @@
     "STR31-C",
     "STR34-C"
   ],
-  "notes": "Reconstructed during benchmark_adjudication's initial population (2026-09-16) from benchmarking_db's ground_truth.source='precision_audit_fts5_tokenize'. row_count/projects/codebase_commits/rules were derived from the rows themselves, not declared at adjudication time. aurora_lint_version/aurora_lint_sha are unknown for legacy data -- never recorded per-row."
+  "notes": "Reconstructed during benchmark_adjudication's initial population (2026-09-16) from benchmarking_db's ground_truth.source='precision_audit_fts5_tokenize'. row_count/projects/codebase_commits/rules were derived from the rows themselves, not declared at adjudication time. aurora_lint_version/aurora_lint_sha are unknown for legacy data -- never recorded per-row.",
+  "superseded_rows": [
+    {
+      "by": "dcl13-ruling-1890-a11",
+      "count": 5,
+      "keys": [
+        "sqlite ext/fts5/fts5_tokenize.c:118 DCL13-C",
+        "sqlite ext/fts5/fts5_tokenize.c:1182 DCL13-C",
+        "sqlite ext/fts5/fts5_tokenize.c:1251 DCL13-C",
+        "sqlite ext/fts5/fts5_tokenize.c:1252 DCL13-C",
+        "sqlite ext/fts5/fts5_tokenize.c:1344 DCL13-C"
+      ],
+      "note": "DCL13-C re-derived under Brandon 2026-09-29 DCL13-C option (c) (a signature, callback or function-pointer-slot basis is not an exception); see dcl13-ruling-1890-a11's manifest notes"
+    }
+  ]
 }

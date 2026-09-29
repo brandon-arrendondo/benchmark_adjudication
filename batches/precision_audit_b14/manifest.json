@@ -12,7 +12,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-06-14T15:07:21.887995",
-  "row_count": 1052,
+  "row_count": 1046,
   "rules": [
     "API00-C",
     "ARR00-C",
@@ -217,6 +217,19 @@
         "sqlite ext/misc/totype.c:445 DCL13-C"
       ],
       "note": "DCL13-C re-derived under Brandon 2026-09-29 DCL13-C option (c) (a signature, callback or function-pointer-slot basis is not an exception); see dcl13-ruling-1890-a12's manifest notes"
+    },
+    {
+      "by": "dcl13-ruling-1890-a11",
+      "count": 6,
+      "keys": [
+        "sqlite ext/fts5/fts5_aux.c:238 DCL13-C",
+        "sqlite ext/fts5/fts5_aux.c:423 DCL13-C",
+        "sqlite ext/fts5/fts5_aux.c:698 DCL13-C",
+        "sqlite ext/fts5/fts5_aux.c:757 DCL13-C",
+        "sqlite ext/intck/sqlite3intck.c:452 DCL13-C",
+        "sqlite ext/misc/dbdump.c:381 DCL13-C"
+      ],
+      "note": "DCL13-C re-derived under Brandon 2026-09-29 DCL13-C option (c) (a signature, callback or function-pointer-slot basis is not an exception); see dcl13-ruling-1890-a11's manifest notes"
     }
   ]
 }

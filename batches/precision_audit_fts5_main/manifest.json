@@ -12,7 +12,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-06-12T17:03:11.499738",
-  "row_count": 262,
+  "row_count": 247,
   "rules": [
     "API00-C",
     "ARR00-C",
@@ -56,6 +56,28 @@
         "sqlite ext/fts5/fts5_main.c:3505 EXP34-C"
       ],
       "note": "verdict corrected FP -> TP by bmdb 1553 (sqlite): the FP rested only on in-tree callers of a non-static library function (ADR-0011 742a1571); see that batch manifest notes"
+    },
+    {
+      "by": "dcl13-ruling-1890-a11",
+      "count": 15,
+      "keys": [
+        "sqlite ext/fts5/fts5_main.c:1430 DCL13-C",
+        "sqlite ext/fts5/fts5_main.c:2139 DCL13-C",
+        "sqlite ext/fts5/fts5_main.c:2576 DCL13-C",
+        "sqlite ext/fts5/fts5_main.c:2834 DCL13-C",
+        "sqlite ext/fts5/fts5_main.c:2871 DCL13-C",
+        "sqlite ext/fts5/fts5_main.c:3118 DCL13-C",
+        "sqlite ext/fts5/fts5_main.c:3190 DCL13-C",
+        "sqlite ext/fts5/fts5_main.c:3240 DCL13-C",
+        "sqlite ext/fts5/fts5_main.c:3286 DCL13-C",
+        "sqlite ext/fts5/fts5_main.c:3336 DCL13-C",
+        "sqlite ext/fts5/fts5_main.c:3351 DCL13-C",
+        "sqlite ext/fts5/fts5_main.c:3401 DCL13-C",
+        "sqlite ext/fts5/fts5_main.c:3582 DCL13-C",
+        "sqlite ext/fts5/fts5_main.c:3622 DCL13-C",
+        "sqlite ext/fts5/fts5_main.c:3672 DCL13-C"
+      ],
+      "note": "DCL13-C re-derived under Brandon 2026-09-29 DCL13-C option (c) (a signature, callback or function-pointer-slot basis is not an exception); see dcl13-ruling-1890-a11's manifest notes"
     }
   ]
 }
