@@ -1,0 +1,38 @@
+{
+  "work_item_ref": "benchmarking_db-1887",
+  "requested_by": "coordinator",
+  "adjudicating_node": "r720",
+  "aurora_lint_version": "0.5.3",
+  "aurora_lint_sha": "f330e308e4c67b36d867567257243556c9376d19",
+  "batch_id": "correction-api00c-net-mosq-582-1887",
+  "adjudicator": "claude-opus-5.5",
+  "realworld_run_ids": [
+    316
+  ],
+  "corrections": {
+    "FP_restated": 1
+  },
+  "recheck": {
+    "basis": "merit",
+    "selection": "targeted",
+    "reviewed": 1,
+    "flipped": 0,
+    "blind_to_prior_verdict": false,
+    "blind_to_diagnostic": false
+  },
+  "notes": "bmdb 1887 follow-up: mosquitto lib/net_mosq.c:582 API00-C, found while checking the keys official run 316 adds. The finding names the parameter mosq, but the recorded FP reason addressed msg (its NULL fallback at line 586). The FP verdict holds on the plain-f(p) basis for mosq, so only the reason is restated, in place. Read by hand at source in the pinned checkout. No blind slice: batch under 50 rows. Counting basis: distinct (project, commit, file, line, rule) keys. No precision claim is made here.",
+  "submitted_at": "2026-09-29T21:06:01Z",
+  "row_count": 1,
+  "projects": [
+    "mosquitto"
+  ],
+  "codebase_commits": {
+    "mosquitto": "d3ee5c5ca62c0fa4983308c6fff558ee978e878c"
+  },
+  "rules": [
+    "API00-C"
+  ],
+  "verdicts": {
+    "FP": 1
+  }
+}

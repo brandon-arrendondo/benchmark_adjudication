@@ -12,7 +12,7 @@
     "mosquitto": "d3ee5c5ca62c0fa4983308c6fff558ee978e878c"
   },
   "submitted_at": "2026-06-16T15:18:57.383467",
-  "row_count": 2594,
+  "row_count": 2593,
   "rules": [
     "API00-C",
     "API02-C",
@@ -199,6 +199,14 @@
         "mosquitto src/mux_kqueue.c:45 CON34-C"
       ],
       "note": "verdict corrected FP -> TP by the bmdb 1553 stands pass (mosquitto); see that batch manifest notes"
+    },
+    {
+      "by": "correction-api00c-net-mosq-582-1887",
+      "count": 1,
+      "keys": [
+        "mosquitto lib/net_mosq.c:582 API00-C"
+      ],
+      "note": "same FP verdict, reason restated: the finding names mosq, and the prior reason addressed msg; see correction-api00c-net-mosq-582-1887's manifest"
     }
   ]
 }
