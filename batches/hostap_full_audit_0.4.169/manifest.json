@@ -12,7 +12,7 @@
     "hostap": "dcee60436390dd34731560657c4257c3b4c839a6"
   },
   "submitted_at": "2026-07-28",
-  "row_count": 29703,
+  "row_count": 29667,
   "rules": [
     "API00-C",
     "API01-C",
@@ -1772,6 +1772,49 @@
         "hostap wpa_supplicant/wpa_cli.c:968 DCL13-C"
       ],
       "note": "DCL13-C re-derived under Brandon 2026-09-29 DCL13-C option (c) (a signature, callback or function-pointer-slot basis is not an exception); see dcl13-ruling-1890-a09's manifest notes"
+    },
+    {
+      "by": "dcl13-ruling-1890-a10",
+      "count": 36,
+      "keys": [
+        "hostap wpa_supplicant/wpa_priv.c:1109 DCL13-C",
+        "hostap wpa_supplicant/wpa_priv.c:1169 DCL13-C",
+        "hostap wpa_supplicant/wpa_priv.c:452 DCL13-C",
+        "hostap wpa_supplicant/wpa_priv.c:637 DCL13-C",
+        "hostap wpa_supplicant/wpa_supplicant.c:1039 DCL13-C",
+        "hostap wpa_supplicant/wpa_supplicant.c:223 DCL13-C",
+        "hostap wpa_supplicant/wpa_supplicant.c:557 DCL13-C",
+        "hostap wpa_supplicant/wpa_supplicant.c:596 DCL13-C",
+        "hostap wpa_supplicant/wpa_supplicant.c:6960 DCL13-C",
+        "hostap wpa_supplicant/wpa_supplicant.c:6969 DCL13-C",
+        "hostap wpa_supplicant/wpa_supplicant.c:6987 DCL13-C",
+        "hostap wpa_supplicant/wpa_supplicant.c:7021 DCL13-C",
+        "hostap wpa_supplicant/wpa_supplicant.c:7045 DCL13-C",
+        "hostap wpa_supplicant/wpa_supplicant.c:7059 DCL13-C",
+        "hostap wpa_supplicant/wpa_supplicant.c:7060 DCL13-C",
+        "hostap wpa_supplicant/wpa_supplicant.c:7322 DCL13-C",
+        "hostap wpa_supplicant/wpa_supplicant.c:7665 DCL13-C",
+        "hostap wpa_supplicant/wpa_supplicant.c:8480 DCL13-C",
+        "hostap wpa_supplicant/wpa_supplicant.c:8495 DCL13-C",
+        "hostap wpa_supplicant/wpa_supplicant.c:9842 DCL13-C",
+        "hostap wpa_supplicant/wpas_glue.c:1148 DCL13-C",
+        "hostap wpa_supplicant/wpas_glue.c:1186 DCL13-C",
+        "hostap wpa_supplicant/wpas_glue.c:1409 DCL13-C",
+        "hostap wpa_supplicant/wpas_glue.c:269 DCL13-C",
+        "hostap wpa_supplicant/wpas_glue.c:36 DCL13-C",
+        "hostap wpa_supplicant/wpas_glue.c:52 DCL13-C",
+        "hostap wpa_supplicant/wpas_glue.c:776 DCL13-C",
+        "hostap wpa_supplicant/wps_supplicant.c:1453 DCL13-C",
+        "hostap wpa_supplicant/wps_supplicant.c:1475 DCL13-C",
+        "hostap wpa_supplicant/wps_supplicant.c:1496 DCL13-C",
+        "hostap wpa_supplicant/wps_supplicant.c:2239 DCL13-C",
+        "hostap wpa_supplicant/wps_supplicant.c:63 DCL13-C",
+        "hostap wpa_supplicant/wps_supplicant.c:639 DCL13-C",
+        "hostap wpa_supplicant/wps_supplicant.c:714 DCL13-C",
+        "hostap wpa_supplicant/wps_supplicant.c:931 DCL13-C",
+        "hostap wpa_supplicant/wps_supplicant.c:998 DCL13-C"
+      ],
+      "note": "DCL13-C re-derived under Brandon 2026-09-29 DCL13-C option (c) (a signature, callback or function-pointer-slot basis is not an exception); see dcl13-ruling-1890-a10's manifest notes"
     }
   ]
 }
