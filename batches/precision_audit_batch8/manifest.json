@@ -12,7 +12,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-06-12T22:26:55.925966",
-  "row_count": 1298,
+  "row_count": 1260,
   "rules": [
     "API00-C",
     "API02-C",
@@ -171,6 +171,51 @@
         "sqlite src/vdbeapi.c:62 DCL13-C"
       ],
       "note": "DCL13-C re-derived under Brandon 2026-09-29 DCL13-C option (c) (a signature, callback or function-pointer-slot basis is not an exception); see dcl13-ruling-1890-a15's manifest notes"
+    },
+    {
+      "by": "dcl13-ruling-1890-b04",
+      "count": 38,
+      "keys": [
+        "sqlite src/main.c:2835 DCL13-C",
+        "sqlite src/util.c:104 DCL13-C",
+        "sqlite src/vdbeapi.c:1008 DCL13-C",
+        "sqlite src/vdbeapi.c:1033 DCL13-C",
+        "sqlite src/vdbeapi.c:1106 DCL13-C",
+        "sqlite src/vdbeapi.c:1169 DCL13-C",
+        "sqlite src/vdbeapi.c:1257 DCL13-C",
+        "sqlite src/vdbeapi.c:1266 DCL13-C",
+        "sqlite src/vdbeapi.c:1276 DCL13-C",
+        "sqlite src/vdbeapi.c:1326 DCL13-C",
+        "sqlite src/vdbeapi.c:1486 DCL13-C",
+        "sqlite src/vdbeapi.c:1931 DCL13-C",
+        "sqlite src/vdbeapi.c:1942 DCL13-C",
+        "sqlite src/vdbeapi.c:1953 DCL13-C",
+        "sqlite src/vdbeapi.c:2015 DCL13-C",
+        "sqlite src/vdbeapi.c:2023 DCL13-C",
+        "sqlite src/vdbeapi.c:2031 DCL13-C",
+        "sqlite src/vdbeapi.c:2074 DCL13-C",
+        "sqlite src/vdbeapi.c:2085 DCL13-C",
+        "sqlite src/vdbeapi.c:210 DCL13-C",
+        "sqlite src/vdbeapi.c:2138 DCL13-C",
+        "sqlite src/vdbeapi.c:214 DCL13-C",
+        "sqlite src/vdbeapi.c:2314 DCL13-C",
+        "sqlite src/vdbeapi.c:2337 DCL13-C",
+        "sqlite src/vdbeapi.c:2353 DCL13-C",
+        "sqlite src/vdbeapi.c:245 DCL13-C",
+        "sqlite src/vdbeapi.c:2458 DCL13-C",
+        "sqlite src/vdbeapi.c:2623 DCL13-C",
+        "sqlite src/vdbeapi.c:29 DCL13-C",
+        "sqlite src/vdbeapi.c:334 DCL13-C",
+        "sqlite src/vdbeapi.c:339 DCL13-C",
+        "sqlite src/vdbeapi.c:487 DCL13-C",
+        "sqlite src/vdbeapi.c:512 DCL13-C",
+        "sqlite src/vdbeapi.c:519 DCL13-C",
+        "sqlite src/vdbeapi.c:526 DCL13-C",
+        "sqlite src/vdbeapi.c:534 DCL13-C",
+        "sqlite src/vdbeapi.c:967 DCL13-C",
+        "sqlite src/vdbeapi.c:985 DCL13-C"
+      ],
+      "note": "DCL13-C re-derived under Brandon 2026-09-29 DCL13-C tier B (an API/ABI signature not in a function-pointer slot is strict TP; shallow const) (a signature, callback or function-pointer-slot basis is not an exception); see dcl13-ruling-1890-b04's manifest notes"
     }
   ]
 }

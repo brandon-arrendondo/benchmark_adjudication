@@ -12,7 +12,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-06-14T18:15:55.904371+00:00",
-  "row_count": 1157,
+  "row_count": 1143,
   "rules": [
     "API00-C",
     "API02-C",
@@ -374,6 +374,27 @@
         "sqlite ext/misc/vtablog.c:713 DCL13-C"
       ],
       "note": "DCL13-C re-derived under Brandon 2026-09-29 DCL13-C tier B (an API/ABI signature not in a function-pointer slot is strict TP; shallow const) (a signature, callback or function-pointer-slot basis is not an exception); see dcl13-ruling-1890-b03's manifest notes"
+    },
+    {
+      "by": "dcl13-ruling-1890-b04",
+      "count": 14,
+      "keys": [
+        "sqlite src/bitvec.c:131 DCL13-C",
+        "sqlite src/bitvec.c:295 DCL13-C",
+        "sqlite src/os.c:202 DCL13-C",
+        "sqlite src/os.c:206 DCL13-C",
+        "sqlite src/pcache.c:404 DCL13-C",
+        "sqlite src/pcache.c:832 DCL13-C",
+        "sqlite src/pcache1.c:518 DCL13-C",
+        "sqlite src/resolve.c:1474 DCL13-C",
+        "sqlite src/resolve.c:1515 DCL13-C",
+        "sqlite src/resolve.c:211 DCL13-C",
+        "sqlite src/resolve.c:230 DCL13-C",
+        "sqlite src/resolve.c:70 DCL13-C",
+        "sqlite src/resolve.c:863 DCL13-C",
+        "sqlite src/treeview.c:57 DCL13-C"
+      ],
+      "note": "DCL13-C re-derived under Brandon 2026-09-29 DCL13-C tier B (an API/ABI signature not in a function-pointer slot is strict TP; shallow const) (a signature, callback or function-pointer-slot basis is not an exception); see dcl13-ruling-1890-b04's manifest notes"
     }
   ]
 }

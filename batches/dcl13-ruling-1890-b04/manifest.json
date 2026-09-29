@@ -1,0 +1,45 @@
+{
+  "work_item_ref": "benchmarking_db-1890",
+  "requested_by": "coordinator",
+  "adjudicating_node": "mini",
+  "aurora_lint_version": "0.5.3",
+  "aurora_lint_sha": "44af4205ca0a48b328c33aafa1a61af7020d4b4c",
+  "batch_id": "dcl13-ruling-1890-b04",
+  "adjudicator": "claude-opus-5.5",
+  "corrections": {
+    "FP_restated": 13,
+    "FP_to_TP": 102
+  },
+  "recheck": {
+    "basis": "ruling",
+    "ruling": "Brandon 2026-09-29 DCL13-C tier B (an API/ABI signature not in a function-pointer slot is strict TP; shallow const)",
+    "selection": "census",
+    "reviewed": 115,
+    "flipped": 102,
+    "blind_to_prior_verdict": false,
+    "blind_to_diagnostic": false,
+    "blind_slice": {
+      "seed": 18924,
+      "reviewed": 20,
+      "disagreed": 0,
+      "blind_to_prior_verdict": true,
+      "blind_to_diagnostic": false
+    }
+  },
+  "notes": "A RULING RELABEL. Batch b04 of the DCL13-C tier-B census (tier-B rows for sqlite src/bitvec.c through src/window.c); tier B is FP rows whose recorded reason rests on a public API/ABI signature or contract with no callback wording, ruled strict TP unless the function writes *p. Brandon's 2026-09-29 DCL13-C rulings: a signature, callback or function-pointer-slot constraint is not an exception (option (c)): a function whose non-const pointer parameter is fixed by a function-pointer slot it is visibly assigned to is TP with provenance tag `oracle-tag: interface-fixed signature: fn-pointer slot` (the relaxed profile scores it FP); const is shallow as in C, so a write through a pointer member of *p is not a write to *p, while an array or nested-struct member write is. Each row was re-derived by reading the pinned source: FP only where the function writes *p directly, through a local alias, by passing p (or &p->m, or an array member) to a function or macro whose parameter is pointer-to-non-const or cannot be resolved, or by storing p itself into an object that outlives the call; otherwise TP, tagged where the function's name is assigned to a function-pointer object, table entry or function-pointer parameter in the pinned source. A key with several flagged parameters is TP if at least one is unmodified; its reason names each. Keys aurora-lint 44af4205 no longer reports at the line were relabeled on the parameter the prior reason discussed (provenance says so). 32 TP rows carry the tag; 13 rows stay FP, their reasons restated on a write basis. Blind slice: 20 seeded rows (seed 18924) re-labeled by a fresh reader without the prior verdict or reason; 0 of 20 disagreed. Counting basis: distinct (project, commit, file, line, rule) keys. No precision claim is made here. basis: ruling. selection: census (every in-scope DCL13-C FP row whose recorded reason matches the tier-B signature/API/ABI predicate and not the tier-A callback predicate; this batch covers tier-B rows for sqlite src/bitvec.c through src/window.c). reviewed: 115. flipped: 102 (FP -> TP). blind_to_prior: false. blind_to_diagnostic: false.",
+  "submitted_at": "2026-09-29T22:29:26Z",
+  "row_count": 115,
+  "projects": [
+    "sqlite"
+  ],
+  "codebase_commits": {
+    "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
+  },
+  "rules": [
+    "DCL13-C"
+  ],
+  "verdicts": {
+    "FP": 13,
+    "TP": 102
+  }
+}

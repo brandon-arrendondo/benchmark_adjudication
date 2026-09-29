@@ -12,7 +12,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-06-11T21:36:58.971834",
-  "row_count": 978,
+  "row_count": 977,
   "rules": [
     "ARR00-C",
     "ARR02-C",
@@ -95,6 +95,14 @@
         "sqlite src/vdbe.c:8906 INT00-C"
       ],
       "note": "verdict corrected FP -> TP by bmdb 1553 (sqlite): the FP rested only on in-tree callers of a non-static library function (ADR-0011 742a1571); see that batch manifest notes"
+    },
+    {
+      "by": "dcl13-ruling-1890-b04",
+      "count": 1,
+      "keys": [
+        "sqlite src/vdbe.c:143 DCL13-C"
+      ],
+      "note": "DCL13-C re-derived under Brandon 2026-09-29 DCL13-C tier B (an API/ABI signature not in a function-pointer slot is strict TP; shallow const) (a signature, callback or function-pointer-slot basis is not an exception); see dcl13-ruling-1890-b04's manifest notes"
     }
   ]
 }

@@ -12,7 +12,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-06-14T14:17:05.114719+00:00",
-  "row_count": 1326,
+  "row_count": 1306,
   "rules": [
     "API00-C",
     "API01-C",
@@ -193,6 +193,33 @@
         "sqlite src/wal.c:4527 DCL13-C"
       ],
       "note": "DCL13-C re-derived under Brandon 2026-09-29 DCL13-C option (c) (a signature, callback or function-pointer-slot basis is not an exception); see dcl13-ruling-1890-a15's manifest notes"
+    },
+    {
+      "by": "dcl13-ruling-1890-b04",
+      "count": 20,
+      "keys": [
+        "sqlite src/pager.c:1781 DCL13-C",
+        "sqlite src/pager.c:2240 DCL13-C",
+        "sqlite src/pager.c:3406 DCL13-C",
+        "sqlite src/pager.c:3836 DCL13-C",
+        "sqlite src/pager.c:3925 DCL13-C",
+        "sqlite src/pager.c:3987 DCL13-C",
+        "sqlite src/pager.c:4142 DCL13-C",
+        "sqlite src/pager.c:4239 DCL13-C",
+        "sqlite src/pager.c:6140 DCL13-C",
+        "sqlite src/pager.c:6258 DCL13-C",
+        "sqlite src/vdbesort.c:1308 DCL13-C",
+        "sqlite src/vdbesort.c:1480 DCL13-C",
+        "sqlite src/wal.c:3655 DCL13-C",
+        "sqlite src/wal.c:3795 DCL13-C",
+        "sqlite src/wal.c:3942 DCL13-C",
+        "sqlite src/wal.c:4492 DCL13-C",
+        "sqlite src/wal.c:4549 DCL13-C",
+        "sqlite src/wal.c:4573 DCL13-C",
+        "sqlite src/wal.c:4609 DCL13-C",
+        "sqlite src/wal.c:4617 DCL13-C"
+      ],
+      "note": "DCL13-C re-derived under Brandon 2026-09-29 DCL13-C tier B (an API/ABI signature not in a function-pointer slot is strict TP; shallow const) (a signature, callback or function-pointer-slot basis is not an exception); see dcl13-ruling-1890-b04's manifest notes"
     }
   ]
 }
