@@ -12,7 +12,7 @@
     "lua": "40b76de2d77e66b70a9d4bf989c3f5340919973f"
   },
   "submitted_at": "2026-06-22",
-  "row_count": 2423,
+  "row_count": 2412,
   "rules": [
     "API00-C",
     "API01-C",
@@ -204,6 +204,24 @@
         "lua ltm.c:64 INT34-C"
       ],
       "note": "restated or settled by Brandon's priority-queue gavel verdict (bmdb 1341); see gavel-pq-1341-2026-09-29's manifest"
+    },
+    {
+      "by": "dcl13-ruling-1890-a01",
+      "count": 11,
+      "keys": [
+        "lua lapi.c:1069 DCL13-C",
+        "lua lbaselib.c:371 DCL13-C",
+        "lua ldo.c:1051 DCL13-C",
+        "lua ldo.c:1129 DCL13-C",
+        "lua ldo.c:81 DCL13-C",
+        "lua ldo.c:886 DCL13-C",
+        "lua ldo.c:918 DCL13-C",
+        "lua ldump.c:288 DCL13-C",
+        "lua loadlib.c:336 DCL13-C",
+        "lua lobject.c:500 DCL13-C",
+        "lua lobject.c:513 DCL13-C"
+      ],
+      "note": "DCL13-C re-derived under Brandon 2026-09-29 DCL13-C option (c) (a signature, callback or function-pointer-slot basis is not an exception); see dcl13-ruling-1890-a01's manifest notes"
     }
   ]
 }

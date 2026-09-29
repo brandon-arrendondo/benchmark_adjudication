@@ -12,7 +12,7 @@
     "pureftpd": "cc28bff52ca28e1d122a2142bf37f2dc578f4d3e"
   },
   "submitted_at": "2026-08-25",
-  "row_count": 560,
+  "row_count": 557,
   "rules": [
     "API00-C",
     "API02-C",
@@ -155,6 +155,16 @@
         "pureftpd src/dynamic.c:105 MEM02-C"
       ],
       "note": "restated or settled by Brandon's priority-queue gavel verdict (bmdb 1341); see gavel-pq-1341-2026-09-29's manifest"
+    },
+    {
+      "by": "dcl13-ruling-1890-a01",
+      "count": 3,
+      "keys": [
+        "pureftpd src/bonjour.c:18 DCL13-C",
+        "pureftpd src/log_pam.c:81 DCL13-C",
+        "pureftpd src/tls.c:49 DCL13-C"
+      ],
+      "note": "DCL13-C re-derived under Brandon 2026-09-29 DCL13-C option (c) (a signature, callback or function-pointer-slot basis is not an exception); see dcl13-ruling-1890-a01's manifest notes"
     }
   ]
 }

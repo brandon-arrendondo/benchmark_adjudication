@@ -12,7 +12,7 @@
     "pureftpd": "cc28bff52ca28e1d122a2142bf37f2dc578f4d3e"
   },
   "submitted_at": "2026-09-15T20:13:00.348340",
-  "row_count": 139,
+  "row_count": 138,
   "rules": [
     "API04-C",
     "ARR00-C",
@@ -74,6 +74,14 @@
         "pureftpd src/pure-pw.c:1052 ERR33-C"
       ],
       "note": "ERR33-C verdict corrected FP -> TP by gavel review (bmdb 1281); see that batch's manifest notes"
+    },
+    {
+      "by": "dcl13-ruling-1890-a01",
+      "count": 1,
+      "keys": [
+        "pureftpd src/log_extauth.c:159 DCL13-C"
+      ],
+      "note": "DCL13-C re-derived under Brandon 2026-09-29 DCL13-C option (c) (a signature, callback or function-pointer-slot basis is not an exception); see dcl13-ruling-1890-a01's manifest notes"
     }
   ]
 }
