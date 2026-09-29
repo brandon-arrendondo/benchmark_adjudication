@@ -1,0 +1,33 @@
+{
+  "batch_id": "delta-1887-exclude-all-additions",
+  "work_item_ref": "benchmarking_db-1887",
+  "requested_by": "coordinator",
+  "adjudicator": "claude-opus-5.5",
+  "adjudicating_node": "r720",
+  "aurora_lint_version": "0.5.3",
+  "aurora_lint_sha": "f330e308e4c67b36d867567257243556c9376d19",
+  "projects": [
+    "raylib",
+    "valkey"
+  ],
+  "codebase_commits": {
+    "raylib": "962bbfc6bfbd7a5acd08e21314fcfa161003a589",
+    "valkey": "7f1dffedff6de73058b2c2a389422b6ecd56c8fb"
+  },
+  "submitted_at": "2026-09-29T18:15:55Z",
+  "row_count": 2,
+  "rules": [
+    "API00-C",
+    "DCL15-C"
+  ],
+  "verdicts": {
+    "FP": 2
+  },
+  "selection": "targeted",
+  "basis": "merit",
+  "realworld_run_ids": [
+    316,
+    317
+  ],
+  "notes": "bmdb 1887: the in-scope keys that aurora_lint 1861 was expected to add, re-derived from the official sweep (realworld runs 316 and 317, aurora-lint f330e308, scope pinned from benchmark_repos.json). SELECTION: targeted, the five keys named in the task, not a sample. BASIS: merit, each read by hand at source in the pinned checkout (ADR-0001, rule as written). All five are present in run 316. Three already carry labels on main and are not re-added: mosquitto lib/net_mosq.c:582 API00-C (FP), sqlite src/vacuum.c:62 and :143 MSC04-C (TP). The remaining two are labeled here: raylib src/platforms/rcore_android.c:322 DCL15-C FP (android_main needs external linkage; out_of_config, still scored) and valkey src/modules/lua/engine_lua.c:562 API00-C FP (ctx only forwarded). Counting basis: distinct (project, commit, file, line, rule) keys. No precision claim is made here."
+}
