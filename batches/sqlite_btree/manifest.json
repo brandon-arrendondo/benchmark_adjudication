@@ -12,7 +12,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-06-11T21:07:11.349757",
-  "row_count": 979,
+  "row_count": 978,
   "rules": [
     "API00-C",
     "ARR00-C",
@@ -80,6 +80,14 @@
         "sqlite src/btree.c:5699 API00-C"
       ],
       "note": "verdict corrected FP -> TP by bmdb 1553 (sqlite): the FP rested only on in-tree callers of a non-static library function (ADR-0011 742a1571); see that batch manifest notes"
+    },
+    {
+      "by": "gavel-pq-1341-2026-09-29",
+      "count": 1,
+      "keys": [
+        "sqlite src/btree.c:10196 MEM05-C"
+      ],
+      "note": "restated or settled by Brandon's priority-queue gavel verdict (bmdb 1341); see gavel-pq-1341-2026-09-29's manifest"
     }
   ]
 }

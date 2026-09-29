@@ -12,7 +12,7 @@
     "pureftpd": "cc28bff52ca28e1d122a2142bf37f2dc578f4d3e"
   },
   "submitted_at": "2026-08-25",
-  "row_count": 561,
+  "row_count": 560,
   "rules": [
     "API00-C",
     "API02-C",
@@ -147,6 +147,14 @@
         "pureftpd src/bsd-glob.c:225 API00-C"
       ],
       "note": "API00-C verdict reverted FP -> TP by bmdb 1551 (pureftpd): the FP basis did not end in a real proof under ADR-0011 d9cb04d0; see that batch manifest notes"
+    },
+    {
+      "by": "gavel-pq-1341-2026-09-29",
+      "count": 1,
+      "keys": [
+        "pureftpd src/dynamic.c:105 MEM02-C"
+      ],
+      "note": "restated or settled by Brandon's priority-queue gavel verdict (bmdb 1341); see gavel-pq-1341-2026-09-29's manifest"
     }
   ]
 }

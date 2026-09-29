@@ -12,7 +12,7 @@
     "lua": "40b76de2d77e66b70a9d4bf989c3f5340919973f"
   },
   "submitted_at": "2026-06-22",
-  "row_count": 2424,
+  "row_count": 2423,
   "rules": [
     "API00-C",
     "API01-C",
@@ -196,6 +196,14 @@
         "lua ldebug.c:198 DCL13-C"
       ],
       "note": "verdict corrected FP -> TP by the bmdb 1553 stands pass (lua); see that batch manifest notes"
+    },
+    {
+      "by": "gavel-pq-1341-2026-09-29",
+      "count": 1,
+      "keys": [
+        "lua ltm.c:64 INT34-C"
+      ],
+      "note": "restated or settled by Brandon's priority-queue gavel verdict (bmdb 1341); see gavel-pq-1341-2026-09-29's manifest"
     }
   ]
 }

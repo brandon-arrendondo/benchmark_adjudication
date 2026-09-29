@@ -1,0 +1,48 @@
+{
+  "work_item_ref": "benchmarking_db-1892",
+  "requested_by": "coordinator",
+  "adjudicating_node": "r720",
+  "aurora_lint_version": "0.5.3",
+  "aurora_lint_sha": "f330e308e4c67b36d867567257243556c9376d19",
+  "batch_id": "gavel-pq-1341-2026-09-29",
+  "adjudicator": "human-gavel",
+  "reviewer": "brandon",
+  "notes": "bmdb 1892: Brandon's gavel verdicts on the priority queue (bmdb 1341; coordinator_work review/2026-09-25/priority_queue.csv, items pq:1-14), reviewed 2026-09-25..29. A tie-break queue, not a random sample: not for agreement statistics. Rows are written in place, agreements included. pq:8 is not imported (his verdict describes an INT31-C conversion; carried into the INT16-C to INT31-C re-key) and pq:12 stays uncertain (not imported). pq:4, pq:6, pq:7, pq:10 and pq:14 follow his 2026-09-29 rulings on the coordinator's disposition; pq:4 and pq:10 are FP where his gavel verdict was TP, because the rulings accept source evidence his packet lacked. Reason text is agent-drafted from his rationale and the pinned source, not quoted. Oracle tags are in the provenance column as a '; '-separated segment of the form 'oracle-tag: <class>: <detail>' (class has no ':', neither part has ';'). The strict verdict is the verdict column; a relaxed profile may score a tagged row the other way. pq:14 carries 'library-contract trust'. Counting basis: distinct (project, commit, file, line, rule) keys. No precision claim is made here. basis: merit. selection: targeted (the 1341 priority queue). reviewed: 14. flipped: 8. blind_to_prior: false. blind_to_diagnostic: false.",
+  "submitted_at": "2026-09-29T19:33:23Z",
+  "row_count": 12,
+  "projects": [
+    "hostap",
+    "lua",
+    "mosquitto",
+    "pureftpd",
+    "sqlite"
+  ],
+  "codebase_commits": {
+    "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af",
+    "hostap": "dcee60436390dd34731560657c4257c3b4c839a6",
+    "mosquitto": "d3ee5c5ca62c0fa4983308c6fff558ee978e878c",
+    "lua": "40b76de2d77e66b70a9d4bf989c3f5340919973f",
+    "pureftpd": "cc28bff52ca28e1d122a2142bf37f2dc578f4d3e"
+  },
+  "rules": [
+    "ARR30-C",
+    "DCL06-C",
+    "EXP34-C",
+    "INT31-C",
+    "INT32-C",
+    "INT34-C",
+    "MEM02-C",
+    "MEM05-C",
+    "MEM31-C",
+    "MSC37-C",
+    "PRE00-C"
+  ],
+  "verdicts": {
+    "FP": 4,
+    "TP": 8
+  },
+  "corrections": {
+    "FP_to_TP": 1,
+    "uncertain_to_TP": 7
+  }
+}

@@ -26,7 +26,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-09-11T15:57:27.790148",
-  "row_count": 9338,
+  "row_count": 9337,
   "rules": [
     "DCL04-C",
     "DCL06-C",
@@ -82,6 +82,14 @@
         "sqlite src/resolve.c:198 INT16-C"
       ],
       "note": "verdict corrected FP -> TP by bmdb 1553 (sqlite): the FP rested only on in-tree callers of a non-static library function (ADR-0011 742a1571); see that batch manifest notes"
+    },
+    {
+      "by": "gavel-pq-1341-2026-09-29",
+      "count": 1,
+      "keys": [
+        "mosquitto lib/packet_mosq.c:62 DCL06-C"
+      ],
+      "note": "restated or settled by Brandon's priority-queue gavel verdict (bmdb 1341); see gavel-pq-1341-2026-09-29's manifest"
     }
   ]
 }
