@@ -12,7 +12,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-06-12T22:26:55.925966",
-  "row_count": 1315,
+  "row_count": 1302,
   "rules": [
     "API00-C",
     "API02-C",
@@ -140,6 +140,26 @@
         "sqlite src/os_win.c:5068 INT32-C"
       ],
       "note": "relabeled by Brandon's blind-sample gavel verdict (bmdb 1317); see gavel-bs-1317-2026-09-29's manifest"
+    },
+    {
+      "by": "dcl13-ruling-1890-a14",
+      "count": 13,
+      "keys": [
+        "sqlite src/main.c:1789 DCL13-C",
+        "sqlite src/main.c:1816 DCL13-C",
+        "sqlite src/main.c:2256 DCL13-C",
+        "sqlite src/main.c:2281 DCL13-C",
+        "sqlite src/main.c:2310 DCL13-C",
+        "sqlite src/main.c:2340 DCL13-C",
+        "sqlite src/main.c:2365 DCL13-C",
+        "sqlite src/main.c:2390 DCL13-C",
+        "sqlite src/main.c:2417 DCL13-C",
+        "sqlite src/main.c:2856 DCL13-C",
+        "sqlite src/main.c:3815 DCL13-C",
+        "sqlite src/main.c:3836 DCL13-C",
+        "sqlite src/main.c:774 DCL13-C"
+      ],
+      "note": "DCL13-C re-derived under Brandon 2026-09-29 DCL13-C option (c) (a signature, callback or function-pointer-slot basis is not an exception); see dcl13-ruling-1890-a14's manifest notes"
     }
   ]
 }

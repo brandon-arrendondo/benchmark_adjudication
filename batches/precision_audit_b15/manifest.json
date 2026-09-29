@@ -12,7 +12,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-06-14T16:20:13.561245",
-  "row_count": 1177,
+  "row_count": 1164,
   "rules": [
     "API00-C",
     "API02-C",
@@ -276,6 +276,26 @@
         "sqlite ext/misc/wholenumber.c:70 DCL13-C"
       ],
       "note": "DCL13-C re-derived under Brandon 2026-09-29 DCL13-C option (c) (a signature, callback or function-pointer-slot basis is not an exception); see dcl13-ruling-1890-a13's manifest notes"
+    },
+    {
+      "by": "dcl13-ruling-1890-a14",
+      "count": 13,
+      "keys": [
+        "sqlite src/callback.c:208 DCL13-C",
+        "sqlite src/dbpage.c:122 DCL13-C",
+        "sqlite src/dbpage.c:178 DCL13-C",
+        "sqlite src/dbpage.c:214 DCL13-C",
+        "sqlite src/dbpage.c:232 DCL13-C",
+        "sqlite src/dbpage.c:279 DCL13-C",
+        "sqlite src/dbpage.c:342 DCL13-C",
+        "sqlite src/dbpage.c:343 DCL13-C",
+        "sqlite src/dbpage.c:75 DCL13-C",
+        "sqlite src/dbpage.c:78 DCL13-C",
+        "sqlite src/hash.c:242 DCL13-C",
+        "sqlite src/memjournal.c:290 DCL13-C",
+        "sqlite src/memjournal.c:310 DCL13-C"
+      ],
+      "note": "DCL13-C re-derived under Brandon 2026-09-29 DCL13-C option (c) (a signature, callback or function-pointer-slot basis is not an exception); see dcl13-ruling-1890-a14's manifest notes"
     }
   ]
 }

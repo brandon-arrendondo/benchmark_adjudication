@@ -12,7 +12,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-06-12",
-  "row_count": 2992,
+  "row_count": 2975,
   "rules": [
     "API00-C",
     "API02-C",
@@ -317,6 +317,30 @@
         "sqlite ext/session/changeset.c:143 DCL13-C"
       ],
       "note": "DCL13-C re-derived under Brandon 2026-09-29 DCL13-C option (c) (a signature, callback or function-pointer-slot basis is not an exception); see dcl13-ruling-1890-a13's manifest notes"
+    },
+    {
+      "by": "dcl13-ruling-1890-a14",
+      "count": 17,
+      "keys": [
+        "sqlite src/json.c:3486 DCL13-C",
+        "sqlite src/json.c:3883 DCL13-C",
+        "sqlite src/json.c:3916 DCL13-C",
+        "sqlite src/json.c:3935 DCL13-C",
+        "sqlite src/json.c:4028 DCL13-C",
+        "sqlite src/json.c:4345 DCL13-C",
+        "sqlite src/json.c:4379 DCL13-C",
+        "sqlite src/json.c:4421 DCL13-C",
+        "sqlite src/json.c:4530 DCL13-C",
+        "sqlite src/json.c:4577 DCL13-C",
+        "sqlite src/json.c:4658 DCL13-C",
+        "sqlite src/json.c:4740 DCL13-C",
+        "sqlite src/json.c:4788 DCL13-C",
+        "sqlite src/json.c:4904 DCL13-C",
+        "sqlite src/json.c:5105 DCL13-C",
+        "sqlite src/json.c:542 DCL13-C",
+        "sqlite src/json.c:5424 DCL13-C"
+      ],
+      "note": "DCL13-C re-derived under Brandon 2026-09-29 DCL13-C option (c) (a signature, callback or function-pointer-slot basis is not an exception); see dcl13-ruling-1890-a14's manifest notes"
     }
   ]
 }

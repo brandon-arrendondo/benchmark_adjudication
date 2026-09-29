@@ -12,7 +12,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-06-12T21:51:17.770595",
-  "row_count": 1089,
+  "row_count": 1088,
   "rules": [
     "API00-C",
     "ARR00-C",
@@ -193,6 +193,14 @@
         "sqlite ext/rtree/rtree.c:3105 DCL13-C"
       ],
       "note": "DCL13-C re-derived under Brandon 2026-09-29 DCL13-C option (c) (a signature, callback or function-pointer-slot basis is not an exception); see dcl13-ruling-1890-a13's manifest notes"
+    },
+    {
+      "by": "dcl13-ruling-1890-a14",
+      "count": 1,
+      "keys": [
+        "sqlite src/date.c:1110 DCL13-C"
+      ],
+      "note": "DCL13-C re-derived under Brandon 2026-09-29 DCL13-C option (c) (a signature, callback or function-pointer-slot basis is not an exception); see dcl13-ruling-1890-a14's manifest notes"
     }
   ]
 }

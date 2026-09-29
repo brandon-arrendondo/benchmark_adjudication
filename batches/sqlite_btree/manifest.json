@@ -12,7 +12,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-06-11T21:07:11.349757",
-  "row_count": 978,
+  "row_count": 973,
   "rules": [
     "API00-C",
     "ARR00-C",
@@ -88,6 +88,18 @@
         "sqlite src/btree.c:10196 MEM05-C"
       ],
       "note": "restated or settled by Brandon's priority-queue gavel verdict (bmdb 1341); see gavel-pq-1341-2026-09-29's manifest"
+    },
+    {
+      "by": "dcl13-ruling-1890-a14",
+      "count": 5,
+      "keys": [
+        "sqlite src/btree.c:11127 DCL13-C",
+        "sqlite src/btree.c:2304 DCL13-C",
+        "sqlite src/btree.c:4689 DCL13-C",
+        "sqlite src/btree.c:6821 DCL13-C",
+        "sqlite src/btree.c:8095 DCL13-C"
+      ],
+      "note": "DCL13-C re-derived under Brandon 2026-09-29 DCL13-C option (c) (a signature, callback or function-pointer-slot basis is not an exception); see dcl13-ruling-1890-a14's manifest notes"
     }
   ]
 }

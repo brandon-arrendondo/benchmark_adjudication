@@ -12,7 +12,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-06-14T18:15:55.904371+00:00",
-  "row_count": 1193,
+  "row_count": 1177,
   "rules": [
     "API00-C",
     "API02-C",
@@ -317,6 +317,29 @@
         "sqlite ext/misc/vtablog.c:669 DCL13-C"
       ],
       "note": "DCL13-C re-derived under Brandon 2026-09-29 DCL13-C option (c) (a signature, callback or function-pointer-slot basis is not an exception); see dcl13-ruling-1890-a13's manifest notes"
+    },
+    {
+      "by": "dcl13-ruling-1890-a14",
+      "count": 16,
+      "keys": [
+        "sqlite src/dbstat.c:158 DCL13-C",
+        "sqlite src/dbstat.c:215 DCL13-C",
+        "sqlite src/dbstat.c:290 DCL13-C",
+        "sqlite src/dbstat.c:726 DCL13-C",
+        "sqlite src/dbstat.c:738 DCL13-C",
+        "sqlite src/dbstat.c:805 DCL13-C",
+        "sqlite src/mem5.c:201 DCL13-C",
+        "sqlite src/memdb.c:195 DCL13-C",
+        "sqlite src/memdb.c:210 DCL13-C",
+        "sqlite src/memdb.c:253 DCL13-C",
+        "sqlite src/memdb.c:295 DCL13-C",
+        "sqlite src/memdb.c:331 DCL13-C",
+        "sqlite src/memdb.c:357 DCL13-C",
+        "sqlite src/memdb.c:464 DCL13-C",
+        "sqlite src/memdb.c:511 DCL13-C",
+        "sqlite src/memdb.c:529 DCL13-C"
+      ],
+      "note": "DCL13-C re-derived under Brandon 2026-09-29 DCL13-C option (c) (a signature, callback or function-pointer-slot basis is not an exception); see dcl13-ruling-1890-a14's manifest notes"
     }
   ]
 }
