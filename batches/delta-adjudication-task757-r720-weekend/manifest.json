@@ -26,7 +26,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-09-11T15:57:27.790148",
-  "row_count": 9337,
+  "row_count": 9331,
   "rules": [
     "DCL04-C",
     "DCL06-C",
@@ -90,6 +90,19 @@
         "mosquitto lib/packet_mosq.c:62 DCL06-C"
       ],
       "note": "restated or settled by Brandon's priority-queue gavel verdict (bmdb 1341); see gavel-pq-1341-2026-09-29's manifest"
+    },
+    {
+      "by": "ruling-gavel-clusters-1892",
+      "count": 6,
+      "keys": [
+        "sqlite src/os_win.c:3852 DCL06-C",
+        "sqlite src/util.c:1878 DCL06-C",
+        "sqlite src/util.c:1900 DCL06-C",
+        "pureftpd src/alt_arc4random.c:44 DCL06-C",
+        "pureftpd src/daemons.c:111 DCL06-C",
+        "sel4 src/drivers/smmu/smmuv2.c:395 DCL06-C"
+      ],
+      "note": "uncertain resolved to TP by the agent applying Brandon's gavel cluster rulings (pq:1, pq:3, pq:5); see ruling-gavel-clusters-1892's manifest"
     }
   ]
 }

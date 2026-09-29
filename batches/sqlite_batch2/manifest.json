@@ -12,7 +12,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-06-12T08:49:18.685018",
-  "row_count": 331,
+  "row_count": 322,
   "rules": [
     "API00-C",
     "API02-C",
@@ -110,6 +110,22 @@
         "sqlite ext/misc/compress.c:98 EXP34-C"
       ],
       "note": "restated or settled by Brandon's priority-queue gavel verdict (bmdb 1341); see gavel-pq-1341-2026-09-29's manifest"
+    },
+    {
+      "by": "ruling-gavel-clusters-1892",
+      "count": 9,
+      "keys": [
+        "sqlite src/btreeInt.h:628 PRE12-C",
+        "sqlite src/btreeInt.h:670 PRE00-C",
+        "sqlite src/btreeInt.h:670 PRE12-C",
+        "sqlite src/btreeInt.h:722 PRE00-C",
+        "sqlite src/btreeInt.h:722 PRE12-C",
+        "sqlite src/btreeInt.h:723 PRE00-C",
+        "sqlite src/btreeInt.h:723 PRE12-C",
+        "sqlite src/btreeInt.h:739 PRE00-C",
+        "sqlite src/btreeInt.h:739 PRE12-C"
+      ],
+      "note": "uncertain resolved to TP by the agent applying Brandon's gavel cluster rulings (pq:1, pq:3, pq:5); see ruling-gavel-clusters-1892's manifest"
     }
   ]
 }

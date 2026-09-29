@@ -1,0 +1,34 @@
+{
+  "work_item_ref": "benchmarking_db-1892",
+  "requested_by": "coordinator",
+  "adjudicating_node": "r720",
+  "aurora_lint_version": "0.5.3",
+  "aurora_lint_sha": "f330e308e4c67b36d867567257243556c9376d19",
+  "batch_id": "ruling-gavel-clusters-1892",
+  "adjudicator": "claude-opus-5.5",
+  "notes": "A RULING RELABEL, NOT A HUMAN LABEL. bmdb 1892: the agent applying three of Brandon's gavel rulings (2026-09-29) to the other rows of the clusters they were drawn from. He ruled that each generalizes to its cluster; every row here was still re-derived at source against the ruling, not copied. (1) pq:1, sqlite ext/session/sqlite3session.c:752 INT31-C: a length from sessionSerialLen() is not proven non-negative; 13 sibling INT31-C rows. 4 of them (848, 850, 874, 878) are not reported by realworld run 316 and are relabeled at the pin all the same. (2) pq:3, sqlite src/btreeInt.h:628 PRE00-C: extended to the other 4 PRE00-C macros and all 5 PRE12-C rows. (3) pq:5, mosquitto lib/packet_mosq.c:62 DCL06-C ('a mask or modulus should be named'), which he extended to spec constants and tuning values: 6 sibling rows. The three ruled rows themselves are in gavel-pq-1341-2026-09-29. Counting basis: distinct (project, commit, file, line, rule) keys. No precision claim is made here. No blind slice: batch under 50 rows. basis: ruling. selection: targeted (the cluster rows in coordinator_work review/2026-09-25/clusters.csv, buckets P1, P3, P5). reviewed: 28. flipped: 28 (uncertain -> TP). blind_to_prior: false. blind_to_diagnostic: false.",
+  "submitted_at": "2026-09-29T19:34:03Z",
+  "row_count": 28,
+  "projects": [
+    "pureftpd",
+    "sel4",
+    "sqlite"
+  ],
+  "codebase_commits": {
+    "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af",
+    "pureftpd": "cc28bff52ca28e1d122a2142bf37f2dc578f4d3e",
+    "sel4": "1326364bc9135d9445d936ebc01e38a402c1f4c6"
+  },
+  "rules": [
+    "DCL06-C",
+    "INT31-C",
+    "PRE00-C",
+    "PRE12-C"
+  ],
+  "verdicts": {
+    "TP": 28
+  },
+  "corrections": {
+    "uncertain_to_TP": 28
+  }
+}
