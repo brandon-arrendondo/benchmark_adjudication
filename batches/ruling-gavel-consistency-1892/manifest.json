@@ -1,0 +1,29 @@
+{
+  "work_item_ref": "benchmarking_db-1892",
+  "requested_by": "coordinator",
+  "adjudicating_node": "r720",
+  "aurora_lint_version": "0.5.3",
+  "aurora_lint_sha": "f330e308e4c67b36d867567257243556c9376d19",
+  "batch_id": "ruling-gavel-consistency-1892",
+  "adjudicator": "claude-opus-5.5",
+  "notes": "A RULING RELABEL, NOT A HUMAN LABEL. bmdb 1892: FP rows resting on a basis two of Brandon's blind-sample verdicts reject. (1) s0033, hostap wpa_supplicant/mesh_rsn.c:428 MSC30-C: a non-security use of rand() is not an exception. Every other MSC30-C FP row in the repo rests on that basis: 4 rows, all flipped. (2) s0007, hostap src/crypto/crypto_module_tests.c:1004 MEM03-C: test code is suppression territory. 3 other MEM03-C FP rows rest on a 'test vector' basis: 2 are local arrays of the same kind and flip; crypto_module_tests.c:2478 (a pointer to a string literal, which cannot be cleared) stays FP and is restated in place on that basis. Count corrections, checked at source: the gavel disposition counted 5 other MSC30-C and 4 other MEM03-C rows; there are 4 and 3. No blind slice: batch under 50 rows. Counting basis: distinct (project, commit, file, line, rule) keys. No precision claim is made here. basis: ruling. selection: targeted (every FP row of the rule whose recorded reason rests on the rejected basis). reviewed: 7. flipped: 6 (FP -> TP). blind_to_prior: false. blind_to_diagnostic: false.",
+  "submitted_at": "2026-09-29T19:34:20Z",
+  "row_count": 7,
+  "projects": [
+    "hostap"
+  ],
+  "codebase_commits": {
+    "hostap": "dcee60436390dd34731560657c4257c3b4c839a6"
+  },
+  "rules": [
+    "MEM03-C",
+    "MSC30-C"
+  ],
+  "verdicts": {
+    "FP": 1,
+    "TP": 6
+  },
+  "corrections": {
+    "FP_to_TP": 6
+  }
+}

@@ -12,7 +12,7 @@
     "hostap": "dcee60436390dd34731560657c4257c3b4c839a6"
   },
   "submitted_at": "2026-07-28",
-  "row_count": 30898,
+  "row_count": 30891,
   "rules": [
     "API00-C",
     "API01-C",
@@ -514,6 +514,20 @@
         "hostap src/ap/hw_features.c:16 PRE08-C"
       ],
       "note": "relabeled by Brandon's blind-sample gavel verdict (bmdb 1317); see gavel-bs-1317-2026-09-29's manifest"
+    },
+    {
+      "by": "ruling-gavel-consistency-1892",
+      "count": 7,
+      "keys": [
+        "hostap src/drivers/driver_ndis.c:716 MSC30-C",
+        "hostap src/drivers/driver_wext.c:1893 MSC30-C",
+        "hostap src/eap_server/eap_server.c:1602 MSC30-C",
+        "hostap src/utils/os_win32.c:150 MSC30-C",
+        "hostap src/crypto/crypto_module_tests.c:2487 MEM03-C",
+        "hostap src/crypto/crypto_module_tests.c:2496 MEM03-C",
+        "hostap src/crypto/crypto_module_tests.c:2478 MEM03-C"
+      ],
+      "note": "FP relabeled TP (6) or restated FP on a new basis (1) by the agent applying Brandon's gavel rulings on s0033 (MSC30-C) and s0007 (MEM03-C); see ruling-gavel-consistency-1892's manifest"
     }
   ]
 }
