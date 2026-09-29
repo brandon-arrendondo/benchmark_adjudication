@@ -18,7 +18,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-06-10",
-  "row_count": 150,
+  "row_count": 149,
   "rules": [
     "DCL13-C",
     "EXP34-C",
@@ -42,6 +42,14 @@
         "hostap src/common/dpp_tcp.c:1916 DCL13-C"
       ],
       "note": "DCL13-C re-derived under Brandon 2026-09-29 DCL13-C option (c) (a signature, callback or function-pointer-slot basis is not an exception); see dcl13-ruling-1890-a03's manifest notes"
+    },
+    {
+      "by": "dcl13-ruling-1890-a05",
+      "count": 1,
+      "keys": [
+        "hostap src/eap_peer/eap_mschapv2.c:141 DCL13-C"
+      ],
+      "note": "DCL13-C re-derived under Brandon 2026-09-29 DCL13-C option (c) (a signature, callback or function-pointer-slot basis is not an exception); see dcl13-ruling-1890-a05's manifest notes"
     }
   ]
 }
