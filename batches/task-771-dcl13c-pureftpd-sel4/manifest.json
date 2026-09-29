@@ -14,7 +14,7 @@
     "sel4": "1326364bc9135d9445d936ebc01e38a402c1f4c6"
   },
   "submitted_at": "2026-09-17T18:00:00.000Z",
-  "row_count": 133,
+  "row_count": 130,
   "rules": [
     "DCL13-C"
   ],
@@ -30,6 +30,16 @@
         "pureftpd src/tls.c:143 DCL13-C"
       ],
       "note": "DCL13-C re-derived under Brandon 2026-09-29 DCL13-C option (c) (a signature, callback or function-pointer-slot basis is not an exception); see dcl13-ruling-1890-a01's manifest notes"
+    },
+    {
+      "by": "dcl13-ruling-1890-b01",
+      "count": 3,
+      "keys": [
+        "pureftpd src/fakechroot.c:182 DCL13-C",
+        "pureftpd src/fakechroot.c:195 DCL13-C",
+        "pureftpd src/pure-pw.c:631 DCL13-C"
+      ],
+      "note": "DCL13-C re-derived under Brandon 2026-09-29 DCL13-C tier B (an API/ABI signature not in a function-pointer slot is strict TP; shallow const) (a signature, callback or function-pointer-slot basis is not an exception); see dcl13-ruling-1890-b01's manifest notes"
     }
   ]
 }

@@ -12,7 +12,7 @@
     "mosquitto": "d3ee5c5ca62c0fa4983308c6fff558ee978e878c"
   },
   "submitted_at": "2026-06-16T15:18:57.383467",
-  "row_count": 2583,
+  "row_count": 2578,
   "rules": [
     "API00-C",
     "API02-C",
@@ -224,6 +224,18 @@
         "mosquitto src/plugin_public.c:220 DCL13-C"
       ],
       "note": "DCL13-C re-derived under Brandon 2026-09-29 DCL13-C option (c) (a signature, callback or function-pointer-slot basis is not an exception); see dcl13-ruling-1890-a01's manifest notes"
+    },
+    {
+      "by": "dcl13-ruling-1890-b01",
+      "count": 5,
+      "keys": [
+        "mosquitto lib/libmosquitto.c:139 DCL13-C",
+        "mosquitto src/conf.c:569 DCL13-C",
+        "mosquitto src/database.c:140 DCL13-C",
+        "mosquitto src/database.c:162 DCL13-C",
+        "mosquitto src/database.c:173 DCL13-C"
+      ],
+      "note": "DCL13-C re-derived under Brandon 2026-09-29 DCL13-C tier B (an API/ABI signature not in a function-pointer slot is strict TP; shallow const) (a signature, callback or function-pointer-slot basis is not an exception); see dcl13-ruling-1890-b01's manifest notes"
     }
   ]
 }

@@ -12,7 +12,7 @@
     "lua": "40b76de2d77e66b70a9d4bf989c3f5340919973f"
   },
   "submitted_at": "2026-06-22",
-  "row_count": 2412,
+  "row_count": 2367,
   "rules": [
     "API00-C",
     "API01-C",
@@ -222,6 +222,58 @@
         "lua lobject.c:513 DCL13-C"
       ],
       "note": "DCL13-C re-derived under Brandon 2026-09-29 DCL13-C option (c) (a signature, callback or function-pointer-slot basis is not an exception); see dcl13-ruling-1890-a01's manifest notes"
+    },
+    {
+      "by": "dcl13-ruling-1890-b01",
+      "count": 45,
+      "keys": [
+        "lua lapi.c:167 DCL13-C",
+        "lua lbaselib.c:280 DCL13-C",
+        "lua lcorolib.c:128 DCL13-C",
+        "lua ldebug.c:147 DCL13-C",
+        "lua ldebug.c:152 DCL13-C",
+        "lua ldebug.c:157 DCL13-C",
+        "lua ldebug.c:817 DCL13-C",
+        "lua ldo.c:1173 DCL13-C",
+        "lua ldo.c:395 DCL13-C",
+        "lua llex.c:135 DCL13-C",
+        "lua loadlib.c:216 DCL13-C",
+        "lua loadlib.c:228 DCL13-C",
+        "lua lparser.c:1019 DCL13-C",
+        "lua lparser.c:1448 DCL13-C",
+        "lua lparser.c:159 DCL13-C",
+        "lua lparser.c:1648 DCL13-C",
+        "lua lparser.c:175 DCL13-C",
+        "lua lparser.c:194 DCL13-C",
+        "lua lparser.c:2180 DCL13-C",
+        "lua lparser.c:226 DCL13-C",
+        "lua lparser.c:360 DCL13-C",
+        "lua lparser.c:382 DCL13-C",
+        "lua lparser.c:547 DCL13-C",
+        "lua lparser.c:580 DCL13-C",
+        "lua lparser.c:597 DCL13-C",
+        "lua lparser.c:626 DCL13-C",
+        "lua lparser.c:640 DCL13-C",
+        "lua lparser.c:696 DCL13-C",
+        "lua lparser.c:737 DCL13-C",
+        "lua lparser.c:768 DCL13-C",
+        "lua lparser.c:792 DCL13-C",
+        "lua lparser.c:866 DCL13-C",
+        "lua lstrlib.c:1476 DCL13-C",
+        "lua lstrlib.c:1488 DCL13-C",
+        "lua lstrlib.c:388 DCL13-C",
+        "lua lstrlib.c:397 DCL13-C",
+        "lua lstrlib.c:405 DCL13-C",
+        "lua lstrlib.c:472 DCL13-C",
+        "lua lstrlib.c:488 DCL13-C",
+        "lua lstrlib.c:704 DCL13-C",
+        "lua lstrlib.c:763 DCL13-C",
+        "lua lua.c:70 DCL13-C",
+        "lua lvm.c:668 DCL13-C",
+        "lua lvm.c:834 DCL13-C",
+        "lua lzio.c:39 DCL13-C"
+      ],
+      "note": "DCL13-C re-derived under Brandon 2026-09-29 DCL13-C tier B (an API/ABI signature not in a function-pointer slot is strict TP; shallow const) (a signature, callback or function-pointer-slot basis is not an exception); see dcl13-ruling-1890-b01's manifest notes"
     }
   ]
 }

@@ -12,7 +12,7 @@
     "mbedtls": "068ff080b369adfac81509f9b57b2afabaf82dc5"
   },
   "submitted_at": "2026-09-14T17:32:48.190170",
-  "row_count": 8281,
+  "row_count": 8270,
   "rules": [
     "API00-C",
     "API01-C",
@@ -264,6 +264,24 @@
         "mbedtls library/threading.c:119 DCL13-C"
       ],
       "note": "DCL13-C re-derived under Brandon 2026-09-29 DCL13-C option (c) (a signature, callback or function-pointer-slot basis is not an exception); see dcl13-ruling-1890-a01's manifest notes"
+    },
+    {
+      "by": "dcl13-ruling-1890-b01",
+      "count": 11,
+      "keys": [
+        "mbedtls library/aria.c:441 DCL13-C",
+        "mbedtls library/common.h:164 DCL13-C",
+        "mbedtls library/entropy.c:486 DCL13-C",
+        "mbedtls library/pkparse.c:74 DCL13-C",
+        "mbedtls library/platform.c:197 DCL13-C",
+        "mbedtls library/platform.c:222 DCL13-C",
+        "mbedtls library/platform.c:268 DCL13-C",
+        "mbedtls library/platform.c:386 DCL13-C",
+        "mbedtls library/platform.c:396 DCL13-C",
+        "mbedtls library/x509_crt.c:2384 DCL13-C",
+        "mbedtls library/x509_crt.c:2512 DCL13-C"
+      ],
+      "note": "DCL13-C re-derived under Brandon 2026-09-29 DCL13-C tier B (an API/ABI signature not in a function-pointer slot is strict TP; shallow const) (a signature, callback or function-pointer-slot basis is not an exception); see dcl13-ruling-1890-b01's manifest notes"
     }
   ]
 }
