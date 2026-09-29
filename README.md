@@ -351,6 +351,46 @@ manifest.
 40-char SHA for the same reason `codebase_commit` is: an abbreviation is a
 display concern, not a join/citation key.
 
+#### `recheck`: what a correction or re-check batch looked at
+
+A batch that re-reads existing labels records what it re-read, so that how
+often a label changes on a second look is `flipped / reviewed` from the
+manifest alone. Before this block existed, that lived only in free-text
+notes, and many corrections never stated how many labels they had looked at.
+From 2026-09-30 every manifest carries the key: `"recheck": null` for a batch
+of new labels only, the block below for anything that re-reads labels. A
+manifest with a `corrections` block always needs a real one.
+`scripts/validate.py` checks both.
+
+```json
+"recheck": {
+  "basis": "merit",
+  "selection": "sample",
+  "seed": 20260930,
+  "reviewed": 120,
+  "flipped": 7,
+  "blind_to_prior_verdict": false,
+  "blind_to_diagnostic": false,
+  "blind_slice": {"seed": 7, "reviewed": 20, "disagreed": 1,
+                  "blind_to_prior_verdict": true, "blind_to_diagnostic": false}
+}
+```
+
+| field | meaning |
+|---|---|
+| `basis` | why the labels were re-read: `ruling` (a labeling rule changed after the label), `standard` (the label predates the written standard it is re-read under), `merit` (the same rule applied again), `tool` (the analyzer's output moved, so TP and FN swap by definition), or `conflict` (duplicated code carried split verdicts). One basis per batch: a ruling relabel and a merit re-read measure different things, so relabel under a new ruling in its own batch. |
+| `ruling` | for `ruling` and `standard`: the decision applied, such as an ADR and its commit |
+| `selection` | how the re-read rows were chosen: `census` (every label in a set defined without judging whether the labels were right), `sample` (a seeded random draw; give `seed`), `tool-prompted` (the labels at keys the analyzer stopped reporting), or `targeted` (rows picked because they looked wrong) |
+| `reviewed` | labels re-read, including the ones kept |
+| `flipped` | labels whose verdict changed; at most `reviewed` and `row_count`, and equal to the `corrections` total when there is one |
+| `blind_to_prior_verdict`, `blind_to_diagnostic` | whether the reader could see the earlier verdict, and the analyzer's message |
+| `blind_slice` | optional: a small seeded sample of the batch re-labeled without the prior verdict (and, where the tooling allows, without the message), with how many of its labels the reader disagreed with |
+
+`validate.py` sees one tree, so it cannot check that `flipped` matches the
+rows the batch actually changed. `benchmarking_db`'s
+`bin/oracle_flip_rates.py` reads the history and refuses a manifest whose
+`flipped` disagrees with it.
+
 ## How labels get added (maintainer process)
 
 Every change to `main` goes through a PR (branch protection enforces this —
