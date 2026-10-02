@@ -22,7 +22,7 @@
     "ventoy": "7cbdc5cf69935bcf1f085ae67f40e70ea7e74bae"
   },
   "submitted_at": "2026-09-12T09:24:56.472645",
-  "row_count": 149,
+  "row_count": 148,
   "rules": [
     "PRE31-C"
   ],
@@ -66,6 +66,14 @@
         "sel4 src/object/objecttype.c:758 PRE31-C"
       ],
       "note": "PRE31-C re-derived under Brandon 2026-10-02 PRE31-C ruling (b): an __attribute__((const)) or CONST declaration is the project's own declaration, not proof that a call has no side effect, and an accessor generated at build time has no body in the scanned files, so a call to it is unproven (strict TP, call-side-effect-unproven); see pre31-ruling-2023-a06's manifest notes"
+    },
+    {
+      "by": "pre31-ruling-2026-a01",
+      "count": 1,
+      "keys": [
+        "valkey src/vset.c:932 PRE31-C"
+      ],
+      "note": "PRE31-C re-derived under Brandon 2026-10-02 PRE31-C ruling (a): the oracle records the strict, freestanding truth, where a C library call is an unknown call and strict counts an unknown call as a side effect, so an argument whose only effect is such a call is strict TP; the hosted contract that calls it pure is the relaxation, tagged contract:stdlib_call_effects (ADR-0014, ADR-0015 D5); see pre31-ruling-2026-a01's manifest notes"
     }
   ]
 }

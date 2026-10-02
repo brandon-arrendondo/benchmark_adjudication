@@ -26,7 +26,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-09-06T17:56:24.031110",
-  "row_count": 1287,
+  "row_count": 1272,
   "rules": [
     "DCL04-C",
     "DCL06-C",
@@ -129,6 +129,28 @@
         "sqlite src/printf.c:929 PRE31-C"
       ],
       "note": "PRE31-C re-derived under Brandon 2026-10-02 PRE31-C ruling (A): a macro that, in any build configuration or on any runtime path, does not evaluate an argument is unsafe under PRE31-C as written (ADR-0001), including one that evaluates it once or not at all; see pre31-ruling-2023-a05's manifest notes"
+    },
+    {
+      "by": "pre31-ruling-2026-a01",
+      "count": 15,
+      "keys": [
+        "mosquitto src/bridge.c:79 PRE31-C",
+        "mosquitto src/control.c:153 PRE31-C",
+        "mosquitto src/control.c:236 PRE31-C",
+        "mosquitto src/handle_connect.c:1212 PRE31-C",
+        "mosquitto src/handle_connect.c:1262 PRE31-C",
+        "mosquitto src/handle_connect.c:96 PRE31-C",
+        "mosquitto src/plugin_public.c:440 PRE31-C",
+        "mosquitto src/plugin_public.c:706 PRE31-C",
+        "mosquitto src/plugin_public.c:730 PRE31-C",
+        "mosquitto src/plugin_public.c:752 PRE31-C",
+        "mosquitto src/plugin_public.c:76 PRE31-C",
+        "mosquitto src/plugin_public.c:868 PRE31-C",
+        "mosquitto src/psk_file.c:139 PRE31-C",
+        "mosquitto src/retain.c:368 PRE31-C",
+        "mosquitto src/subs.c:479 PRE31-C"
+      ],
+      "note": "PRE31-C re-derived under Brandon 2026-10-02 PRE31-C ruling (a): the oracle records the strict, freestanding truth, where a C library call is an unknown call and strict counts an unknown call as a side effect, so an argument whose only effect is such a call is strict TP; the hosted contract that calls it pure is the relaxation, tagged contract:stdlib_call_effects (ADR-0014, ADR-0015 D5); see pre31-ruling-2026-a01's manifest notes"
     }
   ]
 }

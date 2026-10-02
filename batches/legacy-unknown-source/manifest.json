@@ -26,7 +26,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-09-06T20:18:13.951550",
-  "row_count": 304,
+  "row_count": 280,
   "rules": [
     "INT02-C",
     "INT30-C",
@@ -159,6 +159,37 @@
         "sel4 src/arch/riscv/kernel/boot.c:437 PRE31-C"
       ],
       "note": "PRE31-C re-derived under Brandon 2026-10-02 PRE31-C ruling (A): a macro that, in any build configuration or on any runtime path, does not evaluate an argument is unsafe under PRE31-C as written (ADR-0001), including one that evaluates it once or not at all; see pre31-ruling-2023-a05's manifest notes"
+    },
+    {
+      "by": "pre31-ruling-2026-a01",
+      "count": 24,
+      "keys": [
+        "mosquitto src/context.c:264 PRE31-C",
+        "mosquitto src/context.c:356 PRE31-C",
+        "mosquitto src/context.c:357 PRE31-C",
+        "mosquitto src/context.c:371 PRE31-C",
+        "mosquitto src/context.c:380 PRE31-C",
+        "mosquitto src/control.c:62 PRE31-C",
+        "mosquitto src/control.c:72 PRE31-C",
+        "mosquitto src/loop.c:151 PRE31-C",
+        "mosquitto src/persist_read.c:59 PRE31-C",
+        "mosquitto src/plugin_public.c:360 PRE31-C",
+        "mosquitto src/plugin_public.c:502 PRE31-C",
+        "mosquitto src/plugin_public.c:567 PRE31-C",
+        "mosquitto src/plugin_public.c:612 PRE31-C",
+        "mosquitto src/plugin_public.c:649 PRE31-C",
+        "mosquitto src/plugin_public.c:682 PRE31-C",
+        "mosquitto src/plugin_public.c:771 PRE31-C",
+        "mosquitto src/psk_file.c:176 PRE31-C",
+        "mosquitto src/psk_file.c:265 PRE31-C",
+        "mosquitto src/retain.c:153 PRE31-C",
+        "mosquitto src/retain.c:327 PRE31-C",
+        "mosquitto src/subs.c:403 PRE31-C",
+        "mosquitto src/subs.c:458 PRE31-C",
+        "mosquitto src/subs.c:637 PRE31-C",
+        "mosquitto src/subs.c:639 PRE31-C"
+      ],
+      "note": "PRE31-C re-derived under Brandon 2026-10-02 PRE31-C ruling (a): the oracle records the strict, freestanding truth, where a C library call is an unknown call and strict counts an unknown call as a side effect, so an argument whose only effect is such a call is strict TP; the hosted contract that calls it pure is the relaxation, tagged contract:stdlib_call_effects (ADR-0014, ADR-0015 D5); see pre31-ruling-2026-a01's manifest notes"
     }
   ]
 }

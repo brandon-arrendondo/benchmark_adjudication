@@ -13,7 +13,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-10-02T11:52:52Z",
-  "row_count": 138,
+  "row_count": 137,
   "rules": [
     "PRE31-C"
   ],
@@ -26,5 +26,15 @@
     "new": 80
   },
   "recheck": null,
-  "notes": "PRE31-C delta-adjudication of aurora-lint 9c6eb108's first official real-world sweep after the side-effect-summary change (runs 318/319; base 316/317), projects sqlite. Every in-scope PRE31-C finding with no label in those runs, scoped by data/benchmark_repos.json at that commit; the per-arm header-macro delta is folded in, as its rows were still unlabeled. origin: 80 new against the base, 58 carried (already unlabeled in the base); each row's provenance says which. Each row was judged by reading the macro's definitions at the pinned commit (does some configuration evaluate the argument other than once) and the argument's callee bodies (does it modify an object, access a volatile object, or call something that does). Labels are the strict truth (ADR-0015 D5) under the owned-storage ruling: a write to storage the function wholly owns is not an effect. Relaxation tags in provenance: library-contract trust: contract:stdlib_call_effects where the only shown effect is through a C library call the hosted contract judges; call-side-effect-unproven where the effect rests on a callee with no definition in the scanned files. Tag counts: none. Counting basis: distinct (project, commit, file, line, rule) keys. No precision claim is made here. Revised before merge after review: the TESTONLY( x = ) call() rows and the objects declared only inside TESTONLY are TP under Brandon's 2026-10-02 ruling (a store to an object that exists only where TESTONLY expands is a lost side effect; the misquoted message is a misfire in the message, but the line's truth stands, ADR-0005)."
+  "notes": "PRE31-C delta-adjudication of aurora-lint 9c6eb108's first official real-world sweep after the side-effect-summary change (runs 318/319; base 316/317), projects sqlite. Every in-scope PRE31-C finding with no label in those runs, scoped by data/benchmark_repos.json at that commit; the per-arm header-macro delta is folded in, as its rows were still unlabeled. origin: 80 new against the base, 58 carried (already unlabeled in the base); each row's provenance says which. Each row was judged by reading the macro's definitions at the pinned commit (does some configuration evaluate the argument other than once) and the argument's callee bodies (does it modify an object, access a volatile object, or call something that does). Labels are the strict truth (ADR-0015 D5) under the owned-storage ruling: a write to storage the function wholly owns is not an effect. Relaxation tags in provenance: library-contract trust: contract:stdlib_call_effects where the only shown effect is through a C library call the hosted contract judges; call-side-effect-unproven where the effect rests on a callee with no definition in the scanned files. Tag counts: none. Counting basis: distinct (project, commit, file, line, rule) keys. No precision claim is made here. Revised before merge after review: the TESTONLY( x = ) call() rows and the objects declared only inside TESTONLY are TP under Brandon's 2026-10-02 ruling (a store to an object that exists only where TESTONLY expands is a lost side effect; the misquoted message is a misfire in the message, but the line's truth stands, ADR-0005).",
+  "superseded_rows": [
+    {
+      "by": "pre31-ruling-2026-a01",
+      "count": 1,
+      "keys": [
+        "sqlite src/os_unix.c:5459 PRE31-C"
+      ],
+      "note": "PRE31-C re-derived under Brandon 2026-10-02 PRE31-C ruling (a): the oracle records the strict, freestanding truth, where a C library call is an unknown call and strict counts an unknown call as a side effect, so an argument whose only effect is such a call is strict TP; the hosted contract that calls it pure is the relaxation, tagged contract:stdlib_call_effects (ADR-0014, ADR-0015 D5); see pre31-ruling-2026-a01's manifest notes"
+    }
+  ]
 }
