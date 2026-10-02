@@ -1,0 +1,34 @@
+{
+  "batch_id": "pre31-delta-1917-b04",
+  "work_item_ref": "benchmarking_db-1917",
+  "requested_by": "coordinator",
+  "adjudicating_node": "r720",
+  "adjudicator": "claude-opus-5.5",
+  "aurora_lint_version": "0.5.3",
+  "aurora_lint_sha": "9c6eb108096e661cef5e5b28bc402ea488091101",
+  "projects": [
+    "lua",
+    "mbedtls",
+    "sel4"
+  ],
+  "codebase_commits": {
+    "lua": "40b76de2d77e66b70a9d4bf989c3f5340919973f",
+    "mbedtls": "068ff080b369adfac81509f9b57b2afabaf82dc5",
+    "sel4": "1326364bc9135d9445d936ebc01e38a402c1f4c6"
+  },
+  "submitted_at": "2026-10-02T11:52:52Z",
+  "row_count": 31,
+  "rules": [
+    "PRE31-C"
+  ],
+  "verdicts": {
+    "FP": 1,
+    "TP": 30
+  },
+  "origin": {
+    "carried": 16,
+    "new": 15
+  },
+  "recheck": null,
+  "notes": "PRE31-C delta-adjudication of aurora-lint 9c6eb108's first official real-world sweep after the side-effect-summary change (runs 318/319; base 316/317), projects sel4, lua, mbedtls. Every in-scope PRE31-C finding with no label in those runs, scoped by data/benchmark_repos.json at that commit; the per-arm header-macro delta is folded in, as its rows were still unlabeled. origin: 15 new against the base, 16 carried (already unlabeled in the base); each row's provenance says which. Each row was judged by reading the macro's definitions at the pinned commit (does some configuration evaluate the argument other than once) and the argument's callee bodies (does it modify an object, access a volatile object, or call something that does). Labels are the strict truth (ADR-0015 D5) under the owned-storage ruling: a write to storage the function wholly owns is not an effect. Relaxation tags in provenance: library-contract trust: contract:stdlib_call_effects where the only shown effect is through a C library call the hosted contract judges; call-side-effect-unproven where the effect rests on a callee with no definition in the scanned files. Tag counts: {'library-contract trust: contract:stdlib_call_effects': 1, 'call-side-effect-unproven: cap_irq_handler_cap_get_capIRQ, generated at build time': 2}. Counting basis: distinct (project, commit, file, line, rule) keys. No precision claim is made here. Two mbedtls rows (library/gcm.c 85 and 87) are deliberately left out: a pending owned-storage fix to the side-effect summaries is expected to remove them."
+}

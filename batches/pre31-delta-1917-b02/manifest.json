@@ -1,0 +1,30 @@
+{
+  "batch_id": "pre31-delta-1917-b02",
+  "work_item_ref": "benchmarking_db-1917",
+  "requested_by": "coordinator",
+  "adjudicating_node": "r720",
+  "adjudicator": "claude-opus-5.5",
+  "aurora_lint_version": "0.5.3",
+  "aurora_lint_sha": "9c6eb108096e661cef5e5b28bc402ea488091101",
+  "projects": [
+    "sqlite"
+  ],
+  "codebase_commits": {
+    "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
+  },
+  "submitted_at": "2026-10-02T11:52:52Z",
+  "row_count": 138,
+  "rules": [
+    "PRE31-C"
+  ],
+  "verdicts": {
+    "FP": 15,
+    "TP": 123
+  },
+  "origin": {
+    "carried": 58,
+    "new": 80
+  },
+  "recheck": null,
+  "notes": "PRE31-C delta-adjudication of aurora-lint 9c6eb108's first official real-world sweep after the side-effect-summary change (runs 318/319; base 316/317), projects sqlite. Every in-scope PRE31-C finding with no label in those runs, scoped by data/benchmark_repos.json at that commit; the per-arm header-macro delta is folded in, as its rows were still unlabeled. origin: 80 new against the base, 58 carried (already unlabeled in the base); each row's provenance says which. Each row was judged by reading the macro's definitions at the pinned commit (does some configuration evaluate the argument other than once) and the argument's callee bodies (does it modify an object, access a volatile object, or call something that does). Labels are the strict truth (ADR-0015 D5) under the owned-storage ruling: a write to storage the function wholly owns is not an effect. Relaxation tags in provenance: library-contract trust: contract:stdlib_call_effects where the only shown effect is through a C library call the hosted contract judges; call-side-effect-unproven where the effect rests on a callee with no definition in the scanned files. Tag counts: none. Counting basis: distinct (project, commit, file, line, rule) keys. No precision claim is made here."
+}
