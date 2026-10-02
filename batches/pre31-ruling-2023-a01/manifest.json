@@ -13,23 +13,24 @@
     "curl": "3e198f75861cc2e12daf299689e145949dddd19b"
   },
   "submitted_at": "2026-10-02T14:29:29Z",
-  "row_count": 117,
+  "row_count": 122,
   "rules": [
     "PRE31-C"
   ],
   "verdicts": {
     "FP": 5,
-    "TP": 112
+    "TP": 117
   },
   "corrections": {
     "FP_to_TP": 112,
-    "FP_restated": 5
+    "FP_restated": 5,
+    "TP_restated": 5
   },
   "recheck": {
     "basis": "ruling",
     "ruling": "Brandon 2026-10-02 PRE31-C ruling (A): a macro that, in any build configuration or on any runtime path, does not evaluate an argument is unsafe under PRE31-C as written (ADR-0001), including one that evaluates it once or not at all",
     "selection": "census",
-    "reviewed": 117,
+    "reviewed": 122,
     "flipped": 112,
     "blind_to_prior_verdict": false,
     "blind_to_diagnostic": false,
@@ -41,5 +42,5 @@
       "blind_to_diagnostic": false
     }
   },
-  "notes": "A RULING RELABEL. Brandon 2026-10-02 PRE31-C ruling (A): a macro that, in any build configuration or on any runtime path, does not evaluate an argument is unsafe under PRE31-C as written (ADR-0001), including one that evaluates it once or not at all. selection: census of every PRE31-C row on main labeled FP whose recorded reason rests on a zero-, once- or conditionally-evaluating macro being safe (DEBUGF/VERBOSE/DEBUGASSERT, the CURL_TRC_* trace macros, TRACELOG, RADIUS_DEBUG/ERROR, LOG_WOLF_ERROR_VA, WPA_ASSERT, assert/ALWAYS/TESTONLY/REGISTER_TRACE, seL4's assert/SMP_COND_STATEMENT/SMP_STATE_DEFINE, libdlt's DLT_LOG_STRING). Each row was re-derived at the pinned commit: the macro has a configuration or runtime path that does not evaluate the argument, so the verdict turns only on whether an argument at that line has a side effect (a write to an object, a volatile access, or a call to something that does), judged strict (ADR-0015 D5) under the owned-storage ruling. TP where it does; FP restated on a no-side-effect basis where every call in the arguments only reads. Left out of the census as not resting on zero or conditional evaluation: hostap wpa_supplicant/dbus/dbus_new_handlers.c:3324 (not a macro call), the RADIUS_DUMP rows (wpa_hexdump is a function in every build), mbedtls library/entropy_poll.c:60 (BCRYPT_SUCCESS evaluates its argument once in every build). Relaxation tags in provenance: call-side-effect-unproven where the only effect rests on a callee with no definition in the scanned files, a call through a function pointer, inline asm, or a benign-effect C library call (strerror); library-contract trust: contract:stdlib_call_effects where it rests on a C library call the hosted contract judges (strchr, memcmp, strlen). Tag counts: {'call-side-effect-unproven': 16, 'library-contract trust: contract:stdlib_call_effects': 1}. Counting basis: distinct (project, commit, file, line, rule) keys. No precision claim is made here. Revised after review: the 15 DEBUGF(curl_mfprintf(...)) rows are tagged call-side-effect-unproven (curl_mfprintf writes only through formatf's stream function pointer), not the library contract. Blind slice: the coordinator's reviewer re-labeled 5 of this batch's rows (random.Random(2023).sample over all 376 first-round keys) from the pinned source before reading the branch label; 0 verdict disagreements, 1 tag disagreement (the curl_mfprintf tag direction, since fixed). Some sqlite, sel4 and hostap slice rows were not fully blind (the reviewer had printed branch verdicts during the census), as the review discloses."
+  "notes": "A RULING RELABEL. Brandon 2026-10-02 PRE31-C ruling (A): a macro that, in any build configuration or on any runtime path, does not evaluate an argument is unsafe under PRE31-C as written (ADR-0001), including one that evaluates it once or not at all. selection: census of every PRE31-C row on main labeled FP whose recorded reason rests on a zero-, once- or conditionally-evaluating macro being safe (DEBUGF/VERBOSE/DEBUGASSERT, the CURL_TRC_* trace macros, TRACELOG, RADIUS_DEBUG/ERROR, LOG_WOLF_ERROR_VA, WPA_ASSERT, assert/ALWAYS/TESTONLY/REGISTER_TRACE, seL4's assert/SMP_COND_STATEMENT/SMP_STATE_DEFINE, libdlt's DLT_LOG_STRING). Each row was re-derived at the pinned commit: the macro has a configuration or runtime path that does not evaluate the argument, so the verdict turns only on whether an argument at that line has a side effect (a write to an object, a volatile access, or a call to something that does), judged strict (ADR-0015 D5) under the owned-storage ruling. TP where it does; FP restated on a no-side-effect basis where every call in the arguments only reads. Left out of the census as not resting on zero or conditional evaluation: hostap wpa_supplicant/dbus/dbus_new_handlers.c:3324 (not a macro call), the RADIUS_DUMP rows (wpa_hexdump is a function in every build), mbedtls library/entropy_poll.c:60 (BCRYPT_SUCCESS evaluates its argument once in every build). Relaxation tags in provenance: call-side-effect-unproven where the only effect rests on a callee with no definition in the scanned files, a call through a function pointer, inline asm, or a benign-effect C library call (strerror); library-contract trust: contract:stdlib_call_effects where it rests on a C library call the hosted contract judges (strchr, memcmp, strlen). Tag counts: {'call-side-effect-unproven': 21, 'library-contract trust: contract:stdlib_call_effects': 1}. Counting basis: distinct (project, commit, file, line, rule) keys. No precision claim is made here. Revised after review: the 14 DEBUGF(curl_mfprintf(...)) rows are tagged call-side-effect-unproven (curl_mfprintf writes only through formatf's stream function pointer), not the library contract. Blind slice: the coordinator's reviewer re-labeled 5 of this batch's rows (random.Random(2023).sample over all 376 first-round keys) from the pinned source before reading the branch label; 0 verdict disagreements, 1 tag disagreement (the curl_mfprintf tag direction, since fixed). Some sqlite, sel4 and hostap slice rows were not fully blind (the reviewer had printed branch verdicts during the census), as the review discloses. Also folded in after re-review: five delta-batch rows, curl lib/vauth/ntlm.c 382/502/770/785/790 (DEBUG_OUT around curl_mfprintf), keep TP and are re-tagged call-side-effect-unproven: curl_mfprintf for the same tag-direction reason (TP_restated 5)."
 }
