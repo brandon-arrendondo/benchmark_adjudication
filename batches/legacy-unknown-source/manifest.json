@@ -26,7 +26,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-09-06T20:18:13.951550",
-  "row_count": 305,
+  "row_count": 304,
   "rules": [
     "INT02-C",
     "INT30-C",
@@ -151,6 +151,14 @@
         "sqlite src/whereexpr.c:141 PRE31-C"
       ],
       "note": "PRE31-C re-derived under Brandon 2026-10-02 PRE31-C ruling (A): a macro that, in any build configuration or on any runtime path, does not evaluate an argument is unsafe under PRE31-C as written (ADR-0001), including one that evaluates it once or not at all; see pre31-ruling-2023-a04's manifest notes"
+    },
+    {
+      "by": "pre31-ruling-2023-a05",
+      "count": 1,
+      "keys": [
+        "sel4 src/arch/riscv/kernel/boot.c:437 PRE31-C"
+      ],
+      "note": "PRE31-C re-derived under Brandon 2026-10-02 PRE31-C ruling (A): a macro that, in any build configuration or on any runtime path, does not evaluate an argument is unsafe under PRE31-C as written (ADR-0001), including one that evaluates it once or not at all; see pre31-ruling-2023-a05's manifest notes"
     }
   ]
 }

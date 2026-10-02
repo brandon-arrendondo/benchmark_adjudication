@@ -22,7 +22,7 @@
     "ventoy": "7cbdc5cf69935bcf1f085ae67f40e70ea7e74bae"
   },
   "submitted_at": "2026-09-12T09:24:56.472645",
-  "row_count": 155,
+  "row_count": 149,
   "rules": [
     "PRE31-C"
   ],
@@ -46,6 +46,26 @@
         "sqlite src/main.c:4381 PRE31-C"
       ],
       "note": "PRE31-C re-derived under Brandon 2026-10-02 PRE31-C ruling (A): a macro that, in any build configuration or on any runtime path, does not evaluate an argument is unsafe under PRE31-C as written (ADR-0001), including one that evaluates it once or not at all; see pre31-ruling-2023-a04's manifest notes"
+    },
+    {
+      "by": "pre31-ruling-2023-a05",
+      "count": 1,
+      "keys": [
+        "sel4 src/fastpath/fastpath.c:669 PRE31-C"
+      ],
+      "note": "PRE31-C re-derived under Brandon 2026-10-02 PRE31-C ruling (A): a macro that, in any build configuration or on any runtime path, does not evaluate an argument is unsafe under PRE31-C as written (ADR-0001), including one that evaluates it once or not at all; see pre31-ruling-2023-a05's manifest notes"
+    },
+    {
+      "by": "pre31-ruling-2023-a06",
+      "count": 5,
+      "keys": [
+        "sel4 src/kernel/thread.c:612 PRE31-C",
+        "sel4 src/kernel/thread.c:715 PRE31-C",
+        "sel4 src/machine/capdl.c:350 PRE31-C",
+        "sel4 src/object/objecttype.c:245 PRE31-C",
+        "sel4 src/object/objecttype.c:758 PRE31-C"
+      ],
+      "note": "PRE31-C re-derived under Brandon 2026-10-02 PRE31-C ruling (b): an __attribute__((const)) or CONST declaration is the project's own declaration, not proof that a call has no side effect, and an accessor generated at build time has no body in the scanned files, so a call to it is unproven (strict TP, call-side-effect-unproven); see pre31-ruling-2023-a06's manifest notes"
     }
   ]
 }

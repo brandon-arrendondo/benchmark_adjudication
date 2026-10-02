@@ -1,0 +1,37 @@
+{
+  "batch_id": "pre31-ruling-2023-a06",
+  "work_item_ref": "benchmarking_db-2023",
+  "requested_by": "coordinator",
+  "adjudicating_node": "r720",
+  "adjudicator": "claude-opus-5.5",
+  "aurora_lint_version": "0.5.3",
+  "aurora_lint_sha": "9c6eb108096e661cef5e5b28bc402ea488091101",
+  "projects": [
+    "sel4"
+  ],
+  "codebase_commits": {
+    "sel4": "1326364bc9135d9445d936ebc01e38a402c1f4c6"
+  },
+  "submitted_at": "2026-10-02T15:44:03Z",
+  "rules": [
+    "PRE31-C"
+  ],
+  "row_count": 5,
+  "verdicts": {
+    "TP": 5
+  },
+  "corrections": {
+    "FP_to_TP": 5,
+    "FP_restated": 0
+  },
+  "recheck": {
+    "basis": "ruling",
+    "ruling": "Brandon 2026-10-02 PRE31-C ruling (b): an __attribute__((const)) or CONST declaration is the project's own declaration, not proof that a call has no side effect, and an accessor generated at build time has no body in the scanned files, so a call to it is unproven (strict TP, call-side-effect-unproven)",
+    "selection": "census",
+    "reviewed": 5,
+    "flipped": 5,
+    "blind_to_prior_verdict": false,
+    "blind_to_diagnostic": false
+  },
+  "notes": "A RULING RELABEL. Brandon 2026-10-02 PRE31-C ruling (b): an __attribute__((const)) or CONST declaration is the project's own declaration, not proof that a call has no side effect, and an accessor generated at build time has no body in the scanned files, so a call to it is unproven (strict TP, call-side-effect-unproven). Each row was re-derived at the pinned commit from the macro's definitions and the argument's callees, judged strict (ADR-0015 D5) under the owned-storage ruling. Tag counts: {'call-side-effect-unproven': 5}. Counting basis: distinct (project, commit, file, line, rule) keys. No precision claim is made here. The sel4 rows whose FP rested on a CONST-attributed callee being pure: capdl.c:350, objecttype.c:245/758 (IDX_TO_IRQT on the generated cap_irq_handler_cap_get_capIRQ) and thread.c:612/715 (MIN and SCHED_ENQUEUE on NODE_STATE, which calls getCurrentCPUIndex in an SMP build)."
+}

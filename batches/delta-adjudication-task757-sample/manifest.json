@@ -26,7 +26,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-09-06T17:56:24.031110",
-  "row_count": 1291,
+  "row_count": 1287,
   "rules": [
     "DCL04-C",
     "DCL06-C",
@@ -118,6 +118,17 @@
         "sqlite src/whereexpr.c:1082 PRE31-C"
       ],
       "note": "PRE31-C re-derived under Brandon 2026-10-02 PRE31-C ruling (A): a macro that, in any build configuration or on any runtime path, does not evaluate an argument is unsafe under PRE31-C as written (ADR-0001), including one that evaluates it once or not at all; see pre31-ruling-2023-a04's manifest notes"
+    },
+    {
+      "by": "pre31-ruling-2023-a05",
+      "count": 4,
+      "keys": [
+        "sel4 src/arch/arm/kernel/boot.c:148 PRE31-C",
+        "sqlite src/btree.c:11453 PRE31-C",
+        "sqlite src/os_win.c:3544 PRE31-C",
+        "sqlite src/printf.c:929 PRE31-C"
+      ],
+      "note": "PRE31-C re-derived under Brandon 2026-10-02 PRE31-C ruling (A): a macro that, in any build configuration or on any runtime path, does not evaluate an argument is unsafe under PRE31-C as written (ADR-0001), including one that evaluates it once or not at all; see pre31-ruling-2023-a05's manifest notes"
     }
   ]
 }

@@ -12,7 +12,7 @@
     "pureftpd": "cc28bff52ca28e1d122a2142bf37f2dc578f4d3e"
   },
   "submitted_at": "2026-08-19T20:51:49.864751",
-  "row_count": 218,
+  "row_count": 217,
   "rules": [
     "API02-C",
     "API07-C",
@@ -64,6 +64,14 @@
         "pureftpd src/log_pgsql.c:62 INT32-C"
       ],
       "note": "row re-keyed INT32-C -> INT30-C in place (verdict/reason kept) after 144baafc/task 1288 moved the allocation-size wrap; see that batch's manifest"
+    },
+    {
+      "by": "pre31-ruling-2023-a05",
+      "count": 1,
+      "keys": [
+        "pureftpd src/log_mysql.c:360 PRE31-C"
+      ],
+      "note": "PRE31-C re-derived under Brandon 2026-10-02 PRE31-C ruling (A): a macro that, in any build configuration or on any runtime path, does not evaluate an argument is unsafe under PRE31-C as written (ADR-0001), including one that evaluates it once or not at all; see pre31-ruling-2023-a05's manifest notes"
     }
   ]
 }

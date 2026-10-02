@@ -1,0 +1,44 @@
+{
+  "batch_id": "pre31-ruling-2023-a05",
+  "work_item_ref": "benchmarking_db-2023",
+  "requested_by": "coordinator",
+  "adjudicating_node": "r720",
+  "adjudicator": "claude-opus-5.5",
+  "aurora_lint_version": "0.5.3",
+  "aurora_lint_sha": "9c6eb108096e661cef5e5b28bc402ea488091101",
+  "projects": [
+    "curl",
+    "pureftpd",
+    "sel4",
+    "sqlite"
+  ],
+  "codebase_commits": {
+    "curl": "3e198f75861cc2e12daf299689e145949dddd19b",
+    "pureftpd": "cc28bff52ca28e1d122a2142bf37f2dc578f4d3e",
+    "sel4": "1326364bc9135d9445d936ebc01e38a402c1f4c6",
+    "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
+  },
+  "submitted_at": "2026-10-02T15:44:03Z",
+  "rules": [
+    "PRE31-C"
+  ],
+  "row_count": 69,
+  "verdicts": {
+    "FP": 38,
+    "TP": 31
+  },
+  "corrections": {
+    "FP_to_TP": 31,
+    "FP_restated": 38
+  },
+  "recheck": {
+    "basis": "ruling",
+    "ruling": "Brandon 2026-10-02 PRE31-C ruling (A): a macro that, in any build configuration or on any runtime path, does not evaluate an argument is unsafe under PRE31-C as written (ADR-0001), including one that evaluates it once or not at all",
+    "selection": "census",
+    "reviewed": 69,
+    "flipped": 31,
+    "blind_to_prior_verdict": false,
+    "blind_to_diagnostic": false
+  },
+  "notes": "A RULING RELABEL. Brandon 2026-10-02 PRE31-C ruling (A): a macro that, in any build configuration or on any runtime path, does not evaluate an argument is unsafe under PRE31-C as written (ADR-0001), including one that evaluates it once or not at all. Each row was re-derived at the pinned commit from the macro's definitions and the argument's callees, judged strict (ADR-0015 D5) under the owned-storage ruling. Tag counts: {'call-side-effect-unproven': 10, 'library-contract trust: contract:stdlib_call_effects': 18}. Counting basis: distinct (project, commit, file, line, rule) keys. No precision claim is made here. Added after review: the census gap, rows whose recorded reason rests on the overturned premise in a template the first census missed (curl DEBUGASSERT 'referenced at most once in every branch'), plus sel4 fastpath.c:669, riscv boot.c:437, arm boot.c:148, sqlite btree.c:11453, os_win.c:3544, printf.c:929 and pureftpd log_mysql.c:360."
+}
