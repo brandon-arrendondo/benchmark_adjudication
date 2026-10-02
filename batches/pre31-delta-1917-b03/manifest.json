@@ -13,7 +13,7 @@
     "valkey": "7f1dffedff6de73058b2c2a389422b6ecd56c8fb"
   },
   "submitted_at": "2026-10-02T11:52:52Z",
-  "row_count": 151,
+  "row_count": 150,
   "rules": [
     "PRE31-C"
   ],
@@ -26,5 +26,15 @@
     "carried": 116
   },
   "recheck": null,
-  "notes": "PRE31-C delta-adjudication of aurora-lint 9c6eb108's first official real-world sweep after the side-effect-summary change (runs 318/319; base 316/317), projects valkey. Every in-scope PRE31-C finding with no label in those runs, scoped by data/benchmark_repos.json at that commit; the per-arm header-macro delta is folded in, as its rows were still unlabeled. origin: 35 new against the base, 116 carried (already unlabeled in the base); each row's provenance says which. Each row was judged by reading the macro's definitions at the pinned commit (does some configuration evaluate the argument other than once) and the argument's callee bodies (does it modify an object, access a volatile object, or call something that does). Labels are the strict truth (ADR-0015 D5) under the owned-storage ruling: a write to storage the function wholly owns is not an effect. Relaxation tags in provenance: library-contract trust: contract:stdlib_call_effects where the only shown effect is through a C library call the hosted contract judges; call-side-effect-unproven where the effect rests on a callee with no definition in the scanned files. Tag counts: {'call-side-effect-unproven: strerror': 1, 'library-contract trust: contract:stdlib_call_effects': 3}. Counting basis: distinct (project, commit, file, line, rule) keys. No precision claim is made here. Revised before merge after review: src/bio.c:341 is TP (the statement also passes strerror(err); tag call-side-effect-unproven: strerror). Keys whose verdict depends on the pending ruling on whether an assertion's failure path counts as a side effect (labeled FP under PRE31-C's nested-assert convention, confidence medium): valkey src/bio.c:343 and src/cluster_legacy.c:1382, PRE31-C, at 7f1dffedff6de73058b2c2a389422b6ecd56c8fb."
+  "notes": "PRE31-C delta-adjudication of aurora-lint 9c6eb108's first official real-world sweep after the side-effect-summary change (runs 318/319; base 316/317), projects valkey. Every in-scope PRE31-C finding with no label in those runs, scoped by data/benchmark_repos.json at that commit; the per-arm header-macro delta is folded in, as its rows were still unlabeled. origin: 35 new against the base, 116 carried (already unlabeled in the base); each row's provenance says which. Each row was judged by reading the macro's definitions at the pinned commit (does some configuration evaluate the argument other than once) and the argument's callee bodies (does it modify an object, access a volatile object, or call something that does). Labels are the strict truth (ADR-0015 D5) under the owned-storage ruling: a write to storage the function wholly owns is not an effect. Relaxation tags in provenance: library-contract trust: contract:stdlib_call_effects where the only shown effect is through a C library call the hosted contract judges; call-side-effect-unproven where the effect rests on a callee with no definition in the scanned files. Tag counts: {'call-side-effect-unproven: strerror': 1, 'library-contract trust: contract:stdlib_call_effects': 3}. Counting basis: distinct (project, commit, file, line, rule) keys. No precision claim is made here. Revised before merge after review: src/bio.c:341 is TP (the statement also passes strerror(err); tag call-side-effect-unproven: strerror). Keys whose verdict depends on the pending ruling on whether an assertion's failure path counts as a side effect (labeled FP under PRE31-C's nested-assert convention, confidence medium): valkey src/bio.c:343 and src/cluster_legacy.c:1382, PRE31-C, at 7f1dffedff6de73058b2c2a389422b6ecd56c8fb.",
+  "superseded_rows": [
+    {
+      "by": "pre31-ruling-2026-a01",
+      "count": 1,
+      "keys": [
+        "valkey src/rax.c:679 PRE31-C"
+      ],
+      "note": "PRE31-C re-derived under Brandon 2026-10-02 PRE31-C ruling (a) (a C library call is an unknown call under the strict, freestanding reading); see pre31-ruling-2026-a01's manifest notes"
+    }
+  ]
 }

@@ -19,24 +19,31 @@
     "valkey": "7f1dffedff6de73058b2c2a389422b6ecd56c8fb"
   },
   "submitted_at": "2026-10-02T16:21:43Z",
-  "row_count": 43,
+  "row_count": 45,
   "rules": [
     "PRE31-C"
   ],
   "verdicts": {
-    "TP": 43
+    "TP": 45
   },
   "corrections": {
-    "FP_to_TP": 43
+    "FP_to_TP": 45
   },
   "recheck": {
     "basis": "ruling",
     "ruling": "Brandon 2026-10-02 PRE31-C ruling (a): the oracle records the strict, freestanding truth, where a C library call is an unknown call and strict counts an unknown call as a side effect, so an argument whose only effect is such a call is strict TP; the hosted contract that calls it pure is the relaxation, tagged contract:stdlib_call_effects (ADR-0014, ADR-0015 D5)",
     "selection": "census",
-    "reviewed": 43,
-    "flipped": 43,
+    "reviewed": 45,
+    "flipped": 45,
     "blind_to_prior_verdict": false,
-    "blind_to_diagnostic": false
+    "blind_to_diagnostic": false,
+    "blind_slice": {
+      "seed": 2026,
+      "reviewed": 12,
+      "disagreed": 0,
+      "blind_to_prior_verdict": true,
+      "blind_to_diagnostic": false
+    }
   },
-  "notes": "A RULING RELABEL. Brandon 2026-10-02 PRE31-C ruling (a): the oracle records the strict, freestanding truth, where a C library call is an unknown call and strict counts an unknown call as a side effect, so an argument whose only effect is such a call is strict TP; the hosted contract that calls it pure is the relaxation, tagged contract:stdlib_call_effects (ADR-0014, ADR-0015 D5). selection: census of every PRE31-C FP on main whose recorded reason names a C library call as what makes the argument side-effect free, each re-derived at the pinned commit: mosquitto's uthash HASH_FIND / HASH_ADD_KEYPTR / HASH_VALUE / HASH_ADD_KEYPTR_BYHASHVALUE rows with a strlen(...) key length (every one evaluates keylen more than once; HASH_FUNCTION defaults to HASH_JEN), curl's two CURLMIN(..., strlen(...)) rows, and sqlite src/os_unix.c:5459 (assert of assertLockingArrayOk, which calls only memset and memcmp). Also, at the coordinator's direction, valkey src/vset.c:932, whose FP rested on a function-pointer callback being 'pure by contract': TP + call-side-effect-unproven. Kept FP and left out after re-derivation: raylib RL_CALLOC x3 and pureftpd IN_MULTICAST (each evaluates its argument exactly once), valkey src/rdma.c:357 (abs is a real function, not a macro), valkey src/t_zset.c:882 (isnan evaluates once in every definition), curl lib/curlx/warnless.c:294 (no library call on the line). Tag counts: {'library-contract trust: contract:stdlib_call_effects': 42, 'call-side-effect-unproven': 1}. Counting basis: distinct (project, commit, file, line, rule) keys. No precision claim is made here. No blind slice yet: the task asks for one by a fresh reader or the coordinator's reviewer."
+  "notes": "A RULING RELABEL. Brandon 2026-10-02 PRE31-C ruling (a): the oracle records the strict, freestanding truth, where a C library call is an unknown call and strict counts an unknown call as a side effect, so an argument whose only effect is such a call is strict TP; the hosted contract that calls it pure is the relaxation, tagged contract:stdlib_call_effects (ADR-0014, ADR-0015 D5). selection: census of every PRE31-C FP on main whose recorded reason names a C library call as what makes the argument side-effect free, each re-derived at the pinned commit: mosquitto's uthash HASH_FIND / HASH_ADD_KEYPTR / HASH_VALUE / HASH_ADD_KEYPTR_BYHASHVALUE rows with a strlen(...) key length (every one evaluates keylen more than once; HASH_FUNCTION defaults to HASH_JEN), curl's two CURLMIN(..., strlen(...)) rows, and sqlite src/os_unix.c:5459 (assert of assertLockingArrayOk, which calls only memset and memcmp). Also, at the coordinator's direction, valkey src/vset.c:932, whose FP rested on a function-pointer callback being 'pure by contract': TP + call-side-effect-unproven. Kept FP and left out after re-derivation: raylib RL_CALLOC x3 and pureftpd IN_MULTICAST (each evaluates its argument exactly once), valkey src/rdma.c:357 (abs is a real function, not a macro), valkey src/t_zset.c:882 (isnan evaluates once in every definition), curl lib/curlx/warnless.c:294 (no library call on the line). Tag counts: {'library-contract trust: contract:stdlib_call_effects': 44, 'call-side-effect-unproven': 1}. Counting basis: distinct (project, commit, file, line, rule) keys. No precision claim is made here. Added after review: valkey src/rax.c:679 (debugf of raxGetData, which calls memcpy) and sqlite src/vdbe.c:9290 (assert of sqlite3_strlike, whose patternCompare reaches toupper()/tolower() in the non-ASCII build) become TP + contract, on the same basis as os_unix.c:5459. sqlite src/build.c:2172 stays FP: the call passes a literal 0 Column*, and on that path sqlite3AffinityType reads only sqlite3UpperToLower[]; its library-reaching calls (sqlite3Isdigit, sqlite3GetInt32) are behind if( pCol ), so no configuration reaches a C library call from this argument. Blind slice: the coordinator's reviewer re-labeled random.Random(2026).sample(sorted(changed_keys), 12) of the first 43 rows (11 mosquitto, 1 curl) from the pinned source: 12/12 verdicts and 12/12 tags agree; strictly blind 11/11 (the reviewer had seen curl lib/curl_ntlm_core.c:360's label before sampling)."
 }
