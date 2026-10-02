@@ -22,9 +22,30 @@
     "ventoy": "7cbdc5cf69935bcf1f085ae67f40e70ea7e74bae"
   },
   "submitted_at": "2026-09-12T09:24:56.472645",
-  "row_count": 160,
+  "row_count": 155,
   "rules": [
     "PRE31-C"
   ],
-  "notes": "Reconstructed during benchmark_adjudication's initial population (2026-09-16) from benchmarking_db's ground_truth.source='delta-adjudication-pre31c-run250-crossfile-fix'. row_count/projects/codebase_commits/rules were derived from the rows themselves, not declared at adjudication time. aurora_lint_version/aurora_lint_sha are unknown for legacy data -- never recorded per-row."
+  "notes": "Reconstructed during benchmark_adjudication's initial population (2026-09-16) from benchmarking_db's ground_truth.source='delta-adjudication-pre31c-run250-crossfile-fix'. row_count/projects/codebase_commits/rules were derived from the rows themselves, not declared at adjudication time. aurora_lint_version/aurora_lint_sha are unknown for legacy data -- never recorded per-row.",
+  "superseded_rows": [
+    {
+      "by": "pre31-ruling-2023-a03",
+      "count": 4,
+      "keys": [
+        "sel4 src/kernel/thread.c:563 PRE31-C",
+        "sel4 src/machine/capdl.c:461 PRE31-C",
+        "sel4 src/machine/capdl.c:507 PRE31-C",
+        "sel4 src/model/statedata.c:18 PRE31-C"
+      ],
+      "note": "PRE31-C re-derived under Brandon 2026-10-02 PRE31-C ruling (A): a macro that, in any build configuration or on any runtime path, does not evaluate an argument is unsafe under PRE31-C as written (ADR-0001), including one that evaluates it once or not at all; see pre31-ruling-2023-a03's manifest notes"
+    },
+    {
+      "by": "pre31-ruling-2023-a04",
+      "count": 1,
+      "keys": [
+        "sqlite src/main.c:4381 PRE31-C"
+      ],
+      "note": "PRE31-C re-derived under Brandon 2026-10-02 PRE31-C ruling (A): a macro that, in any build configuration or on any runtime path, does not evaluate an argument is unsafe under PRE31-C as written (ADR-0001), including one that evaluates it once or not at all; see pre31-ruling-2023-a04's manifest notes"
+    }
+  ]
 }

@@ -26,7 +26,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-09-06T17:56:24.031110",
-  "row_count": 1337,
+  "row_count": 1291,
   "rules": [
     "DCL04-C",
     "DCL06-C",
@@ -43,5 +43,81 @@
     "PRE00-C",
     "PRE31-C"
   ],
-  "notes": "Reconstructed during benchmark_adjudication's initial population (2026-09-16) from benchmarking_db's ground_truth.source='delta-adjudication-task757-sample'. row_count/projects/codebase_commits/rules were derived from the rows themselves, not declared at adjudication time. aurora_lint_version/aurora_lint_sha are unknown for legacy data -- never recorded per-row."
+  "notes": "Reconstructed during benchmark_adjudication's initial population (2026-09-16) from benchmarking_db's ground_truth.source='delta-adjudication-task757-sample'. row_count/projects/codebase_commits/rules were derived from the rows themselves, not declared at adjudication time. aurora_lint_version/aurora_lint_sha are unknown for legacy data -- never recorded per-row.",
+  "superseded_rows": [
+    {
+      "by": "pre31-ruling-2023-a01",
+      "count": 7,
+      "keys": [
+        "curl lib/http_ntlm.c:202 PRE31-C",
+        "curl lib/mime.c:1138 PRE31-C",
+        "curl lib/request.c:209 PRE31-C",
+        "curl lib/select.c:571 PRE31-C",
+        "curl lib/tftp.c:1267 PRE31-C",
+        "curl lib/tftp.c:872 PRE31-C",
+        "curl lib/url.c:995 PRE31-C"
+      ],
+      "note": "PRE31-C re-derived under Brandon 2026-10-02 PRE31-C ruling (A): a macro that, in any build configuration or on any runtime path, does not evaluate an argument is unsafe under PRE31-C as written (ADR-0001), including one that evaluates it once or not at all; see pre31-ruling-2023-a01's manifest notes"
+    },
+    {
+      "by": "pre31-ruling-2023-a02",
+      "count": 6,
+      "keys": [
+        "curl lib/cf-h2-proxy.c:764 PRE31-C",
+        "curl lib/ftp.c:146 PRE31-C",
+        "curl lib/ftp.c:1785 PRE31-C",
+        "curl lib/ftp.c:788 PRE31-C",
+        "curl lib/http2.c:1929 PRE31-C",
+        "curl lib/http2.c:2304 PRE31-C"
+      ],
+      "note": "PRE31-C re-derived under Brandon 2026-10-02 PRE31-C ruling (A): a macro that, in any build configuration or on any runtime path, does not evaluate an argument is unsafe under PRE31-C as written (ADR-0001), including one that evaluates it once or not at all; see pre31-ruling-2023-a02's manifest notes"
+    },
+    {
+      "by": "pre31-ruling-2023-a03",
+      "count": 21,
+      "keys": [
+        "hostap src/fst/fst_group.c:491 PRE31-C",
+        "hostap src/fst/fst_session.c:101 PRE31-C",
+        "hostap src/radius/radius_server.c:1439 PRE31-C",
+        "hostap src/radius/radius_server.c:1467 PRE31-C",
+        "hostap src/radius/radius_server.c:2577 PRE31-C",
+        "hostap src/radius/radius_server.c:618 PRE31-C",
+        "hostap src/radius/radius_server.c:676 PRE31-C",
+        "hostap src/radius/radius_server.c:706 PRE31-C",
+        "raylib src/platforms/rcore_desktop_rgfw.c:1910 PRE31-C",
+        "raylib src/platforms/rcore_desktop_win32.c:1688 PRE31-C",
+        "raylib src/platforms/rcore_desktop_win32.c:1863 PRE31-C",
+        "raylib src/platforms/rcore_desktop_win32.c:1934 PRE31-C",
+        "raylib src/platforms/rcore_drm.c:1235 PRE31-C",
+        "raylib src/platforms/rcore_drm.c:1487 PRE31-C",
+        "raylib src/platforms/rcore_drm.c:2253 PRE31-C",
+        "raylib src/platforms/rcore_drm.c:2578 PRE31-C",
+        "raylib src/platforms/rcore_web.c:1425 PRE31-C",
+        "sel4 src/arch/x86/32/kernel/vspace_32paging.c:208 PRE31-C",
+        "sel4 src/arch/x86/64/kernel/vspace.c:143 PRE31-C",
+        "sel4 src/kernel/thread.c:43 PRE31-C",
+        "sel4 src/kernel/thread.c:742 PRE31-C"
+      ],
+      "note": "PRE31-C re-derived under Brandon 2026-10-02 PRE31-C ruling (A): a macro that, in any build configuration or on any runtime path, does not evaluate an argument is unsafe under PRE31-C as written (ADR-0001), including one that evaluates it once or not at all; see pre31-ruling-2023-a03's manifest notes"
+    },
+    {
+      "by": "pre31-ruling-2023-a04",
+      "count": 12,
+      "keys": [
+        "sqlite ext/fts5/fts5_main.c:1357 PRE31-C",
+        "sqlite src/btree.c:10172 PRE31-C",
+        "sqlite src/build.c:690 PRE31-C",
+        "sqlite src/expr.c:5129 PRE31-C",
+        "sqlite src/func.c:2069 PRE31-C",
+        "sqlite src/insert.c:3176 PRE31-C",
+        "sqlite src/malloc.c:370 PRE31-C",
+        "sqlite src/pager.c:1361 PRE31-C",
+        "sqlite src/pager.c:5144 PRE31-C",
+        "sqlite src/pager.c:5669 PRE31-C",
+        "sqlite src/select.c:1838 PRE31-C",
+        "sqlite src/whereexpr.c:1082 PRE31-C"
+      ],
+      "note": "PRE31-C re-derived under Brandon 2026-10-02 PRE31-C ruling (A): a macro that, in any build configuration or on any runtime path, does not evaluate an argument is unsafe under PRE31-C as written (ADR-0001), including one that evaluates it once or not at all; see pre31-ruling-2023-a04's manifest notes"
+    }
+  ]
 }

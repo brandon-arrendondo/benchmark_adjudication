@@ -1,0 +1,38 @@
+{
+  "batch_id": "pre31-ruling-2023-a01",
+  "work_item_ref": "benchmarking_db-2023",
+  "requested_by": "coordinator",
+  "adjudicating_node": "r720",
+  "adjudicator": "claude-opus-5.5",
+  "aurora_lint_version": "0.5.3",
+  "aurora_lint_sha": "9c6eb108096e661cef5e5b28bc402ea488091101",
+  "projects": [
+    "curl"
+  ],
+  "codebase_commits": {
+    "curl": "3e198f75861cc2e12daf299689e145949dddd19b"
+  },
+  "submitted_at": "2026-10-02T14:29:29Z",
+  "row_count": 117,
+  "rules": [
+    "PRE31-C"
+  ],
+  "verdicts": {
+    "FP": 5,
+    "TP": 112
+  },
+  "corrections": {
+    "FP_to_TP": 112,
+    "FP_restated": 5
+  },
+  "recheck": {
+    "basis": "ruling",
+    "ruling": "Brandon 2026-10-02 PRE31-C ruling (A): a macro that, in any build configuration or on any runtime path, does not evaluate an argument is unsafe under PRE31-C as written (ADR-0001), including one that evaluates it once or not at all",
+    "selection": "census",
+    "reviewed": 117,
+    "flipped": 112,
+    "blind_to_prior_verdict": false,
+    "blind_to_diagnostic": false
+  },
+  "notes": "A RULING RELABEL. Brandon 2026-10-02 PRE31-C ruling (A): a macro that, in any build configuration or on any runtime path, does not evaluate an argument is unsafe under PRE31-C as written (ADR-0001), including one that evaluates it once or not at all. selection: census of every PRE31-C row on main labeled FP whose recorded reason rests on a zero-, once- or conditionally-evaluating macro being safe (DEBUGF/VERBOSE/DEBUGASSERT, the CURL_TRC_* trace macros, TRACELOG, RADIUS_DEBUG/ERROR, LOG_WOLF_ERROR_VA, WPA_ASSERT, assert/ALWAYS/TESTONLY/REGISTER_TRACE, seL4's assert/SMP_COND_STATEMENT/SMP_STATE_DEFINE, libdlt's DLT_LOG_STRING). Each row was re-derived at the pinned commit: the macro has a configuration or runtime path that does not evaluate the argument, so the verdict turns only on whether an argument at that line has a side effect (a write to an object, a volatile access, or a call to something that does), judged strict (ADR-0015 D5) under the owned-storage ruling. TP where it does; FP restated on a no-side-effect basis where every call in the arguments only reads. Left out of the census as not resting on zero or conditional evaluation: hostap wpa_supplicant/dbus/dbus_new_handlers.c:3324 (not a macro call), the RADIUS_DUMP rows (wpa_hexdump is a function in every build), mbedtls library/entropy_poll.c:60 (BCRYPT_SUCCESS evaluates its argument once in every build). Relaxation tags in provenance: call-side-effect-unproven where the only effect rests on a callee with no definition in the scanned files, a call through a function pointer, inline asm, or a benign-effect C library call (strerror); library-contract trust: contract:stdlib_call_effects where it rests on a C library call the hosted contract judges (strchr, memcmp, strlen, stdio). Tag counts: {'library-contract trust: contract:stdlib_call_effects': 15, 'call-side-effect-unproven': 2}. Counting basis: distinct (project, commit, file, line, rule) keys. No precision claim is made here. No blind slice: the reader had already seen every prior verdict (all FP) while deriving the census."
+}
