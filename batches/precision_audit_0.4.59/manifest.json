@@ -12,7 +12,7 @@
     "lua": "40b76de2d77e66b70a9d4bf989c3f5340919973f"
   },
   "submitted_at": "2026-06-22",
-  "row_count": 2364,
+  "row_count": 2362,
   "rules": [
     "API00-C",
     "API01-C",
@@ -277,9 +277,11 @@
     },
     {
       "by": "retire-cert-cpp-ids-fio50-fio51-bmdb2229",
-      "count": 3,
+      "count": 5,
       "keys": [
         "lua lauxlib.c:1167 FIO50-C",
+        "lua liolib.c:262 FIO51-C",
+        "lua liolib.c:275 FIO51-C",
         "lua lobject.c:106 FIO50-C",
         "lua lstring.c:56 FIO50-C"
       ],

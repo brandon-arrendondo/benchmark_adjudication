@@ -12,7 +12,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-06-12",
-  "row_count": 2934,
+  "row_count": 2932,
   "rules": [
     "API00-C",
     "API02-C",
@@ -402,9 +402,11 @@
     },
     {
       "by": "retire-cert-cpp-ids-fio50-fio51-bmdb2229",
-      "count": 4,
+      "count": 6,
       "keys": [
         "sqlite ext/misc/base85.c:234 FIO50-C",
+        "sqlite ext/misc/base85.c:434 FIO50-C",
+        "sqlite ext/misc/csv.c:136 FIO51-C",
         "sqlite src/json.c:1254 FIO50-C",
         "sqlite src/json.c:1321 FIO50-C",
         "sqlite src/json.c:1327 FIO50-C"

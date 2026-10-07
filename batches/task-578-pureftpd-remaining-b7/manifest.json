@@ -12,7 +12,7 @@
     "pureftpd": "cc28bff52ca28e1d122a2142bf37f2dc578f4d3e"
   },
   "submitted_at": "2026-09-18T15:11:15Z",
-  "row_count": 127,
+  "row_count": 126,
   "rules": [
     "FIO01-C",
     "FIO02-C",
@@ -39,9 +39,10 @@
   "superseded_rows": [
     {
       "by": "retire-cert-cpp-ids-fio50-fio51-bmdb2229",
-      "count": 8,
+      "count": 9,
       "keys": [
         "pureftpd puredb/src/puredb_write.c:310 FIO50-C",
+        "pureftpd puredb/src/puredb_write.c:65 FIO51-C",
         "pureftpd src/crypto.c:68 FIO50-C",
         "pureftpd src/crypto.c:69 FIO50-C",
         "pureftpd src/crypto.c:76 FIO50-C",

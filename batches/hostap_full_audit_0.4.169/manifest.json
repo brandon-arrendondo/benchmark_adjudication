@@ -12,7 +12,7 @@
     "hostap": "dcee60436390dd34731560657c4257c3b4c839a6"
   },
   "submitted_at": "2026-07-28",
-  "row_count": 29555,
+  "row_count": 29554,
   "rules": [
     "API00-C",
     "API01-C",
@@ -1922,7 +1922,7 @@
     },
     {
       "by": "retire-cert-cpp-ids-fio50-fio51-bmdb2229",
-      "count": 22,
+      "count": 23,
       "keys": [
         "hostap hostapd/sae_pk_gen.c:162 FIO50-C",
         "hostap src/ap/ieee802_11_vht.c:67 FIO50-C",
@@ -1942,6 +1942,7 @@
         "hostap src/crypto/des-internal.c:410 FIO50-C",
         "hostap src/crypto/random.c:74 FIO50-C",
         "hostap src/crypto/sha1-internal.c:259 FIO50-C",
+        "hostap src/eap_peer/eap_fast_pac.c:276 FIO51-C",
         "hostap src/tls/libtommath.c:1423 FIO50-C",
         "hostap src/tls/libtommath.c:2385 FIO50-C",
         "hostap src/utils/base64.c:135 FIO50-C",

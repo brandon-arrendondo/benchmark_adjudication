@@ -2002,14 +2002,12 @@ lua,40b76de2d77e66b70a9d4bf989c3f5340919973f,liolib.c,254,EXP34-C,FP,claude-sonn
 lua,40b76de2d77e66b70a9d4bf989c3f5340919973f,liolib.c,256,DCL30-C,FP,claude-sonnet-4.6,"p is Lua GC userdata, not stack storage; return is safe",precision_audit_0.4.59,2026-06-22,precision_audit,high
 lua,40b76de2d77e66b70a9d4bf989c3f5340919973f,liolib.c,262,EXP34-C,FP,claude-sonnet-4.6,p from newfile (via newprefile/lua_newuserdatauv) is always non-NULL,precision_audit_0.4.59,2026-06-22,precision_audit,high
 lua,40b76de2d77e66b70a9d4bf989c3f5340919973f,liolib.c,262,FIO42-C,FP,claude-sonnet-4.6,p->f is managed by io_fclose via Lua GC; file is closed via closef callback,precision_audit_0.4.59,2026-06-22,precision_audit,high
-lua,40b76de2d77e66b70a9d4bf989c3f5340919973f,liolib.c,262,FIO51-C,FP,claude-sonnet-4.6,File closed via io_fclose registered in closef; Lua GC manages lifecycle,precision_audit_0.4.59,2026-06-22,precision_audit,high
 lua,40b76de2d77e66b70a9d4bf989c3f5340919973f,liolib.c,263,EXP19-C,TP,claude-sonnet-5,,delta-adjudication-task757-round22,2026-09-07T23:13:18.119548,,
 lua,40b76de2d77e66b70a9d4bf989c3f5340919973f,liolib.c,264,CON33-C,FP,claude-sonnet-4.6,Lua io library is single-threaded by design; strerror thread safety not a concern,precision_audit_0.4.59,2026-06-22,precision_audit,high
 lua,40b76de2d77e66b70a9d4bf989c3f5340919973f,liolib.c,264,CON34-C,FP,claude-sonnet-4.6,"Same rationale; Lua state is single-threaded, strerror static buffer not shared",precision_audit_0.4.59,2026-06-22,precision_audit,high
 lua,40b76de2d77e66b70a9d4bf989c3f5340919973f,liolib.c,275,ERR00-C,FP,claude-sonnet-4.6,fopen return is checked at line 276: (p->f == NULL) ? luaL_fileresult...,precision_audit_0.4.59,2026-06-22,precision_audit,high
 lua,40b76de2d77e66b70a9d4bf989c3f5340919973f,liolib.c,275,EXP34-C,FP,claude-sonnet-4.6,p from newfile always non-NULL; Lua raises on OOM before returning,precision_audit_0.4.59,2026-06-22,precision_audit,high
 lua,40b76de2d77e66b70a9d4bf989c3f5340919973f,liolib.c,275,FIO42-C,FP,claude-sonnet-4.6,io_open assigns p->f and closef=io_fclose; lifecycle managed by Lua GC,precision_audit_0.4.59,2026-06-22,precision_audit,high
-lua,40b76de2d77e66b70a9d4bf989c3f5340919973f,liolib.c,275,FIO51-C,FP,claude-sonnet-4.6,File closed by io_fclose via GC-managed closef; FP,precision_audit_0.4.59,2026-06-22,precision_audit,high
 lua,40b76de2d77e66b70a9d4bf989c3f5340919973f,liolib.c,296,EXP34-C,FP,claude-sonnet-4.6,p from newprefile always non-NULL; Lua raises on allocation failure,precision_audit_0.4.59,2026-06-22,precision_audit,high
 lua,40b76de2d77e66b70a9d4bf989c3f5340919973f,liolib.c,296,FIO42-C,FP,claude-sonnet-4.6,io_popen sets closef=io_pclose; FILE closed by pclose via Lua GC,precision_audit_0.4.59,2026-06-22,precision_audit,high
 lua,40b76de2d77e66b70a9d4bf989c3f5340919973f,liolib.c,305,EXP34-C,FP,claude-sonnet-4.6,p from newfile always non-NULL,precision_audit_0.4.59,2026-06-22,precision_audit,high

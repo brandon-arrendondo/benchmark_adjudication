@@ -12,7 +12,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-06-14T18:15:55.904371+00:00",
-  "row_count": 1142,
+  "row_count": 1140,
   "rules": [
     "API00-C",
     "API02-C",
@@ -398,9 +398,11 @@
     },
     {
       "by": "retire-cert-cpp-ids-fio50-fio51-bmdb2229",
-      "count": 1,
+      "count": 3,
       "keys": [
-        "sqlite ext/misc/sha1.c:161 FIO50-C"
+        "sqlite ext/misc/sha1.c:161 FIO50-C",
+        "sqlite ext/misc/tmstmpvfs.c:498 FIO51-C",
+        "sqlite ext/misc/vfslog.c:296 FIO51-C"
       ],
       "note": "retired from the CERT C oracle: FIO50-C/FIO51-C are CERT C++ ids, removed from aurora-lint at 9aace3a3; row archived, verdict unchanged; see retire-cert-cpp-ids-fio50-fio51-bmdb2229"
     }
