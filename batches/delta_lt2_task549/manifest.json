@@ -22,7 +22,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-08-25T10:00:19.860628",
-  "row_count": 64,
+  "row_count": 59,
   "rules": [
     "API07-C",
     "CON02-C",
@@ -54,6 +54,18 @@
         "hostap src/tls/libtommath.c:583 MSC37-C"
       ],
       "note": "restated or settled by Brandon's priority-queue gavel verdict (bmdb 1341); see gavel-pq-1341-2026-09-29's manifest"
+    },
+    {
+      "by": "retire-non-cert-c-ids-cwe-ruleset-bmdb2207",
+      "count": 5,
+      "keys": [
+        "curl lib/curl_ntlm_core.c:320 MSC42-C",
+        "curl lib/curl_ntlm_core.c:324 MSC42-C",
+        "curl lib/curl_ntlm_core.c:328 MSC42-C",
+        "curl lib/curl_ntlm_core.c:372 MSC42-C",
+        "curl lib/curl_ntlm_core.c:376 MSC42-C"
+      ],
+      "note": "retired from the CERT C oracle: rule id moved to the CWE ruleset (aurora-lint 4a4ec2b2), not a CERT C identifier; row archived, verdict unchanged; see retire-non-cert-c-ids-cwe-ruleset-bmdb2207"
     }
   ]
 }

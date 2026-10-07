@@ -12,7 +12,7 @@
     "ventoy": "7cbdc5cf69935bcf1f085ae67f40e70ea7e74bae"
   },
   "submitted_at": "2026-09-14T15:03:07.205857",
-  "row_count": 2449,
+  "row_count": 2447,
   "rules": [
     "API00-C",
     "API01-C",
@@ -153,6 +153,15 @@
         "ventoy Ventoy2Disk/Ventoy2Disk/VentoyJson.c:719 API00-C"
       ],
       "note": "API00-C TP restated on the main() argc/argv ruling's basis (Brandon 2026-09-24, bmdb 1548): argv[1] indexed with no argc bound; verdict unchanged; see that batch manifest notes"
+    },
+    {
+      "by": "retire-non-cert-c-ids-cwe-ruleset-bmdb2207",
+      "count": 2,
+      "keys": [
+        "ventoy Ventoy2Disk/Ventoy2Disk/Utility.c:1194 WIN05-C",
+        "ventoy Ventoy2Disk/Ventoy2Disk/Utility.c:664 WIN05-C"
+      ],
+      "note": "retired from the CERT C oracle: rule id moved to the CWE ruleset (aurora-lint 4a4ec2b2), not a CERT C identifier; row archived, verdict unchanged; see retire-non-cert-c-ids-cwe-ruleset-bmdb2207"
     }
   ]
 }
