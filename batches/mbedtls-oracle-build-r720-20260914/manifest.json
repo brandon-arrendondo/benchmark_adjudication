@@ -12,7 +12,7 @@
     "mbedtls": "068ff080b369adfac81509f9b57b2afabaf82dc5"
   },
   "submitted_at": "2026-09-14T17:32:48.190170",
-  "row_count": 8269,
+  "row_count": 8229,
   "rules": [
     "API00-C",
     "API01-C",
@@ -290,6 +290,53 @@
         "mbedtls library/net_sockets.c:343 POS55-C"
       ],
       "note": "retired from the CERT C oracle: rule id moved to the CWE ruleset (aurora-lint 4a4ec2b2), not a CERT C identifier; row archived, verdict unchanged; see retire-non-cert-c-ids-cwe-ruleset-bmdb2207"
+    },
+    {
+      "by": "retire-cert-cpp-ids-fio50-fio51-bmdb2229",
+      "count": 40,
+      "keys": [
+        "mbedtls library/aes.c:1174 FIO50-C",
+        "mbedtls library/aes.c:410 FIO50-C",
+        "mbedtls library/aes.c:411 FIO50-C",
+        "mbedtls library/aes.c:412 FIO50-C",
+        "mbedtls library/aes.c:413 FIO50-C",
+        "mbedtls library/aesce.c:316 FIO50-C",
+        "mbedtls library/bignum.c:1349 FIO50-C",
+        "mbedtls library/bignum.c:1351 FIO50-C",
+        "mbedtls library/bignum.c:1354 FIO50-C",
+        "mbedtls library/camellia.c:265 FIO50-C",
+        "mbedtls library/camellia.c:266 FIO50-C",
+        "mbedtls library/camellia.c:267 FIO50-C",
+        "mbedtls library/camellia.c:268 FIO50-C",
+        "mbedtls library/cmac.c:80 FIO50-C",
+        "mbedtls library/des.c:427 FIO50-C",
+        "mbedtls library/des.c:428 FIO50-C",
+        "mbedtls library/des.c:430 FIO50-C",
+        "mbedtls library/des.c:431 FIO50-C",
+        "mbedtls library/des.c:434 FIO50-C",
+        "mbedtls library/des.c:437 FIO50-C",
+        "mbedtls library/des.c:438 FIO50-C",
+        "mbedtls library/des.c:440 FIO50-C",
+        "mbedtls library/des.c:446 FIO50-C",
+        "mbedtls library/des.c:448 FIO50-C",
+        "mbedtls library/des.c:450 FIO50-C",
+        "mbedtls library/des.c:451 FIO50-C",
+        "mbedtls library/des.c:452 FIO50-C",
+        "mbedtls library/des.c:453 FIO50-C",
+        "mbedtls library/des.c:454 FIO50-C",
+        "mbedtls library/des.c:455 FIO50-C",
+        "mbedtls library/des.c:456 FIO50-C",
+        "mbedtls library/gcm.c:317 FIO50-C",
+        "mbedtls library/gcm.c:327 FIO50-C",
+        "mbedtls library/gcm.c:332 FIO50-C",
+        "mbedtls library/gcm.c:333 FIO50-C",
+        "mbedtls library/md5.c:288 FIO50-C",
+        "mbedtls library/ripemd160.c:337 FIO50-C",
+        "mbedtls library/sha1.c:324 FIO50-C",
+        "mbedtls library/sha256.c:737 FIO50-C",
+        "mbedtls library/sha512.c:851 FIO50-C"
+      ],
+      "note": "retired from the CERT C oracle: FIO50-C/FIO51-C are CERT C++ ids, removed from aurora-lint at 9aace3a3; row archived, verdict unchanged; see retire-cert-cpp-ids-fio50-fio51-bmdb2229"
     }
   ]
 }

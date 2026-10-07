@@ -12,7 +12,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-06-12T22:12:35.702584",
-  "row_count": 1185,
+  "row_count": 1183,
   "rules": [
     "API00-C",
     "API02-C",
@@ -285,6 +285,15 @@
         "sqlite src/os_unix.c:8077 DCL13-C"
       ],
       "note": "DCL13-C re-derived under Brandon 2026-09-29 DCL13-C tier B (an API/ABI signature not in a function-pointer slot is strict TP; shallow const) (a signature, callback or function-pointer-slot basis is not an exception); see dcl13-ruling-1890-b04's manifest notes"
+    },
+    {
+      "by": "retire-cert-cpp-ids-fio50-fio51-bmdb2229",
+      "count": 2,
+      "keys": [
+        "sqlite ext/session/changesetfuzz.c:183 FIO50-C",
+        "sqlite ext/session/changesetfuzz.c:392 FIO50-C"
+      ],
+      "note": "retired from the CERT C oracle: FIO50-C/FIO51-C are CERT C++ ids, removed from aurora-lint at 9aace3a3; row archived, verdict unchanged; see retire-cert-cpp-ids-fio50-fio51-bmdb2229"
     }
   ]
 }

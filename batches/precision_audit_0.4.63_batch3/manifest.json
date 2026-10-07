@@ -12,7 +12,7 @@
     "raylib": "962bbfc6bfbd7a5acd08e21314fcfa161003a589"
   },
   "submitted_at": "2026-06-23T15:35:46.549195",
-  "row_count": 449,
+  "row_count": 448,
   "rules": [
     "API00-C",
     "API07-C",
@@ -142,6 +142,14 @@
         "raylib src/rcore.c:3661 ERR02-C"
       ],
       "note": "relabeled by Brandon's blind-sample gavel verdict (bmdb 1317); see gavel-bs-1317-2026-09-29's manifest"
+    },
+    {
+      "by": "retire-cert-cpp-ids-fio50-fio51-bmdb2229",
+      "count": 1,
+      "keys": [
+        "raylib src/rcore.c:2023 FIO50-C"
+      ],
+      "note": "retired from the CERT C oracle: FIO50-C/FIO51-C are CERT C++ ids, removed from aurora-lint at 9aace3a3; row archived, verdict unchanged; see retire-cert-cpp-ids-fio50-fio51-bmdb2229"
     }
   ]
 }

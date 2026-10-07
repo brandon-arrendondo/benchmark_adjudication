@@ -12,7 +12,7 @@
     "hostap": "dcee60436390dd34731560657c4257c3b4c839a6"
   },
   "submitted_at": "2026-07-28",
-  "row_count": 29577,
+  "row_count": 29555,
   "rules": [
     "API00-C",
     "API01-C",
@@ -1919,6 +1919,35 @@
         "hostap src/crypto/crypto_openssl.c:961 MSC42-C"
       ],
       "note": "retired from the CERT C oracle: rule id moved to the CWE ruleset (aurora-lint 4a4ec2b2), not a CERT C identifier; row archived, verdict unchanged; see retire-non-cert-c-ids-cwe-ruleset-bmdb2207"
+    },
+    {
+      "by": "retire-cert-cpp-ids-fio50-fio51-bmdb2229",
+      "count": 22,
+      "keys": [
+        "hostap hostapd/sae_pk_gen.c:162 FIO50-C",
+        "hostap src/ap/ieee802_11_vht.c:67 FIO50-C",
+        "hostap src/common/sae_pk.c:404 FIO50-C",
+        "hostap src/common/sae_pk.c:411 FIO50-C",
+        "hostap src/crypto/aes-internal-dec.c:123 FIO50-C",
+        "hostap src/crypto/aes-internal-enc.c:70 FIO50-C",
+        "hostap src/crypto/aes_i.h:72 FIO50-C",
+        "hostap src/crypto/crypto_gnutls.c:59 FIO50-C",
+        "hostap src/crypto/crypto_libtomcrypt.c:49 FIO50-C",
+        "hostap src/crypto/crypto_linux.c:625 FIO50-C",
+        "hostap src/crypto/crypto_nettle.c:40 FIO50-C",
+        "hostap src/crypto/crypto_openssl.c:404 FIO50-C",
+        "hostap src/crypto/crypto_wolfssl.c:546 FIO50-C",
+        "hostap src/crypto/des-internal.c:352 FIO50-C",
+        "hostap src/crypto/des-internal.c:380 FIO50-C",
+        "hostap src/crypto/des-internal.c:410 FIO50-C",
+        "hostap src/crypto/random.c:74 FIO50-C",
+        "hostap src/crypto/sha1-internal.c:259 FIO50-C",
+        "hostap src/tls/libtommath.c:1423 FIO50-C",
+        "hostap src/tls/libtommath.c:2385 FIO50-C",
+        "hostap src/utils/base64.c:135 FIO50-C",
+        "hostap src/utils/base64.c:136 FIO50-C"
+      ],
+      "note": "retired from the CERT C oracle: FIO50-C/FIO51-C are CERT C++ ids, removed from aurora-lint at 9aace3a3; row archived, verdict unchanged; see retire-cert-cpp-ids-fio50-fio51-bmdb2229"
     }
   ]
 }

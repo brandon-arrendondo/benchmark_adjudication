@@ -12,7 +12,7 @@
     "pureftpd": "cc28bff52ca28e1d122a2142bf37f2dc578f4d3e"
   },
   "submitted_at": "2026-08-25",
-  "row_count": 557,
+  "row_count": 555,
   "rules": [
     "API00-C",
     "API02-C",
@@ -165,6 +165,15 @@
         "pureftpd src/tls.c:49 DCL13-C"
       ],
       "note": "DCL13-C re-derived under Brandon 2026-09-29 DCL13-C option (c) (a signature, callback or function-pointer-slot basis is not an exception); see dcl13-ruling-1890-a01's manifest notes"
+    },
+    {
+      "by": "retire-cert-cpp-ids-fio50-fio51-bmdb2229",
+      "count": 2,
+      "keys": [
+        "pureftpd src/crypto.c:83 FIO50-C",
+        "pureftpd src/pure-pw.c:589 FIO50-C"
+      ],
+      "note": "retired from the CERT C oracle: FIO50-C/FIO51-C are CERT C++ ids, removed from aurora-lint at 9aace3a3; row archived, verdict unchanged; see retire-cert-cpp-ids-fio50-fio51-bmdb2229"
     }
   ]
 }

@@ -12,7 +12,7 @@
     "mosquitto": "d3ee5c5ca62c0fa4983308c6fff558ee978e878c"
   },
   "submitted_at": "2026-06-16T15:18:57.383467",
-  "row_count": 2578,
+  "row_count": 2577,
   "rules": [
     "API00-C",
     "API02-C",
@@ -236,6 +236,14 @@
         "mosquitto src/database.c:173 DCL13-C"
       ],
       "note": "DCL13-C re-derived under Brandon 2026-09-29 DCL13-C tier B (an API/ABI signature not in a function-pointer slot is strict TP; shallow const) (a signature, callback or function-pointer-slot basis is not an exception); see dcl13-ruling-1890-b01's manifest notes"
+    },
+    {
+      "by": "retire-cert-cpp-ids-fio50-fio51-bmdb2229",
+      "count": 1,
+      "keys": [
+        "mosquitto src/database.c:974 FIO50-C"
+      ],
+      "note": "retired from the CERT C oracle: FIO50-C/FIO51-C are CERT C++ ids, removed from aurora-lint at 9aace3a3; row archived, verdict unchanged; see retire-cert-cpp-ids-fio50-fio51-bmdb2229"
     }
   ]
 }

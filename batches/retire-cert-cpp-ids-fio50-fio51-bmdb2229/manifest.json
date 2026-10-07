@@ -1,0 +1,42 @@
+{
+  "requested_by": "coordinator",
+  "adjudicator": "claude-opus-5.5",
+  "adjudicating_node": "r720",
+  "aurora_lint_version": "0.6.0",
+  "submitted_at": "2026-10-07T12:00:00Z",
+  "work_item_ref": "benchmarking_db-2229",
+  "aurora_lint_sha": "9aace3a34380131de168457bc8818b9cadfe0eef",
+  "notes": "A RETIREMENT, NOT AN ADJUDICATION. row_count is 0 on purpose: this batch adds no row and records 129 being retired from the CERT C oracle. No verdict is changed anywhere.\n\nWHY. FIO50-C and FIO51-C are not CERT C identifiers (they correspond to CERT C++'s FIO50-CPP and FIO51-CPP). aurora-lint 9aace3a3 removed both rules. The oracle is a CERT C oracle, so labels on these ids are retired, not deleted.\n\nWHAT. FIO50-C 127 and FIO51-C 2, all FP: every label under the two ids except the 10 held below. Selected by rule id; nothing was re-read and nothing was judged.\n\nHELD, NOT RETIRED HERE (10). At aurora-lint 9aace3a3 the covering CERT C rule reports the same line, so these wait to be handled together with that rule's key while the adjudication hold is in force. They keep their current rows and source:\n  hostap src/eap_peer/eap_fast_pac.c:276 FIO51-C (now reported as FIO42-C)\n  lua liolib.c:262 FIO51-C (now reported as FIO42-C)\n  lua liolib.c:275 FIO51-C (now reported as FIO42-C)\n  mbedtls library/psa_its_file.c:84 FIO51-C (now reported as FIO42-C)\n  pureftpd puredb/src/puredb_write.c:64 FIO51-C (now reported as FIO42-C)\n  pureftpd puredb/src/puredb_write.c:65 FIO51-C (now reported as FIO42-C)\n  sqlite ext/misc/base85.c:434 FIO50-C (now reported as FIO39-C)\n  sqlite ext/misc/csv.c:136 FIO51-C (now reported as FIO42-C)\n  sqlite ext/misc/tmstmpvfs.c:498 FIO51-C (now reported as FIO42-C)\n  sqlite ext/misc/vfslog.c:296 FIO51-C (now reported as FIO42-C)\nEach of those 10 covering keys already carries a label of its own in this repo.\n\nARCHIVED, NOT LOST. The rows are removed from data/*/adjudication.csv but stay complete in this repo's history at the parent commit, and each source manifest names every removed key under superseded_rows. Postgres keeps them until benchmarking_db's drop_ground_truth_rows.py --keys runs, since the mainline sync never deletes; that step writes the full rows to oracle_corrections/.",
+  "batch_id": "retire-cert-cpp-ids-fio50-fio51-bmdb2229",
+  "projects": [
+    "curl",
+    "hostap",
+    "lua",
+    "mbedtls",
+    "mosquitto",
+    "pureftpd",
+    "raylib",
+    "sqlite"
+  ],
+  "codebase_commits": {
+    "curl": "3e198f75861cc2e12daf299689e145949dddd19b",
+    "hostap": "dcee60436390dd34731560657c4257c3b4c839a6",
+    "lua": "40b76de2d77e66b70a9d4bf989c3f5340919973f",
+    "mbedtls": "068ff080b369adfac81509f9b57b2afabaf82dc5",
+    "mosquitto": "d3ee5c5ca62c0fa4983308c6fff558ee978e878c",
+    "pureftpd": "cc28bff52ca28e1d122a2142bf37f2dc578f4d3e",
+    "raylib": "962bbfc6bfbd7a5acd08e21314fcfa161003a589",
+    "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
+  },
+  "row_count": 0,
+  "rules": [
+    "FIO50-C",
+    "FIO51-C"
+  ],
+  "verdicts": {},
+  "removed_rows": 129,
+  "removed_verdicts": {
+    "FP": 129
+  },
+  "recheck": null
+}
