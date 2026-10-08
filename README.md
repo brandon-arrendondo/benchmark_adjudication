@@ -479,3 +479,11 @@ dataset does not depend on Postgres, a coordinator, or any other tooling to
 be useful** — the CSV files are the dataset, this repo is deliberately
 Postgres-blind (no DSN, no connection code, ever), and anyone else can
 consume `data/*/adjudication.csv` on its own with no other system involved.
+
+## License
+
+Copyright 2026 BISSELL Homecare, Inc. The dataset is licensed under the
+[Creative Commons Attribution 4.0 International licence (CC BY 4.0)](LICENSE):
+you may share and adapt it for any purpose, provided you give appropriate
+credit. Code excerpts quoted in label reasons remain under the licences of
+the projects they come from.
