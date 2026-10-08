@@ -48,7 +48,7 @@ and contributor documentation links to it. Do not keep a separate copy.
 
 ## Repository values
 
-- **Technical guide:** [CLAUDE.md](CLAUDE.md), including links to the dataset review process, schema, and validation instructions.
+- **Technical guide:** [CLAUDE.md](CLAUDE.md), which points to README.md, which documents the dataset review process, schema, and validation instructions.
 - **AI attribution:** this repository is public. Do not add an AI
   attribution trailer of any kind to a new commit, for any agent, whether
   `Co-Authored-By` or another key. Earlier commits keep the trailers they

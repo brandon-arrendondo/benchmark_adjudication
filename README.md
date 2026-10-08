@@ -31,10 +31,16 @@ files directly with anything that reads CSV.
   labels — nothing in `data/*.csv` requires resolving a manifest to be
   usable.
 
-Everything past this point describes how *this maintainer* curates and adds
-to the dataset. None of it is a prerequisite for using it.
+## AI Assistance
+
+Most labels in this dataset were written by Claude-family models (Anthropic) under the labeling standards below. The `adjudicator` column records which model or person wrote each label, for example `claude-opus-4.8` or `manual`. A model-written label records the model's judgment under those standards. Only some labels have had a human review. Every batch reaches `main` through a reviewed pull request (see "How labels get added"). Claude also wrote much of the validation and scoring scripts and the documentation. From October 2026, [Codex](https://openai.com/codex/) (OpenAI) also contributed the tooling that enforces the agent and commit guidelines. Each of its changes was reviewed before it was merged.
+
+Many earlier commits have a `Co-Authored-By: Claude` trailer, but not every AI-assisted commit does, so the trailers are not a complete record. From October 2026 the contribution is acknowledged once, here, and not with a co-author trailer on each commit.
 
 ## Scoring a run
+
+Everything past this point describes how *this maintainer* curates and adds
+to the dataset. None of it is a prerequisite for using it.
 
 `scripts/score.py` is the reference scorer: the exact definition behind the
 real-world precision / recall / label-coverage figures aurora-lint publishes
