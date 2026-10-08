@@ -4,6 +4,8 @@ A dataset: TP/FP/uncertain adjudication labels for static-analysis findings
 across several open-source C codebases, adjudicated for aurora-lint but not
 specific to it — a label says "line N of file F in commit C of project P is a
 real bug" (or isn't), independent of which tool flagged it or who runs it.
+Rule ids follow the SEI CERT C Coding Standard; the labels are this
+project's own judgements, not CERT's.
 
 ## Using this dataset
 
