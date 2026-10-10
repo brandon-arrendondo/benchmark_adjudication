@@ -277,6 +277,16 @@ were corrected FP to TP in one reviewed commit, each listed under
 `superseded_rows` in the manifest of the batch that first labeled it. Task 1281
 had already parked the "returned to the caller" shape on the same ground.)
 
+**The rulings behind the labels are in `rulings/`.** How this project reads
+each CERT C guideline (its form in the default, strict and pedantic presets,
+its exceptions and how lists in its text are read) is recorded there as
+dated rulings, one file per guideline, with the cross-cutting principles in
+`rulings/principles.md`. A label is judged under the rulings at a commit of
+this repository; `rulings/rule-text-map.json` pins the CERT text each
+guideline is read against (aurora-lint ADR-0018). We are contributors to
+CERT's text, not its authors; `rulings/README.md` lists where our merged
+changes affect the pinned text.
+
 ## Layout
 
 ```
@@ -289,6 +299,8 @@ scripts/precision_ci.py           -- Wilson and clustered-bootstrap intervals fo
                                      the same figures
 scripts/eval_scope_table.py       -- per-project scope size and adjudication status
 scripts/label_churn.py            -- what changed in the labels between two commits
+rulings/                          -- the rulings labels are judged under, and
+                                     the pinned CERT rule text (rulings/README.md)
 tests/                            -- golden tests pinning score.py and precision_ci.py
                                      to published runs, and label_churn.py to this
                                      repo's history

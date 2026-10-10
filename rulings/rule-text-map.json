@@ -1,0 +1,2915 @@
+{
+ "pin_commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+ "pin_commit_date": "2026-10-09T12:39:47-04:00",
+ "repository": "https://github.com/cmu-sei/secure-coding-standards",
+ "rules": {
+  "API00-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:08:50Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/02.application-programming-interfaces-api/02.api00-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "carried forward by recorded review: page changed after the read without touching the reading (8cf4d38f tool rows)",
+   "set": "2026-10-10",
+   "sha256": "bed5490abb6e6e1811b2aa6108f64e6044c58e1e0c23cc9ba7cdcc5b383f8f54"
+  },
+  "API01-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-07T16:48:36Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/02.application-programming-interfaces-api/03.api01-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "5c354390afdfbfee7b335402d5482b87c6f04e6e84bbb86957bb9717efea564e"
+  },
+  "API02-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:08:51Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/02.application-programming-interfaces-api/04.api02-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "carried forward by recorded review: page changed after the read without touching the reading (1afabc47 risk table header)",
+   "set": "2026-10-10",
+   "sha256": "26261c9fc3a87d9b55e8fb166cb62aca4c9286c4c3190d38c2126296cd57f288"
+  },
+  "API03-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:08:51Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/02.application-programming-interfaces-api/05.api03-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "not shipped: the ruling is a disposition, so no reading is carried",
+   "set": "2026-10-10",
+   "sha256": "9d4c1f04f066624cfb21d86332dc6478e77284a2034c463fed17a558b02e0ad7",
+   "shipped": false
+  },
+  "API04-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:08:52Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/02.application-programming-interfaces-api/06.api04-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "not shipped: the ruling is a disposition, so no reading is carried",
+   "set": "2026-10-10",
+   "sha256": "67a2251fa8b57c9003e5df769bb64551365c016cc5c7d4a04b06b08462410add",
+   "shipped": false
+  },
+  "API05-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:08:52Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/02.application-programming-interfaces-api/07.api05-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "carried forward by recorded review: page changed after the read without touching the reading (1afabc47 risk table header)",
+   "set": "2026-10-10",
+   "sha256": "dc066ba781beacfec9c8a1576f611552f3635579ee1394440abfc3858c9b5c29"
+  },
+  "API07-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:08:52Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/02.application-programming-interfaces-api/08.api07-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "not shipped: the ruling is a disposition, so no reading is carried",
+   "set": "2026-10-10",
+   "sha256": "9b5e91c15096bc51c56b0ca8924edee11c8a99273800669172c2e65ea61067d2",
+   "shipped": false
+  },
+  "API09-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:08:53Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/02.application-programming-interfaces-api/09.api09-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "not shipped: the ruling is a disposition, so no reading is carried",
+   "set": "2026-10-10",
+   "sha256": "5362e139c8cbe9c89dd3b9bd4f8bc20a299ad0753b322aa61c345d372a85de75",
+   "shipped": false
+  },
+  "API10-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:08:53Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/02.application-programming-interfaces-api/10.api10-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "not shipped: the ruling is a disposition, so no reading is carried",
+   "set": "2026-10-10",
+   "sha256": "867a9a9c49ea30821a9d6aaec5bbb55883a2a3863b941fa20df73c2d13c525d2",
+   "shipped": false
+  },
+  "ARR00-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:08:54Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/03.arrays-arr/2.arr00-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "not shipped: the ruling is a disposition, so no reading is carried",
+   "set": "2026-10-10",
+   "sha256": "9ce79d15a5066d1724e234e0b387c73dec2087229ee486b7397acea786a5dea0",
+   "shipped": false
+  },
+  "ARR01-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:08:54Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/03.arrays-arr/3.arr01-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "carried forward by recorded review: page changed after the read without touching the reading (8cf4d38f tool rows)",
+   "set": "2026-10-10",
+   "sha256": "50e3c643dde5bd2b67262a1e542e528d3e4adf2926ffd79fbd2565fc96df0f0b"
+  },
+  "ARR02-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:08:55Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/03.arrays-arr/4.arr02-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "carried forward by recorded review: page changed after the read without touching the reading (8cf4d38f tool rows)",
+   "set": "2026-10-10",
+   "sha256": "67edf776addf64e86371a61bf71283ef8ee3a2bdbf60e44d18376b0c1e586e25"
+  },
+  "ARR30-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:08:55Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/03.arrays-arr/2.arr30-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "carried forward by recorded review: page changed after the read without touching the reading (8cf4d38f tool rows)",
+   "set": "2026-10-10",
+   "sha256": "a4e990a009e0a0e50617f193374e663439aec515d6486fcc7bdeea6db0c9850d"
+  },
+  "ARR32-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:08:55Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/03.arrays-arr/3.arr32-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "d41fc9380625de6b6c8aa0eab2d68466c7e37a1f85fa6d1741a633adae946c05"
+  },
+  "ARR36-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:08:56Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/03.arrays-arr/4.arr36-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "carried forward by recorded review: page changed after the read without touching the reading (8cf4d38f tool rows)",
+   "set": "2026-10-10",
+   "sha256": "148f73615ffe4f007fd0b6974bca3ec32506c21e497c97c3ea191a2a9fd07169"
+  },
+  "ARR37-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:08:56Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/03.arrays-arr/5.arr37-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "64b789bda1ad74932527e448362303172c8b8454169fb29443c913c9a064e1a1"
+  },
+  "ARR38-C": {
+   "carried_forward": false,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:08:57Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/03.arrays-arr/6.arr38-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "RE-JUDGE: 8130b220 changed the page's function table (memset_s() out, memset_explicit() in); labels re-judged under E5 before they count at this pin",
+   "set": "2026-10-10",
+   "sha256": "48b97761aaebcd23c7ea18c6622eaa0e5075747b01d661598bdf834a7dbc5286"
+  },
+  "ARR39-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:08:57Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/03.arrays-arr/7.arr39-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "f0379232f4112df0170271d91e8fa527accaebf71e465a7f46924d5bdab77710"
+  },
+  "CON01-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:08:58Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/05.concurrency-con/02.con01-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "2dd6227cc8170e115a6e7e74cc19c310cfbe739e1db2400e1eef6b683d1b85ac"
+  },
+  "CON02-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:08:58Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/05.concurrency-con/03.con02-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "afe59f1e921bb00a4496cd151cdf48569177378f450b6e67c700f09f1e4b87bb"
+  },
+  "CON03-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:08:58Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/05.concurrency-con/04.con03-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "not shipped: the ruling is a disposition, so no reading is carried",
+   "set": "2026-10-10",
+   "sha256": "878b972073cf9a183950f7a6a6d681f2619be627063cdbaac59f444dc828a845",
+   "shipped": false
+  },
+  "CON04-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:08:59Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/05.concurrency-con/05.con04-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "22e3d8da2c3fb1d24f720955ff8dbf73c31466fe16a4d8bbb2f99efa6a28edd9"
+  },
+  "CON05-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:09:00Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/05.concurrency-con/06.con05-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "eef89ce15ffa19971ea1175ec0d336991cfaf59d9208ce1cbee3b0172e7825e8"
+  },
+  "CON06-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:09:00Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/05.concurrency-con/07.con06-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "not shipped: the ruling is a disposition, so no reading is carried",
+   "set": "2026-10-10",
+   "sha256": "4ff9cf91b3fa9f549ee3714c5f19f2f096a222e47f054c98107017801a005cc8",
+   "shipped": false
+  },
+  "CON07-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:09:00Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/05.concurrency-con/08.con07-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "carried forward by recorded review: page changed after the read without touching the reading (1afabc47 risk table header)",
+   "set": "2026-10-10",
+   "sha256": "938b3613677997e6121794ba9cf80225a5ca48c60da0eb282ac7cfc64a9cce5e"
+  },
+  "CON08-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:09:01Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/05.concurrency-con/09.con08-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "carried forward by recorded review: page changed after the read without touching the reading (1afabc47 risk table header)",
+   "set": "2026-10-10",
+   "sha256": "a73c717064f4461c03a61eb882a95ef404a8659ceb80b2f09018577f5ba6906a"
+  },
+  "CON09-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:09:01Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/05.concurrency-con/10.con09-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "not shipped: the ruling is a disposition, so no reading is carried",
+   "set": "2026-10-10",
+   "sha256": "b3de40b3184a75c1541f289e7e5e669e7751eca2f75d62df66f291fcf9a638cb",
+   "shipped": false
+  },
+  "CON30-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:09:02Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/05.concurrency-con/02.con30-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "114cf9699477b21ddd911c8e2669747474f07dba9cf5b6877818afddc1dd51a3"
+  },
+  "CON31-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:09:02Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/05.concurrency-con/03.con31-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "be8646075088ccbb5707316953dc0f88c6614017a2f759eed558ed7aaeb46f6b"
+  },
+  "CON32-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:09:03Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/05.concurrency-con/04.con32-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "fe59d2d6075c24843e8ad7ea2e100741b13ee9fa7f7f76a44234b44eb5dc4186"
+  },
+  "CON33-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:09:03Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/05.concurrency-con/05.con33-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "6ba493c759367c8648e4bc230173fb7eca47f647ff712aeeb1ac0149eddc6f29"
+  },
+  "CON34-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:09:03Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/05.concurrency-con/06.con34-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "b12e2b04000cb7d21f0f6c49639646e20941821f8a9cb09eeeb2456b212ff1e8"
+  },
+  "CON35-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:09:04Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/05.concurrency-con/07.con35-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "cd2b1987043f56363a07844acf7c4819c37ae70eb3ab00cb98cce48af9dd41fb"
+  },
+  "CON36-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:09:04Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/05.concurrency-con/08.con36-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "dc99adabf4ff01fb1b001d9b0e09b33e60ae9063f359e419fb543297e86fcbf4"
+  },
+  "CON37-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:09:05Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/05.concurrency-con/09.con37-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "e4434f71aa0e6a5f10c13255b48df68635c3c6785e191f33ed5b5579570fd42f"
+  },
+  "CON38-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:09:05Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/05.concurrency-con/10.con38-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "97e94ca55c0605136c29cff2f5b76024c78a9d893f8060c821a270855908607e"
+  },
+  "CON39-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:09:06Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/05.concurrency-con/11.con39-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "3b61f4f326a424f0eb2df4c97205273a446c97832daf9f80b30fa0589bb77a47"
+  },
+  "CON40-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:09:06Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/05.concurrency-con/12.con40-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "e50176f0bace930b6daeaa005b3274dfceec733c03cd3497d12c03c69001118a"
+  },
+  "CON41-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:09:07Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/05.concurrency-con/13.con41-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "f33ca644b53645281fdf04a1457375d65f9fcefd03529761308e007815a597a1"
+  },
+  "CON43-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:09:07Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/05.concurrency-con/15.con43-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "carried forward by recorded review: page changed after the read without touching the reading (8cf4d38f tool rows)",
+   "set": "2026-10-10",
+   "sha256": "ce4358e5eec358e772d2b7ea776789b171cbc95425f7f921cb9ddbfbe0b5a92c"
+  },
+  "DCL00-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:09:07Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/06.declarations-and-initialization-dcl/02.dcl00-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "428aad48d92b62815f145d408608d420e67e124032fee1bb78f2875ed7e13ed2"
+  },
+  "DCL01-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:09:08Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/06.declarations-and-initialization-dcl/03.dcl01-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "carried forward by recorded review: page changed after the read without touching the reading (8cf4d38f tool rows)",
+   "set": "2026-10-10",
+   "sha256": "2d54a0419bdbbba13711108e12663005031a1ef717abcd640a8a75a7f782465a"
+  },
+  "DCL02-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:09:08Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/06.declarations-and-initialization-dcl/04.dcl02-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "ad9a212c45144acaf3b4de660cbfc8d02cac559a57999ae4183df11bb03c9e87"
+  },
+  "DCL03-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:09:09Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/06.declarations-and-initialization-dcl/05.dcl03-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "89a80a80ae4ea2c943f12f04910630b7ac0e9bdd4b934dc5369e1eb97812b21f"
+  },
+  "DCL04-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:09:09Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/06.declarations-and-initialization-dcl/06.dcl04-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "8d4a8765a1887f0d1353936bc7330f0406ad8f7810887d7e10ee1f2775bc9701"
+  },
+  "DCL05-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:09:09Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/06.declarations-and-initialization-dcl/07.dcl05-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "61e54ab36d598fae19cdb913bd3dc427415bc38474914056f78fa4fefbad7676"
+  },
+  "DCL06-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:09:10Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/06.declarations-and-initialization-dcl/08.dcl06-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "6a558126085c75a26dcfaa5a6d5cf6c2d27a121a32b8af3521bf9cf7f0a80148"
+  },
+  "DCL07-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:09:10Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/06.declarations-and-initialization-dcl/09.dcl07-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "937ce2e5d9a58eaae8ed7496a253f0258e85d5dcd85f2055d50c5f27d1e4ae41"
+  },
+  "DCL08-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:09:11Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/06.declarations-and-initialization-dcl/10.dcl08-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "not shipped: the ruling is a disposition, so no reading is carried",
+   "set": "2026-10-10",
+   "sha256": "36de5edaf81f890c1e7337e14a40cb905808583f02caa3a989937f33c53eb139",
+   "shipped": false
+  },
+  "DCL09-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:09:11Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/06.declarations-and-initialization-dcl/11.dcl09-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "9fc7227dab2cc7ee2abb9a62cde672f94df48798a0795efa4eec90abb087d3c3"
+  },
+  "DCL10-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:09:11Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/06.declarations-and-initialization-dcl/12.dcl10-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "not shipped: the ruling is a disposition, so no reading is carried",
+   "set": "2026-10-10",
+   "sha256": "3d0d8b8890e973f7153524c93e830d92c5bd353e1525f1c5357f70d4378952ef",
+   "shipped": false
+  },
+  "DCL11-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:09:12Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/06.declarations-and-initialization-dcl/13.dcl11-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "not shipped: the ruling is a disposition, so no reading is carried",
+   "set": "2026-10-10",
+   "sha256": "32e0773f17751d4b76b396a4a2c1a99466f909e6c62990899f0e4bee6ca97d87",
+   "shipped": false
+  },
+  "DCL12-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:09:12Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/06.declarations-and-initialization-dcl/14.dcl12-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "e8f9de0be2188df4b65ba420783e96b7c2f43282508ba0055d4bcb7ffc92014a"
+  },
+  "DCL13-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:09:13Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/06.declarations-and-initialization-dcl/15.dcl13-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "carried forward by recorded review: page changed after the read without touching the reading (64e2e654 example compile fix)",
+   "set": "2026-10-10",
+   "sha256": "9e8c33be7ffef3c734df247a2f25e9c1794e981b1449d6dc3a14573f5cca834e"
+  },
+  "DCL15-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:09:13Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/06.declarations-and-initialization-dcl/16.dcl15-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "42ec8242d335461914112bb8c0165c42f536352af42e8b515292848f53d29864"
+  },
+  "DCL16-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:09:13Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/06.declarations-and-initialization-dcl/17.dcl16-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "cb669fc56aef7b51543055894c4eb5fd5ac2c3b9f62617feb04d565a947b5325"
+  },
+  "DCL17-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:09:14Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/06.declarations-and-initialization-dcl/18.dcl17-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "not shipped: the ruling is a disposition, so no reading is carried",
+   "set": "2026-10-10",
+   "sha256": "806f271da77df384d0a1460b76e95eb7ff1e7607163747fc801f92020658a840",
+   "shipped": false
+  },
+  "DCL18-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:09:14Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/06.declarations-and-initialization-dcl/19.dcl18-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "carried forward by recorded review: page changed after the read without touching the reading (8cf4d38f tool rows; 1afabc47 risk table header)",
+   "set": "2026-10-10",
+   "sha256": "a13877e66dff1efefb72d8934ede2812e4e8a3dd67ddcac72f82a35167da896c"
+  },
+  "DCL19-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:09:15Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/06.declarations-and-initialization-dcl/20.dcl19-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "carried forward by recorded review: page changed after the read without touching the reading (8cf4d38f tool rows)",
+   "set": "2026-10-10",
+   "sha256": "7c1f12035972f12563c53717abb7ef51cdc0aad151f2d9e4ed6e601a75297b2f"
+  },
+  "DCL20-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:09:15Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/06.declarations-and-initialization-dcl/21.dcl20-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "93d12b02c3b86903820dd630194e0850d7de35e1874bd4151bd8aa6a51537352"
+  },
+  "DCL21-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:09:15Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/06.declarations-and-initialization-dcl/22.dcl21-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "not shipped: the ruling is a disposition, so no reading is carried",
+   "set": "2026-10-10",
+   "sha256": "cc9a2afed4764bcf6bc91e9efb3fa5796bfe251af0291d4cf68d40baf4f1cd49",
+   "shipped": false
+  },
+  "DCL22-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:09:16Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/06.declarations-and-initialization-dcl/23.dcl22-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "not shipped: the ruling is a disposition, so no reading is carried",
+   "set": "2026-10-10",
+   "sha256": "b43451a1b2b33fb1520d8340050054c6b09ec9502aaa3fe7a797172cf3b2a21d",
+   "shipped": false
+  },
+  "DCL23-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:09:16Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/06.declarations-and-initialization-dcl/24.dcl23-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "carried forward by recorded review: page changed after the read without touching the reading (1afabc47 risk table header)",
+   "set": "2026-10-10",
+   "sha256": "20440b88ac4ff0c54b5486574a7703e7c409e8c655c73f2c66af1c4965832842"
+  },
+  "DCL30-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:09:17Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/06.declarations-and-initialization-dcl/02.dcl30-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "carried forward by recorded review: page changed after the read without touching the reading (8cf4d38f tool rows)",
+   "set": "2026-10-10",
+   "sha256": "489d5dd885288f903576a533bcc94a8e8bc6d33b123c04bd1cf2c2040b3f6285"
+  },
+  "DCL31-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:09:17Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/06.declarations-and-initialization-dcl/03.dcl31-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "carried forward by recorded review: page changed after the read without touching the reading (8cf4d38f tool rows)",
+   "set": "2026-10-10",
+   "sha256": "fdc1972873df4e75a4ffc0fbca8797cf76b0ef3d94fb9ad8103a8bcacd4c37a3"
+  },
+  "DCL36-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-07T16:06:40Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/06.declarations-and-initialization-dcl/04.dcl36-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "5794aa03094030e06ebc403720cddaf588e5c314de5655dfb453a236ef5c966e"
+  },
+  "DCL37-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:09:18Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/06.declarations-and-initialization-dcl/05.dcl37-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "carried forward by recorded review: page changed after the read without touching the reading (8cf4d38f tool rows)",
+   "set": "2026-10-10",
+   "sha256": "42ea8f8b3a5695565628c24d2a5dc4c9928f5ac4046ab58d113b1ca570c26542"
+  },
+  "DCL38-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:09:18Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/06.declarations-and-initialization-dcl/06.dcl38-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "53d423b2f173b6badec9175ff211f38a44183df0bcd21ffbe4a1a8f13dd425ca"
+  },
+  "DCL39-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:09:19Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/06.declarations-and-initialization-dcl/07.dcl39-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "399b84c9e301b1d4a9cbdd014354779dda0e51aee8c5655258174592f6126cff"
+  },
+  "DCL40-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:09:19Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/06.declarations-and-initialization-dcl/08.dcl40-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "30fe0752a2abf0af0b4644fd1b6da4bed37363ceea3bc995bb1f7f8d67aa971c"
+  },
+  "DCL41-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-07T19:01:58Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/06.declarations-and-initialization-dcl/09.dcl41-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "c8aba7ec780e0b5f9afe1fbbc2ab919d732ab0dc69cdb41b3a4b42867450f52c"
+  },
+  "DCL42-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:09:20Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/06.declarations-and-initialization-dcl/10.dcl42-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "22f49859465ae7a886af81db6a82e94727ac7a499151ffc05cd41546f9002fb0"
+  },
+  "ENV01-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:09:20Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/07.environment-env/2.env01-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "not shipped: the ruling is a disposition, so no reading is carried",
+   "set": "2026-10-10",
+   "sha256": "8f215bf2349785767812fe678b870dfeafcdde75bbd27978f3779620283b4707",
+   "shipped": false
+  },
+  "ENV02-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-07T11:11:06Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/07.environment-env/3.env02-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "dd5c789fa5e07f587620d46c0060f6fa2e9adb0f4abf852c8672ca5c1bece9c0"
+  },
+  "ENV03-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-07T18:11:03Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/07.environment-env/4.env03-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "7a8d8e7eb05b0ce9bdc19b3e2d51e5ba15374c3fc0a63523c66ba8dc6279db03"
+  },
+  "ENV04-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:09:21Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/07.environment-env/5.env04-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "not shipped: the ruling is a disposition, so no reading is carried",
+   "set": "2026-10-10",
+   "sha256": "34e80b7e5e1cef4beef56a5fee85591ad06e2a37fe3c4f8da95feab3f04d54d1",
+   "shipped": false
+  },
+  "ENV30-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:09:22Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/07.environment-env/2.env30-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "carried forward by recorded review (author, 2026-10-10): a875e37f drops asctime() from the must-not-modify list, the reading the ruling took",
+   "set": "2026-10-10",
+   "sha256": "36455840f8543ca8a20f52f6dc96f3757205ee300f90f9d0f6686eecfa1bf77f"
+  },
+  "ENV31-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:09:22Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/07.environment-env/3.env31-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "c927437e2d0ebcb68720b252df5f27504e671d47984fc20d6cd4f7e636c57f89"
+  },
+  "ENV32-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-09T21:41:45Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/07.environment-env/4.env32-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "c0f6705c66c9ef0c528e6bbe62c92a4bbc78faa1b1b017775fecc819e7df7839"
+  },
+  "ENV33-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-07T22:14:23Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/07.environment-env/5.env33-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "cdb6c80b7dee8f34732a72dd1edfae30b73c6b7135629fe3e77a3c3ef41aeb9e"
+  },
+  "ENV34-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:09:23Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/07.environment-env/6.env34-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "941bc80714e983b7e61d4e56bee5535ac64479e50e7a1f270da9ed365ba5cb81"
+  },
+  "ERR00-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:09:24Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/08.error-handling-err/2.err00-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "not shipped: the ruling is a disposition, so no reading is carried",
+   "set": "2026-10-10",
+   "sha256": "3ffd8dc769ae899d60ebe59e9beeba610aa3b1e8586b2e76648c7dab7e461707",
+   "shipped": false
+  },
+  "ERR01-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-07T11:27:28Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/08.error-handling-err/3.err01-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "aaf28ef62e1ce8a471b5bf877ac433100f55fa96e453630db1517c331db50efb"
+  },
+  "ERR02-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:10:54Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/08.error-handling-err/4.err02-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "7ffac9b8964433d8b895a478432e3fcb69ee270852c5f0a27ec2c3bf168469ba"
+  },
+  "ERR04-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:10:55Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/08.error-handling-err/5.err04-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "d5448e545db9bb5e6a213c55adee720e3840377e37c38f5495d67c185c23a328"
+  },
+  "ERR05-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-07T16:28:33Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/08.error-handling-err/6.err05-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "dfeb4c84628405c26f214d00614c616d315838daa6d62fbf086bf433fc54c577"
+  },
+  "ERR06-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T17:35:21Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/08.error-handling-err/7.err06-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "carried forward by recorded review: page changed after the read without touching the reading (8cf4d38f tool rows)",
+   "set": "2026-10-10",
+   "sha256": "02dc53ee28b9360daa080d4de5efaebd5140de7eacbc6effee32bcfbaeb9ac13"
+  },
+  "ERR07-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-07T22:13:21Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/08.error-handling-err/8.err07-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "0d8d0e01c41b896254c1596db237f266b4fdb7cfb76ff00fc3888660bff512a6"
+  },
+  "ERR30-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-09T19:55:09Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/08.error-handling-err/2.err30-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "9fda1ece76289d313d8fa532e1b4d23af70ffa74355e77a7758a61f7da542cee"
+  },
+  "ERR32-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:10:57Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/08.error-handling-err/3.err32-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "21277fd531c5f9d75d5d34e3c383c8f8f0d15ac6a37a6da4bb0219eea0f9b321"
+  },
+  "ERR33-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-09T23:11:10Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/08.error-handling-err/4.err33-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "9ed7942885d0b34a50ccead5aefbb5c13067b322d1c9a3fe620c7d515dc4e9d1"
+  },
+  "ERR34-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-07T11:45:13Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/08.error-handling-err/5.err34-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "carried forward by recorded review: page changed after the read without touching the reading (4dc5a8ca undefined-behaviour link)",
+   "set": "2026-10-10",
+   "sha256": "6d198f84a66aa9fe42fb1f6733038b83ed0c1d2ffcc43a6560c46c3d699f2e59"
+  },
+  "EXP00-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-07T11:45:05Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/09.expressions-exp/02.exp00-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "36dc3b99a06b962a9c018a2f77fd9ac59b83206108cb95e48f9726307a63cb6c"
+  },
+  "EXP02-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:10:59Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/09.expressions-exp/03.exp02-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "aa1ac08987d184f599138d8a90701be74b04d0a03cac331516a301c2434efdb1"
+  },
+  "EXP03-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:10:59Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/09.expressions-exp/04.exp03-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "not shipped: the ruling is a disposition, so no reading is carried",
+   "set": "2026-10-10",
+   "sha256": "71e6425240005e9d3c1e094c4b03b241b81f7a3547c713ebd54b18399b0b26c5",
+   "shipped": false
+  },
+  "EXP05-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:10:59Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/09.expressions-exp/05.exp05-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "7a5b39c692ecc56e8b1136790e77aba7542cabe06855de9d3f0392ea9eeed3ea"
+  },
+  "EXP07-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:11:00Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/09.expressions-exp/06.exp07-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "not shipped: the ruling is a disposition, so no reading is carried",
+   "set": "2026-10-10",
+   "sha256": "d12fcabc059f45a8c6fd19644dd2bf37c3f33553a8ebb1f935ba50a3c63fa97a",
+   "shipped": false
+  },
+  "EXP08-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:11:01Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/09.expressions-exp/07.exp08-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "not shipped: the ruling is a disposition, so no reading is carried",
+   "set": "2026-10-10",
+   "sha256": "0b16b016db550fd33c9387e3f1f87f8c57117c59885607ec80f08fb2ed8aac6d",
+   "shipped": false
+  },
+  "EXP09-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-07T12:18:05Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/09.expressions-exp/08.exp09-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "a9bb77dcfa5a75993663ab9fea9074b54dad59376baff57ff93c04e549fd13f3"
+  },
+  "EXP10-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:11:01Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/09.expressions-exp/09.exp10-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "not shipped: the ruling is a disposition, so no reading is carried",
+   "set": "2026-10-10",
+   "sha256": "0f0bd25d27bcab43cfbd1cf4d38a2bbf184370542ee006d767b033d2225a1596",
+   "shipped": false
+  },
+  "EXP11-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-07T10:38:12Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/09.expressions-exp/10.exp11-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "f9afce81d18d4909bdc23f4cf3def52731657c28af872536755317cdc0cda06f"
+  },
+  "EXP12-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:11:02Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/09.expressions-exp/11.exp12-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "carried forward by recorded review: page changed after the read without touching the reading (8cf4d38f tool rows)",
+   "set": "2026-10-10",
+   "sha256": "a85d43674a2e7b8f789ba7391f2e4624d04b01c33528924489c3096334d100e1"
+  },
+  "EXP13-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-07T11:10:55Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/09.expressions-exp/12.exp13-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "carried forward by recorded review: page changed after the read without touching the reading (5ea837b9 explanatory wording)",
+   "set": "2026-10-10",
+   "sha256": "5a0f484eee6961b9da0ad7d83bb15589c6f31ddf1a4e5878b86228ddaf1e6c42"
+  },
+  "EXP14-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:11:03Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/09.expressions-exp/13.exp14-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "not shipped: the ruling is a disposition, so no reading is carried",
+   "set": "2026-10-10",
+   "sha256": "d3c6af7786e63b38262dcec08442d94ee20850fc7d6aa22bd0f59de89c309fb4",
+   "shipped": false
+  },
+  "EXP15-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-09T23:38:52Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/09.expressions-exp/14.exp15-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "4b728a0550cf89a57c4a61bc28631320756aa252026df8148ddd4bee52de0afe"
+  },
+  "EXP16-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-07T12:45:45Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/09.expressions-exp/15.exp16-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "63b488d6f76fc6fa273cc78867d13398e1090604f376fe73f6478129bf2aac29"
+  },
+  "EXP19-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-10T12:09:55Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/09.expressions-exp/16.exp19-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "f06363d87fc272fa577246e043c3f2a9672d104c9326917475d4564c38791225"
+  },
+  "EXP20-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-09T19:52:01Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/09.expressions-exp/17.exp20-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "c537ab53830f25a3d390ed8bb6d69d8f8eb38bc60712ec2130510a4b791a7f1b"
+  },
+  "EXP30-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-07T16:10:21Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/09.expressions-exp/02.exp30-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "b755b194ede67eec98a6240e539f251c52b6e2e163084fe282c62c3dfc0d101e"
+  },
+  "EXP32-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-07T12:18:14Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/09.expressions-exp/03.exp32-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "b66ecd2398cfabe689ded9df58f87004a75d031db2d629817be7d70af4897d98"
+  },
+  "EXP33-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-09T20:53:30Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/09.expressions-exp/04.exp33-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "6a399ddd05b73caf5ed742c4a13a9254aac65b7bc501af3f84124827b255f1ef"
+  },
+  "EXP34-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:12:36Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/09.expressions-exp/05.exp34-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "carried forward by recorded review: page changed after the read without touching the reading (8cf4d38f tool rows)",
+   "set": "2026-10-10",
+   "sha256": "e53b9ed96f4a52be83f73ea2ecc0f90ab10e750ce2727171357af126c59314ae"
+  },
+  "EXP35-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-07T11:53:34Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/09.expressions-exp/06.exp35-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "7c15f6cd2567259c43b243b33fb5469bee8f7dc061931322a852984a0b31fe07"
+  },
+  "EXP36-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:12:37Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/09.expressions-exp/07.exp36-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "carried forward by recorded review: page changed after the read without touching the reading (8cf4d38f tool rows)",
+   "set": "2026-10-10",
+   "sha256": "81b3e80693ea7301249a39a236455a95d16abf6850e2d94e3d725b6e858844f3"
+  },
+  "EXP37-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:12:37Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/09.expressions-exp/08.exp37-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "carried forward by recorded review: page changed after the read without touching the reading (8cf4d38f tool rows)",
+   "set": "2026-10-10",
+   "sha256": "bfc20fcdb6af1eb8111e04ae3e2fc7278679cc391a139120294bd394275995b8"
+  },
+  "EXP39-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:12:38Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/09.expressions-exp/09.exp39-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "carried forward by recorded review: page changed after the read without touching the reading (8cf4d38f tool rows; 913e4fd2 CWE note typo)",
+   "set": "2026-10-10",
+   "sha256": "292befb5745f312b0be12dc577d30fa352ca0faef7892dd9a602d95cc920eb0b"
+  },
+  "EXP40-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:12:38Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/09.expressions-exp/10.exp40-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "cdd7717bb4bab36465dd791d02242060672c4e4edd9bc5bafd5ae63e35f8105c"
+  },
+  "EXP42-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-09T19:58:10Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/09.expressions-exp/11.exp42-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "92f0a0bb4c2132bc31386cfc9d25d059370f57c7857bb1ee72c7f502d0440087"
+  },
+  "EXP43-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:12:39Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/09.expressions-exp/12.exp43-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "2eb16290c110bc132e56e20137b3dc7fab292972c1c6232e5fde623a4967e910"
+  },
+  "EXP44-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:12:40Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/09.expressions-exp/13.exp44-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "carried forward by recorded review: page changed after the read without touching the reading (8cf4d38f tool rows)",
+   "set": "2026-10-10",
+   "sha256": "005e7803f0aa8e429f185e0c3488dc92334c22dc4616548463012c497a0db894"
+  },
+  "EXP45-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-07T12:46:28Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/09.expressions-exp/14.exp45-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "bfb344b7018ec10e41766b051ac8a6079593b04bb1356abcdba2ea13c4cbc0a7"
+  },
+  "EXP46-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-07T12:45:38Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/09.expressions-exp/15.exp46-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "53adbf2ece62f6419194fcf2af0dc59a542b9d2c936de09eaadb6a547eea4b60"
+  },
+  "EXP47-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-07T17:32:37Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/09.expressions-exp/16.exp47-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "3f22d960f4aae1ad32fd0933c015106286336de90f1f92a7477fc6c9b79ec449"
+  },
+  "FIO01-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-09T22:05:06Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/11.input-output-fio/02.fio01-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "d190225bd26a9a21234636918adddf178f789bdf2396a38b51feeed1e216dbdd"
+  },
+  "FIO02-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:12:42Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/11.input-output-fio/03.fio02-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "carried forward by recorded review: page changed after the read without touching the reading (d3f03dbd example compile fix)",
+   "set": "2026-10-10",
+   "sha256": "febed996daf71a72e13453521069d068b9304891da637d28669e5c0561e7e651"
+  },
+  "FIO03-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:12:42Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/11.input-output-fio/04.fio03-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "2d48d97c717bad6e85246e2a7bb9f06cd6b423f14e4d05345289db8b42527600"
+  },
+  "FIO05-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:12:42Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/11.input-output-fio/05.fio05-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "d3bb2a1c3818a5ad849915b8fb82c6d5c1cd2af81fee6f50fc6ca8d946266070"
+  },
+  "FIO06-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:12:43Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/11.input-output-fio/06.fio06-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "228dfa5b3652262b26679db7eba802023006aee15ab8b04291b4da924c33d962"
+  },
+  "FIO08-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:12:43Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/11.input-output-fio/07.fio08-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "46c7875fee456be9f86ba8082db33e602f236a88ed2bd7217e612cc3fd4983d3"
+  },
+  "FIO09-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:12:44Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/11.input-output-fio/08.fio09-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "carried forward by recorded review: page changed after the read without touching the reading (c46fb327 example fix)",
+   "set": "2026-10-10",
+   "sha256": "5c409699fcc6fde3411375fb2c49db832a7a94863b131ff3b3fef2bc9c499d70"
+  },
+  "FIO10-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:12:44Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/11.input-output-fio/09.fio10-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "not shipped: the ruling is a disposition, so no reading is carried",
+   "set": "2026-10-10",
+   "sha256": "8b07fde45174934c486e60b424b4fd823684f8a9a656271af54ada6b0760f0c2",
+   "shipped": false
+  },
+  "FIO11-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:12:45Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/11.input-output-fio/10.fio11-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "6b4e2775c4a467c0a8a2a3914eab2385e2c83a50ca510877aa41cfa78631bc00"
+  },
+  "FIO13-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-07T10:38:04Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/11.input-output-fio/11.fio13-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "c717940e8036bd1ecd1ff517231b3de93fc100ee19898554f409625546e9b3b6"
+  },
+  "FIO14-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:12:45Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/11.input-output-fio/12.fio14-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "d5a25aef5d2fa72d5ff89567de67b5e8ecee1c05e04ddfe9e1ea562b08733b7a"
+  },
+  "FIO15-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:12:46Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/11.input-output-fio/13.fio15-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "not shipped: the ruling is a disposition, so no reading is carried",
+   "set": "2026-10-10",
+   "sha256": "e4b973469428e09289e7c60013074f386c759b524c9285a6d9e8a0d7271aaa00",
+   "shipped": false
+  },
+  "FIO17-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:12:46Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/11.input-output-fio/14.fio17-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "not shipped: the ruling is a disposition, so no reading is carried",
+   "set": "2026-10-10",
+   "sha256": "c36bd4001198dcc8b168089e76bf88ffa50dca3f8eabc77a2e07a2ea8bcd854c",
+   "shipped": false
+  },
+  "FIO18-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:12:47Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/11.input-output-fio/15.fio18-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "not shipped: the ruling is a disposition, so no reading is carried",
+   "set": "2026-10-10",
+   "sha256": "9c9a4f4271a27432996c922a98a2e226146b0b8381021bd246fc880bfc26d7ab",
+   "shipped": false
+  },
+  "FIO19-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:12:47Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/11.input-output-fio/16.fio19-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "475d98a19845ae848a29923ab3ecde8c5c1db97c8056d5faaf261ca7410f78eb"
+  },
+  "FIO20-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-09T21:41:08Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/11.input-output-fio/17.fio20-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "313dca9b72aa02158d6bf5f15bbed267a03105d86e090eacaaa7c331089b3eb5"
+  },
+  "FIO21-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:12:48Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/11.input-output-fio/18.fio21-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "a319614a198e1c24a2778d95bc1ddbd4efa6e30ce478a68379573b593413da39"
+  },
+  "FIO22-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:12:48Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/11.input-output-fio/19.fio22-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "carried forward by recorded review (author, 2026-10-10): e700e8e3/b717b8b3 example compile fix and getchar() naming; reading unchanged",
+   "set": "2026-10-10",
+   "sha256": "9b7dfda0e971b726602a7b3bd980325d3ca33c3be1b5fb7b4f5ea3f0da4cf6cd"
+  },
+  "FIO23-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:12:49Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/11.input-output-fio/20.fio23-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "6ae1a93b41a25648f9c82565212f8b9c3db68e400630a6e7b692ff1b7d9593ff"
+  },
+  "FIO24-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:12:49Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/11.input-output-fio/21.fio24-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "carried forward by recorded review: page changed after the read without touching the reading (1afabc47 risk table header)",
+   "set": "2026-10-10",
+   "sha256": "6bcb2a6a3c91470da0b8178d2d390314c5931087ff4e9036df6cc00cecdc7d16"
+  },
+  "FIO30-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-09T23:37:52Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/11.input-output-fio/02.fio30-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "75b3622e1230e35cfda3d7b71dedf7a0789e076a6da58d826f5ff755a9ba4500"
+  },
+  "FIO32-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:12:50Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/11.input-output-fio/03.fio32-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "12e1c786c12f30d50235eedf4ec6c286273b64dde77e23a7c48e1765a46fb725"
+  },
+  "FIO34-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-09T22:11:59Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/11.input-output-fio/04.fio34-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "792e7b2039e3b9e127d81cf7037ce4704d4c6ad1cacc67559f455ce62381dc03"
+  },
+  "FIO37-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-09T22:28:11Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/11.input-output-fio/05.fio37-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "97b016d0567151fffe8382b1d4d3785f2fe109a75fc59f3cbacd60333ff3ebf8"
+  },
+  "FIO38-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:12:52Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/11.input-output-fio/06.fio38-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "846ab0b8fb482f76505358fce4ef16b885cd667eb26c3f653defba37bd7f672d"
+  },
+  "FIO39-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-07T13:04:16Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/11.input-output-fio/07.fio39-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "568e250f4b0626e9e8d844e1f5ad32b21bf65ce9cebc7d8e51d71fe46d2e0e93"
+  },
+  "FIO40-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:12:52Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/11.input-output-fio/08.fio40-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "carried forward by recorded review: page changed after the read without touching the reading (8cf4d38f tool rows)",
+   "set": "2026-10-10",
+   "sha256": "ade822e90e6dc7d8e70e4308571123942606bf5bf396054a7ae9c179dd18f990"
+  },
+  "FIO41-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:12:53Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/11.input-output-fio/09.fio41-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "180ec052b47fa2c1a26dacd28099972f3aa76e6c6081f9b043fc85e84b975a7e"
+  },
+  "FIO42-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:12:53Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/11.input-output-fio/10.fio42-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "d7cf49d90a1382bdeba6d80ae90ef7415a946360b7399adb64df1a1efd4fe192"
+  },
+  "FIO44-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:12:54Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/11.input-output-fio/11.fio44-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "carried forward by recorded review: page changed after the read without touching the reading (8cf4d38f tool rows)",
+   "set": "2026-10-10",
+   "sha256": "93d0e6c859f00f90a91da9e066ec0076c7b058ce8cbb1d1417d10e23090c3fbd"
+  },
+  "FIO45-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-07T17:32:23Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/11.input-output-fio/12.fio45-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "19f5775bd507110ff324e29c67f38467db42b89757adf229644de0a206f4e855"
+  },
+  "FIO46-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:12:55Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/11.input-output-fio/13.fio46-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "carried forward by recorded review (author, 2026-10-10): b717b8b3 names getchar() as the implicit-stdin function, the reading the record took",
+   "set": "2026-10-10",
+   "sha256": "bb696cdbda8cdcf02b0dfc0cbad1cded293be9df2a13ec88155849db6e86e2bf"
+  },
+  "FIO47-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-07T13:04:37Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/11.input-output-fio/14.fio47-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "855fde8aa6446e741f95228ab300830e0c5100e9b5b1507c4e4e504fa2c96eae"
+  },
+  "FLP00-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:12:55Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/10.floating-point-flp/2.flp00-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "930db05b32e13a2f4fa09d9bc7792314611dd2accd130ecbfcea19aceeabf6a5"
+  },
+  "FLP01-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:12:56Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/10.floating-point-flp/3.flp01-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "not shipped: the ruling is a disposition, so no reading is carried",
+   "set": "2026-10-10",
+   "sha256": "20f7989f0e2391bee590543635a6de94b7eee1b5680ae184c9e7bcd6d1f6f02e",
+   "shipped": false
+  },
+  "FLP02-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:12:56Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/10.floating-point-flp/4.flp02-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "not shipped: the ruling is a disposition, so no reading is carried",
+   "set": "2026-10-10",
+   "sha256": "ec26b8849f36cfd963d56af61a5a53e9a8e8a47ac830e4789400c3353d4953c6",
+   "shipped": false
+  },
+  "FLP03-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:12:57Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/10.floating-point-flp/5.flp03-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "b792b2adb00a5367a340f761f3457737a51062cbe4508aa5d32026057fa08b82"
+  },
+  "FLP04-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:12:57Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/10.floating-point-flp/6.flp04-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "cfad5c3f426a99e548dc0df8cb2d0b6b5ba9fe8dbb655f8914835d812ee69234"
+  },
+  "FLP05-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:12:57Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/10.floating-point-flp/7.flp05-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "carried forward by recorded review: page changed after the read without touching the reading (1afabc47 risk table header)",
+   "set": "2026-10-10",
+   "sha256": "8811b07b8a37a9b018a1ce26b3fd1579cb58d84110984da148da1aed643d9324"
+  },
+  "FLP06-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:12:58Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/10.floating-point-flp/8.flp06-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "carried forward by recorded review: page changed after the read without touching the reading (8cf4d38f tool rows)",
+   "set": "2026-10-10",
+   "sha256": "889780b8bce3e4814dd4cfc9fdb9220ec60ee7cece685b6e0cf54c40cced7e06"
+  },
+  "FLP07-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:12:58Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/10.floating-point-flp/9.flp07-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "carried forward by recorded review: page changed after the read without touching the reading (1afabc47 risk table header)",
+   "set": "2026-10-10",
+   "sha256": "e99c7454527c53019f839e585e9682ec6c2966b36ddd1b231f9fb58d5bf7388c"
+  },
+  "FLP30-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-07T12:04:38Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/10.floating-point-flp/2.flp30-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "c7621bf072ccded4f699f76c48a05f4dcf27ef45f715310ea1b128f9d192314f"
+  },
+  "FLP32-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-09T20:26:15Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/10.floating-point-flp/3.flp32-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "ed072f6f7a5961027d4b3faf6ebe8dd851d31f4621a9756e26528663a4bbbbba"
+  },
+  "FLP34-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:13:00Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/10.floating-point-flp/4.flp34-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "carried forward by recorded review: page changed after the read without touching the reading (8cf4d38f tool rows)",
+   "set": "2026-10-10",
+   "sha256": "c77b844a7c6e779eba7d3671645e311742b00f57f073553ff92058ff4ee4c4ff"
+  },
+  "FLP36-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:13:00Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/10.floating-point-flp/5.flp36-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "carried forward by recorded review: page changed after the read without touching the reading (8cf4d38f tool rows)",
+   "set": "2026-10-10",
+   "sha256": "4a3ac69684a7a38cd25469bf890ef9b2ac48d53139b2a47f96004304492c964a"
+  },
+  "FLP37-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:13:01Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/10.floating-point-flp/6.flp37-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "carried forward by recorded review: page changed after the read without touching the reading (8cf4d38f tool rows)",
+   "set": "2026-10-10",
+   "sha256": "55fb6acfd92cdb9d7ef88d51ba71e3d846276d17d33f0fcde1e6c18c2726bf09"
+  },
+  "FLP38-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:13:01Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/10.floating-point-flp/7.flp38-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "ef81cfc3c4908721a2c5486ecce0cc8e3b40b66ac9add97e1a0972b0c89e9dac"
+  },
+  "INT00-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:13:02Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/12.integers-int/02.int00-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "not shipped: the ruling is a disposition, so no reading is carried",
+   "set": "2026-10-10",
+   "sha256": "c5cb7d6e708172ae99dac205203430f67c5cb702a24451ae29c0759d9ec48c2b",
+   "shipped": false
+  },
+  "INT01-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-07T16:06:47Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/12.integers-int/03.int01-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "carried forward by recorded review: page changed after the read without touching the reading (43134d25 explanatory count)",
+   "set": "2026-10-10",
+   "sha256": "fd1766ad80debe9f71ea5899b3196132ea67b9ac49f66c88cf96d5fcefc9b096"
+  },
+  "INT02-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-07T10:54:49Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/12.integers-int/04.int02-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "cdb2b241b7ad034d48a7f055e6545b7e4637e5c18b7a59d9b3e66fec7bbf2000"
+  },
+  "INT04-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-09T22:29:02Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/12.integers-int/05.int04-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "f2100a51bce9206140bf3b84ac35353011b25a68fa201301693133bcccdca8b7"
+  },
+  "INT05-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:13:03Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/12.integers-int/06.int05-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "not shipped: the ruling is a disposition, so no reading is carried",
+   "set": "2026-10-10",
+   "sha256": "8e8b2d3168b47ed0101c9099aeab352f7d32fb2baae48ae3fb1dba04739dfcf2",
+   "shipped": false
+  },
+  "INT07-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-09T20:24:59Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/12.integers-int/07.int07-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "afd080c2c1be6cd40006dcfef978e4128dd4562c8f97321a0f8f2e3b7cf127c2"
+  },
+  "INT08-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:13:04Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/12.integers-int/08.int08-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "not shipped: the ruling is a disposition, so no reading is carried",
+   "set": "2026-10-10",
+   "sha256": "11e8931569cf3788227493d2d810c1ba88b298dd50eaf1e9d8ec76058d0940c8",
+   "shipped": false
+  },
+  "INT09-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:13:05Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/12.integers-int/09.int09-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "6d8f8b57926b1fedca6a8e5233026379fadf62737cbfd792ff5cde2534d07eb1"
+  },
+  "INT10-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:13:05Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/12.integers-int/10.int10-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "6f065eda7add7880d87e888e7145737dcd4202022e6d164f8cf3be37925d2f83"
+  },
+  "INT12-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:13:05Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/12.integers-int/11.int12-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "cb57b3c37ae9825af363ef936304d32e78d4fec751f15f29ee28f4ae5da6147b"
+  },
+  "INT13-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-07T13:04:26Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/12.integers-int/12.int13-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "57c8f3b5f96d5322ed96a7c5b1ae45f035344df66066c8b7f5de0b9b5ac3dd4e"
+  },
+  "INT14-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:13:06Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/12.integers-int/13.int14-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "fbd27bc933282c6691b98f26b745c1ca8a13ffd674cd18228bf15f1ab0903dff"
+  },
+  "INT15-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-07T12:18:20Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/12.integers-int/14.int15-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "4e70e1a2ba83289db8c8a89203635395ad5ccd8de3086c2ab308e7ef3750513d"
+  },
+  "INT16-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:13:07Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/12.integers-int/15.int16-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "not shipped: the ruling is a disposition, so no reading is carried",
+   "set": "2026-10-10",
+   "sha256": "75903aa91d08c9145a816a95e3cc7b94b347f85ae68c0d18fc11efc4a13f1fa1",
+   "shipped": false
+  },
+  "INT17-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:13:08Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/12.integers-int/16.int17-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "109954aae96d0234ad272ea300e41944dc3f9b0fc3193c38f50e43c2b05b485a"
+  },
+  "INT18-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-09T23:16:24Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/12.integers-int/17.int18-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "061040c0caa5644bb5c2fdfc7243b8a6484f5dca61b7a2392e40d05ef783b316"
+  },
+  "INT30-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-07T11:31:07Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/12.integers-int/2.int30-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "carried forward by recorded review (author, 2026-10-10): d4dd90de bounds EX2 right shifts by the precision, the reading the record took",
+   "set": "2026-10-10",
+   "sha256": "4cd0eea682c1dd9823cbfff8ff7f8d3911e93b6396f52fa9042b1752a8a787cc"
+  },
+  "INT31-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-07T22:11:34Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/12.integers-int/3.int31-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "8056546b94af1172e34c028c8b8a12f60f34c45e4d268ce6ac7092f1daab077a"
+  },
+  "INT32-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-07T22:45:20Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/12.integers-int/4.int32-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "2283c3a9a2f19219589cf6294483a45d0a5a751e1396d7c154cd18446aff8419"
+  },
+  "INT33-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-07T12:30:44Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/12.integers-int/5.int33-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "de658227c687b3257b73eb42cedb15c0014b47066cf3e52ae86188c5332167cd"
+  },
+  "INT34-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:13:10Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/12.integers-int/6.int34-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "carried forward by recorded review: page changed after the read without touching the reading (8cf4d38f tool rows)",
+   "set": "2026-10-10",
+   "sha256": "5737fd52c4fc4e027804d440e314c7903b00137e32260e4af5d2c57689c790a7"
+  },
+  "INT35-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:13:10Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/12.integers-int/7.int35-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "0dbcfb2b9a8a75a74e30eb7b58823d1e9defd55a34af80b22d291bc07c98bba5"
+  },
+  "INT36-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:13:11Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/12.integers-int/8.int36-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "carried forward by recorded review: page changed after the read without touching the reading (8cf4d38f tool rows)",
+   "set": "2026-10-10",
+   "sha256": "bc119195d9fb697fb6b13ec3493effbbe5b89b8c94b613b01d725c224ce482bd"
+  },
+  "MEM00-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:13:11Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/13.memory-management-mem/02.mem00-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "not shipped: the ruling is a disposition, so no reading is carried",
+   "set": "2026-10-10",
+   "sha256": "f22c0d8cff95bf73c8c5c22083a722184eec2272a886878151d60e8ca5a90024",
+   "shipped": false
+  },
+  "MEM01-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-07T15:49:42Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/13.memory-management-mem/03.mem01-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "b6e4311f8c998477fbde9be334b95dd0411c96ecfa237e6dd6ce7487d17337fa"
+  },
+  "MEM02-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:13:12Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/13.memory-management-mem/04.mem02-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "4a271138059913099ac98b9e5e2757e715d985b2e8c535eec4eaa603211ffdf6"
+  },
+  "MEM03-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:13:13Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/13.memory-management-mem/05.mem03-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "carried forward by recorded review (author, 2026-10-10): memset_explicit() examples; the ruling already credits memset_explicit() as a non-elidable clear",
+   "set": "2026-10-10",
+   "sha256": "fc9105a0954dae4f48bacac5e7ccf4f47f77483604bbb9b4a445fe05614a6dce"
+  },
+  "MEM04-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-07T12:30:55Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/13.memory-management-mem/06.mem04-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "05fff350190da5d2a31641562fb77a19b5fb1f21ad847a50064a3f4a9d35f012"
+  },
+  "MEM05-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-07T17:30:12Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/13.memory-management-mem/07.mem05-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "158daf14fe72b5c20c32b95efe98a66a4860e76a58a687b13a2a1f497c173b8c"
+  },
+  "MEM06-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:13:14Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/13.memory-management-mem/08.mem06-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "carried forward by recorded review (author, 2026-10-10): memset_explicit() examples; the ruling already credits memset_explicit() as a non-elidable clear",
+   "set": "2026-10-10",
+   "sha256": "9f06f5a1f8cf4e816a6f5060eb4efc3c632e892bbf718fe7c2170e356a5e9b8c"
+  },
+  "MEM07-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:13:14Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/13.memory-management-mem/09.mem07-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "not shipped: the ruling is a disposition, so no reading is carried",
+   "set": "2026-10-10",
+   "sha256": "11bf3344b2f80fc337c5c51187173a9d67f6d721fca5f491112bb01c0f830365",
+   "shipped": false
+  },
+  "MEM10-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:13:15Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/13.memory-management-mem/10.mem10-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "not shipped: the ruling is a disposition, so no reading is carried",
+   "set": "2026-10-10",
+   "sha256": "c3c46b2457d6c0cbc430c42b0e6b72bc0f3e76e89746d6101230e9ed02b862df",
+   "shipped": false
+  },
+  "MEM11-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-09T22:31:56Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/13.memory-management-mem/11.mem11-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "not shipped: the ruling is a disposition, so no reading is carried",
+   "set": "2026-10-10",
+   "sha256": "fd1426528e6bfdff2b41d038fb8a77f9f70c52f277a169421e1530b319dbd467",
+   "shipped": false
+  },
+  "MEM12-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:13:15Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/13.memory-management-mem/12.mem12-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "not shipped: the ruling is a disposition, so no reading is carried",
+   "set": "2026-10-10",
+   "sha256": "3dc8428785fb0ef34a3c1536b480b50447ecb74b3a9e590f351d668fe15bc2db",
+   "shipped": false
+  },
+  "MEM30-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-07T18:10:45Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/13.memory-management-mem/2.mem30-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "d137bb1abd7edfefa98f9ad572cdd244781afb442418f82364e646feb525967b"
+  },
+  "MEM31-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:13:16Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/13.memory-management-mem/3.mem31-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "carried forward by recorded review: page changed after the read without touching the reading (8cf4d38f tool rows)",
+   "set": "2026-10-10",
+   "sha256": "990a72151785cb9e0a1f102f96d492095a58a1825baadbdaf9ac1da9fa8a0a8c"
+  },
+  "MEM33-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:13:17Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/13.memory-management-mem/4.mem33-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "79689c0b6d57d02862a2e765542a28c96ed4ae4e9f803b67bc3751865490ae8f"
+  },
+  "MEM34-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-07T18:31:18Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/13.memory-management-mem/5.mem34-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "1ac78a4eee63c54f77dd892f4b547103d93c5b01adbb817ccd07682fb46f9ddd"
+  },
+  "MEM35-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-07T17:54:43Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/13.memory-management-mem/6.mem35-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "8e78d290a8b081c5409e7b3c055f82925062cd011d737bb19356653f6d1172df"
+  },
+  "MEM36-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:13:18Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/13.memory-management-mem/7.mem36-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "5cec64e7d8aefb46efe5bd092e18fabe0feb7b3848b6a41af7504a99713d2ebd"
+  },
+  "MSC00-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:13:18Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/15.miscellaneous-msc/02.msc00-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "carried forward by recorded review: page changed after the read without touching the reading (8cf4d38f tool rows)",
+   "set": "2026-10-10",
+   "sha256": "ca1c27cef7ab07932b7ee889560778502eda2be9e057e7b3fddf548625f19387"
+  },
+  "MSC01-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:13:19Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/15.miscellaneous-msc/03.msc01-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "carried forward by recorded review: page changed after the read without touching the reading (8cf4d38f tool rows)",
+   "set": "2026-10-10",
+   "sha256": "8259d5dd1db54e5d2931f180ed5deba338a029d7e8f8252fa3bd705e97560784"
+  },
+  "MSC04-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:13:19Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/15.miscellaneous-msc/04.msc04-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "191a3e0752f0a9096a054832254e86784c02c4d12b21122199d64dfad0043340"
+  },
+  "MSC05-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:13:20Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/15.miscellaneous-msc/05.msc05-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "d14f031f7083d0bc75b066b0674e7569f784f6884b3d3cc7430a2a4e1e7400e4"
+  },
+  "MSC06-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-09T20:25:44Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/15.miscellaneous-msc/06.msc06-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "6ae65b8464eb14eabc251b623c1844d2e50c3e3a4adbc71c6d09ca5618a8a798"
+  },
+  "MSC07-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:13:20Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/15.miscellaneous-msc/07.msc07-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "not shipped: the ruling is a disposition, so no reading is carried",
+   "set": "2026-10-10",
+   "sha256": "9c6c78006383523dbbf98ee5fa56a5d2b8da31d89ea106da5c9e4eb40f82cd2c",
+   "shipped": false
+  },
+  "MSC09-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-09T22:31:56Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/15.miscellaneous-msc/23.msc09-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "8032f43cc56b84f95cd0f761cbd08f003c97f2826acb43fcf1fbb8f5b49e8a21"
+  },
+  "MSC10-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:13:21Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/15.miscellaneous-msc/08.msc10-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "carried forward by recorded review: page changed after the read without touching the reading (0df6ff7b source attribution; 9e83c290 example attribution; 3d238dcd example fix)",
+   "set": "2026-10-10",
+   "sha256": "7bdbd46d5e4399bf373dbb77142012bef4260c1c3da56e7089a9138cf348c529"
+  },
+  "MSC11-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:13:21Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/15.miscellaneous-msc/09.msc11-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "carried forward by recorded review: page changed after the read without touching the reading (996ff809 risk table header (merge); 1afabc47 risk table header; 469a1e4a CWE link)",
+   "set": "2026-10-10",
+   "sha256": "c9df896da2920d037f350a9742425b2e51ccea0d284f923ec2c8c62888a29d11"
+  },
+  "MSC12-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:13:22Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/15.miscellaneous-msc/10.msc12-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "carried forward by recorded review: page changed after the read without touching the reading (8cf4d38f tool rows)",
+   "set": "2026-10-10",
+   "sha256": "0328184f0d0e563f6a2708fddea36f3d6887f14f8f33540bab9c492b408af046"
+  },
+  "MSC13-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:13:22Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/15.miscellaneous-msc/11.msc13-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "carried forward by recorded review: page changed after the read without touching the reading (8cf4d38f tool rows)",
+   "set": "2026-10-10",
+   "sha256": "0326bf2f9882124186b6fd989599d77902fd72764e5b8977ad813a622b22a5a1"
+  },
+  "MSC14-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:13:23Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/15.miscellaneous-msc/12.msc14-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "e5fe028ada53afc0b80a6a8f25d1330b28376933b15b923ae11bffe040ba6eca"
+  },
+  "MSC15-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:13:23Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/15.miscellaneous-msc/13.msc15-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "not shipped: the ruling is a disposition, so no reading is carried",
+   "set": "2026-10-10",
+   "sha256": "58f7c25c1e0143614b994f92c504fbe5f33bc67f9ce40ec0a78e96a4d99d2646",
+   "shipped": false
+  },
+  "MSC17-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-09T22:30:07Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/15.miscellaneous-msc/14.msc17-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "574acdf0f91ef6ebef2f0b570f3c0fb316502d5375a8fefa05e61dd7432bf3e9"
+  },
+  "MSC18-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:13:24Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/15.miscellaneous-msc/15.msc18-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "not shipped: the ruling is a disposition, so no reading is carried",
+   "set": "2026-10-10",
+   "sha256": "310db2d8e54d8f7e2c3f28a2fcbd3b61d103a59afe6ca50e26606d2629512c52",
+   "shipped": false
+  },
+  "MSC19-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:13:24Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/15.miscellaneous-msc/16.msc19-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "not shipped: the ruling is a disposition, so no reading is carried",
+   "set": "2026-10-10",
+   "sha256": "560a4abca19a4234514d2631ddbec94a5a3eb4c05df09aab6e6b5f307eeaf69b",
+   "shipped": false
+  },
+  "MSC20-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-07T19:21:38Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/15.miscellaneous-msc/17.msc20-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "9c6118ef2797b543bd7f77e8451e7bc0f9b2c8fdc1d7b9700a20036f8ac9fb77"
+  },
+  "MSC21-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:13:25Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/15.miscellaneous-msc/18.msc21-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "carried forward by recorded review: page changed after the read without touching the reading (8cf4d38f tool rows)",
+   "set": "2026-10-10",
+   "sha256": "3904deb35bbd4b723fb82a7a432ed84949bec18eaed7a4c1c9acebf1b43fb43a"
+  },
+  "MSC22-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:13:25Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/15.miscellaneous-msc/19.msc22-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "8624ba1760398de541c5bc9a4c0345b760f284326776c75b686ee97a0e92ef97"
+  },
+  "MSC23-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:13:26Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/15.miscellaneous-msc/20.msc23-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "not shipped: the ruling is a disposition, so no reading is carried",
+   "set": "2026-10-10",
+   "sha256": "b9fabcaeb4112779a9c11cadf49248658ea89ccd671bf8931ddd611b1c66d830",
+   "shipped": false
+  },
+  "MSC24-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-09T22:47:46Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/15.miscellaneous-msc/21.msc24-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "b43e2fd98a616039aea2f49ed8e9d978472dcd1a7d4b1a517ea8960582e8b34c"
+  },
+  "MSC25-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:13:27Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/15.miscellaneous-msc/22.msc25-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "not shipped: the ruling is a disposition, so no reading is carried",
+   "set": "2026-10-10",
+   "sha256": "1a323c5946da78185025b23101d00c3b7b813d14f10b1363156df35a2ee6fd8b",
+   "shipped": false
+  },
+  "MSC30-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:13:27Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/15.miscellaneous-msc/2.msc30-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "9da3a076c88aefd4400377b6469a3d5cc5ae0756a7e575bdcf6b28d55eec6fe9"
+  },
+  "MSC32-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-09T22:49:27Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/15.miscellaneous-msc/3.msc32-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "dfe557106b13e4b13ae8c028fb9a867d949eff45da95ad244589493a2c001531"
+  },
+  "MSC33-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-07T19:24:26Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/15.miscellaneous-msc/4.msc33-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "cd642fe01e88a6318142d45c5b2d26901938ced4603bfa8ff3c73cf0dae8c607"
+  },
+  "MSC37-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-07T15:58:21Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/15.miscellaneous-msc/5.msc37-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "23566ff044ef7c280dc97dc4bdb9490f18259abdd086fd741ff01b635ae2de3f"
+  },
+  "MSC38-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:13:28Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/15.miscellaneous-msc/6.msc38-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "598bbfe5de4d40263337f358ab6a3388b7e8c10a7152c37fc792ac57155fcdd3"
+  },
+  "MSC39-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:13:29Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/15.miscellaneous-msc/7.msc39-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "be6f95799b380a73e5dbdae6f4b6ef9b3e85840a00397ebbcda828f7b3c0032a"
+  },
+  "MSC40-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:13:29Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/15.miscellaneous-msc/8.msc40-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "3f116f48ffa8120cb5456df7fb2b2643c7db0f1c4024fa1049fef46974023cc3"
+  },
+  "MSC41-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-07T17:51:53Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/15.miscellaneous-msc/9.msc41-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "95211827afe839ce9e7fcd12e1b02fce2472748d8979a44714c8fddb191ca0e1"
+  },
+  "POS01-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-07T17:51:04Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/16.posix-pos/2.pos01-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "0dcde47bba99a4477cf5426611ec8f47e8b29e2c379c83aa30f7cd9fc0dceffc"
+  },
+  "POS02-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:13:30Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/16.posix-pos/3.pos02-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "not shipped: the ruling is a disposition, so no reading is carried",
+   "set": "2026-10-10",
+   "sha256": "48bd3659ef58ef83c0d7ee169072419c7d077b9c138bc3d8d9fabc3bb28819cc",
+   "shipped": false
+  },
+  "POS04-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:13:31Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/16.posix-pos/4.pos04-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "13bdecd5859f942e063bca6b23cfec3fd898f818848a0a1ad85fc968390fccce"
+  },
+  "POS05-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:13:31Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/16.posix-pos/5.pos05-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "dcb0fa97e3b2af879ecde2e94fdf0dc87fe0a0c67fc378c75834f2294588e8fd"
+  },
+  "POS30-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-09T22:47:21Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/16.posix-pos/02.pos30-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "2ffa471935c444a45c1f37779239353638d161b799c6adc1c02f0e2ed158bc17"
+  },
+  "POS34-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-07T15:58:18Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/16.posix-pos/03.pos34-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "carried forward by recorded review: page changed after the read without touching the reading (bee45409 CWE mapping note)",
+   "set": "2026-10-10",
+   "sha256": "46037d995fb86dc1176e98348bddf20f5df1a69c005f2db7884416462e53c5cc"
+  },
+  "POS35-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-07T18:32:42Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/16.posix-pos/04.pos35-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "carried forward by recorded review (author, 2026-10-10): 8bc168d7 says the identity solution detects, not eliminates, the race, the reading the record took",
+   "set": "2026-10-10",
+   "sha256": "271b655841eea55f688f00680ad09b55107c022bcfc42e8508cba640a9056930"
+  },
+  "POS36-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-07T22:46:58Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/16.posix-pos/05.pos36-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "f5ed38a7fb753b03873aec74e143edad1f65d6de0060a87fce3d2c4a7b6ee126"
+  },
+  "POS37-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-07T22:48:21Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/16.posix-pos/06.pos37-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "4f8d1b03e03a263795d42e6d857d612e2626fc26be90eb5b2ca41b5d0cf7f15a"
+  },
+  "POS38-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:13:34Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/16.posix-pos/07.pos38-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "42935a74b572b97fc577ca7da25f26574492b24cc276a29721e108e713e7dcc6"
+  },
+  "POS39-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-09T23:11:11Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/16.posix-pos/08.pos39-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "21331534bd7978d7ce15f081fb2ba28060699507c3ac1496540cc9832e5dc6d5"
+  },
+  "POS44-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:13:34Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/16.posix-pos/09.pos44-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "carried forward by recorded review: page changed after the read without touching the reading (5d11c538 example compile fix)",
+   "set": "2026-10-10",
+   "sha256": "0c260c265b9cd4be04a78fbbaef0c1e1ac9ff00f0593a5d1d377f279e903662d"
+  },
+  "POS47-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-07T10:38:11Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/16.posix-pos/10.pos47-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "fcf1163ec44b6952b22aeb4941503273b6e07c90fef06acf384e11b9762ca24f"
+  },
+  "POS48-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-07T10:51:14Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/16.posix-pos/11.pos48-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "9a22fdec687f1aa9f650026600a33594b7ee21f29b07f69f3a6ae892a3b86be2"
+  },
+  "POS49-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:13:36Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/16.posix-pos/12.pos49-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "carried forward by recorded review: page changed after the read without touching the reading (5ea837b9 explanatory wording)",
+   "set": "2026-10-10",
+   "sha256": "925e57880ff35ee9f8172c926b534f1fb50c68685027dcaefd9870c016a19eee"
+  },
+  "POS50-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:13:36Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/16.posix-pos/13.pos50-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "carried forward by recorded review: page changed after the read without touching the reading (29eb99d0 example compile fix)",
+   "set": "2026-10-10",
+   "sha256": "4be9c056cb28643e12b21d35f51cc6605a1a26ae923108d429a576c2e88afcaf"
+  },
+  "POS51-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:13:36Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/16.posix-pos/14.pos51-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "carried forward by recorded review: page changed after the read without touching the reading (00049830 example fix)",
+   "set": "2026-10-10",
+   "sha256": "1e2e3f2cd043901b1263e2355b1ce13f4909f5c6a84a5e0709e5607af0b36761"
+  },
+  "POS52-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:13:37Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/16.posix-pos/15.pos52-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "carried forward by recorded review: page changed after the read without touching the reading (518b2363 example fixes (merge); a4be1cfd example compile fix; 7108f859 example fix; 6ec97c7e example fix)",
+   "set": "2026-10-10",
+   "sha256": "1a65f777887f6a680288e9e42c53bbb784ae82ada1d493e864a8db8e899aceef"
+  },
+  "POS53-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-07T16:26:57Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/16.posix-pos/16.pos53-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "5478d8d4260b9397d5c002df4ac5ff6f5372fc4df4d2581de5773047ee4dea57"
+  },
+  "POS54-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-09T23:36:41Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/16.posix-pos/17.pos54-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "32b8af775c68bbb1852d150bfc9bcead49d89632f1fddef71bf46f4f492fd383"
+  },
+  "PRE00-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:13:38Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/17.preprocessor-pre/02.pre00-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "06dc6e167b8eb20f629c7887c11f0b3a36b15fa3291dc1e19150724933d8ce25"
+  },
+  "PRE01-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-09T20:54:43Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/17.preprocessor-pre/03.pre01-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "c221b1b0f790358d9912f8cb9f9bb163a29adad53f9bb05e20a93cae379f1087"
+  },
+  "PRE02-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-10T12:06:30Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/17.preprocessor-pre/04.pre02-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "acad4cb8613943d9bccf9383ecabc13ae3bcf7d7b37ccd25ba8d385d22090071"
+  },
+  "PRE04-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:13:39Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/17.preprocessor-pre/05.pre04-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "753daa75e4972cda1c93aaec3c9483c410dda5672e6e75038fc23d703bb24beb"
+  },
+  "PRE05-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:13:40Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/17.preprocessor-pre/06.pre05-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "ccc2a2ffc14da774bc98020a385fee441f4ab4183cfbcddfa84b8bf7df6b485c"
+  },
+  "PRE06-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:13:40Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/17.preprocessor-pre/07.pre06-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "746c682196d919cde52e736bdcb1f8effbf67e08eb217c8e838a556fdd75483b"
+  },
+  "PRE07-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-07T11:17:39Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/17.preprocessor-pre/08.pre07-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "701b7adb19d80f106a0c14e1148f7545be8b17529f42280c57213b2886c00d9a"
+  },
+  "PRE08-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:13:41Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/17.preprocessor-pre/09.pre08-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "14d4556a3e3d2b5249da4ae914128f8b7d3cc823299f368fb9929c53635c6076"
+  },
+  "PRE09-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-10T00:09:10Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/17.preprocessor-pre/10.pre09-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "4c17a12272f5f8642ef896082b5037502fd54b99277d322296eeaae8dfcdff73"
+  },
+  "PRE10-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-09T20:50:45Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/17.preprocessor-pre/11.pre10-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "b555a25875c6fd4f0f897c76dc27db7c78dd6cdc49fb208bfaad26cef1b99a3d"
+  },
+  "PRE11-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-07T19:27:29Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/17.preprocessor-pre/12.pre11-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "8076d2070024a0d0508cb5cd3469a7d2dfc28dd426b78ab65679cb4620b961bf"
+  },
+  "PRE12-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:13:43Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/17.preprocessor-pre/13.pre12-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "carried forward by recorded review: page changed after the read without touching the reading (1afabc47 risk table header)",
+   "set": "2026-10-10",
+   "sha256": "d3ecc3b868094a21f38652fcc27156b4b2574ea6e6c45b10564f4f1304b54e22"
+  },
+  "PRE13-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:13:43Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/17.preprocessor-pre/14.pre13-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "carried forward by recorded review: page changed after the read without touching the reading (996ff809 risk table header (merge); 1afabc47 risk table header; be53f189 example fix)",
+   "set": "2026-10-10",
+   "sha256": "fc7aaa00547831985ca214b4e6b406ca238d722fa98cb2afbb7c0b1e1c8abba7"
+  },
+  "PRE30-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:13:43Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/17.preprocessor-pre/2.pre30-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "dda6a223c91c916969875297099ace8805b02195d8013510cc14b7b5ba1224ec"
+  },
+  "PRE31-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-07T10:51:11Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/17.preprocessor-pre/3.pre31-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "a7327c67df52b986ce3eb4620ba86c7a71bec9cc972e9bb6d6a026a0efb718e1"
+  },
+  "PRE32-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:13:44Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/17.preprocessor-pre/4.pre32-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "c33afc81549446897307fc0e303d9006b516667d414c39452b7140d25e1a2302"
+  },
+  "SIG00-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-07T18:30:15Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/18.signals-sig/2.sig00-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "7701f3f2c4c5c62e2e6c4a4c33a96331a7fb73a17aa66b67bf452bd26bd663e7"
+  },
+  "SIG01-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:13:45Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/18.signals-sig/3.sig01-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "c44a2085f170112348fbfac54d24ab37c2a9258a86cb1b3de43710ee398eb046"
+  },
+  "SIG02-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-07T11:30:18Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/18.signals-sig/4.sig02-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "b94d1b7250993e41c3873b8b383c6828c0142da53a62d26e2330d7222e5b2694"
+  },
+  "SIG30-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-10T00:07:22Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/18.signals-sig/2.sig30-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "2214f6dc42394ada7fc1869f659ce985c5e83a201160c517d3c86b13b90952ec"
+  },
+  "SIG31-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-10T00:06:48Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/18.signals-sig/3.sig31-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "934d1c421d1e3c571c7d8fcfddd18ca30f1d267768e76b71f1e332f2eb49017c"
+  },
+  "SIG34-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:13:47Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/18.signals-sig/4.sig34-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "5dffcc4807f772dc42db164b4ff32a13ce5207bb674e54f03b9d7ed97774df35"
+  },
+  "SIG35-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:13:47Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/18.signals-sig/5.sig35-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "18ae5653bf7fa763432a5327e2ce8823ea0e236a7d135435df6e4aac1072c3bc"
+  },
+  "STR00-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:13:47Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/04.characters-and-strings-str/02.str00-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "not shipped: the ruling is a disposition, so no reading is carried",
+   "set": "2026-10-10",
+   "sha256": "af16dfa0cca03b259de773d3f2d2e769e00bfd77eee225329ef3cf0fbad5e8c1",
+   "shipped": false
+  },
+  "STR01-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:13:48Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/04.characters-and-strings-str/03.str01-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "not shipped: the ruling is a disposition, so no reading is carried",
+   "set": "2026-10-10",
+   "sha256": "2fa4055851ef326876c56a09ebdfec16842e3cbf80f84604c2a2f271cf60eae0",
+   "shipped": false
+  },
+  "STR02-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-07T18:53:59Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/04.characters-and-strings-str/04.str02-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "b9e4c7fe6575a2ed8363a0fa26c42d44a6e4730e55e0da14333ad66353fc6540"
+  },
+  "STR03-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:13:49Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/04.characters-and-strings-str/05.str03-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "d883e3d0c2bfeee229640aa1307ab42f06f18e97ade2ff454a8097b7320c2f2f"
+  },
+  "STR04-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:13:49Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/04.characters-and-strings-str/06.str04-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "e564a136d5556459f8edfbaa6a650e103d38eb4b479fbf2bda377832536e3779"
+  },
+  "STR05-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:13:49Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/04.characters-and-strings-str/07.str05-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "4ad2846d59133cecff20b019e0adb05957fc8b59aa8cc9fd25f4aef70ab4372b"
+  },
+  "STR06-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-07T18:11:40Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/04.characters-and-strings-str/08.str06-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "0e9a6cf4382e9af3a721fe0bff011248db2e0705aba1adebc97d86ad1b82e08b"
+  },
+  "STR09-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:13:50Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/04.characters-and-strings-str/09.str09-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "carried forward by recorded review: page changed after the read without touching the reading (1afabc47 risk table header)",
+   "set": "2026-10-10",
+   "sha256": "70d43a8a031a96041b520f1e5be8904cc4e90c6dc79b3c7285fe6f7bfdc7ba49"
+  },
+  "STR10-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:13:51Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/04.characters-and-strings-str/10.str10-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "carried forward by recorded review: page changed after the read without touching the reading (1afabc47 risk table header)",
+   "set": "2026-10-10",
+   "sha256": "4c85a7c074385cf7c48ec319d7c66aa0bbfabe16b887c04ff14b38e086c874ff"
+  },
+  "STR11-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-07T12:04:49Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/04.characters-and-strings-str/11.str11-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "ec059bb1622d9b86b2bb1fe5488048cc91d208ad36cf5a05a973607186feb41d"
+  },
+  "STR30-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-07T12:30:44Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/04.characters-and-strings-str/2.str30-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "f324bebf17f7bcbcea5e2094b37b64d1e6e2b5accefd68f5a0f17a3627f65fde"
+  },
+  "STR31-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-07T18:56:02Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/04.characters-and-strings-str/3.str31-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "69645c1b216c607512e204ede8b6908c17b8e7a84f138370b4ce5f4350ba635f"
+  },
+  "STR32-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-09T21:43:02Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/04.characters-and-strings-str/4.str32-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "8e0c240b4fd9aa7d2e5245dcaa1f34ca1fdd661b7dc1d36c2cd456f55a12f165"
+  },
+  "STR34-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-07T16:24:41Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/04.characters-and-strings-str/5.str34-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "carried forward by recorded review (author, 2026-10-10): a3c6f580 says larger integer type, matching the title and the reading the record took",
+   "set": "2026-10-10",
+   "sha256": "e2897bd01ae8b8b6ffbff625fb07840396e115e9ca07f89ccd181e7991a397aa"
+  },
+  "STR37-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:13:53Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/04.characters-and-strings-str/6.str37-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "e599ca32f15cc76fbef5ae7e399be1a6fe342d5d53b7daff8cc9a23edebcfb30"
+  },
+  "STR38-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-10T00:36:11Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/04.characters-and-strings-str/7.str38-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "8756f52ba2da605086a14036600faaea708ef5aab218e92dbc14357f85ad0a50"
+  },
+  "WIN00-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-09T22:03:36Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/14.microsoft-windows-win/2.win00-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "15c86613dbf9b92d86f54555f0933624ed5d3395590ebdd762e2b430943c04ee"
+  },
+  "WIN01-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-10T00:33:11Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/14.microsoft-windows-win/3.win01-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "2ee63ebd4dcbee03b9b4773f17048ec6bccffe65e17ec74d801936af87313711"
+  },
+  "WIN02-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-10T00:32:06Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/14.microsoft-windows-win/4.win02-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "262531c9cadaa36a9874f8e8edecf823538f7d3a479b3125441cb325a74631be"
+  },
+  "WIN03-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:13:55Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/14.microsoft-windows-win/5.win03-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "326be5e1a3301c3f0ba1b30f2894b60dd9118627099a2c7e3e2bd2c748ebb1aa"
+  },
+  "WIN04-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:13:55Z",
+   "path": "content/4.sei-cert-c-coding-standard/08.recommendations/14.microsoft-windows-win/6.win04-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "set": "2026-10-10",
+   "sha256": "4b2b767699acc892ae6b39e4c8bc409140c5f929800a0daae51c34808093393d"
+  },
+  "WIN30-C": {
+   "carried_forward": true,
+   "commit": "98706f871dd6fc6494250cb24addd08302ca11ea",
+   "last_read_utc": "2026-10-06T04:13:56Z",
+   "path": "content/4.sei-cert-c-coding-standard/03.rules/14.microsoft-windows-win/2.win30-c.md",
+   "reason": "first map (ADR-0018 ruling c)",
+   "review": "carried forward by recorded review: page changed after the read without touching the reading (8cf4d38f tool rows)",
+   "set": "2026-10-10",
+   "sha256": "6630f88456bd966735f903933a53197be23dd729e148af6012ea878e14c21a04"
+  }
+ }
+}

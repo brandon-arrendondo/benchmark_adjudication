@@ -24,6 +24,9 @@ Checks:
     manifest's own counts (see check_recheck).
   - every data/*/adjudication.csv is LF-terminated with no CR byte anywhere
     (see check_line_terminators for why this is an error, not a warning).
+  - rulings/: dated ruling ids, a rule file or an unruled entry for every
+    labelled rule, and a well-formed rule-text pin for every labelled rule
+    with a CERT C page (see check_rulings).
   - no free-text field (reason/provenance/confidence) contains a
     backslash-escaped quote (\") -- CSV has no backslash-escape convention,
     so this is the signature of a row built by something that assumed
@@ -89,6 +92,7 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parent.parent
 DATA_DIR = REPO_ROOT / "data"
 BATCHES_DIR = REPO_ROOT / "batches"
+RULINGS_DIR = REPO_ROOT / "rulings"
 
 CSV_COLUMNS = [
     "project", "codebase_commit", "file_path", "line", "rule_id", "verdict",
@@ -506,6 +510,86 @@ def check_line_terminators(errors: list[str]) -> None:
             )
 
 
+RULE_ID_RE = re.compile(r"^[A-Z]{3}\d{2}-C$")
+RULING_REF_RE = re.compile(r"\b([A-Z]{3}\d{2}-C)/([^/\s`]+)/([0-9A-Za-z_-]+)")
+RULING_DEF_RE = re.compile(r"^- \*\*([A-Z]{3}\d{2}-C)/([^/\s`]+)/([0-9A-Za-z_-]+)\b", re.M)
+RULING_DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
+SHA256_RE = re.compile(r"^[0-9a-f]{64}$")
+
+
+def check_rulings(errors: list[str]) -> None:
+    """Check rulings/ against itself and against the labels.
+
+    - Every ruling id is `<rule>/<YYYY-MM-DD>/<item>`: dated, so a public
+      file never carries an internal task id; a rule file defines only its
+      own rule's ids, each once.
+    - Every rule_id in data/*/adjudication.csv has rulings/rules/<id>.md or
+      is listed in rulings/unruled.md (whose labels cite the principles).
+    - rulings/rule-text-map.json parses, each entry is pinned to a full
+      commit, a path and a SHA-256, and every labelled rule with a CERT C
+      page has an entry (aurora-lint ADR-0018).
+    """
+    if not RULINGS_DIR.exists():
+        return
+    rules_dir = RULINGS_DIR / "rules"
+    have = {}
+    for path in sorted(rules_dir.glob("*.md")):
+        rule = path.stem
+        text = path.read_text(encoding="utf-8")
+        have[rule] = text
+        if not RULE_ID_RE.match(rule):
+            errors.append(f"{path}: file name is not a CERT C rule id")
+        if not text.startswith(f"# {rule}\n"):
+            errors.append(f"{path}: first line must be '# {rule}'")
+        for m in RULING_REF_RE.finditer(text):
+            if not RULING_DATE_RE.match(m.group(2)):
+                errors.append(f"{path}: ruling id {m.group(0)} is not dated "
+                              f"(<rule>/<YYYY-MM-DD>/<item>)")
+        defined = [m.groups() for m in RULING_DEF_RE.finditer(text)]
+        for r, _date, _item in defined:
+            if r != rule:
+                errors.append(f"{path}: defines a ruling id for {r}")
+        seen = set()
+        for d in defined:
+            if d in seen:
+                errors.append(f"{path}: ruling id {'/'.join(d)} defined twice")
+            seen.add(d)
+
+    unruled_path = RULINGS_DIR / "unruled.md"
+    unruled = set()
+    if unruled_path.exists():
+        unruled = set(re.findall(r"\b([A-Z]{3}\d{2}-C)\b",
+                                 unruled_path.read_text(encoding="utf-8")))
+
+    labelled = set()
+    for csv_path in sorted(DATA_DIR.glob("*/adjudication.csv")):
+        with csv_path.open(newline="", encoding="utf-8") as f:
+            for row in csv.DictReader(f):
+                labelled.add(row["rule_id"])
+    for rule in sorted(labelled - set(have) - unruled):
+        errors.append(f"rulings: label rule_id {rule} has no rulings/rules/"
+                      f"{rule}.md and is not in rulings/unruled.md")
+
+    map_path = RULINGS_DIR / "rule-text-map.json"
+    try:
+        rule_map = json.loads(map_path.read_text(encoding="utf-8"))["rules"]
+    except (OSError, ValueError, KeyError) as exc:
+        errors.append(f"{map_path}: unreadable rule-text map ({exc})")
+        return
+    for rule, entry in sorted(rule_map.items()):
+        where = f"{map_path}: {rule}"
+        if not FULL_SHA_RE.match(str(entry.get("commit", ""))):
+            errors.append(f"{where}: commit is not a full SHA")
+        if not str(entry.get("path", "")).endswith(".md"):
+            errors.append(f"{where}: path is not a page source")
+        if not SHA256_RE.match(str(entry.get("sha256", ""))):
+            errors.append(f"{where}: sha256 is not a SHA-256")
+    for rule in sorted(labelled - set(rule_map)):
+        text = have.get(rule, "")
+        if "**Rule text:** none" not in text:
+            errors.append(f"{map_path}: labelled rule {rule} has no pin")
+
+
 def main() -> None:
     errors: list[str] = []
     adr0007_warnings: dict[tuple[str, str], int] = {}
@@ -513,6 +597,7 @@ def main() -> None:
     source_row_counts = validate_csvs(errors, manifests, adr0007_warnings)
     cross_check_row_counts(errors, manifests, source_row_counts)
     check_line_terminators(errors)
+    check_rulings(errors)
 
     if errors:
         fail(errors)
