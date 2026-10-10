@@ -6,8 +6,8 @@ Nothing here pushes anything -- this only writes local files for review
 before a PR (bmdb 1317, Item 2 step 3(b)).
 
 Usage:
-    python3 scripts/to_batch.py <verdict_csv> <batch_id> [--adjudicator TAG]
-        [--answer-key PATH]
+    python3 scripts/to_batch.py <verdict_csv> <batch_id> --rulings-commit SHA
+        [--adjudicator TAG] [--answer-key PATH]
 
 <verdict_csv> is review/2026-09-21/blind_sample.csv or priority_queue.csv
 with human_verdict (TP/FP) and human_reason filled in -- blank
@@ -16,6 +16,15 @@ later, label more) works. human_reason must be non-empty (ADR-0007:
 label basis only, same as any other row in this repo) or the row is
 rejected with a list at the end, matching so nothing partial gets
 silently dropped.
+
+Each applied row is a label judged now, so it takes its rule's current pin
+from rulings/rule-text-map.json with rule_text_basis "judged"
+(aurora-lint ADR-0018, scripts/rule_text_pin.py). It also records the
+rulings it was judged under: --rulings-commit is the commit of this
+repository whose rulings/ the verdicts applied, and the verdict CSV's
+human_rulings column lists the ruling ids applied, space-separated (the
+principles' ids, e.g. P/lists, for a rule with no ruling of its own). A row
+with an empty human_rulings, or whose rule has no current pin, is rejected.
 
 Coordinator, 2026-09-21 (worker/adjudication.md's Tuesday redistribution
 will carry this forward): the priority queue (bmdb 1341, the biased
@@ -45,8 +54,11 @@ import argparse
 import csv
 import datetime
 import json
+import re
 import sys
 from pathlib import Path
+
+from rule_text_pin import load_map
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 DATA_DIR = REPO_ROOT / "data"
@@ -75,8 +87,16 @@ def main() -> None:
              "human verdict agrees with the model's -- those are kappa data, "
              "not corrections",
     )
+    parser.add_argument(
+        "--rulings-commit", required=True,
+        help="full commit of this repository whose rulings/ the verdicts "
+             "were judged under",
+    )
     args = parser.parse_args()
     verdict_path, batch_id = args.verdict_csv, args.batch_id
+    if not re.fullmatch(r"[0-9a-f]{40}", args.rulings_commit):
+        sys.exit("--rulings-commit must be a full 40-character commit")
+    rule_map = load_map()["rules"]
 
     answer_key = load_answer_key(args.answer_key) if args.answer_key else None
 
@@ -94,6 +114,13 @@ def main() -> None:
                 continue
             if not reason:
                 rejected.append((row["sample_id"], "human_reason is empty"))
+                continue
+            if not (row.get("human_rulings") or "").split():
+                rejected.append((row["sample_id"], "human_rulings is empty"))
+                continue
+            if row["rule_id"] not in rule_map:
+                rejected.append((row["sample_id"],
+                                 f"{row['rule_id']} has no pin in rulings/rule-text-map.json"))
                 continue
             if answer_key is not None:
                 model_verdict = answer_key.get(row["sample_id"])
@@ -154,6 +181,12 @@ def main() -> None:
             rows[i]["source"] = batch_id
             rows[i]["adjudicated_at"] = now
             rows[i]["confidence"] = "high"
+            pin = rule_map[row["rule_id"]]
+            rows[i]["rule_text_commit"] = pin["commit"]
+            rows[i]["rule_text_version"] = pin["sha256"]
+            rows[i]["rule_text_basis"] = "judged"
+            rows[i]["rulings_commit"] = args.rulings_commit
+            rows[i]["rulings_ids"] = " ".join(row["human_rulings"].split())
             applied += 1
             projects_touched[row["project"]] = row["codebase_commit"]
 

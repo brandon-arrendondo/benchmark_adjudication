@@ -15,11 +15,18 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPO_ROOT / "scripts"))
 
+import rule_text_pin  # noqa: E402
 import validate  # noqa: E402
 
 SHA = "a" * 40
 SHA256 = "b" * 64
 HEADER = ",".join(validate.CSV_COLUMNS) + "\n"
+
+
+def entry(path="a.md", carried_forward=True, **extra):
+    return {"commit": SHA, "path": path, "sha256": SHA256,
+            "carried_forward": carried_forward, "set": "2026-10-10",
+            "reason": "first map", **extra}
 
 
 def rule_file(rule, body=""):
@@ -38,8 +45,7 @@ class CheckRulings(unittest.TestCase):
         self.saved = (validate.RULINGS_DIR, validate.DATA_DIR)
         validate.RULINGS_DIR, validate.DATA_DIR = self.rulings, self.data
         self.write_rule("SIG30-C")
-        self.write_map({"SIG30-C": {"commit": SHA, "path": "a/sig30-c.md",
-                                    "sha256": SHA256}})
+        self.write_map({"SIG30-C": entry("a/sig30-c.md")})
         self.write_labels(["SIG30-C"])
 
     def tearDown(self):
@@ -51,11 +57,18 @@ class CheckRulings(unittest.TestCase):
             text if text is not None else rule_file(rule), encoding="utf-8")
 
     def write_map(self, rules):
+        self.rule_map = rules
         (self.rulings / "rule-text-map.json").write_text(
             json.dumps({"rules": rules}), encoding="utf-8")
 
-    def write_labels(self, rules):
-        rows = "".join(f"p,{SHA},f.c,1,{r},TP,a,r,s,t,p,c\n" for r in rules)
+    def write_labels(self, rules, pins=None):
+        """One label per rule, with the pin fields the backfill would give
+        it, or `pins` (a dict of PIN_COLUMNS values) for every row."""
+        rows = ""
+        for line, r in enumerate(rules, 1):
+            fields = pins or rule_text_pin.backfill_fields(r, self.rule_map)
+            rows += (f"p,{SHA},f.c,{line},{r},TP,a,r,s,t,p,c,"
+                     + ",".join(fields[c] for c in rule_text_pin.PIN_COLUMNS) + "\n")
         (self.data / "p" / "adjudication.csv").write_text(HEADER + rows,
                                                           encoding="utf-8")
 
@@ -109,8 +122,8 @@ class CheckRulings(unittest.TestCase):
 
     def test_unruled_list_covers_a_labelled_rule(self):
         self.write_labels(["SIG30-C", "SIG31-C"])
-        self.write_map({"SIG30-C": {"commit": SHA, "path": "a.md", "sha256": SHA256},
-                        "SIG31-C": {"commit": SHA, "path": "b.md", "sha256": SHA256}})
+        self.write_map({"SIG30-C": entry("a.md"), "SIG31-C": entry("b.md")})
+        self.write_labels(["SIG30-C", "SIG31-C"])
         (self.rulings / "unruled.md").write_text("- **SIG31-C**: open\n",
                                                  encoding="utf-8")
         self.assertEqual(self.errors(), [])
@@ -125,8 +138,7 @@ class CheckRulings(unittest.TestCase):
         self.assertEqual(self.errors(), [])
 
     def test_malformed_pin_is_rejected(self):
-        self.write_map({"SIG30-C": {"commit": "abc", "path": "a.md",
-                                    "sha256": SHA256}})
+        self.write_map({"SIG30-C": {**entry(), "commit": "abc"}})
         self.assertTrue(any("not a full SHA" in e for e in self.errors()))
 
 

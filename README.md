@@ -19,6 +19,13 @@ files directly with anything that reads CSV.
   to — check out that commit of the project to get matching file contents
   and line numbers before comparing your own tool's findings against these
   labels.
+- Each label also names the version of its CERT rule's text it was judged
+  against (`rule_text_version`, the SHA-256 of the rule's page at a merged
+  commit of `cmu-sei/secure-coding-standards`; see
+  `rulings/rule-text-map.json`). The full key of a label adds that version.
+  Today every key has one label; labels for a newer text of a rule will sit
+  beside the older ones, and a score then uses, for each rule, the labels at
+  the text the map pins.
 - `verdict` is the label: `TP` (real defect), `FP` (not a real defect),
   `uncertain`, or `FN` (a real bug found by reading the file that aurora-lint
   did NOT flag at that line/rule — has no matching finding, so it never
@@ -325,11 +332,24 @@ One row per adjudicated finding, columns matching `benchmarking_db`'s
 | `adjudicated_at` | ISO 8601 timestamp |
 | `provenance` | free text |
 | `confidence` | free text |
+| `rule_text_commit` | the merged commit of `cmu-sei/secure-coding-standards` the rule's text is pinned at for this label; empty when unpinned |
+| `rule_text_version` | the SHA-256 of the rule's page source at that commit, as `rulings/rule-text-map.json` records it, or `unpinned` |
+| `rule_text_basis` | `judged` (judged against that text), `carried-forward` (judged against an earlier text and carried forward to this one by the review the map entry records), or `unpinned` (no text the label can be tied to: the rule has no pin, or its pin says its labels must be re-judged) |
+| `rulings_commit` | the commit of this repository whose `rulings/` the label was judged under; empty for a label that predates the rulings |
+| `rulings_ids` | the ruling ids the label applied, space-separated (`SIG30-C/2026-10-10/3`, `P/lists`); empty as for `rulings_commit` |
 
-`(project, codebase_commit, file_path, line, rule_id)` must be unique within
-a project's CSV, matching `ground_truth`'s own `UNIQUE` constraint — a
+A label's key is `(project, codebase_commit, file_path, line, rule_id,
+rule_text_version)`. Until the scorers choose labels by the rule-text map,
+`(project, codebase_commit, file_path, line, rule_id)` stays unique within a
+project's CSV as well, matching `ground_truth`'s `UNIQUE` constraint — a
 collision here is a defect to fix before merge, not something Postgres
 should discover first.
+
+The labels written before the rule-text pin existed were backfilled by
+`scripts/rule_text_pin.py backfill`: a rule whose map entry says its reading
+carried forward to the first pin gives its labels that version, marked
+`carried-forward`; every other label is `unpinned`. A label judged from now
+on is `judged`, at its rule's current pin, and names its rulings.
 
 ### `batches/<batch_id>/manifest.json`
 
@@ -437,6 +457,20 @@ mechanism and its limits, in particular why some rows' `provenance`/
 `confidence` were left blank rather than guessed). `scripts/validate.py`
 catches the raw pattern in CI, but the fix is upstream: generate valid CSV
 in the first place.
+
+**A new or re-judged label is `judged` at its rule's current pin and names
+its rulings** (aurora-lint ADR-0018). Its `rule_text_commit` and
+`rule_text_version` are the rule's entry in `rulings/rule-text-map.json` at
+the time it is judged, `rule_text_basis` is `judged`, `rulings_commit` is
+the full commit of this repository whose `rulings/` the adjudicator applied,
+and `rulings_ids` lists the ruling ids applied (the principles' `P/<name>`
+ids for a rule with no ruling of its own). `scripts/to_batch.py` writes
+these for you: pass `--rulings-commit <sha>` and fill the verdict CSV's
+`human_rulings` column; a row without rulings, or whose rule has no pin, is
+rejected. Never judge a label against CERT wording that has not been
+merged: the map pins merged commits only, and `validate.py` rejects a label
+whose version the map does not record. A change to the map itself is also
+checked against CERT's repository in CI (`validate.py --cert-repo`).
 
 **Every CSV is LF-terminated, and a batch appends rather than rewriting the
 file.** `.gitattributes` pins `*.csv text eol=lf`, and `scripts/validate.py`
