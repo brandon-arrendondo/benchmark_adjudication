@@ -44,6 +44,16 @@ MISRA guidelines by number, and tool documentation. The evidence itself,
 including material that cannot be redistributed, is held privately by the
 maintainer. Quotations here are the maintainer's own words only.
 
+Each ruling's evidence (quotations, MISRA material, CERT report
+candidates not yet filed) is held in a private archive. The commit named
+on a rule's Evidence line pins exactly which evidence that ruling rests
+on; it is available to reviewers on request.
+
+Two terms recur in the rule files. A *lead* is the recommendation,
+recorded in the private evidence record, that a ruling adopted or
+amended. A *CERT report candidate* is a correction or question we may
+submit to CERT about its text.
+
 ## Our contributions to CERT's text
 
 We are contributors to the CERT C standard's text, not its authors. While

@@ -746,7 +746,7 @@
    "last_read_utc": "2026-10-06T04:09:22Z",
    "path": "content/4.sei-cert-c-coding-standard/03.rules/07.environment-env/2.env30-c.md",
    "reason": "first map (ADR-0018 ruling c)",
-   "review": "carried forward by recorded review (author, 2026-10-10): a875e37f drops asctime() from the must-not-modify list, the reading the ruling took",
+   "review": "carried forward by recorded review: a875e37f drops asctime() from the must-not-modify list, the reading the ruling took",
    "set": "2026-10-10",
    "sha256": "36455840f8543ca8a20f52f6dc96f3757205ee300f90f9d0f6686eecfa1bf77f"
   },
@@ -1354,7 +1354,7 @@
    "last_read_utc": "2026-10-06T04:12:48Z",
    "path": "content/4.sei-cert-c-coding-standard/08.recommendations/11.input-output-fio/19.fio22-c.md",
    "reason": "first map (ADR-0018 ruling c)",
-   "review": "carried forward by recorded review (author, 2026-10-10): e700e8e3/b717b8b3 example compile fix and getchar() naming; reading unchanged",
+   "review": "carried forward by recorded review: e700e8e3/b717b8b3 example compile fix and getchar() naming; reading unchanged",
    "set": "2026-10-10",
    "sha256": "9b7dfda0e971b726602a7b3bd980325d3ca33c3be1b5fb7b4f5ea3f0da4cf6cd"
   },
@@ -1484,7 +1484,7 @@
    "last_read_utc": "2026-10-06T04:12:55Z",
    "path": "content/4.sei-cert-c-coding-standard/03.rules/11.input-output-fio/13.fio46-c.md",
    "reason": "first map (ADR-0018 ruling c)",
-   "review": "carried forward by recorded review (author, 2026-10-10): b717b8b3 names getchar() as the implicit-stdin function, the reading the record took",
+   "review": "carried forward by recorded review: b717b8b3 names getchar() as the implicit-stdin function, the reading the record took",
    "set": "2026-10-10",
    "sha256": "bb696cdbda8cdcf02b0dfc0cbad1cded293be9df2a13ec88155849db6e86e2bf"
   },
@@ -1792,7 +1792,7 @@
    "last_read_utc": "2026-10-07T11:31:07Z",
    "path": "content/4.sei-cert-c-coding-standard/03.rules/12.integers-int/2.int30-c.md",
    "reason": "first map (ADR-0018 ruling c)",
-   "review": "carried forward by recorded review (author, 2026-10-10): d4dd90de bounds EX2 right shifts by the precision, the reading the record took",
+   "review": "carried forward by recorded review: d4dd90de bounds EX2 right shifts by the precision, the reading the record took",
    "set": "2026-10-10",
    "sha256": "4cd0eea682c1dd9823cbfff8ff7f8d3911e93b6396f52fa9042b1752a8a787cc"
   },
@@ -1887,7 +1887,7 @@
    "last_read_utc": "2026-10-06T04:13:13Z",
    "path": "content/4.sei-cert-c-coding-standard/08.recommendations/13.memory-management-mem/05.mem03-c.md",
    "reason": "first map (ADR-0018 ruling c)",
-   "review": "carried forward by recorded review (author, 2026-10-10): memset_explicit() examples; the ruling already credits memset_explicit() as a non-elidable clear",
+   "review": "carried forward by recorded review: memset_explicit() examples; the ruling already credits memset_explicit() as a non-elidable clear",
    "set": "2026-10-10",
    "sha256": "fc9105a0954dae4f48bacac5e7ccf4f47f77483604bbb9b4a445fe05614a6dce"
   },
@@ -1915,7 +1915,7 @@
    "last_read_utc": "2026-10-06T04:13:14Z",
    "path": "content/4.sei-cert-c-coding-standard/08.recommendations/13.memory-management-mem/08.mem06-c.md",
    "reason": "first map (ADR-0018 ruling c)",
-   "review": "carried forward by recorded review (author, 2026-10-10): memset_explicit() examples; the ruling already credits memset_explicit() as a non-elidable clear",
+   "review": "carried forward by recorded review: memset_explicit() examples; the ruling already credits memset_explicit() as a non-elidable clear",
    "set": "2026-10-10",
    "sha256": "9f06f5a1f8cf4e816a6f5060eb4efc3c632e892bbf718fe7c2170e356a5e9b8c"
   },
@@ -2370,7 +2370,7 @@
    "last_read_utc": "2026-10-07T18:32:42Z",
    "path": "content/4.sei-cert-c-coding-standard/03.rules/16.posix-pos/04.pos35-c.md",
    "reason": "first map (ADR-0018 ruling c)",
-   "review": "carried forward by recorded review (author, 2026-10-10): 8bc168d7 says the identity solution detects, not eliminates, the race, the reading the record took",
+   "review": "carried forward by recorded review: 8bc168d7 says the identity solution detects, not eliminates, the race, the reading the record took",
    "set": "2026-10-10",
    "sha256": "271b655841eea55f688f00680ad09b55107c022bcfc42e8508cba640a9056930"
   },
@@ -2834,7 +2834,7 @@
    "last_read_utc": "2026-10-07T16:24:41Z",
    "path": "content/4.sei-cert-c-coding-standard/03.rules/04.characters-and-strings-str/5.str34-c.md",
    "reason": "first map (ADR-0018 ruling c)",
-   "review": "carried forward by recorded review (author, 2026-10-10): a3c6f580 says larger integer type, matching the title and the reading the record took",
+   "review": "carried forward by recorded review: a3c6f580 says larger integer type, matching the title and the reading the record took",
    "set": "2026-10-10",
    "sha256": "e2897bd01ae8b8b6ffbff625fb07840396e115e9ca07f89ccd181e7991a397aa"
   },
