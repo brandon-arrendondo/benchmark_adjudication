@@ -4,9 +4,10 @@
   `rule-text-map.json`).
 - **Ruled:** 2026-10-09; 2026-10-10.
 - **Evidence:** private record `PRE09-C`, papers `5c1753a`.
-- **Differs by preset:** yes, in two places. Default adds one widening
-  (PRE09-C/2026-10-09/6); pedantic differs from strict only in the C-library
-  posture (PRE09-C/2026-10-10/presets).
+- **Differs by preset:** yes, at default only: one widening
+  (PRE09-C/2026-10-09/6). Pedantic counts as written (ruled 2026-10-10):
+  its C-library notice is not a stricter reading
+  (PRE09-C/2026-10-10/presets).
 
 ## Rulings
 
@@ -22,9 +23,9 @@
     it is expanded. A hosted C library is trusted (P/facts).
   - Default: strict, plus PRE09-C/2026-10-09/6. Default does not take
     MSC24-C's default options. No narrowing.
-  - Pedantic equals strict except the C-library posture: with no
-    declared C library, list-1 and list-2 targets are tested against the
-    standard declarations, and list-3 targets are undecided, said
+  - Pedantic, as written (ruled 2026-10-10), with the C-library posture:
+    with no declared C library, list-1 and list-2 targets are tested against
+    the standard declarations, and list-3 targets are undecided, said
     loudly, naming both remedies (declare the C library, or disable the
     rule) (P/facts).
   - Out of every preset: any pair a reviewer judges less secure, and

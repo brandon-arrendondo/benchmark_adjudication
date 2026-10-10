@@ -36,14 +36,12 @@
 - **EXP42-C/2026-10-09/4, `bool` members.** A `bool` or `_Bool` member voids
   EX1 (C23 6.2.6.2p1; earlier editions by the safe default). Floating
   members are FLP37-C's.
-- **EXP42-C/2026-10-09/5, beyond `memcmp`.** The text names an open family
-  (P/lists case 2). At strict: `__builtin_memcmp` as the resolution of a
-  `memcmp` call, `wmemcmp` as a member of the family, and byte loops over
-  a structure's object representation when the loop's range is resolved.
-  At pedantic: `bcmp`, `atomic_compare_exchange_*` on atomic structure or
-  union types, and byte loops whose range is not resolved. Amended
-  2026-10-09 (list-reading principle): `wmemcmp` moved
-  from pedantic to strict.
+- **EXP42-C/2026-10-09/5, beyond `memcmp`.** At strict: `__builtin_memcmp`
+  as the resolution of a `memcmp` call, `wmemcmp`, and byte loops over a
+  structure's object representation when the loop's range is resolved. At
+  pedantic: `bcmp`, `atomic_compare_exchange_*` on atomic structure or union
+  types, and byte loops whose range is not resolved. Amended 2026-10-09
+  (list-reading principle): `wmemcmp` moved from pedantic to strict.
 - **EXP42-C/2026-10-09/presets.** Default: strict, plus a named option (E8)
   that credits a structure as padding-free under the natural-alignment
   layout of every data model aurora-lint knows (ILP32, LP64, LLP64) when

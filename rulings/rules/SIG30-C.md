@@ -4,10 +4,11 @@
   `rule-text-map.json`).
 - **Ruled:** 2026-10-10.
 - **Evidence:** private record `SIG30-C`, papers `5c1753a`.
-- **Differs by preset:** yes, in two places. With POSIX undeclared,
-  default credits the functions safe in every POSIX edition
-  (SIG30-C/2026-10-10/3); pedantic declines implementation-only list credits
-  (SIG30-C/2026-10-10/10).
+- **Differs by preset:** yes, at default: with POSIX undeclared, default
+  credits the functions safe in every POSIX edition
+  (SIG30-C/2026-10-10/3). Pedantic counts as written (ruled 2026-10-10):
+  its partial decline of implementation-only list credits
+  (SIG30-C/2026-10-10/10) is not a stricter reading.
 
 ## Rulings
 
@@ -25,9 +26,9 @@
     Strict assumes a hosted library conforming to the declared standards
     (P/facts).
   - Default: strict, except with POSIX undeclared (SIG30-C/2026-10-10/3).
-  - Pedantic: strict, except that it declines the implementation-list
-    part (SIG30-C/2026-10-10/10). With no declared C library, the same
-    membership with the ruled notice (P/facts).
+  - Pedantic, as written (ruled 2026-10-10): strict, except that it declines
+    the implementation-list part (SIG30-C/2026-10-10/10). With no declared C
+    library, the same membership with the ruled notice (P/facts).
   - Out of every preset: crediting an unsafe call because the signal
     can never interrupt an unsafe function (too loose); every call in a
     handler, or every `<signal.h>` use, MISRA C:2012 Rule 21.5's
