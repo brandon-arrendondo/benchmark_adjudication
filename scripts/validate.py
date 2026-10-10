@@ -5,6 +5,9 @@ Pure stdlib, no dependencies — this runs in CI on every PR against
 untrusted diffs, so it stays cheap and has nothing to install.
 
 Checks:
+  - reason text contains no unresolved tracker, ledger or machine references;
+    exact batch names, dated rulings, code operands and corroborated source
+    lines are protected. Ambiguous forms fail for review, never auto-rewrite.
   - CSV header matches the canonical column set exactly.
   - codebase_commit / aurora_lint_sha are full 40-char lowercase hex, never
     abbreviated (see README: two spellings of one commit already split a
@@ -88,6 +91,8 @@ import json
 import re
 import sys
 from pathlib import Path
+
+from reason_references import reference_categories
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 DATA_DIR = REPO_ROOT / "data"
@@ -363,12 +368,19 @@ def validate_csvs(
     errors: list[str], manifests: dict[str, dict], adr0007_warnings: dict[tuple[str, str], int]
 ) -> dict[str, int]:
     source_row_counts: dict[str, int] = {}
+    batch_ids = set(manifests)
     if not DATA_DIR.exists():
         return source_row_counts
 
     for csv_path in sorted(DATA_DIR.glob("*/adjudication.csv")):
         project_dir_name = csv_path.parent.name
         seen_keys: set[tuple] = set()
+
+        with csv_path.open(newline="") as evidence_file:
+            evidence_lines = {
+                (r.get("codebase_commit", ""), r.get("file_path", ""), r.get("line", ""))
+                for r in csv.DictReader(evidence_file)
+            }
 
         with csv_path.open(newline="") as f:
             reader = csv.DictReader(f)
@@ -419,6 +431,15 @@ def validate_csvs(
                             f"writer, never hand-escaped (see README, "
                             f'"How labels get added")'
                         )
+
+                references = reference_categories(
+                    row["reason"], batch_ids, row["file_path"], evidence_lines,
+                    row["codebase_commit"]
+                )
+                if references:
+                    errors.append(f"{loc}: reason needs public-reference review "
+                                  f"({', '.join(sorted(references))}); state the "
+                                  f"label basis or cite public evidence")
 
                 hit_categories = adr0007_hit_categories(
                     f"{row['reason']} {row['provenance']}"

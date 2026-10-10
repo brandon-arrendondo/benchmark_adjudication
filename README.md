@@ -465,6 +465,15 @@ terminators moved with `git diff --ignore-cr-at-eol`; a batch that fails
 `validate.py` on a CR was written by something that needs the
 `lineterminator` fix, not a file-side workaround.
 
+**Reasons cite public evidence.** `scripts/validate.py` also checks the parsed
+`reason` column for unresolved tracker, ledger, numbered-machine and named-read
+references. Exact existing batch directory names, dated ruling IDs, known code
+operands and source-line references corroborated by another label in the same
+file and pinned commit remain valid. Ambiguous forms fail for review; the
+validator never rewrites text. Write the verdict explanation directly or cite public evidence. This
+check runs offline; checking whether a cited tool commit is reachable from its
+public main branch remains a separate release/export check.
+
 Whether a free-text field discloses a secret or an internal address is
 **not** something CI checks — an earlier regex-based scanner flagged 311
 rows in this repo's very first PR that turned out to be ordinary C variable
