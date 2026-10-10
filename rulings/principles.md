@@ -46,12 +46,12 @@ defined in aurora-lint ADR-0015.
 
 ## P/two-disagreements: when a preset may differ from strict
 
-Ruled 2026-10-09 (from P84 on), verbatim: "pedantic is a disagreement in
-one direction - if the rule is well formed on the spectrum, pedantic ==
-strict. relaxed is disagreement in the other direction: the rule says
-always but that doesn't allow this common idiom, which any developer would
-say is legitimate, therefore relaxed says the idiom is allowed - a
-disagreement from CERT, but for clear obvious reason."
+Ruled 2026-10-09 (for rulings made from that day on), verbatim: "pedantic is
+a disagreement in one direction - if the rule is well formed on the
+spectrum, pedantic == strict. relaxed is disagreement in the other
+direction: the rule says always but that doesn't allow this common idiom,
+which any developer would say is legitimate, therefore relaxed says the
+idiom is allowed - a disagreement from CERT, but for clear obvious reason."
 
 - Pedantic differs from strict only where the rule is not well formed
   (open, ambiguous, unenforceable as written). There it declines the

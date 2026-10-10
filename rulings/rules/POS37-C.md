@@ -33,7 +33,8 @@
 - **POS37-C/2026-10-09/1, drop classification.** An argument that does not
   resolve is a presumed drop at strict, with the imprecision declared
   (E3). `0`, and the value stored from `geteuid()` before any identity
-  change, count as acquire or restore (consistent with POS36-C ruling 4).
+  change, count as acquire or restore (consistent with
+  POS36-C/2026-10-09/4).
 - **POS37-C/2026-10-09/2, function set at strict.** `setuid`, plus
   `setreuid` and `setresuid` when they set the saved set-user-ID. POSIX is
   the bound.

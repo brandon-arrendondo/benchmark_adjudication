@@ -44,29 +44,30 @@
   edition with an error indication, minus ISO C's (by the declared
   `c_standard`) and minus functions with no meaningful test, documented
   in the rule docs (P/lists).
-- **POS54-C/2026-10-09/5, detection forms.** Shared with ERR33-C rulings 3
-  and 4: for null-returning functions `!p`, `if (p)`, `NULL == p`,
-  ternary and loop tests; for nonzero-returning functions any test that
-  separates zero. An `ENOMEM`-only, `errno`-only or `memptr` test is not
-  detection, and a test after a use does not detect that use. Callees
-  resolve by declaration (E2), through parentheses, macros and function
-  pointers; dominance, not statement windows.
+- **POS54-C/2026-10-09/5, detection forms.** Shared with
+  ERR33-C/2026-10-09/3 and ERR33-C/2026-10-09/4: for null-returning
+  functions `!p`, `if (p)`, `NULL == p`, ternary and loop tests; for
+  nonzero-returning functions any test that separates zero. An
+  `ENOMEM`-only, `errno`-only or `memptr` test is not detection, and a test
+  after a use does not detect that use. Callees resolve by declaration (E2),
+  through parentheses, macros and function pointers; dominance, not
+  statement windows.
 - **POS54-C/2026-10-09/6, exceptions and credits.** At strict, the page's
   second exception reads as ERR33-C's first exception as written: no
   function is exempt, and a `(void)` cast is not credited. Propagation by
   `return` or by an out-parameter store is credited. Default credits a
   `(void)` cast, a dominating `assert`, and `dprintf` to
   `STDOUT_FILENO`/`STDERR_FILENO`, each as a named option (E8), following
-  ERR33-C rulings 2 and 9. For results tested in band (`readdir`,
-  `getpwnam`, `sysconf`), default credits the result test alone.
+  ERR33-C/2026-10-09/2 and ERR33-C/2026-10-09/9. For results tested in band
+  (`readdir`, `getpwnam`, `sysconf`), default credits the result test alone.
 - **POS54-C/2026-10-09/7, split with ERR33-C.** By the declared
   `c_standard`: a function ISO C defines in that edition is ERR33-C's (for
   example `strdup` under C23), otherwise POS54-C's. ISO functions with POSIX
   extensions (`fopen` setting `errno`) stay ERR33-C's. One analysis keyed by
   API, separate tables (E10).
 - **POS54-C/2026-10-09/8, location.** At the call; the first use of the
-  untested result is a secondary location (P/location), as ERR33-C
-  ruling 10.
+  untested result is a secondary location (P/location), as
+  ERR33-C/2026-10-09/10.
 - **POS54-C/2026-10-09/9.** Moot under POS54-C/2026-10-09/1.
 
 ## Related rulings

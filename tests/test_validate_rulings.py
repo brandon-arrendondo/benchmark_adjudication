@@ -71,6 +71,26 @@ class CheckRulings(unittest.TestCase):
         self.write_rule("SIG30-C", rule_file("SIG30-C", "- See SIG30-C/2358/3.\n"))
         self.assertTrue(any("not dated" in e for e in self.errors()))
 
+    def test_batch_id_in_principles_is_rejected(self):
+        (self.rulings / "principles.md").write_text(
+            "Ruled 2026-10-09 (from P84 on).\n", encoding="utf-8")
+        self.assertTrue(any("'P84'" in e for e in self.errors()))
+
+    def test_task_id_in_readme_is_rejected(self):
+        (self.rulings / "README.md").write_text(
+            "Ruled under aurora_lint 2358.\n", encoding="utf-8")
+        self.assertTrue(any("aurora_lint 2358" in e for e in self.errors()))
+
+    def test_bare_item_reference_is_rejected(self):
+        self.write_rule("SIG30-C", rule_file("SIG30-C",
+                                             "- As ERR33-C ruling 10.\n"))
+        self.assertTrue(any("internal reference" in e for e in self.errors()))
+
+    def test_principle_ids_are_not_batch_ids(self):
+        (self.rulings / "principles.md").write_text(
+            "## P/lists: reading lists\n", encoding="utf-8")
+        self.assertEqual(self.errors(), [])
+
     def test_id_for_another_rule_is_rejected(self):
         self.write_rule("SIG30-C", rule_file("SIG30-C",
                                              "- **SIG31-C/2026-10-07/1, x.**\n"))

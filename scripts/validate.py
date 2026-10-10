@@ -515,11 +515,20 @@ RULING_REF_RE = re.compile(r"\b([A-Z]{3}\d{2}-C)/([^/\s`]+)/([0-9A-Za-z_-]+)")
 RULING_DEF_RE = re.compile(r"^- \*\*([A-Z]{3}\d{2}-C)/([^/\s`]+)/([0-9A-Za-z_-]+)\b", re.M)
 RULING_DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 SHA256_RE = re.compile(r"^[0-9a-f]{64}$")
+# Internal references a public reader cannot resolve: batch ids (P84),
+# tracker task ids, and a ruling cited by its bare item number in another
+# rule ("ERR33-C ruling 10") instead of by its dated id.
+INTERNAL_REF_RE = re.compile(
+    r"\bP\d{1,3}\b(?!/)"
+    r"|\b(?:aurora_lint|benchmarking_db|tasks?)\s+\d{3,4}\b"
+    r"|\b[A-Z]{3}\d{2}-C\s+rulings?\s+\d")
 
 
 def check_rulings(errors: list[str]) -> None:
     """Check rulings/ against itself and against the labels.
 
+    - No rulings/ Markdown file carries an internal reference: a batch id,
+      a tracker task id, or another rule's ruling by bare item number.
     - Every ruling id is `<rule>/<YYYY-MM-DD>/<item>`: dated, so a public
       file never carries an internal task id; a rule file defines only its
       own rule's ids, each once.
@@ -531,6 +540,12 @@ def check_rulings(errors: list[str]) -> None:
     """
     if not RULINGS_DIR.exists():
         return
+    for path in sorted(RULINGS_DIR.rglob("*.md")):
+        text = path.read_text(encoding="utf-8")
+        for n, line in enumerate(text.splitlines(), 1):
+            for m in INTERNAL_REF_RE.finditer(line):
+                errors.append(f"{path}:{n}: internal reference {m.group(0)!r}; "
+                              f"cite a date or a dated ruling id")
     rules_dir = RULINGS_DIR / "rules"
     have = {}
     for path in sorted(rules_dir.glob("*.md")):
