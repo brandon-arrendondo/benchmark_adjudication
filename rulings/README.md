@@ -17,17 +17,36 @@ project's readings, not CERT's, and CERT has not reviewed them.
   disposition and its reason.
 - `unruled.md`: shipped guidelines with no ruling yet (none at present).
 - `rule-text-map.json`: the rule-text pin of aurora-lint ADR-0018. Each
-  shipped guideline maps to a merged commit of
-  `cmu-sei/secure-coding-standards`, the path of its page source in that
-  commit and the SHA-256 of that file. The first map pins every guideline
-  at one commit and records, per guideline, whether its rulings carry
-  forward to that text and why.
+  CERT C guideline with a page, shipped or not (305 entries), maps to a
+  merged commit of `cmu-sei/secure-coding-standards`, the path of its page
+  source in that commit and the SHA-256 of that file. The first map pins
+  every guideline at one commit. Per guideline, `carried_forward` records
+  whether the guideline's existing labels carry forward to that text, and
+  `review` says why: the page is unchanged since it was last read, or it
+  changed without touching the reading (naming the commit), or, for
+  `carried_forward: false`, what changed and that the labels must be
+  re-judged.
 
 ## How a label cites a ruling
 
 A label records the rulings it was judged under as the commit of this
 repository plus the ruling ids it applied (aurora-lint ADR-0018, Decision
-4). A label for a guideline with no ruling cites the principles only.
+4), in its `rulings_commit` and `rulings_ids` columns. A label for a
+guideline with no ruling cites the principles only. It also records the
+text it was judged against: its rule's pin from `rule-text-map.json`, in
+`rule_text_commit` and `rule_text_version`.
+
+## The map
+
+An entry may list the pins it replaced under `history`, oldest first, each
+with its `commit`, `path`, `sha256` and `carried_forward`, so a label judged
+against an earlier text still names a version the map knows.
+`python3 scripts/rule_text_pin.py digest` prints the map's SHA-256 over its
+canonical serialisation (sorted keys, no whitespace), the pin a run
+records. `python3 scripts/validate.py --cert-repo <clone>` checks, against
+a fetched clone of `cmu-sei/secure-coding-standards`, that every pin is a
+commit on its `main` and that each page hashes to the recorded SHA-256.
+Run it when a pin is set or moved; CI has no clone.
 
 ## How rulings change
 

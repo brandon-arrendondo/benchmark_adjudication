@@ -1,0 +1,29 @@
+name: rule-text pin
+
+# The guard of aurora-lint ADR-0018, Decision 7: the rule-text map pins
+# merged CERT commits only, and each pin's SHA-256 is its page's. It needs
+# CERT's repository, so it runs only when the map changes. Labels need no
+# clone: validate.py already refuses a label whose version the map does not
+# record.
+
+on:
+  pull_request:
+    branches: [main]
+    paths: [rulings/rule-text-map.json]
+  push:
+    branches: [main]
+    paths: [rulings/rule-text-map.json]
+
+jobs:
+  pins-are-merged:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      # Full commit history, page blobs fetched on demand by `git show`.
+      - run: >
+          git clone --quiet --filter=blob:none
+          https://github.com/cmu-sei/secure-coding-standards.git "$RUNNER_TEMP/cert"
+      - run: python3 scripts/validate.py --cert-repo "$RUNNER_TEMP/cert"

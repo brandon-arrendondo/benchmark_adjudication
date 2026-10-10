@@ -12,7 +12,11 @@ Checks:
   - verdict is one of TP/FP/uncertain/FN.
   - line is a positive integer.
   - (project, codebase_commit, file_path, line, rule_id) is unique within a
-    project's CSV, matching ground_truth's own UNIQUE constraint.
+    project's CSV, matching ground_truth's own UNIQUE constraint. The label
+    key is that tuple plus rule_text_version (aurora-lint ADR-0018), but the
+    scorers here and in benchmarking_db still read one label per 5-tuple, so
+    a second rule_text_version for the same tuple is refused until they
+    select labels by the rule-text map.
   - every row's `source` names a batch_id with a manifest under batches/.
   - every manifest's declared row_count matches the number of CSV rows
     actually carrying that batch_id as their source.
@@ -27,6 +31,13 @@ Checks:
   - rulings/: dated ruling ids, a rule file or an unruled entry for every
     labelled rule, and a well-formed rule-text pin for every labelled rule
     with a CERT C page (see check_rulings).
+  - every label's rule-text pin fields (scripts/rule_text_pin.py): its
+    rule_text_version is one the rule-text map knows for its rule, so a label
+    can never cite CERT wording the map has not pinned, and the map pins only
+    merged commits (checked against a CERT checkout with --cert-repo); a
+    carried-forward label's pin is one the map records as carried forward; a
+    judged label names the rulings commit and the ruling ids it applied, and
+    each id is defined under rulings/ (see check_label_pins).
   - no free-text field (reason/provenance/confidence) contains a
     backslash-escaped quote (\") -- CSV has no backslash-escape convention,
     so this is the signature of a row built by something that assumed
@@ -83,11 +94,16 @@ noise, both worse than not having it.
 
 Exits 1 with all violations listed (not just the first) on failure.
 """
+import argparse
 import csv
+import hashlib
 import json
 import re
+import subprocess
 import sys
 from pathlib import Path
+
+from rule_text_pin import BASES, PIN_COLUMNS, UNPINNED, known_pins
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 DATA_DIR = REPO_ROOT / "data"
@@ -97,7 +113,7 @@ RULINGS_DIR = REPO_ROOT / "rulings"
 CSV_COLUMNS = [
     "project", "codebase_commit", "file_path", "line", "rule_id", "verdict",
     "adjudicator", "reason", "source", "adjudicated_at", "provenance",
-    "confidence",
+    "confidence", *PIN_COLUMNS,
 ]
 # FN (false negative): a real bug found by reading the file, with no
 # matching aurora-lint finding at that line/rule. Never affects precision;
@@ -454,7 +470,9 @@ def validate_csvs(
                 if key in seen_keys:
                     errors.append(
                         f"{loc}: duplicate key {key} within {csv_path} "
-                        f"(matches ground_truth's UNIQUE constraint)"
+                        f"(matches ground_truth's UNIQUE constraint; a label "
+                        f"for another rule_text_version waits until the "
+                        f"scorers select by the rule-text map)"
                     )
                 seen_keys.add(key)
 
@@ -592,20 +610,122 @@ def check_rulings(errors: list[str]) -> None:
         errors.append(f"{map_path}: unreadable rule-text map ({exc})")
         return
     for rule, entry in sorted(rule_map.items()):
-        where = f"{map_path}: {rule}"
-        if not FULL_SHA_RE.match(str(entry.get("commit", ""))):
-            errors.append(f"{where}: commit is not a full SHA")
-        if not str(entry.get("path", "")).endswith(".md"):
-            errors.append(f"{where}: path is not a page source")
-        if not SHA256_RE.match(str(entry.get("sha256", ""))):
-            errors.append(f"{where}: sha256 is not a SHA-256")
+        for n, pin in enumerate(known_pins(entry)):
+            where = f"{map_path}: {rule}" + ("" if pin is entry else f" history[{n}]")
+            if not FULL_SHA_RE.match(str(pin.get("commit", ""))):
+                errors.append(f"{where}: commit is not a full SHA")
+            if not str(pin.get("path", "")).endswith(".md"):
+                errors.append(f"{where}: path is not a page source")
+            if not SHA256_RE.match(str(pin.get("sha256", ""))):
+                errors.append(f"{where}: sha256 is not a SHA-256")
+            if not isinstance(pin.get("carried_forward"), bool):
+                errors.append(f"{where}: carried_forward is not true or false")
+        if not RULING_DATE_RE.match(str(entry.get("set", ""))):
+            errors.append(f"{map_path}: {rule}: set is not a date")
+        if not entry.get("reason"):
+            errors.append(f"{map_path}: {rule}: no reason the pin was set")
     for rule in sorted(labelled - set(rule_map)):
         text = have.get(rule, "")
         if "**Rule text:** none" not in text:
             errors.append(f"{map_path}: labelled rule {rule} has no pin")
 
+    ruling_ids = {"/".join(m.groups())
+                  for text in have.values() for m in RULING_DEF_RE.finditer(text)}
+    principles = RULINGS_DIR / "principles.md"
+    if principles.exists():
+        ruling_ids |= set(PRINCIPLE_DEF_RE.findall(principles.read_text(encoding="utf-8")))
+    check_label_pins(errors, rule_map, ruling_ids)
+
+
+PRINCIPLE_DEF_RE = re.compile(r"^## (P/[a-z0-9-]+)", re.M)
+
+
+def check_label_pins(errors: list[str], rule_map: dict, ruling_ids: set[str]) -> None:
+    """Check every label's rule-text pin fields against the map (ADR-0018).
+
+    - rule_text_basis is judged, carried-forward or unpinned.
+    - An unpinned label names no commit and the version "unpinned".
+    - Any other label names a (commit, sha256) the map knows for its rule,
+      current or in the entry's history. A label therefore cannot cite text
+      the map has not pinned, and the map pins merged commits only
+      (check_map_merged), so no label cites unmerged CERT wording.
+    - A carried-forward label's pin is one the map records as carried forward.
+    - A judged label names a full rulings_commit and at least one ruling id,
+      each defined under rulings/ (`<RULE>/<date>/<item>` or `P/<name>`).
+    """
+    for csv_path in sorted(DATA_DIR.glob("*/adjudication.csv")):
+        with csv_path.open(newline="", encoding="utf-8") as f:
+            reader = csv.DictReader(f)
+            if reader.fieldnames != CSV_COLUMNS:
+                continue  # validate_csvs reports the header
+            for i, row in enumerate(reader, start=2):
+                loc = f"{csv_path}:{i}"
+                basis = row["rule_text_basis"]
+                commit, version = row["rule_text_commit"], row["rule_text_version"]
+                if basis not in BASES:
+                    errors.append(f"{loc}: rule_text_basis '{basis}' not in {sorted(BASES)}")
+                    continue
+                if basis == UNPINNED:
+                    if commit or version != UNPINNED:
+                        errors.append(f"{loc}: an unpinned label names no commit and "
+                                      f"rule_text_version '{UNPINNED}'")
+                else:
+                    entry = rule_map.get(row["rule_id"])
+                    pin = next((p for p in known_pins(entry or {})
+                                if p.get("commit") == commit and p.get("sha256") == version),
+                               None) if entry else None
+                    if pin is None:
+                        errors.append(f"{loc}: rule_text {commit[:12]}/{version[:12]} is not "
+                                      f"a pin rulings/rule-text-map.json records for "
+                                      f"{row['rule_id']}")
+                    elif basis == "carried-forward" and not pin.get("carried_forward"):
+                        errors.append(f"{loc}: carried forward to a pin the map says "
+                                      f"must be re-judged")
+                ids = row["rulings_ids"].split()
+                if basis == "judged":
+                    if not FULL_SHA_RE.match(row["rulings_commit"]):
+                        errors.append(f"{loc}: a judged label names the full rulings_commit")
+                    if not ids:
+                        errors.append(f"{loc}: a judged label names the ruling ids it "
+                                      f"applied (the principles' ids if its rule has none)")
+                elif row["rulings_commit"] and not FULL_SHA_RE.match(row["rulings_commit"]):
+                    errors.append(f"{loc}: rulings_commit is not a full SHA")
+                for ruling in ids:
+                    if ruling not in ruling_ids:
+                        errors.append(f"{loc}: ruling id {ruling} is not defined under rulings/")
+
+
+def check_map_merged(errors: list[str], cert_repo: Path) -> None:
+    """Every pin in the map is a commit on the CERT checkout's origin/main
+    and its page hashes to the recorded SHA-256: the map never pins wording
+    CERT has not merged (ADR-0018 Decision 7). Needs a clone of
+    cmu-sei/secure-coding-standards, fetched; CI has none, so this runs when
+    a pin is set or moved."""
+    rule_map = json.loads((RULINGS_DIR / "rule-text-map.json").read_text(encoding="utf-8"))
+    for rule, entry in sorted(rule_map["rules"].items()):
+        for pin in known_pins(entry):
+            commit, where = pin.get("commit", ""), f"rule-text map {rule} @ {pin.get('commit', '')[:12]}"
+            merged = subprocess.run(["git", "-C", str(cert_repo), "merge-base",
+                                     "--is-ancestor", commit, "origin/main"],
+                                    capture_output=True)
+            if merged.returncode != 0:
+                errors.append(f"{where}: not a commit on CERT's origin/main")
+                continue
+            page = subprocess.run(["git", "-C", str(cert_repo), "show",
+                                   f"{commit}:{pin.get('path', '')}"], capture_output=True)
+            if page.returncode != 0:
+                errors.append(f"{where}: {pin.get('path')} does not exist at that commit")
+            elif hashlib.sha256(page.stdout).hexdigest() != pin.get("sha256"):
+                errors.append(f"{where}: the page's SHA-256 is not the one recorded")
+
 
 def main() -> None:
+    parser = argparse.ArgumentParser(description="Validate the dataset.")
+    parser.add_argument("--cert-repo", type=Path, default=None,
+                        help="a fetched clone of cmu-sei/secure-coding-standards: "
+                             "also check that every rule-text pin is merged and "
+                             "hashes to its recorded SHA-256")
+    args = parser.parse_args()
     errors: list[str] = []
     adr0007_warnings: dict[tuple[str, str], int] = {}
     manifests = load_manifests(errors)
@@ -613,6 +733,8 @@ def main() -> None:
     cross_check_row_counts(errors, manifests, source_row_counts)
     check_line_terminators(errors)
     check_rulings(errors)
+    if args.cert_repo:
+        check_map_merged(errors, args.cert_repo)
 
     if errors:
         fail(errors)

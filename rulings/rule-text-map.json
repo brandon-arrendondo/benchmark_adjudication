@@ -38,7 +38,7 @@
    "last_read_utc": "2026-10-06T04:08:51Z",
    "path": "content/4.sei-cert-c-coding-standard/08.recommendations/02.application-programming-interfaces-api/05.api03-c.md",
    "reason": "first map (ADR-0018 ruling c)",
-   "review": "not shipped: the ruling is a disposition, so no reading is carried",
+   "review": "not shipped; labels carried forward by recorded review: page changed after the read without touching the reading (1afabc47 risk table header)",
    "set": "2026-10-10",
    "sha256": "9d4c1f04f066624cfb21d86332dc6478e77284a2034c463fed17a558b02e0ad7",
    "shipped": false
@@ -49,7 +49,7 @@
    "last_read_utc": "2026-10-06T04:08:52Z",
    "path": "content/4.sei-cert-c-coding-standard/08.recommendations/02.application-programming-interfaces-api/06.api04-c.md",
    "reason": "first map (ADR-0018 ruling c)",
-   "review": "not shipped: the ruling is a disposition, so no reading is carried",
+   "review": "not shipped; labels carried forward by recorded review: page changed after the read without touching the reading (1afabc47 risk table header)",
    "set": "2026-10-10",
    "sha256": "67a2251fa8b57c9003e5df769bb64551365c016cc5c7d4a04b06b08462410add",
    "shipped": false
@@ -70,7 +70,7 @@
    "last_read_utc": "2026-10-06T04:08:52Z",
    "path": "content/4.sei-cert-c-coding-standard/08.recommendations/02.application-programming-interfaces-api/08.api07-c.md",
    "reason": "first map (ADR-0018 ruling c)",
-   "review": "not shipped: the ruling is a disposition, so no reading is carried",
+   "review": "not shipped; labels carried forward by recorded review: page changed after the read without touching the reading (1afabc47 risk table header)",
    "set": "2026-10-10",
    "sha256": "9b5e91c15096bc51c56b0ca8924edee11c8a99273800669172c2e65ea61067d2",
    "shipped": false
@@ -81,7 +81,7 @@
    "last_read_utc": "2026-10-06T04:08:53Z",
    "path": "content/4.sei-cert-c-coding-standard/08.recommendations/02.application-programming-interfaces-api/09.api09-c.md",
    "reason": "first map (ADR-0018 ruling c)",
-   "review": "not shipped: the ruling is a disposition, so no reading is carried",
+   "review": "not shipped; labels carried forward by recorded review: page unchanged since the read",
    "set": "2026-10-10",
    "sha256": "5362e139c8cbe9c89dd3b9bd4f8bc20a299ad0753b322aa61c345d372a85de75",
    "shipped": false
@@ -92,7 +92,7 @@
    "last_read_utc": "2026-10-06T04:08:53Z",
    "path": "content/4.sei-cert-c-coding-standard/08.recommendations/02.application-programming-interfaces-api/10.api10-c.md",
    "reason": "first map (ADR-0018 ruling c)",
-   "review": "not shipped: the ruling is a disposition, so no reading is carried",
+   "review": "not shipped; labels carried forward by recorded review: page changed after the read without touching the reading (1afabc47 risk table header)",
    "set": "2026-10-10",
    "sha256": "867a9a9c49ea30821a9d6aaec5bbb55883a2a3863b941fa20df73c2d13c525d2",
    "shipped": false
@@ -103,7 +103,7 @@
    "last_read_utc": "2026-10-06T04:08:54Z",
    "path": "content/4.sei-cert-c-coding-standard/08.recommendations/03.arrays-arr/2.arr00-c.md",
    "reason": "first map (ADR-0018 ruling c)",
-   "review": "not shipped: the ruling is a disposition, so no reading is carried",
+   "review": "not shipped; labels carried forward by recorded review: page unchanged since the read",
    "set": "2026-10-10",
    "sha256": "9ce79d15a5066d1724e234e0b387c73dec2087229ee486b7397acea786a5dea0",
    "shipped": false
@@ -209,7 +209,7 @@
    "last_read_utc": "2026-10-06T04:08:58Z",
    "path": "content/4.sei-cert-c-coding-standard/08.recommendations/05.concurrency-con/04.con03-c.md",
    "reason": "first map (ADR-0018 ruling c)",
-   "review": "not shipped: the ruling is a disposition, so no reading is carried",
+   "review": "not shipped; labels carried forward by recorded review: page changed after the read without touching the reading (1afabc47 risk table header)",
    "set": "2026-10-10",
    "sha256": "878b972073cf9a183950f7a6a6d681f2619be627063cdbaac59f444dc828a845",
    "shipped": false
@@ -238,7 +238,7 @@
    "last_read_utc": "2026-10-06T04:09:00Z",
    "path": "content/4.sei-cert-c-coding-standard/08.recommendations/05.concurrency-con/07.con06-c.md",
    "reason": "first map (ADR-0018 ruling c)",
-   "review": "not shipped: the ruling is a disposition, so no reading is carried",
+   "review": "not shipped; labels carried forward by recorded review: page changed after the read without touching the reading (1afabc47 risk table header)",
    "set": "2026-10-10",
    "sha256": "4ff9cf91b3fa9f549ee3714c5f19f2f096a222e47f054c98107017801a005cc8",
    "shipped": false
@@ -269,7 +269,7 @@
    "last_read_utc": "2026-10-06T04:09:01Z",
    "path": "content/4.sei-cert-c-coding-standard/08.recommendations/05.concurrency-con/10.con09-c.md",
    "reason": "first map (ADR-0018 ruling c)",
-   "review": "not shipped: the ruling is a disposition, so no reading is carried",
+   "review": "not shipped; labels carried forward by recorded review: page unchanged since the read",
    "set": "2026-10-10",
    "sha256": "b3de40b3184a75c1541f289e7e5e669e7751eca2f75d62df66f291fcf9a638cb",
    "shipped": false
@@ -471,7 +471,7 @@
    "last_read_utc": "2026-10-06T04:09:11Z",
    "path": "content/4.sei-cert-c-coding-standard/08.recommendations/06.declarations-and-initialization-dcl/10.dcl08-c.md",
    "reason": "first map (ADR-0018 ruling c)",
-   "review": "not shipped: the ruling is a disposition, so no reading is carried",
+   "review": "not shipped; labels carried forward by recorded review: page unchanged since the read",
    "set": "2026-10-10",
    "sha256": "36de5edaf81f890c1e7337e14a40cb905808583f02caa3a989937f33c53eb139",
    "shipped": false
@@ -491,7 +491,7 @@
    "last_read_utc": "2026-10-06T04:09:11Z",
    "path": "content/4.sei-cert-c-coding-standard/08.recommendations/06.declarations-and-initialization-dcl/12.dcl10-c.md",
    "reason": "first map (ADR-0018 ruling c)",
-   "review": "not shipped: the ruling is a disposition, so no reading is carried",
+   "review": "not shipped; labels carried forward by recorded review: page unchanged since the read",
    "set": "2026-10-10",
    "sha256": "3d0d8b8890e973f7153524c93e830d92c5bd353e1525f1c5357f70d4378952ef",
    "shipped": false
@@ -502,7 +502,7 @@
    "last_read_utc": "2026-10-06T04:09:12Z",
    "path": "content/4.sei-cert-c-coding-standard/08.recommendations/06.declarations-and-initialization-dcl/13.dcl11-c.md",
    "reason": "first map (ADR-0018 ruling c)",
-   "review": "not shipped: the ruling is a disposition, so no reading is carried",
+   "review": "not shipped; labels carried forward by recorded review: page changed after the read without touching the reading (8cf4d38f tool rows)",
    "set": "2026-10-10",
    "sha256": "32e0773f17751d4b76b396a4a2c1a99466f909e6c62990899f0e4bee6ca97d87",
    "shipped": false
@@ -550,7 +550,7 @@
    "last_read_utc": "2026-10-06T04:09:14Z",
    "path": "content/4.sei-cert-c-coding-standard/08.recommendations/06.declarations-and-initialization-dcl/18.dcl17-c.md",
    "reason": "first map (ADR-0018 ruling c)",
-   "review": "not shipped: the ruling is a disposition, so no reading is carried",
+   "review": "not shipped; labels carried forward by recorded review: page changed after the read without touching the reading (1afabc47 risk table header)",
    "set": "2026-10-10",
    "sha256": "806f271da77df384d0a1460b76e95eb7ff1e7607163747fc801f92020658a840",
    "shipped": false
@@ -590,7 +590,7 @@
    "last_read_utc": "2026-10-06T04:09:15Z",
    "path": "content/4.sei-cert-c-coding-standard/08.recommendations/06.declarations-and-initialization-dcl/22.dcl21-c.md",
    "reason": "first map (ADR-0018 ruling c)",
-   "review": "not shipped: the ruling is a disposition, so no reading is carried",
+   "review": "not shipped; labels carried forward by recorded review: page unchanged since the read",
    "set": "2026-10-10",
    "sha256": "cc9a2afed4764bcf6bc91e9efb3fa5796bfe251af0291d4cf68d40baf4f1cd49",
    "shipped": false
@@ -601,7 +601,7 @@
    "last_read_utc": "2026-10-06T04:09:16Z",
    "path": "content/4.sei-cert-c-coding-standard/08.recommendations/06.declarations-and-initialization-dcl/23.dcl22-c.md",
    "reason": "first map (ADR-0018 ruling c)",
-   "review": "not shipped: the ruling is a disposition, so no reading is carried",
+   "review": "not shipped; labels carried forward by recorded review: page unchanged since the read",
    "set": "2026-10-10",
    "sha256": "b43451a1b2b33fb1520d8340050054c6b09ec9502aaa3fe7a797172cf3b2a21d",
    "shipped": false
@@ -706,7 +706,7 @@
    "last_read_utc": "2026-10-06T04:09:20Z",
    "path": "content/4.sei-cert-c-coding-standard/08.recommendations/07.environment-env/2.env01-c.md",
    "reason": "first map (ADR-0018 ruling c)",
-   "review": "not shipped: the ruling is a disposition, so no reading is carried",
+   "review": "not shipped; labels carried forward by recorded review: page unchanged since the read",
    "set": "2026-10-10",
    "sha256": "8f215bf2349785767812fe678b870dfeafcdde75bbd27978f3779620283b4707",
    "shipped": false
@@ -735,7 +735,7 @@
    "last_read_utc": "2026-10-06T04:09:21Z",
    "path": "content/4.sei-cert-c-coding-standard/08.recommendations/07.environment-env/5.env04-c.md",
    "reason": "first map (ADR-0018 ruling c)",
-   "review": "not shipped: the ruling is a disposition, so no reading is carried",
+   "review": "not shipped; labels carried forward by recorded review: page unchanged since the read",
    "set": "2026-10-10",
    "sha256": "34e80b7e5e1cef4beef56a5fee85591ad06e2a37fe3c4f8da95feab3f04d54d1",
    "shipped": false
@@ -792,7 +792,7 @@
    "last_read_utc": "2026-10-06T04:09:24Z",
    "path": "content/4.sei-cert-c-coding-standard/08.recommendations/08.error-handling-err/2.err00-c.md",
    "reason": "first map (ADR-0018 ruling c)",
-   "review": "not shipped: the ruling is a disposition, so no reading is carried",
+   "review": "not shipped; labels carried forward by recorded review: page unchanged since the read",
    "set": "2026-10-10",
    "sha256": "3ffd8dc769ae899d60ebe59e9beeba610aa3b1e8586b2e76648c7dab7e461707",
    "shipped": false
@@ -913,7 +913,7 @@
    "last_read_utc": "2026-10-06T04:10:59Z",
    "path": "content/4.sei-cert-c-coding-standard/08.recommendations/09.expressions-exp/04.exp03-c.md",
    "reason": "first map (ADR-0018 ruling c)",
-   "review": "not shipped: the ruling is a disposition, so no reading is carried",
+   "review": "not shipped; labels carried forward by recorded review: page unchanged since the read",
    "set": "2026-10-10",
    "sha256": "71e6425240005e9d3c1e094c4b03b241b81f7a3547c713ebd54b18399b0b26c5",
    "shipped": false
@@ -933,7 +933,7 @@
    "last_read_utc": "2026-10-06T04:11:00Z",
    "path": "content/4.sei-cert-c-coding-standard/08.recommendations/09.expressions-exp/06.exp07-c.md",
    "reason": "first map (ADR-0018 ruling c)",
-   "review": "not shipped: the ruling is a disposition, so no reading is carried",
+   "review": "not shipped; labels carried forward by recorded review: page unchanged since the read",
    "set": "2026-10-10",
    "sha256": "d12fcabc059f45a8c6fd19644dd2bf37c3f33553a8ebb1f935ba50a3c63fa97a",
    "shipped": false
@@ -944,7 +944,7 @@
    "last_read_utc": "2026-10-06T04:11:01Z",
    "path": "content/4.sei-cert-c-coding-standard/08.recommendations/09.expressions-exp/07.exp08-c.md",
    "reason": "first map (ADR-0018 ruling c)",
-   "review": "not shipped: the ruling is a disposition, so no reading is carried",
+   "review": "not shipped; labels carried forward by recorded review: page changed after the read without touching the reading (8cf4d38f tool rows)",
    "set": "2026-10-10",
    "sha256": "0b16b016db550fd33c9387e3f1f87f8c57117c59885607ec80f08fb2ed8aac6d",
    "shipped": false
@@ -964,7 +964,7 @@
    "last_read_utc": "2026-10-06T04:11:01Z",
    "path": "content/4.sei-cert-c-coding-standard/08.recommendations/09.expressions-exp/09.exp10-c.md",
    "reason": "first map (ADR-0018 ruling c)",
-   "review": "not shipped: the ruling is a disposition, so no reading is carried",
+   "review": "not shipped; labels carried forward by recorded review: page changed after the read without touching the reading (8cf4d38f tool rows)",
    "set": "2026-10-10",
    "sha256": "0f0bd25d27bcab43cfbd1cf4d38a2bbf184370542ee006d767b033d2225a1596",
    "shipped": false
@@ -1004,7 +1004,7 @@
    "last_read_utc": "2026-10-06T04:11:03Z",
    "path": "content/4.sei-cert-c-coding-standard/08.recommendations/09.expressions-exp/13.exp14-c.md",
    "reason": "first map (ADR-0018 ruling c)",
-   "review": "not shipped: the ruling is a disposition, so no reading is carried",
+   "review": "not shipped; labels carried forward by recorded review: page unchanged since the read",
    "set": "2026-10-10",
    "sha256": "d3c6af7786e63b38262dcec08442d94ee20850fc7d6aa22bd0f59de89c309fb4",
    "shipped": false
@@ -1256,7 +1256,7 @@
    "last_read_utc": "2026-10-06T04:12:44Z",
    "path": "content/4.sei-cert-c-coding-standard/08.recommendations/11.input-output-fio/09.fio10-c.md",
    "reason": "first map (ADR-0018 ruling c)",
-   "review": "not shipped: the ruling is a disposition, so no reading is carried",
+   "review": "not shipped; labels carried forward by recorded review: page unchanged since the read",
    "set": "2026-10-10",
    "sha256": "8b07fde45174934c486e60b424b4fd823684f8a9a656271af54ada6b0760f0c2",
    "shipped": false
@@ -1294,7 +1294,7 @@
    "last_read_utc": "2026-10-06T04:12:46Z",
    "path": "content/4.sei-cert-c-coding-standard/08.recommendations/11.input-output-fio/13.fio15-c.md",
    "reason": "first map (ADR-0018 ruling c)",
-   "review": "not shipped: the ruling is a disposition, so no reading is carried",
+   "review": "not shipped; labels carried forward by recorded review: page unchanged since the read",
    "set": "2026-10-10",
    "sha256": "e4b973469428e09289e7c60013074f386c759b524c9285a6d9e8a0d7271aaa00",
    "shipped": false
@@ -1305,7 +1305,7 @@
    "last_read_utc": "2026-10-06T04:12:46Z",
    "path": "content/4.sei-cert-c-coding-standard/08.recommendations/11.input-output-fio/14.fio17-c.md",
    "reason": "first map (ADR-0018 ruling c)",
-   "review": "not shipped: the ruling is a disposition, so no reading is carried",
+   "review": "not shipped; labels carried forward by recorded review: page changed after the read without touching the reading (1afabc47 risk table header)",
    "set": "2026-10-10",
    "sha256": "c36bd4001198dcc8b168089e76bf88ffa50dca3f8eabc77a2e07a2ea8bcd854c",
    "shipped": false
@@ -1316,7 +1316,7 @@
    "last_read_utc": "2026-10-06T04:12:47Z",
    "path": "content/4.sei-cert-c-coding-standard/08.recommendations/11.input-output-fio/15.fio18-c.md",
    "reason": "first map (ADR-0018 ruling c)",
-   "review": "not shipped: the ruling is a disposition, so no reading is carried",
+   "review": "not shipped; labels carried forward by recorded review: page unchanged since the read",
    "set": "2026-10-10",
    "sha256": "9c9a4f4271a27432996c922a98a2e226146b0b8381021bd246fc880bfc26d7ab",
    "shipped": false
@@ -1512,7 +1512,7 @@
    "last_read_utc": "2026-10-06T04:12:56Z",
    "path": "content/4.sei-cert-c-coding-standard/08.recommendations/10.floating-point-flp/3.flp01-c.md",
    "reason": "first map (ADR-0018 ruling c)",
-   "review": "not shipped: the ruling is a disposition, so no reading is carried",
+   "review": "not shipped; labels carried forward by recorded review: page unchanged since the read",
    "set": "2026-10-10",
    "sha256": "20f7989f0e2391bee590543635a6de94b7eee1b5680ae184c9e7bcd6d1f6f02e",
    "shipped": false
@@ -1523,7 +1523,7 @@
    "last_read_utc": "2026-10-06T04:12:56Z",
    "path": "content/4.sei-cert-c-coding-standard/08.recommendations/10.floating-point-flp/4.flp02-c.md",
    "reason": "first map (ADR-0018 ruling c)",
-   "review": "not shipped: the ruling is a disposition, so no reading is carried",
+   "review": "not shipped; labels carried forward by recorded review: page changed after the read without touching the reading (8cf4d38f tool rows)",
    "set": "2026-10-10",
    "sha256": "ec26b8849f36cfd963d56af61a5a53e9a8e8a47ac830e4789400c3353d4953c6",
    "shipped": false
@@ -1639,7 +1639,7 @@
    "last_read_utc": "2026-10-06T04:13:02Z",
    "path": "content/4.sei-cert-c-coding-standard/08.recommendations/12.integers-int/02.int00-c.md",
    "reason": "first map (ADR-0018 ruling c)",
-   "review": "not shipped: the ruling is a disposition, so no reading is carried",
+   "review": "not shipped; labels carried forward by recorded review: page changed after the read without touching the reading (8cf4d38f tool rows)",
    "set": "2026-10-10",
    "sha256": "c5cb7d6e708172ae99dac205203430f67c5cb702a24451ae29c0759d9ec48c2b",
    "shipped": false
@@ -1678,7 +1678,7 @@
    "last_read_utc": "2026-10-06T04:13:03Z",
    "path": "content/4.sei-cert-c-coding-standard/08.recommendations/12.integers-int/06.int05-c.md",
    "reason": "first map (ADR-0018 ruling c)",
-   "review": "not shipped: the ruling is a disposition, so no reading is carried",
+   "review": "not shipped; labels carried forward by recorded review: page unchanged since the read",
    "set": "2026-10-10",
    "sha256": "8e8b2d3168b47ed0101c9099aeab352f7d32fb2baae48ae3fb1dba04739dfcf2",
    "shipped": false
@@ -1698,7 +1698,7 @@
    "last_read_utc": "2026-10-06T04:13:04Z",
    "path": "content/4.sei-cert-c-coding-standard/08.recommendations/12.integers-int/08.int08-c.md",
    "reason": "first map (ADR-0018 ruling c)",
-   "review": "not shipped: the ruling is a disposition, so no reading is carried",
+   "review": "not shipped; labels carried forward by recorded review: page unchanged since the read",
    "set": "2026-10-10",
    "sha256": "11e8931569cf3788227493d2d810c1ba88b298dd50eaf1e9d8ec76058d0940c8",
    "shipped": false
@@ -1763,7 +1763,7 @@
    "last_read_utc": "2026-10-06T04:13:07Z",
    "path": "content/4.sei-cert-c-coding-standard/08.recommendations/12.integers-int/15.int16-c.md",
    "reason": "first map (ADR-0018 ruling c)",
-   "review": "not shipped: the ruling is a disposition, so no reading is carried",
+   "review": "not shipped; labels carried forward by recorded review: page unchanged since the read",
    "set": "2026-10-10",
    "sha256": "75903aa91d08c9145a816a95e3cc7b94b347f85ae68c0d18fc11efc4a13f1fa1",
    "shipped": false
@@ -1858,7 +1858,7 @@
    "last_read_utc": "2026-10-06T04:13:11Z",
    "path": "content/4.sei-cert-c-coding-standard/08.recommendations/13.memory-management-mem/02.mem00-c.md",
    "reason": "first map (ADR-0018 ruling c)",
-   "review": "not shipped: the ruling is a disposition, so no reading is carried",
+   "review": "not shipped; labels carried forward by recorded review: page unchanged since the read",
    "set": "2026-10-10",
    "sha256": "f22c0d8cff95bf73c8c5c22083a722184eec2272a886878151d60e8ca5a90024",
    "shipped": false
@@ -1925,7 +1925,7 @@
    "last_read_utc": "2026-10-06T04:13:14Z",
    "path": "content/4.sei-cert-c-coding-standard/08.recommendations/13.memory-management-mem/09.mem07-c.md",
    "reason": "first map (ADR-0018 ruling c)",
-   "review": "not shipped: the ruling is a disposition, so no reading is carried",
+   "review": "not shipped; labels carried forward by recorded review: page unchanged since the read",
    "set": "2026-10-10",
    "sha256": "11bf3344b2f80fc337c5c51187173a9d67f6d721fca5f491112bb01c0f830365",
    "shipped": false
@@ -1936,7 +1936,7 @@
    "last_read_utc": "2026-10-06T04:13:15Z",
    "path": "content/4.sei-cert-c-coding-standard/08.recommendations/13.memory-management-mem/10.mem10-c.md",
    "reason": "first map (ADR-0018 ruling c)",
-   "review": "not shipped: the ruling is a disposition, so no reading is carried",
+   "review": "not shipped; labels carried forward by recorded review: page changed after the read without touching the reading (1afabc47 risk table header)",
    "set": "2026-10-10",
    "sha256": "c3c46b2457d6c0cbc430c42b0e6b72bc0f3e76e89746d6101230e9ed02b862df",
    "shipped": false
@@ -1947,7 +1947,7 @@
    "last_read_utc": "2026-10-09T22:31:56Z",
    "path": "content/4.sei-cert-c-coding-standard/08.recommendations/13.memory-management-mem/11.mem11-c.md",
    "reason": "first map (ADR-0018 ruling c)",
-   "review": "not shipped: the ruling is a disposition, so no reading is carried",
+   "review": "not shipped; labels carried forward by recorded review: page unchanged since the read",
    "set": "2026-10-10",
    "sha256": "fd1426528e6bfdff2b41d038fb8a77f9f70c52f277a169421e1530b319dbd467",
    "shipped": false
@@ -1958,7 +1958,7 @@
    "last_read_utc": "2026-10-06T04:13:15Z",
    "path": "content/4.sei-cert-c-coding-standard/08.recommendations/13.memory-management-mem/12.mem12-c.md",
    "reason": "first map (ADR-0018 ruling c)",
-   "review": "not shipped: the ruling is a disposition, so no reading is carried",
+   "review": "not shipped; labels carried forward by recorded review: page unchanged since the read",
    "set": "2026-10-10",
    "sha256": "3dc8428785fb0ef34a3c1536b480b50447ecb74b3a9e590f351d668fe15bc2db",
    "shipped": false
@@ -2071,7 +2071,7 @@
    "last_read_utc": "2026-10-06T04:13:20Z",
    "path": "content/4.sei-cert-c-coding-standard/08.recommendations/15.miscellaneous-msc/07.msc07-c.md",
    "reason": "first map (ADR-0018 ruling c)",
-   "review": "not shipped: the ruling is a disposition, so no reading is carried",
+   "review": "not shipped; labels carried forward by recorded review: page unchanged since the read",
    "set": "2026-10-10",
    "sha256": "9c6c78006383523dbbf98ee5fa56a5d2b8da31d89ea106da5c9e4eb40f82cd2c",
    "shipped": false
@@ -2140,7 +2140,7 @@
    "last_read_utc": "2026-10-06T04:13:23Z",
    "path": "content/4.sei-cert-c-coding-standard/08.recommendations/15.miscellaneous-msc/13.msc15-c.md",
    "reason": "first map (ADR-0018 ruling c)",
-   "review": "not shipped: the ruling is a disposition, so no reading is carried",
+   "review": "not shipped; labels carried forward by recorded review: page changed after the read without touching the reading (8cf4d38f tool rows)",
    "set": "2026-10-10",
    "sha256": "58f7c25c1e0143614b994f92c504fbe5f33bc67f9ce40ec0a78e96a4d99d2646",
    "shipped": false
@@ -2160,7 +2160,7 @@
    "last_read_utc": "2026-10-06T04:13:24Z",
    "path": "content/4.sei-cert-c-coding-standard/08.recommendations/15.miscellaneous-msc/15.msc18-c.md",
    "reason": "first map (ADR-0018 ruling c)",
-   "review": "not shipped: the ruling is a disposition, so no reading is carried",
+   "review": "not shipped; labels carried forward by recorded review: page unchanged since the read",
    "set": "2026-10-10",
    "sha256": "310db2d8e54d8f7e2c3f28a2fcbd3b61d103a59afe6ca50e26606d2629512c52",
    "shipped": false
@@ -2171,7 +2171,7 @@
    "last_read_utc": "2026-10-06T04:13:24Z",
    "path": "content/4.sei-cert-c-coding-standard/08.recommendations/15.miscellaneous-msc/16.msc19-c.md",
    "reason": "first map (ADR-0018 ruling c)",
-   "review": "not shipped: the ruling is a disposition, so no reading is carried",
+   "review": "not shipped; labels carried forward by recorded review: page changed after the read without touching the reading (1afabc47 risk table header)",
    "set": "2026-10-10",
    "sha256": "560a4abca19a4234514d2631ddbec94a5a3eb4c05df09aab6e6b5f307eeaf69b",
    "shipped": false
@@ -2210,7 +2210,7 @@
    "last_read_utc": "2026-10-06T04:13:26Z",
    "path": "content/4.sei-cert-c-coding-standard/08.recommendations/15.miscellaneous-msc/20.msc23-c.md",
    "reason": "first map (ADR-0018 ruling c)",
-   "review": "not shipped: the ruling is a disposition, so no reading is carried",
+   "review": "not shipped; labels carried forward by recorded review: page changed after the read without touching the reading (1afabc47 risk table header)",
    "set": "2026-10-10",
    "sha256": "b9fabcaeb4112779a9c11cadf49248658ea89ccd671bf8931ddd611b1c66d830",
    "shipped": false
@@ -2230,7 +2230,7 @@
    "last_read_utc": "2026-10-06T04:13:27Z",
    "path": "content/4.sei-cert-c-coding-standard/08.recommendations/15.miscellaneous-msc/22.msc25-c.md",
    "reason": "first map (ADR-0018 ruling c)",
-   "review": "not shipped: the ruling is a disposition, so no reading is carried",
+   "review": "not shipped; labels carried forward by recorded review: page changed after the read without touching the reading (1afabc47 risk table header)",
    "set": "2026-10-10",
    "sha256": "1a323c5946da78185025b23101d00c3b7b813d14f10b1363156df35a2ee6fd8b",
    "shipped": false
@@ -2322,7 +2322,7 @@
    "last_read_utc": "2026-10-06T04:13:30Z",
    "path": "content/4.sei-cert-c-coding-standard/08.recommendations/16.posix-pos/3.pos02-c.md",
    "reason": "first map (ADR-0018 ruling c)",
-   "review": "not shipped: the ruling is a disposition, so no reading is carried",
+   "review": "not shipped; labels carried forward by recorded review: page unchanged since the read",
    "set": "2026-10-10",
    "sha256": "48bd3659ef58ef83c0d7ee169072419c7d077b9c138bc3d8d9fabc3bb28819cc",
    "shipped": false
@@ -2711,7 +2711,7 @@
    "last_read_utc": "2026-10-06T04:13:47Z",
    "path": "content/4.sei-cert-c-coding-standard/08.recommendations/04.characters-and-strings-str/02.str00-c.md",
    "reason": "first map (ADR-0018 ruling c)",
-   "review": "not shipped: the ruling is a disposition, so no reading is carried",
+   "review": "not shipped; labels carried forward by recorded review: page unchanged since the read",
    "set": "2026-10-10",
    "sha256": "af16dfa0cca03b259de773d3f2d2e769e00bfd77eee225329ef3cf0fbad5e8c1",
    "shipped": false
@@ -2722,7 +2722,7 @@
    "last_read_utc": "2026-10-06T04:13:48Z",
    "path": "content/4.sei-cert-c-coding-standard/08.recommendations/04.characters-and-strings-str/03.str01-c.md",
    "reason": "first map (ADR-0018 ruling c)",
-   "review": "not shipped: the ruling is a disposition, so no reading is carried",
+   "review": "not shipped; labels carried forward by recorded review: page unchanged since the read",
    "set": "2026-10-10",
    "sha256": "2fa4055851ef326876c56a09ebdfec16842e3cbf80f84604c2a2f271cf60eae0",
    "shipped": false
