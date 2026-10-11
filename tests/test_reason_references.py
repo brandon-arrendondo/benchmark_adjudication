@@ -7,7 +7,7 @@ import unittest
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
-from reason_references import reference_categories
+from reason_references import reference_categories, column_reference_categories
 import validate
 
 
@@ -95,7 +95,7 @@ class ReasonReferenceTests(unittest.TestCase):
         self.assertIn("numbered review", self.check("AES rounds 12; review round 12"))
         self.assertIn("numbered review", self.check("rounds 12 while reviewing AES"))
 
-    def test_validator_checks_reason_only(self):
+    def test_validator_checks_public_attribution_columns(self):
         with tempfile.TemporaryDirectory() as directory:
             data = Path(directory)
             (data / "project").mkdir()
@@ -105,7 +105,7 @@ class ReasonReferenceTests(unittest.TestCase):
             row.update(project="project", codebase_commit="a" * 40,
                        file_path="f.c", line="1", rule_id="MEM31-C", verdict="FP",
                        source="public-batch", reason="Ownership is transferred to the caller.",
-                       provenance=tracker, confidence=tracker, adjudicated_at="2026-01-01")
+                       provenance="source review", confidence=tracker, adjudicated_at="2026-01-01")
             def write():
                 with path.open("w", newline="") as stream:
                     writer = csv.DictWriter(stream, fieldnames=validate.CSV_COLUMNS,
@@ -117,11 +117,48 @@ class ReasonReferenceTests(unittest.TestCase):
                 errors = []
                 validate.validate_csvs(errors, {"public-batch": {}}, {})
                 self.assertFalse(errors)
-                row["reason"] = tracker
-                write()
-                errors = []
-                validate.validate_csvs(errors, {"public-batch": {}}, {})
-                self.assertTrue(any("public-reference review" in e for e in errors))
+                for column in ("reason", "provenance", "adjudicator"):
+                    with self.subTest(column=column):
+                        previous = row[column]
+                        row[column] = tracker
+                        write()
+                        errors = []
+                        validate.validate_csvs(errors, {"public-batch": {}}, {})
+                        self.assertTrue(any(column + " needs public-reference review" in e
+                                            for e in errors))
+                        row[column] = previous
+
+    def test_embedded_task_tokens_and_exact_batch_exception(self):
+        number = str(90000 + 12)
+        for text in ("delta_err33_task" + number, "delta_msc13_task_" + number):
+            for column in ("reason", "provenance", "adjudicator"):
+                with self.subTest(text=text, column=column):
+                    self.assertIn("tracker reference",
+                                  column_reference_categories(column, text))
+                    self.assertFalse(column_reference_categories(column, text, {text}))
+        self.assertFalse(column_reference_categories("source", "task" + number))
+
+    def test_attribution_policy_keeps_model_versions_and_public_builds(self):
+        for model in ("claude", "claude-reverify", "claude-audit",
+                      "claude-sonnet-5", "claude-sonnet-5-revert", "claude-opus-4.8"):
+            self.assertFalse(column_reference_categories("adjudicator", model))
+        self.assertTrue(column_reference_categories("adjudicator", "claude-r" + str(90000 + 13)))
+        self.assertTrue(column_reference_categories("adjudicator", "claude-sonnet-5-" + str(90000 + 14)))
+        self.assertTrue(column_reference_categories("provenance", "runs " + str(90000 + 15)))
+        self.assertFalse(column_reference_categories("provenance", "build sqc-1.2.3-abcdef123"))
+        self.assertFalse(column_reference_categories("provenance", "aurora-lint 12345678"))
+        self.assertFalse(column_reference_categories("provenance", "aurora-lint 12345abc"))
+        self.assertTrue(column_reference_categories("provenance", "aurora-lint " + str(90000 + 16)))
+        self.assertFalse(column_reference_categories("adjudicator", "claude-opus-5-5"))
+        self.assertFalse(column_reference_categories("provenance", "offset runs 0..limit; index runs 1..size"))
+        self.assertFalse(column_reference_categories("provenance", "message: array index b64; ROUND8; AES rounds 12; P256"))
+
+    def test_oracle_tag_and_resolving_batch_citations(self):
+        tag = "oracle-tag: interface-fixed signature: fn-pointer slot"
+        self.assertFalse(column_reference_categories("provenance", tag + "; source verified"))
+        batch = "review-task" + str(90000 + 17) + "-r" + str(90000 + 18)
+        self.assertFalse(column_reference_categories("provenance", tag + "; prior " + batch, {batch}))
+        self.assertTrue(column_reference_categories("provenance", tag + "; prior " + batch))
 
     def test_bare_tracker_context_needs_review(self):
         number = str(9000 + 1)

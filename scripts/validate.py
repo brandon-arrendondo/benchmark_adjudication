@@ -112,7 +112,7 @@ import subprocess
 import sys
 from pathlib import Path
 
-from reason_references import reference_categories
+from reason_references import column_reference_categories
 from rule_text_pin import BASES, PIN_COLUMNS, UNPINNED, known_pins
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
@@ -453,14 +453,15 @@ def validate_csvs(
                             f'"How labels get added")'
                         )
 
-                references = reference_categories(
-                    row["reason"], batch_ids, row["file_path"], evidence_lines,
-                    row["codebase_commit"]
-                )
-                if references:
-                    errors.append(f"{loc}: reason needs public-reference review "
-                                  f"({', '.join(sorted(references))}); state the "
-                                  f"label basis or cite public evidence")
+                for field in ("reason", "provenance", "adjudicator"):
+                    references = column_reference_categories(
+                        field, row[field], batch_ids, row["file_path"], evidence_lines,
+                        row["codebase_commit"]
+                    )
+                    if references:
+                        errors.append(f"{loc}: {field} needs public-reference review "
+                                      f"({', '.join(sorted(references))}); state the "
+                                      f"label basis or cite public evidence")
 
                 hit_categories = adr0007_hit_categories(
                     f"{row['reason']} {row['provenance']}"

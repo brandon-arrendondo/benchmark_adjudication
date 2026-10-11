@@ -10,8 +10,8 @@ import re
 NUMBER_LIST = r"\d+(?:\s*[/,&+\-]\s*\d+)*"
 PATTERNS = {
     "tracker reference": re.compile(
-        rf"\b(?:tasks?\s*[-_#:]?\s*|(?:bmdb|benchmarking_db|"
-        rf"aurora[_-]lint|tools[_-]sqc)\s+(?:tasks?\s+)?){NUMBER_LIST}\b", re.I
+        rf"(?<![A-Za-z0-9])(?:tasks?\s*[-_#:]?\s*|(?:bmdb|benchmarking_db|"
+        rf"aurora[_-]lint|tools[_-]sqc)\s+(?:tasks?\s+)?){NUMBER_LIST}(?![A-Za-z0-9])", re.I
     ),
     "numbered review": re.compile(r"\b(?:rounds?|batch(?:es)?|ledger)\s*[-_#:]?\s*\d+\b", re.I),
     "internal run number": re.compile(r"\brun(?:\s+|[-_])\d+\b", re.I),
@@ -39,6 +39,46 @@ HASH_NUMBER = re.compile(r"(?<![\w/#])#\d+\b")
 BARE_FINDING = re.compile(r"\b(?:the|same as|per|see)\s+(\d{3,5})\s+(?:finding|case|precedent|correction|ruling)\b", re.I)
 NAMED_READ = re.compile(r"\b(?:per|matches)\s+([a-z][a-z0-9_-]*)['’]s\s+(?:original\s+)?read\b", re.I)
 PUBLIC_READERS = {"adjudicator", "reviewer", "maintainer", "owner"}
+PUBLIC_COLUMNS = {"reason", "provenance", "adjudicator"}
+PROVENANCE_RUN = re.compile(
+    r"\bruns?(?:\s+|[-_])\d+(?:[/,-]\d+)*\b(?!\.\.)", re.I)
+PROVENANCE_BATCH = re.compile(
+    r"^(?:\d+(?:-\d+|plus)?_)?b\d+$|\bbatch\s+b\d+\b", re.I)
+HOST_ATTRIBUTION = re.compile(r"(?<![A-Za-z0-9])r\d{3,}(?![A-Za-z0-9])", re.I)
+ADJUDICATOR_CAMPAIGN = re.compile(r"(?<=\d)-\d{3,}(?:-revert)?$", re.I)
+
+
+def column_reference_categories(column: str, value: str,
+                                batch_ids: set[str] | None = None,
+                                file_path: str = "",
+                                evidence_lines: set[tuple[str, str, str]] | None = None,
+                                codebase_commit: str = "") -> set[str]:
+    """Review public attribution text; exporter callers can supply batch IDs.
+
+    Source identifiers and pin metadata are intentionally outside this policy.
+    Exact batch citations remain valid only when supplied by the caller from
+    the dataset's manifest directories. No files or database are read here.
+    """
+    if column not in PUBLIC_COLUMNS:
+        return set()
+    batches = batch_ids or set()
+    categories = reference_categories(value, batches, file_path, evidence_lines,
+                                      codebase_commit)
+    if column == "reason":
+        return categories
+    # Operands, source locations and diagnostic messages in provenance use the
+    # same technical exceptions as reasons; extra checks concern attribution.
+    text = TOKEN.sub(lambda m: " " if m.group() in batches else m.group(), value)
+    if HOST_ATTRIBUTION.search(text):
+        categories.add("numbered machine")
+    if column == "provenance":
+        if PROVENANCE_RUN.search(text):
+            categories.add("internal run number")
+        if PROVENANCE_BATCH.search(text):
+            categories.add("abbreviated batch")
+    elif ADJUDICATOR_CAMPAIGN.search(text):
+        categories.add("adjudicator campaign reference")
+    return categories
 
 
 def reference_categories(reason: str, batch_ids: set[str], file_path: str = "",
@@ -57,6 +97,10 @@ def reference_categories(reason: str, batch_ids: set[str], file_path: str = "",
     protected += [(m.start(), m.end()) for m in RULING.finditer(reason)]
     protected += [(m.start(), m.end()) for m in PUBLIC_RUN_ID.finditer(reason)]
     protected += [(m.start(), m.end()) for m in AES_ROUNDS.finditer(reason)]
+    # Hex commit citations may be all digits; the whole token, never a digit
+    # prefix of a SHA, is protected when attributed to the public tool.
+    protected += [(m.start(), m.end()) for m in re.finditer(
+        r"\b(?:aurora[-_]lint|tools[-_]sqc)\s+[0-9a-f]{7,40}\b", reason)]
 
     def is_protected(match):
         for start, end in protected:

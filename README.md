@@ -502,8 +502,8 @@ terminators moved with `git diff --ignore-cr-at-eol`; a batch that fails
 `validate.py` on a CR was written by something that needs the
 `lineterminator` fix, not a file-side workaround.
 
-**Reasons cite public evidence.** `scripts/validate.py` also checks the parsed
-`reason` column for unresolved tracker, ledger, numbered-machine and named-read
+**Label attribution cites public evidence.** `scripts/validate.py` also checks the parsed
+`reason`, `provenance` and `adjudicator` columns for unresolved tracker, ledger, numbered-machine and named-read
 references, including internal run numbers and ruling attribution. Cite a
 public `sqc-<version>-<sha>` run ID when available. Exact existing batch
 directory names, dated ruling IDs, known code
@@ -512,6 +512,18 @@ file and pinned commit remain valid. Ambiguous forms fail for review; the
 validator never rewrites text. Write the verdict explanation directly or cite public evidence. This
 check runs offline; checking whether a cited tool commit is reachable from its
 public main branch remains a separate release/export check.
+
+Adjudicators use model or review-role names, without machine or campaign
+suffixes; the immutable `source` batch identifier records the submission.
+Provenance preserves public build IDs and explains the review operation.
+Oracle tags remain `; `-separated segments in the form
+`oracle-tag: <class>: <detail>`; the class contains no colon and neither
+part contains a semicolon. Keep existing tags unchanged when revising prose.
+Exporters can import `column_reference_categories(column, value, batch_ids)`
+from `scripts/reason_references.py` to apply the same policy without reading
+files or connecting to a database. Supply the actual manifest directory names
+to permit batch citations; omission grants no identifier exceptions. Source,
+confidence and rule-text pin metadata are outside this attribution check.
 
 Whether a free-text field discloses a secret or an internal address is
 **not** something CI checks — an earlier regex-based scanner flagged 311
