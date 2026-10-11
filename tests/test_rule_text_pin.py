@@ -39,7 +39,10 @@ def pins(commit=SHA, version=SHA256, basis="carried-forward", rulings_commit="",
 
 
 class Layout(unittest.TestCase):
-    """A temporary repository: one ruled rule (SIG30-C) and a principle."""
+    """A temporary repository: one ruled rule (SIG30-C) and a principle.
+
+    It has no git history, so ruling ids resolve against its own rulings/;
+    tests/test_rulings_history.py covers resolving them at rulings_commit."""
 
     def setUp(self):
         self.tmp = tempfile.TemporaryDirectory()
@@ -47,8 +50,9 @@ class Layout(unittest.TestCase):
         self.rulings, self.data = root / "rulings", root / "data"
         (self.rulings / "rules").mkdir(parents=True)
         (self.data / "p").mkdir(parents=True)
-        self.saved = (validate.RULINGS_DIR, validate.DATA_DIR)
+        self.saved = (validate.RULINGS_DIR, validate.DATA_DIR, validate.GIT_REPO)
         validate.RULINGS_DIR, validate.DATA_DIR = self.rulings, self.data
+        validate.GIT_REPO = None
         (self.rulings / "rules" / "SIG30-C.md").write_text(
             "# SIG30-C\n\n- **Rule text:** [x](y)\n\n## Rulings\n\n"
             "- **SIG30-C/2026-10-10/3, the form.** Text.\n", encoding="utf-8")
@@ -57,7 +61,7 @@ class Layout(unittest.TestCase):
         self.write_map({"SIG30-C": entry()})
 
     def tearDown(self):
-        validate.RULINGS_DIR, validate.DATA_DIR = self.saved
+        validate.RULINGS_DIR, validate.DATA_DIR, validate.GIT_REPO = self.saved
         self.tmp.cleanup()
 
     def write_map(self, rules):

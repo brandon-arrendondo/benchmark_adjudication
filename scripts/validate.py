@@ -41,6 +41,12 @@ Checks:
     carried-forward label's pin is one the map records as carried forward; a
     judged label names the rulings commit and the ruling ids it applied, and
     each id is defined under rulings/ (see check_label_pins).
+  - every label's rulings_commit is a commit in this repository's history,
+    and each of its rulings_ids is defined in THAT commit's rulings/, not
+    only in today's (see RulingsHistory). Needs the repository's history:
+    this checkout's own .git, or --git-dir. Without either (a tree
+    extracted with `git archive`), the ids are checked against this tree's
+    rulings/ instead and the run says how many labels it could not check.
   - no free-text field (reason/provenance/confidence) contains a
     backslash-escaped quote (\") -- CSV has no backslash-escape convention,
     so this is the signature of a row built by something that assumed
@@ -562,7 +568,7 @@ INTERNAL_REF_RE = re.compile(
     r"|\b[A-Z]{3}\d{2}-C\s+rulings?\s+\d")
 
 
-def check_rulings(errors: list[str]) -> None:
+def check_rulings(errors: list[str]) -> int:
     """Check rulings/ against itself and against the labels.
 
     - No rulings/ Markdown file carries an internal reference: a batch id,
@@ -577,7 +583,7 @@ def check_rulings(errors: list[str]) -> None:
       page has an entry (aurora-lint ADR-0018).
     """
     if not RULINGS_DIR.exists():
-        return
+        return 0
     for path in sorted(RULINGS_DIR.rglob("*.md")):
         text = path.read_text(encoding="utf-8")
         for n, line in enumerate(text.splitlines(), 1):
@@ -628,7 +634,7 @@ def check_rulings(errors: list[str]) -> None:
         rule_map = json.loads(map_path.read_text(encoding="utf-8"))["rules"]
     except (OSError, ValueError, KeyError) as exc:
         errors.append(f"{map_path}: unreadable rule-text map ({exc})")
-        return
+        return 0
     for rule, entry in sorted(rule_map.items()):
         for n, pin in enumerate(known_pins(entry)):
             where = f"{map_path}: {rule}" + ("" if pin is entry else f" history[{n}]")
@@ -654,13 +660,60 @@ def check_rulings(errors: list[str]) -> None:
     principles = RULINGS_DIR / "principles.md"
     if principles.exists():
         ruling_ids |= set(PRINCIPLE_DEF_RE.findall(principles.read_text(encoding="utf-8")))
-    check_label_pins(errors, rule_map, ruling_ids)
+    return check_label_pins(errors, rule_map, ruling_ids, RulingsHistory.for_repo(GIT_REPO))
 
 
 PRINCIPLE_DEF_RE = re.compile(r"^## (P/[a-z0-9-]+)", re.M)
 
+# The repository whose history a label's rulings_commit is resolved in: this
+# checkout when it is one, else whatever --git-dir names, else none.
+GIT_REPO: Path | None = REPO_ROOT if (REPO_ROOT / ".git").exists() else None
+# The commit whose history counts: HEAD, or --history-ref for a tree that was
+# extracted from a clone whose HEAD is some other commit.
+HISTORY_REF = "HEAD"
 
-def check_label_pins(errors: list[str], rule_map: dict, ruling_ids: set[str]) -> None:
+
+class RulingsHistory:
+    """The ruling ids defined at a commit of this repository.
+
+    A label records the rulings it was judged under as a commit plus the ids
+    it applied (aurora-lint ADR-0018, Decision 4). The ids must exist in
+    that commit's rulings/: an id added later was not there to be applied,
+    even though today's tree defines it.
+    """
+
+    def __init__(self, repo: Path, ref: str = "HEAD"):
+        self.repo, self.ref = repo, ref
+        self._ids: dict[str, set[str] | None] = {}
+
+    @classmethod
+    def for_repo(cls, repo: Path | None) -> "RulingsHistory | None":
+        return cls(repo, HISTORY_REF) if repo else None
+
+    def _git(self, *args: str) -> subprocess.CompletedProcess:
+        return subprocess.run(["git", "-C", str(self.repo), *args],
+                              capture_output=True, text=True)
+
+    def ids_at(self, commit: str) -> set[str] | None:
+        """The ruling ids defined at `commit`, or None if `commit` is not a
+        commit in this repository's history (reachable from the history ref)."""
+        if commit not in self._ids:
+            known = self._git("cat-file", "-e", f"{commit}^{{commit}}").returncode == 0
+            if known and self._git("merge-base", "--is-ancestor", commit, self.ref).returncode:
+                known = False
+            if not known:
+                self._ids[commit] = None
+            else:
+                found = self._git("grep", "--no-color", "-h", "-E",
+                                  r"^(- \*\*[A-Z]{3}[0-9]{2}-C/|## P/)",
+                                  commit, "--", "rulings").stdout
+                self._ids[commit] = ({"/".join(m.groups()) for m in RULING_DEF_RE.finditer(found)}
+                                     | set(PRINCIPLE_DEF_RE.findall(found)))
+        return self._ids[commit]
+
+
+def check_label_pins(errors: list[str], rule_map: dict, ruling_ids: set[str],
+                     history: RulingsHistory | None = None) -> int:
     """Check every label's rule-text pin fields against the map (ADR-0018).
 
     - rule_text_basis is judged, carried-forward or unpinned.
@@ -672,7 +725,14 @@ def check_label_pins(errors: list[str], rule_map: dict, ruling_ids: set[str]) ->
     - A carried-forward label's pin is one the map records as carried forward.
     - A judged label names a full rulings_commit and at least one ruling id,
       each defined under rulings/ (`<RULE>/<date>/<item>` or `P/<name>`).
+    - With `history`, a label's rulings_commit must be a commit in this
+      repository's history and each id must be defined in that commit's
+      rulings/. Without it, the ids are checked against this tree's rulings/.
+
+    Returns how many labels cite ruling ids that could not be resolved in
+    history because there was none to read.
     """
+    unchecked = 0
     for csv_path in sorted(DATA_DIR.glob("*/adjudication.csv")):
         with csv_path.open(newline="", encoding="utf-8") as f:
             reader = csv.DictReader(f)
@@ -710,9 +770,25 @@ def check_label_pins(errors: list[str], rule_map: dict, ruling_ids: set[str]) ->
                                       f"applied (the principles' ids if its rule has none)")
                 elif row["rulings_commit"] and not FULL_SHA_RE.match(row["rulings_commit"]):
                     errors.append(f"{loc}: rulings_commit is not a full SHA")
+                rulings_commit = row["rulings_commit"]
+                at_commit = None
+                if (ids or rulings_commit) and FULL_SHA_RE.match(rulings_commit):
+                    if history is None:
+                        unchecked += bool(ids)
+                    else:
+                        at_commit = history.ids_at(rulings_commit)
+                        if at_commit is None:
+                            errors.append(f"{loc}: rulings_commit {rulings_commit[:12]} is not "
+                                          f"a commit in this repository's history")
+                            continue
                 for ruling in ids:
-                    if ruling not in ruling_ids:
+                    if at_commit is not None:
+                        if ruling not in at_commit:
+                            errors.append(f"{loc}: ruling id {ruling} is not defined in "
+                                          f"rulings/ at rulings_commit {rulings_commit[:12]}")
+                    elif ruling not in ruling_ids:
                         errors.append(f"{loc}: ruling id {ruling} is not defined under rulings/")
+    return unchecked
 
 
 def check_map_merged(errors: list[str], cert_repo: Path) -> None:
@@ -745,14 +821,25 @@ def main() -> None:
                         help="a fetched clone of cmu-sei/secure-coding-standards: "
                              "also check that every rule-text pin is merged and "
                              "hashes to its recorded SHA-256")
+    parser.add_argument("--git-dir", type=Path, default=None,
+                        help="a clone of this repository whose history resolves each "
+                             "label's rulings_commit, for a tree that is not itself a "
+                             "checkout (default: this checkout)")
+    parser.add_argument("--history-ref", default="HEAD",
+                        help="the commit of that clone whose history counts, e.g. the "
+                             "commit a tree was extracted from (default: HEAD)")
     args = parser.parse_args()
+    global GIT_REPO, HISTORY_REF
+    if args.git_dir:
+        GIT_REPO = args.git_dir
+    HISTORY_REF = args.history_ref
     errors: list[str] = []
     adr0007_warnings: dict[tuple[str, str], int] = {}
     manifests = load_manifests(errors)
     source_row_counts = validate_csvs(errors, manifests, adr0007_warnings)
     cross_check_row_counts(errors, manifests, source_row_counts)
     check_line_terminators(errors)
-    check_rulings(errors)
+    unchecked = check_rulings(errors)
     if args.cert_repo:
         check_map_merged(errors, args.cert_repo)
 
@@ -768,6 +855,13 @@ def main() -> None:
             f"validate.py: {n_warn} legacy row(s) across {n_pairs} (project, rule) "
             f"pair(s) carry ADR-0007-restricted vocabulary (warn-only; run "
             f"scripts/adr0007_vocabulary_counts.py for the breakdown)",
+            file=sys.stderr,
+        )
+    if unchecked:
+        print(
+            f"validate.py: {unchecked} label(s) cite ruling ids that were checked "
+            f"against this tree's rulings/, not their rulings_commit's: there is no "
+            f"repository history here (pass --git-dir)",
             file=sys.stderr,
         )
 

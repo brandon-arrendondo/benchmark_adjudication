@@ -13,7 +13,8 @@ jobs:
       - uses: actions/checkout@v4
         with:
           # tests/test_score_golden.py scores the labels at a pinned past
-          # commit through `git show`; a shallow clone cannot see it.
+          # commit through `git show`, and validate.py resolves each label's
+          # rulings_commit in the history; a shallow clone has neither.
           fetch-depth: 0
       - uses: actions/setup-python@v5
         with:

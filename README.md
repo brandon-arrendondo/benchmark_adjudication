@@ -467,7 +467,10 @@ and `rulings_ids` lists the ruling ids applied (the principles' `P/<name>`
 ids for a rule with no ruling of its own). `scripts/to_batch.py` writes
 these for you: pass `--rulings-commit <sha>` and fill the verdict CSV's
 `human_rulings` column; a row without rulings, or whose rule has no pin, is
-rejected. Never judge a label against CERT wording that has not been
+rejected. `validate.py` resolves each label's ruling ids in the
+`rulings/` of its `rulings_commit`, which must be a commit on this
+repository's history: an id added after that commit was not there to apply.
+Never judge a label against CERT wording that has not been
 merged: the map pins merged commits only, and `validate.py` rejects a label
 whose version the map does not record. A change to the map itself is also
 checked against CERT's repository in CI (`validate.py --cert-repo`).
