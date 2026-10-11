@@ -718,9 +718,9 @@ def check_label_pins(errors: list[str], rule_map: dict, ruling_ids: set[str]) ->
 def check_map_merged(errors: list[str], cert_repo: Path) -> None:
     """Every pin in the map is a commit on the CERT checkout's origin/main
     and its page hashes to the recorded SHA-256: the map never pins wording
-    CERT has not merged (ADR-0018 Decision 7). Needs a clone of
-    cmu-sei/secure-coding-standards, fetched; CI has none, so this runs when
-    a pin is set or moved."""
+    CERT has not merged (ADR-0018 Decision 7). Needs a fetched clone of
+    cmu-sei/secure-coding-standards: the rule-text-pin CI workflow makes one
+    and runs this whenever the map, this script or the workflow changes."""
     rule_map = json.loads((RULINGS_DIR / "rule-text-map.json").read_text(encoding="utf-8"))
     for rule, entry in sorted(rule_map["rules"].items()):
         for pin in known_pins(entry):

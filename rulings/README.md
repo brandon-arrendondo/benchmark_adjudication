@@ -21,11 +21,13 @@ project's readings, not CERT's, and CERT has not reviewed them.
   merged commit of `cmu-sei/secure-coding-standards`, the path of its page
   source in that commit and the SHA-256 of that file. The first map pins
   every guideline at one commit. Per guideline, `carried_forward` records
-  whether the guideline's existing labels carry forward to that text, and
-  `review` says why: the page is unchanged since it was last read, or it
-  changed without touching the reading (naming the commit), or, for
-  `carried_forward: false`, what changed and that the labels must be
-  re-judged.
+  whether the guideline's existing labels carry forward to that text. A
+  shipped guideline whose page is unchanged since it was last read carries
+  no `review` string (189 entries). Every other entry's `review` says why:
+  a page that changed without touching the reading (naming the commit), a
+  guideline that is not shipped (its labels carried forward, with whether
+  its page changed), or, for `carried_forward: false`, what changed and
+  that the labels must be re-judged.
 
 ## How a label cites a ruling
 
@@ -46,7 +48,8 @@ canonical serialisation (sorted keys, no whitespace), the pin a run
 records. `python3 scripts/validate.py --cert-repo <clone>` checks, against
 a fetched clone of `cmu-sei/secure-coding-standards`, that every pin is a
 commit on its `main` and that each page hashes to the recorded SHA-256.
-Run it when a pin is set or moved; CI has no clone.
+CI runs it, against a fresh clone of CERT's repository, whenever the map
+changes (`.github/workflows/rule-text-pin.yml`).
 
 ## How rulings change
 
