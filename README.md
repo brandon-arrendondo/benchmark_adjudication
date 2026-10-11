@@ -431,6 +431,22 @@ rows the batch actually changed. `benchmarking_db`'s
 `bin/oracle_flip_rates.py` reads the history and refuses a manifest whose
 `flipped` disagrees with it.
 
+#### Naming a batch
+
+A batch's directory name is its `batch_id`, and reasons and provenance may
+cite it verbatim as a dataset identifier. So a new name must not read as an
+internal reference: `scripts/validate.py` refuses a new directory whose name
+falls under the same policy that reviews reason text
+(`scripts/reason_references.py`: a tracker number such as `task-NNN`, a run
+number such as `run-NNN`, a numbered host, and the other forms listed there),
+reported by `manifest_name_categories`. Name a new batch by what it holds,
+for example `delta-str30c-2026-10` or `correction-fio40c-ex1-2026-10`: the
+rule or construct, the kind of change, and a date if it needs one. The names
+that existed when the check was introduced, internal-looking ones included,
+stay valid and are listed in `scripts/batch_name_allowlist.txt`. That list
+is frozen: it is checked against the tree (`scripts/batch_name_allowlist.py
+--check`), and a new batch takes a neutral name rather than an entry there.
+
 ## How labels get added (maintainer process)
 
 Every change to `main` goes through a PR (branch protection enforces this —

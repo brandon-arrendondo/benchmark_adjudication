@@ -137,3 +137,26 @@ def reference_categories(reason: str, batch_ids: set[str], file_path: str = "",
         if not is_protected(m) and m.group(1).lower() not in PUBLIC_READERS:
             categories.add("named read attribution")
     return categories
+
+
+def manifest_name_categories(name: str, allowlist: set[str] | frozenset[str]) -> set[str]:
+    """Review a manifest directory name as a citation, without reading files.
+
+    A batch directory name is cited verbatim by reasons and provenance, which
+    therefore accept it (see `column_reference_categories`). The names that
+    existed when this check was introduced stay valid as dataset identifiers
+    and are passed in as `allowlist`. Any other name is held to the same
+    internal-reference policy as reason text, plus the host-name form from
+    provenance, so a new batch cannot make an internal reference citable by
+    being named after it. Underscores and dots count as separators, as hyphens
+    do. Returns the policy categories the name falls under; empty means it may
+    be used.
+    """
+    if name in allowlist:
+        return set()
+    categories = set()
+    for text in {name, re.sub(r"[_.]", "-", name)}:
+        categories |= reference_categories(text, set())
+        if HOST_ATTRIBUTION.search(text):
+            categories.add("numbered machine")
+    return categories

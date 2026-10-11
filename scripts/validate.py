@@ -21,6 +21,9 @@ Checks:
     a second rule_text_version for the same tuple is refused until they
     select labels by the rule-text map.
   - every row's `source` names a batch_id with a manifest under batches/.
+  - every manifest directory name is grandfathered in
+    scripts/batch_name_allowlist.txt or does not read as an internal
+    reference (reason_references.manifest_name_categories).
   - every manifest's declared row_count matches the number of CSV rows
     actually carrying that batch_id as their source.
   - every manifest's required fields are present and SHA-shaped.
@@ -112,7 +115,8 @@ import subprocess
 import sys
 from pathlib import Path
 
-from reason_references import column_reference_categories
+import batch_name_allowlist
+from reason_references import column_reference_categories, manifest_name_categories
 from rule_text_pin import BASES, PIN_COLUMNS, UNPINNED, known_pins
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
@@ -343,10 +347,28 @@ def fail(errors: list[str]) -> None:
     sys.exit(1)
 
 
+def check_batch_names(names: list[str], allowlist: frozenset[str]) -> list[str]:
+    """A manifest directory name is cited verbatim as a dataset identifier, so
+    a new one must not look like an internal reference (README, "Naming a
+    batch"). The names grandfathered in batch_name_allowlist.txt pass."""
+    errors = []
+    for name in names:
+        categories = manifest_name_categories(name, allowlist)
+        if categories:
+            errors.append(
+                f"batches/{name}: the directory name reads as an internal reference "
+                f"({', '.join(sorted(categories))}); give the batch a neutral name"
+            )
+    return errors
+
+
 def load_manifests(errors: list[str]) -> dict[str, dict]:
     manifests: dict[str, dict] = {}
     if not BATCHES_DIR.exists():
         return manifests
+    errors.extend(batch_name_allowlist.check(batches_dir=BATCHES_DIR))
+    errors.extend(check_batch_names(batch_name_allowlist.tree_names(BATCHES_DIR),
+                                    batch_name_allowlist.read_allowlist()))
     for manifest_path in sorted(BATCHES_DIR.glob("*/manifest.json")):
         batch_dir_name = manifest_path.parent.name
         try:
