@@ -14,9 +14,11 @@ PATTERNS = {
         rf"aurora[_-]lint|tools[_-]sqc)\s+(?:tasks?\s+)?){NUMBER_LIST}\b", re.I
     ),
     "numbered review": re.compile(r"\b(?:rounds?|batch(?:es)?|ledger)\s*[-_#:]?\s*\d+\b", re.I),
+    "internal run number": re.compile(r"\brun(?:\s+|[-_])\d+\b", re.I),
+    "internal ruling attribution": re.compile(r"\bcoordinator\b", re.I),
     "label row reference": re.compile(r"\bgt[-_]\d+\b", re.I),
     "abbreviated batch": re.compile(r"\b\d+(?:-\d+)?_b\d+(?:/(?:\d+(?:plus)?_)?b\d+)*\b", re.I),
-    "numbered machine": re.compile(r"\b(?:dev|windev)[-_]\d+\b|\br\d{3,4}\b", re.I),
+    "numbered machine": re.compile(r"\bdev[-_]\d+\b", re.I),
     "bare tracker context": re.compile(
         r"\b(?:the\s+)?\d{3,5}\s+(?:FP\s+pattern|mechanism\s+[A-Z]\d|stores_params|reconciliation)\b"
         r"|\brelated\s+to\s+\d{3,5}\b|\bwhich\s+\d{3,5}\s+confirmed\b"
@@ -24,13 +26,15 @@ PATTERNS = {
         r"|\bbatches\s*\(\d+(?:/\d+)+\)"
         r"|\(name-shape/summary gap,\s*\d+\)", re.I
     ),
-    "commit with tracker number": re.compile(r"\b[0-9a-f]{7,40}\s*\(\d{3,5}(?:\s+[^)]{1,100})?\)"),
+    "commit with tracker number": re.compile(r"\b[0-9a-f]{7,40}\s*\(\d{3,5}(?:[,\s]+[^)]{1,100})?\)"),
     "dated batch alias": re.compile(r"\bbmdb\s+\d{4}-\d{2}-\d{2}(?:-[a-z0-9]+)+\b", re.I),
 }
 RULING = re.compile(r"\b[A-Z]{3}\d{2}-C/\d{4}-\d{2}-\d{2}/[^\s,;)]+")
+PUBLIC_RUN_ID = re.compile(r"\bsqc-\d+(?:\.\d+)+-[0-9a-f]{7,40}\b")
+AES_ROUNDS = re.compile(r"\bAES(?:-\d+)?\s+rounds?\s+\d+\b", re.I)
 TOKEN = re.compile(r"[\w.-]+")
 P_TOKEN = re.compile(r"\bP\d+\b")
-CODE_OPERANDS = {"P0", "P2", "P3", "P4", "P5", "P11", "P15", "P521"}
+CODE_OPERANDS = {"P0", "P2", "P3", "P4", "P5", "P11", "P15", "P256", "P384", "P521"}
 HASH_NUMBER = re.compile(r"(?<![\w/#])#\d+\b")
 BARE_FINDING = re.compile(r"\b(?:the|same as|per|see)\s+(\d{3,5})\s+(?:finding|case|precedent|correction|ruling)\b", re.I)
 NAMED_READ = re.compile(r"\b(?:per|matches)\s+([a-z][a-z0-9_-]*)['’]s\s+(?:original\s+)?read\b", re.I)
@@ -51,6 +55,8 @@ def reference_categories(reason: str, batch_ids: set[str], file_path: str = "",
     protected = [(m.start(), m.end()) for m in TOKEN.finditer(reason)
                  if m.group() in batch_ids]
     protected += [(m.start(), m.end()) for m in RULING.finditer(reason)]
+    protected += [(m.start(), m.end()) for m in PUBLIC_RUN_ID.finditer(reason)]
+    protected += [(m.start(), m.end()) for m in AES_ROUNDS.finditer(reason)]
 
     def is_protected(match):
         for start, end in protected:

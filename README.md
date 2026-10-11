@@ -467,7 +467,9 @@ terminators moved with `git diff --ignore-cr-at-eol`; a batch that fails
 
 **Reasons cite public evidence.** `scripts/validate.py` also checks the parsed
 `reason` column for unresolved tracker, ledger, numbered-machine and named-read
-references. Exact existing batch directory names, dated ruling IDs, known code
+references, including internal run numbers and ruling attribution. Cite a
+public `sqc-<version>-<sha>` run ID when available. Exact existing batch
+directory names, dated ruling IDs, known code
 operands and source-line references corroborated by another label in the same
 file and pinned commit remain valid. Ambiguous forms fail for review; the
 validator never rewrites text. Write the verdict explanation directly or cite public evidence. This

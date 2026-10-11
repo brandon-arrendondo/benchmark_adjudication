@@ -30,7 +30,7 @@ class ReasonReferenceTests(unittest.TestCase):
         self.assertTrue(self.check(batch + "; task " + str(90000 + 3), {batch}))
 
     def test_machine_shape_in_batch_is_protected(self):
-        machine = "r" + str(700 + 1)
+        machine = "dev-" + str(90000 + 4)
         batch = "review-" + machine + "-source"
         self.assertFalse(self.check(batch, {batch}))
         self.assertIn("numbered machine", self.check(machine))
@@ -44,7 +44,7 @@ class ReasonReferenceTests(unittest.TestCase):
             self.assertTrue(self.check(text), text)
 
     def test_known_code_tokens_and_unknown_tokens(self):
-        self.assertFalse(self.check("P0 P2 P3 P4 P5 P11 P15 P521"))
+        self.assertFalse(self.check("P0 P2 P3 P4 P5 P11 P15 P256 P384 P521"))
         self.assertIn("ambiguous numbered token", self.check("P" + str(90000 + 6)))
         self.assertFalse(self.check("BRULE-058 MSC04-C CWE-89 nToken pToken"))
         self.assertFalse(self.check("ROUND8(sizeof(*pX)); ROUND8 yields a value"))
@@ -69,9 +69,31 @@ class ReasonReferenceTests(unittest.TestCase):
         text = "abcdef123 (" + str(90000 + 9) + " mechanism)"
         self.assertTrue(self.check(text))
         self.assertFalse(self.check("abcdef123 (stores_params)"))
+        self.assertTrue(self.check("abcdef123 (" + str(90000 + 9) + ", mechanism)"))
         self.assertTrue(self.check("per worker's read"))
         self.assertFalse(self.check("per the initial adjudicator's read"))
         self.assertFalse(self.check("it's read; iteration's read; sscanf's read-only input"))
+
+    def test_internal_run_numbers_require_public_ids(self):
+        number = str(90000 + 11)
+        public_id = "sqc-1.2.3-abcdef123"
+        self.assertFalse(self.check("Verified at " + public_id))
+        for separator in (" ", "-", "_"):
+            self.assertIn("internal run number", self.check("run" + separator + number))
+        self.assertTrue(self.check("run " + number + " (" + public_id + ")"))
+        batch = "review-run-" + number
+        self.assertFalse(self.check(batch, {batch}))
+        self.assertFalse(self.check("offset runs 0..limit; iteration runs 1..size"))
+
+    def test_ruling_attribution_uses_project_language(self):
+        self.assertIn("internal ruling attribution", self.check("coordinator ruling"))
+        self.assertIn("internal ruling attribution", self.check("to the coordinator"))
+        self.assertFalse(self.check("project ruling; for project review"))
+
+    def test_aes_round_counts_are_code_evidence(self):
+        self.assertFalse(self.check("AES rounds 12; AES-256 rounds 14"))
+        self.assertIn("numbered review", self.check("AES rounds 12; review round 12"))
+        self.assertIn("numbered review", self.check("rounds 12 while reviewing AES"))
 
     def test_validator_checks_reason_only(self):
         with tempfile.TemporaryDirectory() as directory:
