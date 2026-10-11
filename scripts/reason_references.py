@@ -139,6 +139,21 @@ def reference_categories(reason: str, batch_ids: set[str], file_path: str = "",
     return categories
 
 
+# Forms a directory name takes that reason text, written in words, does not:
+# a tracker or tool prefix joined to its number by `_` or `-` or nothing
+# (`delta_x_bmdb90001`, `aurora_lint-90001`, `task90001`), a run number with no
+# separator (`run90001`), and a numbered fleet host with or without a prefix
+# (`windev-04`, `dev90001`). Names only: the reason and provenance patterns
+# above stay as they are, so no existing row is judged again.
+NAME_PATTERNS = {
+    "tracker reference": re.compile(
+        r"(?<![A-Za-z0-9])(?:tasks?|bmdb|benchmarking[_-]db|aurora[_-]lint|tools[_-]sqc)"
+        r"[\s_-]*\d+(?!\d)", re.I),
+    "internal run number": re.compile(r"(?<![A-Za-z0-9])run[\s_-]*\d+(?!\d)", re.I),
+    "numbered machine": re.compile(r"(?<![A-Za-z0-9])(?:win)?dev[\s_-]*\d+(?!\d)", re.I),
+}
+
+
 def manifest_name_categories(name: str, allowlist: set[str] | frozenset[str]) -> set[str]:
     """Review a manifest directory name as a citation, without reading files.
 
@@ -159,4 +174,20 @@ def manifest_name_categories(name: str, allowlist: set[str] | frozenset[str]) ->
         categories |= reference_categories(text, set())
         if HOST_ATTRIBUTION.search(text):
             categories.add("numbered machine")
+        categories |= {c for c, p in NAME_PATTERNS.items() if p.search(text)}
     return categories
+
+
+def batch_name_errors(names, allowlist: set[str] | frozenset[str]) -> list[str]:
+    """One message per name in `names` that `manifest_name_categories`
+    refuses, in the given order; pure, so validate.py and the exporter share
+    it without either importing the other."""
+    errors = []
+    for name in names:
+        categories = manifest_name_categories(name, allowlist)
+        if categories:
+            errors.append(
+                f"batches/{name}: the directory name reads as an internal reference "
+                f"({', '.join(sorted(categories))}); give the batch a neutral name"
+            )
+    return errors

@@ -439,9 +439,12 @@ internal reference: `scripts/validate.py` refuses a new directory whose name
 falls under the same policy that reviews reason text
 (`scripts/reason_references.py`: a tracker number such as `task-NNN`, a run
 number such as `run-NNN`, a numbered host, and the other forms listed there),
-reported by `manifest_name_categories`. Name a new batch by what it holds,
-for example `delta-str30c-2026-10` or `correction-fio40c-ex1-2026-10`: the
-rule or construct, the kind of change, and a date if it needs one. The names
+reported by `manifest_name_categories`. A numbered part such as `batch3`,
+`round-2` or `ledger4` counts too ("numbered review"). Name a new batch by
+what it holds, for example `delta-str30c-2026-10` or
+`correction-fio40c-ex1-2026-10`: the rule or construct, the kind of change,
+and a date if it needs one; split a large batch by what each part covers
+(`delta-str30c-2026-10-sqlite`) rather than by number. The names
 that existed when the check was introduced, internal-looking ones included,
 stay valid and are listed in `scripts/batch_name_allowlist.txt`. That list
 is frozen: it is checked against the tree (`scripts/batch_name_allowlist.py

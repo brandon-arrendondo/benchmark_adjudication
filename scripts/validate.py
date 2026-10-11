@@ -116,7 +116,7 @@ import sys
 from pathlib import Path
 
 import batch_name_allowlist
-from reason_references import column_reference_categories, manifest_name_categories
+from reason_references import batch_name_errors, column_reference_categories
 from rule_text_pin import BASES, PIN_COLUMNS, UNPINNED, known_pins
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
@@ -351,15 +351,7 @@ def check_batch_names(names: list[str], allowlist: frozenset[str]) -> list[str]:
     """A manifest directory name is cited verbatim as a dataset identifier, so
     a new one must not look like an internal reference (README, "Naming a
     batch"). The names grandfathered in batch_name_allowlist.txt pass."""
-    errors = []
-    for name in names:
-        categories = manifest_name_categories(name, allowlist)
-        if categories:
-            errors.append(
-                f"batches/{name}: the directory name reads as an internal reference "
-                f"({', '.join(sorted(categories))}); give the batch a neutral name"
-            )
-    return errors
+    return batch_name_errors(names, allowlist)
 
 
 def load_manifests(errors: list[str]) -> dict[str, dict]:
