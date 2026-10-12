@@ -153,6 +153,19 @@ class ReasonReferenceTests(unittest.TestCase):
         self.assertFalse(column_reference_categories("provenance", "offset runs 0..limit; index runs 1..size"))
         self.assertFalse(column_reference_categories("provenance", "message: array index b64; ROUND8; AES rounds 12; P256"))
 
+    def test_campaign_segment_at_any_position_requires_review(self):
+        for number in (str(900 + 1), str(90000 + 1)):
+            for name in ("claude-" + number, "codex-" + number,
+                         "claude-sonnet-5-" + number + "-reverify",
+                         "claude-sonnet-5-" + number + "-revert",
+                         "claude-" + number + "-review-model-5"):
+                with self.subTest(name=name):
+                    self.assertIn("adjudicator campaign reference",
+                                  column_reference_categories("adjudicator", name))
+        for name in ("claude-opus-5-5", "claude-sonnet-5", "claude-sonnet-5-reverify"):
+            with self.subTest(name=name):
+                self.assertFalse(column_reference_categories("adjudicator", name))
+
     def test_oracle_tag_and_resolving_batch_citations(self):
         tag = "oracle-tag: interface-fixed signature: fn-pointer slot"
         self.assertFalse(column_reference_categories("provenance", tag + "; source verified"))

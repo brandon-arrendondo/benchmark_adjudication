@@ -45,7 +45,7 @@ PROVENANCE_RUN = re.compile(
 PROVENANCE_BATCH = re.compile(
     r"^(?:\d+(?:-\d+|plus)?_)?b\d+$|\bbatch\s+b\d+\b", re.I)
 HOST_ATTRIBUTION = re.compile(r"(?<![A-Za-z0-9])r\d{3,}(?![A-Za-z0-9])", re.I)
-ADJUDICATOR_CAMPAIGN = re.compile(r"(?<=\d)-\d{3,}(?:-revert)?$", re.I)
+ADJUDICATOR_CAMPAIGN = re.compile(r"-\d{3,}(?=-|$)", re.I)
 
 
 def column_reference_categories(column: str, value: str,
