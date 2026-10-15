@@ -12,7 +12,7 @@
     "raylib": "962bbfc6bfbd7a5acd08e21314fcfa161003a589"
   },
   "submitted_at": "2026-09-08T10:37:49.365982",
-  "row_count": 212,
+  "row_count": 211,
   "rules": [
     "INT30-C",
     "INT32-C"
@@ -53,6 +53,14 @@
         "raylib src/rtext.c:820 INT32-C"
       ],
       "note": "verdict corrected FP -> TP by bmdb 1553 (raylib): the FP rested only on in-tree callers of a non-static library function (ADR-0011 742a1571); see that batch manifest notes"
+    },
+    {
+      "by": "correction-int30c-signed-operands-2026-10",
+      "count": 1,
+      "keys": [
+        "raylib src/rmodels.c:2676 INT30-C"
+      ],
+      "note": "INT30-C verdict corrected TP -> FP: u + v*resX has only int operands, a signed operation that INT30-C does not cover; see that batch's manifest notes"
     }
   ]
 }

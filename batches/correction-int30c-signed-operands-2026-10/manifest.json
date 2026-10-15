@@ -1,0 +1,34 @@
+{
+  "work_item_ref": "correction-int30c-signed-operands-2026-10",
+  "requested_by": "coordinator",
+  "aurora_lint_version": null,
+  "aurora_lint_sha": "7838731928736fc64346350a133f27fcf2cbb7f4",
+  "adjudicator": "claude-opus-5.5",
+  "batch_id": "correction-int30c-signed-operands-2026-10",
+  "recheck": {
+    "basis": "merit",
+    "selection": "targeted",
+    "reviewed": 1,
+    "flipped": 1,
+    "blind_to_prior_verdict": false,
+    "blind_to_diagnostic": false
+  },
+  "notes": "A MERIT CORRECTION of one label. raylib src/rmodels.c:2676 `texcoords[u + v*resX]` in GenMeshPlane: u and v are int loop counters and resX is an int parameter, so the operation is signed and belongs to INT32-C, not INT30-C. The INT30-C TP label carried the INT32-C reasoning over to INT30-C at the same line; it is relabeled FP (INT30-C/2026-10-07/form: unsigned operations only). The INT32-C TP label at this line is unchanged. The INT30-C finding was a type-resolution misfire (an int named `u` read as a u-suffixed literal), which aurora-lint 7838731928736fc64346350a133f27fcf2cbb7f4 no longer reports. Counting basis: distinct (project, commit, file, line, rule) keys. No precision claim is made here. No blind slice: batch under 50 rows. basis: merit. selection: targeted (the one INT30-C label a same-line INT30-C/INT32-C co-firing check showed to be on a signed operation). reviewed: 1. flipped: 1 (TP -> FP). blind_to_prior: false. blind_to_diagnostic: false.",
+  "submitted_at": "2026-10-14T22:30:00Z",
+  "row_count": 1,
+  "projects": [
+    "raylib"
+  ],
+  "codebase_commits": {
+    "raylib": "962bbfc6bfbd7a5acd08e21314fcfa161003a589"
+  },
+  "rules": [
+    "INT30-C"
+  ],
+  "verdicts": {
+    "FP": 1
+  },
+  "corrections": {
+    "TP_to_FP": 1
+  }
+}
