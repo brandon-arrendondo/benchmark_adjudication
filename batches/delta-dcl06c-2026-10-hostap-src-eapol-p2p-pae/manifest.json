@@ -1,0 +1,25 @@
+{
+  "batch_id": "delta-dcl06c-2026-10-hostap-src-eapol-p2p-pae",
+  "work_item_ref": "aurora_lint-1304",
+  "requested_by": "coordinator",
+  "adjudicator": "claude-opus-5.5",
+  "aurora_lint_version": "0.6.0",
+  "aurora_lint_sha": "d21be1b3dc1ffa801ddbc32ba425d6df7ab90c68",
+  "projects": [
+    "hostap"
+  ],
+  "codebase_commits": {
+    "hostap": "dcee60436390dd34731560657c4257c3b4c839a6"
+  },
+  "submitted_at": "2026-10-17T23:35:54Z",
+  "row_count": 140,
+  "rules": [
+    "DCL06-C"
+  ],
+  "verdicts": {
+    "FP": 22,
+    "TP": 118
+  },
+  "recheck": null,
+  "notes": "New DCL06-C labels for hostap: the next 140 (file, line order) of hostap's in-scope unlabeled DCL06-C keys at aurora-lint d21be1b3d (0.6.0), covering the rest of src/eap_server, src/eapol_auth, src/eapol_supp, src/l2_packet, src/p2p and src/pae up to ieee802_1x_key.c. Every key was read at source in the pinned checkout, judged under rulings/rules/DCL06-C.md with the reading calibrated in delta-dcl06c-2026-10-curl-mbedtls-sqlite (strict presumption, no exempt set; EX1 only where the constant is itself the abstraction, here SI unit-conversion factors and a strtoul() numeric base; declaration dimensions FP after CERT's sizeof compliant solution, P/lists case 3, their dependent uses TP, e.g. a loop bound repeating a table's dimension). Protocol-specific units (TU, 100-TU discovery intervals, 5-minute wait-time units) are not treated as EX1; timeouts, buffer allowances, thresholds and channel/frequency values are TP. 118 TP, 22 FP (16 declaration dimensions, 6 EX1). One precedent conflict is named in provenance (eap_server_ttls.c:705 dimension FP against a carried-forward TP on '24' at :629). No prior row is edited."
+}
