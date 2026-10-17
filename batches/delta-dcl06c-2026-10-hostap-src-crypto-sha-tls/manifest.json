@@ -1,0 +1,25 @@
+{
+  "batch_id": "delta-dcl06c-2026-10-hostap-src-crypto-sha-tls",
+  "work_item_ref": "aurora_lint-1304",
+  "requested_by": "coordinator",
+  "adjudicator": "claude-opus-5.5",
+  "aurora_lint_version": "0.6.0",
+  "aurora_lint_sha": "d21be1b3dc1ffa801ddbc32ba425d6df7ab90c68",
+  "projects": [
+    "hostap"
+  ],
+  "codebase_commits": {
+    "hostap": "dcee60436390dd34731560657c4257c3b4c839a6"
+  },
+  "submitted_at": "2026-10-17T23:30:20Z",
+  "row_count": 140,
+  "rules": [
+    "DCL06-C"
+  ],
+  "verdicts": {
+    "FP": 74,
+    "TP": 66
+  },
+  "recheck": null,
+  "notes": "New DCL06-C labels for hostap src/crypto (remainder) and the first src/drivers keys: the next 140 (file, line order) of hostap's in-scope unlabeled DCL06-C keys at aurora-lint d21be1b3d (0.6.0), ms_funcs.c through driver_bsd.c. Every key was read at source in the pinned checkout, judged under rulings/rules/DCL06-C.md with the reading calibrated in delta-dcl06c-2026-10-curl-mbedtls-sqlite (strict presumption, no exempt set; EX1 only where the constant is itself the abstraction; declaration dimensions FP after CERT's sizeof compliant solution, P/lists case 3, their dependent uses TP). EX1 is applied to the round index passed to SHA-1's unrolled R0()-R4() steps, as it was to AES ROUND() in delta-dcl06c-2026-10-hostap-src-crypto-aes-des, and to a minutes-to-seconds factor. New shape: the CONST64()-wrapped elements of sha512-internal.c's const-qualified K[80] round-constant table are FP as initializer data of a named const object (CERT lists const-qualified objects as a symbolic-constant mechanism); the sibling SHA-256 K[64] table's plain-literal elements are not reported at all at this build. SHA-384/512 initial-state assignments and bare digest and block lengths stay TP. String-literal lengths written as numbers are TP by standing precedent. 66 TP, 74 FP (21 declaration dimensions, 35 table elements, 18 round indices and unit factors). Two precedent conflicts are named in provenance (sha1-internal.c:176 and :180 dimensions FP against the carried-forward TP on '64' at :19). No prior row is edited."
+}
