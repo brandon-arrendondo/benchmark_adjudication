@@ -1,0 +1,25 @@
+{
+  "batch_id": "delta-dcl06c-2026-10-hostap-wpa-supplicant-p2p-to-wps",
+  "work_item_ref": "aurora_lint-1304",
+  "requested_by": "coordinator",
+  "adjudicator": "claude-opus-5.5",
+  "aurora_lint_version": "0.6.0",
+  "aurora_lint_sha": "d21be1b3dc1ffa801ddbc32ba425d6df7ab90c68",
+  "projects": [
+    "hostap"
+  ],
+  "codebase_commits": {
+    "hostap": "dcee60436390dd34731560657c4257c3b4c839a6"
+  },
+  "submitted_at": "2026-10-17T23:45:12Z",
+  "row_count": 147,
+  "rules": [
+    "DCL06-C"
+  ],
+  "verdicts": {
+    "FP": 25,
+    "TP": 122
+  },
+  "recheck": null,
+  "notes": "New DCL06-C labels for hostap wpa_supplicant, the final 147 (file, line order) of hostap's in-scope unlabeled DCL06-C keys at aurora-lint d21be1b3d (0.6.0), p2p_supplicant.c through wps_supplicant.c; with it every in-scope hostap DCL06-C key at the pinned commit is labeled. Every key was read at source in the pinned checkout, judged under rulings/rules/DCL06-C.md with the reading calibrated in delta-dcl06c-2026-10-curl-mbedtls-sqlite (strict presumption, no exempt set; EX1 only where the constant is itself the abstraction, here SI time-unit conversions; declaration dimensions FP after CERT's sizeof compliant solution, P/lists case 3). Rate tables in 500 kbit/s units, operating classes, channel-to-frequency arithmetic and protocol-specific units are TP under the presumption. String-literal lengths written as numbers are TP by standing precedent. 122 TP, 25 FP (21 declaration dimensions, 4 EX1). No precedent conflicts occur. No prior row is edited."
+}
