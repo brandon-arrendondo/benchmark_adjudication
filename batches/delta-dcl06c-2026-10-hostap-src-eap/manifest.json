@@ -1,0 +1,25 @@
+{
+  "batch_id": "delta-dcl06c-2026-10-hostap-src-eap",
+  "work_item_ref": "aurora_lint-1304",
+  "requested_by": "coordinator",
+  "adjudicator": "claude-opus-5.5",
+  "aurora_lint_version": "0.6.0",
+  "aurora_lint_sha": "d21be1b3dc1ffa801ddbc32ba425d6df7ab90c68",
+  "projects": [
+    "hostap"
+  ],
+  "codebase_commits": {
+    "hostap": "dcee60436390dd34731560657c4257c3b4c839a6"
+  },
+  "submitted_at": "2026-10-17T23:34:07Z",
+  "row_count": 140,
+  "rules": [
+    "DCL06-C"
+  ],
+  "verdicts": {
+    "FP": 31,
+    "TP": 109
+  },
+  "recheck": null,
+  "notes": "New DCL06-C labels for hostap src/eap_common, src/eap_peer and the first src/eap_server keys: the next 140 (file, line order) of hostap's in-scope unlabeled DCL06-C keys at aurora-lint d21be1b3d (0.6.0), eap_pwd_common.c through eap_server_tls_common.c. Every key was read at source in the pinned checkout, judged under rulings/rules/DCL06-C.md with the reading calibrated in delta-dcl06c-2026-10-curl-mbedtls-sqlite (strict presumption, no exempt set; EX1 only where the constant is itself the abstraction, here a seconds-to-days factor, a byte radix in a two-byte big-endian combination and a strtoul() numeric base; declaration dimensions FP after CERT's sizeof compliant solution, P/lists case 3, their dependent uses TP). Key, MAC and nonce lengths written as bare numbers, protocol field values, attribute-type thresholds and prefix-length offsets into parsed strings are TP. 109 TP, 31 FP (28 declaration dimensions, 3 EX1). No precedent conflicts occur. No prior row is edited."
+}
