@@ -1,0 +1,29 @@
+{
+  "batch_id": "delta-dcl06c-2026-10-curl-mbedtls-sqlite",
+  "work_item_ref": "aurora_lint-1304",
+  "requested_by": "coordinator",
+  "adjudicator": "claude-opus-5.5",
+  "aurora_lint_version": "0.6.0",
+  "aurora_lint_sha": "d21be1b3dc1ffa801ddbc32ba425d6df7ab90c68",
+  "projects": [
+    "curl",
+    "mbedtls",
+    "sqlite"
+  ],
+  "codebase_commits": {
+    "curl": "3e198f75861cc2e12daf299689e145949dddd19b",
+    "mbedtls": "068ff080b369adfac81509f9b57b2afabaf82dc5",
+    "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
+  },
+  "submitted_at": "2026-10-17T21:42:55Z",
+  "row_count": 18,
+  "rules": [
+    "DCL06-C"
+  ],
+  "verdicts": {
+    "FP": 6,
+    "TP": 12
+  },
+  "recheck": null,
+  "notes": "New DCL06-C labels: every key that aurora-lint d21be1b3d (0.6.0) reports for DCL06-C at the default or strict preset in curl, mbedtls and sqlite at the pinned commits, that is in scope under data/benchmark_repos.json and is not already labeled (18 keys: curl 2, mbedtls 6, sqlite 10). This is a calibration batch, to fix the reading before the hostap and valkey populations. Each key was read at source in the pinned checkout (corpus-check clean). It was judged under rulings/rules/DCL06-C.md: the oracle labels strict (P/oracle-scope); strict is the presumption with no exempt set (DCL06-C/2026-10-07/form, /presets), so -1/0/1/2, single characters and literals assigned to a variable are not exempt here; EX1 is settled by review and applies only where the constant is itself the abstraction (two percent factors). An array dimension in a declaration is labeled FP after CERT's own sizeof compliant solution, which keeps char buffer[256]; and moves the violation to the dependent use (P/lists case 3). The dependent uses in the same function are labeled TP. Ten rows conflict with neighbouring carried-forward labels, which predate the 2026-10-07 rulings and exempted algorithm-inherent constants, comment-documented values and self-evident bit-mask idioms. Each conflict is named in that row's provenance. No prior row is edited by this batch."
+}
