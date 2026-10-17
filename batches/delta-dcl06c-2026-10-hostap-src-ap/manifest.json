@@ -1,0 +1,25 @@
+{
+  "batch_id": "delta-dcl06c-2026-10-hostap-src-ap",
+  "work_item_ref": "aurora_lint-1304",
+  "requested_by": "coordinator",
+  "adjudicator": "claude-opus-5.5",
+  "aurora_lint_version": "0.6.0",
+  "aurora_lint_sha": "d21be1b3dc1ffa801ddbc32ba425d6df7ab90c68",
+  "projects": [
+    "hostap"
+  ],
+  "codebase_commits": {
+    "hostap": "dcee60436390dd34731560657c4257c3b4c839a6"
+  },
+  "submitted_at": "2026-10-17T23:17:56Z",
+  "row_count": 140,
+  "rules": [
+    "DCL06-C"
+  ],
+  "verdicts": {
+    "FP": 17,
+    "TP": 123
+  },
+  "recheck": null,
+  "notes": "New DCL06-C labels for hostap src/ap: the first 140 (file, line order) of hostap's 1,967 in-scope DCL06-C keys that aurora-lint d21be1b3d (0.6.0) reports at the default and strict presets at the pinned commit and that the oracle had no label for. Every key was read at source in the pinned checkout (corpus-check clean), judged under rulings/rules/DCL06-C.md as calibrated in delta-dcl06c-2026-10-curl-mbedtls-sqlite: the oracle labels strict (P/oracle-scope); strict is the presumption with no exempt set (DCL06-C/2026-10-07/form, /presets); EX1 is settled by review and applies only where the constant is itself the abstraction, here unit-conversion factors (ms/s, us/s, minutes to seconds); an array dimension in a declaration is FP after CERT's own sizeof compliant solution (P/lists case 3), its dependent uses TP; a string-literal length written as a number is TP by standing precedent. 123 TP, 17 FP (9 declaration dimensions, 8 unit conversions). Precedent conflicts are named per row in provenance, defined as a carried-forward label in the same file on the same literal with the opposite verdict; none occur in this batch. No prior row is edited."
+}
