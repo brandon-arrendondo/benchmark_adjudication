@@ -1,0 +1,25 @@
+{
+  "batch_id": "delta-dcl06c-2026-10-valkey-crcspeed-to-hashtable",
+  "work_item_ref": "aurora_lint-1304",
+  "requested_by": "coordinator",
+  "adjudicator": "claude-opus-5.5",
+  "aurora_lint_version": "0.6.0",
+  "aurora_lint_sha": "d21be1b3dc1ffa801ddbc32ba425d6df7ab90c68",
+  "projects": [
+    "valkey"
+  ],
+  "codebase_commits": {
+    "valkey": "7f1dffedff6de73058b2c2a389422b6ecd56c8fb"
+  },
+  "submitted_at": "2026-10-17T23:49:41Z",
+  "row_count": 140,
+  "rules": [
+    "DCL06-C"
+  ],
+  "verdicts": {
+    "FP": 48,
+    "TP": 92
+  },
+  "recheck": null,
+  "notes": "New DCL06-C labels for valkey, the next 140 (file, line order) of valkey's in-scope unlabeled DCL06-C keys at aurora-lint d21be1b3d (0.6.0), crcspeed.c through hashtable.c. Every key was read at source in the pinned checkout, judged under rulings/rules/DCL06-C.md with the reading calibrated in delta-dcl06c-2026-10-curl-mbedtls-sqlite and applied in the hostap DCL06-C batches (strict presumption, no exempt set; EX1 only where the constant is itself the abstraction, here time-unit conversions and percent factors and a numeric base; declaration dimensions, parameter-array dimensions included, FP after CERT's sizeof compliant solution, P/lists case 3, their dependent uses TP, e.g. debug.c's j < 20 over hash[20]). Byte-swap and bit-interleave masks, SHA-1 digest lengths written as numbers, fuzzer value ranges, geohash step bounds and debug reply test values are TP under the presumption; string-literal lengths written as numbers are TP by standing precedent. 92 TP, 48 FP (34 declaration dimensions, 14 EX1). No precedent conflicts can occur. No prior row is edited."
+}
