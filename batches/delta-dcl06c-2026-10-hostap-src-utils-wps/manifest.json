@@ -1,0 +1,25 @@
+{
+  "batch_id": "delta-dcl06c-2026-10-hostap-src-utils-wps",
+  "work_item_ref": "aurora_lint-1304",
+  "requested_by": "coordinator",
+  "adjudicator": "claude-opus-5.5",
+  "aurora_lint_version": "0.6.0",
+  "aurora_lint_sha": "d21be1b3dc1ffa801ddbc32ba425d6df7ab90c68",
+  "projects": [
+    "hostap"
+  ],
+  "codebase_commits": {
+    "hostap": "dcee60436390dd34731560657c4257c3b4c839a6"
+  },
+  "submitted_at": "2026-10-17T23:39:28Z",
+  "row_count": 140,
+  "rules": [
+    "DCL06-C"
+  ],
+  "verdicts": {
+    "FP": 22,
+    "TP": 118
+  },
+  "recheck": null,
+  "notes": "New DCL06-C labels for hostap src/utils and the first src/wps keys: the next 140 (file, line order) of hostap's in-scope unlabeled DCL06-C keys at aurora-lint d21be1b3d (0.6.0), browser-system.c through wps_upnp.c. Every key was read at source in the pinned checkout, judged under rulings/rules/DCL06-C.md with the reading calibrated in delta-dcl06c-2026-10-curl-mbedtls-sqlite (strict presumption, no exempt set; EX1 only where the constant is itself the abstraction, here time-unit conversions between seconds, milliseconds, microseconds and nanoseconds, including microsecond normalization against one second, and strtoul()'s numeric base; declaration dimensions FP after CERT's sizeof compliant solution, P/lists case 3). struct tm's 1900 year offset, the NTP epoch offset, ASCII range bounds, smart-card status words, HTTP status codes and #if version comparisons are TP under the presumption. String-literal lengths written as numbers are TP by standing precedent. 118 TP, 22 FP (9 declaration dimensions, 13 EX1). One precedent conflict is named in provenance (utils_module_tests.c:1180 dimension FP against a carried-forward TP on '100' at :361). No prior row is edited."
+}
