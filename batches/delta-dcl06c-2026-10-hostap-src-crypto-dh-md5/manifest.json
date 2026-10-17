@@ -1,0 +1,25 @@
+{
+  "batch_id": "delta-dcl06c-2026-10-hostap-src-crypto-dh-md5",
+  "work_item_ref": "aurora_lint-1304",
+  "requested_by": "coordinator",
+  "adjudicator": "claude-opus-5.5",
+  "aurora_lint_version": "0.6.0",
+  "aurora_lint_sha": "d21be1b3dc1ffa801ddbc32ba425d6df7ab90c68",
+  "projects": [
+    "hostap"
+  ],
+  "codebase_commits": {
+    "hostap": "dcee60436390dd34731560657c4257c3b4c839a6"
+  },
+  "submitted_at": "2026-10-17T23:27:58Z",
+  "row_count": 140,
+  "rules": [
+    "DCL06-C"
+  ],
+  "verdicts": {
+    "FP": 41,
+    "TP": 99
+  },
+  "recheck": null,
+  "notes": "New DCL06-C labels for hostap src/crypto, the next 140 (file, line order) of hostap's in-scope unlabeled DCL06-C keys at aurora-lint d21be1b3d (0.6.0): des-internal.c through ms_funcs.c. Every key was read at source in the pinned checkout, judged under rulings/rules/DCL06-C.md with the reading calibrated in delta-dcl06c-2026-10-curl-mbedtls-sqlite (strict presumption, no exempt set; EX1 only where the constant is itself the abstraction; declaration dimensions FP after CERT's sizeof compliant solution, P/lists case 3). MD4/MD5 per-step additive constants and rotation amounts, DES mask constants and hash block/digest lengths written as bare numbers are TP under the presumption, matching the carried-forward majority in curl lib/md5.c and lib/md4.c. New shape: a DH group id passed to dh_groups.c's DH_GROUP() table macro is FP, because the macro token-pastes it into the identifiers of the arrays it refers to, so no symbolic constant can stand in its place. 99 TP, 41 FP (33 declaration dimensions incl. the DH group prime/order arrays, 8 token-pasted ids). Two precedent conflicts are named in provenance (md5-internal.c:17 and :150 parameter dimensions FP against the carried-forward TP on the same shape at :208). No prior row is edited."
+}
