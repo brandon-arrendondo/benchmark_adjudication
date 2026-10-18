@@ -1,0 +1,31 @@
+{
+  "batch_id": "coverage-exp34c-2026-10-part-a-curl-hostap-mbedtls-mosquitto",
+  "work_item_ref": "benchmarking_db-2493",
+  "requested_by": "coordinator",
+  "adjudicator": "claude-opus-5.5",
+  "aurora_lint_version": "0.6.0",
+  "aurora_lint_sha": "d21be1b3dc1ffa801ddbc32ba425d6df7ab90c68",
+  "projects": [
+    "curl",
+    "hostap",
+    "mbedtls",
+    "mosquitto"
+  ],
+  "codebase_commits": {
+    "curl": "3e198f75861cc2e12daf299689e145949dddd19b",
+    "hostap": "dcee60436390dd34731560657c4257c3b4c839a6",
+    "mbedtls": "068ff080b369adfac81509f9b57b2afabaf82dc5",
+    "mosquitto": "d3ee5c5ca62c0fa4983308c6fff558ee978e878c"
+  },
+  "submitted_at": "2026-10-18T01:54:42Z",
+  "row_count": 128,
+  "rules": [
+    "EXP34-C"
+  ],
+  "verdicts": {
+    "FP": 90,
+    "TP": 38
+  },
+  "recheck": null,
+  "notes": "EXP34-C ORACLE COVERAGE, PART A, BATCH 1 (curl, hostap, mbedtls, mosquitto). These 128 keys are the in-scope EXP34-C findings in these projects that aurora-lint d21be1b3d reports at both the default and the strict preset (runs sqc-0.6.0-d21be1b3d-default-* and -strict-*) and that no label covers. Same standard as coverage-exp34c-2026-10-calibration: the dereference is the violation site, judged at strict under EXP34-C/2026-10-07/presets. FP needs proof in the scanned source, a language guarantee, or an ISO C or POSIX library contract (those rows also cite P/facts). A third-party library's contract outside the scanned tree is not proof. Non-static functions in libcurl, the mbedtls library, the mosquitto broker and libraries (ENABLE_EXPORTS) and the wpa_supplicant- and hostapd-linked hostap sources (-rdynamic builds) have open caller sets, as in the correction-libruling-*-task1553 batches. A strippable assert, a noreturn attribute and an earlier dereference of the same pointer are not proof.\n\nMETHOD. One read-only research reader per project drafted each verdict at source in the pinned checkout. Every draft was then reviewed by the adjudicator: a format and vocabulary check, a check of every opposite-verdict label nearby in the same file, a source re-read of a sample and of every medium-confidence and TP row it questioned, and corrections where a basis did not meet the standard (one third-party library contract re-judged TP; cross-row references made self-contained).\n\nRESULT: 90 FP, 38 TP (curl 28/1, hostap 22/17, mbedtls 28/9, mosquitto 12/11).\n- TP shapes: a parameter of an open function used without a test (hostap hapd and driver ctx paths, mbedtls sha*_update input, curl multi extra_fds, mosquitto context and mux_poll pollfds); a NULL-returning callee left untested (hostap eapol_test configuration allocation); a value stored through an open function and read without a test (mbedtls SE driver methods).\n- FP shapes: an out-parameter set non-null on every success return and read after the status test (mbedtls PSA slot lookups, curl and hostap parsers); a test in the same condition or a dominating early return (mosquitto REQUIRE_* macros); a correlation inside one function; a closed static caller chain; getaddrinfo, strchr, strstr or strtod contracts.\n\nSHAPE CALLS FOR REVIEW: mosquitto conf.c:2728/2729 TP medium (the strtok_r save pointer: POSIX leaves its contents unspecified, so nothing proves it non-null); mbedtls psa_crypto.c SE driver rows TP medium (the methods table is stored by the public psa_register_se_driver, whose only check is an earlier dereference).\n\nEight rows name a conflict in provenance with a carried-forward FP that predates the 2026-10-07 rulings and rested on in-tree callers or an earlier dereference. Existing rows are not edited.\n\nCounting basis: distinct (project, commit, file, line, rule) keys. No precision or recall claim is made here."
+}

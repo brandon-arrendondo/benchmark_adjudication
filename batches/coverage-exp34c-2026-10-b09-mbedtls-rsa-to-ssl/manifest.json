@@ -1,0 +1,25 @@
+{
+  "batch_id": "coverage-exp34c-2026-10-b09-mbedtls-rsa-to-ssl",
+  "work_item_ref": "benchmarking_db-2493",
+  "requested_by": "coordinator",
+  "adjudicator": "claude-opus-5.5",
+  "aurora_lint_version": "0.6.0",
+  "aurora_lint_sha": "d21be1b3dc1ffa801ddbc32ba425d6df7ab90c68",
+  "projects": [
+    "mbedtls"
+  ],
+  "codebase_commits": {
+    "mbedtls": "068ff080b369adfac81509f9b57b2afabaf82dc5"
+  },
+  "submitted_at": "2026-10-18T02:16:09Z",
+  "row_count": 95,
+  "rules": [
+    "EXP34-C"
+  ],
+  "verdicts": {
+    "FP": 3,
+    "TP": 92
+  },
+  "recheck": null,
+  "notes": "EXP34-C ORACLE COVERAGE, PART B (strict-only keys), mbedtls: library/rsa.c through library/ssl_tls12_client.c. These 95 keys are in-scope EXP34-C findings that aurora-lint d21be1b3d reports only at the strict preset (run sqc-0.6.0-d21be1b3d-strict-*; strict sets first_site_only=false and reports every dereference site, not only the first) and that no label covers. Same standard and method as coverage-exp34c-2026-10-calibration and coverage-exp34c-2026-10-part-a-curl-hostap-mbedtls-mosquitto: the dereference is the violation site, judged at strict under EXP34-C/2026-10-07/presets; FP needs proof in the scanned source, a language guarantee, or an ISO C or POSIX library contract (those rows also cite P/facts); open caller sets for exported functions; a strippable assert, a noreturn attribute and an earlier dereference of the same pointer are not proof. A later site inherits an earlier site's FP only when that proof also dominates it with no reassignment between. One read-only research reader drafted each verdict at source in the pinned checkout; the adjudicator reviewed every draft (format and vocabulary, every nearby opposite-verdict label, a source re-read of a sample and of the questioned rows) before inclusion.\n\nRESULT: 3 FP, 92 TP.\n\nTP shape: rsa.c ctx->f and &ctx->f in the public mbedtls_rsa_* functions and the static helpers they alone call, none of which tests ctx; the carried-forward FP labels on ctx in rsa.c rest on a documented caller contract or an earlier dereference, and each row names that conflict. sha1/sha256/sha512 update input: TP (an open parameter copied with a nonzero length). FP: ssl_cache entry lookups and the validated ciphersuite in ssl_tls12_client.c.\n\n89 row(s) name a conflict in provenance with a carried-forward label that predates the 2026-10-07 rulings; existing rows are not edited.\n\nCounting basis: distinct (project, commit, file, line, rule) keys. No precision or recall claim is made here."
+}
