@@ -12,7 +12,7 @@
     "hostap": "dcee60436390dd34731560657c4257c3b4c839a6"
   },
   "submitted_at": "2026-09-10T13:45:03.436130Z",
-  "row_count": 119,
+  "row_count": 101,
   "rules": [
     "EXP34-C"
   ],
@@ -52,6 +52,31 @@
         "hostap wpa_supplicant/dbus/dbus_new_handlers.c:6238 EXP34-C",
         "hostap wpa_supplicant/dbus/dbus_new_handlers.c:6273 EXP34-C",
         "hostap wpa_supplicant/dbus/dbus_new_handlers.c:6326 EXP34-C"
+      ],
+      "note": "relabeled or restated by the hostap caller-set re-pass under ADR-0011 (open caller sets in the -rdynamic builds); see that batch's manifest notes"
+    },
+    {
+      "by": "correction-rdynamic-hostap-2026-10-not-emitted-wpas",
+      "count": 18,
+      "keys": [
+        "hostap wpa_supplicant/ctrl_iface.c:14401 EXP34-C",
+        "hostap wpa_supplicant/dbus/dbus_new_handlers.c:1000 EXP34-C",
+        "hostap wpa_supplicant/dbus/dbus_new_handlers.c:1897 EXP34-C",
+        "hostap wpa_supplicant/dbus/dbus_new_handlers.c:2340 EXP34-C",
+        "hostap wpa_supplicant/dbus/dbus_new_handlers.c:2416 EXP34-C",
+        "hostap wpa_supplicant/dbus/dbus_new_handlers.c:2597 EXP34-C",
+        "hostap wpa_supplicant/dbus/dbus_new_handlers.c:2615 EXP34-C",
+        "hostap wpa_supplicant/dbus/dbus_new_handlers.c:2657 EXP34-C",
+        "hostap wpa_supplicant/dbus/dbus_new_handlers.c:2701 EXP34-C",
+        "hostap wpa_supplicant/dbus/dbus_new_handlers.c:2706 EXP34-C",
+        "hostap wpa_supplicant/dbus/dbus_new_handlers.c:949 EXP34-C",
+        "hostap wpa_supplicant/dbus/dbus_new_handlers_p2p.c:534 EXP34-C",
+        "hostap wpa_supplicant/dbus/dbus_new_handlers_wps.c:242 EXP34-C",
+        "hostap wpa_supplicant/dbus/dbus_new_helpers.c:314 EXP34-C",
+        "hostap wpa_supplicant/dbus/dbus_new_helpers.c:984 EXP34-C",
+        "hostap wpa_supplicant/dbus/dbus_new_helpers.c:992 EXP34-C",
+        "hostap wpa_supplicant/dpp_supplicant.c:2055 EXP34-C",
+        "hostap wpa_supplicant/events.c:1984 EXP34-C"
       ],
       "note": "relabeled or restated by the hostap caller-set re-pass under ADR-0011 (open caller sets in the -rdynamic builds); see that batch's manifest notes"
     }

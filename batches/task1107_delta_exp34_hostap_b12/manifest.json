@@ -12,7 +12,7 @@
     "hostap": "dcee60436390dd34731560657c4257c3b4c839a6"
   },
   "submitted_at": "2026-09-10T13:44:06.321826Z",
-  "row_count": 127,
+  "row_count": 94,
   "rules": [
     "EXP34-C"
   ],
@@ -25,6 +25,46 @@
         "hostap wpa_supplicant/ctrl_iface.c:6596 EXP34-C"
       ],
       "note": "EXP34-C verdict corrected TP -> FP as keyed by bmdb 1423: the key is a caller's positional call argument, which aurora_lint 1418 no longer treats as a violation site; see that batch's manifest notes"
+    },
+    {
+      "by": "correction-rdynamic-hostap-2026-10-not-emitted-wpas",
+      "count": 33,
+      "keys": [
+        "hostap wpa_supplicant/config.c:3048 EXP34-C",
+        "hostap wpa_supplicant/ctrl_iface.c:2409 EXP34-C",
+        "hostap wpa_supplicant/ctrl_iface.c:2414 EXP34-C",
+        "hostap wpa_supplicant/ctrl_iface.c:250 EXP34-C",
+        "hostap wpa_supplicant/ctrl_iface.c:3074 EXP34-C",
+        "hostap wpa_supplicant/ctrl_iface.c:3162 EXP34-C",
+        "hostap wpa_supplicant/ctrl_iface.c:3165 EXP34-C",
+        "hostap wpa_supplicant/ctrl_iface.c:3189 EXP34-C",
+        "hostap wpa_supplicant/ctrl_iface.c:449 EXP34-C",
+        "hostap wpa_supplicant/ctrl_iface.c:5517 EXP34-C",
+        "hostap wpa_supplicant/ctrl_iface.c:5521 EXP34-C",
+        "hostap wpa_supplicant/ctrl_iface.c:5546 EXP34-C",
+        "hostap wpa_supplicant/ctrl_iface.c:5707 EXP34-C",
+        "hostap wpa_supplicant/ctrl_iface.c:5709 EXP34-C",
+        "hostap wpa_supplicant/ctrl_iface.c:5711 EXP34-C",
+        "hostap wpa_supplicant/ctrl_iface.c:5713 EXP34-C",
+        "hostap wpa_supplicant/ctrl_iface.c:5715 EXP34-C",
+        "hostap wpa_supplicant/ctrl_iface.c:5717 EXP34-C",
+        "hostap wpa_supplicant/ctrl_iface.c:5719 EXP34-C",
+        "hostap wpa_supplicant/ctrl_iface.c:5720 EXP34-C",
+        "hostap wpa_supplicant/ctrl_iface.c:5722 EXP34-C",
+        "hostap wpa_supplicant/ctrl_iface.c:5725 EXP34-C",
+        "hostap wpa_supplicant/ctrl_iface.c:5727 EXP34-C",
+        "hostap wpa_supplicant/ctrl_iface.c:5729 EXP34-C",
+        "hostap wpa_supplicant/ctrl_iface.c:5731 EXP34-C",
+        "hostap wpa_supplicant/ctrl_iface.c:5733 EXP34-C",
+        "hostap wpa_supplicant/ctrl_iface.c:5743 EXP34-C",
+        "hostap wpa_supplicant/ctrl_iface.c:5784 EXP34-C",
+        "hostap wpa_supplicant/ctrl_iface.c:5847 EXP34-C",
+        "hostap wpa_supplicant/ctrl_iface.c:6619 EXP34-C",
+        "hostap wpa_supplicant/ctrl_iface.c:8185 EXP34-C",
+        "hostap wpa_supplicant/ctrl_iface.c:8329 EXP34-C",
+        "hostap wpa_supplicant/ctrl_iface.c:8567 EXP34-C"
+      ],
+      "note": "relabeled or restated by the hostap caller-set re-pass under ADR-0011 (open caller sets in the -rdynamic builds); see that batch's manifest notes"
     }
   ]
 }

@@ -13,7 +13,7 @@
     "hostap": "dcee60436390dd34731560657c4257c3b4c839a6"
   },
   "submitted_at": "2026-09-25T03:49:14Z",
-  "row_count": 9,
+  "row_count": 1,
   "rules": [
     "API00-C"
   ],
@@ -50,6 +50,21 @@
         "hostap wpa_supplicant/hs20_supplicant.c:221 API00-C"
       ],
       "note": "verdict reverted FP -> TP by the bmdb 1554 -rdynamic re-pass (ADR-0011 6b28c8d7): the function is non-static and linked into wpa_supplicant, so its caller set is open and the in-tree call-site basis does not hold"
+    },
+    {
+      "by": "correction-rdynamic-hostap-2026-10-not-emitted-wpas",
+      "count": 8,
+      "keys": [
+        "hostap wpa_supplicant/dbus/dbus_new_handlers_p2p.c:1280 API00-C",
+        "hostap wpa_supplicant/dbus/dbus_new_handlers_p2p.c:1395 API00-C",
+        "hostap wpa_supplicant/dbus/dbus_new_handlers_p2p.c:1419 API00-C",
+        "hostap wpa_supplicant/dbus/dbus_new_handlers_p2p.c:1439 API00-C",
+        "hostap wpa_supplicant/dbus/dbus_new_handlers_p2p.c:1463 API00-C",
+        "hostap wpa_supplicant/dbus/dbus_new_handlers_p2p.c:3120 API00-C",
+        "hostap wpa_supplicant/dbus/dbus_new_handlers_wps.c:356 API00-C",
+        "hostap wpa_supplicant/ibss_rsn.c:861 API00-C"
+      ],
+      "note": "relabeled or restated by the hostap caller-set re-pass under ADR-0011 (open caller sets in the -rdynamic builds); see that batch's manifest notes"
     }
   ]
 }

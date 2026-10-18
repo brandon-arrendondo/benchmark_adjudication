@@ -12,7 +12,7 @@
     "hostap": "dcee60436390dd34731560657c4257c3b4c839a6"
   },
   "submitted_at": "2026-07-28",
-  "row_count": 29243,
+  "row_count": 29208,
   "rules": [
     "API00-C",
     "API01-C",
@@ -2307,6 +2307,48 @@
         "hostap src/wps/wps_upnp.c:447 EXP34-C",
         "hostap src/wps/wps_upnp_ap.c:79 EXP34-C",
         "hostap src/wps/wps_upnp_ssdp.c:474 INT10-C"
+      ],
+      "note": "relabeled or restated by the hostap caller-set re-pass under ADR-0011 (open caller sets in the -rdynamic builds); see that batch's manifest notes"
+    },
+    {
+      "by": "correction-rdynamic-hostap-2026-10-not-emitted-wpas",
+      "count": 35,
+      "keys": [
+        "hostap wpa_supplicant/ap.c:231 EXP34-C",
+        "hostap wpa_supplicant/ap.c:55 EXP34-C",
+        "hostap wpa_supplicant/bss.c:1706 EXP34-C",
+        "hostap wpa_supplicant/bss.c:1749 EXP34-C",
+        "hostap wpa_supplicant/bss.c:1804 EXP34-C",
+        "hostap wpa_supplicant/config_file.c:504 DCL30-C",
+        "hostap wpa_supplicant/config_none.c:34 DCL30-C",
+        "hostap wpa_supplicant/config_winreg.c:500 DCL30-C",
+        "hostap wpa_supplicant/ctrl_iface_unix.c:1388 EXP34-C",
+        "hostap wpa_supplicant/ctrl_iface_unix.c:783 EXP34-C",
+        "hostap wpa_supplicant/dbus/dbus_new_handlers.c:1652 EXP34-C",
+        "hostap wpa_supplicant/dbus/dbus_new_handlers.c:1656 EXP34-C",
+        "hostap wpa_supplicant/dbus/dbus_new_handlers.c:1660 EXP34-C",
+        "hostap wpa_supplicant/dbus/dbus_new_handlers.c:1665 EXP34-C",
+        "hostap wpa_supplicant/dbus/dbus_new_handlers.c:1669 EXP34-C",
+        "hostap wpa_supplicant/dbus/dbus_new_handlers.c:1675 EXP34-C",
+        "hostap wpa_supplicant/dbus/dbus_new_handlers.c:1681 EXP34-C",
+        "hostap wpa_supplicant/dbus/dbus_new_handlers_p2p.c:927 EXP34-C",
+        "hostap wpa_supplicant/events.c:1750 EXP34-C",
+        "hostap wpa_supplicant/events.c:1924 EXP34-C",
+        "hostap wpa_supplicant/events.c:2010 EXP34-C",
+        "hostap wpa_supplicant/events.c:3235 EXP34-C",
+        "hostap wpa_supplicant/events.c:4632 EXP34-C",
+        "hostap wpa_supplicant/events.c:6016 EXP34-C",
+        "hostap wpa_supplicant/interworking.c:2409 EXP34-C",
+        "hostap wpa_supplicant/interworking.c:2449 EXP34-C",
+        "hostap wpa_supplicant/interworking.c:59 EXP34-C",
+        "hostap wpa_supplicant/notify.c:267 EXP34-C",
+        "hostap wpa_supplicant/p2p_supplicant.c:295 EXP34-C",
+        "hostap wpa_supplicant/p2p_supplicant.c:4456 EXP34-C",
+        "hostap wpa_supplicant/p2p_supplicant.c:4536 EXP34-C",
+        "hostap wpa_supplicant/p2p_supplicant.c:4566 EXP34-C",
+        "hostap wpa_supplicant/rrm.c:502 EXP34-C",
+        "hostap wpa_supplicant/wpa_supplicant.c:5429 EXP34-C",
+        "hostap wpa_supplicant/wpa_supplicant.c:9895 EXP34-C"
       ],
       "note": "relabeled or restated by the hostap caller-set re-pass under ADR-0011 (open caller sets in the -rdynamic builds); see that batch's manifest notes"
     }

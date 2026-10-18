@@ -13,7 +13,7 @@
     "hostap": "dcee60436390dd34731560657c4257c3b4c839a6"
   },
   "submitted_at": "2026-09-25T04:22:37Z",
-  "row_count": 3,
+  "row_count": 2,
   "rules": [
     "API00-C"
   ],
@@ -45,6 +45,14 @@
       "count": 1,
       "keys": [
         "hostap wpa_supplicant/wmm_ac.c:847 API00-C"
+      ],
+      "note": "relabeled or restated by the hostap caller-set re-pass under ADR-0011 (open caller sets in the -rdynamic builds); see that batch's manifest notes"
+    },
+    {
+      "by": "correction-rdynamic-hostap-2026-10-not-emitted-wpas",
+      "count": 1,
+      "keys": [
+        "hostap wpa_supplicant/wpa_supplicant.c:8831 API00-C"
       ],
       "note": "relabeled or restated by the hostap caller-set re-pass under ADR-0011 (open caller sets in the -rdynamic builds); see that batch's manifest notes"
     }

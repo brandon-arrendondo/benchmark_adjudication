@@ -12,7 +12,7 @@
     "hostap": "dcee60436390dd34731560657c4257c3b4c839a6"
   },
   "submitted_at": "2026-09-10T13:36:46.149745Z",
-  "row_count": 125,
+  "row_count": 122,
   "rules": [
     "EXP34-C"
   ],
@@ -25,6 +25,16 @@
         "hostap wpa_supplicant/ctrl_iface.c:10705 EXP34-C",
         "hostap wpa_supplicant/ctrl_iface.c:10765 EXP34-C",
         "hostap wpa_supplicant/ctrl_iface.c:10788 EXP34-C"
+      ],
+      "note": "relabeled or restated by the hostap caller-set re-pass under ADR-0011 (open caller sets in the -rdynamic builds); see that batch's manifest notes"
+    },
+    {
+      "by": "correction-rdynamic-hostap-2026-10-not-emitted-wpas",
+      "count": 3,
+      "keys": [
+        "hostap wpa_supplicant/ctrl_iface.c:10549 EXP34-C",
+        "hostap wpa_supplicant/ctrl_iface.c:10707 EXP34-C",
+        "hostap wpa_supplicant/ctrl_iface.c:10790 EXP34-C"
       ],
       "note": "relabeled or restated by the hostap caller-set re-pass under ADR-0011 (open caller sets in the -rdynamic builds); see that batch's manifest notes"
     }
