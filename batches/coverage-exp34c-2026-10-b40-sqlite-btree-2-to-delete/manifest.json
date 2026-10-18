@@ -1,0 +1,25 @@
+{
+  "batch_id": "coverage-exp34c-2026-10-b40-sqlite-btree-2-to-delete",
+  "work_item_ref": "benchmarking_db-2493",
+  "requested_by": "coordinator",
+  "adjudicator": "claude-opus-5.5",
+  "aurora_lint_version": "0.6.0",
+  "aurora_lint_sha": "d21be1b3dc1ffa801ddbc32ba425d6df7ab90c68",
+  "projects": [
+    "sqlite"
+  ],
+  "codebase_commits": {
+    "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
+  },
+  "submitted_at": "2026-10-18T03:27:26Z",
+  "row_count": 120,
+  "rules": [
+    "EXP34-C"
+  ],
+  "verdicts": {
+    "FP": 85,
+    "TP": 35
+  },
+  "recheck": null,
+  "notes": "EXP34-C ORACLE COVERAGE, PART B (strict-only keys), sqlite: src/btree.c through src/delete.c. These 120 keys are in-scope EXP34-C findings that aurora-lint d21be1b3d reports only at the strict preset (run sqc-0.6.0-d21be1b3d-strict-*; strict sets first_site_only=false and reports every dereference site, not only the first) and that no label covers. Same standard and method as coverage-exp34c-2026-10-calibration and coverage-exp34c-2026-10-part-a-curl-hostap-mbedtls-mosquitto: the dereference is the violation site, judged at strict under EXP34-C/2026-10-07/presets; FP needs proof in the scanned source, a language guarantee, or an ISO C or POSIX library contract (those rows also cite P/facts); open caller sets for exported functions; a strippable assert, a noreturn attribute and an earlier dereference of the same pointer are not proof. A later site inherits an earlier site's FP only when that proof also dominates it with no reassignment between. One read-only research reader drafted each verdict at source in the pinned checkout; the adjudicator reviewed every draft (format and vocabulary, every nearby opposite-verdict label, a source re-read of a sample and of the questioned rows) before inclusion.\n\nRESULT: 85 FP, 35 TP.\n\nFP shapes: btree page pointers from btreeGetPage, getAndInitPage or allocateBtreePage read after the rc test; closed static callers (integrity-check heap helpers, sqlite3RefillIndex call sites, collation-hash lookups); rc correlations in dbpage.c and dbstat.c; WITHOUT ROWID tables always having a PK index (medium); three TRACE() arguments in btree.c, which btree.c defines empty (misfires). TP shapes: parameters of non-static build.c, callback.c and btree helpers guarded only by assert, ALWAYS() or an earlier dereference; date.c SQL-function argv (open through the FuncDef table; medium).\n\n12 row(s) name a conflict in provenance with a carried-forward label that predates the 2026-10-07 rulings; existing rows are not edited.\n\nCounting basis: distinct (project, commit, file, line, rule) keys. No precision or recall claim is made here."
+}
