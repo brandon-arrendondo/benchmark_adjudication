@@ -12,7 +12,7 @@
     "curl": "3e198f75861cc2e12daf299689e145949dddd19b"
   },
   "submitted_at": "2026-06-16T15:18:56.926079",
-  "row_count": 8950,
+  "row_count": 8936,
   "rules": [
     "API00-C",
     "API01-C",
@@ -995,6 +995,34 @@
         "curl lib/vtls/x509asn1.c:401 FIO50-C"
       ],
       "note": "retired from the CERT C oracle: FIO50-C/FIO51-C are CERT C++ ids, removed from aurora-lint at 9aace3a3; row archived, verdict unchanged; see retire-cert-cpp-ids-fio50-fio51-bmdb2229"
+    },
+    {
+      "by": "correction-exp34c-precedent-2026-10-part-b",
+      "count": 12,
+      "keys": [
+        "curl lib/cf-socket.c:994 EXP34-C",
+        "curl lib/connect.c:76 EXP34-C",
+        "curl lib/http.c:4885 EXP34-C",
+        "curl lib/ldap.c:418 EXP34-C",
+        "curl lib/multi.c:931 EXP34-C",
+        "curl lib/openldap.c:1006 EXP34-C",
+        "curl lib/sendf.c:1158 EXP34-C",
+        "curl lib/splay.c:258 EXP34-C",
+        "curl lib/vauth/krb5_sspi.c:305 EXP34-C",
+        "curl lib/vssh/libssh2.c:373 EXP34-C",
+        "curl lib/vtls/openssl.c:286 EXP34-C",
+        "curl lib/vtls/vtls_scache.c:797 EXP34-C"
+      ],
+      "note": "EXP34-C verdict corrected FP -> TP: the carried-forward FP predates the 2026-10-07 rulings and its basis (an open caller set, an assert, an earlier dereference, an unchecked allocation or an unproven invariant) is not proof under EXP34-C/2026-10-07/presets; see that batch's manifest notes"
+    },
+    {
+      "by": "correction-exp34c-precedent-2026-10-part-b",
+      "count": 2,
+      "keys": [
+        "curl lib/doh.c:1166 EXP34-C",
+        "curl lib/urlapi.c:343 EXP34-C"
+      ],
+      "note": "same FP verdict, reason restated: the carried-forward basis predates the 2026-10-07 rulings, and a proof that meets them is stated in its place; see that batch's manifest notes"
     }
   ]
 }

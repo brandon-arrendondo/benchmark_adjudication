@@ -12,7 +12,7 @@
     "curl": "3e198f75861cc2e12daf299689e145949dddd19b"
   },
   "submitted_at": "2026-09-10T13:28:02.803488Z",
-  "row_count": 128,
+  "row_count": 127,
   "rules": [
     "EXP34-C"
   ],
@@ -25,6 +25,14 @@
         "curl lib/vtls/vtls_scache.c:1091 EXP34-C"
       ],
       "note": "EXP34-C verdict corrected TP -> FP as keyed by bmdb 1423: the key is a caller's positional call argument, which aurora_lint 1418 no longer treats as a violation site; see that batch's manifest notes"
+    },
+    {
+      "by": "correction-exp34c-precedent-2026-10-part-b",
+      "count": 1,
+      "keys": [
+        "curl lib/vtls/vtls_scache.c:806 EXP34-C"
+      ],
+      "note": "same FP verdict, reason restated: the carried-forward basis predates the 2026-10-07 rulings, and a proof that meets them is stated in its place; see that batch's manifest notes"
     }
   ]
 }

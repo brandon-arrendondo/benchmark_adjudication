@@ -25,7 +25,7 @@
     "ventoy": "7cbdc5cf69935bcf1f085ae67f40e70ea7e74bae"
   },
   "submitted_at": "2026-09-23T00:00:00Z",
-  "row_count": 34,
+  "row_count": 28,
   "rules": [
     "EXP33-C",
     "EXP34-C"
@@ -141,6 +141,26 @@
         "hostap src/ap/p2p_hostapd.c:106 EXP34-C"
       ],
       "note": "relabeled or restated by the hostap caller-set re-pass under ADR-0011 (open caller sets in the -rdynamic builds); see that batch's manifest notes"
+    },
+    {
+      "by": "correction-exp34c-precedent-2026-10-sqlite-part-a",
+      "count": 3,
+      "keys": [
+        "sqlite src/build.c:822 EXP34-C",
+        "sqlite src/expr.c:3138 EXP34-C",
+        "sqlite src/expr.c:3626 EXP34-C"
+      ],
+      "note": "EXP34-C verdict corrected FP -> TP: the carried-forward FP predates the 2026-10-07 rulings and its basis (an open caller set, an assert, an earlier dereference, an unchecked allocation or an unproven invariant) is not proof under EXP34-C/2026-10-07/presets; see that batch's manifest notes"
+    },
+    {
+      "by": "correction-exp34c-precedent-2026-10-part-b",
+      "count": 3,
+      "keys": [
+        "mbedtls library/psa_crypto_slot_management.c:1083 EXP34-C",
+        "sqlite src/printf.c:1251 EXP34-C",
+        "sqlite src/printf.c:163 EXP34-C"
+      ],
+      "note": "EXP34-C verdict corrected FP -> TP: the carried-forward FP predates the 2026-10-07 rulings and its basis (an open caller set, an assert, an earlier dereference, an unchecked allocation or an unproven invariant) is not proof under EXP34-C/2026-10-07/presets; see that batch's manifest notes"
     }
   ]
 }

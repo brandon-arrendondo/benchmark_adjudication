@@ -12,7 +12,7 @@
     "lua": "40b76de2d77e66b70a9d4bf989c3f5340919973f"
   },
   "submitted_at": "2026-06-22",
-  "row_count": 2362,
+  "row_count": 2358,
   "rules": [
     "API00-C",
     "API01-C",
@@ -286,6 +286,17 @@
         "lua lstring.c:56 FIO50-C"
       ],
       "note": "retired from the CERT C oracle: FIO50-C/FIO51-C are CERT C++ ids, removed from aurora-lint at 9aace3a3; row archived, verdict unchanged; see retire-cert-cpp-ids-fio50-fio51-bmdb2229"
+    },
+    {
+      "by": "correction-exp34c-precedent-2026-10-part-b",
+      "count": 4,
+      "keys": [
+        "lua lauxlib.c:486 EXP34-C",
+        "lua lauxlib.c:623 EXP34-C",
+        "lua lmathlib.c:636 EXP34-C",
+        "lua lstrlib.c:850 EXP34-C"
+      ],
+      "note": "EXP34-C verdict corrected FP -> TP: the carried-forward FP predates the 2026-10-07 rulings and its basis (an open caller set, an assert, an earlier dereference, an unchecked allocation or an unproven invariant) is not proof under EXP34-C/2026-10-07/presets; see that batch's manifest notes"
     }
   ]
 }

@@ -12,9 +12,19 @@
     "pureftpd": "cc28bff52ca28e1d122a2142bf37f2dc578f4d3e"
   },
   "submitted_at": "2026-09-10T12:38:12.058426Z",
-  "row_count": 123,
+  "row_count": 122,
   "rules": [
     "EXP34-C"
   ],
-  "notes": "Reconstructed during benchmark_adjudication's initial population (2026-09-16) from benchmarking_db's ground_truth.source='task773_delta_exp34_pureftpd'. row_count/projects/codebase_commits/rules were derived from the rows themselves, not declared at adjudication time. aurora_lint_version/aurora_lint_sha are unknown for legacy data -- never recorded per-row."
+  "notes": "Reconstructed during benchmark_adjudication's initial population (2026-09-16) from benchmarking_db's ground_truth.source='task773_delta_exp34_pureftpd'. row_count/projects/codebase_commits/rules were derived from the rows themselves, not declared at adjudication time. aurora_lint_version/aurora_lint_sha are unknown for legacy data -- never recorded per-row.",
+  "superseded_rows": [
+    {
+      "by": "correction-exp34c-precedent-2026-10-part-b",
+      "count": 1,
+      "keys": [
+        "pureftpd src/altlog.c:188 EXP34-C"
+      ],
+      "note": "EXP34-C verdict corrected FP -> TP: the carried-forward FP predates the 2026-10-07 rulings and its basis (an open caller set, an assert, an earlier dereference, an unchecked allocation or an unproven invariant) is not proof under EXP34-C/2026-10-07/presets; see that batch's manifest notes"
+    }
+  ]
 }

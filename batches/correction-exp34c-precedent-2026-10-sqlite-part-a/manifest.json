@@ -1,0 +1,38 @@
+{
+  "batch_id": "correction-exp34c-precedent-2026-10-sqlite-part-a",
+  "work_item_ref": "benchmarking_db-2496",
+  "requested_by": "coordinator",
+  "adjudicator": "claude-opus-5.5",
+  "adjudicating_node": "r720",
+  "aurora_lint_version": "0.6.0",
+  "aurora_lint_sha": "d21be1b3dc1ffa801ddbc32ba425d6df7ab90c68",
+  "projects": [
+    "sqlite"
+  ],
+  "codebase_commits": {
+    "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
+  },
+  "submitted_at": "2026-10-18T17:00:00Z",
+  "row_count": 142,
+  "rules": [
+    "EXP34-C"
+  ],
+  "verdicts": {
+    "TP": 107,
+    "FP": 35
+  },
+  "corrections": {
+    "FP_to_TP": 107,
+    "FP_restated": 35
+  },
+  "recheck": {
+    "basis": "ruling",
+    "ruling": "EXP34-C/2026-10-07/presets",
+    "selection": "targeted",
+    "reviewed": 142,
+    "flipped": 107,
+    "blind_to_prior_verdict": false,
+    "blind_to_diagnostic": false
+  },
+  "notes": "A CORRECTION, NOT A NEW ADJUDICATION. EXP34-C PRECEDENT CONSISTENCY, SQLITE PART A (ext/ and src/ files through src/pager.c). The strict-oracle coverage batches (coverage-exp34c-2026-10-*) name, in provenance, a carried-forward FP that predates the 2026-10-07 rulings on the same pointer (\"precedent conflict\"). These 142 keys are every carried-forward EXP34-C label so cited in sqlite, in file order through src/pager.c; the rest of sqlite and the other projects follow in a separate batch. Every one was FP.\n\nSTANDARD: EXP34-C/2026-10-07/presets at the strict preset, as in the coverage batches. FP needs proof in the scanned source, a language guarantee, or an ISO C or POSIX library contract. A third-party or platform contract is not proof. p->f and &p->f are dereferences. An unchecked allocation is a null source. A strippable assert (assert, ALWAYS, NEVER) and an earlier dereference of the same pointer are never a check. libsqlite3 is installed and the separate-source build makes SQLITE_PRIVATE functions extern, so every non-static function has an open caller set (correction-libruling-sqlite-b1-task1553), and a static function whose address escapes into a FuncDef, method table or module is open too. An invariant counts only when the scanned source proves every writer.\n\nMETHOD. Two read-only research readers re-read each row at source in the pinned checkout and drafted a verdict and a self-contained reason. The adjudicator reviewed every draft against the citing coverage rows and the finding message of the official runs (which pointer the finding names), re-read every kept FP and every low-confidence row at source, and corrected two drafts (sqlite3session.c:3847, where the finding names p, not pnRec; fuzzer.c:632, where a failed realloc leaves a null buffer with a non-zero size). A fresh-context refuter then re-read a seeded sample of 25 rows (seed 2496: every kept FP, every low-confidence row, and 12 at random) and agreed with every verdict; the factual slips it found in five reasons (incomplete caller lists, the build that compiles pager.c:6620, which read at pager.c:4436/4453 is unconditional) are corrected.\n\nRESULT: 107 FP -> TP, 35 FP kept with the reason restated.\n- Flip bases: an open caller set (a non-static or public function, or a static function reached from one or whose address escapes; this includes the SQL-function context, for which sqlite3_context_db_handle and sqlite3_user_data return 0 under SQLITE_ENABLE_API_ARMOR); an assert, ALWAYS or NEVER as the only test; an earlier dereference as the only proof; an unchecked sqlite3_realloc; a NULL return left untested; an invariant whose writers the source does not all prove (PgHdr.pPager, MemPage.aData, cursor pages).\n- Kept FP: 30 call sites that are not a dereference site (the line only passes db, pConfig, pCsr, pIter, pIndex, pCol, pInfo, zIn, pPager, pList or azCol to an in-tree function such as sqlite3MPrintf, sqlite3DbIsNamed, sqlite3BtreeEnterAll/LeaveAll, sqlite3Init, sqlite3FindFunction, sqlite3Fts5CreateTable, fts5CsrNewrow, sqlite3changeset_op, sqlite3_db_mutex, patternCompare, mkFullPathname, pager_reset, pager_write_pagelist, sqlite3FreeIndex, freeColumnList, sqlite3ExprCodeGeneratedColumn); two misfires (dbdump.c:198, where the index is under sizeof; checkindex.c:748, an argument line), a dominating test (dbdump.c:203), and two non-null assignments (attach.c:188, pager.c:3536).\n\nUnder the 2026-09-21 site ruling (ADR-0012 Decision 1: a plain f(p) into a project function is never an EXP34-C site) only what is physically on the keyed line counts: a line that only passes the pointer to an in-tree function is restated FP, \"Not a dereference site\", unless the line itself dereferences a pointer or passes one to an ISO C or POSIX function specified to dereference it (memcpy, memcmp, strcmp, strlen, printf %s), which keeps it TP. A dereference inside an assert compiled in !NDEBUG builds counts.\n\nLOW CONFIDENCE: checkindex.c:411/653/728 (PRAGMA index_xinfo yielding no rows), sqlite3rbu.c:3196 (an ignored sqlite3_file_control result), and json.c:1376 (sqlite3_value_blob non-null when its length is positive).\n\nMechanics: in-place edits keep each key; each donor batch takes a row_count decrement and a superseded_rows record, split into the flips and the restatements. Counting basis: distinct (project, commit, file, line, rule) keys. No precision or recall claim is made here."
+}

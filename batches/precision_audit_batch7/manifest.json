@@ -12,7 +12,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-06-12T22:12:35.702584",
-  "row_count": 1183,
+  "row_count": 1180,
   "rules": [
     "API00-C",
     "API02-C",
@@ -294,6 +294,16 @@
         "sqlite ext/session/changesetfuzz.c:392 FIO50-C"
       ],
       "note": "retired from the CERT C oracle: FIO50-C/FIO51-C are CERT C++ ids, removed from aurora-lint at 9aace3a3; row archived, verdict unchanged; see retire-cert-cpp-ids-fio50-fio51-bmdb2229"
+    },
+    {
+      "by": "correction-exp34c-precedent-2026-10-sqlite-part-a",
+      "count": 3,
+      "keys": [
+        "sqlite src/build.c:2977 EXP34-C",
+        "sqlite src/build.c:4220 EXP34-C",
+        "sqlite src/build.c:4446 EXP34-C"
+      ],
+      "note": "EXP34-C verdict corrected FP -> TP: the carried-forward FP predates the 2026-10-07 rulings and its basis (an open caller set, an assert, an earlier dereference, an unchecked allocation or an unproven invariant) is not proof under EXP34-C/2026-10-07/presets; see that batch's manifest notes"
     }
   ]
 }

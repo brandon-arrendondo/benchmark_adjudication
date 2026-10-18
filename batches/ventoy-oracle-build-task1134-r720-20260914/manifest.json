@@ -12,7 +12,7 @@
     "ventoy": "7cbdc5cf69935bcf1f085ae67f40e70ea7e74bae"
   },
   "submitted_at": "2026-09-14T15:03:07.205857",
-  "row_count": 2447,
+  "row_count": 2443,
   "rules": [
     "API00-C",
     "API01-C",
@@ -162,6 +162,17 @@
         "ventoy Ventoy2Disk/Ventoy2Disk/Utility.c:664 WIN05-C"
       ],
       "note": "retired from the CERT C oracle: rule id moved to the CWE ruleset (aurora-lint 4a4ec2b2), not a CERT C identifier; row archived, verdict unchanged; see retire-non-cert-c-ids-cwe-ruleset-bmdb2207"
+    },
+    {
+      "by": "correction-exp34c-precedent-2026-10-part-b",
+      "count": 4,
+      "keys": [
+        "ventoy Ventoy2Disk/Ventoy2Disk/DiskService_vds.c:1097 EXP34-C",
+        "ventoy Ventoy2Disk/Ventoy2Disk/Utility.c:922 EXP34-C",
+        "ventoy Ventoy2Disk/Ventoy2Disk/Utility.c:972 EXP34-C",
+        "ventoy Ventoy2Disk/Ventoy2Disk/Utility.c:997 EXP34-C"
+      ],
+      "note": "EXP34-C verdict corrected FP -> TP: the carried-forward FP predates the 2026-10-07 rulings and its basis (an open caller set, an assert, an earlier dereference, an unchecked allocation or an unproven invariant) is not proof under EXP34-C/2026-10-07/presets; see that batch's manifest notes"
     }
   ]
 }

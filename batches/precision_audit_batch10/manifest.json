@@ -12,7 +12,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-06-14T15:32:32.702771+00:00",
-  "row_count": 1096,
+  "row_count": 1088,
   "rules": [
     "API00-C",
     "API02-C",
@@ -240,6 +240,28 @@
         "sqlite src/window.c:663 DCL13-C"
       ],
       "note": "DCL13-C re-derived under Brandon 2026-09-29 DCL13-C tier B (an API/ABI signature not in a function-pointer slot is strict TP; shallow const) (a signature, callback or function-pointer-slot basis is not an exception); see dcl13-ruling-1890-b04's manifest notes"
+    },
+    {
+      "by": "correction-exp34c-precedent-2026-10-sqlite-part-a",
+      "count": 2,
+      "keys": [
+        "sqlite src/expr.c:4444 EXP34-C",
+        "sqlite src/expr.c:4962 EXP34-C"
+      ],
+      "note": "EXP34-C verdict corrected FP -> TP: the carried-forward FP predates the 2026-10-07 rulings and its basis (an open caller set, an assert, an earlier dereference, an unchecked allocation or an unproven invariant) is not proof under EXP34-C/2026-10-07/presets; see that batch's manifest notes"
+    },
+    {
+      "by": "correction-exp34c-precedent-2026-10-part-b",
+      "count": 6,
+      "keys": [
+        "sqlite src/vdbemem.c:108 EXP34-C",
+        "sqlite src/vdbemem.c:253 EXP34-C",
+        "sqlite src/vdbemem.c:566 EXP34-C",
+        "sqlite src/vdbemem.c:592 EXP34-C",
+        "sqlite src/wherecode.c:584 EXP34-C",
+        "sqlite src/window.c:913 EXP34-C"
+      ],
+      "note": "EXP34-C verdict corrected FP -> TP: the carried-forward FP predates the 2026-10-07 rulings and its basis (an open caller set, an assert, an earlier dereference, an unchecked allocation or an unproven invariant) is not proof under EXP34-C/2026-10-07/presets; see that batch's manifest notes"
     }
   ]
 }

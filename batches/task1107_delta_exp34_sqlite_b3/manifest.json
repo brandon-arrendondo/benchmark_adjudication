@@ -12,7 +12,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-09-10T15:46:59.622966Z",
-  "row_count": 124,
+  "row_count": 123,
   "rules": [
     "EXP34-C"
   ],
@@ -28,6 +28,14 @@
         "sqlite ext/misc/sqlite3_stdio.c:296 EXP34-C"
       ],
       "note": "EXP34-C verdict corrected TP -> FP as keyed by bmdb 1423: the key is a caller's positional call argument, which aurora_lint 1418 no longer treats as a violation site; see that batch's manifest notes"
+    },
+    {
+      "by": "correction-exp34c-precedent-2026-10-sqlite-part-a",
+      "count": 1,
+      "keys": [
+        "sqlite ext/misc/dbdump.c:273 EXP34-C"
+      ],
+      "note": "same FP verdict, reason restated: the carried-forward basis predates the 2026-10-07 rulings, and a proof that meets them is stated in its place; see that batch's manifest notes"
     }
   ]
 }

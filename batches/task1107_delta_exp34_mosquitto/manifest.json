@@ -12,7 +12,7 @@
     "mosquitto": "d3ee5c5ca62c0fa4983308c6fff558ee978e878c"
   },
   "submitted_at": "2026-09-10T13:28:02.803488Z",
-  "row_count": 98,
+  "row_count": 97,
   "rules": [
     "EXP34-C"
   ],
@@ -26,6 +26,14 @@
         "mosquitto src/mosquitto.c:613 EXP34-C"
       ],
       "note": "EXP34-C verdict corrected TP -> FP as keyed by bmdb 1423: the key is a caller's positional call argument, which aurora_lint 1418 no longer treats as a violation site; see that batch's manifest notes"
+    },
+    {
+      "by": "correction-exp34c-precedent-2026-10-part-b",
+      "count": 1,
+      "keys": [
+        "mosquitto src/service.c:133 EXP34-C"
+      ],
+      "note": "same FP verdict, reason restated: the carried-forward basis predates the 2026-10-07 rulings, and a proof that meets them is stated in its place; see that batch's manifest notes"
     }
   ]
 }

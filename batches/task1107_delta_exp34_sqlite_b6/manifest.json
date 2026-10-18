@@ -12,7 +12,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-09-10T16:52:56.271544Z",
-  "row_count": 127,
+  "row_count": 111,
   "rules": [
     "EXP34-C"
   ],
@@ -25,6 +25,29 @@
         "sqlite src/build.c:342 EXP34-C"
       ],
       "note": "restated or settled by Brandon's priority-queue gavel verdict (bmdb 1341); see gavel-pq-1341-2026-09-29's manifest"
+    },
+    {
+      "by": "correction-exp34c-precedent-2026-10-sqlite-part-a",
+      "count": 16,
+      "keys": [
+        "sqlite ext/session/sqlite3session.c:6092 EXP34-C",
+        "sqlite src/alter.c:1560 EXP34-C",
+        "sqlite src/alter.c:1779 EXP34-C",
+        "sqlite src/alter.c:1951 EXP34-C",
+        "sqlite src/alter.c:2023 EXP34-C",
+        "sqlite src/attach.c:138 EXP34-C",
+        "sqlite src/attach.c:145 EXP34-C",
+        "sqlite src/attach.c:146 EXP34-C",
+        "sqlite src/attach.c:188 EXP34-C",
+        "sqlite src/attach.c:193 EXP34-C",
+        "sqlite src/attach.c:200 EXP34-C",
+        "sqlite src/attach.c:227 EXP34-C",
+        "sqlite src/attach.c:238 EXP34-C",
+        "sqlite src/attach.c:240 EXP34-C",
+        "sqlite src/attach.c:302 EXP34-C",
+        "sqlite src/build.c:586 EXP34-C"
+      ],
+      "note": "same FP verdict, reason restated: the carried-forward basis predates the 2026-10-07 rulings, and a proof that meets them is stated in its place; see that batch's manifest notes"
     }
   ]
 }

@@ -12,7 +12,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-06-12T08:37:09.925876",
-  "row_count": 552,
+  "row_count": 545,
   "rules": [
     "API00-C",
     "ARR00-C",
@@ -155,6 +155,20 @@
         "sqlite ext/session/sqlite3session.c:4081 DCL13-C"
       ],
       "note": "DCL13-C re-derived under Brandon 2026-09-29 DCL13-C tier B (an API/ABI signature not in a function-pointer slot is strict TP; shallow const) (a signature, callback or function-pointer-slot basis is not an exception); see dcl13-ruling-1890-b03's manifest notes"
+    },
+    {
+      "by": "correction-exp34c-precedent-2026-10-sqlite-part-a",
+      "count": 7,
+      "keys": [
+        "sqlite ext/session/sqlite3session.c:1272 EXP34-C",
+        "sqlite ext/session/sqlite3session.c:1545 EXP34-C",
+        "sqlite ext/session/sqlite3session.c:3071 EXP34-C",
+        "sqlite ext/session/sqlite3session.c:3723 EXP34-C",
+        "sqlite ext/session/sqlite3session.c:3783 EXP34-C",
+        "sqlite ext/session/sqlite3session.c:3847 EXP34-C",
+        "sqlite ext/session/sqlite3session.c:6076 EXP34-C"
+      ],
+      "note": "EXP34-C verdict corrected FP -> TP: the carried-forward FP predates the 2026-10-07 rulings and its basis (an open caller set, an assert, an earlier dereference, an unchecked allocation or an unproven invariant) is not proof under EXP34-C/2026-10-07/presets; see that batch's manifest notes"
     }
   ]
 }

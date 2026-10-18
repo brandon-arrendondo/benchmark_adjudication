@@ -12,7 +12,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-09-10T16:13:20.580389Z",
-  "row_count": 127,
+  "row_count": 125,
   "rules": [
     "EXP34-C"
   ],
@@ -25,6 +25,15 @@
         "sqlite ext/session/sqlite3session.c:2425 EXP34-C"
       ],
       "note": "verdict corrected FP -> TP by bmdb 1553 (sqlite): the FP rested only on in-tree callers of a non-static library function (ADR-0011 742a1571); see that batch manifest notes"
+    },
+    {
+      "by": "correction-exp34c-precedent-2026-10-sqlite-part-a",
+      "count": 2,
+      "keys": [
+        "sqlite ext/session/sqlite3session.c:3090 EXP34-C",
+        "sqlite ext/session/sqlite3session.c:3093 EXP34-C"
+      ],
+      "note": "same FP verdict, reason restated: the carried-forward basis predates the 2026-10-07 rulings, and a proof that meets them is stated in its place; see that batch's manifest notes"
     }
   ]
 }
