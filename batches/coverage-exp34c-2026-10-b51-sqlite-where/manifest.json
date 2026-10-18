@@ -1,0 +1,25 @@
+{
+  "batch_id": "coverage-exp34c-2026-10-b51-sqlite-where",
+  "work_item_ref": "benchmarking_db-2493",
+  "requested_by": "coordinator",
+  "adjudicator": "claude-opus-5.5",
+  "aurora_lint_version": "0.6.0",
+  "aurora_lint_sha": "d21be1b3dc1ffa801ddbc32ba425d6df7ab90c68",
+  "projects": [
+    "sqlite"
+  ],
+  "codebase_commits": {
+    "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
+  },
+  "submitted_at": "2026-10-18T03:46:08Z",
+  "row_count": 130,
+  "rules": [
+    "EXP34-C"
+  ],
+  "verdicts": {
+    "FP": 98,
+    "TP": 32
+  },
+  "recheck": null,
+  "notes": "EXP34-C ORACLE COVERAGE, PART B (strict-only keys), sqlite: src/where.c. These 130 keys are in-scope EXP34-C findings that aurora-lint d21be1b3d reports only at the strict preset (run sqc-0.6.0-d21be1b3d-strict-*; strict sets first_site_only=false and reports every dereference site, not only the first) and that no label covers. Same standard and method as coverage-exp34c-2026-10-calibration and coverage-exp34c-2026-10-part-a-curl-hostap-mbedtls-mosquitto: the dereference is the violation site, judged at strict under EXP34-C/2026-10-07/presets; FP needs proof in the scanned source, a language guarantee, or an ISO C or POSIX library contract (those rows also cite P/facts); open caller sets for exported functions; a strippable assert, a noreturn attribute and an earlier dereference of the same pointer are not proof. A later site inherits an earlier site's FP only when that proof also dominates it with no reassignment between. One read-only research reader drafted each verdict at source in the pinned checkout; the adjudicator reviewed every draft (format and vocabulary, every nearby opposite-verdict label, a source re-read of a sample and of the questioned rows) before inclusion.\n\nRESULT: 98 FP, 32 TP.\n\nFP shapes: pWInfo in sqlite3WhereBegin after a DbMallocRawNN whose failure sets mallocFailed and jumps to whereBeginError; pLevel as an element address of pWInfo->a; correlations (aSortCost, pIndex/iColumn, pOrderBy/nOrderBy); multi-file invariants (medium). TP shapes: ALWAYS()/NEVER()-only tests; pResultSet-derived pointers from the open sqlite3WhereBegin; xBestIndex-written constraint offsets (medium); pLoop rows on a path where wherePathSolver finds no plan under suppressErr (medium).\n\n8 row(s) name a conflict in provenance with a carried-forward label that predates the 2026-10-07 rulings; existing rows are not edited.\n\nCounting basis: distinct (project, commit, file, line, rule) keys. No precision or recall claim is made here."
+}
