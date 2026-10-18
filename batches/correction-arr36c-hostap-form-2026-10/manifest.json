@@ -1,0 +1,36 @@
+{
+  "batch_id": "correction-arr36c-hostap-form-2026-10",
+  "work_item_ref": "benchmarking_db-1554",
+  "requested_by": "coordinator",
+  "adjudicator": "claude-opus-5.5",
+  "adjudicating_node": "dev-468",
+  "aurora_lint_version": "0.6.0",
+  "aurora_lint_sha": "d21be1b3dc1ffa801ddbc32ba425d6df7ab90c68",
+  "projects": [
+    "hostap"
+  ],
+  "codebase_commits": {
+    "hostap": "dcee60436390dd34731560657c4257c3b4c839a6"
+  },
+  "submitted_at": "2026-10-18T16:17:35Z",
+  "row_count": 128,
+  "rules": [
+    "ARR36-C"
+  ],
+  "verdicts": {
+    "FP": 128
+  },
+  "corrections": {
+    "FP_restated": 128
+  },
+  "recheck": {
+    "basis": "ruling",
+    "ruling": "ARR36-C/2026-10-07/form (rulings/rules/ARR36-C.md): a violation needs operands proven to point into different objects",
+    "selection": "targeted",
+    "reviewed": 128,
+    "flipped": 0,
+    "blind_to_prior_verdict": false,
+    "blind_to_diagnostic": false
+  },
+  "notes": "A CORRECTION, NOT A NEW ADJUDICATION. hostap ARR36-C rows from the caller-set re-pass, restated under the checkable form.\n\nRULING. ARR36-C/2026-10-07/form (rulings/rules/ARR36-C.md): a pointer subtraction or relational comparison is a violation when its operands are proven to point into two different objects. The earlier FP reasons rested on the pos/end pair coming from one caller buffer, which under aurora-lint ADR-0011 6b28c8d7 is a caller argument and proves nothing for an open caller set. Under the form the caller set does not decide the label: what matters is whether the line's operands are proven to point into different objects, and on none of these lines are they.\n\nSCOPE. Every hostap ARR36-C FP row in a file linked into wpa_supplicant or hostapd whose reason rested on callers, the paired-bounds idiom or documentation. None of these keys is reported by aurora-lint d21be1b3d, so each row's provenance says so. hostap's other ARR36-C FP rows are FP under the form as they stand and are unchanged.\n\nMETHOD. Read-only research readers re-read every row at source at the pinned commit under a written brief: name every pointer subtraction and relational comparison on the line, trace both operands within the function, and label TP only if a pair is proven to point into different objects. A fresh-context refuter re-read a random sample of 30 rows: 29 agreed and 1 citation was corrected; a side remark the citation fix showed was wrong for some rows in one function was removed from all of them.\n\nRESULT. 128 rows reviewed, all kept FP with the reason restated to the form; no verdict changes. Confidence is medium throughout because at least one operand on each line is a parameter of the function."
+}
