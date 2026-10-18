@@ -12,7 +12,7 @@
     "mbedtls": "068ff080b369adfac81509f9b57b2afabaf82dc5"
   },
   "submitted_at": "2026-09-14T17:32:48.190170",
-  "row_count": 8228,
+  "row_count": 8226,
   "rules": [
     "API00-C",
     "API01-C",
@@ -338,6 +338,15 @@
         "mbedtls library/sha512.c:851 FIO50-C"
       ],
       "note": "retired from the CERT C oracle: FIO50-C/FIO51-C are CERT C++ ids, removed from aurora-lint at 9aace3a3; row archived, verdict unchanged; see retire-cert-cpp-ids-fio50-fio51-bmdb2229"
+    },
+    {
+      "by": "correction-arr36c-cross-project-form-2026-10",
+      "count": 2,
+      "keys": [
+        "mbedtls library/psa_crypto_slot_management.c:570 ARR36-C",
+        "mbedtls library/psa_crypto_slot_management.c:579 ARR36-C"
+      ],
+      "note": "relabeled TP -> FP by the cross-project ARR36-C pass under ARR36-C/2026-10-07/form; see that batch's manifest notes"
     }
   ]
 }

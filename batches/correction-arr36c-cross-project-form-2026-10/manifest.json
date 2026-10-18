@@ -1,0 +1,40 @@
+{
+  "batch_id": "correction-arr36c-cross-project-form-2026-10",
+  "work_item_ref": "benchmarking_db-1554",
+  "requested_by": "coordinator",
+  "adjudicator": "claude-opus-5.5",
+  "adjudicating_node": "dev-468",
+  "aurora_lint_version": "0.6.0",
+  "aurora_lint_sha": "d21be1b3dc1ffa801ddbc32ba425d6df7ab90c68",
+  "projects": [
+    "hostap",
+    "mbedtls",
+    "sqlite"
+  ],
+  "codebase_commits": {
+    "hostap": "dcee60436390dd34731560657c4257c3b4c839a6",
+    "mbedtls": "068ff080b369adfac81509f9b57b2afabaf82dc5",
+    "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
+  },
+  "submitted_at": "2026-10-18T16:24:42Z",
+  "row_count": 4,
+  "rules": [
+    "ARR36-C"
+  ],
+  "verdicts": {
+    "FP": 4
+  },
+  "corrections": {
+    "TP_to_FP": 4
+  },
+  "recheck": {
+    "basis": "ruling",
+    "ruling": "ARR36-C/2026-10-07/form (rulings/rules/ARR36-C.md): a violation needs operands proven to point into different objects",
+    "selection": "targeted",
+    "reviewed": 4,
+    "flipped": 4,
+    "blind_to_prior_verdict": false,
+    "blind_to_diagnostic": false
+  },
+  "notes": "A CORRECTION, NOT A NEW ADJUDICATION. CROSS-PROJECT (sqlite, mbedtls, hostap): this batch is not part of the hostap -rdynamic caller-set work; it applies one ARR36-C ruling consistently across the oracle.\n\nRULING. ARR36-C/2026-10-07/form (rulings/rules/ARR36-C.md): a pointer subtraction or relational comparison is a violation when its operands are proven to point into two different objects. These four TP labels predate the ruling and rested on nothing in the function establishing that the operands share an object, or on a code comment saying so. Under the form that is not enough for a violation, so each goes TP -> FP.\n\nSCOPE. Every ARR36-C TP in the oracle at the time of this batch (four rows); all four rest on that basis. sqlite src/malloc.c:800, mbedtls library/psa_crypto_slot_management.c:570 and :579, hostap src/utils/os_internal.c:297. The sqlite and hostap keys are not reported by aurora-lint d21be1b3d, and their provenance says so.\n\nMETHOD. Each row was read at source at its pinned commit: every pointer subtraction or relational comparison on the line named and both operands traced within the function. A fresh-context refuter re-read all four rows.\n\nRESULT. 4 rows reviewed, 4 TP -> FP, each reason restated to the form."
+}

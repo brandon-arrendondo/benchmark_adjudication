@@ -12,7 +12,7 @@
     "hostap": "dcee60436390dd34731560657c4257c3b4c839a6"
   },
   "submitted_at": "2026-07-28",
-  "row_count": 29317,
+  "row_count": 29316,
   "rules": [
     "API00-C",
     "API01-C",
@@ -2214,6 +2214,14 @@
         "hostap wpa_supplicant/ctrl_iface.c:5291 ARR36-C"
       ],
       "note": "restated by the hostap ARR36-C pass under ARR36-C/2026-10-07/form; see that batch's manifest notes"
+    },
+    {
+      "by": "correction-arr36c-cross-project-form-2026-10",
+      "count": 1,
+      "keys": [
+        "hostap src/utils/os_internal.c:297 ARR36-C"
+      ],
+      "note": "relabeled TP -> FP by the cross-project ARR36-C pass under ARR36-C/2026-10-07/form; see that batch's manifest notes"
     }
   ]
 }
