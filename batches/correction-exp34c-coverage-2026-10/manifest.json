@@ -1,0 +1,37 @@
+{
+  "batch_id": "correction-exp34c-coverage-2026-10",
+  "work_item_ref": "benchmarking_db-2493",
+  "requested_by": "coordinator",
+  "adjudicator": "claude-opus-5.5",
+  "adjudicating_node": "dev-468",
+  "aurora_lint_version": "0.6.0",
+  "aurora_lint_sha": "d21be1b3dc1ffa801ddbc32ba425d6df7ab90c68",
+  "projects": [
+    "mbedtls",
+    "sqlite"
+  ],
+  "codebase_commits": {
+    "mbedtls": "068ff080b369adfac81509f9b57b2afabaf82dc5",
+    "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
+  },
+  "submitted_at": "2026-10-18T10:00:00Z",
+  "row_count": 2,
+  "rules": [
+    "EXP34-C"
+  ],
+  "verdicts": {
+    "TP": 2
+  },
+  "corrections": {
+    "FP_to_TP": 2
+  },
+  "recheck": {
+    "basis": "merit",
+    "selection": "targeted",
+    "reviewed": 2,
+    "flipped": 2,
+    "blind_to_prior_verdict": false,
+    "blind_to_diagnostic": false
+  },
+  "notes": "A CORRECTION, NOT A NEW ADJUDICATION. Two EXP34-C rows from the 2026-10 strict-oracle coverage batches, relabeled FP -> TP on a second reading under the same EXP34-C/2026-10-07 rulings.\n\nmbedtls library/ssl_tls.c:7573 (from coverage-exp34c-2026-10-part-a-curl-hostap-mbedtls-mosquitto): the FP rested on the length being 0 when the pointer is NULL; a library call with a null pointer and a zero length is still invalid through C23 (EXP34-C/2026-10-07/presets), so the correlation is not proof.\n\nsqlite src/func.c:960 (from coverage-exp34c-2026-10-part-a-sqlite): the FP rested on the in-tree FuncDef entries for likeFunc; the SQL function context is an open input (the function's address escapes into a FuncDef, and sqlite3_user_data returns 0 for a null context under SQLITE_ENABLE_API_ARMOR), which is how the other sqlite labels on that shape read it.\n\nMechanics: in-place edits keep each key; each original batch takes a row_count decrement of 1 and a superseded_rows record. Counting basis: distinct (project, commit, file, line, rule) keys. No precision claim is made here."
+}
