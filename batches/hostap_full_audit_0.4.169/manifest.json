@@ -12,7 +12,7 @@
     "hostap": "dcee60436390dd34731560657c4257c3b4c839a6"
   },
   "submitted_at": "2026-07-28",
-  "row_count": 29316,
+  "row_count": 29298,
   "rules": [
     "API00-C",
     "API01-C",
@@ -2222,6 +2222,31 @@
         "hostap src/utils/os_internal.c:297 ARR36-C"
       ],
       "note": "relabeled TP -> FP by the cross-project ARR36-C pass under ARR36-C/2026-10-07/form; see that batch's manifest notes"
+    },
+    {
+      "by": "correction-rdynamic-hostap-2026-10-not-emitted-ap",
+      "count": 18,
+      "keys": [
+        "hostap src/ap/acs.c:561 EXP34-C",
+        "hostap src/ap/acs.c:576 EXP34-C",
+        "hostap src/ap/acs.c:587 EXP34-C",
+        "hostap src/ap/ap_config.c:1538 ARR30-C",
+        "hostap src/ap/ap_config.c:1539 ARR30-C",
+        "hostap src/ap/ap_config.c:1540 ARR30-C",
+        "hostap src/ap/ap_config.c:1541 ARR30-C",
+        "hostap src/ap/gas_serv.c:42 EXP34-C",
+        "hostap src/ap/ieee802_11_ht.c:453 EXP34-C",
+        "hostap src/ap/ieee802_11_shared.c:1237 EXP34-C",
+        "hostap src/ap/ieee802_1x.c:393 EXP34-C",
+        "hostap src/ap/ieee802_1x.c:447 EXP34-C",
+        "hostap src/ap/ieee802_1x.c:515 EXP34-C",
+        "hostap src/ap/ieee802_1x.c:914 MEM31-C",
+        "hostap src/ap/sta_info.c:181 EXP34-C",
+        "hostap src/ap/sta_info.c:213 EXP34-C",
+        "hostap src/ap/sta_info.c:237 EXP34-C",
+        "hostap src/ap/sta_info.c:285 EXP34-C"
+      ],
+      "note": "relabeled or restated by the hostap caller-set re-pass under ADR-0011 (open caller sets in the -rdynamic builds); see that batch's manifest notes"
     }
   ]
 }

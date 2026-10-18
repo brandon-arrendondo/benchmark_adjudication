@@ -12,7 +12,7 @@
     "hostap": "dcee60436390dd34731560657c4257c3b4c839a6"
   },
   "submitted_at": "2026-09-10T13:38:08.303148Z",
-  "row_count": 121,
+  "row_count": 114,
   "rules": [
     "EXP34-C"
   ],
@@ -38,6 +38,20 @@
         "hostap src/ap/drv_callbacks.c:1999 EXP34-C"
       ],
       "note": "re-read on its merits under the EXP34-C/2026-10-07 rulings, as a precedent named in conflict by the 2026-10 EXP34-C coverage rows; see that batch's manifest notes"
+    },
+    {
+      "by": "correction-rdynamic-hostap-2026-10-not-emitted-ap",
+      "count": 7,
+      "keys": [
+        "hostap src/ap/beacon.c:1115 EXP34-C",
+        "hostap src/ap/dpp_hostapd.c:351 EXP34-C",
+        "hostap src/ap/drv_callbacks.c:1503 EXP34-C",
+        "hostap src/ap/drv_callbacks.c:2460 EXP34-C",
+        "hostap src/ap/drv_callbacks.c:2821 EXP34-C",
+        "hostap src/ap/drv_callbacks.c:2827 EXP34-C",
+        "hostap src/ap/drv_callbacks.c:2833 EXP34-C"
+      ],
+      "note": "relabeled or restated by the hostap caller-set re-pass under ADR-0011 (open caller sets in the -rdynamic builds); see that batch's manifest notes"
     }
   ]
 }

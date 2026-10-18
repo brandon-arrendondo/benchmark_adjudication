@@ -12,9 +12,35 @@
     "hostap": "dcee60436390dd34731560657c4257c3b4c839a6"
   },
   "submitted_at": "2026-09-10T13:47:05.515322Z",
-  "row_count": 128,
+  "row_count": 111,
   "rules": [
     "EXP34-C"
   ],
-  "notes": "Reconstructed during benchmark_adjudication's initial population (2026-09-16) from benchmarking_db's ground_truth.source='task1107_delta_exp34_hostap_b5'. row_count/projects/codebase_commits/rules were derived from the rows themselves, not declared at adjudication time. aurora_lint_version/aurora_lint_sha are unknown for legacy data -- never recorded per-row."
+  "notes": "Reconstructed during benchmark_adjudication's initial population (2026-09-16) from benchmarking_db's ground_truth.source='task1107_delta_exp34_hostap_b5'. row_count/projects/codebase_commits/rules were derived from the rows themselves, not declared at adjudication time. aurora_lint_version/aurora_lint_sha are unknown for legacy data -- never recorded per-row.",
+  "superseded_rows": [
+    {
+      "by": "correction-rdynamic-hostap-2026-10-not-emitted-ap",
+      "count": 17,
+      "keys": [
+        "hostap src/ap/taxonomy.c:255 EXP34-C",
+        "hostap src/ap/taxonomy.c:263 EXP34-C",
+        "hostap src/ap/wpa_auth.c:4271 EXP34-C",
+        "hostap src/ap/wpa_auth.c:4733 EXP34-C",
+        "hostap src/ap/wpa_auth.c:4844 EXP34-C",
+        "hostap src/ap/wpa_auth.c:8061 EXP34-C",
+        "hostap src/ap/wpa_auth_ft.c:2511 EXP34-C",
+        "hostap src/ap/wpa_auth_ft.c:2773 EXP34-C",
+        "hostap src/ap/wpa_auth_ft.c:489 EXP34-C",
+        "hostap src/ap/wpa_auth_ft.c:495 EXP34-C",
+        "hostap src/ap/wpa_auth_ft.c:496 EXP34-C",
+        "hostap src/ap/wpa_auth_glue.c:663 EXP34-C",
+        "hostap src/ap/wpa_auth_ie.c:411 EXP34-C",
+        "hostap src/ap/wpa_auth_ie.c:439 EXP34-C",
+        "hostap src/ap/wpa_auth_ie.c:469 EXP34-C",
+        "hostap src/ap/wps_hostapd.c:965 EXP34-C",
+        "hostap src/ap/wps_hostapd.c:969 EXP34-C"
+      ],
+      "note": "relabeled or restated by the hostap caller-set re-pass under ADR-0011 (open caller sets in the -rdynamic builds); see that batch's manifest notes"
+    }
+  ]
 }

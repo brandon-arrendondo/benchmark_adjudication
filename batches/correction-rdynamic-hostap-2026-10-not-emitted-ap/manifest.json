@@ -1,0 +1,41 @@
+{
+  "batch_id": "correction-rdynamic-hostap-2026-10-not-emitted-ap",
+  "work_item_ref": "benchmarking_db-1554",
+  "requested_by": "coordinator",
+  "adjudicator": "claude-opus-5.5",
+  "adjudicating_node": "dev-468",
+  "aurora_lint_version": "0.6.0",
+  "aurora_lint_sha": "d21be1b3dc1ffa801ddbc32ba425d6df7ab90c68",
+  "projects": [
+    "hostap"
+  ],
+  "codebase_commits": {
+    "hostap": "dcee60436390dd34731560657c4257c3b4c839a6"
+  },
+  "submitted_at": "2026-10-18T16:49:03Z",
+  "row_count": 154,
+  "rules": [
+    "ARR30-C",
+    "EXP34-C",
+    "INT30-C",
+    "MEM31-C"
+  ],
+  "verdicts": {
+    "TP": 32,
+    "FP": 122
+  },
+  "corrections": {
+    "FP_restated": 122,
+    "FP_to_TP": 32
+  },
+  "recheck": {
+    "basis": "ruling",
+    "ruling": "aurora-lint ADR-0011 6b28c8d7 (wpa_supplicant/Makefile:1004-1006, -rdynamic under CONFIG_DYNAMIC_EAP_METHODS), with hostapd/Makefile:112-116 (-rdynamic under CONFIG_WPA_TRACE) for files only hostapd links",
+    "selection": "targeted",
+    "reviewed": 154,
+    "flipped": 32,
+    "blind_to_prior_verdict": false,
+    "blind_to_diagnostic": false
+  },
+  "notes": "A CORRECTION, NOT A NEW ADJUDICATION. hostap caller-set re-pass, src/ap and hostapd/, keys aurora-lint no longer reports.\n\nRULING. aurora-lint ADR-0011 6b28c8d7: wpa_supplicant/Makefile:1004-1006 links with -ldl -rdynamic under CONFIG_DYNAMIC_EAP_METHODS, and hostapd/Makefile:112-116 links with -rdynamic under CONFIG_WPA_TRACE; both configurations compile (ADR-0010), so every non-static function in a file either binary links, and every static function whose address escapes (an ops table, a callback or eloop registration), has an open caller set, and in-tree call sites prove nothing. Also applied: an earlier dereference is not a check; documentation, an \"internal invariant\" and a third-party library contract are not proof; a closed static chain counts only while every call site provably passes a safe value; an in-function correlation counts when every writer is listed.\n\nEXP34-C rows follow the site ruling (2026-09-21; EXP34-C/2026-10-07): the violation site is a dereference token on the keyed line itself; a line that only passes the pointer to an in-tree function is not a site (the callee's dereference is its own), and a dereference on another line of the same statement belongs to that line's key. Labels are keyed by line, so a line that is not a site for the pointer the old reason was about but dereferences a different pointer nothing proves non-null is TP on that dereference.\n\nSCOPE. FP rows in src/ap and hostapd/ whose reason rested on callers, an earlier dereference, documentation or a mixed caller/local basis, in files linked into wpa_supplicant or hostapd, at keys aurora-lint d21be1b3d does not report (each row's provenance says so). No rows of this scope were held out.\n\nMETHOD. Read-only research readers re-read every row at source at the pinned commit under a written brief that states the site ruling and the settled shapes up front, and drafted a verdict. Every EXP34-C draft was then re-checked at source against the site ruling on its keyed line. A fresh-context refuter re-read a sample of 30 rows (the rows the readers were least sure of, then a random draw): 27 upheld, 3 citations corrected, none overturned. Corrections were applied.\n\nRESULT. 154 rows reviewed: FP->FP 122, FP->TP 32. Verdict changes by rule: EXP34-C 30, ARR30-C 2. 95 kept FP rows are \"Not a dereference site\". Every kept row's reason is restated to the basis it now rests on.\n\nMechanics: in-place edits keep each key; each original batch takes a row_count decrement and a superseded_rows record. Counting basis: distinct (project, commit, file, line, rule) keys. No precision claim is made here."
+}
