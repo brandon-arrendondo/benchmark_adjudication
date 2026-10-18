@@ -27,7 +27,7 @@
     "ventoy": "7cbdc5cf69935bcf1f085ae67f40e70ea7e74bae"
   },
   "submitted_at": "2026-09-22T19:59:31Z",
-  "row_count": 58,
+  "row_count": 52,
   "rules": [
     "EXP34-C"
   ],
@@ -211,6 +211,19 @@
         "sqlite src/expr.c:4323 EXP34-C",
         "sqlite src/expr.c:6047 EXP34-C",
         "sqlite src/main.c:791 EXP34-C"
+      ],
+      "note": "EXP34-C verdict corrected FP -> TP: the carried-forward FP predates the 2026-10-07 rulings and its basis (an open caller set, an assert, an earlier dereference, an unchecked allocation or an unproven invariant) is not proof under EXP34-C/2026-10-07/presets; see that batch's manifest notes"
+    },
+    {
+      "by": "correction-exp34c-precedent-2026-10-part-b",
+      "count": 6,
+      "keys": [
+        "curl lib/curl_addrinfo.c:354 EXP34-C",
+        "mbedtls library/ecp.c:3312 EXP34-C",
+        "mbedtls library/md5.c:226 EXP34-C",
+        "mbedtls library/ripemd160.c:289 EXP34-C",
+        "mbedtls library/rsa.c:648 EXP34-C",
+        "sqlite src/util.c:121 EXP34-C"
       ],
       "note": "EXP34-C verdict corrected FP -> TP: the carried-forward FP predates the 2026-10-07 rulings and its basis (an open caller set, an assert, an earlier dereference, an unchecked allocation or an unproven invariant) is not proof under EXP34-C/2026-10-07/presets; see that batch's manifest notes"
     }

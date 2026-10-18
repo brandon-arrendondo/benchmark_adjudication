@@ -17,7 +17,7 @@
     "raylib": "962bbfc6bfbd7a5acd08e21314fcfa161003a589"
   },
   "submitted_at": "2026-09-22T00:00:00Z",
-  "row_count": 4,
+  "row_count": 3,
   "rules": [
     "EXP34-C"
   ],
@@ -53,6 +53,14 @@
         "hostap wpa_supplicant/p2p_supplicant.c:4375 EXP34-C"
       ],
       "note": "relabeled or restated by the hostap caller-set re-pass under ADR-0011 (open caller sets in the -rdynamic builds); see that batch's manifest notes"
+    },
+    {
+      "by": "correction-exp34c-precedent-2026-10-part-b",
+      "count": 1,
+      "keys": [
+        "raylib src/rmodels.c:2902 EXP34-C"
+      ],
+      "note": "same FP verdict, reason restated: the carried-forward basis predates the 2026-10-07 rulings, and a proof that meets them is stated in its place; see that batch's manifest notes"
     }
   ]
 }

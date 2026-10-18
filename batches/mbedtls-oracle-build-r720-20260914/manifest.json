@@ -12,7 +12,7 @@
     "mbedtls": "068ff080b369adfac81509f9b57b2afabaf82dc5"
   },
   "submitted_at": "2026-09-14T17:32:48.190170",
-  "row_count": 8226,
+  "row_count": 8203,
   "rules": [
     "API00-C",
     "API01-C",
@@ -347,6 +347,43 @@
         "mbedtls library/psa_crypto_slot_management.c:579 ARR36-C"
       ],
       "note": "relabeled TP -> FP by the cross-project ARR36-C pass under ARR36-C/2026-10-07/form; see that batch's manifest notes"
+    },
+    {
+      "by": "correction-exp34c-precedent-2026-10-part-b",
+      "count": 21,
+      "keys": [
+        "mbedtls library/bignum_core.c:60 EXP34-C",
+        "mbedtls library/ecdh.c:426 EXP34-C",
+        "mbedtls library/ecdh.c:457 EXP34-C",
+        "mbedtls library/psa_crypto.c:1190 EXP34-C",
+        "mbedtls library/psa_crypto.c:716 EXP34-C",
+        "mbedtls library/psa_crypto_ecp.c:261 EXP34-C",
+        "mbedtls library/psa_crypto_ecp.c:439 EXP34-C",
+        "mbedtls library/rsa.c:1291 EXP34-C",
+        "mbedtls library/rsa.c:1314 EXP34-C",
+        "mbedtls library/rsa.c:1393 EXP34-C",
+        "mbedtls library/rsa.c:1833 EXP34-C",
+        "mbedtls library/rsa.c:1991 EXP34-C",
+        "mbedtls library/rsa.c:2110 EXP34-C",
+        "mbedtls library/rsa.c:2192 EXP34-C",
+        "mbedtls library/rsa.c:2287 EXP34-C",
+        "mbedtls library/rsa.c:2497 EXP34-C",
+        "mbedtls library/rsa.c:2606 EXP34-C",
+        "mbedtls library/rsa.c:2713 EXP34-C",
+        "mbedtls library/rsa.c:882 EXP34-C",
+        "mbedtls library/rsa.c:924 EXP34-C",
+        "mbedtls library/rsa.c:999 EXP34-C"
+      ],
+      "note": "EXP34-C verdict corrected FP -> TP: the carried-forward FP predates the 2026-10-07 rulings and its basis (an open caller set, an assert, an earlier dereference, an unchecked allocation or an unproven invariant) is not proof under EXP34-C/2026-10-07/presets; see that batch's manifest notes"
+    },
+    {
+      "by": "correction-exp34c-precedent-2026-10-part-b",
+      "count": 2,
+      "keys": [
+        "mbedtls library/rsa.c:1232 EXP34-C",
+        "mbedtls library/rsa.c:1512 EXP34-C"
+      ],
+      "note": "same FP verdict, reason restated: the carried-forward basis predates the 2026-10-07 rulings, and a proof that meets them is stated in its place; see that batch's manifest notes"
     }
   ]
 }

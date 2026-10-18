@@ -22,7 +22,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-08-25T08:36:46.115695",
-  "row_count": 196,
+  "row_count": 189,
   "rules": [
     "EXP34-C"
   ],
@@ -117,6 +117,20 @@
         "sqlite src/pager.c:3536 EXP34-C"
       ],
       "note": "same FP verdict, reason restated: the carried-forward basis predates the 2026-10-07 rulings, and a proof that meets them is stated in its place; see that batch's manifest notes"
+    },
+    {
+      "by": "correction-exp34c-precedent-2026-10-part-b",
+      "count": 7,
+      "keys": [
+        "mosquitto lib/packet_mosq.c:170 EXP34-C",
+        "mosquitto src/database.c:255 EXP34-C",
+        "mosquitto src/database.c:268 EXP34-C",
+        "sqlite src/pcache.c:206 EXP34-C",
+        "sqlite src/pragma.c:573 EXP34-C",
+        "sqlite src/vdbe.c:8320 EXP34-C",
+        "sqlite src/vdbe.c:8465 EXP34-C"
+      ],
+      "note": "EXP34-C verdict corrected FP -> TP: the carried-forward FP predates the 2026-10-07 rulings and its basis (an open caller set, an assert, an earlier dereference, an unchecked allocation or an unproven invariant) is not proof under EXP34-C/2026-10-07/presets; see that batch's manifest notes"
     }
   ]
 }

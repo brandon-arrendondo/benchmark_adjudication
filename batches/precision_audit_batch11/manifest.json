@@ -12,7 +12,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-06-14T16:47:13.233669+00:00",
-  "row_count": 1101,
+  "row_count": 1096,
   "rules": [
     "API00-C",
     "API02-C",
@@ -261,6 +261,18 @@
         "sqlite src/alter.c:1947 EXP34-C",
         "sqlite src/alter.c:2059 EXP34-C",
         "sqlite src/alter.c:2185 EXP34-C"
+      ],
+      "note": "EXP34-C verdict corrected FP -> TP: the carried-forward FP predates the 2026-10-07 rulings and its basis (an open caller set, an assert, an earlier dereference, an unchecked allocation or an unproven invariant) is not proof under EXP34-C/2026-10-07/presets; see that batch's manifest notes"
+    },
+    {
+      "by": "correction-exp34c-precedent-2026-10-part-b",
+      "count": 5,
+      "keys": [
+        "sqlite src/vtab.c:944 EXP34-C",
+        "sqlite src/vtab.c:96 EXP34-C",
+        "sqlite src/whereexpr.c:1081 EXP34-C",
+        "sqlite src/whereexpr.c:1552 EXP34-C",
+        "sqlite src/whereexpr.c:207 EXP34-C"
       ],
       "note": "EXP34-C verdict corrected FP -> TP: the carried-forward FP predates the 2026-10-07 rulings and its basis (an open caller set, an assert, an earlier dereference, an unchecked allocation or an unproven invariant) is not proof under EXP34-C/2026-10-07/presets; see that batch's manifest notes"
     }

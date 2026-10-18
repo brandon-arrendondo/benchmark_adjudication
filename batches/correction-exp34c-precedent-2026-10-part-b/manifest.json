@@ -1,0 +1,52 @@
+{
+  "batch_id": "correction-exp34c-precedent-2026-10-part-b",
+  "work_item_ref": "benchmarking_db-2496",
+  "requested_by": "coordinator",
+  "adjudicator": "claude-opus-5.5",
+  "adjudicating_node": "r720",
+  "aurora_lint_version": "0.6.0",
+  "aurora_lint_sha": "d21be1b3dc1ffa801ddbc32ba425d6df7ab90c68",
+  "projects": [
+    "curl",
+    "lua",
+    "mbedtls",
+    "mosquitto",
+    "pureftpd",
+    "raylib",
+    "sqlite",
+    "ventoy"
+  ],
+  "codebase_commits": {
+    "curl": "3e198f75861cc2e12daf299689e145949dddd19b",
+    "lua": "40b76de2d77e66b70a9d4bf989c3f5340919973f",
+    "mbedtls": "068ff080b369adfac81509f9b57b2afabaf82dc5",
+    "mosquitto": "d3ee5c5ca62c0fa4983308c6fff558ee978e878c",
+    "pureftpd": "cc28bff52ca28e1d122a2142bf37f2dc578f4d3e",
+    "raylib": "962bbfc6bfbd7a5acd08e21314fcfa161003a589",
+    "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af",
+    "ventoy": "7cbdc5cf69935bcf1f085ae67f40e70ea7e74bae"
+  },
+  "submitted_at": "2026-10-18T19:00:00Z",
+  "row_count": 135,
+  "rules": [
+    "EXP34-C"
+  ],
+  "verdicts": {
+    "TP": 119,
+    "FP": 16
+  },
+  "corrections": {
+    "FP_to_TP": 119,
+    "FP_restated": 16
+  },
+  "recheck": {
+    "basis": "ruling",
+    "ruling": "EXP34-C/2026-10-07/presets",
+    "selection": "targeted",
+    "reviewed": 135,
+    "flipped": 119,
+    "blind_to_prior_verdict": false,
+    "blind_to_diagnostic": false
+  },
+  "notes": "A CORRECTION, NOT A NEW ADJUDICATION. EXP34-C PRECEDENT CONSISTENCY, PART B: the rest of sqlite (src/pcache.c through src/window.c) and curl, lua, mbedtls, mosquitto, pureftpd, raylib and ventoy. Same selection, standard and mechanics as correction-exp34c-precedent-2026-10-sqlite-part-a: every carried-forward EXP34-C label that a coverage-exp34c-2026-10-* row names in provenance as a precedent conflict (hostap excluded; sel4 has none). Every one was FP.\n\nCALLER SETS, as in the coverage batches: non-static functions are open in sqlite, libcurl, the mbedtls library, libmosquitto and the broker (ENABLE_EXPORTS), lua and raylib; a static function whose address escapes is open. curl's UNITTEST is static in the shipped libcurl (curl_setup.h:1505-1508), so its caller set is its in-library callers. pureftpd outside puredb and Ventoy2Disk are programs no real build exports (ADR-0011), so their callers are enumerated in the tree, with no callback, ops-table or escaping-pointer route. Third-party and platform contracts (GLFW, RGFW, the Android JNI, OpenSSL, libssh2, LDAP, SSPI, Windows VDS, a loadable sqlite virtual-table module) are not proof. An unchecked RL_MALLOC/RL_CALLOC, malloc or mosquitto_malloc result is a null source; lua allocator calls raise instead of returning NULL.\n\nMETHOD. Three read-only research readers re-read each row at source in the pinned checkouts, each row carrying the official runs' finding message so the pointer judged is the one the finding names. The adjudicator reviewed every draft against the citing coverage rows and re-read every kept FP and every low-confidence row; three drafts were corrected (curl doh.c:1166 and urlapi.c:343 kept FP: the reader had treated UNITTEST functions as extern, and their in-library callers prove the pointer; Ventoy DiskService_vds.c:1097 TP: a VDS success contract is a platform contract). A fresh-context refuter re-read a seeded sample of 23 rows (seed 24962: every kept FP, every low-confidence row, and 12 at random) and agreed with every verdict; the line-number slips it found (rtextures.c:2942) and one wording are corrected.\n\nRESULT: 119 FP -> TP, 16 FP kept with the reason restated (TP/FP: sqlite 46/6, mbedtls 26/2, raylib 20/1, curl 13/6, mosquitto 5/1, lua 4/0, ventoy 4/0, pureftpd 1/0).\n- Flip bases: an open caller set; an assert, DEBUGASSERT, ALWAYS or NEVER as the only test; an earlier dereference as the only proof; an unchecked allocation (the raylib \"trusted allocator\" labels, LoadImageColors/LoadImageDataNormalized results, Ventoy GPT buffers); a NULL return left untested (localtime, lua_touserdata on a replaceable upvalue, sqlite3PrimaryKeyIndex); a third-party or platform contract; an invariant whose writers the source does not all prove.\n- Kept FP: 12 call sites that are not a dereference site (sqlite select.c:3874, upsert.c:284, vdbeaux.c:4582, vdbemem.c:2208, vtab.c:97; curl conncache.c:395/422, doh.c:298, vtls_scache.c:806; mbedtls rsa.c:1232/1512; mosquitto service.c:133); a mallocFailed correlation (where.c:7034); two curl UNITTEST helpers with closed, proving callers (doh.c:1166, urlapi.c:343); a raylib line no build compiles (rmodels.c:2902, in the #else of a macro defined on the line before).\n\nUnder the 2026-09-21 site ruling (ADR-0012 Decision 1: a plain f(p) into a project function is never an EXP34-C site) only what is physically on the keyed line counts: a line that only passes the pointer to an in-tree function is restated FP, \"Not a dereference site\", unless the line itself dereferences a pointer or passes one to an ISO C or POSIX function specified to dereference it (memcpy, memcmp, strcmp, strlen, printf %s), which keeps it TP. Ventoy Utility.c:997 stays TP on the line's own Head->PartTblCrc dereference.\n\nLOW CONFIDENCE: sqlite vdbe.c:6174/6175/8465 (virtual-table cursor and module fields that only a loadable module can leave NULL), vdbeaux.c:1157 (reachable only through an open caller of sqlite3VdbeTakeOpArray), curl multi.c:931 (a dereference inside DEBUGASSERT).\n\nMechanics: in-place edits keep each key; each donor batch takes a row_count decrement and a superseded_rows record, split into the flips and the restatements. Counting basis: distinct (project, commit, file, line, rule) keys. No precision or recall claim is made here."
+}

@@ -12,7 +12,7 @@
     "raylib": "962bbfc6bfbd7a5acd08e21314fcfa161003a589"
   },
   "submitted_at": "2026-06-23T17:02:48.296889",
-  "row_count": 856,
+  "row_count": 846,
   "rules": [
     "API00-C",
     "API07-C",
@@ -90,6 +90,23 @@
         "raylib src/rtextures.c:5483 FIO50-C"
       ],
       "note": "retired from the CERT C oracle: FIO50-C/FIO51-C are CERT C++ ids, removed from aurora-lint at 9aace3a3; row archived, verdict unchanged; see retire-cert-cpp-ids-fio50-fio51-bmdb2229"
+    },
+    {
+      "by": "correction-exp34c-precedent-2026-10-part-b",
+      "count": 10,
+      "keys": [
+        "raylib src/rtextures.c:1270 EXP34-C",
+        "raylib src/rtextures.c:2060 EXP34-C",
+        "raylib src/rtextures.c:2100 EXP34-C",
+        "raylib src/rtextures.c:2294 EXP34-C",
+        "raylib src/rtextures.c:2490 EXP34-C",
+        "raylib src/rtextures.c:2750 EXP34-C",
+        "raylib src/rtextures.c:2780 EXP34-C",
+        "raylib src/rtextures.c:2817 EXP34-C",
+        "raylib src/rtextures.c:2869 EXP34-C",
+        "raylib src/rtextures.c:2906 EXP34-C"
+      ],
+      "note": "EXP34-C verdict corrected FP -> TP: the carried-forward FP predates the 2026-10-07 rulings and its basis (an open caller set, an assert, an earlier dereference, an unchecked allocation or an unproven invariant) is not proof under EXP34-C/2026-10-07/presets; see that batch's manifest notes"
     }
   ]
 }
