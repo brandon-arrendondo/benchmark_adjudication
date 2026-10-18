@@ -12,7 +12,7 @@
     "hostap": "dcee60436390dd34731560657c4257c3b4c839a6"
   },
   "submitted_at": "2026-09-10T14:01:14.632544Z",
-  "row_count": 127,
+  "row_count": 122,
   "rules": [
     "EXP34-C"
   ],
@@ -25,6 +25,18 @@
         "hostap wpa_supplicant/p2p_supplicant.c:1652 EXP34-C"
       ],
       "note": "EXP34-C verdict corrected TP -> FP as keyed by bmdb 1423: the key is a caller's positional call argument, which aurora_lint 1418 no longer treats as a violation site; see that batch's manifest notes"
+    },
+    {
+      "by": "correction-rdynamic-hostap-2026-10-rest",
+      "count": 5,
+      "keys": [
+        "hostap wpa_supplicant/events.c:6236 EXP34-C",
+        "hostap wpa_supplicant/events.c:6685 EXP34-C",
+        "hostap wpa_supplicant/events.c:7161 EXP34-C",
+        "hostap wpa_supplicant/events.c:7368 EXP34-C",
+        "hostap wpa_supplicant/notify.c:439 EXP34-C"
+      ],
+      "note": "relabeled or restated by the hostap caller-set re-pass under ADR-0011 (open caller sets in the -rdynamic builds); see that batch's manifest notes"
     }
   ]
 }

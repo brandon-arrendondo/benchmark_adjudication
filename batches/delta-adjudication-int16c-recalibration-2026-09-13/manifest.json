@@ -30,7 +30,7 @@
     "ventoy": "7cbdc5cf69935bcf1f085ae67f40e70ea7e74bae"
   },
   "submitted_at": "2026-09-13T06:11:45.408059",
-  "row_count": 1026,
+  "row_count": 1021,
   "rules": [
     "INT16-C"
   ],
@@ -131,6 +131,18 @@
         "hostap src/ap/wpa_auth_ie.c:293 INT16-C",
         "hostap src/ap/wpa_auth_ie.c:300 INT16-C",
         "hostap src/ap/wpa_auth_ie.c:307 INT16-C"
+      ],
+      "note": "relabeled or restated by the hostap caller-set re-pass under ADR-0011 (open caller sets in the -rdynamic builds); see that batch's manifest notes"
+    },
+    {
+      "by": "correction-rdynamic-hostap-2026-10-rest",
+      "count": 5,
+      "keys": [
+        "hostap src/common/dpp.c:542 INT16-C",
+        "hostap src/common/dpp.c:627 INT16-C",
+        "hostap src/eap_peer/eap_aka.c:387 INT16-C",
+        "hostap src/eap_peer/eap_sim.c:413 INT16-C",
+        "hostap src/rsn_supp/wpa.c:642 INT16-C"
       ],
       "note": "relabeled or restated by the hostap caller-set re-pass under ADR-0011 (open caller sets in the -rdynamic builds); see that batch's manifest notes"
     }

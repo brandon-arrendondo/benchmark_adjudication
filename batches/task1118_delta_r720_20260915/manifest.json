@@ -24,7 +24,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-09-15T11:23:46.295128",
-  "row_count": 259,
+  "row_count": 228,
   "rules": [
     "API00-C"
   ],
@@ -1381,6 +1381,44 @@
         "hostap src/ap/vlan_util.c:124 API00-C",
         "hostap src/ap/vlan_util.c:24 API00-C",
         "hostap src/ap/wpa_auth_ft.c:2877 API00-C"
+      ],
+      "note": "relabeled or restated by the hostap caller-set re-pass under ADR-0011 (open caller sets in the -rdynamic builds); see that batch's manifest notes"
+    },
+    {
+      "by": "correction-rdynamic-hostap-2026-10-rest",
+      "count": 31,
+      "keys": [
+        "hostap src/crypto/tls_internal.c:298 API00-C",
+        "hostap src/drivers/linux_ioctl.c:123 API00-C",
+        "hostap src/eap_server/eap_server_tls_common.c:196 API00-C",
+        "hostap src/eap_server/ikev2.c:1185 API00-C",
+        "hostap src/eap_server/ikev2.c:21 API00-C",
+        "hostap src/radius/radius.c:1024 API00-C",
+        "hostap src/radius/radius.c:1075 API00-C",
+        "hostap src/radius/radius.c:1099 API00-C",
+        "hostap src/radius/radius.c:1584 API00-C",
+        "hostap src/radius/radius.c:1607 API00-C",
+        "hostap src/radius/radius.c:1905 API00-C",
+        "hostap src/radius/radius.c:426 API00-C",
+        "hostap src/radius/radius.c:461 API00-C",
+        "hostap src/radius/radius.c:52 API00-C",
+        "hostap src/radius/radius.c:646 API00-C",
+        "hostap src/radius/radius.c:972 API00-C",
+        "hostap src/radius/radius_client.c:1857 API00-C",
+        "hostap src/radius/radius_das.c:546 API00-C",
+        "hostap src/radius/radius_server.c:2022 API00-C",
+        "hostap src/utils/common.c:1125 API00-C",
+        "hostap src/utils/common.c:450 API00-C",
+        "hostap src/utils/common.c:461 API00-C",
+        "hostap src/utils/ext_password.c:75 API00-C",
+        "hostap src/utils/os_win32.c:102 API00-C",
+        "hostap src/utils/os_win32.c:132 API00-C",
+        "hostap src/utils/os_win32.c:193 API00-C",
+        "hostap src/utils/os_win32.c:26 API00-C",
+        "hostap src/utils/os_win32.c:51 API00-C",
+        "hostap src/utils/os_win32.c:62 API00-C",
+        "hostap wpa_supplicant/scan.c:1989 API00-C",
+        "hostap wpa_supplicant/wpa_supplicant.c:7386 API00-C"
       ],
       "note": "relabeled or restated by the hostap caller-set re-pass under ADR-0011 (open caller sets in the -rdynamic builds); see that batch's manifest notes"
     }
