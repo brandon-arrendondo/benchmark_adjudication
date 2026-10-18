@@ -1,0 +1,43 @@
+{
+  "batch_id": "correction-hostap-windows-only-merit-2026-10",
+  "work_item_ref": "benchmarking_db-1554",
+  "requested_by": "coordinator",
+  "adjudicator": "claude-opus-5.5",
+  "adjudicating_node": "dev-468",
+  "aurora_lint_version": "0.6.0",
+  "aurora_lint_sha": "d21be1b3dc1ffa801ddbc32ba425d6df7ab90c68",
+  "projects": [
+    "hostap"
+  ],
+  "codebase_commits": {
+    "hostap": "dcee60436390dd34731560657c4257c3b4c839a6"
+  },
+  "submitted_at": "2026-10-18T19:56:49Z",
+  "row_count": 38,
+  "rules": [
+    "API00-C",
+    "EXP34-C",
+    "FIO05-C",
+    "INT16-C",
+    "INT34-C"
+  ],
+  "verdicts": {
+    "TP": 7,
+    "FP": 31
+  },
+  "corrections": {
+    "FP_to_TP": 3,
+    "TP_restated": 4,
+    "TP_to_FP": 31
+  },
+  "recheck": {
+    "basis": "ruling",
+    "ruling": "aurora-lint ADR-0011 (the converse: code that no real build in the tree exports stays closed; a Windows-only file cannot be a dlopen/-rdynamic build) and ADR-0010 Decisions 6-7 (hostap's oracle describes its POSIX/Linux configuration; a Windows-only row is labeled on its own merits), with ADR-0012 Decision 2 for API00-C",
+    "selection": "targeted",
+    "reviewed": 38,
+    "flipped": 34,
+    "blind_to_prior_verdict": false,
+    "blind_to_diagnostic": false
+  },
+  "notes": "A CORRECTION, NOT A NEW ADJUDICATION. hostap rows in files that only a Windows (PE) build compiles, re-read on their merits.\n\nRULING. aurora-lint ADR-0011, the converse: code that no real build in the tree exports stays closed, and a Windows-only file cannot be a dlopen/-rdynamic build without dlfcn. ADR-0010 Decisions 6-7: hostap's oracle describes its primary POSIX/Linux configuration; a Windows-only row is still labeled as written, on its own merits. So the -rdynamic open-caller basis never applied to these files: a function's caller set is the in-tree one unless a registered callback, a thread start routine, an ops table or another function pointer exports it. API00-C follows ADR-0012 Decision 2 (TP only when the receiving function is reachable from outside the program) and Decision 3.\n\nSCOPE. The Windows-only files, derived from the build files (CONFIG_NATIVE_WINDOWS, CONFIG_OS=win32, CONFIG_ELOOP=eloop_win, CONFIG_L2_PACKET=ndis/winpcap, CONFIG_DRIVER_NDIS, CONFIG_BACKEND=winreg, CONFIG_CTRL_IFACE=named_pipe, nmake.mak) and their unconditional Windows headers or Win32 API use: src/utils/os_win32.c, src/utils/eloop_win.c, src/l2_packet/l2_packet_ndis.c, src/l2_packet/l2_packet_winpcap.c, src/drivers/driver_ndis.c, src/drivers/driver_ndis_.c, src/drivers/ndis_events.c, wpa_supplicant/main_winsvc.c, wpa_supplicant/main_winmain.c, wpa_supplicant/win_if_list.c, wpa_supplicant/config_winreg.c, wpa_supplicant/ctrl_iface_named_pipe.c. Every TP row in those files whose basis was an open caller set, explicit (-rdynamic, an escaping address) or implicit (callers pass an unproven value, an unconstrained parameter), whichever batch labeled it, plus three FP rows from the hostap caller-set re-pass held for this question. TPs resting on a null source or a real export route, and syntactic rules, are unchanged.\n\nMETHOD. Read-only research readers re-read every row at source at the pinned commit under a written brief: enumerate every in-tree call site of a closed function, follow every export route, and label TP only where the function itself shows a path or an open value reaches it through a route. A fresh-context refuter re-read all 38 rows, grepping the whole checkout for each function name used as a value: 32 upheld, 6 citations corrected, none overturned.\n\nRESULT. 38 rows reviewed: TP->FP 31, TP->TP 4 (restated), FP->TP 3. Verdict changes by rule: API00-C 29, EXP34-C 3, INT16-C 1, FIO05-C 1.\n\nENTRY POINTS. The five API00-C rows on the wpa_driver_ndis_event_* functions in src/drivers/driver_ndis.c are FP: each function is called only directly, so its caller set is closed (Decision 2). The drv they receive arrives through eloop callbacks registered at driver_ndis.c:2029-2030 (ndisuio_notification_receive) and :2886-2887 (wpa_driver_ndis_event_pipe_cb), which ADR-0011 counts as an export route, so API00-C belongs at those callbacks. Neither callback carries an API00-C key at the pinned commit, so the value is unlabeled at its entry point. A dereference of drv inside the event functions is an EXP34-C site and is labeled separately.\n\nMechanics: in-place edits keep each key; each original batch takes a row_count decrement and a superseded_rows record. Counting basis: distinct (project, commit, file, line, rule) keys. No precision claim is made here."
+}

@@ -18,9 +18,19 @@
     "raylib": "962bbfc6bfbd7a5acd08e21314fcfa161003a589"
   },
   "submitted_at": "2026-09-03T13:11:45.346729",
-  "row_count": 20,
+  "row_count": 19,
   "rules": [
     "API00-C"
   ],
-  "notes": "Reconstructed during benchmark_adjudication's initial population (2026-09-16) from benchmarking_db's ground_truth.source='task-664-sample-overflow'. row_count/projects/codebase_commits/rules were derived from the rows themselves, not declared at adjudication time. aurora_lint_version/aurora_lint_sha are unknown for legacy data -- never recorded per-row."
+  "notes": "Reconstructed during benchmark_adjudication's initial population (2026-09-16) from benchmarking_db's ground_truth.source='task-664-sample-overflow'. row_count/projects/codebase_commits/rules were derived from the rows themselves, not declared at adjudication time. aurora_lint_version/aurora_lint_sha are unknown for legacy data -- never recorded per-row.",
+  "superseded_rows": [
+    {
+      "by": "correction-hostap-windows-only-merit-2026-10",
+      "count": 1,
+      "keys": [
+        "hostap src/l2_packet/l2_packet_winpcap.c:72 API00-C"
+      ],
+      "note": "re-read on its merits by the Windows-only file pass (closed caller set in the Windows-only configuration); see that batch's manifest notes"
+    }
+  ]
 }

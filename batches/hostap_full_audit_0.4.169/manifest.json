@@ -12,7 +12,7 @@
     "hostap": "dcee60436390dd34731560657c4257c3b4c839a6"
   },
   "submitted_at": "2026-07-28",
-  "row_count": 29207,
+  "row_count": 29205,
   "rules": [
     "API00-C",
     "API01-C",
@@ -2359,6 +2359,15 @@
         "hostap src/eapol_supp/eapol_supp_sm.c:2220 API00-C"
       ],
       "note": "relabeled or restated by the hostap caller-set re-pass under ADR-0011 (open caller sets in the -rdynamic builds); see that batch's manifest notes"
+    },
+    {
+      "by": "correction-hostap-windows-only-merit-2026-10",
+      "count": 2,
+      "keys": [
+        "hostap src/l2_packet/l2_packet_winpcap.c:254 API00-C",
+        "hostap src/utils/os_win32.c:154 API00-C"
+      ],
+      "note": "re-read on its merits by the Windows-only file pass (closed caller set in the Windows-only configuration); see that batch's manifest notes"
     }
   ]
 }

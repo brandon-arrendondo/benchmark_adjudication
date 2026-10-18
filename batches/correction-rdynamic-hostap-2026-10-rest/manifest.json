@@ -13,7 +13,7 @@
     "hostap": "dcee60436390dd34731560657c4257c3b4c839a6"
   },
   "submitted_at": "2026-10-18T14:41:28Z",
-  "row_count": 104,
+  "row_count": 94,
   "rules": [
     "API00-C",
     "ARR00-C",
@@ -47,5 +47,24 @@
     "blind_to_prior_verdict": false,
     "blind_to_diagnostic": false
   },
-  "notes": "A CORRECTION, NOT A NEW ADJUDICATION. hostap caller-set re-pass, the remaining directories.\n\nRULING. aurora-lint ADR-0011 6b28c8d7: wpa_supplicant/Makefile:1004-1006 links with -ldl -rdynamic under CONFIG_DYNAMIC_EAP_METHODS, and hostapd/Makefile:112-116 links with -rdynamic under CONFIG_WPA_TRACE; both configurations compile (ADR-0010), so every non-static function in a file either binary links, and every static function whose address escapes, has an open caller set, and in-tree call sites prove nothing. Also applied: an earlier dereference is not a check; documentation and an \"internal invariant\" are not proof; a closed static chain counts only while every call site provably passes a safe value.\n\nSCOPE. FP rows outside src/ap and hostapd/ whose reason rested on callers, an earlier dereference, documentation or a mixed caller/local basis, in files linked into wpa_supplicant or hostapd, at keys aurora-lint d21be1b3d still reports plus the rows of that kind the newer EXP34-C coverage rows name as conflicting precedent. Rows at keys d21be1b3d no longer reports say so in provenance.\n\nMETHOD. Read-only research readers re-read every row at source at the pinned commit under a written brief and drafted a verdict; a fresh-context refuter re-read a sample of each batch (30 rows: every verdict change to FP, every kept FP below high confidence, and a random draw of the rest). The refuters found one shape applied inconsistently, a line that only passes the pointer to an in-tree function, so every EXP34-C row was then re-checked at source against the EXP34-C site ruling (the dereference is the violation site; passing a pointer as an ordinary argument is not one; the callee's own dereference is its site). Where such a line also dereferences another pointer that nothing proves non-null, the line is labeled on that dereference. Refuter citation fixes were applied. Two PRE00-C/PRE12-C rows were left out: a macro's call sites are all in-tree, so ADR-0011 does not reach them.\n\nRESULT. 104 rows reviewed: FP->FP 45, FP->TP 59. Verdict changes by rule: API00-C 36, EXP34-C 12, INT16-C 3, MSC01-C 3, FIO05-C 2, INT34-C 1, INT33-C 1, INT30-C 1. Every kept row's reason is restated to the basis it now rests on.\n\nMechanics: in-place edits keep each key; each original batch takes a row_count decrement and a superseded_rows record. Counting basis: distinct (project, commit, file, line, rule) keys. No precision claim is made here."
+  "notes": "A CORRECTION, NOT A NEW ADJUDICATION. hostap caller-set re-pass, the remaining directories.\n\nRULING. aurora-lint ADR-0011 6b28c8d7: wpa_supplicant/Makefile:1004-1006 links with -ldl -rdynamic under CONFIG_DYNAMIC_EAP_METHODS, and hostapd/Makefile:112-116 links with -rdynamic under CONFIG_WPA_TRACE; both configurations compile (ADR-0010), so every non-static function in a file either binary links, and every static function whose address escapes, has an open caller set, and in-tree call sites prove nothing. Also applied: an earlier dereference is not a check; documentation and an \"internal invariant\" are not proof; a closed static chain counts only while every call site provably passes a safe value.\n\nSCOPE. FP rows outside src/ap and hostapd/ whose reason rested on callers, an earlier dereference, documentation or a mixed caller/local basis, in files linked into wpa_supplicant or hostapd, at keys aurora-lint d21be1b3d still reports plus the rows of that kind the newer EXP34-C coverage rows name as conflicting precedent. Rows at keys d21be1b3d no longer reports say so in provenance.\n\nMETHOD. Read-only research readers re-read every row at source at the pinned commit under a written brief and drafted a verdict; a fresh-context refuter re-read a sample of each batch (30 rows: every verdict change to FP, every kept FP below high confidence, and a random draw of the rest). The refuters found one shape applied inconsistently, a line that only passes the pointer to an in-tree function, so every EXP34-C row was then re-checked at source against the EXP34-C site ruling (the dereference is the violation site; passing a pointer as an ordinary argument is not one; the callee's own dereference is its site). Where such a line also dereferences another pointer that nothing proves non-null, the line is labeled on that dereference. Refuter citation fixes were applied. Two PRE00-C/PRE12-C rows were left out: a macro's call sites are all in-tree, so ADR-0011 does not reach them.\n\nRESULT. 104 rows reviewed: FP->FP 45, FP->TP 59. Verdict changes by rule: API00-C 36, EXP34-C 12, INT16-C 3, MSC01-C 3, FIO05-C 2, INT34-C 1, INT33-C 1, INT30-C 1. Every kept row's reason is restated to the basis it now rests on.\n\nMechanics: in-place edits keep each key; each original batch takes a row_count decrement and a superseded_rows record. Counting basis: distinct (project, commit, file, line, rule) keys. No precision claim is made here.",
+  "superseded_rows": [
+    {
+      "by": "correction-hostap-windows-only-merit-2026-10",
+      "count": 10,
+      "keys": [
+        "hostap src/drivers/driver_ndis.c:1017 INT34-C",
+        "hostap src/l2_packet/l2_packet_ndis.c:189 EXP34-C",
+        "hostap src/l2_packet/l2_packet_ndis.c:326 EXP34-C",
+        "hostap src/utils/os_win32.c:102 API00-C",
+        "hostap src/utils/os_win32.c:132 API00-C",
+        "hostap src/utils/os_win32.c:193 API00-C",
+        "hostap src/utils/os_win32.c:198 FIO05-C",
+        "hostap src/utils/os_win32.c:26 API00-C",
+        "hostap src/utils/os_win32.c:51 API00-C",
+        "hostap src/utils/os_win32.c:62 API00-C"
+      ],
+      "note": "re-read on its merits by the Windows-only file pass (closed caller set in the Windows-only configuration); see that batch's manifest notes"
+    }
+  ]
 }

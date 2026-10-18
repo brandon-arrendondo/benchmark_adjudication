@@ -26,7 +26,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-09-11T15:57:27.790148",
-  "row_count": 9031,
+  "row_count": 9029,
   "rules": [
     "DCL04-C",
     "DCL06-C",
@@ -438,6 +438,15 @@
         "curl lib/http.c:3125 PRE31-C"
       ],
       "note": "PRE31-C re-derived under Brandon 2026-10-02 PRE31-C ruling (a): the oracle records the strict, freestanding truth, where a C library call is an unknown call and strict counts an unknown call as a side effect, so an argument whose only effect is such a call is strict TP; the hosted contract that calls it pure is the relaxation, tagged contract:stdlib_call_effects (ADR-0014, ADR-0015 D5); see pre31-ruling-2026-a01's manifest notes"
+    },
+    {
+      "by": "correction-hostap-windows-only-merit-2026-10",
+      "count": 2,
+      "keys": [
+        "hostap src/drivers/driver_ndis.c:589 INT16-C",
+        "hostap src/drivers/driver_ndis.c:618 INT16-C"
+      ],
+      "note": "re-read on its merits by the Windows-only file pass (closed caller set in the Windows-only configuration); see that batch's manifest notes"
     }
   ]
 }

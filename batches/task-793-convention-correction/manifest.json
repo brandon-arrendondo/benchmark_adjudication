@@ -20,7 +20,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-09-08T12:54:46.331652",
-  "row_count": 309,
+  "row_count": 308,
   "rules": [
     "API00-C"
   ],
@@ -33,6 +33,14 @@
         "mosquitto src/mosquitto.c:413 API00-C"
       ],
       "note": "API00-C verdict corrected TP -> FP under the main() argc/argv ruling (Brandon 2026-09-24, bmdb 1548): argv itself is non-null by C11 5.1.2.2.1; see that batch manifest notes"
+    },
+    {
+      "by": "correction-hostap-windows-only-merit-2026-10",
+      "count": 1,
+      "keys": [
+        "hostap src/utils/eloop_win.c:314 API00-C"
+      ],
+      "note": "re-read on its merits by the Windows-only file pass (closed caller set in the Windows-only configuration); see that batch's manifest notes"
     }
   ]
 }

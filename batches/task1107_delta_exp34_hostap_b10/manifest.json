@@ -12,7 +12,7 @@
     "hostap": "dcee60436390dd34731560657c4257c3b4c839a6"
   },
   "submitted_at": "2026-09-10T13:43:26.612631Z",
-  "row_count": 109,
+  "row_count": 107,
   "rules": [
     "EXP34-C"
   ],
@@ -50,6 +50,15 @@
         "hostap src/rsn_supp/pmksa_cache.c:257 EXP34-C"
       ],
       "note": "relabeled or restated by the hostap caller-set re-pass under ADR-0011 (open caller sets in the -rdynamic builds); see that batch's manifest notes"
+    },
+    {
+      "by": "correction-hostap-windows-only-merit-2026-10",
+      "count": 2,
+      "keys": [
+        "hostap src/l2_packet/l2_packet_ndis.c:121 EXP34-C",
+        "hostap src/l2_packet/l2_packet_winpcap.c:89 EXP34-C"
+      ],
+      "note": "re-read on its merits by the Windows-only file pass (closed caller set in the Windows-only configuration); see that batch's manifest notes"
     }
   ]
 }
