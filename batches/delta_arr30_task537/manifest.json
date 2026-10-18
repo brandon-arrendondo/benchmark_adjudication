@@ -18,7 +18,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-08-25T08:22:09.467359",
-  "row_count": 342,
+  "row_count": 341,
   "rules": [
     "ARR30-C"
   ],
@@ -64,6 +64,14 @@
       "keys": [
         "hostap src/ap/ieee802_11_eht.c:131 ARR30-C",
         "hostap src/ap/ieee802_11_he.c:104 ARR30-C"
+      ],
+      "note": "relabeled or restated by the hostap caller-set re-pass under ADR-0011 (open caller sets in the -rdynamic builds); see that batch's manifest notes"
+    },
+    {
+      "by": "correction-rdynamic-hostap-2026-10-not-emitted-rest",
+      "count": 1,
+      "keys": [
+        "hostap src/radius/radius.c:68 ARR30-C"
       ],
       "note": "relabeled or restated by the hostap caller-set re-pass under ADR-0011 (open caller sets in the -rdynamic builds); see that batch's manifest notes"
     }

@@ -17,7 +17,7 @@
     "raylib": "962bbfc6bfbd7a5acd08e21314fcfa161003a589"
   },
   "submitted_at": "2026-09-22T00:00:00Z",
-  "row_count": 7,
+  "row_count": 6,
   "rules": [
     "EXP34-C"
   ],
@@ -36,6 +36,14 @@
         "raylib src/raudio.c:1707 EXP34-C"
       ],
       "note": "verdict corrected FP -> TP by bmdb 1553 (raylib): the FP rested only on in-tree callers of a non-static library function (ADR-0011 742a1571); see that batch manifest notes"
+    },
+    {
+      "by": "correction-rdynamic-hostap-2026-10-not-emitted-rest",
+      "count": 1,
+      "keys": [
+        "hostap src/common/wpa_common.c:1277 EXP34-C"
+      ],
+      "note": "relabeled or restated by the hostap caller-set re-pass under ADR-0011 (open caller sets in the -rdynamic builds); see that batch's manifest notes"
     }
   ]
 }

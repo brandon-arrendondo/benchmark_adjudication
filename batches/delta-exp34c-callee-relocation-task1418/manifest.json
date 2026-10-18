@@ -27,7 +27,7 @@
     "ventoy": "7cbdc5cf69935bcf1f085ae67f40e70ea7e74bae"
   },
   "submitted_at": "2026-09-22T19:59:31Z",
-  "row_count": 69,
+  "row_count": 68,
   "rules": [
     "EXP34-C"
   ],
@@ -188,6 +188,14 @@
         "hostap src/utils/wpabuf.c:40 EXP34-C"
       ],
       "note": "verdict reverted FP -> TP by the bmdb 1554 -rdynamic re-pass (ADR-0011 6b28c8d7): the function is non-static and linked into wpa_supplicant, so its caller set is open and the in-tree call-site basis does not hold"
+    },
+    {
+      "by": "correction-rdynamic-hostap-2026-10-not-emitted-rest",
+      "count": 1,
+      "keys": [
+        "hostap src/rsn_supp/tdls.c:1667 EXP34-C"
+      ],
+      "note": "relabeled or restated by the hostap caller-set re-pass under ADR-0011 (open caller sets in the -rdynamic builds); see that batch's manifest notes"
     }
   ]
 }

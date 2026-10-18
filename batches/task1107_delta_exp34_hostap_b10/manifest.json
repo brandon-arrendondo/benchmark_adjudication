@@ -12,7 +12,7 @@
     "hostap": "dcee60436390dd34731560657c4257c3b4c839a6"
   },
   "submitted_at": "2026-09-10T13:43:26.612631Z",
-  "row_count": 126,
+  "row_count": 109,
   "rules": [
     "EXP34-C"
   ],
@@ -26,6 +26,30 @@
         "hostap src/p2p/p2p.c:6313 EXP34-C"
       ],
       "note": "EXP34-C verdict corrected TP -> FP as keyed by bmdb 1423: the key is a caller's positional call argument, which aurora_lint 1418 no longer treats as a violation site; see that batch's manifest notes"
+    },
+    {
+      "by": "correction-rdynamic-hostap-2026-10-not-emitted-rest",
+      "count": 17,
+      "keys": [
+        "hostap src/eap_server/tncs.c:614 EXP34-C",
+        "hostap src/eap_server/tncs.c:624 EXP34-C",
+        "hostap src/fst/fst.c:100 EXP34-C",
+        "hostap src/fst/fst.c:101 EXP34-C",
+        "hostap src/fst/fst.c:95 EXP34-C",
+        "hostap src/fst/fst.c:98 EXP34-C",
+        "hostap src/fst/fst_ctrl_iface.c:290 EXP34-C",
+        "hostap src/l2_packet/l2_packet_freebsd.c:67 EXP34-C",
+        "hostap src/l2_packet/l2_packet_linux.c:136 EXP34-C",
+        "hostap src/l2_packet/l2_packet_pcap.c:99 EXP34-C",
+        "hostap src/p2p/p2p.c:5851 EXP34-C",
+        "hostap src/p2p/p2p_invitation.c:445 EXP34-C",
+        "hostap src/p2p/p2p_parse.c:509 EXP34-C",
+        "hostap src/pae/ieee802_1x_kay.c:4175 EXP34-C",
+        "hostap src/radius/radius_server.c:1964 EXP34-C",
+        "hostap src/radius/radius_server.c:2550 EXP34-C",
+        "hostap src/rsn_supp/pmksa_cache.c:257 EXP34-C"
+      ],
+      "note": "relabeled or restated by the hostap caller-set re-pass under ADR-0011 (open caller sets in the -rdynamic builds); see that batch's manifest notes"
     }
   ]
 }

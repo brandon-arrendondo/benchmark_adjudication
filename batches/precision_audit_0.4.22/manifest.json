@@ -18,7 +18,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-06-10",
-  "row_count": 139,
+  "row_count": 138,
   "rules": [
     "DCL13-C",
     "EXP34-C",
@@ -102,6 +102,14 @@
         "hostap wpa_supplicant/eapol_test.c:843 EXP34-C"
       ],
       "note": "re-read on its merits under the EXP34-C/2026-10-07 rulings, as a precedent named in conflict by the 2026-10 EXP34-C coverage rows; see that batch's manifest notes"
+    },
+    {
+      "by": "correction-rdynamic-hostap-2026-10-not-emitted-rest",
+      "count": 1,
+      "keys": [
+        "hostap src/common/hw_features_common.c:993 EXP34-C"
+      ],
+      "note": "relabeled or restated by the hostap caller-set re-pass under ADR-0011 (open caller sets in the -rdynamic builds); see that batch's manifest notes"
     }
   ]
 }

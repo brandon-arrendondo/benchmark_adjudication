@@ -22,7 +22,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-09-03T14:14:17.652937",
-  "row_count": 159,
+  "row_count": 157,
   "rules": [
     "ARR00-C",
     "ARR36-C",
@@ -51,6 +51,15 @@
         "hostap src/tls/tlsv1_server_write.c:916 ARR36-C"
       ],
       "note": "restated by the hostap ARR36-C pass under ARR36-C/2026-10-07/form; see that batch's manifest notes"
+    },
+    {
+      "by": "correction-rdynamic-hostap-2026-10-not-emitted-rest",
+      "count": 2,
+      "keys": [
+        "hostap src/common/wpa_common.c:3067 EXP34-C",
+        "hostap src/tls/tlsv1_client_write.c:719 ARR00-C"
+      ],
+      "note": "relabeled or restated by the hostap caller-set re-pass under ADR-0011 (open caller sets in the -rdynamic builds); see that batch's manifest notes"
     }
   ]
 }

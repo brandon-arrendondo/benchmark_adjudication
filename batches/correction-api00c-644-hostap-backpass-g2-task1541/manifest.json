@@ -13,7 +13,7 @@
     "hostap": "dcee60436390dd34731560657c4257c3b4c839a6"
   },
   "submitted_at": "2026-09-25T04:36:59Z",
-  "row_count": 4,
+  "row_count": 2,
   "rules": [
     "API00-C"
   ],
@@ -59,6 +59,15 @@
       "keys": [
         "hostap src/ap/taxonomy.c:268 API00-C",
         "hostap src/ap/taxonomy.c:277 API00-C"
+      ],
+      "note": "relabeled or restated by the hostap caller-set re-pass under ADR-0011 (open caller sets in the -rdynamic builds); see that batch's manifest notes"
+    },
+    {
+      "by": "correction-rdynamic-hostap-2026-10-not-emitted-rest",
+      "count": 2,
+      "keys": [
+        "hostap src/common/dpp_crypto.c:1169 API00-C",
+        "hostap src/common/dpp_crypto.c:2225 API00-C"
       ],
       "note": "relabeled or restated by the hostap caller-set re-pass under ADR-0011 (open caller sets in the -rdynamic builds); see that batch's manifest notes"
     }
