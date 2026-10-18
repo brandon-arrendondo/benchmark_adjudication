@@ -24,7 +24,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-09-15T11:23:46.295128",
-  "row_count": 264,
+  "row_count": 259,
   "rules": [
     "API00-C"
   ],
@@ -1371,6 +1371,18 @@
         "hostap wpa_supplicant/wps_supplicant.c:2381 API00-C"
       ],
       "note": "verdict reverted FP -> TP by the bmdb 1554 -rdynamic re-pass (ADR-0011 6b28c8d7): the function is non-static and linked into wpa_supplicant, so its caller set is open and the in-tree call-site basis does not hold"
+    },
+    {
+      "by": "correction-rdynamic-hostap-2026-10-src-ap",
+      "count": 5,
+      "keys": [
+        "hostap src/ap/ap_config.c:734 API00-C",
+        "hostap src/ap/drv_callbacks.c:2946 API00-C",
+        "hostap src/ap/vlan_util.c:124 API00-C",
+        "hostap src/ap/vlan_util.c:24 API00-C",
+        "hostap src/ap/wpa_auth_ft.c:2877 API00-C"
+      ],
+      "note": "relabeled or restated by the hostap caller-set re-pass under ADR-0011 (open caller sets in the -rdynamic builds); see that batch's manifest notes"
     }
   ]
 }

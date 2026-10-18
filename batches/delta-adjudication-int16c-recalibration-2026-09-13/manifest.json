@@ -30,7 +30,7 @@
     "ventoy": "7cbdc5cf69935bcf1f085ae67f40e70ea7e74bae"
   },
   "submitted_at": "2026-09-13T06:11:45.408059",
-  "row_count": 1058,
+  "row_count": 1026,
   "rules": [
     "INT16-C"
   ],
@@ -94,6 +94,45 @@
         "hostap src/utils/eloop.c:538 INT16-C"
       ],
       "note": "verdict reverted FP -> TP by the bmdb 1554 -rdynamic re-pass (ADR-0011 6b28c8d7): the function is non-static and linked into wpa_supplicant, so its caller set is open and the in-tree call-site basis does not hold"
+    },
+    {
+      "by": "correction-rdynamic-hostap-2026-10-src-ap",
+      "count": 32,
+      "keys": [
+        "hostap src/ap/ieee802_1x.c:258 INT16-C",
+        "hostap src/ap/wmm.c:27 INT16-C",
+        "hostap src/ap/wmm.c:30 INT16-C",
+        "hostap src/ap/wmm.c:37 INT16-C",
+        "hostap src/ap/wmm.c:38 INT16-C",
+        "hostap src/ap/wpa_auth.c:2330 INT16-C",
+        "hostap src/ap/wpa_auth.c:2366 INT16-C",
+        "hostap src/ap/wpa_auth.c:2368 INT16-C",
+        "hostap src/ap/wpa_auth_ie.c:1019 INT16-C",
+        "hostap src/ap/wpa_auth_ie.c:1021 INT16-C",
+        "hostap src/ap/wpa_auth_ie.c:183 INT16-C",
+        "hostap src/ap/wpa_auth_ie.c:188 INT16-C",
+        "hostap src/ap/wpa_auth_ie.c:194 INT16-C",
+        "hostap src/ap/wpa_auth_ie.c:200 INT16-C",
+        "hostap src/ap/wpa_auth_ie.c:206 INT16-C",
+        "hostap src/ap/wpa_auth_ie.c:213 INT16-C",
+        "hostap src/ap/wpa_auth_ie.c:219 INT16-C",
+        "hostap src/ap/wpa_auth_ie.c:224 INT16-C",
+        "hostap src/ap/wpa_auth_ie.c:230 INT16-C",
+        "hostap src/ap/wpa_auth_ie.c:235 INT16-C",
+        "hostap src/ap/wpa_auth_ie.c:240 INT16-C",
+        "hostap src/ap/wpa_auth_ie.c:245 INT16-C",
+        "hostap src/ap/wpa_auth_ie.c:251 INT16-C",
+        "hostap src/ap/wpa_auth_ie.c:256 INT16-C",
+        "hostap src/ap/wpa_auth_ie.c:262 INT16-C",
+        "hostap src/ap/wpa_auth_ie.c:267 INT16-C",
+        "hostap src/ap/wpa_auth_ie.c:273 INT16-C",
+        "hostap src/ap/wpa_auth_ie.c:278 INT16-C",
+        "hostap src/ap/wpa_auth_ie.c:286 INT16-C",
+        "hostap src/ap/wpa_auth_ie.c:293 INT16-C",
+        "hostap src/ap/wpa_auth_ie.c:300 INT16-C",
+        "hostap src/ap/wpa_auth_ie.c:307 INT16-C"
+      ],
+      "note": "relabeled or restated by the hostap caller-set re-pass under ADR-0011 (open caller sets in the -rdynamic builds); see that batch's manifest notes"
     }
   ]
 }

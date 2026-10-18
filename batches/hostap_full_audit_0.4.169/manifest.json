@@ -12,7 +12,7 @@
     "hostap": "dcee60436390dd34731560657c4257c3b4c839a6"
   },
   "submitted_at": "2026-07-28",
-  "row_count": 29554,
+  "row_count": 29533,
   "rules": [
     "API00-C",
     "API01-C",
@@ -1949,6 +1949,34 @@
         "hostap src/utils/base64.c:136 FIO50-C"
       ],
       "note": "retired from the CERT C oracle: FIO50-C/FIO51-C are CERT C++ ids, removed from aurora-lint at 9aace3a3; row archived, verdict unchanged; see retire-cert-cpp-ids-fio50-fio51-bmdb2229"
+    },
+    {
+      "by": "correction-rdynamic-hostap-2026-10-src-ap",
+      "count": 21,
+      "keys": [
+        "hostap src/ap/accounting.c:274 EXP34-C",
+        "hostap src/ap/accounting.c:47 EXP34-C",
+        "hostap src/ap/ap_config.c:1538 ARR00-C",
+        "hostap src/ap/ap_config.c:1539 ARR00-C",
+        "hostap src/ap/ap_config.c:1540 ARR00-C",
+        "hostap src/ap/ap_config.c:1541 ARR00-C",
+        "hostap src/ap/dpp_hostapd.c:272 EXP20-C",
+        "hostap src/ap/dpp_hostapd.c:66 EXP20-C",
+        "hostap src/ap/drv_callbacks.c:1958 EXP34-C",
+        "hostap src/ap/drv_callbacks.c:2591 EXP34-C",
+        "hostap src/ap/ieee802_11_eht.c:1800 EXP34-C",
+        "hostap src/ap/ieee802_11_eht.c:1859 EXP34-C",
+        "hostap src/ap/ieee802_11_eht.c:2465 EXP34-C",
+        "hostap src/ap/sta_info.c:127 EXP34-C",
+        "hostap src/ap/wpa_auth.c:4935 ARR00-C",
+        "hostap src/ap/wpa_auth_ft.c:1061 EXP34-C",
+        "hostap src/ap/wpa_auth_ft.c:1132 EXP34-C",
+        "hostap src/ap/wpa_auth_ft.c:1164 EXP34-C",
+        "hostap src/ap/wpa_auth_ft.c:2228 EXP34-C",
+        "hostap src/ap/wpa_auth_ft.c:927 EXP34-C",
+        "hostap src/ap/wps_hostapd.c:334 EXP20-C"
+      ],
+      "note": "relabeled or restated by the hostap caller-set re-pass under ADR-0011 (open caller sets in the -rdynamic builds); see that batch's manifest notes"
     }
   ]
 }

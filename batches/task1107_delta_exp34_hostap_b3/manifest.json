@@ -12,7 +12,7 @@
     "hostap": "dcee60436390dd34731560657c4257c3b4c839a6"
   },
   "submitted_at": "2026-09-10T13:44:52.436096Z",
-  "row_count": 125,
+  "row_count": 117,
   "rules": [
     "EXP34-C"
   ],
@@ -34,6 +34,21 @@
         "hostap src/ap/hostapd.c:3487 EXP34-C"
       ],
       "note": "verdict reverted FP -> TP by the bmdb 1554 -rdynamic re-pass (ADR-0011 6b28c8d7): the function is non-static and linked into wpa_supplicant, so its caller set is open and the in-tree call-site basis does not hold"
+    },
+    {
+      "by": "correction-rdynamic-hostap-2026-10-src-ap",
+      "count": 8,
+      "keys": [
+        "hostap src/ap/hostapd.c:1613 EXP34-C",
+        "hostap src/ap/hostapd.c:1678 EXP34-C",
+        "hostap src/ap/ieee802_11.c:1211 EXP34-C",
+        "hostap src/ap/ieee802_11.c:4492 EXP34-C",
+        "hostap src/ap/ieee802_11.c:5161 EXP34-C",
+        "hostap src/ap/ieee802_11.c:5259 EXP34-C",
+        "hostap src/ap/ieee802_11.c:5401 EXP34-C",
+        "hostap src/ap/ieee802_11.c:5456 EXP34-C"
+      ],
+      "note": "relabeled or restated by the hostap caller-set re-pass under ADR-0011 (open caller sets in the -rdynamic builds); see that batch's manifest notes"
     }
   ]
 }
