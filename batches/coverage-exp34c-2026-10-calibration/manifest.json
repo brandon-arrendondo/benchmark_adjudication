@@ -1,0 +1,33 @@
+{
+  "batch_id": "coverage-exp34c-2026-10-calibration",
+  "work_item_ref": "benchmarking_db-2493",
+  "requested_by": "coordinator",
+  "adjudicator": "claude-opus-5.5",
+  "aurora_lint_version": "0.6.0",
+  "aurora_lint_sha": "d21be1b3dc1ffa801ddbc32ba425d6df7ab90c68",
+  "projects": [
+    "lua",
+    "pureftpd",
+    "raylib",
+    "sel4",
+    "ventoy"
+  ],
+  "codebase_commits": {
+    "lua": "40b76de2d77e66b70a9d4bf989c3f5340919973f",
+    "pureftpd": "cc28bff52ca28e1d122a2142bf37f2dc578f4d3e",
+    "raylib": "962bbfc6bfbd7a5acd08e21314fcfa161003a589",
+    "sel4": "1326364bc9135d9445d936ebc01e38a402c1f4c6",
+    "ventoy": "7cbdc5cf69935bcf1f085ae67f40e70ea7e74bae"
+  },
+  "submitted_at": "2026-10-18T01:37:46Z",
+  "row_count": 30,
+  "rules": [
+    "EXP34-C"
+  ],
+  "verdicts": {
+    "FP": 26,
+    "TP": 4
+  },
+  "recheck": null,
+  "notes": "EXP34-C ORACLE COVERAGE, CALIBRATION BATCH. These 30 keys are the in-scope EXP34-C findings in lua, pureftpd, raylib, sel4 and ventoy that aurora-lint d21be1b3d reports at both the default and the strict preset (runs sqc-0.6.0-d21be1b3d-default-* and -strict-*) and that no label covers. They are the first slice of the strict-oracle coverage pass; the strict-only keys (strict sets first_site_only=false and reports every site) follow in later batches. Valkey is not in this pass.\n\nSTANDARD. The violation site is the dereference (the delta-exp34c-callee-relocation-task1418 standard), judged at strict under EXP34-C/2026-10-07/presets: a dereference of a pointer not proven non-null. A basis for FP must be proof in the scanned source, a language guarantee, or an ISO C or POSIX library contract (rows citing a library contract also cite P/facts). In-tree callers prove nothing for a function with an open caller set: lua's exported API is open, as in correction-libruling-lua-b2-task1553. A strippable assert, an attribute such as noreturn, and an earlier dereference of the same pointer are not proof. Each finding was read at source in the pinned checkout.\n\nRESULT: 26 FP, 4 TP. TP: lua lapi.c:933 (the Table pointer from gettable() under the exported lua_rawset family, consistent with lapi.c:777 in correction-libruling-lua-b2-task1553), raylib rcore_desktop_glfw.c:1669 (unchecked glfwGetVideoMode, which returns NULL on failure) and rcore_desktop_rgfw.c:557 and :1862 (unchecked RGFW_window_getMonitor, consistent with :1844). The FPs rest on a closed caller set, a never-null return proven from the callee's body, a test in the same condition, a correlation inside one function, or getaddrinfo's success contract.\n\nSHAPE CALLS FOR REVIEW (medium confidence):\n(1) lua lgc.c:1264/1266, a list pointer returned by correctgraylist: the address of a gclist member, the same basis as the existing FP labels at lgc.c:1263/1265. getgclist's default arm returns 0 only for an object type with no gclist member.\n(2) sel4 fastpath.c:632, the notification-queue head in the Waiting state: FP on an invariant kept by every writer in src/object/notification.c, which is kernel-internal state.\n(3) sel4 fastpath.c:652: FP because slowpath() ends every path in restore_user_context(), which leaves through the exception return. That is proof from the body, not the NORETURN attribute, and it matches the existing FP labels at fastpath.c:193 and :859.\n(4) ventoy WinDialog.c:1435, CLI-mode pointer: FP on the single writer of a static global, ordered before every CLI-mode call.\n\nONE TOOL ISSUE seen, filed separately for aurora-lint: a null test on an assignment inside a condition, such as (s = f()) == NULL || *s, is not credited for the short-circuit operand (pureftpd log_ldap.c:491/509, pure-pw.c:308/323). The labels are FP either way.\n\nCounting basis: distinct (project, commit, file, line, rule) keys. No precision or recall claim is made here."
+}
