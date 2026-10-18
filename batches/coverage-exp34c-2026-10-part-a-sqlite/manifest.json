@@ -1,0 +1,25 @@
+{
+  "batch_id": "coverage-exp34c-2026-10-part-a-sqlite",
+  "work_item_ref": "benchmarking_db-2493",
+  "requested_by": "coordinator",
+  "adjudicator": "claude-opus-5.5",
+  "aurora_lint_version": "0.6.0",
+  "aurora_lint_sha": "d21be1b3dc1ffa801ddbc32ba425d6df7ab90c68",
+  "projects": [
+    "sqlite"
+  ],
+  "codebase_commits": {
+    "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
+  },
+  "submitted_at": "2026-10-18T01:56:07Z",
+  "row_count": 126,
+  "rules": [
+    "EXP34-C"
+  ],
+  "verdicts": {
+    "FP": 89,
+    "TP": 37
+  },
+  "recheck": null,
+  "notes": "EXP34-C ORACLE COVERAGE, PART A, BATCH 2 (sqlite). These 126 keys are the in-scope EXP34-C findings in sqlite that aurora-lint d21be1b3d reports at both the default and the strict preset (runs sqc-0.6.0-d21be1b3d-default-* and -strict-*) and that no label covers. Same standard and method as coverage-exp34c-2026-10-part-a-curl-hostap-mbedtls-mosquitto. libsqlite3 is installed and the separate-source build makes SQLITE_PRIVATE functions extern, so every non-static function has an open caller set (correction-libruling-sqlite-b1-task1553). ALWAYS(), NEVER() and ONLY_IF_REALLOC_STRESS() are not guards: each constant-folds in a compilable build (SQLITE_OMIT_AUXILIARY_SAFETY_CHECKS, NDEBUG).\n\nRESULT: 89 FP, 37 TP.\n- FP shapes: rc correlation (an allocation failure sets rc to SQLITE_NOMEM and the use sits under rc==SQLITE_OK); a length that is 0 when the pointer is NULL; out2Prerelease and similar returns that are the address of an array element; a dominating test or early return; a closed static caller set.\n- TP shapes: a parameter of a non-static or public function used without a test (btmutex, expr, printf accumulators); a NEVER()/ALWAYS()-only test of a lookup that returns NULL; a NULL return left untested; a vtab method or xBestIndex path whose state a module writes.\n\nSHAPE CALLS FOR REVIEW: the 12 low-confidence TPs, which rest on a NULL that the scanned source does not exclude deep in a parser structure (an ExprList item, a Subquery pSelect) or on state a loadable module's xOpen/xBestIndex writes; and the medium-confidence FPs, which rest on multi-file invariants (a WITHOUT ROWID table always has a PK index, Btree.pBt writers, btree page getters non-null on success).\n\nTwenty rows name a conflict in provenance with a carried-forward FP that predates the 2026-10-07 rulings. Existing rows are not edited.\n\nCounting basis: distinct (project, commit, file, line, rule) keys. No precision or recall claim is made here."
+}
