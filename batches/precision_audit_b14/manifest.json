@@ -12,7 +12,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-06-14T15:07:21.887995",
-  "row_count": 1014,
+  "row_count": 1004,
   "rules": [
     "API00-C",
     "ARR00-C",
@@ -297,6 +297,30 @@
         "sqlite ext/misc/base64.c:197 FIO50-C"
       ],
       "note": "retired from the CERT C oracle: FIO50-C/FIO51-C are CERT C++ ids, removed from aurora-lint at 9aace3a3; row archived, verdict unchanged; see retire-cert-cpp-ids-fio50-fio51-bmdb2229"
+    },
+    {
+      "by": "correction-exp34c-precedent-2026-10-sqlite-part-a",
+      "count": 9,
+      "keys": [
+        "sqlite ext/intck/sqlite3intck.c:104 EXP34-C",
+        "sqlite ext/intck/sqlite3intck.c:155 EXP34-C",
+        "sqlite ext/intck/sqlite3intck.c:274 EXP34-C",
+        "sqlite ext/intck/sqlite3intck.c:489 EXP34-C",
+        "sqlite ext/intck/sqlite3intck.c:63 EXP34-C",
+        "sqlite ext/intck/sqlite3intck.c:78 EXP34-C",
+        "sqlite ext/misc/dbdump.c:158 EXP34-C",
+        "sqlite src/attach.c:118 EXP34-C",
+        "sqlite src/attach.c:299 EXP34-C"
+      ],
+      "note": "EXP34-C verdict corrected FP -> TP: the carried-forward FP predates the 2026-10-07 rulings and its basis (an open caller set, an assert, an earlier dereference, an unchecked allocation or an unproven invariant) is not proof under EXP34-C/2026-10-07/presets; see that batch's manifest notes"
+    },
+    {
+      "by": "correction-exp34c-precedent-2026-10-sqlite-part-a",
+      "count": 1,
+      "keys": [
+        "sqlite ext/misc/dbdump.c:198 EXP34-C"
+      ],
+      "note": "same FP verdict, reason restated: the carried-forward basis predates the 2026-10-07 rulings, and a proof that meets them is stated in its place; see that batch's manifest notes"
     }
   ]
 }

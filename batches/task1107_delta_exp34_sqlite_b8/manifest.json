@@ -12,9 +12,21 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-09-10T17:04:40.526262Z",
-  "row_count": 128,
+  "row_count": 125,
   "rules": [
     "EXP34-C"
   ],
-  "notes": "Reconstructed during benchmark_adjudication's initial population (2026-09-16) from benchmarking_db's ground_truth.source='task1107_delta_exp34_sqlite_b8'. row_count/projects/codebase_commits/rules were derived from the rows themselves, not declared at adjudication time. aurora_lint_version/aurora_lint_sha are unknown for legacy data -- never recorded per-row."
+  "notes": "Reconstructed during benchmark_adjudication's initial population (2026-09-16) from benchmarking_db's ground_truth.source='task1107_delta_exp34_sqlite_b8'. row_count/projects/codebase_commits/rules were derived from the rows themselves, not declared at adjudication time. aurora_lint_version/aurora_lint_sha are unknown for legacy data -- never recorded per-row.",
+  "superseded_rows": [
+    {
+      "by": "correction-exp34c-precedent-2026-10-sqlite-part-a",
+      "count": 3,
+      "keys": [
+        "sqlite src/func.c:969 EXP34-C",
+        "sqlite src/main.c:2017 EXP34-C",
+        "sqlite src/main.c:2033 EXP34-C"
+      ],
+      "note": "same FP verdict, reason restated: the carried-forward basis predates the 2026-10-07 rulings, and a proof that meets them is stated in its place; see that batch's manifest notes"
+    }
+  ]
 }
