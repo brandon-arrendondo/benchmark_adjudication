@@ -13,7 +13,7 @@
     "hostap": "dcee60436390dd34731560657c4257c3b4c839a6"
   },
   "submitted_at": "2026-09-25T03:10:19Z",
-  "row_count": 4,
+  "row_count": 2,
   "rules": [
     "API00-C"
   ],
@@ -60,6 +60,15 @@
       "count": 1,
       "keys": [
         "hostap src/p2p/p2p_invitation.c:227 API00-C"
+      ],
+      "note": "relabeled or restated by the hostap caller-set re-pass under ADR-0011 (open caller sets in the -rdynamic builds); see that batch's manifest notes"
+    },
+    {
+      "by": "correction-rdynamic-hostap-2026-10-settled-shapes",
+      "count": 2,
+      "keys": [
+        "hostap src/p2p/p2p_build.c:389 API00-C",
+        "hostap src/p2p/p2p_build.c:99 API00-C"
       ],
       "note": "relabeled or restated by the hostap caller-set re-pass under ADR-0011 (open caller sets in the -rdynamic builds); see that batch's manifest notes"
     }

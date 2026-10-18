@@ -12,7 +12,7 @@
     "hostap": "dcee60436390dd34731560657c4257c3b4c839a6"
   },
   "submitted_at": "2026-09-10T13:45:20.925431Z",
-  "row_count": 116,
+  "row_count": 115,
   "rules": [
     "EXP34-C"
   ],
@@ -41,6 +41,14 @@
         "hostap src/drivers/driver_nl80211.c:2665 EXP34-C",
         "hostap src/drivers/driver_nl80211.c:6580 EXP34-C",
         "hostap src/drivers/driver_nl80211.c:6598 EXP34-C"
+      ],
+      "note": "relabeled or restated by the hostap caller-set re-pass under ADR-0011 (open caller sets in the -rdynamic builds); see that batch's manifest notes"
+    },
+    {
+      "by": "correction-rdynamic-hostap-2026-10-settled-shapes",
+      "count": 1,
+      "keys": [
+        "hostap src/crypto/crypto_wolfssl.c:1336 EXP34-C"
       ],
       "note": "relabeled or restated by the hostap caller-set re-pass under ADR-0011 (open caller sets in the -rdynamic builds); see that batch's manifest notes"
     }

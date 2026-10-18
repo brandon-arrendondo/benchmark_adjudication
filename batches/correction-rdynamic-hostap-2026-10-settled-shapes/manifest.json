@@ -1,0 +1,39 @@
+{
+  "batch_id": "correction-rdynamic-hostap-2026-10-settled-shapes",
+  "work_item_ref": "benchmarking_db-1554",
+  "requested_by": "coordinator",
+  "adjudicator": "claude-opus-5.5",
+  "adjudicating_node": "dev-468",
+  "aurora_lint_version": "0.6.0",
+  "aurora_lint_sha": "d21be1b3dc1ffa801ddbc32ba425d6df7ab90c68",
+  "projects": [
+    "hostap"
+  ],
+  "codebase_commits": {
+    "hostap": "dcee60436390dd34731560657c4257c3b4c839a6"
+  },
+  "submitted_at": "2026-10-18T17:22:14Z",
+  "row_count": 5,
+  "rules": [
+    "API00-C",
+    "EXP34-C"
+  ],
+  "verdicts": {
+    "FP": 1,
+    "TP": 4
+  },
+  "corrections": {
+    "FP_restated": 1,
+    "FP_to_TP": 4
+  },
+  "recheck": {
+    "basis": "ruling",
+    "ruling": "aurora-lint ADR-0011 6b28c8d7 (wpa_supplicant/Makefile:1004-1006, -rdynamic under CONFIG_DYNAMIC_EAP_METHODS), with hostapd/Makefile:112-116 (-rdynamic under CONFIG_WPA_TRACE) for files only hostapd links",
+    "selection": "targeted",
+    "reviewed": 5,
+    "flipped": 4,
+    "blind_to_prior_verdict": false,
+    "blind_to_diagnostic": false
+  },
+  "notes": "A CORRECTION, NOT A NEW ADJUDICATION. hostap caller-set re-pass, keys aurora-lint no longer reports: five rows held out of the earlier not-emitted batches until two shapes were settled.\n\nRULING. aurora-lint ADR-0011 6b28c8d7 (open caller sets in the -rdynamic builds), with two settled shapes. (a) A line that only passes a pointer to a third-party function whose body is outside the scanned tree is not an EXP34-C dereference site: under the 2026-09-21 site ruling and ADR-0012 Decision 1 the callee's dereference is the site, and only ISO C / POSIX functions specified to dereference an argument count at the call line. (b) An API00-C label is keyed by (file, line, rule), so it is TP when any parameter of the function is unvalidated, even if the parameter the earlier reason named is validated; the reason names the unvalidated parameter.\n\nSCOPE. One EXP34-C row in src/crypto/crypto_wolfssl.c and four API00-C rows (src/eapol_supp/eapol_supp_sm.c, src/p2p/p2p_build.c twice, wpa_supplicant/mesh.c), all at keys aurora-lint d21be1b3d does not report.\n\nMETHOD. Drafted by read-only research readers under the same brief as the not-emitted batches, site-checked at source, and, for the mesh.c row, re-read by a fresh-context refuter, whose finding that the named parameter reaches only NULL-tolerant callees is reflected in the reason.\n\nRESULT. 5 rows reviewed: FP->FP 1 (restated), FP->TP 4 (API00-C).\n\nMechanics: in-place edits keep each key; each original batch takes a row_count decrement and a superseded_rows record. Counting basis: distinct (project, commit, file, line, rule) keys. No precision claim is made here."
+}

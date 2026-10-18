@@ -12,7 +12,7 @@
     "hostap": "dcee60436390dd34731560657c4257c3b4c839a6"
   },
   "submitted_at": "2026-07-28",
-  "row_count": 29208,
+  "row_count": 29207,
   "rules": [
     "API00-C",
     "API01-C",
@@ -2349,6 +2349,14 @@
         "hostap wpa_supplicant/rrm.c:502 EXP34-C",
         "hostap wpa_supplicant/wpa_supplicant.c:5429 EXP34-C",
         "hostap wpa_supplicant/wpa_supplicant.c:9895 EXP34-C"
+      ],
+      "note": "relabeled or restated by the hostap caller-set re-pass under ADR-0011 (open caller sets in the -rdynamic builds); see that batch's manifest notes"
+    },
+    {
+      "by": "correction-rdynamic-hostap-2026-10-settled-shapes",
+      "count": 1,
+      "keys": [
+        "hostap src/eapol_supp/eapol_supp_sm.c:2220 API00-C"
       ],
       "note": "relabeled or restated by the hostap caller-set re-pass under ADR-0011 (open caller sets in the -rdynamic builds); see that batch's manifest notes"
     }
