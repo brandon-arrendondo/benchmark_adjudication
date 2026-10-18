@@ -12,7 +12,7 @@
     "hostap": "dcee60436390dd34731560657c4257c3b4c839a6"
   },
   "submitted_at": "2026-09-10T14:01:14.632544Z",
-  "row_count": 122,
+  "row_count": 120,
   "rules": [
     "EXP34-C"
   ],
@@ -37,6 +37,15 @@
         "hostap wpa_supplicant/notify.c:439 EXP34-C"
       ],
       "note": "relabeled or restated by the hostap caller-set re-pass under ADR-0011 (open caller sets in the -rdynamic builds); see that batch's manifest notes"
+    },
+    {
+      "by": "correction-exp34c-hostap-precedent-conflicts-2026-10",
+      "count": 2,
+      "keys": [
+        "hostap wpa_supplicant/events.c:7027 EXP34-C",
+        "hostap wpa_supplicant/notify.c:447 EXP34-C"
+      ],
+      "note": "re-read on its merits under the EXP34-C/2026-10-07 rulings, as a precedent named in conflict by the 2026-10 EXP34-C coverage rows; see that batch's manifest notes"
     }
   ]
 }

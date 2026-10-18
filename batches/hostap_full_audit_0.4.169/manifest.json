@@ -12,7 +12,7 @@
     "hostap": "dcee60436390dd34731560657c4257c3b4c839a6"
   },
   "submitted_at": "2026-07-28",
-  "row_count": 29486,
+  "row_count": 29441,
   "rules": [
     "API00-C",
     "API01-C",
@@ -2031,6 +2031,58 @@
         "hostap wpa_supplicant/wps_supplicant.c:1859 EXP34-C"
       ],
       "note": "relabeled or restated by the hostap caller-set re-pass under ADR-0011 (open caller sets in the -rdynamic builds); see that batch's manifest notes"
+    },
+    {
+      "by": "correction-exp34c-hostap-precedent-conflicts-2026-10",
+      "count": 45,
+      "keys": [
+        "hostap src/ap/beacon.c:1069 EXP34-C",
+        "hostap src/ap/beacon.c:625 EXP34-C",
+        "hostap src/ap/drv_callbacks.c:1977 EXP34-C",
+        "hostap src/ap/drv_callbacks.c:2010 EXP34-C",
+        "hostap src/ap/drv_callbacks.c:2057 EXP34-C",
+        "hostap src/ap/drv_callbacks.c:2118 EXP34-C",
+        "hostap src/ap/ieee802_11.c:9020 EXP34-C",
+        "hostap src/ap/ieee802_11.c:9085 EXP34-C",
+        "hostap src/ap/ieee802_11.c:9113 EXP34-C",
+        "hostap src/ap/ieee802_11.c:9210 EXP34-C",
+        "hostap src/ap/ieee802_1x.c:700 EXP34-C",
+        "hostap src/ap/ieee802_1x.c:851 EXP34-C",
+        "hostap src/ap/wps_hostapd.c:1397 EXP34-C",
+        "hostap src/common/ieee802_11_common.c:1229 EXP34-C",
+        "hostap src/common/ieee802_11_common.c:2694 EXP34-C",
+        "hostap src/crypto/tls_openssl.c:5467 EXP34-C",
+        "hostap src/eap_peer/eap_fast.c:1055 EXP34-C",
+        "hostap src/eap_peer/eap_fast.c:1585 EXP34-C",
+        "hostap src/eap_peer/eap_mschapv2.c:796 EXP34-C",
+        "hostap src/eap_peer/eap_peap.c:1073 EXP34-C",
+        "hostap src/eap_peer/eap_peap.c:781 EXP34-C",
+        "hostap src/eap_peer/eap_tls.c:227 EXP34-C",
+        "hostap src/eap_peer/eap_ttls.c:1351 EXP34-C",
+        "hostap src/eap_peer/eap_ttls.c:1389 EXP34-C",
+        "hostap src/eap_peer/eap_ttls.c:1547 EXP34-C",
+        "hostap src/eap_peer/eap_ttls.c:516 EXP34-C",
+        "hostap src/rsn_supp/wpa.c:2383 EXP34-C",
+        "hostap src/rsn_supp/wpa.c:261 EXP34-C",
+        "hostap src/rsn_supp/wpa.c:3097 EXP34-C",
+        "hostap src/rsn_supp/wpa.c:640 EXP34-C",
+        "hostap src/utils/os_internal.c:409 EXP34-C",
+        "hostap src/utils/os_internal.c:425 EXP34-C",
+        "hostap wpa_supplicant/ctrl_iface.c:10734 EXP34-C",
+        "hostap wpa_supplicant/ctrl_iface.c:10767 EXP34-C",
+        "hostap wpa_supplicant/ctrl_iface.c:10796 EXP34-C",
+        "hostap wpa_supplicant/ctrl_iface.c:9360 EXP34-C",
+        "hostap wpa_supplicant/ctrl_iface.c:9405 EXP34-C",
+        "hostap wpa_supplicant/dbus/dbus_new.c:1592 EXP34-C",
+        "hostap wpa_supplicant/dbus/dbus_new_handlers.c:4057 EXP34-C",
+        "hostap wpa_supplicant/dbus/dbus_new_handlers.c:6239 EXP34-C",
+        "hostap wpa_supplicant/dbus/dbus_new_handlers.c:6274 EXP34-C",
+        "hostap wpa_supplicant/dbus/dbus_new_handlers.c:6329 EXP34-C",
+        "hostap wpa_supplicant/dbus/dbus_new_handlers_p2p.c:1967 EXP34-C",
+        "hostap wpa_supplicant/dbus/dbus_new_helpers.c:779 EXP34-C",
+        "hostap wpa_supplicant/offchannel.c:100 EXP34-C"
+      ],
+      "note": "re-read on its merits under the EXP34-C/2026-10-07 rulings, as a precedent named in conflict by the 2026-10 EXP34-C coverage rows; see that batch's manifest notes"
     }
   ]
 }
