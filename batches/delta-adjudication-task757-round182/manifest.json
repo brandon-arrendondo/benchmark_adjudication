@@ -24,7 +24,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-09-10T20:27:46.685377",
-  "row_count": 122,
+  "row_count": 121,
   "rules": [
     "DCL06-C"
   ],
@@ -94,6 +94,14 @@
       "count": 1,
       "keys": [
         "sqlite src/os_kv.c:416 DCL06-C"
+      ],
+      "note": "re-read and relabeled where the verdict changed, under the 2026-10-07 DCL06-C rulings (ruling-basis recheck); see that batch's manifest notes"
+    },
+    {
+      "by": "correction-dcl06c-2026-10-sqlite-os-win-to-utf",
+      "count": 1,
+      "keys": [
+        "sqlite src/random.c:42 DCL06-C"
       ],
       "note": "re-read and relabeled where the verdict changed, under the 2026-10-07 DCL06-C rulings (ruling-basis recheck); see that batch's manifest notes"
     }
