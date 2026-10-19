@@ -26,7 +26,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-09-06T18:54:58.053768",
-  "row_count": 1255,
+  "row_count": 1248,
   "rules": [
     "DCL06-C",
     "DCL08-C",
@@ -101,6 +101,20 @@
         "sqlite ext/recover/sqlite3recover.c:2075 DCL06-C",
         "sqlite ext/rtree/geopoly.c:568 DCL06-C",
         "sqlite src/analyze.c:873 DCL06-C"
+      ],
+      "note": "re-read and relabeled where the verdict changed, under the 2026-10-07 DCL06-C rulings (ruling-basis recheck); see that batch's manifest notes"
+    },
+    {
+      "by": "correction-dcl06c-2026-10-sqlite-btree-to-insert",
+      "count": 7,
+      "keys": [
+        "sqlite src/build.c:1314 DCL06-C",
+        "sqlite src/build.c:2327 DCL06-C",
+        "sqlite src/date.c:1264 DCL06-C",
+        "sqlite src/date.c:312 DCL06-C",
+        "sqlite src/date.c:499 DCL06-C",
+        "sqlite src/expr.c:2920 DCL06-C",
+        "sqlite src/func.c:1889 DCL06-C"
       ],
       "note": "re-read and relabeled where the verdict changed, under the 2026-10-07 DCL06-C rulings (ruling-basis recheck); see that batch's manifest notes"
     }
