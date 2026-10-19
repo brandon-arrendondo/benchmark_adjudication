@@ -24,7 +24,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-09-10T20:27:46.685377",
-  "row_count": 129,
+  "row_count": 127,
   "rules": [
     "DCL06-C"
   ],
@@ -66,6 +66,15 @@
       "keys": [
         "sqlite ext/misc/stmtrand.c:74 DCL06-C",
         "sqlite ext/misc/templatevtab.c:164 DCL06-C"
+      ],
+      "note": "re-read and relabeled where the verdict changed, under the 2026-10-07 DCL06-C rulings (ruling-basis recheck); see that batch's manifest notes"
+    },
+    {
+      "by": "correction-dcl06c-2026-10-sqlite-zipfile-to-analyze",
+      "count": 2,
+      "keys": [
+        "sqlite ext/misc/zipfile.c:1552 DCL06-C",
+        "sqlite ext/recover/sqlite3recover.c:2374 DCL06-C"
       ],
       "note": "re-read and relabeled where the verdict changed, under the 2026-10-07 DCL06-C rulings (ruling-basis recheck); see that batch's manifest notes"
     }
