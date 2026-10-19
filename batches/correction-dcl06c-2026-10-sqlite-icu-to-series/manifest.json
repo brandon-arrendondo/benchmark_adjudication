@@ -1,0 +1,40 @@
+{
+  "batch_id": "correction-dcl06c-2026-10-sqlite-icu-to-series",
+  "work_item_ref": "benchmarking_db-2488",
+  "requested_by": "coordinator",
+  "adjudicator": "claude-opus-5.5",
+  "adjudicating_node": "dev-468",
+  "aurora_lint_version": "0.6.0",
+  "aurora_lint_sha": "ca6fd5f3ffd7704300768247ff09b82e2e3ffa2d",
+  "projects": [
+    "sqlite"
+  ],
+  "codebase_commits": {
+    "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
+  },
+  "submitted_at": "2026-10-19T03:22:21Z",
+  "row_count": 133,
+  "rules": [
+    "DCL06-C"
+  ],
+  "verdicts": {
+    "FP": 11,
+    "TP": 122
+  },
+  "corrections": {
+    "FP_restated": 2,
+    "FP_to_TP": 79,
+    "TP_restated": 43,
+    "TP_to_FP": 9
+  },
+  "recheck": {
+    "basis": "ruling",
+    "ruling": "DCL06-C/2026-10-07/form and /presets (rulings/rules/DCL06-C.md): the oracle labels strict, the presumption with no exempt set; EX1 only where the constant is itself the abstraction; array dimensions in declarations FP per P/lists case 3",
+    "selection": "targeted",
+    "reviewed": 133,
+    "flipped": 88,
+    "blind_to_prior_verdict": false,
+    "blind_to_diagnostic": false
+  },
+  "notes": "A CORRECTION, NOT A NEW ADJUDICATION. sqlite DCL06-C labels carried forward from delta-adjudication-task757-r720-weekend, delta-adjudication-task757-round181, delta-adjudication-task757-round182, delta-adjudication-task757-round183, delta-adjudication-task757-round184, delta-adjudication-task757-round2, delta-adjudication-task757-sample, which predate the 2026-10-07 rulings, re-read under them: ext/icu/icu.c through ext/misc/series.c in file order.\n\nRULING. rulings/rules/DCL06-C.md: the oracle labels strict (P/oracle-scope); strict is the presumption with no exempt set (DCL06-C/2026-10-07/form, /presets); EX1 applies only where the constant is itself the abstraction; an array dimension in a declaration is FP after CERT's own sizeof compliant solution, with the violation at dependent uses (P/lists case 3). This is the reading calibrated in delta-dcl06c-2026-10-curl-mbedtls-sqlite and applied in the later 2026-10 DCL06-C batches. A changed reading relabels: the earlier FPs rested on domain-standard, algorithm-inherent, self-evident or comment-documented values, spec constants or no stated basis, none of which the presumption admits; the earlier TPs on declaration dimensions predate P/lists case 3.\n\nSCOPE. Every carried-forward TP or FP DCL06-C row in these files. 1 key with the literal in a preprocessor condition (ext/misc/fossildelta.c:219) are held and left as they are, pending the separate question of literals in preprocessor conditionals. 15 of the rows are not reported by aurora-lint ca6fd5f3f and are labeled on their merits, as the provenance says.\n\nMETHOD. Every row was read at source at the pinned commit (corpus-check: sqlite at its pin) by a reader under a written brief, against a mechanical draft (declaration dimension, const-qualified initializer, preprocessor condition, otherwise the presumption), and reviewed. A fresh-context reviewer re-read a stratified sample.\n\nRESULT. 133 rows reviewed: FP->TP 79, TP->FP 9, FP kept 2 and TP kept 43 with their reasons restated. FP bases: array dimensions in declarations 9, EX1 2.\n\nMechanics: in-place edits keep each key; the original batch takes a row_count decrement and a superseded_rows record. Counting basis: distinct (project, commit, file, line, rule) keys. No precision claim is made here."
+}
