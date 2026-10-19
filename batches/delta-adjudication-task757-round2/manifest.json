@@ -26,7 +26,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-09-06T18:54:58.053768",
-  "row_count": 1288,
+  "row_count": 1277,
   "rules": [
     "DCL06-C",
     "DCL08-C",
@@ -34,5 +34,25 @@
     "INT16-C",
     "INT17-C"
   ],
-  "notes": "Reconstructed during benchmark_adjudication's initial population (2026-09-16) from benchmarking_db's ground_truth.source='delta-adjudication-task757-round2'. row_count/projects/codebase_commits/rules were derived from the rows themselves, not declared at adjudication time. aurora_lint_version/aurora_lint_sha are unknown for legacy data -- never recorded per-row."
+  "notes": "Reconstructed during benchmark_adjudication's initial population (2026-09-16) from benchmarking_db's ground_truth.source='delta-adjudication-task757-round2'. row_count/projects/codebase_commits/rules were derived from the rows themselves, not declared at adjudication time. aurora_lint_version/aurora_lint_sha are unknown for legacy data -- never recorded per-row.",
+  "superseded_rows": [
+    {
+      "by": "correction-dcl06c-2026-10-hex-f-digit-relabel",
+      "count": 11,
+      "keys": [
+        "curl lib/md4.c:348 DCL06-C",
+        "hostap src/common/gas_server.c:136 DCL06-C",
+        "lua lapi.c:1199 DCL06-C",
+        "lua ldump.c:98 DCL06-C",
+        "lua llex.c:373 DCL06-C",
+        "lua lobject.c:388 DCL06-C",
+        "lua lobject.c:394 DCL06-C",
+        "lua lundump.c:105 DCL06-C",
+        "lua lutf8lib.c:67 DCL06-C",
+        "mosquitto src/database.c:970 DCL06-C",
+        "raylib src/rtext.c:2354 DCL06-C"
+      ],
+      "note": "re-read and relabeled where the verdict changed, under the 2026-10-07 DCL06-C rulings; see that batch's manifest notes"
+    }
+  ]
 }

@@ -1,0 +1,57 @@
+{
+  "batch_id": "correction-dcl06c-2026-10-hex-f-digit-relabel",
+  "work_item_ref": "benchmarking_db-1252",
+  "requested_by": "coordinator",
+  "adjudicator": "claude-opus-5.5",
+  "adjudicating_node": "dev-468",
+  "aurora_lint_version": "0.6.0",
+  "aurora_lint_sha": "ca6fd5f3ffd7704300768247ff09b82e2e3ffa2d",
+  "projects": [
+    "curl",
+    "hostap",
+    "libcrc",
+    "lua",
+    "mbedtls",
+    "mosquitto",
+    "pureftpd",
+    "raylib",
+    "sel4",
+    "sqlite"
+  ],
+  "codebase_commits": {
+    "curl": "3e198f75861cc2e12daf299689e145949dddd19b",
+    "hostap": "dcee60436390dd34731560657c4257c3b4c839a6",
+    "libcrc": "7719e2112a9a960b1bba130d02bebdf58e8701f1",
+    "lua": "40b76de2d77e66b70a9d4bf989c3f5340919973f",
+    "mbedtls": "068ff080b369adfac81509f9b57b2afabaf82dc5",
+    "mosquitto": "d3ee5c5ca62c0fa4983308c6fff558ee978e878c",
+    "pureftpd": "cc28bff52ca28e1d122a2142bf37f2dc578f4d3e",
+    "raylib": "962bbfc6bfbd7a5acd08e21314fcfa161003a589",
+    "sel4": "1326364bc9135d9445d936ebc01e38a402c1f4c6",
+    "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
+  },
+  "submitted_at": "2026-10-19T01:33:37Z",
+  "row_count": 149,
+  "rules": [
+    "DCL06-C"
+  ],
+  "verdicts": {
+    "FP": 14,
+    "TP": 135
+  },
+  "corrections": {
+    "FP_restated": 14,
+    "FP_to_TP": 97,
+    "TP_restated": 38
+  },
+  "recheck": {
+    "basis": "ruling",
+    "ruling": "DCL06-C/2026-10-07/form and /presets (rulings/rules/DCL06-C.md): the oracle labels strict, the presumption with no exempt set; EX1 only where the constant is itself the abstraction",
+    "selection": "targeted",
+    "reviewed": 149,
+    "flipped": 97,
+    "blind_to_prior_verdict": false,
+    "blind_to_diagnostic": false
+  },
+  "notes": "A CORRECTION, NOT A NEW ADJUDICATION. DCL06-C keys that earlier builds stopped reporting, and that aurora-lint ca6fd5f3f (0.6.0) reports again at the default and strict presets, re-read under the 2026-10-07 rulings.\n\nSCOPE. The labeled DCL06-C keys that builds before ca6fd5f3f did not report because they stripped f and F from a hexadecimal constant as a float suffix, which made literals such as 0x7f, 0x3f, 0x3ff and 0x7fffffff look like 0x7, 0x3 or a value in the exempt set: 150 keys in curl, hostap, libcrc, lua, mbedtls, mosquitto, pureftpd, raylib, sel4 and sqlite, every one carried forward from batches that predate the rulings, all reported again by ca6fd5f3f. One key is held and left as it is: sqlite src/os_unix.c:204, a constant in an #if comparison, which waits on the separate question of literals in preprocessor conditionals. 149 rows are in this batch.\n\nRULING. rulings/rules/DCL06-C.md: the oracle labels strict (P/oracle-scope); strict is the presumption with no exempt set (DCL06-C/2026-10-07/form, /presets); EX1 applies only where the constant is itself the abstraction. This is the reading calibrated in delta-dcl06c-2026-10-curl-mbedtls-sqlite and applied in the later 2026-10 DCL06-C batches. A changed reading relabels: the earlier FPs rested on self-evident or comment-documented mask idioms, spec, protocol, curve or algorithm constants, claims of an analyzer misfire for a literal that is on the line, or no stated basis, none of which the presumption admits.\n\nMETHOD. Every row was read at source at the pinned commit. A fresh-context reviewer re-read a sample (every kept-FP shape, flips and unchanged TPs).\n\nRESULT. 149 rows reviewed: FP->TP 97; FP kept 14, with the reason restated (curl cipher_suite.c cipher-suite ids in the const table cs_list 3, mbedtls ecp_curves.c const curve tables 6, both the naming site; sqlite util.c countLeadingZeros boundary ladder 5, EX1, the same shape as the digits10 power-of-ten ladder labeled EX1 in valkey); TP kept 38, with the reason restated on the presumption's basis.\n\nMechanics: in-place edits keep each key; each original batch takes a row_count decrement and a superseded_rows record. Counting basis: distinct (project, commit, file, line, rule) keys. Carried-forward DCL06-C FPs on keys outside this set are not touched here. No precision claim is made here."
+}

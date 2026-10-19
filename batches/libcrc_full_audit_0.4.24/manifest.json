@@ -12,7 +12,7 @@
     "libcrc": "7719e2112a9a960b1bba130d02bebdf58e8701f1"
   },
   "submitted_at": "2026-06-11",
-  "row_count": 371,
+  "row_count": 369,
   "rules": [
     "API00-C",
     "API02-C",
@@ -62,6 +62,15 @@
         "libcrc examples/tstcrc.c:225 ERR33-C"
       ],
       "note": "ERR33-C verdict corrected FP -> TP by gavel review (bmdb 1281); see that batch's manifest notes"
+    },
+    {
+      "by": "correction-dcl06c-2026-10-hex-f-digit-relabel",
+      "count": 2,
+      "keys": [
+        "libcrc precalc/precalc.c:157 DCL06-C",
+        "libcrc precalc/precalc.c:158 DCL06-C"
+      ],
+      "note": "re-read and relabeled where the verdict changed, under the 2026-10-07 DCL06-C rulings; see that batch's manifest notes"
     }
   ]
 }

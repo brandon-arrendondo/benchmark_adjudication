@@ -24,9 +24,21 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-09-10T20:37:34.431488",
-  "row_count": 140,
+  "row_count": 137,
   "rules": [
     "DCL06-C"
   ],
-  "notes": "Reconstructed during benchmark_adjudication's initial population (2026-09-16) from benchmarking_db's ground_truth.source='delta-adjudication-task757-round183'. row_count/projects/codebase_commits/rules were derived from the rows themselves, not declared at adjudication time. aurora_lint_version/aurora_lint_sha are unknown for legacy data -- never recorded per-row."
+  "notes": "Reconstructed during benchmark_adjudication's initial population (2026-09-16) from benchmarking_db's ground_truth.source='delta-adjudication-task757-round183'. row_count/projects/codebase_commits/rules were derived from the rows themselves, not declared at adjudication time. aurora_lint_version/aurora_lint_sha are unknown for legacy data -- never recorded per-row.",
+  "superseded_rows": [
+    {
+      "by": "correction-dcl06c-2026-10-hex-f-digit-relabel",
+      "count": 3,
+      "keys": [
+        "curl lib/vtls/x509asn1.c:400 DCL06-C",
+        "hostap src/ap/gas_serv.c:29 DCL06-C",
+        "sqlite src/whereexpr.c:143 DCL06-C"
+      ],
+      "note": "re-read and relabeled where the verdict changed, under the 2026-10-07 DCL06-C rulings; see that batch's manifest notes"
+    }
+  ]
 }

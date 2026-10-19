@@ -24,9 +24,22 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-09-10T20:15:37.040695",
-  "row_count": 138,
+  "row_count": 134,
   "rules": [
     "DCL06-C"
   ],
-  "notes": "Reconstructed during benchmark_adjudication's initial population (2026-09-16) from benchmarking_db's ground_truth.source='delta-adjudication-task757-round181'. row_count/projects/codebase_commits/rules were derived from the rows themselves, not declared at adjudication time. aurora_lint_version/aurora_lint_sha are unknown for legacy data -- never recorded per-row."
+  "notes": "Reconstructed during benchmark_adjudication's initial population (2026-09-16) from benchmarking_db's ground_truth.source='delta-adjudication-task757-round181'. row_count/projects/codebase_commits/rules were derived from the rows themselves, not declared at adjudication time. aurora_lint_version/aurora_lint_sha are unknown for legacy data -- never recorded per-row.",
+  "superseded_rows": [
+    {
+      "by": "correction-dcl06c-2026-10-hex-f-digit-relabel",
+      "count": 4,
+      "keys": [
+        "hostap src/crypto/ms_funcs.c:49 DCL06-C",
+        "raylib src/rtext.c:2477 DCL06-C",
+        "sqlite ext/misc/appendvfs.c:451 DCL06-C",
+        "sqlite src/backup.c:751 DCL06-C"
+      ],
+      "note": "re-read and relabeled where the verdict changed, under the 2026-10-07 DCL06-C rulings; see that batch's manifest notes"
+    }
+  ]
 }

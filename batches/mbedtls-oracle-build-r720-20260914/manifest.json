@@ -12,7 +12,7 @@
     "mbedtls": "068ff080b369adfac81509f9b57b2afabaf82dc5"
   },
   "submitted_at": "2026-09-14T17:32:48.190170",
-  "row_count": 8203,
+  "row_count": 8184,
   "rules": [
     "API00-C",
     "API01-C",
@@ -384,6 +384,32 @@
         "mbedtls library/rsa.c:1512 EXP34-C"
       ],
       "note": "same FP verdict, reason restated: the carried-forward basis predates the 2026-10-07 rulings, and a proof that meets them is stated in its place; see that batch's manifest notes"
+    },
+    {
+      "by": "correction-dcl06c-2026-10-hex-f-digit-relabel",
+      "count": 19,
+      "keys": [
+        "mbedtls library/aes.c:558 DCL06-C",
+        "mbedtls library/asn1parse.c:39 DCL06-C",
+        "mbedtls library/base64.c:94 DCL06-C",
+        "mbedtls library/ecp.c:2018 DCL06-C",
+        "mbedtls library/ecp_curves.c:191 DCL06-C",
+        "mbedtls library/ecp_curves.c:230 DCL06-C",
+        "mbedtls library/ecp_curves.c:236 DCL06-C",
+        "mbedtls library/ecp_curves.c:239 DCL06-C",
+        "mbedtls library/ecp_curves.c:4644 DCL06-C",
+        "mbedtls library/ecp_curves.c:4713 DCL06-C",
+        "mbedtls library/md5.c:215 DCL06-C",
+        "mbedtls library/oid.c:1029 DCL06-C",
+        "mbedtls library/oid.c:951 DCL06-C",
+        "mbedtls library/psa_crypto.c:340 DCL06-C",
+        "mbedtls library/ripemd160.c:278 DCL06-C",
+        "mbedtls library/sha1.c:250 DCL06-C",
+        "mbedtls library/sha256.c:660 DCL06-C",
+        "mbedtls library/sha3.c:243 DCL06-C",
+        "mbedtls library/sha512.c:775 DCL06-C"
+      ],
+      "note": "re-read and relabeled where the verdict changed, under the 2026-10-07 DCL06-C rulings; see that batch's manifest notes"
     }
   ]
 }
