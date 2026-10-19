@@ -24,7 +24,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-09-10T20:15:37.040695",
-  "row_count": 128,
+  "row_count": 124,
   "rules": [
     "DCL06-C"
   ],
@@ -58,6 +58,17 @@
         "sqlite ext/misc/closure.c:693 DCL06-C",
         "sqlite ext/misc/closure.c:701 DCL06-C",
         "sqlite ext/misc/fossildelta.c:141 DCL06-C"
+      ],
+      "note": "re-read and relabeled where the verdict changed, under the 2026-10-07 DCL06-C rulings (ruling-basis recheck); see that batch's manifest notes"
+    },
+    {
+      "by": "correction-dcl06c-2026-10-sqlite-sha1-to-wholenumber",
+      "count": 4,
+      "keys": [
+        "sqlite ext/misc/sha1.c:112 DCL06-C",
+        "sqlite ext/misc/sha1.c:116 DCL06-C",
+        "sqlite ext/misc/sha1.c:121 DCL06-C",
+        "sqlite ext/misc/totype.c:100 DCL06-C"
       ],
       "note": "re-read and relabeled where the verdict changed, under the 2026-10-07 DCL06-C rulings (ruling-basis recheck); see that batch's manifest notes"
     }
