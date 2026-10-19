@@ -1,0 +1,39 @@
+{
+  "batch_id": "delta-dcl06c-2026-10-hex-f-digit-literals",
+  "work_item_ref": "benchmarking_db-1252",
+  "requested_by": "coordinator",
+  "adjudicator": "claude-opus-5.5",
+  "aurora_lint_version": "0.6.0",
+  "aurora_lint_sha": "ca6fd5f3ffd7704300768247ff09b82e2e3ffa2d",
+  "projects": [
+    "curl",
+    "hostap",
+    "mbedtls",
+    "mosquitto",
+    "raylib",
+    "sel4",
+    "sqlite",
+    "valkey"
+  ],
+  "codebase_commits": {
+    "curl": "3e198f75861cc2e12daf299689e145949dddd19b",
+    "hostap": "dcee60436390dd34731560657c4257c3b4c839a6",
+    "mbedtls": "068ff080b369adfac81509f9b57b2afabaf82dc5",
+    "mosquitto": "d3ee5c5ca62c0fa4983308c6fff558ee978e878c",
+    "raylib": "962bbfc6bfbd7a5acd08e21314fcfa161003a589",
+    "sel4": "1326364bc9135d9445d936ebc01e38a402c1f4c6",
+    "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af",
+    "valkey": "7f1dffedff6de73058b2c2a389422b6ecd56c8fb"
+  },
+  "submitted_at": "2026-10-19T00:52:12Z",
+  "row_count": 118,
+  "rules": [
+    "DCL06-C"
+  ],
+  "verdicts": {
+    "FP": 3,
+    "TP": 115
+  },
+  "recheck": null,
+  "notes": "New DCL06-C labels: every key that aurora-lint ca6fd5f3f (0.6.0) reports for DCL06-C at the default and strict presets at the pinned commits that is in scope under data/benchmark_repos.json and was not already labeled (118 keys: hostap 63, sqlite 19, valkey 16, mbedtls 6, mosquitto 6, curl 5, raylib 2, sel4 1). They appear because that build reads f and F in a hexadecimal constant as digits; earlier builds stripped them as a float suffix, which silently exempted literals such as 0x0f, 0x1f, 0x3f and 0x7f. Every key was read at source in the pinned checkout (corpus-check: all heads at their pins). They were judged under rulings/rules/DCL06-C.md with the reading calibrated in delta-dcl06c-2026-10-curl-mbedtls-sqlite and applied across the 2026-10 hostap and valkey DCL06-C batches: the oracle labels strict (P/oracle-scope); strict is the presumption with no exempt set (DCL06-C/2026-10-07/form, /presets); EX1 applies only where the constant is itself the abstraction. Bit masks, field extractions, protocol field values and comment-documented values are TP. 115 TP, 3 FP: one element of a const-qualified table initializer and one const-qualified object initializer (each the naming site), and one EX1 boundary ladder (countLeadingZeros, the same shape as the digits10 power-of-ten ladder labeled EX1 in valkey). Five rows conflict with neighbouring carried-forward FP labels on the same value written in hexadecimal, which predate the 2026-10-07 rulings and exempted self-evident or documented masks; each conflict is named in that row's provenance. No prior row is edited. A fresh-context review re-read a sample."
+}
