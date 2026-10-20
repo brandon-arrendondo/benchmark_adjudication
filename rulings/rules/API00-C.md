@@ -14,7 +14,14 @@
   forwarded to an unchecked or unknown callee, or stored for later use)
   with no validating test that dominates the first use on some path
   (aurora-lint ADR-0012). A precondition stated only in a doc comment
-  is not a validating test.
+  is not a validating test. This departs from a CERT staff view given
+  while CERT debated promoting the guideline to a rule: under exceptions
+  proposed for that rule, a function that documents that it does no
+  validation would comply (Svoboda, 2018, wiki comment). CERT kept
+  API00-C a recommendation and its live text has no such exception. The
+  form follows the listed contributor's reply in the same discussion,
+  that a comment cannot establish what callers do (Ballman, 2018, wiki
+  comment). Departure recorded 2026-10-20.
 - **API00-C/2026-09-26/dropped, integer parameters.** Integer parameters
   not validated for overflow are out: CERT's text does not mention
   integers, and INT30-C and INT32-C report overflow at the arithmetic.

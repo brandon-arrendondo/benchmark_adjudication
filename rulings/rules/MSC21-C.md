@@ -2,7 +2,7 @@
 
 - **Rule text:** [MSC21-C at 98706f871dd6](https://github.com/cmu-sei/secure-coding-standards/blob/98706f871dd6/content/4.sei-cert-c-coding-standard/08.recommendations/15.miscellaneous-msc/18.msc21-c.md) (see
   `rule-text-map.json`).
-- **Ruled:** 2026-10-07.
+- **Ruled:** 2026-10-07; 2026-10-20.
 - **Evidence:** private record `MSC21-C`, papers `5c1753a`.
 - **Differs by preset:** no (P/coincide).
 
@@ -14,6 +14,9 @@
   tested with an equality operator whose literal step is not plus or
   minus one toward the target, and a relational test against the maximum
   of the counter's type.
+- **MSC21-C/2026-10-20/loops, any loop counter.** Both forms apply to the
+  counter of a `for`, `while` or `do` loop alike; no loop kind is
+  excluded.
 - **MSC21-C/2026-10-07/presets.** Default, strict and pedantic report the
   same form.
 
