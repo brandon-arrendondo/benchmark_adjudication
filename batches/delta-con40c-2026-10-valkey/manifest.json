@@ -1,0 +1,25 @@
+{
+  "batch_id": "delta-con40c-2026-10-valkey",
+  "work_item_ref": "benchmarking_db-2561",
+  "requested_by": "coordinator",
+  "adjudicator": "claude-opus-5.5",
+  "aurora_lint_version": "0.6.0",
+  "aurora_lint_sha": "81912f86e27582464d99938308ec143a1d58ef45",
+  "projects": [
+    "valkey"
+  ],
+  "codebase_commits": {
+    "valkey": "7f1dffedff6de73058b2c2a389422b6ecd56c8fb"
+  },
+  "submitted_at": "2026-10-21T22:06:41Z",
+  "row_count": 3,
+  "rules": [
+    "CON40-C"
+  ],
+  "verdicts": {
+    "FP": 2,
+    "TP": 1
+  },
+  "recheck": null,
+  "notes": "First CON40-C labels in the dataset: the three valkey keys that aurora-lint 81912f86e reports for CON40-C at the default and strict presets at the pinned commit and that the previous build did not. They appear because CON40-C now types each access by its declaration and member path and follows atomic objects through pointers, members and _Atomic(T) declarations. Both files are in scope under data/benchmark_repos.json (src/*.c). Every key was read at source in the pinned checkout (corpus-check: all heads at their pins) and judged at strict under rulings/rules/CON40-C.md. src/server.c:1610 is the checkable form (two reads of one atomic object in one full expression): TP. src/queues.c:73 and :265 are the split-statement form, a presumption with review; review found each load/store pair is on a head index that only the queue's single consumer writes, so no atomicity of the pair is assumed and CERT's exception holds: FP. The 37 keys the same change stopped reporting (valkey-benchmark.c) had no labels, so nothing is retired. No prior row is edited."
+}
