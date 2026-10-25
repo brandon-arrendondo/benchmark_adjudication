@@ -23,9 +23,10 @@
   `ungetc` caution away from position 0. It does not relax `ungetc` at
   file position 0: POSIX's `ungetc` leaves the position unspecified after
   the call when it was 0 before, and its Future Directions apply ISO C's
-  obsolescence of that use to every stream. That form is reported in every
-  preset and environment. The 2026-10-07 form, which relaxed all three
-  forms under POSIX, is superseded.
+  obsolescence of that use to every stream. That form is reported on every
+  stream, text or binary (ISO C leaves a text stream's position unspecified
+  after any `ungetc`), in every preset and environment. The 2026-10-07
+  form, which relaxed all three forms under POSIX, is superseded.
 - **FIO14-C/2026-10-07/presets.** Amended 2026-10-08: POSIX
   is a declared fact, from the configuration or the project's
   `compile_commands.json`, never from the scanning host (P/facts).
