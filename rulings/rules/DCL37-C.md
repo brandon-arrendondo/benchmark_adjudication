@@ -2,7 +2,7 @@
 
 - **Rule text:** [DCL37-C at 98706f871dd6](https://github.com/cmu-sei/secure-coding-standards/blob/98706f871dd6/content/4.sei-cert-c-coding-standard/03.rules/06.declarations-and-initialization-dcl/05.dcl37-c.md) (see
   `rule-text-map.json`).
-- **Ruled:** 2026-10-06; 2026-10-07; 2026-10-26.
+- **Ruled:** 2026-10-06; 2026-10-07; 2026-10-26; 2026-10-27.
 - **Evidence:** private record `DCL37-C`, papers `5c1753a`.
 - **Differs by preset:** no. The feature-test exemption applies in every
   preset (DCL37-C/2026-10-07/presets).
@@ -44,6 +44,37 @@
   reservation does not reach it. A block-scope `_X` or `__x` is reserved
   for any use and stays a violation. A declaration inside
   `extern "C" { ... }` is at file scope.
+- **DCL37-C/2026-10-27/undef.** Removing a macro definition of a name
+  reserved for any use (`_X`, `__x`) with `#undef` is undefined (C 7.1.3)
+  and is a violation. That includes a listed feature-test macro
+  (`#undef _POSIX_C_SOURCE`): the exemption covers only defining one
+  (DCL37-C/2026-10-06/feature-test-macros). `#undef` of a library macro
+  such as `NULL`, which C 7.1.4 allows, and of an underscore-lowercase
+  name is not.
+- **DCL37-C/2026-10-27/library-names.** A library name (`bool`, `true`,
+  `false`, `FILE`, `EOF`, `NULL`, `SIZE_MAX`, the `<limits.h>` limits, and
+  the like) is reserved only where the file includes one of the headers
+  that declare or define it, directly or through the headers it includes
+  (C 7.1.3, "if any of its associated headers is included"). A header the
+  standard defines to include another counts as including it:
+  `<inttypes.h>` includes `<stdint.h>` (7.8p1), so `enum { SIZE_MAX = 80 };`
+  after `#include <inttypes.h>` is a violation, while
+  `enum bool { false, true };` in a file that includes no `<stdbool.h>` is
+  not. This holds for an object, a function, a typedef name, an enumeration
+  constant and a macro alike. `errno`, reserved for external linkage
+  always, is reserved everywhere.
+- **DCL37-C/2026-10-27/tags.** A tag is in the tag name space, which C
+  7.1.3 reserves at file scope as it does the ordinary one. It is judged
+  where it is declared: a specifier with a body, or one standing alone
+  (`struct _x;`). A specifier that only names a tag (`struct _x *p;`,
+  `struct _stat st;`) is not reported, though with no tag visible it
+  declares one (C 6.7.2.3), since it nearly always names a header's tag.
+- **DCL37-C/2026-10-27/members-and-labels.** Following
+  DCL37-C/2026-10-26/block-scope ("Scope is C 7.1.3's"): a structure or
+  union member and a label each have a name space of their own (C 6.2.3),
+  which the file-scope reservation of the ordinary and tag name spaces
+  does not reach, so a member or label `_m` is not a violation. `_M` and
+  `__m`, reserved for any use, are.
 - **DCL37-C/2026-10-06/include-guards.** Include guards spelled with a
   reserved name (a leading underscore followed by an uppercase letter, or a
   double underscore) remain true positives, as CERT's first noncompliant
