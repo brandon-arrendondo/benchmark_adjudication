@@ -73,9 +73,11 @@
   `#include <stdbool.h>` / `#else` /
   `typedef enum bool { false, true } bool;` is not a violation. Nor does
   one no C build compiles: under `#if 0`, in a `__cplusplus` arm, or in an
-  `#ifdef` arm the file's own `#define` or `#undef` rules out (ADR-0010
-  decision 2). One under a platform macro (`#ifdef _WIN32`) counts,
-  whatever platform the scan assumes.
+  `#ifdef`, `#ifndef` or `#if [!]defined(X)` arm the file's own `#define`
+  or `#undef` rules out (ADR-0010 decision 2). One under a platform macro
+  (`#ifdef _WIN32`) counts in every configuration; whether that platform
+  is in a corpus's primary configuration is a scope question (ADR-0010
+  decisions 6 and 7).
 - **DCL37-C/2026-10-27/tags.** A tag is in the tag name space, which C
   7.1.3 reserves at file scope as it does the ordinary one. It is judged
   where it is declared: a specifier with a body, or one standing alone
