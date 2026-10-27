@@ -2,7 +2,7 @@
 
 - **Rule text:** [DCL37-C at 98706f871dd6](https://github.com/cmu-sei/secure-coding-standards/blob/98706f871dd6/content/4.sei-cert-c-coding-standard/03.rules/06.declarations-and-initialization-dcl/05.dcl37-c.md) (see
   `rule-text-map.json`).
-- **Ruled:** 2026-10-06; 2026-10-07.
+- **Ruled:** 2026-10-06; 2026-10-07; 2026-10-26.
 - **Evidence:** private record `DCL37-C`, papers `5c1753a`.
 - **Differs by preset:** no. The feature-test exemption applies in every
   preset (DCL37-C/2026-10-07/presets).
@@ -14,9 +14,9 @@
   leaves the question open (a CERT staff answer, Svoboda, 2020, wiki
   comment, and a listed contributor's reply, Ballman, 2020, wiki
   comment), so the exemption is recorded as this project's reading of
-  the standards, not CERT's. Only *defining* a listed macro is exempt;
-  any other declaration or definition of a reserved identifier stays a
-  violation. The list is closed and cited (P/lists case 1); a name is
+  the standards, not CERT's. Only *defining* a listed macro is exempt
+  (DCL37-C/2026-10-26/exemption-form gives the form); any other
+  declaration or definition of a reserved identifier stays a violation. The list is closed and cited (P/lists case 1); a name is
   added only from its primary source.
   - C23 (N3220): `__STDC_WANT_LIB_EXT1__` (Annex K.3.1.1),
     `__STDC_WANT_IEC_60559_EXT__` (7.12) and
@@ -32,6 +32,18 @@
     `_DEFAULT_SOURCE`, `_ATFILE_SOURCE`, `_GNU_SOURCE`, `_REENTRANT`,
     `_THREAD_SAFE` and `_FORTIFY_SOURCE`. `__STRICT_ANSI__` is not on
     the list: the compiler defines it, and a program does not.
+- **DCL37-C/2026-10-26/exemption-form.** The exemption covers the name
+  only, defined as an object-like macro with any value; the value is not
+  checked (`#define _POSIX_C_SOURCE garbage` is not a violation). A
+  function-like definition of a listed name (`#define _GNU_SOURCE() 1`)
+  is not the form any listed source asks a program to define, and stays a
+  violation.
+- **DCL37-C/2026-10-26/block-scope.** Scope is C 7.1.3's. A block-scope
+  `_x` is not reserved, and that includes a block-scope
+  `extern int _x;`: the identifier has block scope, so the file-scope
+  reservation does not reach it. A block-scope `_X` or `__x` is reserved
+  for any use and stays a violation. A declaration inside
+  `extern "C" { ... }` is at file scope.
 - **DCL37-C/2026-10-06/include-guards.** Include guards spelled with a
   reserved name (a leading underscore followed by an uppercase letter, or a
   double underscore) remain true positives, as CERT's first noncompliant
