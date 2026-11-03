@@ -13,12 +13,27 @@
     "valkey": "7f1dffedff6de73058b2c2a389422b6ecd56c8fb"
   },
   "submitted_at": "2026-09-25T14:09:10Z",
-  "row_count": 140,
+  "row_count": 134,
   "rules": [
     "EXP19-C"
   ],
   "verdicts": {
     "TP": 140
   },
-  "notes": "aurora_lint 1504 (v0.5.3 step 3), valkey EXP19-C stratum S2, batch 2: a baseline, not a delta (valkey had no EXP19-C labels before S1). Stacked on delta-1504-valkey-exp19c-s2-b01; this branch adds only this batch's rows over its parent.\n\nSCOPE. S2 is every in-scope valkey EXP19-C key at realworld run 274 that is not else-shaped and has no preprocessor directive within the next 5 lines (6,395 keys; S1's 154 are merged). Brandon ruled that S2 is labeled by hand rather than by a mechanical checker. Batches run alphabetically by file, about 130 keys each. This batch: 140 keys in 7 file(s), src/ae.c .. src/anet.c (if 137, for 3).\n\nSTANDARD. The existing EXP19-C convention (~39,700 labels): TP when the body of the if/for/while/do at that line is a single statement not enclosed in braces (a macro call, return, goto, assignment, empty statement or nested unbraced if all count); FP only when the premise is false and the body is a braced block the tool misread.\n\nMETHOD. One read-only agent read every key's construct at source in the pinned checkout and judged it; no script decided a verdict. The adjudicator then checked that each reason's named body token is present at the key and spot-read a random sample at source.\n\nRESULT: 140 TP / 0 FP.\n\nCounting basis: distinct (project, commit, file, line, rule) keys. No precision/recall claim is made here."
+  "notes": "aurora_lint 1504 (v0.5.3 step 3), valkey EXP19-C stratum S2, batch 2: a baseline, not a delta (valkey had no EXP19-C labels before S1). Stacked on delta-1504-valkey-exp19c-s2-b01; this branch adds only this batch's rows over its parent.\n\nSCOPE. S2 is every in-scope valkey EXP19-C key at realworld run 274 that is not else-shaped and has no preprocessor directive within the next 5 lines (6,395 keys; S1's 154 are merged). Brandon ruled that S2 is labeled by hand rather than by a mechanical checker. Batches run alphabetically by file, about 130 keys each. This batch: 140 keys in 7 file(s), src/ae.c .. src/anet.c (if 137, for 3).\n\nSTANDARD. The existing EXP19-C convention (~39,700 labels): TP when the body of the if/for/while/do at that line is a single statement not enclosed in braces (a macro call, return, goto, assignment, empty statement or nested unbraced if all count); FP only when the premise is false and the body is a braced block the tool misread.\n\nMETHOD. One read-only agent read every key's construct at source in the pinned checkout and judged it; no script decided a verdict. The adjudicator then checked that each reason's named body token is present at the key and spot-read a random sample at source.\n\nRESULT: 140 TP / 0 FP.\n\nCounting basis: distinct (project, commit, file, line, rule) keys. No precision/recall claim is made here.",
+  "superseded_rows": [
+    {
+      "by": "exp19-c-report-at-body-rekey",
+      "count": 6,
+      "keys": [
+        "valkey src/ae.c:127 EXP19-C",
+        "valkey src/ae.c:341 EXP19-C",
+        "valkey src/ae_evport.c:244 EXP19-C",
+        "valkey src/ae_kqueue.c:152 EXP19-C",
+        "valkey src/ae_kqueue.c:154 EXP19-C",
+        "valkey src/anet.c:94 EXP19-C"
+      ],
+      "note": "EXP19-C label re-keyed to the line where aurora-lint 0.7.0 reports the unbraced body (EXP19-C/2026-10-10/8) instead of its keyword; verdict unchanged; see that batch's manifest"
+    }
+  ]
 }

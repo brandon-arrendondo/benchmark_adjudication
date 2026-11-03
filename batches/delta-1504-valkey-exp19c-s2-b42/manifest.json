@@ -13,12 +13,48 @@
     "valkey": "7f1dffedff6de73058b2c2a389422b6ecd56c8fb"
   },
   "submitted_at": "2026-09-25T16:25:52Z",
-  "row_count": 118,
+  "row_count": 91,
   "rules": [
     "EXP19-C"
   ],
   "verdicts": {
     "TP": 118
   },
-  "notes": "aurora_lint 1504 (v0.5.3 step 3), valkey EXP19-C stratum S2, batch 42: a baseline, not a delta. Continues dev-149's b01-b18 from its handoff plan (run-274 keys). Stacked on delta-1504-valkey-exp19c-s2-b41; this branch adds only this batch's rows over its parent.\n\nSCOPE. S2 is every in-scope valkey EXP19-C key at realworld run 274 that is not else-shaped and has no preprocessor directive within the next 5 lines. Brandon ruled that S2 is labeled by hand rather than by a mechanical checker. This batch: 118 keys in 1 file(s), src/t_hash.c:71 .. src/t_hash.c:2489 (if 118).\n\nSTANDARD. The existing EXP19-C convention: TP when the body of the if/for/while/do at that line is a single statement not enclosed in braces; FP only when the premise is false and the body is a braced block the tool misread.\n\nMETHOD. The adjudicator read every key's construct at source in the pinned checkout and wrote each verdict and body token by hand; no script decided a verdict. A formatter then checked that each reason's named body token is present at the key.\n\nRESULT: 118 TP.\n\nCounting basis: distinct (project, commit, file, line, rule) keys. No precision/recall claim is made here."
+  "notes": "aurora_lint 1504 (v0.5.3 step 3), valkey EXP19-C stratum S2, batch 42: a baseline, not a delta. Continues dev-149's b01-b18 from its handoff plan (run-274 keys). Stacked on delta-1504-valkey-exp19c-s2-b41; this branch adds only this batch's rows over its parent.\n\nSCOPE. S2 is every in-scope valkey EXP19-C key at realworld run 274 that is not else-shaped and has no preprocessor directive within the next 5 lines. Brandon ruled that S2 is labeled by hand rather than by a mechanical checker. This batch: 118 keys in 1 file(s), src/t_hash.c:71 .. src/t_hash.c:2489 (if 118).\n\nSTANDARD. The existing EXP19-C convention: TP when the body of the if/for/while/do at that line is a single statement not enclosed in braces; FP only when the premise is false and the body is a braced block the tool misread.\n\nMETHOD. The adjudicator read every key's construct at source in the pinned checkout and wrote each verdict and body token by hand; no script decided a verdict. A formatter then checked that each reason's named body token is present at the key.\n\nRESULT: 118 TP.\n\nCounting basis: distinct (project, commit, file, line, rule) keys. No precision/recall claim is made here.",
+  "superseded_rows": [
+    {
+      "by": "exp19-c-report-at-body-rekey",
+      "count": 27,
+      "keys": [
+        "valkey src/t_hash.c:1242 EXP19-C",
+        "valkey src/t_hash.c:136 EXP19-C",
+        "valkey src/t_hash.c:1404 EXP19-C",
+        "valkey src/t_hash.c:1419 EXP19-C",
+        "valkey src/t_hash.c:1424 EXP19-C",
+        "valkey src/t_hash.c:1567 EXP19-C",
+        "valkey src/t_hash.c:1676 EXP19-C",
+        "valkey src/t_hash.c:1695 EXP19-C",
+        "valkey src/t_hash.c:1697 EXP19-C",
+        "valkey src/t_hash.c:1749 EXP19-C",
+        "valkey src/t_hash.c:1844 EXP19-C",
+        "valkey src/t_hash.c:1849 EXP19-C",
+        "valkey src/t_hash.c:1918 EXP19-C",
+        "valkey src/t_hash.c:1937 EXP19-C",
+        "valkey src/t_hash.c:2044 EXP19-C",
+        "valkey src/t_hash.c:2203 EXP19-C",
+        "valkey src/t_hash.c:2335 EXP19-C",
+        "valkey src/t_hash.c:2361 EXP19-C",
+        "valkey src/t_hash.c:2395 EXP19-C",
+        "valkey src/t_hash.c:2419 EXP19-C",
+        "valkey src/t_hash.c:291 EXP19-C",
+        "valkey src/t_hash.c:375 EXP19-C",
+        "valkey src/t_hash.c:559 EXP19-C",
+        "valkey src/t_hash.c:658 EXP19-C",
+        "valkey src/t_hash.c:75 EXP19-C",
+        "valkey src/t_hash.c:854 EXP19-C",
+        "valkey src/t_hash.c:871 EXP19-C"
+      ],
+      "note": "EXP19-C label re-keyed to the line where aurora-lint 0.7.0 reports the unbraced body (EXP19-C/2026-10-10/8) instead of its keyword; verdict unchanged; see that batch's manifest"
+    }
+  ]
 }

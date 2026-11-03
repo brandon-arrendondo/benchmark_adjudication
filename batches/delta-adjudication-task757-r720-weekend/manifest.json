@@ -26,7 +26,7 @@
     "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af"
   },
   "submitted_at": "2026-09-11T15:57:27.790148",
-  "row_count": 7931,
+  "row_count": 7930,
   "rules": [
     "DCL04-C",
     "DCL06-C",
@@ -1615,6 +1615,14 @@
         "sqlite src/window.c:1071 DCL06-C"
       ],
       "note": "re-read and relabeled where the verdict changed, under the 2026-10-07 DCL06-C rulings (ruling-basis recheck); see that batch's manifest notes"
+    },
+    {
+      "by": "exp19-c-report-at-body-rekey",
+      "count": 1,
+      "keys": [
+        "hostap src/ap/ap_config.c:1187 EXP19-C"
+      ],
+      "note": "EXP19-C label re-keyed to the line where aurora-lint 0.7.0 reports the unbraced body (EXP19-C/2026-10-10/8) instead of its keyword; verdict unchanged; see that batch's manifest"
     }
   ]
 }

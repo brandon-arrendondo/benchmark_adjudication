@@ -13,12 +13,59 @@
     "valkey": "7f1dffedff6de73058b2c2a389422b6ecd56c8fb"
   },
   "submitted_at": "2026-09-25T16:24:49Z",
-  "row_count": 127,
+  "row_count": 89,
   "rules": [
     "EXP19-C"
   ],
   "verdicts": {
     "TP": 127
   },
-  "notes": "aurora_lint 1504 (v0.5.3 step 3), valkey EXP19-C stratum S2, batch 40: a baseline, not a delta. Continues dev-149's b01-b18 from its handoff plan (run-274 keys). Stacked on delta-1504-valkey-exp19c-s2-b39; this branch adds only this batch's rows over its parent.\n\nSCOPE. S2 is every in-scope valkey EXP19-C key at realworld run 274 that is not else-shaped and has no preprocessor directive within the next 5 lines. Brandon ruled that S2 is labeled by hand rather than by a mechanical checker. This batch: 127 keys in 3 file(s), src/server.c:5569 .. src/setproctitle.c:281 (for 2, if 124, while 1).\n\nSTANDARD. The existing EXP19-C convention: TP when the body of the if/for/while/do at that line is a single statement not enclosed in braces; FP only when the premise is false and the body is a braced block the tool misread.\n\nMETHOD. The adjudicator read every key's construct at source in the pinned checkout and wrote each verdict and body token by hand; no script decided a verdict. A formatter then checked that each reason's named body token is present at the key.\n\nRESULT: 127 TP.\n\nCounting basis: distinct (project, commit, file, line, rule) keys. No precision/recall claim is made here."
+  "notes": "aurora_lint 1504 (v0.5.3 step 3), valkey EXP19-C stratum S2, batch 40: a baseline, not a delta. Continues dev-149's b01-b18 from its handoff plan (run-274 keys). Stacked on delta-1504-valkey-exp19c-s2-b39; this branch adds only this batch's rows over its parent.\n\nSCOPE. S2 is every in-scope valkey EXP19-C key at realworld run 274 that is not else-shaped and has no preprocessor directive within the next 5 lines. Brandon ruled that S2 is labeled by hand rather than by a mechanical checker. This batch: 127 keys in 3 file(s), src/server.c:5569 .. src/setproctitle.c:281 (for 2, if 124, while 1).\n\nSTANDARD. The existing EXP19-C convention: TP when the body of the if/for/while/do at that line is a single statement not enclosed in braces; FP only when the premise is false and the body is a braced block the tool misread.\n\nMETHOD. The adjudicator read every key's construct at source in the pinned checkout and wrote each verdict and body token by hand; no script decided a verdict. A formatter then checked that each reason's named body token is present at the key.\n\nRESULT: 127 TP.\n\nCounting basis: distinct (project, commit, file, line, rule) keys. No precision/recall claim is made here.",
+  "superseded_rows": [
+    {
+      "by": "exp19-c-report-at-body-rekey",
+      "count": 38,
+      "keys": [
+        "valkey src/server.c:5569 EXP19-C",
+        "valkey src/server.c:6091 EXP19-C",
+        "valkey src/server.c:6093 EXP19-C",
+        "valkey src/server.c:6099 EXP19-C",
+        "valkey src/server.c:6101 EXP19-C",
+        "valkey src/server.c:6932 EXP19-C",
+        "valkey src/server.c:6934 EXP19-C",
+        "valkey src/server.c:7062 EXP19-C",
+        "valkey src/server.c:7236 EXP19-C",
+        "valkey src/server.c:7308 EXP19-C",
+        "valkey src/server.c:7314 EXP19-C",
+        "valkey src/server.c:7316 EXP19-C",
+        "valkey src/server.c:7521 EXP19-C",
+        "valkey src/server.c:7523 EXP19-C",
+        "valkey src/server.c:7529 EXP19-C",
+        "valkey src/server.c:7531 EXP19-C",
+        "valkey src/setcpuaffinity.c:100 EXP19-C",
+        "valkey src/setcpuaffinity.c:111 EXP19-C",
+        "valkey src/setcpuaffinity.c:116 EXP19-C",
+        "valkey src/setcpuaffinity.c:119 EXP19-C",
+        "valkey src/setcpuaffinity.c:51 EXP19-C",
+        "valkey src/setcpuaffinity.c:53 EXP19-C",
+        "valkey src/setcpuaffinity.c:60 EXP19-C",
+        "valkey src/setcpuaffinity.c:64 EXP19-C",
+        "valkey src/setproctitle.c:112 EXP19-C",
+        "valkey src/setproctitle.c:120 EXP19-C",
+        "valkey src/setproctitle.c:135 EXP19-C",
+        "valkey src/setproctitle.c:169 EXP19-C",
+        "valkey src/setproctitle.c:172 EXP19-C",
+        "valkey src/setproctitle.c:196 EXP19-C",
+        "valkey src/setproctitle.c:209 EXP19-C",
+        "valkey src/setproctitle.c:212 EXP19-C",
+        "valkey src/setproctitle.c:220 EXP19-C",
+        "valkey src/setproctitle.c:223 EXP19-C",
+        "valkey src/setproctitle.c:236 EXP19-C",
+        "valkey src/setproctitle.c:253 EXP19-C",
+        "valkey src/setproctitle.c:256 EXP19-C",
+        "valkey src/setproctitle.c:281 EXP19-C"
+      ],
+      "note": "EXP19-C label re-keyed to the line where aurora-lint 0.7.0 reports the unbraced body (EXP19-C/2026-10-10/8) instead of its keyword; verdict unchanged; see that batch's manifest"
+    }
+  ]
 }

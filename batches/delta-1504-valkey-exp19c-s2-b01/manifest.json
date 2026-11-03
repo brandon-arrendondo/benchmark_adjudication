@@ -13,12 +13,40 @@
     "valkey": "7f1dffedff6de73058b2c2a389422b6ecd56c8fb"
   },
   "submitted_at": "2026-09-25T14:08:36Z",
-  "row_count": 131,
+  "row_count": 112,
   "rules": [
     "EXP19-C"
   ],
   "verdicts": {
     "TP": 131
   },
-  "notes": "aurora_lint 1504 (v0.5.3 step 3), valkey EXP19-C stratum S2, batch 1: a baseline, not a delta (valkey had no EXP19-C labels before S1). Stacked on origin/main; this branch adds only this batch's rows over its parent.\n\nSCOPE. S2 is every in-scope valkey EXP19-C key at realworld run 274 that is not else-shaped and has no preprocessor directive within the next 5 lines (6,395 keys; S1's 154 are merged). Brandon ruled that S2 is labeled by hand rather than by a mechanical checker. Batches run alphabetically by file, about 130 keys each. This batch: 131 keys in 2 file(s), src/acl.c .. src/adlist.c (if 118, for 10, while 3).\n\nSTANDARD. The existing EXP19-C convention (~39,700 labels): TP when the body of the if/for/while/do at that line is a single statement not enclosed in braces (a macro call, return, goto, assignment, empty statement or nested unbraced if all count); FP only when the premise is false and the body is a braced block the tool misread.\n\nMETHOD. One read-only agent read every key's construct at source in the pinned checkout and judged it; no script decided a verdict. The adjudicator then checked that each reason's named body token is present at the key and spot-read a random sample at source.\n\nRESULT: 131 TP / 0 FP.\n\nCounting basis: distinct (project, commit, file, line, rule) keys. No precision/recall claim is made here."
+  "notes": "aurora_lint 1504 (v0.5.3 step 3), valkey EXP19-C stratum S2, batch 1: a baseline, not a delta (valkey had no EXP19-C labels before S1). Stacked on origin/main; this branch adds only this batch's rows over its parent.\n\nSCOPE. S2 is every in-scope valkey EXP19-C key at realworld run 274 that is not else-shaped and has no preprocessor directive within the next 5 lines (6,395 keys; S1's 154 are merged). Brandon ruled that S2 is labeled by hand rather than by a mechanical checker. Batches run alphabetically by file, about 130 keys each. This batch: 131 keys in 2 file(s), src/acl.c .. src/adlist.c (if 118, for 10, while 3).\n\nSTANDARD. The existing EXP19-C convention (~39,700 labels): TP when the body of the if/for/while/do at that line is a single statement not enclosed in braces (a macro call, return, goto, assignment, empty statement or nested unbraced if all count); FP only when the premise is false and the body is a braced block the tool misread.\n\nMETHOD. One read-only agent read every key's construct at source in the pinned checkout and judged it; no script decided a verdict. The adjudicator then checked that each reason's named body token is present at the key and spot-read a random sample at source.\n\nRESULT: 131 TP / 0 FP.\n\nCounting basis: distinct (project, commit, file, line, rule) keys. No precision/recall claim is made here.",
+  "superseded_rows": [
+    {
+      "by": "exp19-c-report-at-body-rekey",
+      "count": 19,
+      "keys": [
+        "valkey src/acl.c:1235 EXP19-C",
+        "valkey src/acl.c:1433 EXP19-C",
+        "valkey src/acl.c:1479 EXP19-C",
+        "valkey src/acl.c:1499 EXP19-C",
+        "valkey src/acl.c:1501 EXP19-C",
+        "valkey src/acl.c:1503 EXP19-C",
+        "valkey src/acl.c:1508 EXP19-C",
+        "valkey src/acl.c:1513 EXP19-C",
+        "valkey src/acl.c:1516 EXP19-C",
+        "valkey src/acl.c:1519 EXP19-C",
+        "valkey src/acl.c:1522 EXP19-C",
+        "valkey src/acl.c:1524 EXP19-C",
+        "valkey src/acl.c:1736 EXP19-C",
+        "valkey src/acl.c:1804 EXP19-C",
+        "valkey src/acl.c:1807 EXP19-C",
+        "valkey src/acl.c:1908 EXP19-C",
+        "valkey src/adlist.c:224 EXP19-C",
+        "valkey src/adlist.c:266 EXP19-C",
+        "valkey src/adlist.c:400 EXP19-C"
+      ],
+      "note": "EXP19-C label re-keyed to the line where aurora-lint 0.7.0 reports the unbraced body (EXP19-C/2026-10-10/8) instead of its keyword; verdict unchanged; see that batch's manifest"
+    }
+  ]
 }

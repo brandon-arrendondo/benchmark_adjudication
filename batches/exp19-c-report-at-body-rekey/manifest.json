@@ -1,0 +1,60 @@
+{
+  "batch_id": "exp19-c-report-at-body-rekey",
+  "work_item_ref": "aurora_lint-2715",
+  "requested_by": "coordinator",
+  "adjudicator": "claude-opus-5.5",
+  "adjudicating_node": "dev-149",
+  "aurora_lint_version": "0.7.0",
+  "aurora_lint_sha": "78ed3fe09cf14efc07b4c954b6b67b3f646a85fa",
+  "projects": [
+    "curl",
+    "hostap",
+    "lua",
+    "mbedtls",
+    "pureftpd",
+    "raylib",
+    "sel4",
+    "sqlite",
+    "valkey",
+    "ventoy"
+  ],
+  "codebase_commits": {
+    "curl": "3e198f75861cc2e12daf299689e145949dddd19b",
+    "hostap": "dcee60436390dd34731560657c4257c3b4c839a6",
+    "lua": "40b76de2d77e66b70a9d4bf989c3f5340919973f",
+    "mbedtls": "068ff080b369adfac81509f9b57b2afabaf82dc5",
+    "pureftpd": "cc28bff52ca28e1d122a2142bf37f2dc578f4d3e",
+    "raylib": "962bbfc6bfbd7a5acd08e21314fcfa161003a589",
+    "sel4": "1326364bc9135d9445d936ebc01e38a402c1f4c6",
+    "sqlite": "b1a73ba34d05b32007315e4065c6468cc638e3af",
+    "valkey": "7f1dffedff6de73058b2c2a389422b6ecd56c8fb",
+    "ventoy": "7cbdc5cf69935bcf1f085ae67f40e70ea7e74bae"
+  },
+  "submitted_at": "2026-11-03T16:12:00Z",
+  "row_count": 31866,
+  "rules": [
+    "EXP19-C"
+  ],
+  "verdicts": {
+    "TP": 31866
+  },
+  "corrections": {
+    "TP_restated": 31866
+  },
+  "recheck": {
+    "basis": "tool",
+    "selection": "census",
+    "reviewed": 31866,
+    "flipped": 0,
+    "blind_to_prior_verdict": false,
+    "blind_to_diagnostic": false,
+    "blind_slice": {
+      "seed": 20261103,
+      "reviewed": 20,
+      "disagreed": 0,
+      "blind_to_prior_verdict": true,
+      "blind_to_diagnostic": true
+    }
+  },
+  "notes": "A RE-KEY, NOT A NEW ADJUDICATION. aurora-lint 0.7.0 reports an EXP19-C finding where the unbraced body starts (EXP19-C/2026-10-10/8), not at its if/for/while keyword, so labels keyed at the keyword line no longer match a finding. Each row here is an existing TP label moved to the line where the same detection now lands; reason, adjudicator and adjudicated_at are the old row's, and its provenance says where it came from. The old rows are listed under superseded_rows in their own manifests.\n\nPAIRING. An old key (line L) pairs with a 0.7.0 finding (line N) only when aurora-lint's own parse of the file (its pre-parse repairs and per-project prescan) has an if, for or while keyword on L whose body is not a compound statement and starts on N, N - L is 1 to 3, the finding names the same kind of statement, and the pairing is one to one. Findings: aurora-lint at aurora_lint_sha, default and strict runs; the EXP19-C findings of the two presets are identical key for key, so one re-key covers both. Every old key and its row were checked present, TP and with the same source on this repository's main at d617cafac9d157223eb36f668893b614bf170753, and no new key was present there.\n\nLEFT OUT AND COUNTED (TP): new key already labeled TP 111; no keyword on the old line 9; body not at a finding 4; ambiguous 0; many to one 0. Non-TP labels are not re-keyed: 1 FP label paired structurally and is left as it is. PRE01-C and DCL37-C labels whose findings also moved are not re-keyed here: one #define label maps to several per-use findings, so choosing among them is judgment, not a re-key.\n\nCHECK. A blind slice of 20 rows drawn with the seed above was labeled from the source alone, without the prior verdict or the analyzer's message: 20 TP, each naming the old line as the keyword line. rekey-audit.csv lists every old key with its new line and the batch it came from.\n\nREPRODUCE: aurora-lint 78ed3fe09cf14efc07b4c954b6b67b3f646a85fa; this repository at d617cafac9d157223eb36f668893b614bf170753 plus this batch; benchmarking_db d4ff7d3da29ea0b2cdeec209a7b44ddb991f0681 (findings read from its database)."
+}

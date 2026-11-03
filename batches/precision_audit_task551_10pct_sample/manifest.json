@@ -12,7 +12,7 @@
     "pureftpd": "cc28bff52ca28e1d122a2142bf37f2dc578f4d3e"
   },
   "submitted_at": "2026-08-25",
-  "row_count": 555,
+  "row_count": 551,
   "rules": [
     "API00-C",
     "API02-C",
@@ -174,6 +174,17 @@
         "pureftpd src/pure-pw.c:589 FIO50-C"
       ],
       "note": "retired from the CERT C oracle: FIO50-C/FIO51-C are CERT C++ ids, removed from aurora-lint at 9aace3a3; row archived, verdict unchanged; see retire-cert-cpp-ids-fio50-fio51-bmdb2229"
+    },
+    {
+      "by": "exp19-c-report-at-body-rekey",
+      "count": 4,
+      "keys": [
+        "pureftpd src/bsd-getopt_long.c:306 EXP19-C",
+        "pureftpd src/bsd-getopt_long.c:421 EXP19-C",
+        "pureftpd src/bsd-getopt_long.c:454 EXP19-C",
+        "pureftpd src/daemons.c:28 EXP19-C"
+      ],
+      "note": "EXP19-C label re-keyed to the line where aurora-lint 0.7.0 reports the unbraced body (EXP19-C/2026-10-10/8) instead of its keyword; verdict unchanged; see that batch's manifest"
     }
   ]
 }

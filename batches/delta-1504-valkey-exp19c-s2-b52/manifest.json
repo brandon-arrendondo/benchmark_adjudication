@@ -13,12 +13,45 @@
     "valkey": "7f1dffedff6de73058b2c2a389422b6ecd56c8fb"
   },
   "submitted_at": "2026-09-25T16:31:11Z",
-  "row_count": 115,
+  "row_count": 91,
   "rules": [
     "EXP19-C"
   ],
   "verdicts": {
     "TP": 115
   },
-  "notes": "aurora_lint 1504 (v0.5.3 step 3), valkey EXP19-C stratum S2, batch 52: a baseline, not a delta. Continues dev-149's b01-b18 from its handoff plan (run-274 keys). Stacked on delta-1504-valkey-exp19c-s2-b51; this branch adds only this batch's rows over its parent.\n\nSCOPE. S2 is every in-scope valkey EXP19-C key at realworld run 274 that is not else-shaped and has no preprocessor directive within the next 5 lines. Brandon ruled that S2 is labeled by hand rather than by a mechanical checker. This batch: 115 keys in 1 file(s), src/valkey-cli.c:321 .. src/valkey-cli.c:3895 (for 1, if 110, while 4).\n\nSTANDARD. The existing EXP19-C convention: TP when the body of the if/for/while/do at that line is a single statement not enclosed in braces; FP only when the premise is false and the body is a braced block the tool misread.\n\nMETHOD. The adjudicator read every key's construct at source in the pinned checkout and wrote each verdict and body token by hand; no script decided a verdict. A formatter then checked that each reason's named body token is present at the key.\n\nRESULT: 115 TP.\n\nCounting basis: distinct (project, commit, file, line, rule) keys. No precision/recall claim is made here."
+  "notes": "aurora_lint 1504 (v0.5.3 step 3), valkey EXP19-C stratum S2, batch 52: a baseline, not a delta. Continues dev-149's b01-b18 from its handoff plan (run-274 keys). Stacked on delta-1504-valkey-exp19c-s2-b51; this branch adds only this batch's rows over its parent.\n\nSCOPE. S2 is every in-scope valkey EXP19-C key at realworld run 274 that is not else-shaped and has no preprocessor directive within the next 5 lines. Brandon ruled that S2 is labeled by hand rather than by a mechanical checker. This batch: 115 keys in 1 file(s), src/valkey-cli.c:321 .. src/valkey-cli.c:3895 (for 1, if 110, while 4).\n\nSTANDARD. The existing EXP19-C convention: TP when the body of the if/for/while/do at that line is a single statement not enclosed in braces; FP only when the premise is false and the body is a braced block the tool misread.\n\nMETHOD. The adjudicator read every key's construct at source in the pinned checkout and wrote each verdict and body token by hand; no script decided a verdict. A formatter then checked that each reason's named body token is present at the key.\n\nRESULT: 115 TP.\n\nCounting basis: distinct (project, commit, file, line, rule) keys. No precision/recall claim is made here.",
+  "superseded_rows": [
+    {
+      "by": "exp19-c-report-at-body-rekey",
+      "count": 24,
+      "keys": [
+        "valkey src/valkey-cli.c:1424 EXP19-C",
+        "valkey src/valkey-cli.c:1546 EXP19-C",
+        "valkey src/valkey-cli.c:1789 EXP19-C",
+        "valkey src/valkey-cli.c:1791 EXP19-C",
+        "valkey src/valkey-cli.c:1793 EXP19-C",
+        "valkey src/valkey-cli.c:1795 EXP19-C",
+        "valkey src/valkey-cli.c:1821 EXP19-C",
+        "valkey src/valkey-cli.c:1823 EXP19-C",
+        "valkey src/valkey-cli.c:1893 EXP19-C",
+        "valkey src/valkey-cli.c:1895 EXP19-C",
+        "valkey src/valkey-cli.c:1897 EXP19-C",
+        "valkey src/valkey-cli.c:1899 EXP19-C",
+        "valkey src/valkey-cli.c:1901 EXP19-C",
+        "valkey src/valkey-cli.c:1903 EXP19-C",
+        "valkey src/valkey-cli.c:1905 EXP19-C",
+        "valkey src/valkey-cli.c:1927 EXP19-C",
+        "valkey src/valkey-cli.c:1929 EXP19-C",
+        "valkey src/valkey-cli.c:2043 EXP19-C",
+        "valkey src/valkey-cli.c:2097 EXP19-C",
+        "valkey src/valkey-cli.c:2221 EXP19-C",
+        "valkey src/valkey-cli.c:3196 EXP19-C",
+        "valkey src/valkey-cli.c:3198 EXP19-C",
+        "valkey src/valkey-cli.c:3861 EXP19-C",
+        "valkey src/valkey-cli.c:440 EXP19-C"
+      ],
+      "note": "EXP19-C label re-keyed to the line where aurora-lint 0.7.0 reports the unbraced body (EXP19-C/2026-10-10/8) instead of its keyword; verdict unchanged; see that batch's manifest"
+    }
+  ]
 }

@@ -13,12 +13,41 @@
     "valkey": "7f1dffedff6de73058b2c2a389422b6ecd56c8fb"
   },
   "submitted_at": "2026-09-25T16:23:17Z",
-  "row_count": 94,
+  "row_count": 74,
   "rules": [
     "EXP19-C"
   ],
   "verdicts": {
     "TP": 94
   },
-  "notes": "aurora_lint 1504 (v0.5.3 step 3), valkey EXP19-C stratum S2, batch 37: a baseline, not a delta. Continues dev-149's b01-b18 from its handoff plan (run-274 keys). Stacked on delta-1504-valkey-exp19c-s2-b36; this branch adds only this batch's rows over its parent.\n\nSCOPE. S2 is every in-scope valkey EXP19-C key at realworld run 274 that is not else-shaped and has no preprocessor directive within the next 5 lines. Brandon ruled that S2 is labeled by hand rather than by a mechanical checker. This batch: 94 keys in 1 file(s), src/sentinel.c:3926 .. src/sentinel.c:5399 (for 1, if 93).\n\nSTANDARD. The existing EXP19-C convention: TP when the body of the if/for/while/do at that line is a single statement not enclosed in braces; FP only when the premise is false and the body is a braced block the tool misread.\n\nMETHOD. The adjudicator read every key's construct at source in the pinned checkout and wrote each verdict and body token by hand; no script decided a verdict. A formatter then checked that each reason's named body token is present at the key.\n\nRESULT: 94 TP.\n\nCounting basis: distinct (project, commit, file, line, rule) keys. No precision/recall claim is made here."
+  "notes": "aurora_lint 1504 (v0.5.3 step 3), valkey EXP19-C stratum S2, batch 37: a baseline, not a delta. Continues dev-149's b01-b18 from its handoff plan (run-274 keys). Stacked on delta-1504-valkey-exp19c-s2-b36; this branch adds only this batch's rows over its parent.\n\nSCOPE. S2 is every in-scope valkey EXP19-C key at realworld run 274 that is not else-shaped and has no preprocessor directive within the next 5 lines. Brandon ruled that S2 is labeled by hand rather than by a mechanical checker. This batch: 94 keys in 1 file(s), src/sentinel.c:3926 .. src/sentinel.c:5399 (for 1, if 93).\n\nSTANDARD. The existing EXP19-C convention: TP when the body of the if/for/while/do at that line is a single statement not enclosed in braces; FP only when the premise is false and the body is a braced block the tool misread.\n\nMETHOD. The adjudicator read every key's construct at source in the pinned checkout and wrote each verdict and body token by hand; no script decided a verdict. A formatter then checked that each reason's named body token is present at the key.\n\nRESULT: 94 TP.\n\nCounting basis: distinct (project, commit, file, line, rule) keys. No precision/recall claim is made here.",
+  "superseded_rows": [
+    {
+      "by": "exp19-c-report-at-body-rekey",
+      "count": 20,
+      "keys": [
+        "valkey src/sentinel.c:3926 EXP19-C",
+        "valkey src/sentinel.c:4031 EXP19-C",
+        "valkey src/sentinel.c:4045 EXP19-C",
+        "valkey src/sentinel.c:4047 EXP19-C",
+        "valkey src/sentinel.c:4096 EXP19-C",
+        "valkey src/sentinel.c:4108 EXP19-C",
+        "valkey src/sentinel.c:4144 EXP19-C",
+        "valkey src/sentinel.c:4218 EXP19-C",
+        "valkey src/sentinel.c:4220 EXP19-C",
+        "valkey src/sentinel.c:4446 EXP19-C",
+        "valkey src/sentinel.c:4448 EXP19-C",
+        "valkey src/sentinel.c:4568 EXP19-C",
+        "valkey src/sentinel.c:4610 EXP19-C",
+        "valkey src/sentinel.c:4653 EXP19-C",
+        "valkey src/sentinel.c:4730 EXP19-C",
+        "valkey src/sentinel.c:5038 EXP19-C",
+        "valkey src/sentinel.c:5040 EXP19-C",
+        "valkey src/sentinel.c:5042 EXP19-C",
+        "valkey src/sentinel.c:5072 EXP19-C",
+        "valkey src/sentinel.c:5343 EXP19-C"
+      ],
+      "note": "EXP19-C label re-keyed to the line where aurora-lint 0.7.0 reports the unbraced body (EXP19-C/2026-10-10/8) instead of its keyword; verdict unchanged; see that batch's manifest"
+    }
+  ]
 }

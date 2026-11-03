@@ -13,12 +13,51 @@
     "valkey": "7f1dffedff6de73058b2c2a389422b6ecd56c8fb"
   },
   "submitted_at": "2026-09-25T16:14:43Z",
-  "row_count": 133,
+  "row_count": 103,
   "rules": [
     "EXP19-C"
   ],
   "verdicts": {
     "TP": 133
   },
-  "notes": "aurora_lint 1504 (v0.5.3 step 3), valkey EXP19-C stratum S2, batch 22: a baseline, not a delta. Continues dev-149's b01-b18 from its handoff plan (run-274 keys). Stacked on delta-1504-valkey-exp19c-s2-b21; this branch adds only this batch's rows over its parent.\n\nSCOPE. S2 is every in-scope valkey EXP19-C key at realworld run 274 that is not else-shaped and has no preprocessor directive within the next 5 lines. Brandon ruled that S2 is labeled by hand rather than by a mechanical checker. This batch: 133 keys in 2 file(s), src/module.c:11253 .. src/modules/lua/debug_lua.c:569 (for 3, if 128, while 2).\n\nSTANDARD. The existing EXP19-C convention: TP when the body of the if/for/while/do at that line is a single statement not enclosed in braces; FP only when the premise is false and the body is a braced block the tool misread.\n\nMETHOD. The adjudicator read every key's construct at source in the pinned checkout and wrote each verdict and body token by hand; no script decided a verdict. A formatter then checked that each reason's named body token is present at the key.\n\nRESULT: 133 TP.\n\nCounting basis: distinct (project, commit, file, line, rule) keys. No precision/recall claim is made here."
+  "notes": "aurora_lint 1504 (v0.5.3 step 3), valkey EXP19-C stratum S2, batch 22: a baseline, not a delta. Continues dev-149's b01-b18 from its handoff plan (run-274 keys). Stacked on delta-1504-valkey-exp19c-s2-b21; this branch adds only this batch's rows over its parent.\n\nSCOPE. S2 is every in-scope valkey EXP19-C key at realworld run 274 that is not else-shaped and has no preprocessor directive within the next 5 lines. Brandon ruled that S2 is labeled by hand rather than by a mechanical checker. This batch: 133 keys in 2 file(s), src/module.c:11253 .. src/modules/lua/debug_lua.c:569 (for 3, if 128, while 2).\n\nSTANDARD. The existing EXP19-C convention: TP when the body of the if/for/while/do at that line is a single statement not enclosed in braces; FP only when the premise is false and the body is a braced block the tool misread.\n\nMETHOD. The adjudicator read every key's construct at source in the pinned checkout and wrote each verdict and body token by hand; no script decided a verdict. A formatter then checked that each reason's named body token is present at the key.\n\nRESULT: 133 TP.\n\nCounting basis: distinct (project, commit, file, line, rule) keys. No precision/recall claim is made here.",
+  "superseded_rows": [
+    {
+      "by": "exp19-c-report-at-body-rekey",
+      "count": 30,
+      "keys": [
+        "valkey src/module.c:12245 EXP19-C",
+        "valkey src/module.c:12718 EXP19-C",
+        "valkey src/module.c:12735 EXP19-C",
+        "valkey src/module.c:12737 EXP19-C",
+        "valkey src/module.c:12739 EXP19-C",
+        "valkey src/module.c:12741 EXP19-C",
+        "valkey src/module.c:12757 EXP19-C",
+        "valkey src/module.c:12759 EXP19-C",
+        "valkey src/module.c:12761 EXP19-C",
+        "valkey src/module.c:12763 EXP19-C",
+        "valkey src/module.c:12915 EXP19-C",
+        "valkey src/module.c:12917 EXP19-C",
+        "valkey src/module.c:12919 EXP19-C",
+        "valkey src/module.c:12921 EXP19-C",
+        "valkey src/module.c:13242 EXP19-C",
+        "valkey src/module.c:13323 EXP19-C",
+        "valkey src/module.c:13792 EXP19-C",
+        "valkey src/module.c:13794 EXP19-C",
+        "valkey src/module.c:13796 EXP19-C",
+        "valkey src/module.c:14639 EXP19-C",
+        "valkey src/module.c:14653 EXP19-C",
+        "valkey src/module.c:14663 EXP19-C",
+        "valkey src/modules/lua/debug_lua.c:184 EXP19-C",
+        "valkey src/modules/lua/debug_lua.c:186 EXP19-C",
+        "valkey src/modules/lua/debug_lua.c:188 EXP19-C",
+        "valkey src/modules/lua/debug_lua.c:289 EXP19-C",
+        "valkey src/modules/lua/debug_lua.c:291 EXP19-C",
+        "valkey src/modules/lua/debug_lua.c:293 EXP19-C",
+        "valkey src/modules/lua/debug_lua.c:295 EXP19-C",
+        "valkey src/modules/lua/debug_lua.c:430 EXP19-C"
+      ],
+      "note": "EXP19-C label re-keyed to the line where aurora-lint 0.7.0 reports the unbraced body (EXP19-C/2026-10-10/8) instead of its keyword; verdict unchanged; see that batch's manifest"
+    }
+  ]
 }
