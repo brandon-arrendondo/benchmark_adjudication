@@ -36,6 +36,16 @@
     translation unit spells is no use. A `#define` in the translation
     unit that spells the name counts as a use even when nothing expands
     it; one outside the translation unit does not.
+  - *Macro expansions.* A call a macro's expansion makes is a call,
+    wherever in the translation unit the macro is defined. That includes
+    a name the macro pastes from its arguments (`CAT(bar, _cb)()`, or
+    `HANDLER(foo)()` handing `foo` on to `CAT`). A macro in a function's
+    head is read by what it expands to, not by its name.
+  - *Spellings in an included file.* Any spelling of the name in a file
+    the translation unit includes counts as a use, even one that names
+    something else there (a header prototype's parameter `count` beside a
+    `static` function `count`). Names in an included file are not
+    resolved, so the reading errs toward no finding.
   - *Configurations.* The function must be uncalled in every
     configuration (aurora-lint ADR-0010): a call in another `#if` arm is a
     use, a call in an arm no build compiles is not, and a definition in
@@ -62,7 +72,11 @@
     inline` function, the shape of a configuration shim kept for the call
     sites another build compiles, as the empty `static inline` body is
     for this rule's empty-body form; and an external-linkage function, as
-    another translation unit may call it.
+    another translation unit may call it. A file with a computed
+    `#include` (`#include HEADER`) that may name any header is not judged,
+    since no use can be ruled out. A call from a `static inline` function
+    is a caller: the inline function is not judged, so it counts as code
+    that may run.
   - *One finding.* An uncalled function with an empty body is reported
     once, as uncalled, not also as an empty body.
 - **MSC12-C/2026-11-24/dead-callers, called only from code that never
