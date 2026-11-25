@@ -60,7 +60,11 @@
     the head, but only when every `#if` arm that defines the macro
     expands that way: an arm that expands to an attribute
     (`__attribute__((used))`) keeps the invocation in the head, so the
-    reading errs toward no finding.
+    reading errs toward no finding. An arm that expands to an item of its
+    own, or to nothing, keeps nothing: the keep-alive attribute in an item
+    belongs to the function the item defines, so a registration macro
+    whose other arm is empty leaves the function after it judged as
+    written.
   - *Unresolved headers.* A header the scan cannot find (no `-I`, `-d` or
     compile database names its directory) is not read, so its uses,
     prototypes and `#define`s are not seen, and a function only such a
