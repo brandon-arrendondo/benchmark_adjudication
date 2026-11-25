@@ -2,7 +2,7 @@
 
 - **Rule text:** [MSC12-C at 98706f871dd6](https://github.com/cmu-sei/secure-coding-standards/blob/98706f871dd6/content/4.sei-cert-c-coding-standard/08.recommendations/15.miscellaneous-msc/10.msc12-c.md) (see
   `rule-text-map.json`).
-- **Ruled:** 2026-10-07; 2026-11-23; 2026-11-24.
+- **Ruled:** 2026-10-07; 2026-11-23; 2026-11-24; 2026-11-25.
 - **Evidence:** private record `MSC12-C`, papers `5c1753a`. For
   MSC12-C/2026-11-23/scope-uncalled-static, the same record holds the A/B
   of the implementing change and the reading at source of every finding
@@ -39,8 +39,26 @@
   - *Macro expansions.* A call a macro's expansion makes is a call,
     wherever in the translation unit the macro is defined. That includes
     a name the macro pastes from its arguments (`CAT(bar, _cb)()`, or
-    `HANDLER(foo)()` handing `foo` on to `CAT`). A macro in a function's
-    head is read by what it expands to, not by its name.
+    `HANDLER(foo)()` handing `foo` on to `CAT`), including a pasting call
+    written in another macro's body (`#define CALL_FOO() CAT(foo,
+    _x)()`), one made through an object-like alias (`#define PASTE CAT`)
+    or a variadic macro's `__VA_ARGS__`, and an argument that is an
+    object-like macro, which hands on its expansion. A fragment is matched
+    by its spelling, as a whole name or a prefix or suffix at a `_`, so
+    `CAT(init, _x)` also counts as a use of an unrelated `init_table`; the
+    reading errs toward no finding. A macro in a function's head is read
+    by what it expands to, not by its name. When no file the scan read
+    defines that macro (its header unresolved), it is read by its name: a
+    name that spells a keep-alive attribute (`ATTRIBUTE_USED`,
+    `DECLARE_CONSTRUCTOR_FOR`) keeps the function. A macro invocation
+    before the head whose expansion is an item of its own, ending in `;`
+    or `}` (`type_init(f)`, which defines a constructor), is no part of
+    the head.
+  - *Unresolved headers.* A header the scan cannot find (no `-I`, `-d` or
+    compile database names its directory) is not read, so its uses,
+    prototypes and `#define`s are not seen, and a function only such a
+    header uses can be reported. A scan meant to be complete names its
+    include directories.
   - *Spellings in an included file.* Any spelling of the name in a file
     the translation unit includes counts as a use, even one that names
     something else there (a header prototype's parameter `count` beside a
