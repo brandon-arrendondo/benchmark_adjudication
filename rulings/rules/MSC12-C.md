@@ -43,7 +43,11 @@
     written in another macro's body (`#define CALL_FOO() CAT(foo,
     _x)()`), one made through an object-like alias (`#define PASTE CAT`)
     or a variadic macro's `__VA_ARGS__`, and an argument that is an
-    object-like macro, which hands on its expansion. A fragment is matched
+    object-like macro, which hands on its expansion. In a macro's body, an
+    argument that is one of that macro's own parameters is no fragment: its
+    invocations supply it, and are read there. A literal argument there is
+    one, even when nothing expands the macro (`#define MK(n) CAT(n, cb)`
+    yields `cb`). A fragment is matched
     by its spelling, as a whole name or a prefix or suffix at a `_`, so
     `CAT(init, _x)` also counts as a use of an unrelated `init_table`; the
     reading errs toward no finding. A macro in a function's head is read
@@ -53,7 +57,10 @@
     `DECLARE_CONSTRUCTOR_FOR`) keeps the function. A macro invocation
     before the head whose expansion is an item of its own, ending in `;`
     or `}` (`type_init(f)`, which defines a constructor), is no part of
-    the head.
+    the head, but only when every `#if` arm that defines the macro
+    expands that way: an arm that expands to an attribute
+    (`__attribute__((used))`) keeps the invocation in the head, so the
+    reading errs toward no finding.
   - *Unresolved headers.* A header the scan cannot find (no `-I`, `-d` or
     compile database names its directory) is not read, so its uses,
     prototypes and `#define`s are not seen, and a function only such a
